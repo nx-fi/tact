@@ -7,7 +7,7 @@ import {
 } from "./features/output/optionals_ContractWithOptionals";
 import { Opt4 } from "./features/output/optionals_Opt4";
 import { Address, beginCell, Cell, toNano } from "@ton/core";
-import { ContractSystem } from "@tact-lang/emulator";
+import { ContractSystem } from "@nxfi/tact-emulator";
 
 function strEq2(a: StructWithOptionals | null, b: StructWithOptionals | null) {
     // Null checks

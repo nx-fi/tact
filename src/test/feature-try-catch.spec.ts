@@ -1,5 +1,5 @@
 import { toNano } from "@ton/core";
-import { ContractSystem } from "@tact-lang/emulator";
+import { ContractSystem } from "@nxfi/tact-emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { TryCatchTester } from "./features/output/try-catch_TryCatchTester";
 

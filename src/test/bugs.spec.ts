@@ -1,5 +1,5 @@
 import { beginCell, toNano } from "@ton/core";
-import { ContractSystem } from "@tact-lang/emulator";
+import { ContractSystem } from "@nxfi/tact-emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { SampleJetton } from "./bugs/output/bugs_SampleJetton";
 import { JettonDefaultWallet } from "./bugs/output/bugs_JettonDefaultWallet";

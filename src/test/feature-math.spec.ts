@@ -1,5 +1,5 @@
 import { beginCell, Dictionary, toNano } from "@ton/core";
-import { ContractSystem, randomAddress } from "@tact-lang/emulator";
+import { ContractSystem, randomAddress } from "@nxfi/tact-emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { MathTester } from "./features/output/math_MathTester";
 
