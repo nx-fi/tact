@@ -1,5 +1,5 @@
 import { IncrementContract } from "./output/increment_IncrementContract";
-import { ContractSystem } from "@tact-lang/emulator";
+import { ContractSystem } from "@nxfi/tact-emulator";
 import { toNano } from "@ton/core";
 
 describe("increment", () => {

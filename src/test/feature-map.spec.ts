@@ -4,7 +4,7 @@ import {
     MapTestContract,
     SomeStruct,
 } from "./features/output/maps_MapTestContract";
-import { ContractSystem } from "@tact-lang/emulator";
+import { ContractSystem } from "@nxfi/tact-emulator";
 import { beginCell, toNano } from "@ton/core";
 import { ComputeError } from "@ton/core";
 
