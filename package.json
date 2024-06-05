@@ -1,7 +1,7 @@
 {
-  "name": "@tact-lang/compiler",
+  "name": "@nxfi/tact-compiler",
   "version": "1.3.0",
-  "repository": "https://github.com/tact-lang/tact.git",
+  "repository": "https://github.com/nxfi/tact.git",
   "homepage": "https://tact-lang.org",
   "description": "Tact is a next-gen smart contract language for TON",
   "author": "Steve Korshakov <steve@korshakov.com>",
