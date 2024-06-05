@@ -1021,6 +1021,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@nxfi/ton-opcode@^0.0.15-0":
+  version "0.0.15-0"
+  resolved "https://registry.yarnpkg.com/@nxfi/ton-opcode/-/ton-opcode-0.0.15-0.tgz#6974b1994e0da24485ffdadebbf2c6d4c024d893"
+  integrity sha512-sqmJ11iSGw9R9PAonyNf81NEF2ffg1QBhyMG5lqm7iCCshs9jcxlgHmXn4aytW74qdVS3qyjxWXL9+6mA3R2Gg==
+
 "@octokit/auth-token@^3.0.0":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-3.0.4.tgz#70e941ba742bdd2b49bdb7393e821dea8520a3db"
