@@ -1,5 +1,5 @@
 import { Address, toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { Debug } from "./features/output/debug_Debug";
 import path from "path";

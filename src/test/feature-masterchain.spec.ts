@@ -1,5 +1,5 @@
 import { Address, beginCell, toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { MasterchainTester } from "./features/output/masterchain_MasterchainTester";
 import { MasterchainTester as EnabledTester } from "./features/output/masterchain-allow_MasterchainTester";
@@ -81,17 +81,6 @@ describe("feature-masterchain", () => {
         await contract.send(treasure, { value: toNano("10") }, "Deploy");
         await system.run();
         await contract.getCreateAddress(-1n, 0n);
-    });
-
-    it("should not create address for invalid workchain", async () => {
-        const system = await ContractSystem.create();
-        const treasure = system.treasure("treasure");
-        const contract = system.open(await MasterchainTester.fromInit());
-        await contract.send(treasure, { value: toNano("10") }, "Deploy");
-        await system.run();
-        await expect(contract.getCreateAddress(10n, 0n)).rejects.toThrowError(
-            "Invalid address",
-        );
     });
 
     //

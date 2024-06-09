@@ -37,6 +37,8 @@ function reduceIntImpl(ast: ASTExpression): bigint {
             return -reduceInt(ast.right);
         } else if (ast.op === "+") {
             return reduceInt(ast.right);
+        } else if (ast.op === "~") {
+            return ~reduceInt(ast.right);
         }
     } else if (ast.kind === "op_static_call") {
         if (ast.name === "ton") {
@@ -71,13 +73,16 @@ function reduceInt(ast: ASTExpression): bigint {
         return reduceIntImpl(ast);
     } catch (error) {
         if (error instanceof RangeError) {
-            throwError(
-                "Cannot evaluate constant expression due to integer overflow",
-                ast.ref,
-            );
-        } else {
-            throw error;
+            if (error.message === "Division by zero") {
+                throwError("Cannot divide by zero", ast.ref);
+            } else if (error.message === "Maximum BigInt size exceeded") {
+                throwError(
+                    "Cannot evaluate constant expression due to integer overflow",
+                    ast.ref,
+                );
+            }
         }
+        throw error;
     }
 }
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`bugs should deploy contract correctly 1`] = `
+exports[`bugs should deploy issue211 correctly 1`] = `
 [
   {
     "$seq": 0,
@@ -12,19 +12,49 @@ exports[`bugs should deploy contract correctly 1`] = `
         "$type": "received",
         "message": {
           "body": {
-            "cell": "x{178D45190000000000000000502540BE4008001C6C7938BCE1EDDD4D7179F5626FBC23A92D0521900C93D0E579C0128C1BCFDB0016E3A425A4E75B646191AC9A34FE5D050BD101A5C490F87D01C66D885D09BC1082_}",
-            "type": "cell",
+            "type": "empty",
           },
-          "bounce": false,
-          "from": "kQAONjycXnD27qa4vPqxN94R1JaCkMgGSehyvOAJRg3n7ROk",
-          "to": "kQBW5ieoSEHXuEljVf_tAb_cPCvcurQZBoW1ez4bx54-Zadw",
+          "bounce": true,
+          "from": "@treasure(treasure)",
+          "to": "kQArW2E6y8aQCI9WMmeCiv5i2gFTLWPhQo-F_tbMFSbNkX4y",
           "type": "internal",
-          "value": "9.959886",
+          "value": "10",
         },
       },
       {
         "$type": "processed",
-        "gasUsed": 12277n,
+        "gasUsed": 4451n,
+      },
+    ],
+  },
+]
+`;
+
+exports[`bugs should deploy sample jetton correctly 1`] = `
+[
+  {
+    "$seq": 0,
+    "events": [
+      {
+        "$type": "deploy",
+      },
+      {
+        "$type": "received",
+        "message": {
+          "body": {
+            "cell": "x{178D45190000000000000000502540BE4008016F6A3A2F11232427B21A93E224DED98AC68A470A2E7A54D5BB7F8B51B67D1CB50016E3A425A4E75B646191AC9A34FE5D050BD101A5C490F87D01C66D885D09BC1082_}",
+            "type": "cell",
+          },
+          "bounce": false,
+          "from": "kQC3tR0XiJGSE9kNSfESb2zFY0UjhRc9Kmrdv8Wo2z6OWlN5",
+          "to": "kQCPIUOr9ieX9RGBbAfhCMmi3OEej88b1u4PMATft3hAfuDq",
+          "type": "internal",
+          "value": "9.959614",
+        },
+      },
+      {
+        "$type": "processed",
+        "gasUsed": 12349n,
       },
       {
         "$type": "sent",
@@ -38,10 +68,10 @@ exports[`bugs should deploy contract correctly 1`] = `
               },
             },
             "bounce": false,
-            "from": "kQBW5ieoSEHXuEljVf_tAb_cPCvcurQZBoW1ez4bx54-Zadw",
+            "from": "kQCPIUOr9ieX9RGBbAfhCMmi3OEej88b1u4PMATft3hAfuDq",
             "to": "@treasure(treasure)",
             "type": "internal",
-            "value": "9.916924834",
+            "value": "9.916460832",
           },
         ],
       },

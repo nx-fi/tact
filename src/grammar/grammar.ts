@@ -620,6 +620,15 @@ semantics.addOperation<ASTNode>("astOfStatement", {
                 case "%=":
                     op = "%";
                     break;
+                case "|=":
+                    op = "|";
+                    break;
+                case "&=":
+                    op = "&";
+                    break;
+                case "^=":
+                    op = "^";
+                    break;
                 default:
                     throw "Internal compiler error: unreachable augmented assignment operator. Please report at https://github.com/tact-lang/tact/issues";
             }
@@ -777,7 +786,7 @@ semantics.addOperation<ASTNode>("astOfStatement", {
             kind: "statement_foreach",
             keyName: keyId.sourceString,
             valueName: valueId.sourceString,
-            map: mapId.astOfExpression(),
+            map: mapId.astOfLValue(),
             statements: foreachBlock.children.map((s) => s.astOfStatement()),
             ref: createRef(this),
         });
@@ -1082,6 +1091,14 @@ semantics.addOperation<ASTNode>("astOfExpression", {
         return createNode({
             kind: "op_unary",
             op: "!",
+            right: operand.astOfExpression(),
+            ref: createRef(this),
+        });
+    },
+    ExpressionUnary_bitwiseNot(_tilde, operand) {
+        return createNode({
+            kind: "op_unary",
+            op: "~",
             right: operand.astOfExpression(),
             ref: createRef(this),
         });

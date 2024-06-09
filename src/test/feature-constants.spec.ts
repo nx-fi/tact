@@ -1,5 +1,5 @@
 import { toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { ConstantTester } from "./features/output/constants_ConstantTester";
 
@@ -36,6 +36,22 @@ describe("feature-constants", () => {
         expect(await contract.getSomething13()).toEqual(88n);
         expect(await contract.getSomething14()).toEqual(243n);
         expect(await contract.getSomething15()).toEqual(32n);
+        expect(await contract.getSomething16()).toEqual(
+            -115792089237316195423570985008687907853269984665640564039457584007913129639936n,
+        );
+        expect(await contract.getSomething17()).toEqual(
+            115792089237316195423570985008687907853269984665640564039457584007913129639935n,
+        );
+        expect(await contract.getSomething18()).toEqual(
+            -115792089237316195423570985008687907853269984665640564039457584007913129639935n,
+        );
+        expect(await contract.getSomething19()).toEqual(
+            -115792089237316195423570985008687907853269984665640564039457584007913129639936n,
+        );
+        expect(await contract.getMinInt1()).toEqual(
+            -115792089237316195423570985008687907853269984665640564039457584007913129639936n,
+        );
+        expect(await contract.getSomething20()).toEqual(-6n);
         expect(await contract.getGlobalConst()).toEqual(100n);
     });
 });

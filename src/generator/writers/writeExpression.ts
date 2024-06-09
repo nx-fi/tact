@@ -61,7 +61,8 @@ function writeStructConstructor(
 
     // Generate constructor
     ctx.fun(name, () => {
-        const sig = `(${resolveFuncType(type, ctx)}) ${name}(${args.map((v) => resolveFuncType(type.fields.find((v2) => v2.name === v)!.type, ctx) + " " + v).join(", ")})`;
+        const funcType = resolveFuncType(type, ctx);
+        const sig = `(${funcType}) ${name}(${args.map((v) => resolveFuncType(type.fields.find((v2) => v2.name === v)!.type, ctx) + " " + v).join(", ")})`;
         ctx.signature(sig);
         ctx.flag("inline");
         ctx.context("type:" + type.name);
@@ -80,7 +81,11 @@ function writeStructConstructor(
                 }
             }, ctx);
 
-            ctx.append(`return (${expressions.join(", ")});`);
+            if (expressions.length === 0 && funcType === "tuple") {
+                ctx.append(`return empty_tuple();`);
+            } else {
+                ctx.append(`return (${expressions.join(", ")});`);
+            }
         });
     });
     return name;
@@ -448,6 +453,10 @@ export function writeExpression(f: ASTExpression, ctx: WriterContext): string {
             return "(~ " + writeExpression(f.right, ctx) + ")";
         }
 
+        if (f.op === "~") {
+            return "(~ " + writeExpression(f.right, ctx) + ")";
+        }
+
         if (f.op === "-") {
             return "(- " + writeExpression(f.right, ctx) + ")";
         }
@@ -679,7 +688,11 @@ export function writeExpression(f: ASTExpression, ctx: WriterContext): string {
             // Render
             const s = writeExpression(f.src, ctx);
             if (ff.isMutating) {
-                return `${s}~${name}(${renderedArguments.join(", ")})`;
+                if (f.src.kind === "id" || f.src.kind === "op_field") {
+                    return `${s}~${name}(${renderedArguments.join(", ")})`;
+                } else {
+                    return `${ctx.used(ops.nonModifying(name))}(${[s, ...renderedArguments].join(", ")})`;
+                }
             } else {
                 return `${name}(${[s, ...renderedArguments].join(", ")})`;
             }

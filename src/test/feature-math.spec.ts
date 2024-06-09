@@ -1,5 +1,5 @@
 import { beginCell, Dictionary, toNano } from "@ton/core";
-import { ContractSystem, randomAddress } from "@nxfi/tact-emulator";
+import { ContractSystem, randomAddress } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { MathTester } from "./features/output/math_MathTester";
 
@@ -51,6 +51,9 @@ describe("feature-math", () => {
         expect(await contract.getXor(2n, -3n)).toBe(-1n);
         expect(await contract.getXor(-2n, 3n)).toBe(-3n);
         expect(await contract.getXor(-2n, -3n)).toBe(3n);
+        expect(await contract.getBitwiseNot(2n)).toBe(-3n);
+        expect(await contract.getBitwiseNot(-2n)).toBe(1n);
+        expect(await contract.getBitwiseNot(6n)).toBe(-7n);
 
         // Augmented Assign
         expect(await contract.getAddAug(1n, 2n)).toBe(3n);
@@ -61,6 +64,15 @@ describe("feature-math", () => {
         expect(await contract.getDivAug(2n, 2n)).toBe(1n);
         expect(await contract.getModAug(2n, 2n)).toBe(0n);
         expect(await contract.getModAug(3n, 2n)).toBe(1n);
+        expect(await contract.getBitwiseOrAug(2n, 1n)).toBe(3n);
+        expect(await contract.getBitwiseOrAug(2n, 2n)).toBe(2n);
+        expect(await contract.getBitwiseOrAug(5n, 3n)).toBe(7n);
+        expect(await contract.getBitwiseAndAug(3n, 2n)).toBe(2n);
+        expect(await contract.getBitwiseAndAug(5n, 6n)).toBe(4n);
+        expect(await contract.getBitwiseAndAug(1n, 3n)).toBe(1n);
+        expect(await contract.getBitwiseXorAug(1n, 2n)).toBe(3n);
+        expect(await contract.getBitwiseXorAug(3n, 1n)).toBe(2n);
+        expect(await contract.getBitwiseXorAug(2n, 0n)).toBe(2n);
 
         // Basic Compare
         expect(await contract.getCompare1(1n, 2n)).toBe(false);
@@ -455,5 +467,11 @@ describe("feature-math", () => {
         expect(await contract.getPrecedence10()).toBe(3n);
         expect(await contract.getPrecedence11()).toBe(3n);
         expect(await contract.getPrecedence12()).toBe(5n);
+
+        // Test multiple unary operations in a row
+        expect(await contract.getBitwiseNot1(5n)).toBe(5n);
+        expect(await contract.getBitwiseNot2(5n)).toBe(-6n);
+        expect(await contract.getBitwiseNot3(5n)).toBe(4n);
+        expect(await contract.getBitwiseNot4(5n)).toBe(6n);
     });
 });

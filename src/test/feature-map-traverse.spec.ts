@@ -1,5 +1,5 @@
 import { toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { MapTraverseTestContract } from "./features/output/map-traverse_MapTraverseTestContract";
 
@@ -40,5 +40,8 @@ describe("feature-map-traversal", () => {
         // ).rejects.toMatchObject(Error("Exit code: -14"));
 
         expect(await contract.getTestMapSize()).toEqual(4n);
+
+        expect(await contract.getTestMapAsField()).toEqual(606n);
+        expect(await contract.getTestMapAsStructField()).toEqual(606n);
     });
 });

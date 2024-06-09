@@ -1,5 +1,5 @@
 import { toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { Functions } from "./contracts/output/benchmark_functions_Functions";
 import { Functions as FunctionsInline } from "./contracts/output/benchmark_functions_inline_Functions";
 
@@ -29,9 +29,9 @@ describe("benchmarks", () => {
                     ),
                 0n,
             );
-        expect(gasUsed).toMatchInlineSnapshot(`3648n`);
+        expect(gasUsed).toMatchInlineSnapshot(`3656n`);
         expect(functions.init!.code.toBoc().length).toMatchInlineSnapshot(
-            `429`,
+            `430`,
         );
     });
     it("benchmark functions(inline)", async () => {
@@ -59,9 +59,9 @@ describe("benchmarks", () => {
                     ),
                 0n,
             );
-        expect(gasUsed).toMatchInlineSnapshot(`3517n`);
+        expect(gasUsed).toMatchInlineSnapshot(`3525n`);
         expect(functions.init!.code.toBoc().length).toMatchInlineSnapshot(
-            `422`,
+            `423`,
         );
     });
 });

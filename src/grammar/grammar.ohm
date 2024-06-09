@@ -105,7 +105,7 @@ Tact {
 
     StatementExpression = Expression ";"
 
-    StatementAssign = LValue ("=" | "+=" | "-=" | "*=" | "/=" | "%=") Expression ";"
+    StatementAssign = LValue ("=" | "+=" | "-=" | "*=" | "/=" | "%=" | "|=" | "&=" | "^=") Expression ";"
 
     StatementCondition = if Expression "{" Statement* "}" ~else --noElse
                        | if Expression "{" Statement* "}" else "{" Statement* "}" --withElse
@@ -123,7 +123,7 @@ Tact {
     StatementTry = try "{" Statement* "}" ~catch --noCatch
                  | try "{" Statement* "}" catch "(" id ")" "{" Statement* "}" --withCatch
 
-    StatementForEach = foreach "(" id "," id "in" id ")" "{" Statement* "}"
+    StatementForEach = foreach "(" id "," id "in" LValue ")" "{" Statement* "}"
 
     LValue = id "." LValue --fieldAccess
            | id --variable
@@ -174,6 +174,7 @@ Tact {
     ExpressionUnary = "-" ExpressionUnary --minus
                     | "+" ExpressionUnary --plus
                     | "!" ExpressionUnary --not
+                    | "~" ExpressionUnary --bitwiseNot
                     | ExpressionPrimary
 
     // Order is important

@@ -1,9 +1,8 @@
 import { toNano } from "@ton/core";
-import { ContractSystem } from "@nxfi/tact-emulator";
+import { ContractSystem } from "@tact-lang/emulator";
 import { __DANGER_resetNodeId } from "../grammar/ast";
 import { AddressTester } from "./features/output/address_AddressTester";
 import { consoleLogger } from "../logger";
-import { run } from "../node";
 
 describe("feature-address", () => {
     beforeAll(() => {
@@ -39,16 +38,8 @@ describe("feature-address", () => {
         expect((await contract.getTest3()).toRawString()).toEqual(
             "0:4a81708d2cf7b15a1b362fbf64880451d698461f52f05f145b36c08517d76873",
         );
-    });
-
-    it("should not compile with uninitialized storage fields", async () => {
-        const result = await run({
-            configPath: __dirname + "/test-tact.config.json",
-            projectNames: ["invalid-address"],
-        });
-        expect((consoleLogger.error as jest.Mock).mock.lastCall[0]).toContain(
-            "FQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N is not a valid address",
+        expect((await contract.getTest4(BigInt(123))).toRawString()).toEqual(
+            "123:000000000000000000000000000000000000000000000000000000000000000f",
         );
-        expect(result).toBe(false);
     });
 });

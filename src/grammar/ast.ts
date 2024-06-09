@@ -153,7 +153,7 @@ export type ASTOpBinary = {
     ref: ASTRef;
 };
 
-export type ASTUnaryOperation = "+" | "-" | "!" | "!!";
+export type ASTUnaryOperation = "+" | "-" | "!" | "!!" | "~";
 
 export type ASTOpUnary = {
     kind: "op_unary";
@@ -445,7 +445,15 @@ export type ASTStatementAssign = {
     ref: ASTRef;
 };
 
-export type ASTAugmentedAssignOperation = "+" | "-" | "*" | "/" | "%";
+export type ASTAugmentedAssignOperation =
+    | "+"
+    | "-"
+    | "*"
+    | "/"
+    | "%"
+    | "|"
+    | "&"
+    | "^";
 
 export type ASTStatementAugmentedAssign = {
     kind: "statement_augmentedassign";
@@ -511,7 +519,7 @@ export type ASTStatementForEach = {
     id: number;
     keyName: string;
     valueName: string;
-    map: ASTId;
+    map: ASTLvalueRef[];
     statements: ASTStatement[];
     ref: ASTRef;
 };
