@@ -1,5 +1,5 @@
 import fs from "fs";
-import { decompileAll } from "@nxfi/ton-opcode";
+import { decompileAll } from "@tact-lang/opcode";
 import { run } from "../src/node";
 import { build } from "../src/pipeline/build";
 import { FuncCompilationResult, funcCompile } from "../src/func/funcCompile";

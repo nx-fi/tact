@@ -1021,20 +1021,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nxfi/tact-emulator@^4.2.3-0":
-  version "4.2.3-0"
-  resolved "https://registry.yarnpkg.com/@nxfi/tact-emulator/-/tact-emulator-4.2.3-0.tgz#4f182fe41e5944bd4e1340f865df3f603d79dca7"
-  integrity sha512-F0x8VRDvO9PjAPbZfHFxW5Hpn2m2xsd3OogPBcx46RKPQuNYeFOoIukZ9JkoFsGmAtFmMjqjX9pHFZj+oPBjTQ==
-  dependencies:
-    prando "^6.0.1"
-    teslabot "^1.5.0"
-    zod "^3.20.2"
-
-"@nxfi/ton-opcode@^0.0.15-0":
-  version "0.0.15-0"
-  resolved "https://registry.yarnpkg.com/@nxfi/ton-opcode/-/ton-opcode-0.0.15-0.tgz#6974b1994e0da24485ffdadebbf2c6d4c024d893"
-  integrity sha512-sqmJ11iSGw9R9PAonyNf81NEF2ffg1QBhyMG5lqm7iCCshs9jcxlgHmXn4aytW74qdVS3qyjxWXL9+6mA3R2Gg==
-
 "@octokit/auth-token@^3.0.0":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-3.0.4.tgz#70e941ba742bdd2b49bdb7393e821dea8520a3db"
@@ -1278,10 +1264,24 @@
     teslabot "^1.5.0"
     zod "^3.20.2"
 
+"@tact-lang/emulator@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@tact-lang/emulator/-/emulator-4.3.0.tgz#f221f81268f66a4b19acfb0ed6a7f7f643a94a5a"
+  integrity sha512-r0i92vyxgz+pQh+AtfXdVKUnM0XcsJevfyLn255hJvfAXQj+fqP7b083qDeoKFveHnxI7reakimCfZXBl73x6Q==
+  dependencies:
+    prando "^6.0.1"
+    teslabot "^1.5.0"
+    zod "^3.20.2"
+
 "@tact-lang/opcode@^0.0.14":
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/@tact-lang/opcode/-/opcode-0.0.14.tgz#52a9cb65bd43b8975481ecac26a3a59b377d1cf2"
   integrity sha512-8FKHK2jwvViRBReO2t40DCkHAP9KPTRWZof4kdsAUJFlyeWIC8SsRQSl9QkZxF+48WvjDduKNqN5Ltb80paufA==
+
+"@tact-lang/opcode@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@tact-lang/opcode/-/opcode-0.0.15.tgz#54fe3116aa0db40aa1d447899d13302f2dbd881f"
+  integrity sha512-fDG4FA8JR4gvHUSeFVkubjeQJ8U8+Qsz0MnuKLEep0JK4Zu4AEuFXEzUb8Ygs1bMvyUvr21c/n0cBKuM+yQMYg==
 
 "@tact-lang/ton-abi@^0.0.3":
   version "0.0.3"

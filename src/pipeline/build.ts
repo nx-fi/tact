@@ -1,5 +1,5 @@
 import { beginCell, Cell, Dictionary } from "@ton/core";
-import { decompileAll } from "@nxfi/ton-opcode";
+import { decompileAll } from "@tact-lang/opcode";
 import { writeTypescript } from "../bindings/writeTypescript";
 import { featureEnable } from "../config/features";
 import { ConfigProject } from "../config/parseConfig";

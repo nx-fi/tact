@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@ipld/dag-pb": "2.1.18",
-    "@nxfi/ton-opcode": "^0.0.15-0",
+    "@tact-lang/opcode": "^0.0.15",
     "@ton/core": "0.56.3",
     "@ton/crypto": "^3.2.0",
     "blockstore-core": "1.0.5",
