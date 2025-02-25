@@ -1,0 +1,209 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; codeOf_CodeOfVsInitOf.headers.fc
+;;
+;; Header files for CodeOfVsInitOf
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $StateInit$_get_code
+_ $StateInit$_get_code((cell, cell) v) inline;
+
+;; $Child$init$_store
+builder $Child$init$_store(builder build_0, tuple v) inline;
+
+;; $CodeOfVsInitOf$_contract_init
+tuple $CodeOfVsInitOf$_contract_init() impure inline;
+
+;; $CodeOfVsInitOf$_contract_load
+tuple $CodeOfVsInitOf$_contract_load() impure inline_ref;
+
+;; $CodeOfVsInitOf$_contract_store
+() $CodeOfVsInitOf$_contract_store(tuple v) impure inline;
+
+;; $Child$_code_child
+cell $Child$_code_child() inline;
+
+;; $CodeOfVsInitOf$_fun_withCodeOf
+(tuple, cell) $CodeOfVsInitOf$_fun_withCodeOf(tuple $self) impure inline_ref;
+
+;; $Child$_init_child
+(cell, cell) $Child$_init_child() inline_ref;
+
+;; $CodeOfVsInitOf$_fun_withInitOf
+(tuple, cell) $CodeOfVsInitOf$_fun_withInitOf(tuple $self) impure inline_ref;
+
+;; $CodeOfVsInitOf$_fun_codeOfSelf
+(tuple, cell) $CodeOfVsInitOf$_fun_codeOfSelf(tuple $self) impure inline_ref;
+
+;; $CodeOfVsInitOf$_fun_myCode
+(tuple, cell) $CodeOfVsInitOf$_fun_myCode(tuple $self) impure inline_ref;
+
+
+;; codeOf_CodeOfVsInitOf.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+cell $global_myCode() impure asm """
+    MYCODE
+""";
+
+;; codeOf_CodeOfVsInitOf.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+_ $StateInit$_get_code((cell, cell) v) inline {
+    var (v'code, v'data) = v;
+    return v'code;
+}
+
+;;
+;; Type: CodeOfVsInitOf
+;;
+
+tuple $CodeOfVsInitOf$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $CodeOfVsInitOf$_contract_init();
+    }
+}
+
+() $CodeOfVsInitOf$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Type: Child
+;;
+
+builder $Child$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $Child$_child_get_code() impure asm """
+    B{b5ee9c7201010301005f000114ff00f4a413f4bcf2c80b010186d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09930c87f01ca00c9ed54e030f2c082020014ed44d0d20030916de06d} B>boc PUSHREF
+""";
+
+cell $Child$_code_child() inline {
+    return $Child$_child_get_code();
+}
+
+(cell, cell) $Child$_init_child() inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: Child
+    cell init_code = $Child$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract CodeOfVsInitOf functions
+;;
+
+tuple $CodeOfVsInitOf$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, cell) $CodeOfVsInitOf$_fun_withCodeOf(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_10 = $Child$_code_child();
+    return ($self, $fresh$ret_10);
+}
+
+(tuple, cell) $CodeOfVsInitOf$_fun_withInitOf(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_11 = $StateInit$_get_code($Child$_init_child());
+    return ($self, $fresh$ret_11);
+}
+
+(tuple, cell) $CodeOfVsInitOf$_fun_codeOfSelf(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_12 = my_code();
+    return ($self, $fresh$ret_12);
+}
+
+(tuple, cell) $CodeOfVsInitOf$_fun_myCode(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_13 = $global_myCode();
+    return ($self, $fresh$ret_13);
+}
+
+;;
+;; Get methods of a Contract CodeOfVsInitOf
+;;
+
+_ %withCodeOf() method_id(85163) {
+    var self = $CodeOfVsInitOf$_contract_load();
+    var res = self~$CodeOfVsInitOf$_fun_withCodeOf();
+    return res;
+}
+
+_ %withInitOf() method_id(77101) {
+    var self = $CodeOfVsInitOf$_contract_load();
+    var res = self~$CodeOfVsInitOf$_fun_withInitOf();
+    return res;
+}
+
+_ %codeOfSelf() method_id(95696) {
+    var self = $CodeOfVsInitOf$_contract_load();
+    var res = self~$CodeOfVsInitOf$_fun_codeOfSelf();
+    return res;
+}
+
+_ %myCode() method_id(73046) {
+    var self = $CodeOfVsInitOf$_contract_load();
+    var res = self~$CodeOfVsInitOf$_fun_myCode();
+    return res;
+}
+
+;;
+;; Routing of a Contract CodeOfVsInitOf
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $CodeOfVsInitOf$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $CodeOfVsInitOf$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

@@ -1,0 +1,711 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/exit-codes/contracts/output/compute-phase-errors_ComputePhaseErrorsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC __tact_dict_get_int_int
+  DECLPROC __tact_dict_get_int_cell
+  DECLPROC $ExitCode4$_load_without_opcode
+  DECLPROC $ComputePhaseErrorsTester$_store
+  DECLPROC $ComputePhaseErrorsTester$_load
+  DECLPROC $ComputePhaseErrorsTester$_contract_init
+  DECLPROC $ComputePhaseErrorsTester$_contract_load
+  DECLPROC $ComputePhaseErrorsTester$_contract_store
+  DECLPROC $Slice$_fun_loadRef$not_mut
+  DECLPROC load_int$not_mut
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_dict_get_int_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_int_cell PROCINLINE:<{
+    -ROT
+    DICTIGETREF
+    NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  $ExitCode4$_load_without_opcode PROCINLINE:<{
+    2 LDU
+    2 LDU
+    -ROT
+  }>
+  $ComputePhaseErrorsTester$_store PROCINLINE:<{
+    s0 s2 XCHG
+    257 PUSHINT
+    STIX
+    STREF
+  }>
+  $ComputePhaseErrorsTester$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    LDREF
+    -ROT
+  }>
+  $ComputePhaseErrorsTester$_contract_init PROCINLINE:<{
+    0 PUSHINT
+        B{b5ee9c724101010100020000004cacb9cd} B>boc PUSHREF
+  }>
+  $ComputePhaseErrorsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $ComputePhaseErrorsTester$_load INLINECALLDICT
+      1 2 BLKDROP2
+    }>
+    DROP
+    $ComputePhaseErrorsTester$_contract_init INLINECALLDICT
+  }>
+  $ComputePhaseErrorsTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    -ROT
+    $ComputePhaseErrorsTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Slice$_fun_loadRef$not_mut PROCREF:<{
+        LDREF
+    DROP
+  }>
+  load_int$not_mut PROCREF:<{
+    LDIX
+    DROP
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ComputePhaseErrorsTester$_contract_load INLINECALLDICT
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+    }>
+    0 PUSHINT
+    s2 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 s2 XCHG
+      32 LDU
+      OVER
+      4 EQINT
+      IFJMP:<{
+        NIP
+        1 2 BLKDROP2
+        $ExitCode4$_load_without_opcode INLINECALLDICT
+        s2 POP
+        s2 s3 s2 XCPU2
+        s3 PUSH
+        TRUE
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        5 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          256 PUSHPOW2DEC
+          OVER
+          ADD
+          3 -ROLL
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        54296 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s4 s3 s(-1) XCPUXC
+        s3 s5 s(-2) PU2XC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        5 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          256 PUSHNEGPOW2
+          s3 PUSH
+          SUB
+          s0 s3 XCHG
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        13102 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s4 s3 s(-1) XCPUXC
+        s3 s5 s(-2) PU2XC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        5 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          256 PUSHNEGPOW2
+          OVER
+          ADD
+          NEGATE
+          s0 s3 XCHG
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        2696 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s4 s3 s(-1) XCPUXC
+        s3 s5 s(-2) PU2XC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        5 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          s2 PUSH
+          INC
+          255 LSHIFT#
+          s0 s3 XCHG
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        43549 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s4 s3 s(-1) XCPUXC
+        s3 s(-1) PUXC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        4 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          256 PUSHNEGPOW2
+          s0 s3 XCHG
+          NEGATE
+          s1 s3 XCHG
+          DIV
+          s0 s2 XCHG
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        13733 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s3 s2 s(-1) XCPUXC
+        s4 s(-1) PUXC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        4 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          1 PUSHINT
+          s2 PUSH
+          DIV
+          s0 s2 XCHG
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        27951 PUSHINT
+        OVER
+        THROWANYIFNOT
+        s3 s2 s(-1) XCPUXC
+        c1 PUSH
+        c3 PUSH
+        c4 PUSH
+        c5 PUSH
+        c7 PUSH
+        <{
+          NIP
+          DUP
+          4 NEQINT
+          THROWANYIF
+        }>CONT
+        c7 SETCONT
+        c5 SETCONT
+        c4 SETCONT
+        c3 SETCONT
+        c1 SETCONT
+        3 PUSHINT
+        -1 PUSHINT
+        SETCONTVARARGS
+        <{
+          1 PUSHINT
+          ROT
+          MOD
+          SWAP
+          FALSE
+        }>CONT
+        c1 PUSH
+        COMPOSALT
+        SWAP
+        TRY
+        34908 PUSHINT
+        SWAP
+        THROWANYIFNOT
+        4 THROW
+        $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s0 s3 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      NIP
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    SWAP
+    HASHSU
+    DUP
+    72784909999241933525101870082106436361196962742821272283906262916606422795144 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      0 THROW
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    67769060446002921259981527530118776762890288817112936233016106081330099482756 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      1 THROW
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    82017397117707532260145186772992242389871229605611936922182940344927991706107 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      100 PUSHINT
+      REPEAT:<{
+            DROP
+      }>
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    42671672223002538127315758181478168679299263813178709131129164903857232658618 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          <{
+          }>CONT // c
+          0 SETNUMARGS // c'
+          2 PUSHINT // c' 2
+          SWAP // 2 c'
+          1 -1 SETCONTARGS
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    19644492782671451837138255797003710552513117277373917435122776370203516703743 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      NIP
+          NEWC
+      -1 PUSHINT
+      SWAP
+      9 PUSHPOW2
+      STUX
+          ENDC
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    108455727864203695433730613594800880998045100965217581203677989191937226558557 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          x{D7FF} @addop
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    99145039458804498223724847114728441874646527226810618592367879377986860569701 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          42 PUSHINT
+      257 PUSHINT
+      0 PUSHINT
+      OVER
+      __tact_dict_get_int_int INLINECALLDICT
+      __tact_not_null INLINECALLDICT
+      DROP
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    7878018245052229845167317431045655604689390732819983517389082263740410162817 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      s0 s1 PUXC
+      TRUE
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        DUP
+        8 NEQINT
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            NEWC
+        0 PUSHINT
+        SWAP
+        250 STI
+        0 PUSHINT
+        SWAP
+        250 STI
+        0 PUSHINT
+        SWAP
+        250 STI
+        0 PUSHINT
+        SWAP
+        250 STI
+        0 PUSHINT
+        SWAP
+        24 STI
+            ENDC
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      2983 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 PUSH
+      -ROT
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        DUP
+        8 NEQINT
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            NEWC
+            STREF
+            STREF
+            STREF
+            STREF
+            STREF
+            ENDC
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      19158 PUSHINT
+      SWAP
+      THROWANYIFNOT
+      8 THROW
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    91553511183396578838676502921700087679959931942254124741563934518563415214757 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      OVER
+      TRUE
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        DUP
+        9 NEQINT
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            b{} PUSHSLICE
+        1 PUSHINT
+        load_int$not_mut INLINECALLDICT
+        SWAP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      16776 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 PUSH
+      -ROT
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        DUP
+        9 NEQINT
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            b{} PUSHSLICE
+        $Slice$_fun_loadRef$not_mut INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      4287 PUSHINT
+      SWAP
+      THROWANYIFNOT
+      9 THROW
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    68249150838422171948055932929686170758403282733586946804298705724880638069498 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      NIP
+          B{b5ee9c72410104010050000101c0010203d008020300410000000000000000000000000000000000000000000000000000000000000000100041000000000000000000000000000000000000000000000000000000000000000030b31b4f55} B>boc PUSHREF
+          CTOS
+          PLDDICT
+      257 PUSHINT
+      0 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      __tact_not_null INLINECALLDICT
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    104149151916359513027840098102504673271105593402068117865880479324163872013154 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      0 PUSHINT
+          SENDMSG
+      DROP
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    2840950878006119288604766119387046618465397805886219378046644628215515989263 PUSHINT
+    EQUAL
+    IFJMP:<{
+      0 PUSHINT
+      31 PUSHPOW2DEC
+      REPEAT:<{
+        INC
+      }>
+      DROP
+      SWAP
+      $ComputePhaseErrorsTester$_contract_store INLINECALLDICT
+    }>
+    2DROP
+    130 THROW
+  }>
+}END>c

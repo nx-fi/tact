@@ -1,0 +1,550 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/stdlib_StdlibTest.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $VarIntStruct$_store
+  DECLPROC $VarIntStruct$_store_cell
+  DECLPROC $StdlibTest$_store
+  DECLPROC $StdlibTest$_load
+  DECLPROC $DataSize$_to_external
+  DECLPROC $StdAddress$_to_external
+  DECLPROC $VarAddress$_to_external
+  DECLPROC $StdlibTest$_contract_init
+  DECLPROC $StdlibTest$_contract_load
+  DECLPROC $StdlibTest$_contract_store
+  DECLPROC $StdlibTest$_fun_sliceEmpty
+  DECLPROC $StdlibTest$_fun_sliceBits
+  DECLPROC $StdlibTest$_fun_sliceRefs
+  DECLPROC $StdlibTest$_fun_storeBool
+  DECLPROC $StdlibTest$_fun_loadBool
+  DECLPROC $StdlibTest$_fun_storeBit
+  DECLPROC $StdlibTest$_fun_loadBit
+  DECLPROC $StdlibTest$_fun_tvm_2023_07_upgrade
+  DECLPROC $StdlibTest$_fun_tvm_2024_04_upgrade
+  DECLPROC $StdlibTest$_fun_storeMaybeRef
+  DECLPROC $StdlibTest$_fun_parseStdAddress
+  DECLPROC $StdlibTest$_fun_parseVarAddress
+  DECLPROC $Context$_constructor_bounceable_sender_value_raw
+  DECLPROC $StdlibTest$_fun_parseOriginalFwdFee
+  DECLPROC $StdlibTest$_fun_builderDepth
+  DECLPROC $StdlibTest$_fun_skipLastBits
+  DECLPROC $StdlibTest$_fun_firstBits
+  DECLPROC $StdlibTest$_fun_lastBits
+  DECLPROC $StdlibTest$_fun_sliceDepth
+  DECLPROC $StdlibTest$_fun_computeDataSizeCell
+  DECLPROC $StdlibTest$_fun_computeDataSizeSlice
+  DECLPROC $StdlibTest$_fun_cellDepth
+  DECLPROC $StdlibTest$_fun_curLt
+  DECLPROC $StdlibTest$_fun_blockLt
+  DECLPROC $StdlibTest$_fun_setGasLimit
+  DECLPROC $StdlibTest$_fun_getSeed
+  DECLPROC $StdlibTest$_fun_setSeed
+  DECLPROC $StdlibTest$_fun_myCode
+  DECLPROC $StdlibTest$_fun_varIntegers1
+  DECLPROC $VarIntStruct$_constructor_a_b_d_e
+  DECLPROC $StdlibTest$_fun_varIntegers2
+  73995 DECLMETHOD %sliceEmpty
+  75090 DECLMETHOD %sliceBits
+  77445 DECLMETHOD %sliceRefs
+  95946 DECLMETHOD %storeBool
+  109838 DECLMETHOD %loadBool
+  124731 DECLMETHOD %storeBit
+  108456 DECLMETHOD %loadBit
+  70959 DECLMETHOD %tvm_2023_07_upgrade
+  77856 DECLMETHOD %tvm_2024_04_upgrade
+  72411 DECLMETHOD %storeMaybeRef
+  113654 DECLMETHOD %parseStdAddress
+  123083 DECLMETHOD %parseVarAddress
+  67390 DECLMETHOD %parseOriginalFwdFee
+  110284 DECLMETHOD %builderDepth
+  102321 DECLMETHOD %skipLastBits
+  98565 DECLMETHOD %firstBits
+  99567 DECLMETHOD %lastBits
+  68745 DECLMETHOD %sliceDepth
+  86103 DECLMETHOD %computeDataSizeCell
+  81173 DECLMETHOD %computeDataSizeSlice
+  76079 DECLMETHOD %cellDepth
+  117220 DECLMETHOD %curLt
+  74753 DECLMETHOD %blockLt
+  109193 DECLMETHOD %setGasLimit
+  91206 DECLMETHOD %getSeed
+  103163 DECLMETHOD %setSeed
+  73046 DECLMETHOD %myCode
+  80382 DECLMETHOD %varIntegers1
+  67997 DECLMETHOD %varIntegers2
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $VarIntStruct$_store PROCINLINE:<{
+    s4 s3 XCHG2
+    STVARINT16
+    SWAP
+    STVARINT32
+    ROT
+    STVARUINT16
+    SWAP
+    STVARUINT32
+  }>
+  $VarIntStruct$_store_cell PROCINLINE:<{
+    NEWC
+    4 -ROLL
+    $VarIntStruct$_store INLINECALLDICT
+    ENDC
+  }>
+  $StdlibTest$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $StdlibTest$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $DataSize$_to_external PROCINLINE:<{
+  }>
+  $StdAddress$_to_external PROCINLINE:<{
+  }>
+  $VarAddress$_to_external PROCINLINE:<{
+  }>
+  $StdlibTest$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $StdlibTest$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $StdlibTest$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $StdlibTest$_contract_init INLINECALLDICT
+  }>
+  $StdlibTest$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $StdlibTest$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $StdlibTest$_fun_sliceEmpty PROCREF:<{
+        SEMPTY
+  }>
+  $StdlibTest$_fun_sliceBits PROCREF:<{
+        SBITS
+  }>
+  $StdlibTest$_fun_sliceRefs PROCREF:<{
+        SREFS
+  }>
+  $StdlibTest$_fun_storeBool PROCREF:<{
+    SWAP
+        1 STI
+  }>
+  $StdlibTest$_fun_loadBool PROCREF:<{
+        1 LDI
+    DROP
+  }>
+  $StdlibTest$_fun_storeBit PROCREF:<{
+    SWAP
+        1 STI
+  }>
+  $StdlibTest$_fun_loadBit PROCREF:<{
+        1 LDI
+    DROP
+  }>
+  $StdlibTest$_fun_tvm_2023_07_upgrade PROCREF:<{
+        GASCONSUMED
+  }>
+  $StdlibTest$_fun_tvm_2024_04_upgrade PROCREF:<{
+    1000 PUSHINT
+    FALSE
+        GETGASFEE
+    1000 PUSHINT
+    s0 s0 PUSH2
+    FALSE
+        GETSTORAGEFEE
+    ADD
+    1000 PUSHINT
+    DUP
+    FALSE
+        GETFORWARDFEE
+    ADD
+    1000 PUSHINT
+    FALSE
+        GETGASFEESIMPLE
+    ADD
+    1000 PUSHINT
+    DUP
+    FALSE
+        GETFORWARDFEESIMPLE
+    ADD
+    1000 PUSHINT
+    FALSE
+        GETORIGINALFWDFEE
+    ADD
+        DUEPAYMENT
+    ADD
+  }>
+  $StdlibTest$_fun_storeMaybeRef PROCREF:<{
+    SWAP
+        STOPTREF
+  }>
+  $StdlibTest$_fun_parseStdAddress PROCREF:<{
+        REWRITESTDADDR
+  }>
+  $StdlibTest$_fun_parseVarAddress PROCREF:<{
+        REWRITEVARADDR
+  }>
+  $Context$_constructor_bounceable_sender_value_raw PROCINLINE:<{
+  }>
+  $StdlibTest$_fun_parseOriginalFwdFee PROCREF:<{
+    4 PUSHINT
+        SDSKIPFIRST
+        LDMSGADDR
+    NIP
+    FALSE
+        MYADDR
+    ROT
+    1000000000 PUSHINT
+    SWAP
+    $Context$_constructor_bounceable_sender_value_raw INLINECALLDICT
+        LDMSGADDR   // load dest:MsgAddressInt
+        LDGRAMS     // load value:CurrencyCollection
+        ONE
+        SDSKIPFIRST // skip extra currency collection
+        LDGRAMS     // load ihr_fee
+        LDGRAMS     // load fwd_fee, we'll be using this!
+        DROP        // drop remaining Slice (with created_lt and created_at)
+        // There are 7 entries on the stack — first 3 fields of Context plus 4 loaded ones.
+        // The topmost is fwd_fee, which is the only one we're after, so let's drop 6 entries below:
+        6 1 BLKDROP2 // drop the loaded values as well as the first 3 fields of Context
+        ZERO              // not masterchain
+        GETORIGINALFWDFEE // (fwd_fee * 2^16) / first_frac, where
+                          // first_frac is a value listed in config param 25
+                          // of the blockchain: https://tonscan.org/config#25
+  }>
+  $StdlibTest$_fun_builderDepth PROCREF:<{
+        BDEPTH
+  }>
+  $StdlibTest$_fun_skipLastBits PROCREF:<{
+        SDSKIPLAST
+  }>
+  $StdlibTest$_fun_firstBits PROCREF:<{
+        SDCUTFIRST
+  }>
+  $StdlibTest$_fun_lastBits PROCREF:<{
+        SDCUTLAST
+  }>
+  $StdlibTest$_fun_sliceDepth PROCREF:<{
+        SDEPTH
+  }>
+  $StdlibTest$_fun_computeDataSizeCell PROCREF:<{
+        CDATASIZE
+  }>
+  $StdlibTest$_fun_computeDataSizeSlice PROCREF:<{
+        SDATASIZE
+  }>
+  $StdlibTest$_fun_cellDepth PROCREF:<{
+        CDEPTH
+  }>
+  $StdlibTest$_fun_curLt PROCREF:<{
+        LTIME
+  }>
+  $StdlibTest$_fun_blockLt PROCREF:<{
+        BLOCKLT
+  }>
+  $StdlibTest$_fun_setGasLimit PROCREF:<{
+        SETGASLIMIT
+    0 PUSHINT
+    100 PUSHINT
+    REPEAT:<{
+      INC
+    }>
+    DROP
+        GASCONSUMED
+  }>
+  $StdlibTest$_fun_getSeed PROCREF:<{
+        RANDSEED
+  }>
+  $StdlibTest$_fun_setSeed PROCREF:<{
+        SETRAND
+        RANDSEED
+  }>
+  $StdlibTest$_fun_myCode PROCREF:<{
+        MYCODE
+  }>
+  $StdlibTest$_fun_varIntegers1 PROCREF:<{
+        NEWC
+    1000 PUSHINT
+        STVARINT16
+    200 PUSHINT
+        STVARINT32
+    30 PUSHINT
+        STVARUINT16
+    4 PUSHINT
+        STVARUINT32
+        ENDC
+        CTOS
+        LDVARINT16
+        LDVARINT32
+        LDVARUINT16
+        LDVARUINT32
+    DROP
+    2SWAP
+    ADD
+    ROT
+    ADD
+    SWAP
+    ADD
+  }>
+  $VarIntStruct$_constructor_a_b_d_e PROCINLINE:<{
+  }>
+  $StdlibTest$_fun_varIntegers2 PROCREF:<{
+    1000 PUSHINT
+    200 PUSHINT
+    30 PUSHINT
+    4 PUSHINT
+    $VarIntStruct$_constructor_a_b_d_e INLINECALLDICT
+    $VarIntStruct$_store_cell INLINECALLDICT
+        CTOS
+        LDVARINT16
+        LDVARINT32
+        LDVARUINT16
+        LDVARUINT32
+    DROP
+    2SWAP
+    ADD
+    ROT
+    ADD
+    SWAP
+    ADD
+  }>
+  %sliceEmpty PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_sliceEmpty INLINECALLDICT
+    NIP
+  }>
+  %sliceBits PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_sliceBits INLINECALLDICT
+    NIP
+  }>
+  %sliceRefs PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_sliceRefs INLINECALLDICT
+    NIP
+  }>
+  %storeBool PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_storeBool INLINECALLDICT
+    NIP
+  }>
+  %loadBool PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_loadBool INLINECALLDICT
+    NIP
+  }>
+  %storeBit PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_storeBit INLINECALLDICT
+    NIP
+  }>
+  %loadBit PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_loadBit INLINECALLDICT
+    NIP
+  }>
+  %tvm_2023_07_upgrade PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_tvm_2023_07_upgrade INLINECALLDICT
+    NIP
+  }>
+  %tvm_2024_04_upgrade PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_tvm_2024_04_upgrade INLINECALLDICT
+    NIP
+  }>
+  %storeMaybeRef PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_storeMaybeRef INLINECALLDICT
+    NIP
+  }>
+  %parseStdAddress PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_parseStdAddress INLINECALLDICT
+    1 2 BLKDROP2
+    $StdAddress$_to_external INLINECALLDICT
+  }>
+  %parseVarAddress PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_parseVarAddress INLINECALLDICT
+    1 2 BLKDROP2
+    $VarAddress$_to_external INLINECALLDICT
+  }>
+  %parseOriginalFwdFee PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_parseOriginalFwdFee INLINECALLDICT
+    NIP
+  }>
+  %builderDepth PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_builderDepth INLINECALLDICT
+    NIP
+  }>
+  %skipLastBits PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_skipLastBits INLINECALLDICT
+    NIP
+  }>
+  %firstBits PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_firstBits INLINECALLDICT
+    NIP
+  }>
+  %lastBits PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_lastBits INLINECALLDICT
+    NIP
+  }>
+  %sliceDepth PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_sliceDepth INLINECALLDICT
+    NIP
+  }>
+  %computeDataSizeCell PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_computeDataSizeCell INLINECALLDICT
+    1 3 BLKDROP2
+    $DataSize$_to_external INLINECALLDICT
+  }>
+  %computeDataSizeSlice PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    -ROT
+    $StdlibTest$_fun_computeDataSizeSlice INLINECALLDICT
+    1 3 BLKDROP2
+    $DataSize$_to_external INLINECALLDICT
+  }>
+  %cellDepth PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_cellDepth INLINECALLDICT
+    NIP
+  }>
+  %curLt PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_curLt INLINECALLDICT
+    NIP
+  }>
+  %blockLt PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_blockLt INLINECALLDICT
+    NIP
+  }>
+  %setGasLimit PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_setGasLimit INLINECALLDICT
+    NIP
+  }>
+  %getSeed PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_getSeed INLINECALLDICT
+    NIP
+  }>
+  %setSeed PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    SWAP
+    $StdlibTest$_fun_setSeed INLINECALLDICT
+    NIP
+  }>
+  %myCode PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_myCode INLINECALLDICT
+    NIP
+  }>
+  %varIntegers1 PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_varIntegers1 INLINECALLDICT
+    NIP
+  }>
+  %varIntegers2 PROC:<{
+    $StdlibTest$_contract_load INLINECALLDICT
+    $StdlibTest$_fun_varIntegers2 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $StdlibTest$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $StdlibTest$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

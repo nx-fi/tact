@@ -1,0 +1,220 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; initof_Self.headers.fc
+;;
+;; Header files for Self
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Self$init$_store
+builder $Self$init$_store(builder build_0, tuple v) inline;
+
+;; $Self$_contract_init
+tuple $Self$_contract_init() impure inline;
+
+;; $Self$_contract_load
+tuple $Self$_contract_load() impure inline_ref;
+
+;; $Self$_contract_store
+() $Self$_contract_store(tuple v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $Self$_init_child
+(cell, cell) $Self$_init_child() inline_ref;
+
+;; $Self$_fun_testInitOfAddress
+(tuple, slice) $Self$_fun_testInitOfAddress(tuple $self) impure inline_ref;
+
+;; $Self$_fun_testMyAddress
+(tuple, slice) $Self$_fun_testMyAddress(tuple $self) impure inline_ref;
+
+
+;; initof_Self.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+;; initof_Self.storage.fc
+;;
+;; Type: Self
+;;
+
+builder $Self$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+tuple $Self$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Self$_contract_init();
+    }
+}
+
+() $Self$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+(cell, cell) $Self$_init_child() inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: Self
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Self$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract Self functions
+;;
+
+tuple $Self$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, slice) $Self$_fun_testInitOfAddress(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_307 = $global_contractAddress($Self$_init_child());
+    return ($self, $fresh$ret_307);
+}
+
+(tuple, slice) $Self$_fun_testMyAddress(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_308 = $global_myAddress();
+    return ($self, $fresh$ret_308);
+}
+
+;;
+;; Get methods of a Contract Self
+;;
+
+_ %testInitOfAddress() method_id(104446) {
+    var self = $Self$_contract_load();
+    var res = self~$Self$_fun_testInitOfAddress();
+    return res;
+}
+
+_ %testMyAddress() method_id(122949) {
+    var self = $Self$_contract_load();
+    var res = self~$Self$_fun_testMyAddress();
+    return res;
+}
+
+;;
+;; Routing of a Contract Self
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Self$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Self$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

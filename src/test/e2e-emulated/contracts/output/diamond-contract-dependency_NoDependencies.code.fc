@@ -1,0 +1,146 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; diamond-contract-dependency_NoDependencies.headers.fc
+;;
+;; Header files for NoDependencies
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $NoDependencies$init$_store
+builder $NoDependencies$init$_store(builder build_0, tuple v) inline;
+
+;; $NoDependencies$_contract_init
+tuple $NoDependencies$_contract_init() impure inline;
+
+;; $NoDependencies$_contract_load
+tuple $NoDependencies$_contract_load() impure inline_ref;
+
+;; $NoDependencies$_contract_store
+() $NoDependencies$_contract_store(tuple v) impure inline;
+
+;; $NoDependencies$_init_child
+(cell, cell) $NoDependencies$_init_child() inline_ref;
+
+;; $NoDependencies$_fun_getState
+(tuple, (cell, cell)) $NoDependencies$_fun_getState(tuple $self) impure inline_ref;
+
+
+;; diamond-contract-dependency_NoDependencies.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; diamond-contract-dependency_NoDependencies.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: NoDependencies
+;;
+
+builder $NoDependencies$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+tuple $NoDependencies$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $NoDependencies$_contract_init();
+    }
+}
+
+() $NoDependencies$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+(cell, cell) $NoDependencies$_init_child() inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: NoDependencies
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $NoDependencies$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract NoDependencies functions
+;;
+
+tuple $NoDependencies$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, (cell, cell)) $NoDependencies$_fun_getState(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_264 = $NoDependencies$_init_child();
+    return ($self, $fresh$ret_264);
+}
+
+;;
+;; Get methods of a Contract NoDependencies
+;;
+
+_ %getState() method_id(124033) {
+    var self = $NoDependencies$_contract_load();
+    var res = self~$NoDependencies$_fun_getState();
+    return $StateInit$_to_external(res);
+}
+
+;;
+;; Routing of a Contract NoDependencies
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $NoDependencies$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $NoDependencies$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

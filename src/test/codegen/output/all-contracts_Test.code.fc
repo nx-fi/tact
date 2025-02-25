@@ -1,0 +1,159 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; all-contracts_Test.headers.fc
+;;
+;; Header files for Test
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Test$_contract_init
+tuple $Test$_contract_init() impure inline;
+
+;; $Test$_contract_load
+tuple $Test$_contract_load() impure inline_ref;
+
+;; $Test$_contract_store
+() $Test$_contract_store(tuple v) impure inline;
+
+;; $Position$_constructor_tokenId_foo
+((int, int)) $Position$_constructor_tokenId_foo(int $tokenId, int $foo) inline;
+
+
+;; all-contracts_Test.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+() __tact_debug_str(slice value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP STRDUMP DROP
+""";
+
+slice $Int$_fun_toString(int $self) impure asm """
+    <{
+        // x
+        NEWC // x b
+        OVER // x b x
+        0 LESSINT // x b <0?
+        <{
+            // x b
+            45 PUSHINT // x b 45
+            SWAP // x 45 b
+            8 STU // x b
+            SWAP // b x
+            NEGATE // b -x
+            SWAP // -x b
+        }>CONT IF
+        // x b
+
+        SWAP // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10 
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 1 1 CALLXARGS
+    // b
+
+    ENDC CTOS // s
+""";
+
+;; all-contracts_Test.native.fc
+;; an empty FunC file to test imports of files with .func extension
+
+;; all-contracts_Test.constants.fc
+;; String "dump(p.tokenId)"
+slice __gen_slice_string_a3e367a7c5a07b2eca8d7cd1a0e85d6b65e9df0f6cdd44c4c01015b16d44665d() asm """
+    B{b5ee9c7241010101001100001e64756d7028702e746f6b656e496429b23b298d} B>boc <s PUSHSLICE
+""";
+
+;; all-contracts_Test.storage.fc
+;;
+;; Type: Position
+;; TLB: _ tokenId:uint16 foo:Maybe int257 = Position
+;;
+
+((int, int)) $Position$_constructor_tokenId_foo(int $tokenId, int $foo) inline {
+    return ($tokenId, $foo);
+}
+
+;;
+;; Type: Test
+;;
+
+tuple $Test$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Test$_contract_init();
+    }
+}
+
+() $Test$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Test functions
+;;
+
+tuple $Test$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+;;
+;; Get methods of a Contract Test
+;;
+
+;;
+;; Routing of a Contract Test
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Test$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "test" message
+    if (text_op == 0x0ee1f3c12fb6aba5ba89ea915e166afc17ebaf48473b14450019cce455529207) {
+        var ($p'tokenId, $p'foo) = $Position$_constructor_tokenId_foo(1, null());
+        __tact_debug_str($Int$_fun_toString($p'tokenId), __gen_slice_string_a3e367a7c5a07b2eca8d7cd1a0e85d6b65e9df0f6cdd44c4c01015b16d44665d(), "File src/test/codegen/struct-with-default-and-optional-fields.tact:9:10:");
+        ;; Persist state
+        $Test$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

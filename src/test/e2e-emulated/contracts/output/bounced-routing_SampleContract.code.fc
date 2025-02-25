@@ -1,0 +1,586 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; bounced-routing_SampleContract.headers.fc
+;;
+;; Header files for SampleContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $EntryFirst$_load_without_opcode
+(slice, ((int, slice))) $EntryFirst$_load_without_opcode(slice sc_0) inline;
+
+;; $EntrySecond$_load_without_opcode
+(slice, ((int, slice))) $EntrySecond$_load_without_opcode(slice sc_0) inline;
+
+;; $First$_store
+builder $First$_store(builder build_0, (int, int, int, slice) v) inline;
+
+;; $First$_store_cell
+cell $First$_store_cell((int, int, int, slice) v) inline;
+
+;; $First$_load_without_opcode
+(slice, ((int, int, int, slice))) $First$_load_without_opcode(slice sc_0) inline;
+
+;; $First$_load_bounced
+(slice, ((int, int, int))) $First$_load_bounced(slice sc_0) inline;
+
+;; $MyStruct$_store
+builder $MyStruct$_store(builder build_0, (int) v) inline;
+
+;; $MyStruct$_load
+(slice, ((int))) $MyStruct$_load(slice sc_0) inline;
+
+;; $Second$_store
+builder $Second$_store(builder build_0, (int, int, int, slice, int, (int), (int)) v) inline_ref;
+
+;; $Second$_store_cell
+cell $Second$_store_cell((int, int, int, slice, int, (int), (int)) v) inline;
+
+;; $Second$_load_without_opcode
+(slice, ((int, int, int, slice, int, (int), (int)))) $Second$_load_without_opcode(slice sc_0) inline_ref;
+
+;; $Second$_load_bounced
+(slice, ((int, int))) $Second$_load_bounced(slice sc_0) inline;
+
+;; $Large$_load_bounced
+(slice, (tuple)) $Large$_load_bounced(slice sc_0) inline;
+
+;; $SmallBounce$_load_without_opcode
+(slice, ((int, int))) $SmallBounce$_load_without_opcode(slice sc_0) inline;
+
+;; $SampleContract$_store
+builder $SampleContract$_store(builder build_0, (int) v) inline;
+
+;; $SampleContract$_load
+(slice, ((int))) $SampleContract$_load(slice sc_0) inline;
+
+;; $SampleContract$_contract_init
+(int) $SampleContract$_contract_init() impure inline;
+
+;; $SampleContract$_contract_load
+(int) $SampleContract$_contract_load() impure inline_ref;
+
+;; $SampleContract$_contract_store
+() $SampleContract$_contract_store((int) v) impure inline;
+
+;; $SampleContract$_fun_amount
+((int), int) $SampleContract$_fun_amount((int) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_to_value_mode_bounce_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline;
+
+;; $First$_constructor_amount_myCoins_myBool3_anAddress
+((int, int, int, slice)) $First$_constructor_amount_myCoins_myBool3_anAddress(int $amount, int $myCoins, int $myBool3, slice $anAddress) inline;
+
+;; $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2
+((int, int, int, slice, int, (int), (int))) $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2(int $amount_bigger, int $myBool, int $thisDoesNotFit, slice $myAddress, int $myBool2, (int) $myStruct, (int) $myStruct2) inline;
+
+;; $MyStruct$_constructor_amount
+((int)) $MyStruct$_constructor_amount(int $amount) inline;
+
+
+;; bounced-routing_SampleContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+() __tact_debug_str(slice value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP STRDUMP DROP
+""";
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+;; bounced-routing_SampleContract.constants.fc
+;; String "dump("In bounce of first")"
+slice __gen_slice_string_40e4ae31f246a7c2de582361e5a10e8f4140ed73d7fb2384c04989a9e28b08d5() asm """
+    B{b5ee9c7241010101001c00003464756d702822496e20626f756e6365206f662066697273742229b36a288a} B>boc <s PUSHSLICE
+""";
+
+;; String "In bounce of first"
+slice __gen_slice_string_243957683affad975f13b5d1da712eeeb40eaaafd138959df55425441c233292() asm """
+    B{b5ee9c72410101010014000024496e20626f756e6365206f66206669727374a88de4c0} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("In bounce of second")"
+slice __gen_slice_string_c04633a6fa8becae8d3cdac8c05fc12deabe7a33534012d9a938cecbc7de69f4() asm """
+    B{b5ee9c7241010101001d00003664756d702822496e20626f756e6365206f66207365636f6e6422291c021b0f} B>boc <s PUSHSLICE
+""";
+
+;; String "In bounce of second"
+slice __gen_slice_string_5060db2d197fc52630815539c065a7d8c266f871c8b16b933b89d4fe90a72fae() asm """
+    B{b5ee9c72410101010015000026496e20626f756e6365206f66207365636f6e64fc665418} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("In bounce of small bounce")"
+slice __gen_slice_string_add89d41b1b3f39e32efc1564e108b5dfa831a400b0ebd18d56bc1aac67d30e8() asm """
+    B{b5ee9c7241010101002300004264756d702822496e20626f756e6365206f6620736d616c6c20626f756e63652229e2782627} B>boc <s PUSHSLICE
+""";
+
+;; String "In bounce of small bounce"
+slice __gen_slice_string_f115c865d815c88dfb8375de4bb989003f2730d837bf69e92fac8747a1cdcb3f() asm """
+    B{b5ee9c7241010101001b000032496e20626f756e6365206f6620736d616c6c20626f756e636520771682} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("In bounce of large bounce")"
+slice __gen_slice_string_eaca69ce75b4b0c725aac1d8d5939a07a29001311893b7a682f1e922967462c5() asm """
+    B{b5ee9c7241010101002300004264756d702822496e20626f756e6365206f66206c6172676520626f756e636522299d7156e0} B>boc <s PUSHSLICE
+""";
+
+;; String "In bounce of large bounce"
+slice __gen_slice_string_072acac8f7f333d9554b76e61e6f7a869815335882336469afd2cfdcdb31e988() asm """
+    B{b5ee9c7241010101001b000032496e20626f756e6365206f66206c6172676520626f756e6365b9a85106} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("In generic bounce")"
+slice __gen_slice_string_f97b915604cca802175167bb52bc5afe5f90e32c153b1ba72db5e733c29e9245() asm """
+    B{b5ee9c7241010101001b00003264756d702822496e2067656e6572696320626f756e6365222912049e70} B>boc <s PUSHSLICE
+""";
+
+;; String "In generic bounce"
+slice __gen_slice_string_e00443a4d0500a8f08cfafd55e0ef63f7446ab298ff5fa2e86e8c14fb1c93308() asm """
+    B{b5ee9c72410101010013000022496e2067656e6572696320626f756e63659b8e2ac3} B>boc <s PUSHSLICE
+""";
+
+;; bounced-routing_SampleContract.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline {
+    return ($mode, $body, null(), null(), $value, $to, $bounce);
+}
+
+;;
+;; Type: EntryFirst
+;; Header: 0xa45b74a8
+;; TLB: entry_first#a45b74a8 amountToAdd:uint32 toAddress:address = EntryFirst
+;;
+
+(slice, ((int, slice))) $EntryFirst$_load_without_opcode(slice sc_0) inline {
+    var v'amountToAdd = sc_0~load_uint(32);
+    var v'toAddress = sc_0~load_msg_addr();
+    return (sc_0, (v'amountToAdd, v'toAddress));
+}
+
+;;
+;; Type: EntrySecond
+;; Header: 0xff40dc10
+;; TLB: entry_second#ff40dc10 amountToAdd:uint32 toAddress:address = EntrySecond
+;;
+
+(slice, ((int, slice))) $EntrySecond$_load_without_opcode(slice sc_0) inline {
+    var v'amountToAdd = sc_0~load_uint(32);
+    var v'toAddress = sc_0~load_msg_addr();
+    return (sc_0, (v'amountToAdd, v'toAddress));
+}
+
+;;
+;; Type: First
+;; Header: 0xbec08f38
+;; TLB: first#bec08f38 amount:uint32 myCoins:coins myBool3:bool anAddress:address = First
+;;
+
+builder $First$_store(builder build_0, (int, int, int, slice) v) inline {
+    var (v'amount, v'myCoins, v'myBool3, v'anAddress) = v;
+    build_0 = store_uint(build_0, 3200290616, 32);
+    build_0 = build_0.store_uint(v'amount, 32);
+    build_0 = build_0.store_varuint16(v'myCoins);
+    build_0 = build_0.store_int(v'myBool3, 1);
+    build_0 = build_0.store_slice(v'anAddress);
+    return build_0;
+}
+
+cell $First$_store_cell((int, int, int, slice) v) inline {
+    return $First$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, int, int, slice))) $First$_load_without_opcode(slice sc_0) inline {
+    var v'amount = sc_0~load_uint(32);
+    var v'myCoins = sc_0~load_varuint16();
+    var v'myBool3 = sc_0~load_int(1);
+    var v'anAddress = sc_0~load_msg_addr();
+    return (sc_0, (v'amount, v'myCoins, v'myBool3, v'anAddress));
+}
+
+(slice, ((int, int, int))) $First$_load_bounced(slice sc_0) inline {
+    var v'amount = sc_0~load_uint(32);
+    var v'myCoins = sc_0~load_varuint16();
+    var v'myBool3 = sc_0~load_int(1);
+    return (sc_0, (v'amount, v'myCoins, v'myBool3));
+}
+
+((int, int, int, slice)) $First$_constructor_amount_myCoins_myBool3_anAddress(int $amount, int $myCoins, int $myBool3, slice $anAddress) inline {
+    return ($amount, $myCoins, $myBool3, $anAddress);
+}
+
+;;
+;; Type: MyStruct
+;; TLB: _ amount:int257 = MyStruct
+;;
+
+builder $MyStruct$_store(builder build_0, (int) v) inline {
+    var (v'amount) = v;
+    build_0 = build_0.store_int(v'amount, 257);
+    return build_0;
+}
+
+(slice, ((int))) $MyStruct$_load(slice sc_0) inline {
+    var v'amount = sc_0~load_int(257);
+    return (sc_0, (v'amount));
+}
+
+((int)) $MyStruct$_constructor_amount(int $amount) inline {
+    return ($amount);
+}
+
+;;
+;; Type: Second
+;; Header: 0x17571ec8
+;; TLB: second#17571ec8 amount_bigger:uint64 myBool:bool thisDoesNotFit:uint256 myAddress:address myBool2:bool myStruct:MyStruct{amount:int257} myStruct2:MyStruct{amount:int257} = Second
+;;
+
+builder $Second$_store(builder build_0, (int, int, int, slice, int, (int), (int)) v) inline_ref {
+    var (v'amount_bigger, v'myBool, v'thisDoesNotFit, v'myAddress, v'myBool2, (v'myStruct'amount), (v'myStruct2'amount)) = v;
+    build_0 = store_uint(build_0, 391585480, 32);
+    build_0 = build_0.store_uint(v'amount_bigger, 64);
+    build_0 = build_0.store_int(v'myBool, 1);
+    build_0 = build_0.store_uint(v'thisDoesNotFit, 256);
+    build_0 = build_0.store_slice(v'myAddress);
+    build_0 = build_0.store_int(v'myBool2, 1);
+    build_0 = $MyStruct$_store(build_0, (v'myStruct'amount));
+    var build_1 = begin_cell();
+    build_1 = $MyStruct$_store(build_1, (v'myStruct2'amount));
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+cell $Second$_store_cell((int, int, int, slice, int, (int), (int)) v) inline {
+    return $Second$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, int, int, slice, int, (int), (int)))) $Second$_load_without_opcode(slice sc_0) inline_ref {
+    var v'amount_bigger = sc_0~load_uint(64);
+    var v'myBool = sc_0~load_int(1);
+    var v'thisDoesNotFit = sc_0~load_uint(256);
+    var v'myAddress = sc_0~load_msg_addr();
+    var v'myBool2 = sc_0~load_int(1);
+    var v'myStruct = sc_0~$MyStruct$_load();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'myStruct2 = sc_1~$MyStruct$_load();
+    return (sc_0, (v'amount_bigger, v'myBool, v'thisDoesNotFit, v'myAddress, v'myBool2, v'myStruct, v'myStruct2));
+}
+
+(slice, ((int, int))) $Second$_load_bounced(slice sc_0) inline {
+    var v'amount_bigger = sc_0~load_uint(64);
+    var v'myBool = sc_0~load_int(1);
+    return (sc_0, (v'amount_bigger, v'myBool));
+}
+
+((int, int, int, slice, int, (int), (int))) $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2(int $amount_bigger, int $myBool, int $thisDoesNotFit, slice $myAddress, int $myBool2, (int) $myStruct, (int) $myStruct2) inline {
+    return ($amount_bigger, $myBool, $thisDoesNotFit, $myAddress, $myBool2, $myStruct, $myStruct2);
+}
+
+;;
+;; Type: Large
+;; Header: 0x24dd4543
+;; TLB: large#24dd4543 address:address value:coins = Large
+;;
+
+(slice, (tuple)) $Large$_load_bounced(slice sc_0) inline {
+    return (sc_0, null());
+}
+
+;;
+;; Type: SmallBounce
+;; Header: 0xc0dee6d6
+;; TLB: small_bounce#c0dee6d6 amount:uint32 myBool3:bool = SmallBounce
+;;
+
+(slice, ((int, int))) $SmallBounce$_load_without_opcode(slice sc_0) inline {
+    var v'amount = sc_0~load_uint(32);
+    var v'myBool3 = sc_0~load_int(1);
+    return (sc_0, (v'amount, v'myBool3));
+}
+
+;;
+;; Type: SampleContract
+;;
+
+builder $SampleContract$_store(builder build_0, (int) v) inline {
+    var (v'a) = v;
+    build_0 = build_0.store_int(v'a, 257);
+    return build_0;
+}
+
+(slice, ((int))) $SampleContract$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(257);
+    return (sc_0, (v'a));
+}
+
+(int) $SampleContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$SampleContract$_load();
+    } else {
+        return $SampleContract$_contract_init();
+    }
+}
+
+() $SampleContract$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $SampleContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract SampleContract functions
+;;
+
+(int) $SampleContract$_contract_init() impure inline {
+    var (($self'a)) = (null());
+    $self'a = 100;
+    return ($self'a);
+}
+
+((int), int) $SampleContract$_fun_amount((int) $self) impure inline_ref {
+    var (($self'a)) = $self;
+    var $fresh$ret_170 = $self'a;
+    return (($self'a), $fresh$ret_170);
+}
+
+;;
+;; Get methods of a Contract SampleContract
+;;
+
+_ %amount() method_id(101100) {
+    var self = $SampleContract$_contract_load();
+    var res = self~$SampleContract$_fun_amount();
+    return res;
+}
+
+;;
+;; Routing of a Contract SampleContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'a) = $SampleContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        ;; Skip 0xFFFFFFFF prefix of a bounced message
+        in_msg~skip_bits(32);
+        int op = 0;
+        if (slice_bits(in_msg) >= 32) {
+            op = in_msg.preload_uint(32);
+        }
+        ;; Bounced handler for First message
+        if (op == 3200290616) {
+            in_msg~skip_bits(32);
+            var ($msg'amount, $msg'myCoins, $msg'myBool3) = in_msg~$First$_load_bounced();
+            __tact_debug_str(__gen_slice_string_243957683affad975f13b5d1da712eeeb40eaaafd138959df55425441c233292(), __gen_slice_string_40e4ae31f246a7c2de582361e5a10e8f4140ed73d7fb2384c04989a9e28b08d5(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:95:9:");
+            int $y = $msg'myBool3;
+            $self'a = (($self'a + $msg'amount) - 2);
+            (int, int, int) $z = ($msg'amount, $msg'myCoins, $msg'myBool3);
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Bounced handler for Second message
+        if (op == 391585480) {
+            in_msg~skip_bits(32);
+            var ($msg'amount_bigger, $msg'myBool) = in_msg~$Second$_load_bounced();
+            __tact_debug_str(__gen_slice_string_5060db2d197fc52630815539c065a7d8c266f871c8b16b933b89d4fe90a72fae(), __gen_slice_string_c04633a6fa8becae8d3cdac8c05fc12deabe7a33534012d9a938cecbc7de69f4(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:104:9:");
+            $self'a = (($self'a + $msg'amount_bigger) - 4);
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Bounced handler for SmallBounce message
+        if (op == 3235833558) {
+            in_msg~skip_bits(32);
+            var ($msg'amount, $msg'myBool3) = in_msg~$SmallBounce$_load_without_opcode();
+            __tact_debug_str(__gen_slice_string_f115c865d815c88dfb8375de4bb989003f2730d837bf69e92fac8747a1cdcb3f(), __gen_slice_string_add89d41b1b3f39e32efc1564e108b5dfa831a400b0ebd18d56bc1aac67d30e8(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:109:9:");
+            $self'a = (($self'a + $msg'amount) - 4);
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Bounced handler for Large message
+        if (op == 618480963) {
+            in_msg~skip_bits(32);
+            var $msg = in_msg~$Large$_load_bounced();
+            __tact_debug_str(__gen_slice_string_072acac8f7f333d9554b76e61e6f7a869815335882336469afd2cfdcdb31e988(), __gen_slice_string_eaca69ce75b4b0c725aac1d8d5939a07a29001311893b7a682f1e922967462c5(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:114:9:");
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Fallback bounce receiver
+        slice $msg = in_msg;
+        __tact_debug_str(__gen_slice_string_e00443a4d0500a8f08cfafd55e0ef63f7446ab298ff5fa2e86e8c14fb1c93308(), __gen_slice_string_f97b915604cca802175167bb52bc5afe5f90e32c153b1ba72db5e733c29e9245(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:89:9:");
+        int $y = $msg~load_uint(32);
+        $self'a = 77;
+        ;; Persist state
+        $SampleContract$_contract_store(($self'a));
+        return ();
+        return ();
+    }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive EntryFirst message
+        if (op == 2757457064) {
+            var ($msg'amountToAdd, $msg'toAddress) = in_msg~$EntryFirst$_load_without_opcode();
+            $self'a = ($self'a - $msg'amountToAdd);
+            $global_send($SendParameters$_constructor_to_value_mode_bounce_body($msg'toAddress, 1000000000, 2, true, $First$_store_cell($First$_constructor_amount_myCoins_myBool3_anAddress($msg'amountToAdd, 3, false, __tact_context_get_sender()))));
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Receive EntrySecond message
+        if (op == 4282440720) {
+            var ($msg'amountToAdd, $msg'toAddress) = in_msg~$EntrySecond$_load_without_opcode();
+            $self'a = ($self'a - $msg'amountToAdd);
+            $global_send($SendParameters$_constructor_to_value_mode_bounce_body($msg'toAddress, 1000000000, 2, true, $Second$_store_cell($Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2($msg'amountToAdd, false, 1, __tact_context_get_sender(), false, $MyStruct$_constructor_amount(1), $MyStruct$_constructor_amount(2)))));
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Receive First message
+        if (op == 3200290616) {
+            var ($msg'amount, $msg'myCoins, $msg'myBool3, $msg'anAddress) = in_msg~$First$_load_without_opcode();
+            var ($x'amount, $x'myCoins, $x'myBool3, $x'anAddress) = ($msg'amount, $msg'myCoins, $msg'myBool3, $msg'anAddress);
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+        ;; Receive Second message
+        if (op == 391585480) {
+            var ($msg'amount_bigger, $msg'myBool, $msg'thisDoesNotFit, $msg'myAddress, $msg'myBool2, ($msg'myStruct'amount), ($msg'myStruct2'amount)) = in_msg~$Second$_load_without_opcode();
+            ;; Persist state
+            $SampleContract$_contract_store(($self'a));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $SampleContract$_contract_store(($self'a));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Increment" message
+    if (text_op == 0xff40318ed8b182300c6dd1a3a2657cc1681d77dee4f972289c411ed40098c9bd) {
+        ;; Persist state
+        $SampleContract$_contract_store(($self'a));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

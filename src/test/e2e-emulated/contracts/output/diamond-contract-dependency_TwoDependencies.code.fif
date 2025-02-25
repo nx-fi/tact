@@ -1,0 +1,194 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/diamond-contract-dependency_TwoDependencies.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $TwoDependencies$_store
+  DECLPROC $TwoDependencies$_load
+  DECLPROC $StateInit$_to_external
+  DECLPROC $NoDependencies$init$_store
+  DECLPROC $OneDependency$init$_store
+  DECLPROC $TwoDependencies$init$_store
+  DECLPROC $TwoDependencies$_contract_init
+  DECLPROC $TwoDependencies$_contract_load
+  DECLPROC $TwoDependencies$_contract_store
+  DECLPROC $NoDependencies$_init_child
+  DECLPROC $OneDependency$_init_child
+  DECLPROC $TwoDependencies$_init_child
+  DECLPROC $TwoDependencies$_fun_getFirstDep
+  DECLPROC $TwoDependencies$_fun_getSecondDep
+  DECLPROC $TwoDependencies$_fun_getNoDep
+  DECLPROC $TwoDependencies$_fun_getState
+  92581 DECLMETHOD %getFirstDep
+  111914 DECLMETHOD %getSecondDep
+  121849 DECLMETHOD %getNoDep
+  124033 DECLMETHOD %getState
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $TwoDependencies$_store PROCINLINE:<{
+    STVARUINT16
+  }>
+  $TwoDependencies$_load PROCINLINE:<{
+    LDVARUINT16
+    SWAP
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $NoDependencies$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $OneDependency$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $TwoDependencies$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $TwoDependencies$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $TwoDependencies$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $TwoDependencies$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $TwoDependencies$_contract_init INLINECALLDICT
+  }>
+  $TwoDependencies$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $TwoDependencies$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $NoDependencies$_init_child PROCREF:<{
+        B{b5ee9c72010107010082000114ff00f4a413f4bcf2c80b0102016202030186d001d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09930c87f01ca00c9ed54e030f2c082040211a1c903b679b678d82504050014ed44d0d20030916de06d0104db3c060014f82ac87001ca006d30c9} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $NoDependencies$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $OneDependency$_init_child PROCREF:<{
+        B{b5ee9c720102120100013a000114ff00f4a413f4bcf2c80b010201620203018cd001d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09cc87f01ca000101cb1fc9ed54e030f2c0820f02012004050211bf739ed9e6d9e360940f060211bf240ed9e6d9e360940f100104db3c07011288c87001ca006d30c9080114ff00f4a413f4bcf2c80b090201620a0b0186d001d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09930c87f01ca00c9ed54e030f2c0820c0211a1c903b679b678d8250c0d0014ed44d0d20030916de06d0104db3c0e0014f82ac87001ca006d30c90028ed44d0d2000194d31f0131e0810101d7000101d1010620db3c11001ef82ac87001ca005801810101cf00c9} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $OneDependency$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $TwoDependencies$_init_child PROCREF:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $TwoDependencies$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $TwoDependencies$_fun_getFirstDep PROCREF:<{
+    0 PUSHINT
+    $OneDependency$_init_child INLINECALLDICT
+  }>
+  $TwoDependencies$_fun_getSecondDep PROCREF:<{
+    1 PUSHINT
+    $OneDependency$_init_child INLINECALLDICT
+  }>
+  $TwoDependencies$_fun_getNoDep PROCREF:<{
+    $NoDependencies$_init_child INLINECALLDICT
+  }>
+  $TwoDependencies$_fun_getState PROCREF:<{
+    $TwoDependencies$_init_child INLINECALLDICT
+  }>
+  %getFirstDep PROC:<{
+    $TwoDependencies$_contract_load INLINECALLDICT
+    $TwoDependencies$_fun_getFirstDep INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  %getSecondDep PROC:<{
+    $TwoDependencies$_contract_load INLINECALLDICT
+    $TwoDependencies$_fun_getSecondDep INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  %getNoDep PROC:<{
+    $TwoDependencies$_contract_load INLINECALLDICT
+    $TwoDependencies$_fun_getNoDep INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  %getState PROC:<{
+    $TwoDependencies$_contract_load INLINECALLDICT
+    $TwoDependencies$_fun_getState INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $TwoDependencies$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $TwoDependencies$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

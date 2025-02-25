@@ -1,0 +1,150 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; benchmark_sha256_as_slice_Sha256AsSlice.headers.fc
+;;
+;; Header files for Sha256AsSlice
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $HashData$_load_without_opcode
+(slice, ((slice))) $HashData$_load_without_opcode(slice sc_0) inline;
+
+;; $Sha256AsSlice$_store
+builder $Sha256AsSlice$_store(builder build_0, (int) v) inline;
+
+;; $Sha256AsSlice$_load
+(slice, ((int))) $Sha256AsSlice$_load(slice sc_0) inline;
+
+;; $Sha256AsSlice$_contract_init
+(int) $Sha256AsSlice$_contract_init() impure inline;
+
+;; $Sha256AsSlice$_contract_load
+(int) $Sha256AsSlice$_contract_load() impure inline_ref;
+
+;; $Sha256AsSlice$_contract_store
+() $Sha256AsSlice$_contract_store((int) v) impure inline;
+
+;; $Sha256AsSlice$_fun_res
+((int), int) $Sha256AsSlice$_fun_res((int) $self) impure inline_ref;
+
+
+;; benchmark_sha256_as_slice_Sha256AsSlice.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; benchmark_sha256_as_slice_Sha256AsSlice.storage.fc
+;;
+;; Type: HashData
+;; Header: 0xbf6d5146
+;; TLB: hash_data#bf6d5146 value:^string = HashData
+;;
+
+(slice, ((slice))) $HashData$_load_without_opcode(slice sc_0) inline {
+    var v'value = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'value));
+}
+
+;;
+;; Type: Sha256AsSlice
+;;
+
+builder $Sha256AsSlice$_store(builder build_0, (int) v) inline {
+    var (v'result) = v;
+    build_0 = build_0.store_int(v'result, 257);
+    return build_0;
+}
+
+(slice, ((int))) $Sha256AsSlice$_load(slice sc_0) inline {
+    var v'result = sc_0~load_int(257);
+    return (sc_0, (v'result));
+}
+
+(int) $Sha256AsSlice$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Sha256AsSlice$_load();
+    } else {
+        return $Sha256AsSlice$_contract_init();
+    }
+}
+
+() $Sha256AsSlice$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Sha256AsSlice$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Sha256AsSlice functions
+;;
+
+(int) $Sha256AsSlice$_contract_init() impure inline {
+    var (($self'result)) = (0);
+    return ($self'result);
+}
+
+((int), int) $Sha256AsSlice$_fun_res((int) $self) impure inline_ref {
+    var (($self'result)) = $self;
+    var $fresh$ret_1 = $self'result;
+    return (($self'result), $fresh$ret_1);
+}
+
+;;
+;; Get methods of a Contract Sha256AsSlice
+;;
+
+_ %res() method_id(68675) {
+    var self = $Sha256AsSlice$_contract_load();
+    var res = self~$Sha256AsSlice$_fun_res();
+    return res;
+}
+
+;;
+;; Routing of a Contract Sha256AsSlice
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'result) = $Sha256AsSlice$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive HashData message
+    if (op == 3211612486) {
+        var ($h'value) = in_msg~$HashData$_load_without_opcode();
+        $self'result = $self'result + __tact_sha256(__tact_str_to_slice($h'value));
+        ;; Persist state
+        $Sha256AsSlice$_contract_store(($self'result));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Sha256AsSlice$_contract_store(($self'result));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

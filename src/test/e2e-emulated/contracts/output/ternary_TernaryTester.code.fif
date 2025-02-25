@@ -1,0 +1,244 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/ternary_TernaryTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $TernaryTester$_contract_init
+  DECLPROC $TernaryTester$_contract_load
+  DECLPROC $TernaryTester$_contract_store
+  DECLPROC $TernaryTester$_fun_test1
+  DECLPROC $TernaryTester$_fun_test2
+  DECLPROC $TernaryTester$_fun_test3
+  DECLPROC $TernaryTester$_fun_test4
+  DECLPROC $TernaryTester$_fun_test5
+  DECLPROC $TernaryTester$_fun_test6
+  DECLPROC $TernaryTester$_fun_test7
+  DECLPROC $TernaryTester$_fun_test8
+  DECLPROC $TernaryTester$_fun_test9
+  DECLPROC $TernaryTester$_fun_test10
+  70304 DECLMETHOD %test1
+  74435 DECLMETHOD %test2
+  78562 DECLMETHOD %test3
+  82437 DECLMETHOD %test4
+  86564 DECLMETHOD %test5
+  90695 DECLMETHOD %test6
+  94822 DECLMETHOD %test7
+  99209 DECLMETHOD %test8
+  103336 DECLMETHOD %test9
+  107552 DECLMETHOD %test10
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $TernaryTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $TernaryTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $TernaryTester$_contract_init INLINECALLDICT
+  }>
+  $TernaryTester$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $TernaryTester$_fun_test1 PROCREF:<{
+    123 EQINT
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      2 PUSHINT
+    }>
+  }>
+  $TernaryTester$_fun_test2 PROCREF:<{
+    DUP
+    123 EQINT
+    IF:<{
+      1 LSHIFT#
+    }>ELSE<{
+      3 MULCONST
+    }>
+  }>
+  $TernaryTester$_fun_test3 PROCREF:<{
+    EQUAL
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      2 PUSHINT
+    }>
+  }>
+  $TernaryTester$_fun_test4 PROCREF:<{
+    SWAP
+    123 EQINT
+    IF:<{
+      456 PUSHINT
+      EQUAL
+      IF:<{
+        1 PUSHINT
+      }>ELSE<{
+        2 PUSHINT
+      }>
+    }>ELSE<{
+      789 PUSHINT
+      EQUAL
+      IF:<{
+        3 PUSHINT
+      }>ELSE<{
+        4 PUSHINT
+      }>
+    }>
+  }>
+  $TernaryTester$_fun_test5 PROCREF:<{
+    1 PUSHINT
+  }>
+  $TernaryTester$_fun_test6 PROCREF:<{
+    1 PUSHINT
+  }>
+  $TernaryTester$_fun_test7 PROCREF:<{
+    2 PUSHINT
+  }>
+  $TernaryTester$_fun_test8 PROCREF:<{
+    3 PUSHINT
+  }>
+  $TernaryTester$_fun_test9 PROCREF:<{
+    3 PUSHINT
+  }>
+  $TernaryTester$_fun_test10 PROCREF:<{
+    DUP
+    1 EQINT
+    IF:<{
+      DROP
+      42 PUSHINT
+    }>ELSE<{
+      DUP
+      2 EQINT
+      IF:<{
+        DROP
+        43 PUSHINT
+      }>ELSE<{
+        3 EQINT
+        IF:<{
+          44 PUSHINT
+        }>ELSE<{
+          45 PUSHINT
+        }>
+      }>
+    }>
+  }>
+  %test1 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    SWAP
+    $TernaryTester$_fun_test1 INLINECALLDICT
+    NIP
+  }>
+  %test2 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    SWAP
+    $TernaryTester$_fun_test2 INLINECALLDICT
+    NIP
+  }>
+  %test3 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    -ROT
+    $TernaryTester$_fun_test3 INLINECALLDICT
+    NIP
+  }>
+  %test4 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    -ROT
+    $TernaryTester$_fun_test4 INLINECALLDICT
+    NIP
+  }>
+  %test5 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    $TernaryTester$_fun_test5 INLINECALLDICT
+    NIP
+  }>
+  %test6 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    $TernaryTester$_fun_test6 INLINECALLDICT
+    NIP
+  }>
+  %test7 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    $TernaryTester$_fun_test7 INLINECALLDICT
+    NIP
+  }>
+  %test8 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    $TernaryTester$_fun_test8 INLINECALLDICT
+    NIP
+  }>
+  %test9 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    $TernaryTester$_fun_test9 INLINECALLDICT
+    NIP
+  }>
+  %test10 PROC:<{
+    $TernaryTester$_contract_load INLINECALLDICT
+    SWAP
+    $TernaryTester$_fun_test10 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $TernaryTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $TernaryTester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

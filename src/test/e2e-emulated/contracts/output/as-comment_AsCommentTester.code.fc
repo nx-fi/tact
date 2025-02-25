@@ -1,0 +1,210 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; as-comment_AsCommentTester.headers.fc
+;;
+;; Header files for AsCommentTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_string_builder_start
+tuple __tact_string_builder_start(builder b) inline;
+
+;; __tact_string_builder_start_comment
+tuple __tact_string_builder_start_comment() inline;
+
+;; __tact_string_builder_end
+cell __tact_string_builder_end(tuple builders) inline;
+
+;; __tact_string_builder_append
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref;
+
+;; $AsCommentTester$_contract_init
+tuple $AsCommentTester$_contract_init() impure inline;
+
+;; $AsCommentTester$_contract_load
+tuple $AsCommentTester$_contract_load() impure inline_ref;
+
+;; $AsCommentTester$_contract_store
+() $AsCommentTester$_contract_store(tuple v) impure inline;
+
+;; $String$_fun_asComment
+cell $String$_fun_asComment(slice $self) impure inline_ref;
+
+;; $AsCommentTester$_fun_constantCell
+(tuple, cell) $AsCommentTester$_fun_constantCell(tuple $self) impure inline_ref;
+
+;; $AsCommentTester$_fun_asCommentRuntimeCell
+(tuple, cell) $AsCommentTester$_fun_asCommentRuntimeCell(tuple $self, slice $val) impure inline_ref;
+
+
+;; as-comment_AsCommentTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+tuple __tact_string_builder_start(builder b) inline {
+    return tpush(tpush(empty_tuple(), b), null());
+}
+
+tuple __tact_string_builder_start_comment() inline {
+    return __tact_string_builder_start(begin_cell().store_uint(0, 32));
+}
+
+cell __tact_string_builder_end(tuple builders) inline {
+    (builder b, tuple tail) = uncons(builders);
+    cell c = b.end_cell();
+    while(~ null?(tail)) {
+        (b, tail) = uncons(tail);
+        c = b.store_ref(c).end_cell();
+    }
+    return c;
+}
+
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref {
+    int sliceRefs = slice_refs(sc);
+    int sliceBits = slice_bits(sc);
+
+    while((sliceBits > 0) | (sliceRefs > 0)) {
+
+        ;; Load the current builder
+        (builder b, tuple tail) = uncons(builders);
+        int remBytes = 127 - (builder_bits(b) / 8);
+        int exBytes = sliceBits / 8;
+
+        ;; Append bits
+        int amount = min(remBytes, exBytes);
+        if (amount > 0) {
+            slice read = sc~load_bits(amount * 8);
+            b = b.store_slice(read);
+        }
+
+        ;; Update builders
+        builders = cons(b, tail);
+
+        ;; Check if we need to add a new cell and continue
+        if (exBytes - amount > 0) {
+            var bb = begin_cell();
+            builders = cons(bb, builders);
+            sliceBits = (exBytes - amount) * 8;
+        } elseif (sliceRefs > 0) {
+            sc = sc~load_ref().begin_parse();
+            sliceRefs = slice_refs(sc);
+            sliceBits = slice_bits(sc);
+        } else {
+            sliceBits = 0;
+            sliceRefs = 0;
+        }
+    }
+
+    return ((builders), ());
+}
+
+cell $String$_fun_asComment(slice $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_comment();
+    $b~__tact_string_builder_append($self);
+    return __tact_string_builder_end($b);
+}
+
+;; as-comment_AsCommentTester.constants.fc
+;; Cell c94dsfuA8hkaDsyHT0JlxSh5CJdc3bh0HG5KNrTCVlI=
+cell __gen_cell_cell_73de1db1fb80f2191a0ecc874f4265c5287908975cddb8741c6e4a36b4c25652() asm """
+    B{b5ee9c7241010101001100001e0000000068656c6c6f20776f726c64279d9773} B>boc PUSHREF
+""";
+
+;; as-comment_AsCommentTester.storage.fc
+;;
+;; Type: AsCommentTester
+;;
+
+tuple $AsCommentTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $AsCommentTester$_contract_init();
+    }
+}
+
+() $AsCommentTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract AsCommentTester functions
+;;
+
+tuple $AsCommentTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, cell) $AsCommentTester$_fun_constantCell(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_146 = __gen_cell_cell_73de1db1fb80f2191a0ecc874f4265c5287908975cddb8741c6e4a36b4c25652();
+    return ($self, $fresh$ret_146);
+}
+
+(tuple, cell) $AsCommentTester$_fun_asCommentRuntimeCell(tuple $self, slice $val) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_147 = $String$_fun_asComment($val);
+    return ($self, $fresh$ret_147);
+}
+
+;;
+;; Get methods of a Contract AsCommentTester
+;;
+
+_ %constantCell() method_id(114184) {
+    var self = $AsCommentTester$_contract_load();
+    var res = self~$AsCommentTester$_fun_constantCell();
+    return res;
+}
+
+_ %asCommentRuntimeCell(slice $val) method_id(108183) {
+    slice $val = $val;
+    var self = $AsCommentTester$_contract_load();
+    var res = self~$AsCommentTester$_fun_asCommentRuntimeCell($val);
+    return res;
+}
+
+;;
+;; Routing of a Contract AsCommentTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $AsCommentTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $AsCommentTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

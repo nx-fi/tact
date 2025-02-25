@@ -1,0 +1,2361 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; semantics_SemanticsTester.headers.fc
+;;
+;; Header files for SemanticsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_cell_eq
+int __tact_cell_eq(cell a, cell b) inline;
+
+;; __tact_cell_neq
+int __tact_cell_neq(cell a, cell b) inline;
+
+;; __tact_slice_eq
+int __tact_slice_eq(slice a, slice b) inline;
+
+;; __tact_slice_neq
+int __tact_slice_neq(slice a, slice b) inline;
+
+;; __tact_dict_get_int_cell
+cell __tact_dict_get_int_cell(cell d, int kl, int k) inline;
+
+;; __tact_dict_min_int_cell
+(int, cell, int) __tact_dict_min_int_cell(cell d, int kl) inline;
+
+;; __tact_dict_next_int_cell
+(int, cell, int) __tact_dict_next_int_cell(cell d, int kl, int pivot) inline;
+
+;; __tact_dict_set_int_cell
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline;
+
+;; $StateInit$_store
+builder $StateInit$_store(builder build_0, (cell, cell) v) inline;
+
+;; $StateInit$_store_cell
+cell $StateInit$_store_cell((cell, cell) v) inline;
+
+;; $SC$_store
+builder $SC$_store(builder build_0, (int) v) inline;
+
+;; $SC$_load
+(slice, ((int))) $SC$_load(slice sc_0) inline;
+
+;; $SB$_store
+builder $SB$_store(builder build_0, (int, (int), int) v) inline;
+
+;; $SB$_store_cell
+cell $SB$_store_cell((int, (int), int) v) inline;
+
+;; $SB$_load
+(slice, ((int, (int), int))) $SB$_load(slice sc_0) inline;
+
+;; $SB$_load_not_mut
+((int, (int), int)) $SB$_load_not_mut(slice sc_0) inline;
+
+;; $SA$_store
+builder $SA$_store(builder build_0, (int, (int, (int), int)) v) inline;
+
+;; $SA$_store_cell
+cell $SA$_store_cell((int, (int, (int), int)) v) inline;
+
+;; $SA$_load
+(slice, ((int, (int, (int), int)))) $SA$_load(slice sc_0) inline;
+
+;; $SA$_as_optional
+tuple $SA$_as_optional((int, (int, (int), int)) v) inline;
+
+;; $SA$_load_opt
+tuple $SA$_load_opt(cell cl) inline;
+
+;; $MapWrapper$_store
+builder $MapWrapper$_store(builder build_0, (cell) v) inline;
+
+;; $MapWrapper$_store_cell
+cell $MapWrapper$_store_cell((cell) v) inline;
+
+;; $MapWrapper$_load
+(slice, ((cell))) $MapWrapper$_load(slice sc_0) inline;
+
+;; $MapWrapper$_as_optional
+tuple $MapWrapper$_as_optional((cell) v) inline;
+
+;; $MapWrapper$_load_opt
+tuple $MapWrapper$_load_opt(cell cl) inline;
+
+;; $SemanticsTester$_store
+builder $SemanticsTester$_store(builder build_0, ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) v) inline;
+
+;; $SemanticsTester$_load
+(slice, (((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int))) $SemanticsTester$_load(slice sc_0) inline;
+
+;; $SA$_get_a1
+_ $SA$_get_a1((int, (int, (int), int)) v) inline;
+
+;; $SA$_get_a2
+_ $SA$_get_a2((int, (int, (int), int)) v) inline;
+
+;; $SA$_not_null
+((int, (int, (int), int))) $SA$_not_null(tuple v) inline;
+
+;; $SB$_get_b1
+_ $SB$_get_b1((int, (int), int) v) inline;
+
+;; $SB$_get_b2
+_ $SB$_get_b2((int, (int), int) v) inline;
+
+;; $SB$_get_b3
+_ $SB$_get_b3((int, (int), int) v) inline;
+
+;; $SC$_get_c1
+_ $SC$_get_c1((int) v) inline;
+
+;; $MapWrapper$_get_m
+_ $MapWrapper$_get_m((cell) v) inline;
+
+;; $MapWrapper$_not_null
+((cell)) $MapWrapper$_not_null(tuple v) inline;
+
+;; $SemanticsTester$init$_store
+builder $SemanticsTester$init$_store(builder build_0, tuple v) inline;
+
+;; $SC$_constructor_c1
+((int)) $SC$_constructor_c1(int $c1) inline;
+
+;; $SB$_constructor_b1_b2_b3
+((int, (int), int)) $SB$_constructor_b1_b2_b3(int $b1, (int) $b2, int $b3) inline;
+
+;; $SA$_constructor_a1_a2
+((int, (int, (int), int))) $SA$_constructor_a1_a2(int $a1, (int, (int), int) $a2) inline;
+
+;; $MapWrapper$_constructor_m
+((cell)) $MapWrapper$_constructor_m(cell $m) inline;
+
+;; $SemanticsTester$_contract_init
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_contract_init() impure inline;
+
+;; $SemanticsTester$_contract_load
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_contract_load() impure inline_ref;
+
+;; $SemanticsTester$_contract_store
+() $SemanticsTester$_contract_store(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $global_getNewStruct
+(int, (int, (int), int)) $global_getNewStruct((int, (int, (int), int)) $s) impure inline_ref;
+
+;; $global_copyAndModifyStruct
+(int, (int, (int), int)) $global_copyAndModifyStruct((int, (int, (int), int)) $s) impure inline_ref;
+
+;; $global_getNewMap
+cell $global_getNewMap(cell $m) impure inline_ref;
+
+;; $global_copyAndModifyMap
+cell $global_copyAndModifyMap(cell $m) impure inline_ref;
+
+;; $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_structAssign2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_structAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $global_copyAndModifyContract
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $global_copyAndModifyContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $c) impure inline_ref;
+
+;; $global_infiniteLoop
+int $global_infiniteLoop() impure inline_ref;
+
+;; $global_throwException
+int $global_throwException(int $v) impure inline_ref;
+
+;; $global_fullyReadSlice
+int $global_fullyReadSlice(slice $s) impure inline_ref;
+
+;; $Int$_fun_multiplyBy2
+(int, int) $Int$_fun_multiplyBy2(int $self) impure inline_ref;
+
+;; $Int$_fun_multiplyBy2$not_mut
+int $Int$_fun_multiplyBy2$not_mut(int $self) impure inline_ref;
+
+;; $Int$_fun_increment
+(int, int) $Int$_fun_increment(int $self) impure inline_ref;
+
+;; $Int$_fun_increment$not_mut
+int $Int$_fun_increment$not_mut(int $self) impure inline_ref;
+
+;; $Int$_fun_doNothing
+(int, int) $Int$_fun_doNothing(int $self) impure inline_ref;
+
+;; $Int$_fun_doNothing$not_mut
+int $Int$_fun_doNothing$not_mut(int $self) impure inline_ref;
+
+;; $Slice$_fun_asCell
+cell $Slice$_fun_asCell(slice $self) impure inline;
+
+;; $Slice$_fun_fullyReadAndModifySlice
+(slice, int) $Slice$_fun_fullyReadAndModifySlice(slice $self) impure inline_ref;
+
+;; $SA$_fun_reassignStruct
+((int, (int, (int), int)), ()) $SA$_fun_reassignStruct((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_changeSomeFields
+((int, (int, (int), int)), ()) $SA$_fun_changeSomeFields((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_changeSomeFields$not_mut
+() $SA$_fun_changeSomeFields$not_mut((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_copyStruct
+(int, (int, (int), int)) $SA$_fun_copyStruct((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_reflectStruct
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_reflectStruct((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_reflectStruct$not_mut
+(int, (int, (int), int)) $SA$_fun_reflectStruct$not_mut((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_incrementIntFields
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_incrementIntFields((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_incrementIntFields$not_mut
+(int, (int, (int), int)) $SA$_fun_incrementIntFields$not_mut((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_flipBooleanFields
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_flipBooleanFields((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $SA$_fun_flipBooleanFields$not_mut
+(int, (int, (int), int)) $SA$_fun_flipBooleanFields$not_mut((int, (int, (int), int)) $self) impure inline_ref;
+
+;; $MapWrapper$_fun_reassignMap
+((cell), ()) $MapWrapper$_fun_reassignMap((cell) $self) impure inline_ref;
+
+;; $MapWrapper$_fun_changeSomeEntries
+((cell), ()) $MapWrapper$_fun_changeSomeEntries((cell) $self) impure inline_ref;
+
+;; $SemanticsTester$_init_child
+(cell, cell) $SemanticsTester$_init_child() inline_ref;
+
+;; $SemanticsTester$_fun_structAssign1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_structAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_paramStruct1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_paramStruct2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateParamStruct1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateParamStruct2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testReturnedStructs
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedStructs(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct3
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct4
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct4(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct5
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct5(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainStruct6
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct6(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mapAssign1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mapAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mapAssign2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mapAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_paramMap1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_paramMap2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramMap2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateParamMap1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateParamMap2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamMap2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testReturnedMaps1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedMaps1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateNestedMap1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateNestedMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_contractAssign1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_contractAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_contractAssign2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_contractAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_paramContract
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_changeSomeContractFields
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ()) $SemanticsTester$_fun_changeSomeContractFields(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateParamContract
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_address
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), slice) $SemanticsTester$_fun_address(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_checkFieldsEqualTo
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_checkFieldsEqualTo(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self, (int, (int), int) $sB, int $n) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateContractState
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateContractState(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_copyContract
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_copyContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_changeSomeContractFields$not_mut
+() $SemanticsTester$_fun_changeSomeContractFields$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_reflectContract
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_reflectContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_flipBooleanFieldsInUB
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_flipBooleanFieldsInUB(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_incrementIntFieldsInUB
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_incrementIntFieldsInUB(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testReturnedContracts
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedContracts(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutateContractStateFlag
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateContractStateFlag(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_changesPersisted
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_changesPersisted(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt3
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt4
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt4(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt5
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt5(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_mutatesChainInt6
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt6(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_andMutateShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_andInfiniteLoopShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_andExceptionShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_orMutateShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_orInfiniteLoopShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_orExceptionShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_ternaryMutateShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_ternaryExceptionShortCircuit
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testAddressEquality
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testAddressEquality(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testSliceEquality1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testSliceEquality1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testSliceEquality2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testSliceEquality2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testCellEquality1
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testCellEquality2
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+;; $SemanticsTester$_fun_testCellEquality3
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref;
+
+
+;; semantics_SemanticsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(cell, int) __tact_dict_delete_int(cell dict, int key_len, int index) asm(index dict key_len) """
+    DICTIDEL
+""";
+
+int __tact_cell_eq(cell a, cell b) inline {
+    return (a.cell_hash() ==  b.cell_hash());
+}
+
+int __tact_cell_neq(cell a, cell b) inline {
+    return (a.cell_hash() !=  b.cell_hash());
+}
+
+int __tact_slice_eq(slice a, slice b) inline {
+    return (a.slice_hash() ==  b.slice_hash());
+}
+
+int __tact_slice_neq(slice a, slice b) inline {
+    return (a.slice_hash() !=  b.slice_hash());
+}
+
+forall X0 -> tuple __tact_tuple_create_1((X0) v) asm """
+    1 TUPLE
+""";
+
+forall X0 -> (X0) __tact_tuple_destroy_1(tuple v) asm """
+    1 UNTUPLE
+""";
+
+forall X0, X1, X2, X3 -> tuple __tact_tuple_create_4((X0, X1, X2, X3) v) asm """
+    4 TUPLE
+""";
+
+forall X0, X1, X2, X3 -> (X0, X1, X2, X3) __tact_tuple_destroy_4(tuple v) asm """
+    4 UNTUPLE
+""";
+
+cell __tact_dict_get_int_cell(cell d, int kl, int k) inline {
+    var (r, ok) = idict_get_ref?(d, kl, k);
+    if (ok) {
+        return r;
+    } else {
+        return null();
+    }
+}
+
+(int, cell, int) __tact_dict_min_int_cell(cell d, int kl) inline {
+    var (key, value, flag) = idict_get_min_ref?(d, kl);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, cell, int) __tact_dict_next_int_cell(cell d, int kl, int pivot) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_ref(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_ref(d, kl, k, v), ());
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+cell $global_emptyCell() impure asm """
+    <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+(int, int) $global_parseStdAddress(slice $slice) impure asm """
+    REWRITESTDADDR
+""";
+
+() $Slice$_fun_endParse(slice $self) impure asm """
+    ENDS
+""";
+
+int $Slice$_fun_empty(slice $self) impure asm """
+    SEMPTY
+""";
+
+builder $Builder$_fun_storeBool(int $value, builder $self) impure asm """
+    1 STI
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+builder $Builder$_fun_storeSlice(builder $self, slice $cell) impure asm """
+    STSLICER
+""";
+
+(slice, cell) $Slice$_fun_loadRef(slice $self) impure asm( -> 1 0) """
+    LDREF
+""";
+
+(slice, int) $Slice$_fun_loadBool(slice $self) impure asm( -> 1 0) """
+    1 LDI
+""";
+
+cell $Slice$_fun_asCell(slice $self) impure inline {
+    var ($self) = $self;
+    return $Builder$_fun_endCell($Builder$_fun_storeSlice($global_beginCell(), $self));
+}
+
+int $Cell$_fun_hash(cell $self) impure asm """
+    HASHCU
+""";
+
+slice $Address$_fun_asSlice(slice $self) impure asm """
+    NOP
+""";
+
+;; semantics_SemanticsTester.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+builder $StateInit$_store(builder build_0, (cell, cell) v) inline {
+    var (v'code, v'data) = v;
+    build_0 = build_0.store_ref(v'code);
+    build_0 = build_0.store_ref(v'data);
+    return build_0;
+}
+
+cell $StateInit$_store_cell((cell, cell) v) inline {
+    return $StateInit$_store(begin_cell(), v).end_cell();
+}
+
+;;
+;; Type: SC
+;; TLB: _ c1:int257 = SC
+;;
+
+builder $SC$_store(builder build_0, (int) v) inline {
+    var (v'c1) = v;
+    build_0 = build_0.store_int(v'c1, 257);
+    return build_0;
+}
+
+(slice, ((int))) $SC$_load(slice sc_0) inline {
+    var v'c1 = sc_0~load_int(257);
+    return (sc_0, (v'c1));
+}
+
+_ $SC$_get_c1((int) v) inline {
+    var (v'c1) = v;
+    return v'c1;
+}
+
+((int)) $SC$_constructor_c1(int $c1) inline {
+    return ($c1);
+}
+
+;;
+;; Type: SB
+;; TLB: _ b1:bool b2:SC{c1:int257} b3:int257 = SB
+;;
+
+builder $SB$_store(builder build_0, (int, (int), int) v) inline {
+    var (v'b1, (v'b2'c1), v'b3) = v;
+    build_0 = build_0.store_int(v'b1, 1);
+    build_0 = $SC$_store(build_0, (v'b2'c1));
+    build_0 = build_0.store_int(v'b3, 257);
+    return build_0;
+}
+
+cell $SB$_store_cell((int, (int), int) v) inline {
+    return $SB$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, (int), int))) $SB$_load(slice sc_0) inline {
+    var v'b1 = sc_0~load_int(1);
+    var v'b2 = sc_0~$SC$_load();
+    var v'b3 = sc_0~load_int(257);
+    return (sc_0, (v'b1, v'b2, v'b3));
+}
+
+((int, (int), int)) $SB$_load_not_mut(slice sc_0) inline {
+    var r = sc_0~$SB$_load();
+    sc_0.end_parse();
+    return r;
+}
+
+_ $SB$_get_b1((int, (int), int) v) inline {
+    var (v'b1, v'b2, v'b3) = v;
+    return v'b1;
+}
+
+_ $SB$_get_b2((int, (int), int) v) inline {
+    var (v'b1, v'b2, v'b3) = v;
+    return v'b2;
+}
+
+_ $SB$_get_b3((int, (int), int) v) inline {
+    var (v'b1, v'b2, v'b3) = v;
+    return v'b3;
+}
+
+((int, (int), int)) $SB$_constructor_b1_b2_b3(int $b1, (int) $b2, int $b3) inline {
+    return ($b1, $b2, $b3);
+}
+
+;;
+;; Type: SA
+;; TLB: _ a1:int257 a2:SB{b1:bool,b2:SC{c1:int257},b3:int257} = SA
+;;
+
+builder $SA$_store(builder build_0, (int, (int, (int), int)) v) inline {
+    var (v'a1, (v'a2'b1, (v'a2'b2'c1), v'a2'b3)) = v;
+    build_0 = build_0.store_int(v'a1, 257);
+    build_0 = $SB$_store(build_0, (v'a2'b1, (v'a2'b2'c1), v'a2'b3));
+    return build_0;
+}
+
+cell $SA$_store_cell((int, (int, (int), int)) v) inline {
+    return $SA$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, (int, (int), int)))) $SA$_load(slice sc_0) inline {
+    var v'a1 = sc_0~load_int(257);
+    var v'a2 = sc_0~$SB$_load();
+    return (sc_0, (v'a1, v'a2));
+}
+
+tuple $SA$_as_optional((int, (int, (int), int)) v) inline {
+    var (v'a1, (v'a2'b1, (v'a2'b2'c1), v'a2'b3)) = v;
+    return __tact_tuple_create_4(v'a1, v'a2'b1, v'a2'b2'c1, v'a2'b3);
+}
+
+tuple $SA$_load_opt(cell cl) inline {
+    if (null?(cl)) {
+        return null();
+    }
+    var sc = cl.begin_parse();
+    return $SA$_as_optional(sc~$SA$_load());
+}
+
+_ $SA$_get_a1((int, (int, (int), int)) v) inline {
+    var (v'a1, v'a2) = v;
+    return v'a1;
+}
+
+_ $SA$_get_a2((int, (int, (int), int)) v) inline {
+    var (v'a1, v'a2) = v;
+    return v'a2;
+}
+
+((int, (int, (int), int))) $SA$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'a1, int vvv'a2'b1, int vvv'a2'b2'c1, int vvv'a2'b3) = __tact_tuple_destroy_4(v);
+    return (vvv'a1, (vvv'a2'b1, (vvv'a2'b2'c1), vvv'a2'b3));
+}
+
+((int, (int, (int), int))) $SA$_constructor_a1_a2(int $a1, (int, (int), int) $a2) inline {
+    return ($a1, $a2);
+}
+
+;;
+;; Type: MapWrapper
+;; TLB: _ m:dict<int, ^SA{a1:int257,a2:SB{b1:bool,b2:SC{c1:int257},b3:int257}}> = MapWrapper
+;;
+
+builder $MapWrapper$_store(builder build_0, (cell) v) inline {
+    var (v'm) = v;
+    build_0 = build_0.store_dict(v'm);
+    return build_0;
+}
+
+cell $MapWrapper$_store_cell((cell) v) inline {
+    return $MapWrapper$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((cell))) $MapWrapper$_load(slice sc_0) inline {
+    var v'm = sc_0~load_dict();
+    return (sc_0, (v'm));
+}
+
+tuple $MapWrapper$_as_optional((cell) v) inline {
+    var (v'm) = v;
+    return __tact_tuple_create_1(v'm);
+}
+
+tuple $MapWrapper$_load_opt(cell cl) inline {
+    if (null?(cl)) {
+        return null();
+    }
+    var sc = cl.begin_parse();
+    return $MapWrapper$_as_optional(sc~$MapWrapper$_load());
+}
+
+_ $MapWrapper$_get_m((cell) v) inline {
+    var (v'm) = v;
+    return v'm;
+}
+
+((cell)) $MapWrapper$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'm) = __tact_tuple_destroy_1(v);
+    return (vvv'm);
+}
+
+((cell)) $MapWrapper$_constructor_m(cell $m) inline {
+    return ($m);
+}
+
+;;
+;; Type: SemanticsTester
+;;
+
+builder $SemanticsTester$_store(builder build_0, ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) v) inline {
+    var ((v'sC'c1), (v'sB'b1, (v'sB'b2'c1), v'sB'b3), (v'sA'a1, (v'sA'a2'b1, (v'sA'a2'b2'c1), v'sA'a2'b3)), (v'uB'b1, (v'uB'b2'c1), v'uB'b3), v'mA, v'mB, v'mC, v'mutateContractStateResult) = v;
+    build_0 = $SC$_store(build_0, (v'sC'c1));
+    build_0 = $SB$_store(build_0, (v'sB'b1, (v'sB'b2'c1), v'sB'b3));
+    var build_1 = begin_cell();
+    build_1 = $SA$_store(build_1, (v'sA'a1, (v'sA'a2'b1, (v'sA'a2'b2'c1), v'sA'a2'b3)));
+    var build_2 = begin_cell();
+    build_2 = $SB$_store(build_2, (v'uB'b1, (v'uB'b2'c1), v'uB'b3));
+    build_2 = build_2.store_dict(v'mA);
+    build_2 = build_2.store_dict(v'mB);
+    build_2 = build_2.store_dict(v'mC);
+    build_2 = build_2.store_int(v'mutateContractStateResult, 1);
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, (((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int))) $SemanticsTester$_load(slice sc_0) inline {
+    var v'sC = sc_0~$SC$_load();
+    var v'sB = sc_0~$SB$_load();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'sA = sc_1~$SA$_load();
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'uB = sc_2~$SB$_load();
+    var v'mA = sc_2~load_dict();
+    var v'mB = sc_2~load_dict();
+    var v'mC = sc_2~load_dict();
+    var v'mutateContractStateResult = sc_2~load_int(1);
+    return (sc_0, (v'sC, v'sB, v'sA, v'uB, v'mA, v'mB, v'mC, v'mutateContractStateResult));
+}
+
+builder $SemanticsTester$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$SemanticsTester$_load();
+    } else {
+        return $SemanticsTester$_contract_init();
+    }
+}
+
+() $SemanticsTester$_contract_store(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $SemanticsTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+(cell, cell) $SemanticsTester$_init_child() inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: SemanticsTester
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $SemanticsTester$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract SemanticsTester functions
+;;
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_contract_init() impure inline {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = ($SC$_constructor_c1(5), $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(5), 10), $SA$_constructor_a1_a2(20, $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(5), 10)), null(), null(), null(), null(), false);
+    $self'uB'b1 = false;
+    ($self'uB'b2'c1) = $SC$_constructor_c1(40);
+    ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3) = $SB$_constructor_b1_b2_b3(false, $SC$_constructor_c1(0), 11);
+    $self'uB'b3 = 14;
+    $self'sB'b1 = false;
+    ($self'sB'b2'c1) = $SC$_constructor_c1(3);
+    $self'mA~__tact_dict_set_int_cell(257, 1, $SA$_store_cell(($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3))));
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $s'a2'b2'c1 = 100;
+    $s'a2'b3 = 0;
+    $self'mA~__tact_dict_set_int_cell(257, 2, $SA$_store_cell(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))));
+    $s'a2'b2'c1 = 150;
+    $s'a1 = 5;
+    $s'a2'b1 = false;
+    $self'mA~__tact_dict_set_int_cell(257, 3, $SA$_store_cell(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))));
+    var ($nestedMap'm) = $MapWrapper$_constructor_m(null());
+    $nestedMap'm~__tact_dict_set_int_cell(257, 10, $SA$_store_cell(($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3))));
+    $self'mC~__tact_dict_set_int_cell(257, 100, $MapWrapper$_store_cell(($nestedMap'm)));
+    return (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+}
+
+(int, (int, (int), int)) $global_getNewStruct((int, (int, (int), int)) $s) impure inline_ref {
+    var (($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))) = $s;
+    ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = $SA$_constructor_a1_a2(0, $SB$_constructor_b1_b2_b3(false, $SC$_constructor_c1(0), 0));
+    return ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3));
+}
+
+(int, (int, (int), int)) $global_copyAndModifyStruct((int, (int, (int), int)) $s) impure inline_ref {
+    var (($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))) = $s;
+    $s'a1 = $s'a1 + 100;
+    $s'a2'b2'c1 = $s'a2'b2'c1 + 1;
+    return ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3));
+}
+
+cell $global_getNewMap(cell $m) impure inline_ref {
+    $m = null();
+    $m~__tact_dict_set_int_cell(257, 1, $SA$_store_cell($SA$_constructor_a1_a2(0, $SB$_constructor_b1_b2_b3(false, $SC$_constructor_c1(0), 0))));
+    return $m;
+}
+
+cell $global_copyAndModifyMap(cell $m) impure inline_ref {
+    var ($c'a1, ($c'a2'b1, ($c'a2'b2'c1), $c'a2'b3)) = $SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($m, 257, 1)));
+    $c'a2'b2'c1 = $c'a2'b2'c1 + 40;
+    if (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($m, 257, 1)))))) == $c'a2'b2'c1)) {
+        return null();
+    }
+    $m~__tact_dict_set_int_cell(257, 1, $SA$_store_cell(($c'a1, ($c'a2'b1, ($c'a2'b2'c1), $c'a2'b3))));
+    $m~__tact_dict_delete_int(257, 2);
+    $m~__tact_dict_delete_int(257, 3);
+    return $m;
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (($self'uB'b1 == false)) ? (($self'uB'b2'c1 == 0)) : (false) )) ? (($self'uB'b3 == 14)) : (false) )) ? (($self'sA'a1 == 20)) : (false) )) ? (($self'sA'a2'b1 == true)) : (false) )) ? (($self'sA'a2'b2'c1 == 5)) : (false) )) ? (($self'sA'a2'b3 == 10)) : (false) )) ? (($self'sB'b1 == false)) : (false) )) ? (($self'sB'b2'c1 == 3)) : (false) )) ? (($self'sB'b3 == 10)) : (false) )) ? (($self'sC'c1 == 5)) : (false) )) ? (null?($self'mB)) : (false) )) ? (null?($self'mB)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))))) == 5)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == 10)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_729, $fresh$flag_728) = __tact_dict_min_int_cell($self'mA, 257);
+    while ($fresh$flag_728) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_729));
+        $result = $result & ( (( (($k == 1)) ? (true) : (($k == 2)) )) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_729, $fresh$flag_728) = __tact_dict_next_int_cell($self'mA, 257, $k);
+    }
+    var ($k1, $v1, $fresh$flag_730) = __tact_dict_min_int_cell($self'mC, 257);
+    while ($fresh$flag_730) {
+        var ($v1'm) = $MapWrapper$_not_null($MapWrapper$_load_opt($v1));
+        var ($k2, $v2, $fresh$flag_731) = __tact_dict_min_int_cell($v1'm, 257);
+        while ($fresh$flag_731) {
+            var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+            $result = $result & ( (( (( (( (( (($k1 == 100)) ? (($k2 == 10)) : (false) )) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 5)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+            ($k2, $v2, $fresh$flag_731) = __tact_dict_next_int_cell($v1'm, 257, $k2);
+        }
+        ($k1, $v1, $fresh$flag_730) = __tact_dict_next_int_cell($self'mC, 257, $k1);
+    }
+    var $fresh$ret_732 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_732);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_structAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $s'a1 = 50;
+    $s'a2'b2'c1 = 70;
+    var ($t'b1, ($t'b2'c1), $t'b3) = ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3);
+    $t'b3 = 100;
+    var $fresh$ret_734 = ( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 50)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 70)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? (($t'b1 == true)) : (false) )) ? (($t'b2'c1 == 70)) : (false) )) ? (($t'b3 == 100)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_734);
+}
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $global_copyAndModifyContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $c) impure inline_ref {
+    var ((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)) = $c;
+    ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3) = $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(99), 98);
+    $c'mA~__tact_dict_delete_int(257, 1);
+    (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_structAssign2();
+    return (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult);
+}
+
+int $global_infiniteLoop() impure inline_ref {
+    while (true) {
+    }
+    return true;
+}
+
+int $global_throwException(int $v) impure inline_ref {
+    return ((1 / $v) > 0);
+}
+
+int $global_fullyReadSlice(slice $s) impure inline_ref {
+    int $i1 = $s~load_int(6);
+    int $i2 = $s~load_int(6);
+    $Slice$_fun_endParse($s);
+    return ( (( (($i1 == 5)) ? (($i2 == 2)) : (false) )) ? ($Slice$_fun_empty($s)) : (false) );
+}
+
+(int, int) $Int$_fun_multiplyBy2(int $self) impure inline_ref {
+    var ($self) = $self;
+    $self = $self * 2;
+    var $fresh$ret_719 = $self;
+    return ($self, $fresh$ret_719);
+}
+
+int $Int$_fun_multiplyBy2$not_mut(int $self) impure inline_ref {
+    return $self~$Int$_fun_multiplyBy2();
+}
+
+(int, int) $Int$_fun_increment(int $self) impure inline_ref {
+    var ($self) = $self;
+    $self = $self + 1;
+    var $fresh$ret_720 = $self;
+    return ($self, $fresh$ret_720);
+}
+
+int $Int$_fun_increment$not_mut(int $self) impure inline_ref {
+    return $self~$Int$_fun_increment();
+}
+
+(int, int) $Int$_fun_doNothing(int $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_721 = $self;
+    return ($self, $fresh$ret_721);
+}
+
+int $Int$_fun_doNothing$not_mut(int $self) impure inline_ref {
+    return $self~$Int$_fun_doNothing();
+}
+
+(slice, int) $Slice$_fun_fullyReadAndModifySlice(slice $self) impure inline_ref {
+    var ($self) = $self;
+    int $i1 = $self~load_int(6);
+    int $i2 = $self~load_int(6);
+    $Slice$_fun_endParse($self);
+    var $fresh$ret_722 = ( (( (($i1 == 5)) ? (($i2 == 2)) : (false) )) ? ($Slice$_fun_empty($self)) : (false) );
+    return ($self, $fresh$ret_722);
+}
+
+((int, (int, (int), int)), ()) $SA$_fun_reassignStruct((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    ($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)) = $SA$_constructor_a1_a2(0, $SB$_constructor_b1_b2_b3(false, $SC$_constructor_c1(0), 0));
+    return (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)), ());
+}
+
+((int, (int, (int), int)), ()) $SA$_fun_changeSomeFields((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    $self'a1 = $self'a1 + 100;
+    $self'a2'b2'c1 = $self'a2'b2'c1 + 1;
+    return (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)), ());
+}
+
+() $SA$_fun_changeSomeFields$not_mut((int, (int, (int), int)) $self) impure inline_ref {
+    return $self~$SA$_fun_changeSomeFields();
+}
+
+(int, (int, (int), int)) $SA$_fun_copyStruct((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    return ($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3));
+}
+
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_reflectStruct((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var $fresh$ret_723 = ($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3));
+    return (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)), $fresh$ret_723);
+}
+
+(int, (int, (int), int)) $SA$_fun_reflectStruct$not_mut((int, (int, (int), int)) $self) impure inline_ref {
+    return $self~$SA$_fun_reflectStruct();
+}
+
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_incrementIntFields((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    $self'a1 = $self'a1 + 1;
+    $self'a2'b2'c1 = $self'a2'b2'c1 + 1;
+    $self'a2'b3 = $self'a2'b3 + 1;
+    var $fresh$ret_724 = ($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3));
+    return (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)), $fresh$ret_724);
+}
+
+(int, (int, (int), int)) $SA$_fun_incrementIntFields$not_mut((int, (int, (int), int)) $self) impure inline_ref {
+    return $self~$SA$_fun_incrementIntFields();
+}
+
+((int, (int, (int), int)), (int, (int, (int), int))) $SA$_fun_flipBooleanFields((int, (int, (int), int)) $self) impure inline_ref {
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    var (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3))) = $self;
+    $self'a2'b1 = (~ $self'a2'b1);
+    var $fresh$ret_725 = ($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3));
+    return (($self'a1, ($self'a2'b1, ($self'a2'b2'c1), $self'a2'b3)), $fresh$ret_725);
+}
+
+(int, (int, (int), int)) $SA$_fun_flipBooleanFields$not_mut((int, (int, (int), int)) $self) impure inline_ref {
+    return $self~$SA$_fun_flipBooleanFields();
+}
+
+((cell), ()) $MapWrapper$_fun_reassignMap((cell) $self) impure inline_ref {
+    var (($self'm)) = $self;
+    var (($self'm)) = $self;
+    ($self'm) = $MapWrapper$_constructor_m(null());
+    $self'm~__tact_dict_set_int_cell(257, 1, $SA$_store_cell($SA$_constructor_a1_a2(0, $SB$_constructor_b1_b2_b3(false, $SC$_constructor_c1(0), 0))));
+    return (($self'm), ());
+}
+
+((cell), ()) $MapWrapper$_fun_changeSomeEntries((cell) $self) impure inline_ref {
+    var (($self'm)) = $self;
+    var (($self'm)) = $self;
+    var ($c'a1, ($c'a2'b1, ($c'a2'b2'c1), $c'a2'b3)) = $SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'm, 257, 1)));
+    $c'a2'b2'c1 = $c'a2'b2'c1 + 30;
+    if (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'm, 257, 1)))))) == $c'a2'b2'c1)) {
+        return (($self'm), ());
+    }
+    $self'm~__tact_dict_set_int_cell(257, 1, $SA$_store_cell(($c'a1, ($c'a2'b1, ($c'a2'b2'c1), $c'a2'b3))));
+    $self'm~__tact_dict_delete_int(257, 2);
+    $self'm~__tact_dict_delete_int(257, 3);
+    return (($self'm), ());
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_structAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    var $fresh$ret_733 = ( (( (( (( (( (( (( (( (($s'a1 == $self'sA'a1)) ? (($s'a2'b1 == $self'sA'a2'b1)) : (false) )) ? (($s'a2'b2'c1 == $self'sA'a2'b2'c1)) : (false) )) ? (($s'a2'b3 == $self'sA'a2'b3)) : (false) )) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_733);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = $global_getNewStruct(($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)));
+    var $fresh$ret_735 = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 0)) : (false) )) ? (($s'a2'b1 == false)) : (false) )) ? (($s'a2'b2'c1 == 0)) : (false) )) ? (($s'a2'b3 == 0)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_735);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = $global_copyAndModifyStruct(($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)));
+    var $fresh$ret_736 = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 120)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 6)) : (false) )) ? (($s'a2'b3 == 10)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_736);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_reassignStruct();
+    var $fresh$ret_737 = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 0)) : (false) )) ? (($s'a2'b1 == false)) : (false) )) ? (($s'a2'b2'c1 == 0)) : (false) )) ? (($s'a2'b3 == 0)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_737);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_changeSomeFields();
+    var $fresh$ret_738 = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 120)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 6)) : (false) )) ? (($s'a2'b3 == 10)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_738);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedStructs(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    $SA$_fun_changeSomeFields$not_mut($SA$_fun_copyStruct(($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3))));
+    int $result = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged();
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_changeSomeFields$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_reflectStruct());
+    $result = $result & ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) );
+    ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_reflectStruct();
+    ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_changeSomeFields();
+    $result = $result & ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 120)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 6)) : (false) )) ? (($s'a2'b3 == 10)) : (false) );
+    var $fresh$ret_739 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_739);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_flipBooleanFields$not_mut($SA$_fun_incrementIntFields$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_reflectStruct()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_flipBooleanFields$not_mut($SA$_fun_incrementIntFields$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_reflectStruct()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    var $fresh$ret_740 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_740);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_incrementIntFields$not_mut($SA$_fun_flipBooleanFields$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_reflectStruct()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_incrementIntFields$not_mut($SA$_fun_flipBooleanFields$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_reflectStruct()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    var $fresh$ret_741 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_741);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_flipBooleanFields$not_mut($SA$_fun_reflectStruct$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_incrementIntFields()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_flipBooleanFields$not_mut($SA$_fun_reflectStruct$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_incrementIntFields()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    var $fresh$ret_742 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 21)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 6)) : (false) )) ? (($s'a2'b3 == 11)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_742);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct4(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_reflectStruct$not_mut($SA$_fun_flipBooleanFields$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_incrementIntFields()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_reflectStruct$not_mut($SA$_fun_flipBooleanFields$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_incrementIntFields()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    var $fresh$ret_743 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 21)) : (false) )) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 6)) : (false) )) ? (($s'a2'b3 == 11)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_743);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct5(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_reflectStruct$not_mut($SA$_fun_incrementIntFields$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_flipBooleanFields()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_reflectStruct$not_mut($SA$_fun_incrementIntFields$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_flipBooleanFields()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    var $fresh$ret_744 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == false)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_744);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainStruct6(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    $SA$_fun_incrementIntFields$not_mut($SA$_fun_reflectStruct$not_mut(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))~$SA$_fun_flipBooleanFields()));
+    var ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3)) = $SA$_fun_incrementIntFields$not_mut($SA$_fun_reflectStruct$not_mut(($t'a1, ($t'a2'b1, ($t'a2'b2'c1), $t'a2'b3))~$SA$_fun_flipBooleanFields()));
+    var ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3)) = ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3));
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_flipBooleanFields();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_reflectStruct();
+    ($z'a1, ($z'a2'b1, ($z'a2'b2'c1), $z'a2'b3))~$SA$_fun_incrementIntFields();
+    var $fresh$ret_745 = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($s'a1 == 20)) : (false) )) ? (($s'a2'b1 == false)) : (false) )) ? (($s'a2'b2'c1 == 5)) : (false) )) ? (($s'a2'b3 == 10)) : (false) )) ? (($t'a1 == 21)) : (false) )) ? (($t'a2'b1 == false)) : (false) )) ? (($t'a2'b2'c1 == 6)) : (false) )) ? (($t'a2'b3 == 11)) : (false) )) ? (($z'a1 == 21)) : (false) )) ? (($z'a2'b1 == false)) : (false) )) ? (($z'a2'b2'c1 == 6)) : (false) )) ? (($z'a2'b3 == 11)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_745);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mapAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $s = $self'mA;
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))) == $SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == $SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))))) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))))) == $SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))))) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == $SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))))) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))) == $SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))))) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == $SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))))) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))))) == $SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))))))) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == $SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))))) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))) == $SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))))) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == $SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))))) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))))) == $SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))))))) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == $SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))))) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))) == 5)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == 10)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))) == 0)) : (false) )) ? ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) : (false) );
+    var ($k, $fresh$underscore_747, $fresh$flag_746) = __tact_dict_min_int_cell($s, 257);
+    while ($fresh$flag_746) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_747));
+        $result = $result & ( (( (($k == 1)) ? (true) : (($k == 2)) )) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_747, $fresh$flag_746) = __tact_dict_next_int_cell($s, 257, $k);
+    }
+    var $fresh$ret_748 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_748);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mapAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $s = $self'mA;
+    $s~__tact_dict_set_int_cell(257, 1, $SA$_store_cell($SA$_constructor_a1_a2(0, $SB$_constructor_b1_b2_b3(false, ($self'sC'c1), 2))));
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))) == 0)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))) == 5)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == 2)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_750, $fresh$flag_749) = __tact_dict_min_int_cell($s, 257);
+    while ($fresh$flag_749) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_750));
+        $result = $result & ( (( (($k == 1)) ? (true) : (($k == 2)) )) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_750, $fresh$flag_749) = __tact_dict_next_int_cell($s, 257, $k);
+    }
+    var $fresh$ret_751 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_751);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $s = $global_getNewMap($self'mA);
+    int $result = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))) == 0)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))) == 0)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_753, $fresh$flag_752) = __tact_dict_min_int_cell($s, 257);
+    while ($fresh$flag_752) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_753));
+        $result = $result & ($k == 1);
+        ($k, $fresh$underscore_753, $fresh$flag_752) = __tact_dict_next_int_cell($s, 257, $k);
+    }
+    var $fresh$ret_754 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_754);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramMap2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $s = $global_copyAndModifyMap($self'mA);
+    int $result = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1)))))) == 45)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s, 257, 1))))) == 10)) : (false) );
+    var ($k, $fresh$underscore_756, $fresh$flag_755) = __tact_dict_min_int_cell($s, 257);
+    while ($fresh$flag_755) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_756));
+        $result = $result & ($k == 1);
+        ($k, $fresh$underscore_756, $fresh$flag_755) = __tact_dict_next_int_cell($s, 257, $k);
+    }
+    var $fresh$ret_757 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_757);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'm) = $MapWrapper$_constructor_m($self'mA);
+    ($s'm)~$MapWrapper$_fun_reassignMap();
+    int $result = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1)))) == 0)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1)))))) == 0)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_759, $fresh$flag_758) = __tact_dict_min_int_cell($s'm, 257);
+    while ($fresh$flag_758) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_759));
+        $result = $result & ($k == 1);
+        ($k, $fresh$underscore_759, $fresh$flag_758) = __tact_dict_next_int_cell($s'm, 257, $k);
+    }
+    var $fresh$ret_760 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_760);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamMap2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($s'm) = $MapWrapper$_constructor_m($self'mA);
+    ($s'm)~$MapWrapper$_fun_changeSomeEntries();
+    int $result = ( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1)))))) == 35)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($s'm, 257, 1))))) == 10)) : (false) );
+    var ($k, $fresh$underscore_762, $fresh$flag_761) = __tact_dict_min_int_cell($s'm, 257);
+    while ($fresh$flag_761) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_762));
+        $result = $result & ($k == 1);
+        ($k, $fresh$underscore_762, $fresh$flag_761) = __tact_dict_next_int_cell($s'm, 257, $k);
+    }
+    var $fresh$ret_763 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_763);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedMaps1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    $SA$_fun_changeSomeFields$not_mut($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))));
+    var $fresh$ret_764 = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged();
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_764);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateNestedMap1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $m = $self'mC;
+    var ($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3)) = $SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($MapWrapper$_get_m($MapWrapper$_not_null($MapWrapper$_load_opt(__tact_dict_get_int_cell($m, 257, 100)))), 257, 10)));
+    $s'a2'b2'c1 = 1000;
+    int $result = ( (( (( (($s'a1 == 20)) ? (($s'a2'b1 == true)) : (false) )) ? (($s'a2'b2'c1 == 1000)) : (false) )) ? (($s'a2'b3 == 10)) : (false) );
+    var ($k1, $v1, $fresh$flag_765) = __tact_dict_min_int_cell($m, 257);
+    while ($fresh$flag_765) {
+        var ($v1'm) = $MapWrapper$_not_null($MapWrapper$_load_opt($v1));
+        var ($k2, $v2, $fresh$flag_766) = __tact_dict_min_int_cell($v1'm, 257);
+        while ($fresh$flag_766) {
+            var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+            $result = $result & ( (( (( (( (( (($k1 == 100)) ? (($k2 == 10)) : (false) )) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 5)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+            ($k2, $v2, $fresh$flag_766) = __tact_dict_next_int_cell($v1'm, 257, $k2);
+        }
+        ($k1, $v1, $fresh$flag_765) = __tact_dict_next_int_cell($m, 257, $k1);
+    }
+    cell $nestedMap1 = null();
+    $nestedMap1~__tact_dict_set_int_cell(257, 10, $SA$_store_cell(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))));
+    var ($wrappedNested1'm) = $MapWrapper$_constructor_m($nestedMap1);
+    var ($wrappedNested2'm) = $MapWrapper$_constructor_m(null());
+    $wrappedNested2'm~__tact_dict_set_int_cell(257, 10, $SA$_store_cell(($s'a1, ($s'a2'b1, ($s'a2'b2'c1), $s'a2'b3))));
+    var ($k2, $v2, $fresh$flag_767) = __tact_dict_min_int_cell($wrappedNested1'm, 257);
+    while ($fresh$flag_767) {
+        var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+        $result = $result & ( (( (( (( (($k2 == 10)) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 1000)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+        ($k2, $v2, $fresh$flag_767) = __tact_dict_next_int_cell($wrappedNested1'm, 257, $k2);
+    }
+    var ($k2, $v2, $fresh$flag_768) = __tact_dict_min_int_cell($wrappedNested2'm, 257);
+    while ($fresh$flag_768) {
+        var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+        $result = $result & ( (( (( (( (($k2 == 10)) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 1000)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+        ($k2, $v2, $fresh$flag_768) = __tact_dict_next_int_cell($wrappedNested2'm, 257, $k2);
+    }
+    $m~__tact_dict_set_int_cell(257, 100, $MapWrapper$_store_cell(($wrappedNested1'm)));
+    var ($k1, $v1, $fresh$flag_769) = __tact_dict_min_int_cell($m, 257);
+    while ($fresh$flag_769) {
+        var ($v1'm) = $MapWrapper$_not_null($MapWrapper$_load_opt($v1));
+        var ($k2, $v2, $fresh$flag_770) = __tact_dict_min_int_cell($v1'm, 257);
+        while ($fresh$flag_770) {
+            var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+            $result = $result & ( (( (( (( (( (($k1 == 100)) ? (($k2 == 10)) : (false) )) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 1000)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+            ($k2, $v2, $fresh$flag_770) = __tact_dict_next_int_cell($v1'm, 257, $k2);
+        }
+        ($k1, $v1, $fresh$flag_769) = __tact_dict_next_int_cell($m, 257, $k1);
+    }
+    $result = $result & (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged();
+    var $fresh$ret_771 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_771);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_contractAssign1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    int $result = ( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? ((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) : (false) );
+    var $fresh$ret_772 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_772);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_contractAssign2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    $c'mA~__tact_dict_delete_int(257, 1);
+    $c'mA~__tact_dict_delete_int(257, 2);
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($c'uB'b1 == false)) : (false) )) ? (($c'uB'b2'c1 == 0)) : (false) )) ? (($c'uB'b3 == 14)) : (false) )) ? (($c'sA'a1 == 20)) : (false) )) ? (($c'sA'a2'b1 == true)) : (false) )) ? (($c'sA'a2'b2'c1 == 5)) : (false) )) ? (($c'sA'a2'b3 == 10)) : (false) )) ? (($c'sB'b1 == false)) : (false) )) ? (($c'sB'b2'c1 == 3)) : (false) )) ? (($c'sB'b3 == 10)) : (false) )) ? (($c'sC'c1 == 5)) : (false) )) ? (null?($c'mB)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_774, $fresh$flag_773) = __tact_dict_min_int_cell($c'mA, 257);
+    while ($fresh$flag_773) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_774));
+        $result = $result & ($k == 3);
+        ($k, $fresh$underscore_774, $fresh$flag_773) = __tact_dict_next_int_cell($c'mA, 257, $k);
+    }
+    var $fresh$ret_775 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_775);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_paramContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = $global_copyAndModifyContract((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult));
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($c'uB'b1 == true)) : (false) )) ? (($c'uB'b2'c1 == 99)) : (false) )) ? (($c'uB'b3 == 98)) : (false) )) ? (($c'sA'a1 == 20)) : (false) )) ? (($c'sA'a2'b1 == true)) : (false) )) ? (($c'sA'a2'b2'c1 == 5)) : (false) )) ? (($c'sA'a2'b3 == 10)) : (false) )) ? (($c'sB'b1 == false)) : (false) )) ? (($c'sB'b2'c1 == 3)) : (false) )) ? (($c'sB'b3 == 10)) : (false) )) ? (($c'sC'c1 == 5)) : (false) )) ? (null?($c'mB)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_777, $fresh$flag_776) = __tact_dict_min_int_cell($c'mA, 257);
+    while ($fresh$flag_776) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_777));
+        $result = $result & ( (($k == 2)) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_777, $fresh$flag_776) = __tact_dict_next_int_cell($c'mA, 257, $k);
+    }
+    var $fresh$ret_778 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_778);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ()) $SemanticsTester$_fun_changeSomeContractFields(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3) = $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(77), 88);
+    $self'sA'a2'b2'c1 = $self'sA'a2'b2'c1 + 30;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), ());
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateParamContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_changeSomeContractFields();
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? (($c'uB'b1 == true)) : (false) )) ? (($c'uB'b2'c1 == 77)) : (false) )) ? (($c'uB'b3 == 88)) : (false) )) ? (($c'sA'a1 == 20)) : (false) )) ? (($c'sA'a2'b1 == true)) : (false) )) ? (($c'sA'a2'b2'c1 == 35)) : (false) )) ? (($c'sA'a2'b3 == 10)) : (false) )) ? (($c'sB'b1 == false)) : (false) )) ? (($c'sB'b2'c1 == 3)) : (false) )) ? (($c'sB'b3 == 10)) : (false) )) ? (($c'sC'c1 == 5)) : (false) )) ? (null?($c'mB)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 1)))))) == 5)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 1))))) == 10)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($c'mA, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_780, $fresh$flag_779) = __tact_dict_min_int_cell($c'mA, 257);
+    while ($fresh$flag_779) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_780));
+        $result = $result & ( (( (($k == 1)) ? (true) : (($k == 2)) )) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_780, $fresh$flag_779) = __tact_dict_next_int_cell($c'mA, 257, $k);
+    }
+    var $fresh$ret_781 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_781);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), slice) $SemanticsTester$_fun_address(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var $fresh$ret_782 = $global_myAddress();
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_782);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_checkFieldsEqualTo(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self, (int, (int), int) $sB, int $n) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($sB'b1, ($sB'b2'c1), $sB'b3)) = $sB;
+    int $result = ( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (( (($self'uB'b1 == $sB'b1)) ? (($self'uB'b2'c1 == $sB'b2'c1)) : (false) )) ? (($self'uB'b3 == $sB'b3)) : (false) )) ? (($self'sA'a1 == 20)) : (false) )) ? (($self'sA'a2'b1 == true)) : (false) )) ? (($self'sA'a2'b2'c1 == $n)) : (false) )) ? (($self'sA'a2'b3 == 10)) : (false) )) ? (($self'sB'b1 == false)) : (false) )) ? (($self'sB'b2'c1 == 3)) : (false) )) ? (($self'sB'b3 == 10)) : (false) )) ? (($self'sC'c1 == 5)) : (false) )) ? (null?($self'mB)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1)))))) == 5)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 1))))) == 10)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))) == 20)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == true)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2)))))) == 100)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 2))))) == 0)) : (false) )) ? (($SA$_get_a1($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))) == 5)) : (false) )) ? (($SB$_get_b1($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == false)) : (false) )) ? (($SC$_get_c1($SB$_get_b2($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3)))))) == 150)) : (false) )) ? (($SB$_get_b3($SA$_get_a2($SA$_not_null($SA$_load_opt(__tact_dict_get_int_cell($self'mA, 257, 3))))) == 0)) : (false) );
+    var ($k, $fresh$underscore_784, $fresh$flag_783) = __tact_dict_min_int_cell($self'mA, 257);
+    while ($fresh$flag_783) {
+        var ($_'a1, ($_'a2'b1, ($_'a2'b2'c1), $_'a2'b3)) = $SA$_not_null($SA$_load_opt($fresh$underscore_784));
+        $result = $result & ( (( (($k == 1)) ? (true) : (($k == 2)) )) ? (true) : (($k == 3)) );
+        ($k, $fresh$underscore_784, $fresh$flag_783) = __tact_dict_next_int_cell($self'mA, 257, $k);
+    }
+    var ($k1, $v1, $fresh$flag_785) = __tact_dict_min_int_cell($self'mC, 257);
+    while ($fresh$flag_785) {
+        var ($v1'm) = $MapWrapper$_not_null($MapWrapper$_load_opt($v1));
+        var ($k2, $v2, $fresh$flag_786) = __tact_dict_min_int_cell($v1'm, 257);
+        while ($fresh$flag_786) {
+            var ($v2'a1, ($v2'a2'b1, ($v2'a2'b2'c1), $v2'a2'b3)) = $SA$_not_null($SA$_load_opt($v2));
+            $result = $result & ( (( (( (( (( (($k1 == 100)) ? (($k2 == 10)) : (false) )) ? (($v2'a1 == 20)) : (false) )) ? (($v2'a2'b1 == true)) : (false) )) ? (($v2'a2'b2'c1 == 5)) : (false) )) ? (($v2'a2'b3 == 10)) : (false) );
+            ($k2, $v2, $fresh$flag_786) = __tact_dict_next_int_cell($v1'm, 257, $k2);
+        }
+        ($k1, $v1, $fresh$flag_785) = __tact_dict_next_int_cell($self'mC, 257, $k1);
+    }
+    var $fresh$ret_787 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_787);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateContractState(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_changeSomeContractFields();
+    int $result = ( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? ((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_checkFieldsEqualTo($SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(77), 88), 35)) : (false) );
+    (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult) = (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult);
+    $result = $result & (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkFieldsEqualTo($SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(77), 88), 35);
+    var $fresh$ret_788 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_788);
+}
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_copyContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    return (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+}
+
+() $SemanticsTester$_fun_changeSomeContractFields$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    return $self~$SemanticsTester$_fun_changeSomeContractFields();
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_reflectContract(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var $fresh$ret_814 = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_814);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_flipBooleanFieldsInUB(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    $self'uB'b1 = (~ $self'uB'b1);
+    var $fresh$ret_816 = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_816);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), ((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int)) $SemanticsTester$_fun_incrementIntFieldsInUB(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    $self'uB'b2'c1 = $self'uB'b2'c1 + 1;
+    $self'uB'b3 = $self'uB'b3 + 1;
+    var $fresh$ret_815 = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_815);
+}
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    return $self~$SemanticsTester$_fun_incrementIntFieldsInUB();
+}
+
+((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    return $self~$SemanticsTester$_fun_flipBooleanFieldsInUB();
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testReturnedContracts(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    $SemanticsTester$_fun_changeSomeContractFields$not_mut($SemanticsTester$_fun_copyContract((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)));
+    int $result = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged();
+    var (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult);
+    $SemanticsTester$_fun_changeSomeContractFields$not_mut((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_reflectContract());
+    $result = $result & ( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? ((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) : (false) );
+    (($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult) = $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut($SemanticsTester$_fun_incrementIntFieldsInUB$not_mut((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_reflectContract()));
+    $result = $result & ( ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged()) ? ((($c'sC'c1), ($c'sB'b1, ($c'sB'b2'c1), $c'sB'b3), ($c'sA'a1, ($c'sA'a2'b1, ($c'sA'a2'b2'c1), $c'sA'a2'b3)), ($c'uB'b1, ($c'uB'b2'c1), $c'uB'b3), $c'mA, $c'mB, $c'mC, $c'mutateContractStateResult)~$SemanticsTester$_fun_checkFieldsEqualTo($SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(1), 15), 5)) : (false) );
+    var $fresh$ret_789 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_789);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutateContractStateFlag(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var $fresh$ret_790 = $self'mutateContractStateResult;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_790);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_changesPersisted(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var $fresh$ret_791 = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_checkFieldsEqualTo($SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(77), 88), 35);
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_791);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_doNothing$not_mut($Int$_fun_increment$not_mut($s~$Int$_fun_multiplyBy2()));
+    int $t = 2;
+    $t = $Int$_fun_doNothing$not_mut($Int$_fun_increment$not_mut($t~$Int$_fun_multiplyBy2()));
+    int $z = 2;
+    $z~$Int$_fun_multiplyBy2();
+    $z~$Int$_fun_increment();
+    $z~$Int$_fun_doNothing();
+    var $fresh$ret_792 = ( (( (($s == 4)) ? (($t == 5)) : (false) )) ? (($z == 5)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_792);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_increment$not_mut($Int$_fun_doNothing$not_mut($s~$Int$_fun_multiplyBy2()));
+    int $t = 2;
+    $t = $Int$_fun_increment$not_mut($Int$_fun_doNothing$not_mut($t~$Int$_fun_multiplyBy2()));
+    int $z = 2;
+    $z~$Int$_fun_multiplyBy2();
+    $z~$Int$_fun_doNothing();
+    $z~$Int$_fun_increment();
+    var $fresh$ret_793 = ( (( (($s == 4)) ? (($t == 5)) : (false) )) ? (($z == 5)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_793);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_increment$not_mut($Int$_fun_multiplyBy2$not_mut($s~$Int$_fun_doNothing()));
+    int $t = 2;
+    $t = $Int$_fun_increment$not_mut($Int$_fun_multiplyBy2$not_mut($t~$Int$_fun_doNothing()));
+    int $z = 2;
+    $z~$Int$_fun_doNothing();
+    $z~$Int$_fun_multiplyBy2();
+    $z~$Int$_fun_increment();
+    var $fresh$ret_794 = ( (( (($s == 2)) ? (($t == 5)) : (false) )) ? (($z == 5)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_794);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt4(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_multiplyBy2$not_mut($Int$_fun_increment$not_mut($s~$Int$_fun_doNothing()));
+    int $t = 2;
+    $t = $Int$_fun_multiplyBy2$not_mut($Int$_fun_increment$not_mut($t~$Int$_fun_doNothing()));
+    int $z = 2;
+    $z~$Int$_fun_doNothing();
+    $z~$Int$_fun_increment();
+    $z~$Int$_fun_multiplyBy2();
+    var $fresh$ret_795 = ( (( (($s == 2)) ? (($t == 6)) : (false) )) ? (($z == 6)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_795);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt5(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_multiplyBy2$not_mut($Int$_fun_doNothing$not_mut($s~$Int$_fun_increment()));
+    int $t = 2;
+    $t = $Int$_fun_multiplyBy2$not_mut($Int$_fun_doNothing$not_mut($t~$Int$_fun_increment()));
+    int $z = 2;
+    $z~$Int$_fun_increment();
+    $z~$Int$_fun_doNothing();
+    $z~$Int$_fun_multiplyBy2();
+    var $fresh$ret_796 = ( (( (($s == 3)) ? (($t == 6)) : (false) )) ? (($z == 6)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_796);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_mutatesChainInt6(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 2;
+    $Int$_fun_doNothing$not_mut($Int$_fun_multiplyBy2$not_mut($s~$Int$_fun_increment()));
+    int $t = 2;
+    $t = $Int$_fun_doNothing$not_mut($Int$_fun_multiplyBy2$not_mut($t~$Int$_fun_increment()));
+    int $z = 2;
+    $z~$Int$_fun_increment();
+    $z~$Int$_fun_multiplyBy2();
+    $z~$Int$_fun_doNothing();
+    var $fresh$ret_797 = ( (( (($s == 3)) ? (($t == 6)) : (false) )) ? (($z == 6)) : (false) );
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_797);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $m1 = ( (true) ? (($s~$Int$_fun_increment() > 2)) : (false) );
+    int $result = ($s == 2);
+    int $m2 = false;
+    $result = $result & ($s == 2);
+    int $m3 = ( (($s > 2)) ? (($s~$Int$_fun_increment() > 2)) : (false) );
+    $result = $result & ($s == 2);
+    int $m4 = ( (( (($s == 2)) ? (($s~$Int$_fun_increment() > 3)) : (false) )) ? (($s~$Int$_fun_increment() > 3)) : (false) );
+    $result = $result & ($s == 3);
+    int $m5 = ( (( (($s == 3)) ? (($s~$Int$_fun_increment() > 3)) : (false) )) ? (($s~$Int$_fun_increment() > 4)) : (false) );
+    $result = $result & ($s == 5);
+    int $m6 = ( (( (( (($s == 5)) ? (($s~$Int$_fun_increment() > 6)) : (false) )) ? (($s~$Int$_fun_increment() > 6)) : (false) )) ? (($s~$Int$_fun_increment() > 6)) : (false) );
+    $result = $result & ($s == 6);
+    $result = $result & ( (( (( (( (( ((~ $m1)) ? ((~ $m2)) : (false) )) ? ((~ $m3)) : (false) )) ? ((~ $m4)) : (false) )) ? ($m5) : (false) )) ? ((~ $m6)) : (false) );
+    var $fresh$ret_798 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_798);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $l1 = false;
+    int $l2 = ( (($s > 1)) ? ($global_infiniteLoop()) : (false) );
+    int $l3 = ( (( (($s == 1)) ? (($s~$Int$_fun_increment() > 2)) : (false) )) ? ($global_infiniteLoop()) : (false) );
+    int $result = ($s == 2);
+    int $l4 = ( (( (( (($s == 2)) ? (($s~$Int$_fun_increment() > 3)) : (false) )) ? ($global_infiniteLoop()) : (false) )) ? (($s~$Int$_fun_increment() > 3)) : (false) );
+    $result = $result & ($s == 3);
+    $result = $result & ( (( (( ((~ $l1)) ? ((~ $l2)) : (false) )) ? ((~ $l3)) : (false) )) ? ((~ $l4)) : (false) );
+    var $fresh$ret_799 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_799);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_andExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $t1 = false;
+    int $t2 = ( (($s > 1)) ? ($global_throwException(($s - 1))) : (false) );
+    int $t3 = ( (( (($s == 1)) ? (($s~$Int$_fun_increment() > 2)) : (false) )) ? ($global_throwException(($s - 2))) : (false) );
+    int $result = ($s == 2);
+    int $t4 = ( (( (( (($s == 2)) ? (($s~$Int$_fun_increment() > 3)) : (false) )) ? ($global_throwException(($s - 3))) : (false) )) ? (($s~$Int$_fun_increment() > 3)) : (false) );
+    $result = $result & ($s == 3);
+    $result = $result & ( (( (( ((~ $t1)) ? ((~ $t2)) : (false) )) ? ((~ $t3)) : (false) )) ? ((~ $t4)) : (false) );
+    var $fresh$ret_800 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_800);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $m1 = ( (false) ? (true) : (($s~$Int$_fun_increment() >= 2)) );
+    int $result = ($s == 2);
+    int $m2 = true;
+    $result = $result & ($s == 2);
+    int $m3 = ( (($s >= 2)) ? (true) : (($s~$Int$_fun_increment() > 2)) );
+    $result = $result & ($s == 2);
+    int $m4 = ( (( (($s != 2)) ? (true) : (($s~$Int$_fun_increment() >= 3)) )) ? (true) : (($s~$Int$_fun_increment() > 3)) );
+    $result = $result & ($s == 3);
+    int $m5 = ( (( (($s != 3)) ? (true) : (($s~$Int$_fun_increment() < 3)) )) ? (true) : (($s~$Int$_fun_increment() < 4)) );
+    $result = $result & ($s == 5);
+    int $m6 = ( (( (( (($s != 5)) ? (true) : (($s~$Int$_fun_increment() >= 6)) )) ? (true) : (($s~$Int$_fun_increment() > 6)) )) ? (true) : (($s~$Int$_fun_increment() > 6)) );
+    $result = $result & ($s == 6);
+    $result = $result & ( (( (( (( (( ($m1) ? ($m2) : (false) )) ? ($m3) : (false) )) ? ($m4) : (false) )) ? ((~ $m5)) : (false) )) ? ($m6) : (false) );
+    var $fresh$ret_801 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_801);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $l1 = true;
+    int $l2 = ( (($s >= 1)) ? (true) : ($global_infiniteLoop()) );
+    int $l3 = ( (( (($s != 1)) ? (true) : (($s~$Int$_fun_increment() >= 2)) )) ? (true) : ($global_infiniteLoop()) );
+    int $result = ($s == 2);
+    int $l4 = ( (( (( (($s != 2)) ? (true) : (($s~$Int$_fun_increment() >= 3)) )) ? (true) : ($global_infiniteLoop()) )) ? (true) : (($s~$Int$_fun_increment() > 3)) );
+    $result = $result & ($s == 3);
+    $result = $result & ( (( (( ($l1) ? ($l2) : (false) )) ? ($l3) : (false) )) ? ($l4) : (false) );
+    var $fresh$ret_802 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_802);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_orExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $t1 = true;
+    int $t2 = ( (($s >= 1)) ? (true) : ($global_throwException(($s - 1))) );
+    int $t3 = ( (( (($s != 1)) ? (true) : (($s~$Int$_fun_increment() >= 2)) )) ? (true) : ($global_throwException(($s - 2))) );
+    int $result = ($s == 2);
+    int $t4 = ( (( (( (($s != 2)) ? (true) : (($s~$Int$_fun_increment() >= 3)) )) ? (true) : ($global_throwException(($s - 3))) )) ? (true) : (($s~$Int$_fun_increment() > 3)) );
+    $result = $result & ($s == 3);
+    $result = $result & ( (( (( ($t1) ? ($t2) : (false) )) ? ($t3) : (false) )) ? ($t4) : (false) );
+    var $fresh$ret_803 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_803);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryMutateShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $m1 = (true ? ($s~$Int$_fun_increment() > 2) : ($s~$Int$_fun_increment() > 2));
+    int $result = ($s == 2);
+    int $m2 = (false ? ($s~$Int$_fun_increment() > 2) : ($s~$Int$_fun_increment() > 2));
+    $result = $result & ($s == 3);
+    int $m3 = (($s > 3) ? ($s~$Int$_fun_increment() > 2) : ($s > 2));
+    $result = $result & ($s == 3);
+    int $m4 = (($s >= 3) ? ($s > 2) : ($s~$Int$_fun_increment() > 2));
+    $result = $result & ($s == 3);
+    int $m5 = (($s~$Int$_fun_increment() > 3) ? ($s == 4) : ($s~$Int$_fun_increment() > 3));
+    $result = $result & ($s == 4);
+    int $m6 = (($s~$Int$_fun_increment() > 5) ? ($s~$Int$_fun_increment() > 3) : ($s > 5));
+    $result = $result & ($s == 5);
+    int $m7 = (($s~$Int$_fun_increment() > 5) ? ($s~$Int$_fun_increment() == 7) : ($s == 6));
+    $result = $result & ($s == 7);
+    int $m8 = (($s~$Int$_fun_increment() > 8) ? ($s == 8) : ($s~$Int$_fun_increment() == 9));
+    $result = $result & ($s == 9);
+    $result = $result & ( (( (( (( (( (( (( ((~ $m1)) ? ($m2) : (false) )) ? ($m3) : (false) )) ? ($m4) : (false) )) ? ($m5) : (false) )) ? ((~ $m6)) : (false) )) ? ($m7) : (false) )) ? ($m8) : (false) );
+    var $fresh$ret_804 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_804);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $l1 = (true ? ($s > 1) : $global_infiniteLoop());
+    int $l2 = (false ? $global_infiniteLoop() : ($s > 1));
+    int $l3 = (($s >= 1) ? ($s > 1) : $global_infiniteLoop());
+    int $l4 = (($s > 1) ? $global_infiniteLoop() : ($s > 1));
+    int $result = ( (( (( ((~ $l1)) ? ((~ $l2)) : (false) )) ? ((~ $l3)) : (false) )) ? ((~ $l4)) : (false) );
+    var $fresh$ret_805 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_805);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_ternaryExceptionShortCircuit(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    int $s = 1;
+    int $t1 = (true ? ($s > 1) : $global_throwException(($s - 1)));
+    int $t2 = (false ? $global_throwException(($s - 1)) : ($s > 1));
+    int $t3 = (($s >= 1) ? ($s > 1) : $global_throwException(($s - 1)));
+    int $t4 = (($s > 1) ? $global_throwException(($s - 1)) : ($s > 1));
+    int $result = ( (( (( ((~ $t1)) ? ((~ $t2)) : (false) )) ? ((~ $t3)) : (false) )) ? ((~ $t4)) : (false) );
+    var $fresh$ret_806 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_806);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testAddressEquality(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    slice $addr1 = $global_myAddress();
+    slice $addr2 = $global_contractAddress($SemanticsTester$_init_child());
+    int $result = ( equal_slices_bits($addr2, $addr1) );
+    slice $addr3 = $addr1;
+    $result = $result & ( equal_slices_bits($addr3, $addr1) );
+    var $fresh$ret_807 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_807);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    slice $addr = $global_myAddress();
+    var ($parsedAddr'workchain, $parsedAddr'address) = $global_parseStdAddress($Address$_fun_asSlice($addr));
+    slice $addr2 = $global_newAddress($parsedAddr'workchain, $parsedAddr'address);
+    int $result = ( equal_slices_bits($addr2, $addr) );
+    int $chainId = 0;
+    int $accountId = $Cell$_fun_hash($StateInit$_store_cell($SemanticsTester$_init_child()));
+    slice $addr3 = $global_newAddress($chainId, $accountId);
+    var ($parsedAddr2'workchain, $parsedAddr2'address) = $global_parseStdAddress($Address$_fun_asSlice($addr3));
+    $result = $result & ( (($chainId == $parsedAddr2'workchain)) ? (($accountId == $parsedAddr2'address)) : (false) );
+    var $fresh$ret_808 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_808);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testSliceEquality1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $cell = $Builder$_fun_endCell(store_int(store_int(store_int($global_beginCell(), 10, 6), 5, 6), 2, 6));
+    slice $slice1 = $Cell$_fun_asSlice($cell);
+    slice $slice2 = $Cell$_fun_asSlice($cell);
+    int $result = __tact_slice_eq($slice2, $slice1);
+    int $i1_s1 = $slice1~load_int(6);
+    $result = $result & ( (__tact_slice_neq($slice2, $slice1)) ? (($i1_s1 == 10)) : (false) );
+    int $i1_s2 = $slice2~load_int(6);
+    $result = $result & ( (__tact_slice_eq($slice2, $slice1)) ? (($i1_s2 == 10)) : (false) );
+    int $i2_s1 = $slice1~load_int(6);
+    int $i3_s1 = $slice1~load_int(6);
+    int $i2_s2 = $slice2~load_int(6);
+    $result = $result & ( (( (( (__tact_slice_neq($slice2, $slice1)) ? (($i2_s1 == 5)) : (false) )) ? (($i3_s1 == 2)) : (false) )) ? (($i2_s2 == 5)) : (false) );
+    int $i3_s2 = $slice2~load_int(6);
+    $result = $result & ( (__tact_slice_eq($slice2, $slice1)) ? (($i3_s2 == 2)) : (false) );
+    $Slice$_fun_endParse($slice1);
+    $result = $result & __tact_slice_eq($slice2, $slice1);
+    $Slice$_fun_endParse($slice2);
+    $result = $result & ( (( (__tact_slice_eq($slice2, $slice1)) ? ($Slice$_fun_empty($slice1)) : (false) )) ? ($Slice$_fun_empty($slice2)) : (false) );
+    slice $slice3 = $Cell$_fun_asSlice($cell);
+    int $i1_s3 = $slice3~load_int(6);
+    $result = $result & ($i1_s3 == 10);
+    slice $slice4 = $slice3;
+    $result = $result & __tact_slice_eq($slice4, $slice3);
+    int $i2_s3 = $slice3~load_int(6);
+    $result = $result & ( (__tact_slice_neq($slice4, $slice3)) ? (($i2_s3 == 5)) : (false) );
+    int $i3_s3 = $slice3~load_int(6);
+    $result = $result & ( (__tact_slice_neq($slice4, $slice3)) ? (($i3_s3 == 2)) : (false) );
+    int $i2_s4 = $slice4~load_int(6);
+    $result = $result & ( (__tact_slice_neq($slice4, $slice3)) ? (($i2_s4 == 5)) : (false) );
+    int $i3_s4 = $slice4~load_int(6);
+    $result = $result & ( (( (( (__tact_slice_eq($slice4, $slice3)) ? (($i3_s4 == 2)) : (false) )) ? ($Slice$_fun_empty($slice3)) : (false) )) ? ($Slice$_fun_empty($slice4)) : (false) );
+    slice $slice5 = $Cell$_fun_asSlice($cell);
+    int $i1_s5 = $slice5~load_int(6);
+    $result = $result & ($i1_s5 == 10);
+    $result = $result & $global_fullyReadSlice($slice5);
+    int $i2_s5 = $slice5~load_int(6);
+    int $i3_s5 = $slice5~load_int(6);
+    $result = $result & ( (( (($i2_s5 == 5)) ? (($i3_s5 == 2)) : (false) )) ? ($Slice$_fun_empty($slice5)) : (false) );
+    slice $slice6 = $Cell$_fun_asSlice($cell);
+    int $i1_s6 = $slice6~load_int(6);
+    $result = $result & ($i1_s6 == 10);
+    $result = $result & $slice6~$Slice$_fun_fullyReadAndModifySlice();
+    $result = $result & $Slice$_fun_empty($slice6);
+    var $fresh$ret_809 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_809);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testSliceEquality2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $cell1 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell2 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell3 = $Builder$_fun_endCell($Builder$_fun_storeRef($cell1, store_int($global_beginCell(), 5, 6)));
+    cell $cell4 = $Builder$_fun_endCell($Builder$_fun_storeRef($cell2, store_int($global_beginCell(), 5, 6)));
+    cell $cell5 = $Builder$_fun_endCell($Builder$_fun_storeRef($global_emptyCell(), store_int($global_beginCell(), 5, 6)));
+    slice $slice3 = $Cell$_fun_asSlice($cell3);
+    slice $slice4 = $Cell$_fun_asSlice($cell4);
+    slice $slice5 = $Cell$_fun_asSlice($cell5);
+    int $result = __tact_slice_eq($slice4, $slice3);
+    $result = $result & ( (__tact_slice_neq($slice3, $slice5)) ? (__tact_slice_neq($slice4, $slice5)) : (false) );
+    int $d1_s3 = $slice3~load_int(6);
+    $result = $result & ($d1_s3 == 5);
+    $result = $result & __tact_slice_neq($slice4, $slice3);
+    int $d1_s4 = $slice4~load_int(6);
+    $result = $result & ($d1_s3 == 5);
+    $result = $result & __tact_slice_eq($slice4, $slice3);
+    int $d1_s5 = $slice5~load_int(6);
+    $result = $result & ($d1_s5 == 5);
+    $result = $result & ( (__tact_slice_neq($slice3, $slice5)) ? (__tact_slice_neq($slice4, $slice5)) : (false) );
+    cell $d2_s3 = $slice3~$Slice$_fun_loadRef();
+    cell $d2_s4 = $slice4~$Slice$_fun_loadRef();
+    cell $d2_s5 = $slice5~$Slice$_fun_loadRef();
+    $result = $result & ( (( (__tact_cell_eq($cell1, $d2_s3)) ? (__tact_cell_eq($cell2, $d2_s4)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $d2_s5)) : (false) );
+    $result = $result & ( (__tact_slice_eq($slice4, $slice3)) ? (__tact_slice_eq($slice5, $slice3)) : (false) );
+    var $fresh$ret_810 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_810);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality1(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    var ($struct1'b1, ($struct1'b2'c1), $struct1'b3) = $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(10), 50);
+    var ($struct2'b1, ($struct2'b2'c1), $struct2'b3) = $SB$_constructor_b1_b2_b3(true, $SC$_constructor_c1(10), 50);
+    cell $cell1 = $SB$_store_cell(($struct1'b1, ($struct1'b2'c1), $struct1'b3));
+    cell $cell2 = $SB$_store_cell(($struct2'b1, ($struct2'b2'c1), $struct2'b3));
+    int $result = __tact_cell_eq($cell2, $cell1);
+    cell $cell3 = $cell1;
+    $result = $result & __tact_cell_eq($cell3, $cell1);
+    var ($struct3'b1, ($struct3'b2'c1), $struct3'b3) = $SB$_load_not_mut($cell3.begin_parse());
+    $result = $result & ( (( (($struct1'b1 == $struct3'b1)) ? (($struct1'b2'c1 == $struct3'b2'c1)) : (false) )) ? (($struct1'b3 == $struct3'b3)) : (false) );
+    $struct3'b2'c1 = 100;
+    cell $cell4 = $SB$_store_cell(($struct3'b1, ($struct3'b2'c1), $struct3'b3));
+    $result = $result & __tact_cell_neq($cell4, $cell1);
+    $struct1'b2'c1 = 100;
+    cell $cell5 = $SB$_store_cell(($struct1'b1, ($struct1'b2'c1), $struct1'b3));
+    $result = $result & __tact_cell_eq($cell4, $cell5);
+    $result = $result & __tact_cell_neq($cell1, $cell5);
+    var $fresh$ret_811 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_811);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality2(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $cell1 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell2 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell3 = $Builder$_fun_endCell(store_uint(store_int($Builder$_fun_storeBool(true, $global_beginCell()), 10, 6), 2, 6));
+    cell $cell4 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(false, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell5 = $Builder$_fun_endCell(store_uint(store_int($Builder$_fun_storeBool(false, $global_beginCell()), 10, 6), 2, 6));
+    int $result = __tact_cell_eq($cell2, $cell1);
+    $result = $result & ( (( (__tact_cell_neq($cell3, $cell1)) ? (__tact_cell_neq($cell4, $cell1)) : (false) )) ? (__tact_cell_neq($cell5, $cell1)) : (false) );
+    $result = $result & ( (( (__tact_cell_neq($cell3, $cell2)) ? (__tact_cell_neq($cell4, $cell2)) : (false) )) ? (__tact_cell_neq($cell5, $cell2)) : (false) );
+    $result = $result & ( (__tact_cell_neq($cell4, $cell3)) ? (__tact_cell_neq($cell5, $cell3)) : (false) );
+    $result = $result & __tact_cell_neq($cell5, $cell4);
+    slice $slice1 = $Cell$_fun_asSlice($cell1);
+    slice $slice3 = $Cell$_fun_asSlice($cell3);
+    int $d1_s1 = $slice1~load_int(6);
+    int $d1_s3 = $slice3~$Slice$_fun_loadBool();
+    $result = $result & ( (($d1_s1 == 10)) ? (($d1_s3 == true)) : (false) );
+    $result = $result & __tact_cell_neq($Slice$_fun_asCell($slice3), $Slice$_fun_asCell($slice1));
+    int $d2_s1 = $slice1~$Slice$_fun_loadBool();
+    $result = $result & ($d2_s1 == true);
+    $result = $result & __tact_cell_neq($Slice$_fun_asCell($slice3), $Slice$_fun_asCell($slice1));
+    int $d2_s3 = $slice3~load_int(6);
+    $result = $result & ($d2_s3 == 10);
+    cell $cell6 = $Slice$_fun_asCell($slice1);
+    cell $cell7 = $Slice$_fun_asCell($slice3);
+    $result = $result & __tact_cell_eq($cell7, $cell6);
+    slice $slice4 = $Cell$_fun_asSlice($cell6);
+    slice $slice5 = $Cell$_fun_asSlice($cell7);
+    int $d_s4 = $slice4~load_uint(6);
+    int $d_s5 = $slice5~load_uint(6);
+    $result = $result & ( (($d_s4 == 2)) ? (($d_s5 == 2)) : (false) );
+    $result = $result & ( (__tact_cell_eq($global_emptyCell(), $Slice$_fun_asCell($slice4))) ? (__tact_cell_eq($global_emptyCell(), $Slice$_fun_asCell($slice5))) : (false) );
+    int $d3_s1 = $slice1~load_uint(6);
+    int $d3_s3 = $slice3~load_uint(6);
+    $result = $result & ( (($d3_s1 == 2)) ? (($d3_s3 == 2)) : (false) );
+    cell $cell8 = $Slice$_fun_asCell($slice1);
+    cell $cell9 = $Slice$_fun_asCell($slice3);
+    $result = $result & ( (( (__tact_cell_eq($cell9, $cell8)) ? (__tact_cell_eq($global_emptyCell(), $cell8)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $cell9)) : (false) );
+    var $fresh$ret_812 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_812);
+}
+
+(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int), int) $SemanticsTester$_fun_testCellEquality3(((int), (int, (int), int), (int, (int, (int), int)), (int, (int), int), cell, cell, cell, int) $self) impure inline_ref {
+    var ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)) = $self;
+    cell $cell1 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    cell $cell2 = $Builder$_fun_endCell(store_uint($Builder$_fun_storeBool(true, store_int($global_beginCell(), 10, 6)), 2, 6));
+    int $result = __tact_cell_eq($cell2, $cell1);
+    cell $cell3 = $Builder$_fun_endCell($Builder$_fun_storeRef($cell1, store_int($global_beginCell(), 5, 6)));
+    cell $cell4 = $Builder$_fun_endCell($Builder$_fun_storeRef($cell2, store_int($global_beginCell(), 5, 6)));
+    $result = $result & __tact_cell_eq($cell4, $cell3);
+    cell $cell5 = $Builder$_fun_endCell($Builder$_fun_storeRef($global_emptyCell(), store_int($global_beginCell(), 5, 6)));
+    $result = $result & ( (( (( (__tact_cell_neq($cell3, $cell5)) ? (__tact_cell_neq($cell4, $cell5)) : (false) )) ? (__tact_cell_neq($cell1, $cell5)) : (false) )) ? (__tact_cell_neq($cell2, $cell5)) : (false) );
+    slice $slice3 = $Cell$_fun_asSlice($cell3);
+    slice $slice4 = $Cell$_fun_asSlice($cell4);
+    slice $slice5 = $Cell$_fun_asSlice($cell5);
+    int $d1_s3 = $slice3~load_int(6);
+    int $d1_s4 = $slice4~load_int(6);
+    int $d1_s5 = $slice5~load_int(6);
+    $result = $result & ( (( (($d1_s3 == 5)) ? (($d1_s4 == 5)) : (false) )) ? (($d1_s5 == 5)) : (false) );
+    $result = $result & ( (( (__tact_cell_eq($Slice$_fun_asCell($slice4), $Slice$_fun_asCell($slice3))) ? (__tact_cell_neq($Slice$_fun_asCell($slice5), $Slice$_fun_asCell($slice3))) : (false) )) ? (__tact_cell_neq($Slice$_fun_asCell($slice5), $Slice$_fun_asCell($slice4))) : (false) );
+    cell $d2_s3 = $slice3~$Slice$_fun_loadRef();
+    cell $d2_s4 = $slice4~$Slice$_fun_loadRef();
+    cell $d2_s5 = $slice5~$Slice$_fun_loadRef();
+    $result = $result & ( (( (__tact_cell_eq($cell1, $d2_s3)) ? (__tact_cell_eq($cell2, $d2_s4)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $d2_s5)) : (false) );
+    cell $cell6 = $Slice$_fun_asCell($slice3);
+    cell $cell7 = $Slice$_fun_asCell($slice4);
+    cell $cell8 = $Slice$_fun_asCell($slice5);
+    $result = $result & ( (( (( (( (__tact_cell_eq($cell7, $cell6)) ? (__tact_cell_eq($cell8, $cell6)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $cell6)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $cell7)) : (false) )) ? (__tact_cell_eq($global_emptyCell(), $cell8)) : (false) );
+    var $fresh$ret_813 = $result;
+    return ((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult), $fresh$ret_813);
+}
+
+;;
+;; Get methods of a Contract SemanticsTester
+;;
+
+_ %checkAllContractFieldsAreUnchanged() method_id(89972) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_checkAllContractFieldsAreUnchanged();
+    return res;
+}
+
+_ %structAssign1() method_id(126129) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_structAssign1();
+    return res;
+}
+
+_ %structAssign2() method_id(122066) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_structAssign2();
+    return res;
+}
+
+_ %paramStruct1() method_id(101710) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_paramStruct1();
+    return res;
+}
+
+_ %paramStruct2() method_id(113965) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_paramStruct2();
+    return res;
+}
+
+_ %mutateParamStruct1() method_id(122731) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateParamStruct1();
+    return res;
+}
+
+_ %mutateParamStruct2() method_id(126728) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateParamStruct2();
+    return res;
+}
+
+_ %testReturnedStructs() method_id(120944) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testReturnedStructs();
+    return res;
+}
+
+_ %mutatesChainStruct1() method_id(111427) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct1();
+    return res;
+}
+
+_ %mutatesChainStruct2() method_id(99104) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct2();
+    return res;
+}
+
+_ %mutatesChainStruct3() method_id(103169) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct3();
+    return res;
+}
+
+_ %mutatesChainStruct4() method_id(123878) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct4();
+    return res;
+}
+
+_ %mutatesChainStruct5() method_id(127943) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct5();
+    return res;
+}
+
+_ %mutatesChainStruct6() method_id(115620) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainStruct6();
+    return res;
+}
+
+_ %mapAssign1() method_id(116618) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mapAssign1();
+    return res;
+}
+
+_ %mapAssign2() method_id(129001) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mapAssign2();
+    return res;
+}
+
+_ %paramMap1() method_id(94790) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_paramMap1();
+    return res;
+}
+
+_ %paramMap2() method_id(82469) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_paramMap2();
+    return res;
+}
+
+_ %mutateParamMap1() method_id(78185) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateParamMap1();
+    return res;
+}
+
+_ %mutateParamMap2() method_id(65802) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateParamMap2();
+    return res;
+}
+
+_ %testReturnedMaps1() method_id(110855) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testReturnedMaps1();
+    return res;
+}
+
+_ %mutateNestedMap1() method_id(118490) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateNestedMap1();
+    return res;
+}
+
+_ %contractAssign1() method_id(127255) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_contractAssign1();
+    return res;
+}
+
+_ %contractAssign2() method_id(115060) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_contractAssign2();
+    return res;
+}
+
+_ %paramContract() method_id(92093) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_paramContract();
+    return res;
+}
+
+_ %mutateParamContract() method_id(79882) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateParamContract();
+    return res;
+}
+
+_ %address() method_id(69216) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_address();
+    return res;
+}
+
+_ %testReturnedContracts() method_id(113327) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testReturnedContracts();
+    return res;
+}
+
+_ %mutateContractStateFlag() method_id(67465) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutateContractStateFlag();
+    return res;
+}
+
+_ %changesPersisted() method_id(76822) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_changesPersisted();
+    return res;
+}
+
+_ %mutatesChainInt1() method_id(119936) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt1();
+    return res;
+}
+
+_ %mutatesChainInt2() method_id(124131) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt2();
+    return res;
+}
+
+_ %mutatesChainInt3() method_id(128194) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt3();
+    return res;
+}
+
+_ %mutatesChainInt4() method_id(99365) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt4();
+    return res;
+}
+
+_ %mutatesChainInt5() method_id(103428) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt5();
+    return res;
+}
+
+_ %mutatesChainInt6() method_id(107623) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_mutatesChainInt6();
+    return res;
+}
+
+_ %andMutateShortCircuit() method_id(119163) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_andMutateShortCircuit();
+    return res;
+}
+
+_ %andInfiniteLoopShortCircuit() method_id(110116) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_andInfiniteLoopShortCircuit();
+    return res;
+}
+
+_ %andExceptionShortCircuit() method_id(68264) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_andExceptionShortCircuit();
+    return res;
+}
+
+_ %orMutateShortCircuit() method_id(127918) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_orMutateShortCircuit();
+    return res;
+}
+
+_ %orInfiniteLoopShortCircuit() method_id(66777) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_orInfiniteLoopShortCircuit();
+    return res;
+}
+
+_ %orExceptionShortCircuit() method_id(67804) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_orExceptionShortCircuit();
+    return res;
+}
+
+_ %ternaryMutateShortCircuit() method_id(73382) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_ternaryMutateShortCircuit();
+    return res;
+}
+
+_ %ternaryInfiniteLoopShortCircuit() method_id(115599) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit();
+    return res;
+}
+
+_ %ternaryExceptionShortCircuit() method_id(90901) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_ternaryExceptionShortCircuit();
+    return res;
+}
+
+_ %testAddressEquality() method_id(92871) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testAddressEquality();
+    return res;
+}
+
+_ %testInversesParseStdAddressAndNewAddress() method_id(109118) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress();
+    return res;
+}
+
+_ %testSliceEquality1() method_id(83228) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testSliceEquality1();
+    return res;
+}
+
+_ %testSliceEquality2() method_id(95615) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testSliceEquality2();
+    return res;
+}
+
+_ %testCellEquality1() method_id(91507) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testCellEquality1();
+    return res;
+}
+
+_ %testCellEquality2() method_id(87312) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testCellEquality2();
+    return res;
+}
+
+_ %testCellEquality3() method_id(83249) {
+    var self = $SemanticsTester$_contract_load();
+    var res = self~$SemanticsTester$_fun_testCellEquality3();
+    return res;
+}
+
+;;
+;; Routing of a Contract SemanticsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult) = $SemanticsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $SemanticsTester$_contract_store((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "mutate" message
+    if (text_op == 0xd9dbdf5794ba75862c326965d4c7613bf9ae694e6ceba2a83cbae047802f3130) {
+        $self'mutateContractStateResult = (($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult)~$SemanticsTester$_fun_mutateContractState();
+        ;; Persist state
+        $SemanticsTester$_contract_store((($self'sC'c1), ($self'sB'b1, ($self'sB'b2'c1), $self'sB'b3), ($self'sA'a1, ($self'sA'a2'b1, ($self'sA'a2'b2'c1), $self'sA'a2'b3)), ($self'uB'b1, ($self'uB'b2'c1), $self'uB'b3), $self'mA, $self'mB, $self'mC, $self'mutateContractStateResult));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

@@ -1,0 +1,133 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; all-contracts_Bar.headers.fc
+;;
+;; Header files for Bar
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $FunCKeywords$_load
+(slice, ((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int))) $FunCKeywords$_load(slice sc_0) inline_ref;
+
+;; $Bar$_load
+(slice, (((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)))) $Bar$_load(slice sc_0) inline;
+
+;; $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr(int $var, int $ifnot, int $then, int $elseifnot, int $int, int $cell, int $slice, int $builder, int $cont, int $tuple, int $type, int $forall, int $extern, int $global, int $asm, int $impure, int $inline_ref, int $auto_apply, int $method_id, int $operator, int $infix, int $infixl, int $infixr) inline;
+
+;; $Bar$_contract_init
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $Bar$_contract_init() impure inline;
+
+;; $Bar$_contract_load
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $Bar$_contract_load() impure inline_ref;
+
+
+;; all-contracts_Bar.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; all-contracts_Bar.native.fc
+;; an empty FunC file to test imports of files with .func extension
+
+;; all-contracts_Bar.storage.fc
+;;
+;; Type: FunCKeywords
+;; TLB: _ var:int257 ifnot:int257 then:int257 elseifnot:int257 int:int257 cell:int257 slice:int257 builder:int257 cont:int257 tuple:int257 type:int257 forall:int257 extern:int257 global:int257 asm:int257 impure:int257 inline_ref:int257 auto_apply:int257 method_id:int257 operator:int257 infix:int257 infixl:int257 infixr:int257 = FunCKeywords
+;;
+
+(slice, ((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int))) $FunCKeywords$_load(slice sc_0) inline_ref {
+    var v'var = sc_0~load_int(257);
+    var v'ifnot = sc_0~load_int(257);
+    var v'then = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'elseifnot = sc_1~load_int(257);
+    var v'int = sc_1~load_int(257);
+    var v'cell = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'slice = sc_2~load_int(257);
+    var v'builder = sc_2~load_int(257);
+    var v'cont = sc_2~load_int(257);
+    slice sc_3 = sc_2~load_ref().begin_parse();
+    var v'tuple = sc_3~load_int(257);
+    var v'type = sc_3~load_int(257);
+    var v'forall = sc_3~load_int(257);
+    slice sc_4 = sc_3~load_ref().begin_parse();
+    var v'extern = sc_4~load_int(257);
+    var v'global = sc_4~load_int(257);
+    var v'asm = sc_4~load_int(257);
+    slice sc_5 = sc_4~load_ref().begin_parse();
+    var v'impure = sc_5~load_int(257);
+    var v'inline_ref = sc_5~load_int(257);
+    var v'auto_apply = sc_5~load_int(257);
+    slice sc_6 = sc_5~load_ref().begin_parse();
+    var v'method_id = sc_6~load_int(257);
+    var v'operator = sc_6~load_int(257);
+    var v'infix = sc_6~load_int(257);
+    slice sc_7 = sc_6~load_ref().begin_parse();
+    var v'infixl = sc_7~load_int(257);
+    var v'infixr = sc_7~load_int(257);
+    return (sc_0, (v'var, v'ifnot, v'then, v'elseifnot, v'int, v'cell, v'slice, v'builder, v'cont, v'tuple, v'type, v'forall, v'extern, v'global, v'asm, v'impure, v'inline_ref, v'auto_apply, v'method_id, v'operator, v'infix, v'infixl, v'infixr));
+}
+
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr(int $var, int $ifnot, int $then, int $elseifnot, int $int, int $cell, int $slice, int $builder, int $cont, int $tuple, int $type, int $forall, int $extern, int $global, int $asm, int $impure, int $inline_ref, int $auto_apply, int $method_id, int $operator, int $infix, int $infixl, int $infixr) inline {
+    return ($var, $ifnot, $then, $elseifnot, $int, $cell, $slice, $builder, $cont, $tuple, $type, $forall, $extern, $global, $asm, $impure, $inline_ref, $auto_apply, $method_id, $operator, $infix, $infixl, $infixr);
+}
+
+;;
+;; Type: Bar
+;;
+
+(slice, (((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)))) $Bar$_load(slice sc_0) inline {
+    var v'f = sc_0~$FunCKeywords$_load();
+    return (sc_0, (v'f));
+}
+
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $Bar$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Bar$_load();
+    } else {
+        return $Bar$_contract_init();
+    }
+}
+
+;;
+;; Contract Bar functions
+;;
+
+((int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)) $Bar$_contract_init() impure inline {
+    var ((($self'f'var, $self'f'ifnot, $self'f'then, $self'f'elseifnot, $self'f'int, $self'f'cell, $self'f'slice, $self'f'builder, $self'f'cont, $self'f'tuple, $self'f'type, $self'f'forall, $self'f'extern, $self'f'global, $self'f'asm, $self'f'impure, $self'f'inline_ref, $self'f'auto_apply, $self'f'method_id, $self'f'operator, $self'f'infix, $self'f'infixl, $self'f'infixr))) = ($FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+    return (($self'f'var, $self'f'ifnot, $self'f'then, $self'f'elseifnot, $self'f'int, $self'f'cell, $self'f'slice, $self'f'builder, $self'f'cont, $self'f'tuple, $self'f'type, $self'f'forall, $self'f'extern, $self'f'global, $self'f'asm, $self'f'impure, $self'f'inline_ref, $self'f'auto_apply, $self'f'method_id, $self'f'operator, $self'f'infix, $self'f'infixl, $self'f'infixr));
+}
+
+;;
+;; Get methods of a Contract Bar
+;;
+
+;;
+;; Routing of a Contract Bar
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var (($self'f'var, $self'f'ifnot, $self'f'then, $self'f'elseifnot, $self'f'int, $self'f'cell, $self'f'slice, $self'f'builder, $self'f'cont, $self'f'tuple, $self'f'type, $self'f'forall, $self'f'extern, $self'f'global, $self'f'asm, $self'f'impure, $self'f'inline_ref, $self'f'auto_apply, $self'f'method_id, $self'f'operator, $self'f'infix, $self'f'infixl, $self'f'infixr)) = $Bar$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}

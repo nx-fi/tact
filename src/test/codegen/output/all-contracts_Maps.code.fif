@@ -1,0 +1,682 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/codegen/output/all-contracts_Maps.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_dict_set_slice_slice
+  DECLPROC __tact_dict_set_slice_int
+  DECLPROC __tact_dict_set_slice_cell
+  DECLPROC __tact_dict_get_int_slice
+  DECLPROC __tact_dict_set_int_slice
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC __tact_dict_get_int_cell
+  DECLPROC __tact_dict_set_int_cell
+  DECLPROC $TokenInfo$_store
+  DECLPROC $TokenInfo$_store_cell
+  DECLPROC $TokenInfo$_not_null
+  DECLPROC $TokenInfo$_store_opt
+  DECLPROC $TokenInfo$_load
+  DECLPROC $TokenInfo$_as_optional
+  DECLPROC $TokenInfo$_load_opt
+  DECLPROC $Replace$_load_without_opcode
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $Maps$_store
+  DECLPROC $Maps$_load
+  DECLPROC $StateInit$_not_null
+  DECLPROC $Maps$init$_load
+  DECLPROC $Maps$_contract_init
+  DECLPROC $Maps$_contract_load
+  DECLPROC $Maps$_contract_store
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $Maps$_fun_oneItem
+  DECLPROC $Maps$_fun_itemCheck
+  DECLPROC $Maps$_fun_allItems
+  DECLPROC $Maps$_fun_forward
+  DECLPROC $Maps$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  DECLPROC $TokenInfo$_constructor_ticker_decimals
+  68660 DECLMETHOD %oneItem
+  102138 DECLMETHOD %itemCheck
+  68968 DECLMETHOD %allItems
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_dict_set_slice_slice PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STSLICER
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_set_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_set_slice_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+          DICTSETREF
+    }>
+  }>
+  __tact_dict_get_int_slice PROCINLINE:<{
+    -ROT
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_slice PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTISET
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  __tact_dict_get_int_cell PROCINLINE:<{
+    -ROT
+    DICTIGETREF
+    NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTISETREF
+    }>
+  }>
+  $TokenInfo$_store PROCINLINE:<{
+    NEWC
+    ROT
+    STSLICER
+    ENDC
+    ROT
+    STREF
+    8 STU
+  }>
+  $TokenInfo$_store_cell PROCINLINE:<{
+    NEWC
+    -ROT
+    $TokenInfo$_store INLINECALLDICT
+    ENDC
+  }>
+  $TokenInfo$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $TokenInfo$_store_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      $TokenInfo$_not_null INLINECALLDICT
+      $TokenInfo$_store_cell INLINECALLDICT
+    }>
+  }>
+  $TokenInfo$_load PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    8 LDU
+    -ROT
+  }>
+  $TokenInfo$_as_optional PROCINLINE:<{
+        2 TUPLE
+  }>
+  $TokenInfo$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $TokenInfo$_load INLINECALLDICT
+      1 2 BLKDROP2
+      $TokenInfo$_as_optional INLINECALLDICT
+    }>
+  }>
+  $Replace$_load_without_opcode PROCINLINE:<{
+    LDDICT
+    SWAP
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $Maps$_store PROCINLINE:<{
+    s7 s8 XCHG2
+    STDICT
+    s0 s5 XCHG
+    NEWC
+    STDICT
+    s1 s4 XCHG
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    SWAP
+    NEWC
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s1 s3 XCHG
+    STDICT
+    s1 s3 XCHG
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $Maps$_load PROCINLINE:<{
+    LDDICT
+    LDREF
+    SWAP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDDICT
+    DROP
+    s7 s8 XCHG
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $Maps$init$_load PROCINLINE:<{
+    LDDICT
+    SWAP
+  }>
+  $Maps$_contract_init PROCINLINE:<{
+    PUSHNULL
+    SWAP
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+  }>
+  $Maps$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Maps$_load INLINECALLDICT
+      1 8 BLKDROP2
+    }>
+    $Maps$init$_load INLINECALLDICT
+    SWAP
+    ENDS
+    $Maps$_contract_init INLINECALLDICT
+  }>
+  $Maps$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    8 -ROLL
+    $Maps$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $Maps$_fun_oneItem PROCREF:<{
+    257 PUSHINT
+    s6 PUSH
+    s0 s2 XCHG
+    __tact_dict_get_int_slice INLINECALLDICT
+  }>
+  $Maps$_fun_itemCheck PROCREF:<{
+    s7 PUSH
+    257 PUSHINT
+    17 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $TokenInfo$_load_opt INLINECALLDICT
+    ISNULL
+    IFJMP:<{
+          B{b5ee9c7241010101000b0000126e6f7420666f756e64de9b0ed2} B>boc <s PUSHSLICE
+    }>
+    s7 PUSH
+    257 PUSHINT
+    17 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $TokenInfo$_load_opt INLINECALLDICT
+    $TokenInfo$_not_null INLINECALLDICT
+    DROP
+  }>
+  $Maps$_fun_allItems PROCREF:<{
+    s3 PUSH
+  }>
+  $Maps$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $Maps$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $Maps$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  $TokenInfo$_constructor_ticker_decimals PROCINLINE:<{
+  }>
+  %oneItem PROC:<{
+    $Maps$_contract_load INLINECALLDICT
+    8 ROLL
+    $Maps$_fun_oneItem INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %itemCheck PROC:<{
+    $Maps$_contract_load INLINECALLDICT
+    $Maps$_fun_itemCheck INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %allItems PROC:<{
+    $Maps$_contract_load INLINECALLDICT
+    $Maps$_fun_allItems INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Maps$_contract_load INLINECALLDICT
+    s0 s9 XCHG
+    IFJMP:<{
+      9 BLKDROP
+    }>
+    s7 PUSH
+    SBITS
+    31 GTINT
+    IF:<{
+      s0 s7 XCHG
+      32 LDU
+      OVER
+      1384510466 PUSHINT
+      EQUAL
+      IFJMP:<{
+        NIP
+        s3 POP
+        s0 s2 XCHG
+        $Replace$_load_without_opcode INLINECALLDICT
+        NIP
+        s5 s7 XCHG
+        s4 s6 XCHG
+        s3 s5 XCHG
+        s4 s4 XCHG2
+        s0 s3 XCHG
+        $Maps$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      SWAP
+      2490013878 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $Deploy$_load_without_opcode INLINECALLDICT
+        NIP
+        $DeployOk$_constructor_queryId INLINECALLDICT
+        $DeployOk$_store_cell INLINECALLDICT
+        s6 s8 XCHG
+        s5 s7 XCHG
+        s4 s6 XCHG
+        s3 s5 XCHG
+        s4 s3 s0 XCHG3
+        s1 s2 XCHG
+        $Maps$_fun_notify INLINECALLDICT
+        $Maps$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s0 s7 XCHG
+    }>
+    s0 s7 XCHG
+    HASHSU
+    DUP
+    234321316757507884562219757973020019558757495444115849406062608395826141845 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      257 PUSHINT
+      17 PUSHINT
+          B{b5ee9c72410101010006000008534849429c299a01} B>boc <s PUSHSLICE
+      9 PUSHINT
+      $TokenInfo$_constructor_ticker_decimals INLINECALLDICT
+      $TokenInfo$_store_cell INLINECALLDICT
+      s3 s8 XCHG
+      __tact_dict_set_int_cell INLINECALLDICT
+      s0 s4 XCHG
+      257 PUSHINT
+      41507952295811122 PUSHINT
+      TRUE
+      1 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      257 PUSHINT
+      240 PUSHPOW2
+      230 PUSHPOW2
+      s2 PUSH
+      s4 s7 XCHG
+      __tact_dict_set_int_int INLINECALLDICT
+      257 PUSHINT
+      -900 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s3 s5 XCHG
+      __tact_dict_set_int_slice INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+          B{b5ee9c72410101010006000008444f474563b21fa5} B>boc <s PUSHSLICE
+      18 PUSHINT
+      $TokenInfo$_constructor_ticker_decimals INLINECALLDICT
+      $TokenInfo$_store_cell INLINECALLDICT
+      s3 s4 XCHG
+      __tact_dict_set_slice_cell INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s2 s7 XCHG
+      TRUE
+      1 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s2 s8 XCHG
+      1230000000 PUSHINT
+      257 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+          MYADDR
+      s3 s10 XCHG
+      __tact_dict_set_slice_slice INLINECALLDICT
+      s4 s7 XCHG
+      s3 s6 XCHG
+      s5 s4 s0 XCHG3
+      s2 s3 XCHG
+      $Maps$_contract_store INLINECALLDICT
+    }>
+    DUP
+    3383249300937894160053440922866574492924096592048450008978192070898677007033 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      257 PUSHINT
+      17 PUSHINT
+      PUSHNULL
+      $TokenInfo$_store_opt INLINECALLDICT
+      s3 s8 XCHG
+      __tact_dict_set_int_cell INLINECALLDICT
+      s0 s4 XCHG
+      257 PUSHINT
+      41507952295811122 PUSHINT
+      PUSHNULL
+      1 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      257 PUSHINT
+      240 PUSHPOW2
+      PUSHNULL
+      s2 PUSH
+      s4 s7 XCHG
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 s2 XCHG
+      257 PUSHINT
+      -900 PUSHINT
+      PUSHNULL
+      __tact_dict_set_int_slice INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      PUSHNULL
+      $TokenInfo$_store_opt INLINECALLDICT
+      s3 s4 XCHG
+      __tact_dict_set_slice_cell INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s2 s7 XCHG
+      PUSHNULL
+      1 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s2 s8 XCHG
+      PUSHNULL
+      257 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      267 PUSHINT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+      s2 s9 XCHG
+      PUSHNULL
+      __tact_dict_set_slice_slice INLINECALLDICT
+      s4 s7 XCHG
+      s3 s6 XCHG
+      s5 s4 s0 XCHG3
+      s2 s3 XCHG
+      $Maps$_contract_store INLINECALLDICT
+    }>
+    8 1 BLKDROP2
+    94205219740994216122890941771050507554430697169586507812251598108679328527920 PUSHINT
+    EQUAL
+    IFJMP:<{
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      PUSHNULL
+      $Maps$_contract_store INLINECALLDICT
+    }>
+    130 THROW
+  }>
+}END>c

@@ -1,0 +1,282 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/serialization-3_SerializationTester3.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Update$_load_without_opcode
+  DECLPROC $SerializationTester3$_store
+  DECLPROC $SerializationTester3$_load
+  DECLPROC $SerializationTester3$init$_load
+  DECLPROC $SerializationTester3$_contract_init
+  DECLPROC $SerializationTester3$_contract_load
+  DECLPROC $SerializationTester3$_contract_store
+  DECLPROC $SerializationTester3$_fun_getA
+  DECLPROC $SerializationTester3$_fun_getB
+  DECLPROC $SerializationTester3$_fun_getC
+  DECLPROC $SerializationTester3$_fun_getD
+  DECLPROC $SerializationTester3$_fun_getE
+  DECLPROC $SerializationTester3$_fun_getF
+  123932 DECLMETHOD %getA
+  119935 DECLMETHOD %getB
+  115806 DECLMETHOD %getC
+  111801 DECLMETHOD %getD
+  107672 DECLMETHOD %getE
+  103675 DECLMETHOD %getF
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Update$_load_without_opcode PROCREF:<{
+    257 PUSHINT
+    LDIX
+    1 LDI
+    LDREF
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    NEWC
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    s1 s2 XCHG
+    STSLICER
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    s2 s6 XCHG
+    s2 s5 XCHG
+    s2 s4 XCHG
+    s2 s3 XCHG
+  }>
+  $SerializationTester3$_store PROCINLINE:<{
+    s5 s6 XCHG2
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    1 STI
+    STREF
+    NEWC
+    NEWC
+    s0 s3 XCHG2
+    STSLICER
+    ENDC
+    ROT
+    STREF
+    NEWC
+    s0 s3 XCHG
+    ENDC
+    CTOS
+    s1 s3 XCHG
+    STSLICER
+    ENDC
+    ROT
+    STREF
+    NEWC
+    s0 s3 XCHG2
+    STSLICER
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $SerializationTester3$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    1 LDI
+    LDREF
+    LDREF
+    SWAP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    NEWC
+    s0 s2 XCHG
+    LDREF
+    SWAP
+    CTOS
+    s1 s3 XCHG
+    STSLICER
+    s0 s2 XCHG
+    LDREF
+    DROP
+    CTOS
+    s3 s6 XCHG
+    s3 s5 XCHG
+    s3 s4 XCHG
+    s1 s2 XCHG
+  }>
+  $SerializationTester3$init$_load PROCREF:<{
+    257 PUSHINT
+    LDIX
+    1 LDI
+    LDREF
+    LDREF
+    SWAP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    NEWC
+    s0 s2 XCHG
+    LDREF
+    SWAP
+    CTOS
+    s1 s3 XCHG
+    STSLICER
+    s0 s2 XCHG
+    LDREF
+    DROP
+    CTOS
+    s3 s6 XCHG
+    s3 s5 XCHG
+    s3 s4 XCHG
+    s1 s2 XCHG
+  }>
+  $SerializationTester3$_contract_init PROCINLINE:<{
+  }>
+  $SerializationTester3$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $SerializationTester3$_load INLINECALLDICT
+      1 6 BLKDROP2
+    }>
+    $SerializationTester3$init$_load INLINECALLDICT
+    s0 s6 XCHG
+    ENDS
+    5 ROLL
+    $SerializationTester3$_contract_init INLINECALLDICT
+  }>
+  $SerializationTester3$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    6 -ROLL
+    $SerializationTester3$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $SerializationTester3$_fun_getA PROCREF:<{
+    s5 PUSH
+  }>
+  $SerializationTester3$_fun_getB PROCREF:<{
+    s4 PUSH
+  }>
+  $SerializationTester3$_fun_getC PROCREF:<{
+    s3 PUSH
+  }>
+  $SerializationTester3$_fun_getD PROCREF:<{
+    s2 PUSH
+  }>
+  $SerializationTester3$_fun_getE PROCREF:<{
+    OVER
+  }>
+  $SerializationTester3$_fun_getF PROCREF:<{
+    DUP
+  }>
+  %getA PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getA INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  %getB PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getB INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  %getC PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getC INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  %getD PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getD INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  %getE PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getE INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  %getF PROC:<{
+    $SerializationTester3$_contract_load INLINECALLDICT
+    $SerializationTester3$_fun_getF INLINECALLDICT
+    6 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $SerializationTester3$_contract_load INLINECALLDICT
+    s0 s7 XCHG
+    IFJMP:<{
+      7 BLKDROP
+    }>
+    0 PUSHINT
+    s6 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 s6 XCHG
+      32 LDU
+      s0 s7 XCHG
+    }>
+    OVER
+    2217298645 PUSHINT
+    EQUAL
+    IFJMP:<{
+      s7 s8 XCHG
+      8 BLKDROP
+      $Update$_load_without_opcode INLINECALLDICT
+      1 6 BLKDROP2
+      $SerializationTester3$_contract_store INLINECALLDICT
+    }>
+    s7 POP
+    0 EQINT
+    s0 s6 XCHG
+    33 LESSINT
+    s1 s6 XCHG
+    AND
+    IFJMP:<{
+      s3 s5 XCHG
+      2 3 BLKSWAP
+      $SerializationTester3$_contract_store INLINECALLDICT
+    }>
+    6 BLKDROP
+    130 THROW
+  }>
+}END>c

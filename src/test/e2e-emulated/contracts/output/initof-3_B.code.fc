@@ -1,0 +1,92 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; initof-3_B.headers.fc
+;;
+;; Header files for B
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $B$_load
+(slice, ((slice))) $B$_load(slice sc_0) inline;
+
+;; $B$init$_load
+(slice, ((slice))) $B$init$_load(slice sc_0) inline;
+
+;; $B$_contract_init
+(slice) $B$_contract_init(slice $addr) impure inline;
+
+;; $B$_contract_load
+(slice) $B$_contract_load() impure inline_ref;
+
+
+;; initof-3_B.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; initof-3_B.storage.fc
+;;
+;; Type: B
+;;
+
+(slice, ((slice))) $B$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice, ((slice))) $B$init$_load(slice sc_0) inline {
+    var v'addr = sc_0~load_msg_addr();
+    return (sc_0, (v'addr));
+}
+
+(slice) $B$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$B$_load();
+    } else {
+        (slice $addr) = $sc~$B$init$_load();
+        $sc.end_parse();
+        return $B$_contract_init($addr);
+    }
+}
+
+;;
+;; Contract B functions
+;;
+
+(slice) $B$_contract_init(slice $addr) impure inline {
+    var (($self'owner)) = (null());
+    $self'owner = $addr;
+    return ($self'owner);
+}
+
+;;
+;; Get methods of a Contract B
+;;
+
+;;
+;; Routing of a Contract B
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner) = $B$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}

@@ -1,0 +1,730 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/dns_DNSTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $DNSTester$_store
+  DECLPROC $DNSTester$_load
+  DECLPROC $StateInit$_not_null
+  DECLPROC $DNSResolveResult$_to_external
+  DECLPROC $DNSTester$_contract_init
+  DECLPROC $DNSTester$_contract_load
+  DECLPROC $DNSTester$_contract_store
+  DECLPROC $global_dnsExtractTopDomainLength
+  DECLPROC $global_dnsExtractTopDomain
+  DECLPROC $Builder$_fun_asSlice
+  DECLPROC $Slice$_fun_asCell
+  DECLPROC $DNSTester$_fun_stringToInternal
+  DECLPROC $DNSTester$_fun_internalNormalize
+  DECLPROC $DNSTester$_fun_dnsInternalVerify
+  DECLPROC $DNSTester$_fun_dnsExtractTopDomainLength
+  DECLPROC $DNSTester$_fun_dnsExtractTopDomain
+  DECLPROC $DNSResolveResult$_constructor_prefix_record
+  DECLPROC $DNSTester$_fun_doResolveDNS
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $DNSTester$_fun_forward
+  DECLPROC $DNSTester$_fun_notify
+  DECLPROC $DNSTester$_fun_dnsresolve
+  DECLPROC $DeployOk$_constructor_queryId
+  DECLPROC dns_internal_verify
+  DECLPROC dns_string_to_internal
+  DECLPROC dns_internal_normalize
+  97933 DECLMETHOD %stringToInternal
+  114271 DECLMETHOD %internalNormalize
+  74415 DECLMETHOD %dnsInternalVerify
+  114191 DECLMETHOD %dnsExtractTopDomainLength
+  103737 DECLMETHOD %dnsExtractTopDomain
+  123660 DECLMETHOD %dnsresolve
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $DNSTester$_store PROCINLINE:<{
+    SWAP
+    STREF
+  }>
+  $DNSTester$_load PROCINLINE:<{
+    LDREF
+    SWAP
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $DNSResolveResult$_to_external PROCINLINE:<{
+  }>
+  $DNSTester$_contract_init PROCINLINE:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc PUSHREF
+  }>
+  $DNSTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $DNSTester$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $DNSTester$_contract_init INLINECALLDICT
+  }>
+  $DNSTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $DNSTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $global_dnsExtractTopDomainLength PROCREF:<{
+    0 PUSHINT
+    UNTIL:<{
+      SWAP
+      8 LDU
+      SWAP
+      0 EQINT
+      DUP
+      NOT
+      IF:<{
+        s0 s2 XCHG
+        8 ADDCONST
+        s0 s2 XCHG
+      }>
+      s1 s2 XCHG
+    }>
+    NIP
+    24161 PUSHINT
+    OVER
+    0 NEQINT
+    THROWANYIFNOT
+  }>
+  $global_dnsExtractTopDomain PROCREF:<{
+    DUP
+    $global_dnsExtractTopDomainLength INLINECALLDICT
+    LDSLICEX
+    DROP
+  }>
+  $Builder$_fun_asSlice PROCINLINE:<{
+        ENDC
+        CTOS
+  }>
+  $Slice$_fun_asCell PROCINLINE:<{
+        NEWC
+    SWAP
+        STSLICER
+        ENDC
+  }>
+  $DNSTester$_fun_stringToInternal PROCREF:<{
+    dns_string_to_internal INLINECALLDICT
+  }>
+  $DNSTester$_fun_internalNormalize PROCREF:<{
+    dns_internal_normalize INLINECALLDICT
+  }>
+  $DNSTester$_fun_dnsInternalVerify PROCREF:<{
+    dns_internal_verify INLINECALLDICT
+  }>
+  $DNSTester$_fun_dnsExtractTopDomainLength PROCREF:<{
+    $global_dnsExtractTopDomainLength INLINECALLDICT
+  }>
+  $DNSTester$_fun_dnsExtractTopDomain PROCREF:<{
+    $global_dnsExtractTopDomain INLINECALLDICT
+  }>
+  $DNSResolveResult$_constructor_prefix_record PROCINLINE:<{
+  }>
+  $DNSTester$_fun_doResolveDNS PROCREF:<{
+    DROP
+    DUP
+        SBITS
+        NEWC
+    ROT
+        STSLICER
+        ENDC
+    $DNSResolveResult$_constructor_prefix_record INLINECALLDICT
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $DNSTester$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $DNSTester$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $DNSTester$_fun_forward INLINECALLDICT
+  }>
+  $DNSTester$_fun_dnsresolve PROCREF:<{
+    0 PUSHINT
+    s2 PUSH
+    8 PLDU
+    0 EQINT
+    IF:<{
+      DROP
+      SWAP
+      8 LDU
+      NIP
+      SWAP
+      8 PUSHINT
+    }>
+    24161 PUSHINT
+    s3 PUSH
+    dns_internal_verify INLINECALLDICT
+    THROWANYIFNOT
+    3 -ROLL
+    $DNSTester$_fun_doResolveDNS INLINECALLDICT
+    s0 s3 XCHG
+    ADD
+    ROT
+    $DNSResolveResult$_constructor_prefix_record INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  dns_internal_verify PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    DUP
+    SREFS
+    0 NEQINT
+    IFJMP:<{
+      DROP
+      FALSE
+    }>
+    DUP
+    SBITS
+    DUP
+    3 MODPOW2#
+    0 NEQINT
+    IFJMP:<{
+      2DROP
+      FALSE
+    }>
+    DUP
+    0 EQINT
+    IFJMP:<{
+      2DROP
+      TRUE
+    }>
+    3 RSHIFT#
+    0 PUSHINT
+    TRUE
+    FALSE
+    s0 s3 XCHG
+    REPEAT:<{
+      s0 s3 XCHG
+      8 LDU
+      OVER
+      0 EQINT
+      IF:<{
+        NIP
+        s3 POP
+        0 EQINT
+        IFJMP:<{
+          2DROP
+          FALSE
+          RETALT
+        }>
+        IFJMP:<{
+          DROP
+          FALSE
+          RETALT
+        }>
+        0 PUSHINT
+        FALSE
+        TRUE
+      }>ELSE<{
+        s3 POP
+        DUP
+        45 EQINT
+        OVER
+        47 GTINT
+        s2 PUSH
+        58 LESSINT
+        AND
+        s1 s(-1) PUXC
+        OR
+        s2 PUSH
+        96 GTINT
+        s0 s3 XCHG
+        123 LESSINT
+        s1 s3 XCHG
+        AND
+        s1 s2 XCHG
+        OR
+        NOT
+        IFJMP:<{
+          4 BLKDROP
+          FALSE
+          RETALT
+        }>
+        s0 s3 PUXC
+        AND
+        IFJMP:<{
+          3 BLKDROP
+          FALSE
+          RETALT
+        }>
+        FALSE
+        SWAP
+        INC
+        s0 s3 s3 XCHG3
+      }>
+      s1 s2 XCHG
+    }>
+    DROP
+    s2 POP
+    0 PUSHINT
+    SWAP
+    NOT
+    AND
+    EQUAL
+  }>
+  dns_string_to_internal PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    DUP
+    SBITS
+    8 EQINT
+    OVER
+    SREFS
+    0 EQINT
+    AND
+    IF:<{
+      DUP
+      8 PLDU
+      46 EQINT
+      IFJMP:<{
+        DROP
+        NEWC
+        0 PUSHINT
+        SWAP
+        8 STU
+        ENDC
+        CTOS
+        RETALT
+      }>
+    }>
+    PUSHNULL
+    NEWC
+    TRUE
+    TRUE
+    FALSE
+    TRUE
+    UNTIL:<{
+      s6 PUSH
+      SBITS
+      0 EQINT
+      IF:<{
+        DROP
+        s5 PUSH
+        SREFS
+        DUP
+        1 EQINT
+        IF:<{
+          DROP
+          s0 s5 XCHG
+          LDREF
+          DROP
+          CTOS
+        }>ELSE<{
+          1 GTINT
+          IFJMP:<{
+            6 BLKDROP
+            PUSHNULL
+            RETALT
+          }>
+          s0 s5 XCHG
+        }>
+        s0 s5 XCHG
+        FALSE
+      }>
+      DUP
+      IF:<{
+        NIP
+        s2 POP
+        s0 s4 XCHG
+        8 LDU
+        OVER
+        45 EQINT
+        s2 PUSH
+        46 EQINT
+        2DUP
+        OR
+        s4 PUSH
+        47 GTINT
+        s5 PUSH
+        58 LESSINT
+        AND
+        OR
+        s4 PUSH
+        96 GTINT
+        s5 PUSH
+        123 LESSINT
+        AND
+        OR
+        NOT
+        s8 s2 PUSH2
+        AND
+        OR
+        IFJMP:<{
+          8 BLKDROP
+          PUSHNULL
+          RETALT
+        }>
+        IF:<{
+          s2 POP
+          s5 s5 XCHG2
+          OR
+          IFJMP:<{
+            4 BLKDROP
+            PUSHNULL
+            RETALT
+          }>
+          s0 s2 XCHG
+          CONS
+          NEWC
+          FALSE
+          TRUE
+          TRUE
+        }>ELSE<{
+          s6 POP
+          FALSE
+          s0 s2 XCHG
+          FALSE
+          s0 s5 XCHG
+          8 STU
+          s0 s3 XCHG
+          s0 s5 XCHG
+          s6 s6 s4 XCHG3
+        }>
+        s4 s5 XCHG
+        s0 s3 XCHG
+        s2 s4 XCHG2
+      }>
+      DUP
+      NOT
+    }>
+    DROP
+    NIP
+    s4 POP
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+      PUSHNULL
+    }>
+    s0 s2 XCHG
+    NOT
+    IF:<{
+      CONS
+    }>ELSE<{
+      NIP
+    }>
+    NEWC
+    SWAP
+    UNCONS
+    -ROT
+    STBR
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      0 PUSHINT
+      s0 s3 XCHG2
+      8 STU
+      SWAP
+      STBR
+    }>
+    0 PUSHINT
+    s2 POP
+    8 STU
+    ENDC
+    CTOS
+  }>
+  dns_internal_normalize PROCREF:<{
+    DUP
+    SREFS
+    0 EQINT
+    134 THROWIFNOT
+    NEWC
+    OVER
+    SBITS
+    3 RSHIFT#
+    REPEAT:<{
+      SWAP
+      8 LDU
+      OVER
+      98 EQINT
+      IF:<{
+        54 PUSHINT
+        s2 POP
+      }>
+      OVER
+      103 EQINT
+      s2 PUSH
+      113 EQINT
+      OR
+      IF:<{
+        57 PUSHINT
+        s2 POP
+      }>
+      OVER
+      108 EQINT
+      IF:<{
+        49 PUSHINT
+        s2 POP
+      }>
+      OVER
+      111 EQINT
+      IF:<{
+        48 PUSHINT
+        s2 POP
+      }>
+      OVER
+      115 EQINT
+      IF:<{
+        53 PUSHINT
+        s2 POP
+      }>
+      OVER
+      117 EQINT
+      IF:<{
+        118 PUSHINT
+        s2 POP
+      }>
+      OVER
+      122 EQINT
+      IF:<{
+        50 PUSHINT
+        s2 POP
+      }>
+      s0 s2 XCHG
+      8 STU
+    }>
+    NIP
+    ENDC
+    CTOS
+  }>
+  %stringToInternal PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    SWAP
+    $DNSTester$_fun_stringToInternal INLINECALLDICT
+    NIP
+  }>
+  %internalNormalize PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    SWAP
+    $DNSTester$_fun_internalNormalize INLINECALLDICT
+    NIP
+  }>
+  %dnsInternalVerify PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    SWAP
+    $DNSTester$_fun_dnsInternalVerify INLINECALLDICT
+    NIP
+  }>
+  %dnsExtractTopDomainLength PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    SWAP
+    $DNSTester$_fun_dnsExtractTopDomainLength INLINECALLDICT
+    NIP
+  }>
+  %dnsExtractTopDomain PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    SWAP
+    $DNSTester$_fun_dnsExtractTopDomain INLINECALLDICT
+    NIP
+  }>
+  %dnsresolve PROC:<{
+    $DNSTester$_contract_load INLINECALLDICT
+    -ROT
+    $DNSTester$_fun_dnsresolve INLINECALLDICT
+    1 2 BLKDROP2
+    $DNSResolveResult$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $DNSTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    DUP
+    SBITS
+    31 GTINT
+    IF:<{
+      32 LDU
+      SWAP
+      2490013878 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $Deploy$_load_without_opcode INLINECALLDICT
+        NIP
+        $DeployOk$_constructor_queryId INLINECALLDICT
+        $DeployOk$_store_cell INLINECALLDICT
+        $DNSTester$_fun_notify INLINECALLDICT
+        $DNSTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      NIP
+    }>ELSE<{
+      NIP
+    }>
+    HASHSU
+    97810282829573291279329293443757272792219899199865747583362518849399645971681 PUSHINT
+    EQUAL
+    IFJMP:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+          NEWC
+          STREF
+      $Builder$_fun_asSlice INLINECALLDICT
+      dns_internal_normalize INLINECALLDICT
+      $Slice$_fun_asCell INLINECALLDICT
+      $DNSTester$_contract_store INLINECALLDICT
+    }>
+    130 THROW
+  }>
+}END>c

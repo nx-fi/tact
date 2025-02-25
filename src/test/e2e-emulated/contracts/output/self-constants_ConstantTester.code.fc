@@ -1,0 +1,187 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; self-constants_ConstantTester.headers.fc
+;;
+;; Header files for ConstantTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $ConstantTester$_store
+builder $ConstantTester$_store(builder build_0, (int) v) inline;
+
+;; $ConstantTester$_load
+(slice, ((int))) $ConstantTester$_load(slice sc_0) inline;
+
+;; $ConstantTester$_contract_init
+(int) $ConstantTester$_contract_init() impure inline;
+
+;; $ConstantTester$_contract_load
+(int) $ConstantTester$_contract_load() impure inline_ref;
+
+;; $ConstantTester$_contract_store
+() $ConstantTester$_contract_store((int) v) impure inline;
+
+;; $ConstantTester$_fun_b
+((int), int) $ConstantTester$_fun_b((int) $self) impure inline_ref;
+
+;; $ConstantTester$_fun_c2
+((int), int) $ConstantTester$_fun_c2((int) $self) impure inline_ref;
+
+;; $ConstantTester$_fun_value
+((int), int) $ConstantTester$_fun_value((int) $self) impure inline_ref;
+
+;; $ConstantTester$_fun_traitB
+((int), int) $ConstantTester$_fun_traitB((int) $self) impure inline_ref;
+
+;; $ConstantTester$_fun_traitC2
+((int), int) $ConstantTester$_fun_traitC2((int) $self) impure inline_ref;
+
+
+;; self-constants_ConstantTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; self-constants_ConstantTester.storage.fc
+;;
+;; Type: ConstantTester
+;;
+
+builder $ConstantTester$_store(builder build_0, (int) v) inline {
+    var (v'value) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    return build_0;
+}
+
+(slice, ((int))) $ConstantTester$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+(int) $ConstantTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ConstantTester$_load();
+    } else {
+        return $ConstantTester$_contract_init();
+    }
+}
+
+() $ConstantTester$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ConstantTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ConstantTester functions
+;;
+
+(int) $ConstantTester$_contract_init() impure inline {
+    var (($self'value)) = (69);
+    return ($self'value);
+}
+
+((int), int) $ConstantTester$_fun_b((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    var $fresh$ret_714 = 42;
+    return (($self'value), $fresh$ret_714);
+}
+
+((int), int) $ConstantTester$_fun_c2((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    var $fresh$ret_715 = 51;
+    return (($self'value), $fresh$ret_715);
+}
+
+((int), int) $ConstantTester$_fun_value((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    var $fresh$ret_716 = $self'value;
+    return (($self'value), $fresh$ret_716);
+}
+
+((int), int) $ConstantTester$_fun_traitB((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    var $fresh$ret_717 = 42;
+    return (($self'value), $fresh$ret_717);
+}
+
+((int), int) $ConstantTester$_fun_traitC2((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    var $fresh$ret_718 = 51;
+    return (($self'value), $fresh$ret_718);
+}
+
+;;
+;; Get methods of a Contract ConstantTester
+;;
+
+_ %b() method_id(85220) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_b();
+    return res;
+}
+
+_ %c2() method_id(84072) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_c2();
+    return res;
+}
+
+_ %value() method_id(121536) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_value();
+    return res;
+}
+
+_ %traitB() method_id(105663) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_traitB();
+    return res;
+}
+
+_ %traitC2() method_id(120853) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_traitC2();
+    return res;
+}
+
+;;
+;; Routing of a Contract ConstantTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'value) = $ConstantTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $ConstantTester$_contract_store(($self'value));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

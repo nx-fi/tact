@@ -1,0 +1,252 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; deep_A.headers.fc
+;;
+;; Header files for A
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $B$init$_store
+builder $B$init$_store(builder build_0, (slice) v) inline;
+
+;; $A$_contract_init
+tuple $A$_contract_init() impure inline;
+
+;; $A$_contract_load
+tuple $A$_contract_load() impure inline_ref;
+
+;; $A$_contract_store
+() $A$_contract_store(tuple v) impure inline;
+
+;; $B$_init_child
+(cell, cell) $B$_init_child(slice $parent) inline_ref;
+
+;; $A$_fun_getNext
+(tuple, (cell, cell)) $A$_fun_getNext(tuple $self) impure inline_ref;
+
+;; $DeployParameters$_constructor_init_value_mode_bounce_body
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_init_value_mode_bounce_body((cell, cell) $init, int $value, int $mode, int $bounce, cell $body) inline;
+
+
+;; deep_A.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+() $global_deploy((int, cell, int, int, (cell, cell)) $params) impure asm """
+    4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+    HASHCU // `init.data` hash
+    SWAP
+    HASHCU // `init.code` hash
+    SWAP2
+    CDEPTH // `init.data` depth
+    SWAP
+    CDEPTH // `init.code` depth
+
+    // Group 2: Calculating destination address
+    // For almost identical logic and instructions,
+    // see comments inside `contractHash()` function in contract.tact
+    131380 INT // (2 << 16) | (1 << 8) | 0x34
+    NEWC
+    24 STU
+    16 STU
+    16 STU
+    256 STU
+    256 STU
+    ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+    // → Stack state
+    // s0: destAddr(hash part)
+    // s1: `init.data`
+    // s2: `init.code`
+    // s3 and below: `bounce`, `value`, `body`, `mode`
+
+    // Group 3: Building a message (CommonMsgInfoRelaxed)
+    s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+    NEWC
+    b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+    1 STI              // store `bounce`
+    s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+    STREF              // store `init.code`
+    STREF              // store `init.data`
+    // Inline StateInit:
+    b{00010000000000} STSLICECONST
+    // 0 + 00 + 10 + 0 + 00000000
+    // 1) 0 - bounced = false
+    // 2) 00 - src = addr_none
+    // 3) 10 - tag of addr_std (part of dest)
+    // 4) 0 - Maybe Anycast = false
+    // 5) 00000000 - workchain_id (part of dest)
+    //
+    256 STU     // store destAddr(hash part)
+    SWAP        // Builder on top, `value` below
+    STGRAMS     // store `value`
+    105 PUSHINT // 1 + 4 + 4 + 64 + 32
+    STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+
+    // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+    // Remaining bits of MessageRelaxed:
+    b{1000110} STSLICECONST
+    // 10 + 0 + 0 + 1 + 1 + 0
+    // 10 - Maybe (Either StateInit ^StateInit) = true false
+    // 0 - split_depth:(Maybe (## 5)) = false
+    // 0 = special:(Maybe TickTock) = false
+    // 1 = code:(Maybe ^Cell) = true
+    // 1 = data:(Maybe ^Cell) = true
+    // 0 = library:(Maybe ^Cell) = false
+    //
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC   // finalize the message
+    // → Stack state
+    // s0: Cell
+    // s1: params.`mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG
+""";
+
+;; deep_A.constants.fc
+;; Cell tBqZMzAcHXKOZOI2hf46nHVAq5NZ73MYlDwO5eCRDV0=
+cell __gen_cell_cell_b41a9933301c1d728e64e23685fe3a9c7540ab9359ef7318943c0ee5e0910d5d() asm """
+    B{b5ee9c7241010101000d000016000000004d6573736167652e559ef2} B>boc PUSHREF
+""";
+
+;; deep_A.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: DeployParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 bounce:bool init:StateInit{code:^cell,data:^cell} = DeployParameters
+;;
+
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_init_value_mode_bounce_body((cell, cell) $init, int $value, int $mode, int $bounce, cell $body) inline {
+    return ($mode, $body, $value, $bounce, $init);
+}
+
+;;
+;; Type: A
+;;
+
+tuple $A$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $A$_contract_init();
+    }
+}
+
+() $A$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Type: B
+;;
+
+builder $B$init$_store(builder build_0, (slice) v) inline {
+    var (v'parent) = v;
+    build_0 = build_0.store_slice(v'parent);
+    return build_0;
+}
+
+cell $B$_child_get_code() impure asm """
+    B{b5ee9c7201020f0100025f000114ff00f4a413f4bcf2c80b01020162020302a6d001d072d721d200d200fa4021103450666f04f86102f862db3c02915be020d749c21f93d31f31def90182f02796bd8dcb3155bf85d91ad1db643a3759a7209173fd2c1959d190a66b7aaf38bae30230f2c0820a040211a042f3b679b678d8250a0602faf828db3c5c705920f90022f9005ad76501d76582020134c8cb17cb0fcb0fcbffcbff71f90400c87401cb0212ca07cbffc9d0007080427f885e234430121046445503c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb00c87f01ca0001cf16c9ed5407050016000000004d6573736167650108f828db3c07011488c87001ca0058cf16c9080114ff00f4a413f4bcf2c80b0903f2d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be020d749c21f93d31f31def9012082f02796bd8dcb3155bf85d91ad1db643a3759a7209173fd2c1959d190a66b7aaf38bae30282f05d83a38f50c03d8297a4969a4525917e026c6a16582eb8cf31e5777855e3d71dbae30230f2c0820a0b0c0022ed44d0d2000194fa400131e0fa400101d102fa3020db3c5c705920f90022f9005ad76501d76582020134c8cb17cb0fcb0fcbffcbff71f90400c87401cb0212ca07cbffc9d0007080427f885e234430121046445503c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb00c87f01ca0001cf16c9ed540d0e0016c87f01ca0001cf16c9ed540016f82ac87001ca0058cf16c90018000000004d65737361676532} B>boc PUSHREF
+""";
+
+(cell, cell) $B$_init_child(slice $parent) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: B
+    cell init_code = $B$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $B$init$_store(b, ($parent));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract A functions
+;;
+
+tuple $A$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, (cell, cell)) $A$_fun_getNext(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_262 = $B$_init_child($global_myAddress());
+    return ($self, $fresh$ret_262);
+}
+
+;;
+;; Get methods of a Contract A
+;;
+
+_ %getNext() method_id(74105) {
+    var self = $A$_contract_load();
+    var res = self~$A$_fun_getNext();
+    return $StateInit$_to_external(res);
+}
+
+;;
+;; Routing of a Contract A
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $A$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Message" message
+    if (text_op == 0x2796bd8dcb3155bf85d91ad1db643a3759a7209173fd2c1959d190a66b7aaf38) {
+        $global_deploy($DeployParameters$_constructor_init_value_mode_bounce_body($B$_init_child($global_myAddress()), 0, 66, true, __gen_cell_cell_b41a9933301c1d728e64e23685fe3a9c7540ab9359ef7318943c0ee5e0910d5d()));
+        ;; Persist state
+        $A$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

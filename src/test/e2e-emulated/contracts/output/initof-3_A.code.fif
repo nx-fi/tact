@@ -1,0 +1,110 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/initof-3_A.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $B$init$_store
+  DECLPROC $A$_contract_init
+  DECLPROC $A$_contract_load
+  DECLPROC $A$_contract_store
+  DECLPROC $B$_init_child
+  DECLPROC $global_get_init
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $B$init$_store PROCINLINE:<{
+    STSLICER
+  }>
+  $A$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $A$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $A$_contract_init INLINECALLDICT
+  }>
+  $A$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $B$_init_child PROCREF:<{
+        B{b5ee9c72010103010042000114ff00f4a413f4bcf2c80b01013ed330d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082020022ed44d0d2000194fa400131e0fa400101d1} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $B$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $global_get_init PROCREF:<{
+    $B$_init_child INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $A$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    DUP
+    SBITS
+    31 GTINT
+    IF:<{
+      32 LDU
+      NIP
+    }>
+    HASHSU
+    79325450564296508347336620423943220508391370367122355827031645291856785662201 PUSHINT
+    EQUAL
+    IFJMP:<{
+          MYADDR
+      $global_get_init INLINECALLDICT
+      NIP
+          B{b5ee9c7241010101000f00001a64756d702863312e6461746129eee374df} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f696e69746f662d332e746163743a31353a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+          MYADDR
+      $B$_init_child INLINECALLDICT
+      NIP
+          B{b5ee9c7241010101000f00001a64756d702863322e6461746129b6967167} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f696e69746f662d332e746163743a31373a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+      $A$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

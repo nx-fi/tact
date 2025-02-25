@@ -1,0 +1,543 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; address-injectivity_Tester.headers.fc
+;;
+;; Header files for Tester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $C1$init$_store
+builder $C1$init$_store(builder build_0, (int) v) inline;
+
+;; $C2$init$_store
+builder $C2$init$_store(builder build_0, (int) v) inline;
+
+;; $C3f$init$_store
+builder $C3f$init$_store(builder build_0, (int) v) inline;
+
+;; $C4g$init$_store
+builder $C4g$init$_store(builder build_0, (int) v) inline;
+
+;; $C5i$init$_store
+builder $C5i$init$_store(builder build_0, (int) v) inline;
+
+;; $C6fn$init$_store
+builder $C6fn$init$_store(builder build_0, (int) v) inline;
+
+;; $C7gt$init$_store
+builder $C7gt$init$_store(builder build_0, (int) v) inline;
+
+;; $C8h$init$_store
+builder $C8h$init$_store(builder build_0, (int) v) inline;
+
+;; $C9g2$init$_store
+builder $C9g2$init$_store(builder build_0, (int) v) inline;
+
+;; $C10o$init$_store
+builder $C10o$init$_store(builder build_0, (int) v) inline;
+
+;; $Tester$_contract_init
+tuple $Tester$_contract_init() impure inline;
+
+;; $Tester$_contract_load
+tuple $Tester$_contract_load() impure inline_ref;
+
+;; $Tester$_contract_store
+() $Tester$_contract_store(tuple v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $C1$_init_child
+(cell, cell) $C1$_init_child(int $v) inline_ref;
+
+;; $C2$_init_child
+(cell, cell) $C2$_init_child(int $v) inline_ref;
+
+;; $C3f$_init_child
+(cell, cell) $C3f$_init_child(int $v) inline_ref;
+
+;; $C4g$_init_child
+(cell, cell) $C4g$_init_child(int $v) inline_ref;
+
+;; $C5i$_init_child
+(cell, cell) $C5i$_init_child(int $n) inline_ref;
+
+;; $C6fn$_init_child
+(cell, cell) $C6fn$_init_child(int $v) inline_ref;
+
+;; $C7gt$_init_child
+(cell, cell) $C7gt$_init_child(int $v) inline_ref;
+
+;; $C8h$_init_child
+(cell, cell) $C8h$_init_child(int $v) inline_ref;
+
+;; $C9g2$_init_child
+(cell, cell) $C9g2$_init_child(int $v) inline_ref;
+
+;; $C10o$_init_child
+(cell, cell) $C10o$_init_child(int $v) inline_ref;
+
+;; $Tester$_fun_checkAddressInjectivity
+(tuple, int) $Tester$_fun_checkAddressInjectivity(tuple $self) impure inline_ref;
+
+
+;; address-injectivity_Tester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+;; address-injectivity_Tester.storage.fc
+;;
+;; Type: C1
+;;
+
+builder $C1$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C1$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C1$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C1
+    cell init_code = $C1$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C1$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C2
+;;
+
+builder $C2$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C2$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C2$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C2
+    cell init_code = $C2$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C2$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C3f
+;;
+
+builder $C3f$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C3f$_child_get_code() impure asm """
+    B{b5ee9c72010106010068000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c082040213a165edb678b1b678d8430405003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C3f$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C3f
+    cell init_code = $C3f$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C3f$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C4g
+;;
+
+builder $C4g$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C4g$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a009a9b67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C4g$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C4g
+    cell init_code = $C4g$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C4g$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C5i
+;;
+
+builder $C5i$init$_store(builder build_0, (int) v) inline {
+    var (v'n) = v;
+    build_0 = build_0.store_int(v'n, 257);
+    return build_0;
+}
+
+cell $C5i$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C5i$_init_child(int $n) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C5i
+    cell init_code = $C5i$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C5i$init$_store(b, ($n));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C6fn
+;;
+
+builder $C6fn$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C6fn$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C6fn$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C6fn
+    cell init_code = $C6fn$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C6fn$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C7gt
+;;
+
+builder $C7gt$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C7gt$_child_get_code() impure asm """
+    B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C7gt$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C7gt
+    cell init_code = $C7gt$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C7gt$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C8h
+;;
+
+builder $C8h$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C8h$_child_get_code() impure asm """
+    B{b5ee9c72010106010068000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c082040213a165edb678b1b678d8430405003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C8h$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C8h
+    cell init_code = $C8h$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C8h$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C9g2
+;;
+
+builder $C9g2$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C9g2$_child_get_code() impure asm """
+    B{b5ee9c7201010901007d000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c0820702012004050211be28e6d9e6d9e3610c07060213bd97b6d9e2c6d9e3610c0708000220003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C9g2$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C9g2
+    cell init_code = $C9g2$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C9g2$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: C10o
+;;
+
+builder $C10o$init$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+cell $C10o$_child_get_code() impure asm """
+    B{b5ee9c7201010901007e000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c0820702012004050211be28e6d9e6d9e3610c07060213bd97b6d9e2c6d9e3610c07080002210040ed44d0d200019d810101d700810101d700596c12e0810101d7000101d180640100065210a0} B>boc PUSHREF
+""";
+
+(cell, cell) $C10o$_init_child(int $v) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C10o
+    cell init_code = $C10o$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C10o$init$_store(b, ($v));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Tester
+;;
+
+tuple $Tester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Tester$_contract_init();
+    }
+}
+
+() $Tester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Tester functions
+;;
+
+tuple $Tester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $Tester$_fun_checkAddressInjectivity(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $addr1 = $global_contractAddress($C1$_init_child(5));
+    slice $addr2 = $global_contractAddress($C1$_init_child(10));
+    int $result = ( ~ equal_slices_bits($addr2, $addr1) );
+    slice $addr3 = $global_contractAddress($C1$_init_child(5));
+    slice $addr4 = $global_contractAddress($C1$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr4, $addr3) );
+    slice $addr5 = $global_contractAddress($C1$_init_child(5));
+    slice $addr6 = $global_contractAddress($C2$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr6, $addr5) );
+    slice $addr7 = $global_contractAddress($C1$_init_child(5));
+    slice $addr8 = $global_contractAddress($C2$_init_child(10));
+    $result = $result & ( ~ equal_slices_bits($addr8, $addr7) );
+    slice $addr9 = $global_contractAddress($C1$_init_child(5));
+    slice $addr10 = $global_contractAddress($C3f$_init_child(5));
+    $result = $result & ( ~ equal_slices_bits($addr10, $addr9) );
+    slice $addr11 = $global_contractAddress($C1$_init_child(5));
+    slice $addr12 = $global_contractAddress($C4g$_init_child(5));
+    $result = $result & ( ~ equal_slices_bits($addr12, $addr11) );
+    slice $addr13 = $global_contractAddress($C1$_init_child(5));
+    slice $addr14 = $global_contractAddress($C5i$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr14, $addr13) );
+    slice $addr15 = $global_contractAddress($C1$_init_child(5));
+    slice $addr16 = $global_contractAddress($C6fn$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr16, $addr15) );
+    slice $addr17 = $global_contractAddress($C1$_init_child(5));
+    slice $addr18 = $global_contractAddress($C7gt$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr18, $addr17) );
+    slice $addr19 = $global_contractAddress($C3f$_init_child(5));
+    slice $addr20 = $global_contractAddress($C8h$_init_child(5));
+    $result = $result & ( equal_slices_bits($addr20, $addr19) );
+    slice $addr21 = $global_contractAddress($C3f$_init_child(5));
+    slice $addr22 = $global_contractAddress($C9g2$_init_child(5));
+    $result = $result & ( ~ equal_slices_bits($addr22, $addr21) );
+    slice $addr23 = $global_contractAddress($C9g2$_init_child(5));
+    slice $addr24 = $global_contractAddress($C10o$_init_child(5));
+    $result = $result & ( ~ equal_slices_bits($addr24, $addr23) );
+    var $fresh$ret_142 = $result;
+    return ($self, $fresh$ret_142);
+}
+
+;;
+;; Get methods of a Contract Tester
+;;
+
+_ %checkAddressInjectivity() method_id(105691) {
+    var self = $Tester$_contract_load();
+    var res = self~$Tester$_fun_checkAddressInjectivity();
+    return res;
+}
+
+;;
+;; Routing of a Contract Tester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Tester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Tester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

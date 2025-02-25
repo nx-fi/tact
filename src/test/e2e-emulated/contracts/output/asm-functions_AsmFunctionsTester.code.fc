@@ -1,0 +1,464 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; asm-functions_AsmFunctionsTester.headers.fc
+;;
+;; Header files for AsmFunctionsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_cell_eq_nullable
+int __tact_cell_eq_nullable(cell a, cell b) inline;
+
+;; __tact_dict_set_int_int
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; $MapIntIntSlice$_get_val
+_ $MapIntIntSlice$_get_val((cell, slice) v) inline;
+
+;; $IntSlice$_get_val
+_ $IntSlice$_get_val((int, slice) v) inline;
+
+;; $SliceInt$_get_val
+_ $SliceInt$_get_val((slice, int) v) inline;
+
+;; $Two$_from_tuple
+(int, int) $Two$_from_tuple(tuple v) inline;
+
+;; $TwoInTwo$_from_tuple
+((int, int), (int, int)) $TwoInTwo$_from_tuple(tuple v) inline;
+
+;; $AsmFunctionsTester$_contract_init
+tuple $AsmFunctionsTester$_contract_init() impure inline;
+
+;; $AsmFunctionsTester$_contract_load
+tuple $AsmFunctionsTester$_contract_load() impure inline_ref;
+
+;; $AsmFunctionsTester$_contract_store
+() $AsmFunctionsTester$_contract_store(tuple v) impure inline;
+
+;; $Builder$_fun_asSlice
+slice $Builder$_fun_asSlice(builder $self) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $AsmFunctionsTester$_fun_testAsmStoreDict
+(tuple, int) $AsmFunctionsTester$_fun_testAsmStoreDict(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmLoadCoins
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoins(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmLoadCoinsMut
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoinsMut(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime(tuple $self, cell $c) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmLoadInt
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadInt(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmDebugStr
+(tuple, int) $AsmFunctionsTester$_fun_testAsmDebugStr(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmCreateUseWord
+(tuple, int) $AsmFunctionsTester$_fun_testAsmCreateUseWord(tuple $self) impure inline_ref;
+
+;; $Two$_constructor_a_b
+((int, int)) $Two$_constructor_a_b(int $a, int $b) inline;
+
+;; $AsmFunctionsTester$_fun_testAsmSecondToLast
+(tuple, int) $AsmFunctionsTester$_fun_testAsmSecondToLast(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime
+(tuple, int) $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime(tuple $self, (int, int) $s1, (int, int) $s2) impure inline_ref;
+
+;; $TwoInTwo$_constructor_a_b
+(((int, int), (int, int))) $TwoInTwo$_constructor_a_b((int, int) $a, (int, int) $b) inline;
+
+;; $AsmFunctionsTester$_fun_testAsmFirst
+(tuple, int) $AsmFunctionsTester$_fun_testAsmFirst(tuple $self) impure inline_ref;
+
+;; $AsmFunctionsTester$_fun_testAsmFirstRuntime
+(tuple, int) $AsmFunctionsTester$_fun_testAsmFirstRuntime(tuple $self, ((int, int), (int, int)) $s1, ((int, int), (int, int)) $s2, ((int, int), (int, int)) $s3) impure inline_ref;
+
+
+;; asm-functions_AsmFunctionsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int __tact_cell_eq_nullable(cell a, cell b) inline {
+    var a_is_null = null?(a);
+    var b_is_null = null?(b);
+    return ( a_is_null & b_is_null ) ? ( true ) : ( ( ( ~ a_is_null ) & ( ~ b_is_null ) ) ? ( a.cell_hash() == b.cell_hash() ) : ( false ) );
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+builder $Builder$_fun_storeCoins(builder $self, int $value) impure asm """
+    STVARUINT16
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Builder$_fun_asSlice(builder $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($Builder$_fun_endCell($self));
+}
+
+() $Slice$_fun_endParse(slice $self) impure asm """
+    ENDS
+""";
+
+int $Slice$_fun_empty(slice $self) impure asm """
+    SEMPTY
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+;; asm-functions_AsmFunctionsTester.storage.fc
+;;
+;; Type: MapIntIntSlice
+;; TLB: _ val:dict<int, int> rem:^slice = MapIntIntSlice
+;;
+
+_ $MapIntIntSlice$_get_val((cell, slice) v) inline {
+    var (v'val, v'rem) = v;
+    return v'val;
+}
+
+;;
+;; Type: IntSlice
+;; TLB: _ val:int257 rem:^slice = IntSlice
+;;
+
+_ $IntSlice$_get_val((int, slice) v) inline {
+    var (v'val, v'rem) = v;
+    return v'val;
+}
+
+;;
+;; Type: SliceInt
+;; TLB: _ rem:^slice val:int257 = SliceInt
+;;
+
+_ $SliceInt$_get_val((slice, int) v) inline {
+    var (v'rem, v'val) = v;
+    return v'val;
+}
+
+;;
+;; Type: Two
+;; TLB: _ a:int257 b:int257 = Two
+;;
+
+(int, int) $Two$_from_tuple(tuple v) inline {
+    var (int v'a, int v'b) = __tact_tuple_destroy_2(v);
+    return (v'a, v'b);
+}
+
+((int, int)) $Two$_constructor_a_b(int $a, int $b) inline {
+    return ($a, $b);
+}
+
+;;
+;; Type: TwoInTwo
+;; TLB: _ a:Two{a:int257,b:int257} b:Two{a:int257,b:int257} = TwoInTwo
+;;
+
+((int, int), (int, int)) $TwoInTwo$_from_tuple(tuple v) inline {
+    var (tuple v'a, tuple v'b) = __tact_tuple_destroy_2(v);
+    return ($Two$_from_tuple(v'a), $Two$_from_tuple(v'b));
+}
+
+(((int, int), (int, int))) $TwoInTwo$_constructor_a_b((int, int) $a, (int, int) $b) inline {
+    return ($a, $b);
+}
+
+;;
+;; Type: AsmFunctionsTester
+;;
+
+tuple $AsmFunctionsTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $AsmFunctionsTester$_contract_init();
+    }
+}
+
+() $AsmFunctionsTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract AsmFunctionsTester functions
+;;
+
+tuple $AsmFunctionsTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+int $global_asmSecondToLast((int, int) $a, (int, int) $b) impure asm($b $a) """
+    DROP DROP DROP
+""";
+
+int $global_asmFirst(((int, int), (int, int)) $a, ((int, int), (int, int)) $b, ((int, int), (int, int)) $c) impure asm($a $c $b) """
+    DROP2 DROP2 DROP2 DROP2 DROP2 DROP
+""";
+
+() $global_asmDebugStr() impure asm """
+    "Works!" DEBUGSTR
+""";
+
+int $global_asmCreateUseWord(int $x) impure asm """
+    { INC INC INC } : 🥰🥰🥰
+    { DEC DEC DEC } : 💀💀💀
+    🥰🥰🥰 💀💀💀 INC
+""";
+
+builder $Builder$_fun_asmStoreDict(cell $c, builder $self) impure asm """
+    STDICT
+""";
+
+(cell, slice) $Slice$_fun_asmLoadMapIntInt(slice $self) impure asm """
+    LDDICT
+""";
+
+(int, slice) $Slice$_fun_asmLoadCoins(slice $self) impure asm """
+    LDVARUINT16
+""";
+
+(slice, int) $Slice$_fun_asmLoadCoinsMut(slice $self) impure asm( -> 1 0) """
+    LDVARUINT16
+""";
+
+(slice, int) $Slice$_fun_asmLoadInt(slice $self, int $len) impure asm($self $len -> 1 0) """
+    LDIX
+""";
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmStoreDict(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 35, 34, 257);
+    $m~__tact_dict_set_int_int(257, 42, 27, 257);
+    slice $s = $Builder$_fun_asSlice($Builder$_fun_asmStoreDict($m, $global_beginCell()));
+    cell $m2 = $MapIntIntSlice$_get_val($Slice$_fun_asmLoadMapIntInt($s));
+    var $fresh$ret_148 = __tact_cell_eq_nullable($m2, $m);
+    return ($self, $fresh$ret_148);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoins(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $s = $Builder$_fun_asSlice($Builder$_fun_storeCoins($global_beginCell(), 42));
+    var $fresh$ret_149 = ($IntSlice$_get_val($Slice$_fun_asmLoadCoins($s)) == 42);
+    return ($self, $fresh$ret_149);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoinsMut(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $s = $Builder$_fun_asSlice($Builder$_fun_storeCoins($global_beginCell(), 42));
+    var $fresh$ret_150 = ( (($s~$Slice$_fun_asmLoadCoinsMut() == 42)) ? ($Slice$_fun_empty($s)) : (false) );
+    return ($self, $fresh$ret_150);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime(tuple $self, cell $c) impure inline_ref {
+    var ($self) = $self;
+    slice $s = $Cell$_fun_asSlice($c);
+    int $res = $s~$Slice$_fun_asmLoadCoinsMut();
+    $Slice$_fun_endParse($s);
+    var $fresh$ret_151 = $res;
+    return ($self, $fresh$ret_151);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmLoadInt(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $s = $Builder$_fun_asSlice(store_int($global_beginCell(), 42, 7));
+    var $fresh$ret_152 = ($SliceInt$_get_val($Slice$_fun_asmLoadInt($s, 7)) == 42);
+    return ($self, $fresh$ret_152);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmDebugStr(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    $global_asmDebugStr();
+    var $fresh$ret_153 = true;
+    return ($self, $fresh$ret_153);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmCreateUseWord(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_154 = ($global_asmCreateUseWord(6) == 7);
+    return ($self, $fresh$ret_154);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmSecondToLast(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_155 = ($global_asmSecondToLast($Two$_constructor_a_b(1, 2), $Two$_constructor_a_b(3, 4)) == 3);
+    return ($self, $fresh$ret_155);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime(tuple $self, (int, int) $s1, (int, int) $s2) impure inline_ref {
+    var ($self) = $self;
+    var (($s1'a, $s1'b)) = $s1;
+    var (($s2'a, $s2'b)) = $s2;
+    var $fresh$ret_156 = $global_asmSecondToLast(($s1'a, $s1'b), ($s2'a, $s2'b));
+    return ($self, $fresh$ret_156);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmFirst(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_157 = ($global_asmFirst($TwoInTwo$_constructor_a_b($Two$_constructor_a_b(1, 2), $Two$_constructor_a_b(3, 4)), $TwoInTwo$_constructor_a_b($Two$_constructor_a_b(5, 6), $Two$_constructor_a_b(7, 8)), $TwoInTwo$_constructor_a_b($Two$_constructor_a_b(9, 10), $Two$_constructor_a_b(11, 12))) == 1);
+    return ($self, $fresh$ret_157);
+}
+
+(tuple, int) $AsmFunctionsTester$_fun_testAsmFirstRuntime(tuple $self, ((int, int), (int, int)) $s1, ((int, int), (int, int)) $s2, ((int, int), (int, int)) $s3) impure inline_ref {
+    var ($self) = $self;
+    var ((($s1'a'a, $s1'a'b), ($s1'b'a, $s1'b'b))) = $s1;
+    var ((($s2'a'a, $s2'a'b), ($s2'b'a, $s2'b'b))) = $s2;
+    var ((($s3'a'a, $s3'a'b), ($s3'b'a, $s3'b'b))) = $s3;
+    var $fresh$ret_158 = $global_asmFirst((($s1'a'a, $s1'a'b), ($s1'b'a, $s1'b'b)), (($s2'a'a, $s2'a'b), ($s2'b'a, $s2'b'b)), (($s3'a'a, $s3'a'b), ($s3'b'a, $s3'b'b)));
+    return ($self, $fresh$ret_158);
+}
+
+;;
+;; Get methods of a Contract AsmFunctionsTester
+;;
+
+_ %testAsmStoreDict() method_id(81432) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmStoreDict();
+    return res;
+}
+
+_ %testAsmLoadCoins() method_id(86431) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmLoadCoins();
+    return res;
+}
+
+_ %testAsmLoadCoinsMut() method_id(128872) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmLoadCoinsMut();
+    return res;
+}
+
+_ %testAsmLoadCoinsMutRuntime(cell $c) method_id(127504) {
+    cell $c = $c;
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime($c);
+    return res;
+}
+
+_ %testAsmLoadInt() method_id(78218) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmLoadInt();
+    return res;
+}
+
+_ %testAsmDebugStr() method_id(93496) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmDebugStr();
+    return res;
+}
+
+_ %testAsmCreateUseWord() method_id(111813) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmCreateUseWord();
+    return res;
+}
+
+_ %testAsmSecondToLast() method_id(67436) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmSecondToLast();
+    return res;
+}
+
+_ %testAsmSecondToLastRuntime(tuple $s1, tuple $s2) method_id(121641) {
+    (int, int) $s1 = $Two$_from_tuple($s1);
+    (int, int) $s2 = $Two$_from_tuple($s2);
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmSecondToLastRuntime($s1, $s2);
+    return res;
+}
+
+_ %testAsmFirst() method_id(124989) {
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmFirst();
+    return res;
+}
+
+_ %testAsmFirstRuntime(tuple $s1, tuple $s2, tuple $s3) method_id(97303) {
+    ((int, int), (int, int)) $s1 = $TwoInTwo$_from_tuple($s1);
+    ((int, int), (int, int)) $s2 = $TwoInTwo$_from_tuple($s2);
+    ((int, int), (int, int)) $s3 = $TwoInTwo$_from_tuple($s3);
+    var self = $AsmFunctionsTester$_contract_load();
+    var res = self~$AsmFunctionsTester$_fun_testAsmFirstRuntime($s1, $s2, $s3);
+    return res;
+}
+
+;;
+;; Routing of a Contract AsmFunctionsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $AsmFunctionsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $AsmFunctionsTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

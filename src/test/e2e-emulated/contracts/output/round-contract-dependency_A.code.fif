@@ -1,0 +1,220 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/round-contract-dependency_A.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_dict_set_code
+  DECLPROC __tact_dict_get_code
+  DECLPROC $A$_store
+  DECLPROC $A$_load
+  DECLPROC $StateInit$_to_external
+  DECLPROC $B$init$_store
+  DECLPROC $C$init$_store
+  DECLPROC $A$_contract_init
+  DECLPROC $A$_contract_load
+  DECLPROC $A$_contract_store
+  DECLPROC $B$_init_child
+  DECLPROC $A$_fun_getNext
+  DECLPROC $C$_init_child
+  DECLPROC $A$_fun_getNestedNext
+  74105 DECLMETHOD %getNext
+  105600 DECLMETHOD %getNestedNext
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_dict_set_code PROCINLINE:<{
+    s0 s2 XCHG
+    16 PUSHINT
+    DICTUSETREF
+  }>
+  __tact_dict_get_code PROCINLINE:<{
+    SWAP
+    16 PUSHINT
+    DICTUGETREF
+    NULLSWAPIFNOT
+    135 THROWIFNOT
+  }>
+  $A$_store PROCINLINE:<{
+    SWAP
+    32 STU
+  }>
+  $A$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $B$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $C$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $A$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $A$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    LDREF
+    SWAP
+    __tact_child_contract_codes SETGLOB
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $A$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $A$_contract_init INLINECALLDICT
+  }>
+  $A$_contract_store PROCINLINE:<{
+    NEWC
+    __tact_child_contract_codes GETGLOB
+    SWAP
+    STREF
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $A$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $B$_init_child PROCREF:<{
+    __tact_child_contract_codes GETGLOB
+    CTOS
+    LDDICT
+    DROP
+    DUP
+    26758 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    NEWDICT
+    s0 s2 XCHG
+    30887 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    s1 s2 XCHG
+    30887 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    22757 PUSHINT
+    MYCODE
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $B$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $A$_fun_getNext PROCREF:<{
+    $B$_init_child INLINECALLDICT
+  }>
+  $C$_init_child PROCREF:<{
+    __tact_child_contract_codes GETGLOB
+    CTOS
+    LDDICT
+    DROP
+    DUP
+    30887 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    NEWDICT
+    22757 PUSHINT
+    MYCODE
+    __tact_dict_set_code INLINECALLDICT
+    s0 s2 XCHG
+    26758 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    s1 s2 XCHG
+    26758 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $C$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $A$_fun_getNestedNext PROCREF:<{
+    $C$_init_child INLINECALLDICT
+  }>
+  %getNext PROC:<{
+    $A$_contract_load INLINECALLDICT
+    $A$_fun_getNext INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  %getNestedNext PROC:<{
+    $A$_contract_load INLINECALLDICT
+    $A$_fun_getNestedNext INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $A$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $A$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

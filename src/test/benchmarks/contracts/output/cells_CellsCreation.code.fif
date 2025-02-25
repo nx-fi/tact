@@ -1,0 +1,106 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/benchmarks/contracts/output/cells_CellsCreation.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $CellsCreation$_contract_init
+  DECLPROC $CellsCreation$_contract_load
+  DECLPROC $CellsCreation$_contract_store
+  DECLPROC $CellsCreation$_fun_emptyCell
+  DECLPROC $CellsCreation$_fun_emptySlice
+  81957 DECLMETHOD %emptyCell
+  89380 DECLMETHOD %emptySlice
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $CellsCreation$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $CellsCreation$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $CellsCreation$_contract_init INLINECALLDICT
+  }>
+  $CellsCreation$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $CellsCreation$_fun_emptyCell PROCREF:<{
+        <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+  }>
+  $CellsCreation$_fun_emptySlice PROCREF:<{
+        b{} PUSHSLICE
+  }>
+  %emptyCell PROC:<{
+    $CellsCreation$_contract_load INLINECALLDICT
+    $CellsCreation$_fun_emptyCell INLINECALLDICT
+    NIP
+  }>
+  %emptySlice PROC:<{
+    $CellsCreation$_contract_load INLINECALLDICT
+    $CellsCreation$_fun_emptySlice INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $CellsCreation$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $CellsCreation$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

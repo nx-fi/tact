@@ -1,0 +1,118 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/codeOf_ChildContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $ChildContract$_store
+  DECLPROC $ChildContract$_load
+  DECLPROC $ChildContract$init$_load
+  DECLPROC $ChildContract$_contract_init
+  DECLPROC $ChildContract$_contract_load
+  DECLPROC $ChildContract$_contract_store
+  DECLPROC $ChildContract$_fun_value
+  121536 DECLMETHOD %value
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $ChildContract$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $ChildContract$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $ChildContract$init$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $ChildContract$_contract_init PROCINLINE:<{
+  }>
+  $ChildContract$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $ChildContract$_load INLINECALLDICT
+      NIP
+    }>
+    $ChildContract$init$_load INLINECALLDICT
+    SWAP
+    ENDS
+    $ChildContract$_contract_init INLINECALLDICT
+  }>
+  $ChildContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $ChildContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $ChildContract$_fun_value PROCREF:<{
+    DUP
+  }>
+  %value PROC:<{
+    $ChildContract$_contract_load INLINECALLDICT
+    $ChildContract$_fun_value INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ChildContract$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $ChildContract$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

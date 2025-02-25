@@ -1,0 +1,421 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/address-injectivity_Tester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $C1$init$_store
+  DECLPROC $C2$init$_store
+  DECLPROC $C3f$init$_store
+  DECLPROC $C4g$init$_store
+  DECLPROC $C5i$init$_store
+  DECLPROC $C6fn$init$_store
+  DECLPROC $C7gt$init$_store
+  DECLPROC $C8h$init$_store
+  DECLPROC $C9g2$init$_store
+  DECLPROC $C10o$init$_store
+  DECLPROC $Tester$_contract_init
+  DECLPROC $Tester$_contract_load
+  DECLPROC $Tester$_contract_store
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $C1$_init_child
+  DECLPROC $C2$_init_child
+  DECLPROC $C3f$_init_child
+  DECLPROC $C4g$_init_child
+  DECLPROC $C5i$_init_child
+  DECLPROC $C6fn$_init_child
+  DECLPROC $C7gt$_init_child
+  DECLPROC $C8h$_init_child
+  DECLPROC $C9g2$_init_child
+  DECLPROC $C10o$_init_child
+  DECLPROC $Tester$_fun_checkAddressInjectivity
+  105691 DECLMETHOD %checkAddressInjectivity
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $C1$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C2$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C3f$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C4g$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C5i$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C6fn$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C7gt$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C8h$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C9g2$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $C10o$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $Tester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Tester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $Tester$_contract_init INLINECALLDICT
+  }>
+  $Tester$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+        NOP
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $C1$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C1$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C2$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C2$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C3f$_init_child PROCREF:<{
+        B{b5ee9c72010106010068000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c082040213a165edb678b1b678d8430405003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C3f$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C4g$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a009a9b67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C4g$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C5i$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C5i$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C6fn$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C6fn$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C7gt$_init_child PROCREF:<{
+        B{b5ee9c7201010601005f000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c30dcf2c082040211a165edb67803b678630405002eed44d0d2000197810101d7000131e0810101d7000101d100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C7gt$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C8h$_init_child PROCREF:<{
+        B{b5ee9c72010106010068000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c082040213a165edb678b1b678d8430405003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C8h$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C9g2$_init_child PROCREF:<{
+        B{b5ee9c7201010901007d000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c0820702012004050211be28e6d9e6d9e3610c07060213bd97b6d9e2c6d9e3610c0708000220003eed44d0d200019d810101d700810101d700596c12e0810101d7000101d1806400065220a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C9g2$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $C10o$_init_child PROCREF:<{
+        B{b5ee9c7201010901007e000114ff00f4a413f4bcf2c80b010201620203013ed030d072d721d200d200fa4021103450556f04f86101f862db3c5bdcf2c0820702012004050211be28e6d9e6d9e3610c07060213bd97b6d9e2c6d9e3610c07080002210040ed44d0d200019d810101d700810101d700596c12e0810101d7000101d180640100065210a0} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C10o$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $Tester$_fun_checkAddressInjectivity PROCREF:<{
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    10 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C2$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    10 PUSHINT
+    $C2$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C3f$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C4g$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C5i$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C6fn$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C1$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C7gt$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C3f$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C8h$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    AND
+    5 PUSHINT
+    $C3f$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C9g2$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    AND
+    5 PUSHINT
+    $C9g2$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    5 PUSHINT
+    $C10o$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    NOT
+    AND
+  }>
+  %checkAddressInjectivity PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_checkAddressInjectivity INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Tester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $Tester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

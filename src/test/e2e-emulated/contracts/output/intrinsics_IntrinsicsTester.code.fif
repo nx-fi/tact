@@ -1,0 +1,1104 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/intrinsics_IntrinsicsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $IntrinsicsTester$_store
+  DECLPROC $IntrinsicsTester$_load
+  DECLPROC $IntrinsicsTester$_contract_init
+  DECLPROC $IntrinsicsTester$_contract_load
+  DECLPROC $IntrinsicsTester$_contract_store
+  DECLPROC $global_emit
+  DECLPROC $IntrinsicsTester$_fun_getTons
+  DECLPROC $IntrinsicsTester$_fun_getTons2
+  DECLPROC $IntrinsicsTester$_fun_getString
+  DECLPROC $IntrinsicsTester$_fun_getString2
+  DECLPROC $IntrinsicsTester$_fun_getAddress
+  DECLPROC $IntrinsicsTester$_fun_getAddress2
+  DECLPROC $IntrinsicsTester$_fun_getCell
+  DECLPROC $IntrinsicsTester$_fun_getCell2
+  DECLPROC $IntrinsicsTester$_fun_getPow
+  DECLPROC $IntrinsicsTester$_fun_getPow2
+  DECLPROC $IntrinsicsTester$_fun_getComment
+  DECLPROC $IntrinsicsTester$_fun_getHash
+  DECLPROC $IntrinsicsTester$_fun_getHashSlice
+  DECLPROC $IntrinsicsTester$_fun_getHash2
+  DECLPROC $IntrinsicsTester$_fun_getHash3
+  DECLPROC $IntrinsicsTester$_fun_getHash4
+  DECLPROC $IntrinsicsTester$_fun_getHashLongComptime
+  DECLPROC $IntrinsicsTester$_fun_getHashLongRuntime
+  DECLPROC $IntrinsicsTester$_fun_getHashLongRuntimeSlice
+  DECLPROC $IntrinsicsTester$_fun_getHashSHA256U
+  DECLPROC $IntrinsicsTester$_fun_getHashHASHEXTSHA256
+  DECLPROC $IntrinsicsTester$_fun_getSlice
+  DECLPROC $IntrinsicsTester$_fun_getSlice2
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice2
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice3
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice4
+  DECLPROC $IntrinsicsTester$_fun_getAscii
+  DECLPROC $IntrinsicsTester$_fun_getAscii2
+  DECLPROC $IntrinsicsTester$_fun_getAscii3
+  DECLPROC $IntrinsicsTester$_fun_getAscii4
+  DECLPROC $IntrinsicsTester$_fun_getCrc32
+  DECLPROC $IntrinsicsTester$_fun_getCrc32_2
+  DECLPROC $IntrinsicsTester$_fun_getCrc32_3
+  DECLPROC $IntrinsicsTester$_fun_getCrc32_4
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice5
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice6
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice7
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice8
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice9
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice10
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice11
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice12
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice13
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice14
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice15
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice16
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice17
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice18
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice19
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice20
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice21
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice22
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice23
+  DECLPROC $IntrinsicsTester$_fun_getRawSlice24
+  85126 DECLMETHOD %getTons
+  72025 DECLMETHOD %getTons2
+  97624 DECLMETHOD %getString
+  123179 DECLMETHOD %getString2
+  67571 DECLMETHOD %getAddress
+  103926 DECLMETHOD %getAddress2
+  83057 DECLMETHOD %getCell
+  94033 DECLMETHOD %getCell2
+  93948 DECLMETHOD %getPow
+  92025 DECLMETHOD %getPow2
+  116303 DECLMETHOD %getComment
+  120167 DECLMETHOD %getHash
+  104138 DECLMETHOD %getHashSlice
+  125641 DECLMETHOD %getHash2
+  129768 DECLMETHOD %getHash3
+  100879 DECLMETHOD %getHash4
+  121679 DECLMETHOD %getHashLongComptime
+  113535 DECLMETHOD %getHashLongRuntime
+  122586 DECLMETHOD %getHashLongRuntimeSlice
+  68441 DECLMETHOD %getHashSHA256U
+  112782 DECLMETHOD %getHashHASHEXTSHA256
+  84384 DECLMETHOD %getSlice
+  94204 DECLMETHOD %getSlice2
+  78245 DECLMETHOD %getRawSlice
+  103779 DECLMETHOD %getRawSlice2
+  99650 DECLMETHOD %getRawSlice3
+  128421 DECLMETHOD %getRawSlice4
+  77750 DECLMETHOD %getAscii
+  95644 DECLMETHOD %getAscii2
+  91581 DECLMETHOD %getAscii3
+  71002 DECLMETHOD %getAscii4
+  71531 DECLMETHOD %getCrc32
+  85945 DECLMETHOD %getCrc32_2
+  90008 DECLMETHOD %getCrc32_3
+  77695 DECLMETHOD %getCrc32_4
+  124292 DECLMETHOD %getRawSlice5
+  120295 DECLMETHOD %getRawSlice6
+  116166 DECLMETHOD %getRawSlice7
+  78889 DECLMETHOD %getRawSlice8
+  74760 DECLMETHOD %getRawSlice9
+  119580 DECLMETHOD %getRawSlice10
+  115517 DECLMETHOD %getRawSlice11
+  127838 DECLMETHOD %getRawSlice12
+  123775 DECLMETHOD %getRawSlice13
+  103320 DECLMETHOD %getRawSlice14
+  99257 DECLMETHOD %getRawSlice15
+  111578 DECLMETHOD %getRawSlice16
+  107515 DECLMETHOD %getRawSlice17
+  86548 DECLMETHOD %getRawSlice18
+  82485 DECLMETHOD %getRawSlice19
+  99919 DECLMETHOD %getRawSlice20
+  104046 DECLMETHOD %getRawSlice21
+  108045 DECLMETHOD %getRawSlice22
+  112172 DECLMETHOD %getRawSlice23
+  116427 DECLMETHOD %getRawSlice24
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $IntrinsicsTester$_store PROCINLINE:<{
+    s1 22 s() XCHG
+    s0 23 s() XCHG
+    257 PUSHINT
+    STIX
+    NEWC
+    SWAP
+    s0 21 s() XCHG
+    STSLICER
+    ENDC
+    SWAP
+    s0 20 s() XCHG
+    STREF
+    SWAP
+    s0 18 s() XCHG
+    STSLICER
+    s0 16 s() XCHG
+    NEWC
+    STREF
+    s1 s15 XCHG
+    257 PUSHINT
+    STIX
+    s1 s13 XCHG
+    257 PUSHINT
+    STIX
+    NEWC
+    s0 s12 XCHG2
+    STSLICER
+    ENDC
+    s0 s11 XCHG2
+    STREF
+    NEWC
+    s0 s10 XCHG2
+    STSLICER
+    ENDC
+    s0 s9 XCHG2
+    STREF
+    s1 s7 XCHG
+    257 PUSHINT
+    STIX
+    s0 s5 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s4 XCHG
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    NEWC
+    ROT
+    STSLICER
+    ENDC
+    SWAP
+    STREF
+    NEWC
+    ROT
+    STSLICER
+    ENDC
+    SWAP
+    STREF
+    NEWC
+    s0 s3 XCHG2
+    STSLICER
+    ENDC
+    ROT
+    STREF
+    NEWC
+    NEWC
+    s0 s4 XCHG2
+    STSLICER
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    NEWC
+    s0 s4 XCHG2
+    STSLICER
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    NEWC
+    s0 s4 XCHG2
+    STSLICER
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    NEWC
+    NEWC
+    s0 s5 XCHG2
+    STSLICER
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    NEWC
+    s0 s6 XCHG2
+    STSLICER
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    NEWC
+    s0 s6 XCHG2
+    STSLICER
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    NEWC
+    NEWC
+    s0 s7 XCHG2
+    STSLICER
+    ENDC
+    s0 s6 XCHG2
+    STREF
+    NEWC
+    s0 s7 XCHG2
+    STSLICER
+    ENDC
+    s0 s6 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $IntrinsicsTester$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDMSGADDR
+    LDREF
+    SWAP
+    CTOS
+    LDREF
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    20 s() 23 s() XCHG
+    20 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+  }>
+  $IntrinsicsTester$_contract_init PROCINLINE:<{
+    10123400000 PUSHINT
+        B{b5ee9c7241010101000d00001648656c6c6f20776f726c64ae013d34} B>boc <s PUSHSLICE
+        B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc PUSHREF
+    9 PUSHPOW2
+    83814198383102558219731078260892729932246618004265700685467928187377105751529 PUSHINT
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+        B{b5ee9c72410101010005000006abcdefe1e98884} B>boc <s PUSHSLICE
+    126207244316550804821666916 PUSHINT
+    2235694568 PUSHINT
+    0 PUSHINT
+    1563963554659859369353828835329962428465513941646011501275668087180532385 PUSHINT
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100030000014acefaa25f} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100030000011025086565} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100030000017888c37a8e} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100820000ffabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcf51215192} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100030000018a0adc2f9c} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100030000018a0adc2f9c} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $IntrinsicsTester$_load INLINECALLDICT
+      23 s() POP
+      21 s() 22 s() XCHG
+      20 s() 21 s() XCHG
+      19 s() 20 s() XCHG
+      18 s() 19 s() XCHG
+      17 s() 18 s() XCHG
+      16 s() 17 s() XCHG
+      s15 16 s() XCHG
+      15 ROLL
+    }>
+    DROP
+    $IntrinsicsTester$_contract_init INLINECALLDICT
+  }>
+  $IntrinsicsTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    s0 23 s() XCHG
+    s0 22 s() XCHG
+    s0 21 s() XCHG
+    s0 20 s() XCHG
+    s0 19 s() XCHG
+    s0 18 s() XCHG
+    s0 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $IntrinsicsTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $global_emit PROCINLINE:<{
+        NEWC
+    15211807202738752817960438464513 PUSHINT
+    SWAP
+    104 STU
+        STREF
+        ENDC
+    0 PUSHINT
+        SENDRAWMSG
+  }>
+  $IntrinsicsTester$_fun_getTons PROCREF:<{
+    10123400000 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getTons2 PROCREF:<{
+    22 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getString PROCREF:<{
+        B{b5ee9c7241010101000d00001648656c6c6f20776f726c64ae013d34} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getString2 PROCREF:<{
+    21 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getAddress PROCREF:<{
+        B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getAddress2 PROCREF:<{
+    20 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getCell PROCREF:<{
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc PUSHREF
+  }>
+  $IntrinsicsTester$_fun_getCell2 PROCREF:<{
+    19 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getPow PROCREF:<{
+    9 PUSHPOW2
+  }>
+  $IntrinsicsTester$_fun_getPow2 PROCREF:<{
+    18 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getComment PROCREF:<{
+        B{b5ee9c7241010101001100001e0000000048656c6c6f20776f726c64f5e7b6c8} B>boc PUSHREF
+  }>
+  $IntrinsicsTester$_fun_getHash PROCREF:<{
+    83814198383102558219731078260892729932246618004265700685467928187377105751529 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getHashSlice PROCREF:<{
+        B{b5ee9c7241010101000d00001668656c6c6f20776f726c647c7b1c8f} B>boc <s PUSHSLICE
+    __tact_sha256 CALLDICT
+  }>
+  $IntrinsicsTester$_fun_getHash2 PROCREF:<{
+    17 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getHash3 PROCREF:<{
+    __tact_sha256 CALLDICT
+  }>
+  $IntrinsicsTester$_fun_getHash4 PROCREF:<{
+    __tact_sha256 CALLDICT
+  }>
+  $IntrinsicsTester$_fun_getHashLongComptime PROCREF:<{
+    58194485868373170300817693691861672340562080930616192288976816887940544073377 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getHashLongRuntime PROCREF:<{
+    __tact_sha256 CALLDICT
+  }>
+  $IntrinsicsTester$_fun_getHashLongRuntimeSlice PROCREF:<{
+    __tact_sha256 CALLDICT
+  }>
+  $IntrinsicsTester$_fun_getHashSHA256U PROCREF:<{
+        SHA256U
+  }>
+  $IntrinsicsTester$_fun_getHashHASHEXTSHA256 PROCREF:<{
+        ONE HASHEXT_SHA256
+  }>
+  $IntrinsicsTester$_fun_getSlice PROCREF:<{
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getSlice2 PROCREF:<{
+    16 s() PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice PROCREF:<{
+        B{b5ee9c72410101010005000006abcdefe1e98884} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice2 PROCREF:<{
+    s15 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice3 PROCREF:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice4 PROCREF:<{
+    s10 PUSH
+  }>
+  $IntrinsicsTester$_fun_getAscii PROCREF:<{
+    126207244316550804821666916 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getAscii2 PROCREF:<{
+    s14 PUSH
+  }>
+  $IntrinsicsTester$_fun_getAscii3 PROCREF:<{
+    1563963554659859369353828835329962428465513941646011501275668087180532385 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getAscii4 PROCREF:<{
+    s11 PUSH
+  }>
+  $IntrinsicsTester$_fun_getCrc32 PROCREF:<{
+    2235694568 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getCrc32_2 PROCREF:<{
+    s13 PUSH
+  }>
+  $IntrinsicsTester$_fun_getCrc32_3 PROCREF:<{
+    s12 PUSH
+  }>
+  $IntrinsicsTester$_fun_getCrc32_4 PROCREF:<{
+    0 PUSHINT
+  }>
+  $IntrinsicsTester$_fun_getRawSlice5 PROCREF:<{
+        B{b5ee9c724101010100030000014acefaa25f} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice6 PROCREF:<{
+    s9 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice7 PROCREF:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice8 PROCREF:<{
+    s8 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice9 PROCREF:<{
+        B{b5ee9c724101010100030000011025086565} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice10 PROCREF:<{
+    s7 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice11 PROCREF:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice12 PROCREF:<{
+    s6 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice13 PROCREF:<{
+        B{b5ee9c724101010100030000017888c37a8e} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice14 PROCREF:<{
+    s5 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice15 PROCREF:<{
+        B{b5ee9c724101010100820000ffabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcf51215192} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice16 PROCREF:<{
+    s4 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice17 PROCREF:<{
+        B{b5ee9c724101010100030000018a0adc2f9c} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice18 PROCREF:<{
+    s3 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice19 PROCREF:<{
+        B{b5ee9c724101010100030000018a0adc2f9c} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice20 PROCREF:<{
+    s2 PUSH
+  }>
+  $IntrinsicsTester$_fun_getRawSlice21 PROCREF:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice22 PROCREF:<{
+    OVER
+  }>
+  $IntrinsicsTester$_fun_getRawSlice23 PROCREF:<{
+        B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+  }>
+  $IntrinsicsTester$_fun_getRawSlice24 PROCREF:<{
+    DUP
+  }>
+  %getTons PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getTons INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getTons2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getTons2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getString PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getString INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getString2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getString2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAddress PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAddress INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAddress2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAddress2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCell PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCell INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCell2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCell2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getPow PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getPow INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getPow2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getPow2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getComment PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getComment INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHash PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getHash INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashSlice PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getHashSlice INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHash2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getHash2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHash3 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHash3 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHash4 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHash4 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashLongComptime PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getHashLongComptime INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashLongRuntime PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHashLongRuntime INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashLongRuntimeSlice PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHashLongRuntimeSlice INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashSHA256U PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHashSHA256U INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getHashHASHEXTSHA256 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $IntrinsicsTester$_fun_getHashHASHEXTSHA256 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getSlice PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getSlice INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getSlice2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getSlice2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice3 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice3 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice4 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice4 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAscii PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAscii INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAscii2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAscii2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAscii3 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAscii3 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getAscii4 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getAscii4 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCrc32 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCrc32 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCrc32_2 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCrc32_2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCrc32_3 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCrc32_3 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getCrc32_4 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getCrc32_4 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice5 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice5 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice6 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice6 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice7 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice7 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice8 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice8 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice9 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice9 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice10 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice10 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice11 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice11 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice12 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice12 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice13 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice13 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice14 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice14 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice15 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice15 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice16 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice16 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice17 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice17 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice18 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice18 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice19 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice19 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice20 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice20 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice21 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice21 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice22 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice22 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice23 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice23 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  %getRawSlice24 PROC:<{
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    $IntrinsicsTester$_fun_getRawSlice24 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    7 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $IntrinsicsTester$_contract_load INLINECALLDICT
+    s0 24 s() XCHG
+    IFJMP:<{
+      15 BLKDROP
+      9 BLKDROP
+    }>
+    22 s() PUSH
+    SBITS
+    31 GTINT
+    IF:<{
+      s0 22 s() XCHG
+      32 LDU
+      NIP
+      s0 22 s() XCHG
+    }>
+    s0 22 s() XCHG
+    HASHSU
+    DUP
+    87651377378655782259476005716871872139955156637688197487361824677095371478895 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      20 s() 22 s() XCHG
+      19 s() 21 s() XCHG
+      18 s() 20 s() XCHG
+      17 s() 19 s() XCHG
+      16 s() 18 s() XCHG
+      s15 17 s() XCHG
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $IntrinsicsTester$_contract_store INLINECALLDICT
+    }>
+    76997382936694767492854111320546350257746090049128147329421038388107052053438 PUSHINT
+    EQUAL
+    IFJMP:<{
+          B{b5ee9c7241010101001100001e0000000048656c6c6f20776f726c64f5e7b6c8} B>boc PUSHREF
+      $global_emit INLINECALLDICT
+      20 s() 22 s() XCHG
+      19 s() 21 s() XCHG
+      18 s() 20 s() XCHG
+      17 s() 19 s() XCHG
+      16 s() 18 s() XCHG
+      s15 17 s() XCHG
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $IntrinsicsTester$_contract_store INLINECALLDICT
+    }>
+    15 BLKDROP
+    8 BLKDROP
+    130 THROW
+  }>
+}END>c

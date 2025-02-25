@@ -1,0 +1,427 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; compute-phase-errors_ComputePhaseErrorsTester.headers.fc
+;;
+;; Header files for ComputePhaseErrorsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_dict_get_int_int
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline;
+
+;; __tact_dict_get_int_cell
+cell __tact_dict_get_int_cell(cell d, int kl, int k) inline;
+
+;; $ExitCode4$_load_without_opcode
+(slice, ((int, int))) $ExitCode4$_load_without_opcode(slice sc_0) inline;
+
+;; $ComputePhaseErrorsTester$_store
+builder $ComputePhaseErrorsTester$_store(builder build_0, (int, cell) v) inline;
+
+;; $ComputePhaseErrorsTester$_load
+(slice, ((int, cell))) $ComputePhaseErrorsTester$_load(slice sc_0) inline;
+
+;; $ComputePhaseErrorsTester$_contract_init
+(int, cell) $ComputePhaseErrorsTester$_contract_init() impure inline;
+
+;; $ComputePhaseErrorsTester$_contract_load
+(int, cell) $ComputePhaseErrorsTester$_contract_load() impure inline_ref;
+
+;; $ComputePhaseErrorsTester$_contract_store
+() $ComputePhaseErrorsTester$_contract_store((int, cell) v) impure inline;
+
+;; $Slice$_fun_loadRef$not_mut
+cell $Slice$_fun_loadRef$not_mut(slice $self) impure inline_ref;
+
+;; load_int$not_mut
+int load_int$not_mut(slice $self, int $l) impure inline_ref;
+
+
+;; compute-phase-errors_ComputePhaseErrorsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline {
+    var (r, ok) = idict_get?(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+cell __tact_dict_get_int_cell(cell d, int kl, int k) inline {
+    var (r, ok) = idict_get_ref?(d, kl, k);
+    if (ok) {
+        return r;
+    } else {
+        return null();
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+cell $global_emptyCell() impure asm """
+    <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+""";
+
+slice $global_emptySlice() impure asm """
+    b{} PUSHSLICE
+""";
+
+int $global_nativeSendMessageReturnForwardFee(cell $msg, int $mode) impure asm """
+    SENDMSG
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+(slice, cell) $Slice$_fun_loadRef(slice $self) impure asm( -> 1 0) """
+    LDREF
+""";
+
+cell $Slice$_fun_loadRef$not_mut(slice $self) impure inline_ref {
+    return $self~$Slice$_fun_loadRef();
+}
+
+int load_int$not_mut(slice $self, int $l) impure inline_ref {
+    return $self~load_int($l);
+}
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+;; compute-phase-errors_ComputePhaseErrorsTester.native.fc
+() stack_overflow() impure asm """
+    <{
+    }>CONT // c
+    0 SETNUMARGS // c'
+    2 PUSHINT // c' 2
+    SWAP // 2 c'
+    1 -1 SETCONTARGS
+""";
+
+;; compute-phase-errors_ComputePhaseErrorsTester.constants.fc
+;; Cell lqKW0iTyhcZ77pPDD4owkVfw2qNdxbh+QQt4YwoJz8c=
+cell __gen_cell_cell_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7() asm """
+    B{b5ee9c724101010100020000004cacb9cd} B>boc PUSHREF
+""";
+
+;; Cell wzPzl5YA+TdUXBpSo+ziPzTMGWy+GyMhwfWSnbjHnjQ=
+cell __gen_cell_cell_c333f3979600f937545c1a52a3ece23f34cc196cbe1b2321c1f5929db8c79e34() asm """
+    B{b5ee9c72410104010050000101c0010203d008020300410000000000000000000000000000000000000000000000000000000000000000100041000000000000000000000000000000000000000000000000000000000000000030b31b4f55} B>boc PUSHREF
+""";
+
+;; compute-phase-errors_ComputePhaseErrorsTester.storage.fc
+;;
+;; Type: ExitCode4
+;; Header: 0x00000004
+;; TLB: exit_code4#00000004 val0:uint2 val1:uint2 = ExitCode4
+;;
+
+(slice, ((int, int))) $ExitCode4$_load_without_opcode(slice sc_0) inline {
+    var v'val0 = sc_0~load_uint(2);
+    var v'val1 = sc_0~load_uint(2);
+    return (sc_0, (v'val0, v'val1));
+}
+
+;;
+;; Type: ComputePhaseErrorsTester
+;;
+
+builder $ComputePhaseErrorsTester$_store(builder build_0, (int, cell) v) inline {
+    var (v'tmpI, v'tmpC) = v;
+    build_0 = build_0.store_int(v'tmpI, 257);
+    build_0 = build_0.store_ref(v'tmpC);
+    return build_0;
+}
+
+(slice, ((int, cell))) $ComputePhaseErrorsTester$_load(slice sc_0) inline {
+    var v'tmpI = sc_0~load_int(257);
+    var v'tmpC = sc_0~load_ref();
+    return (sc_0, (v'tmpI, v'tmpC));
+}
+
+(int, cell) $ComputePhaseErrorsTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ComputePhaseErrorsTester$_load();
+    } else {
+        return $ComputePhaseErrorsTester$_contract_init();
+    }
+}
+
+() $ComputePhaseErrorsTester$_contract_store((int, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ComputePhaseErrorsTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ComputePhaseErrorsTester functions
+;;
+
+(int, cell) $ComputePhaseErrorsTester$_contract_init() impure inline {
+    var (($self'tmpI, $self'tmpC)) = (0, __gen_cell_cell_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7());
+    return ($self'tmpI, $self'tmpC);
+}
+
+cell $global_toMapIntCell(slice $x) impure asm """
+    PLDDICT
+""";
+
+() $global_invalidOpcode() impure asm """
+    x{D7FF} @addop
+""";
+
+() $global_drop() impure asm """
+    DROP
+""";
+
+cell $global_typeCheckError() impure asm """
+    42 PUSHINT
+""";
+
+;;
+;; Get methods of a Contract ComputePhaseErrorsTester
+;;
+
+;;
+;; Routing of a Contract ComputePhaseErrorsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'tmpI, $self'tmpC) = $ComputePhaseErrorsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive ExitCode4 message
+        if (op == 4) {
+            var ($msg'val0, $msg'val1) = in_msg~$ExitCode4$_load_without_opcode();
+            int $targetCode = 4;
+            int $failed = true;
+            try {
+                $self'tmpI = (115792089237316195423570985008687907853269984665640564039457584007913129639935 + $msg'val1);
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(54296, $failed);
+            try {
+                $self'tmpI = (-115792089237316195423570985008687907853269984665640564039457584007913129639936 - $msg'val1);
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(13102, $failed);
+            try {
+                $self'tmpI = (- (-115792089237316195423570985008687907853269984665640564039457584007913129639936 + $msg'val0));
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(2696, $failed);
+            try {
+                $self'tmpI = (57896044618658097711785492504343953926634992332820282019728792003956564819968 * ($msg'val1 + 1));
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(43549, $failed);
+            try {
+                $self'tmpI = (-115792089237316195423570985008687907853269984665640564039457584007913129639936 / (- $msg'val1));
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(13733, $failed);
+            try {
+                $self'tmpI = (1 / $msg'val0);
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(27951, $failed);
+            try {
+                $self'tmpI = (1 % $msg'val0);
+                $failed = false;
+            } catch (_, $exitCode) {
+                throw_if($exitCode, ($exitCode != $targetCode));
+            }
+            throw_unless(34908, $failed);
+            throw($targetCode);
+            ;; Persist state
+            $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "0" message
+    if (text_op == 0xa0eacc9676d4e13d5bade93200eee2734baf0ad2256df4ee1983c5e6ce29c388) {
+        throw(0);
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "1" message
+    if (text_op == 0x95d3edce5382f1b2fb94f9d0aa8f5ba94a6b25cdb617dc85a17fdeaadbc17084) {
+        throw(1);
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "2" message
+    if (text_op == 0xb55433a286138a2f29c1d5e51730f96d7bf82a2b481e69f87376b5c544a131fb) {
+        repeat (100) {
+            $global_drop();
+        }
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "3" message
+    if (text_op == 0x5e574f82b26092395dc2ca9e4919ccae9f833cf3121d67649ad13dd2f2b5c0ba) {
+        stack_overflow();
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "5" message
+    if (text_op == 0x2b6e638e90f239c5405711352d94084b4da68f156b4a5086b5b9fe763f5793ff) {
+        $self'tmpC = $Builder$_fun_endCell(store_uint($global_beginCell(), -1, 512));
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "6" message
+    if (text_op == 0xefc7c440b63c20e06c16ec79adc59bac9cdbf9d58d6a04400eb2617ef265cc5d) {
+        $global_invalidOpcode();
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "7" message
+    if (text_op == 0xdb321a8db51b45504e8268cd0c427d5713b6a79ec5a4ce278e1852ddb67b5465) {
+        __tact_not_null(__tact_dict_get_int_int($global_typeCheckError(), 257, 0, 257));
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "8" message
+    if (text_op == 0x116acce14c39a49b635af78fcb5ea3adb6927b3350dc1f69dd98a072041eee81) {
+        int $targetCode = 8;
+        int $failed = true;
+        try {
+            $self'tmpC = $Builder$_fun_endCell(store_int(store_int(store_int(store_int(store_int($global_beginCell(), 0, 250), 0, 250), 0, 250), 0, 250), 0, 24));
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(2983, $failed);
+        try {
+            $self'tmpC = $Builder$_fun_endCell($Builder$_fun_storeRef($global_emptyCell(), $Builder$_fun_storeRef($global_emptyCell(), $Builder$_fun_storeRef($global_emptyCell(), $Builder$_fun_storeRef($global_emptyCell(), $Builder$_fun_storeRef($global_emptyCell(), $global_beginCell()))))));
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(19158, $failed);
+        throw($targetCode);
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "9" message
+    if (text_op == 0xca697373fc1e9c93eb803b314d0b1f27cced05475c8e1b2d17fe2dd2d26b4aa5) {
+        int $targetCode = 9;
+        int $failed = true;
+        try {
+            $self'tmpI = load_int$not_mut($global_emptySlice(), 1);
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(16776, $failed);
+        try {
+            $self'tmpC = $Slice$_fun_loadRef$not_mut($global_emptySlice());
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(4287, $failed);
+        throw($targetCode);
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "10" message
+    if (text_op == 0x96e3a684b0d1207cbbca4ef2f0ca101266f20463fe8075b800dcab0f7e7e4afa) {
+        cell $m = $global_toMapIntCell($Cell$_fun_beginParse(__gen_cell_cell_c333f3979600f937545c1a52a3ece23f34cc196cbe1b2321c1f5929db8c79e34()));
+        $self'tmpC = __tact_not_null(__tact_dict_get_int_cell($m, 257, 0));
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "11" message
+    if (text_op == 0xe64254bcc538816d7331bedecc7cf89e0740e3a29b9c213846f281c8ef3a3b62) {
+        $global_nativeSendMessageReturnForwardFee($global_emptyCell(), 0);
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Receive "13" message
+    if (text_op == 0x0647ebd4b47b9e7dfd594694ca63709c8375f470cac22cee1a119fa60d3e450f) {
+        int $counter = 0;
+        repeat (2147483647) {
+            $counter = $counter + 1;
+        }
+        ;; Persist state
+        $ComputePhaseErrorsTester$_contract_store(($self'tmpI, $self'tmpC));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

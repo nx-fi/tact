@@ -1,0 +1,127 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/benchmarks/contracts/output/benchmark_sha256_big_Sha256Big.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $HashData$_load_without_opcode
+  DECLPROC $Sha256Big$_store
+  DECLPROC $Sha256Big$_load
+  DECLPROC $Sha256Big$_contract_init
+  DECLPROC $Sha256Big$_contract_load
+  DECLPROC $Sha256Big$_contract_store
+  DECLPROC $Sha256Big$_fun_res
+  68675 DECLMETHOD %res
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $HashData$_load_without_opcode PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $Sha256Big$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $Sha256Big$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Sha256Big$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $Sha256Big$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Sha256Big$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $Sha256Big$_contract_init INLINECALLDICT
+  }>
+  $Sha256Big$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $Sha256Big$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Sha256Big$_fun_res PROCREF:<{
+    DUP
+  }>
+  %res PROC:<{
+    $Sha256Big$_contract_load INLINECALLDICT
+    $Sha256Big$_fun_res INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Sha256Big$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    3211612486 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $HashData$_load_without_opcode INLINECALLDICT
+      NIP
+      __tact_sha256 CALLDICT
+      ADD
+      $Sha256Big$_contract_store INLINECALLDICT
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $Sha256Big$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

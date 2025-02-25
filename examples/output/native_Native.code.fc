@@ -1,0 +1,121 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; native_Native.headers.fc
+;;
+;; Header files for Native
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Native$_store
+builder $Native$_store(builder build_0, (int) v) inline;
+
+;; $Native$_load
+(slice, ((int))) $Native$_load(slice sc_0) inline;
+
+;; $Native$_contract_init
+(int) $Native$_contract_init() impure inline;
+
+;; $Native$_contract_load
+(int) $Native$_contract_load() impure inline_ref;
+
+;; $Native$_contract_store
+() $Native$_contract_store((int) v) impure inline;
+
+
+;; native_Native.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; native_Native.native.fc
+int hello_world() {
+    return 1000;
+}
+
+;; native_Native.storage.fc
+;;
+;; Type: Native
+;;
+
+builder $Native$_store(builder build_0, (int) v) inline {
+    var (v'value) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    return build_0;
+}
+
+(slice, ((int))) $Native$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+(int) $Native$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Native$_load();
+    } else {
+        return $Native$_contract_init();
+    }
+}
+
+() $Native$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Native$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Native functions
+;;
+
+(int) $Native$_contract_init() impure inline {
+    var (($self'value)) = (null());
+    $self'value = 0;
+    return ($self'value);
+}
+
+;;
+;; Get methods of a Contract Native
+;;
+
+;;
+;; Routing of a Contract Native
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'value) = $Native$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Increment" message
+    if (text_op == 0xff40318ed8b182300c6dd1a3a2657cc1681d77dee4f972289c411ed40098c9bd) {
+        $self'value = ($self'value + hello_world());
+        ;; Persist state
+        $Native$_contract_store(($self'value));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

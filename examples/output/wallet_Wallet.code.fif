@@ -1,0 +1,379 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/examples/output/wallet_Wallet.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Transfer$_store
+  DECLPROC $Transfer$_store_cell
+  DECLPROC $Transfer$_load
+  DECLPROC $TransferMessage$_load_without_opcode
+  DECLPROC $Wallet$_store
+  DECLPROC $Wallet$_load
+  DECLPROC $Wallet$init$_store
+  DECLPROC $Wallet$init$_load
+  DECLPROC $Wallet$_contract_init
+  DECLPROC $Wallet$_contract_load
+  DECLPROC $Wallet$_contract_store
+  DECLPROC $Wallet$_init_child
+  DECLPROC $Wallet$_fun_publicKey
+  DECLPROC $Wallet$_fun_walletId
+  DECLPROC $Wallet$_fun_seqno
+  DECLPROC $SendParameters$_constructor_value_to_mode_body
+  86520 DECLMETHOD %publicKey
+  114762 DECLMETHOD %walletId
+  85143 DECLMETHOD %seqno
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Transfer$_store PROCINLINE:<{
+    s4 s5 XCHG2
+    32 STU
+    s1 s2 XCHG
+    8 STU
+    SWAP
+    STSLICER
+    SWAP
+    STVARUINT16
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      SWAP
+      1 STI
+      STREF
+    }>ELSE<{
+      FALSE
+      s2 POP
+      1 STI
+    }>
+  }>
+  $Transfer$_store_cell PROCINLINE:<{
+    NEWC
+    5 -ROLL
+    $Transfer$_store INLINECALLDICT
+    ENDC
+  }>
+  $Transfer$_load PROCINLINE:<{
+    32 LDU
+    8 LDU
+    LDMSGADDR
+    LDVARUINT16
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    5 -ROLL
+  }>
+  $TransferMessage$_load_without_opcode PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    $Transfer$_load INLINECALLDICT
+    s5 s6 XCHG
+  }>
+  $Wallet$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    32 STU
+    256 STU
+    64 STU
+  }>
+  $Wallet$_load PROCINLINE:<{
+    32 LDU
+    256 LDU
+    64 LDU
+    3 -ROLL
+  }>
+  $Wallet$init$_store PROCINLINE:<{
+    s0 s2 XCHG
+    257 PUSHINT
+    STIX
+    257 PUSHINT
+    STIX
+  }>
+  $Wallet$init$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    -ROT
+  }>
+  $Wallet$_contract_init PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+  }>
+  $Wallet$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Wallet$_load INLINECALLDICT
+      1 3 BLKDROP2
+    }>
+    $Wallet$init$_load INLINECALLDICT
+    s0 s2 XCHG
+    ENDS
+    SWAP
+    $Wallet$_contract_init INLINECALLDICT
+  }>
+  $Wallet$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    3 -ROLL
+    $Wallet$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Wallet$_init_child PROCREF:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    2SWAP
+    $Wallet$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $Wallet$_fun_publicKey PROCREF:<{
+    OVER
+  }>
+  $Wallet$_fun_walletId PROCREF:<{
+    DUP
+  }>
+  $Wallet$_fun_seqno PROCREF:<{
+    s2 PUSH
+  }>
+  $SendParameters$_constructor_value_to_mode_body PROCINLINE:<{
+    2SWAP
+    PUSHNULL
+    PUSHNULL
+    2SWAP
+    TRUE
+  }>
+  %publicKey PROC:<{
+    $Wallet$_contract_load INLINECALLDICT
+    $Wallet$_fun_publicKey INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  %walletId PROC:<{
+    $Wallet$_contract_load INLINECALLDICT
+    $Wallet$_fun_walletId INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  %seqno PROC:<{
+    $Wallet$_contract_load INLINECALLDICT
+    $Wallet$_fun_seqno INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Wallet$_contract_load INLINECALLDICT
+    s0 s4 XCHG
+    IFJMP:<{
+      s2 POP
+      s0 s2 XCHG
+      $Wallet$_contract_store INLINECALLDICT
+    }>
+    0 PUSHINT
+    s3 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s3 PUSH
+      32 PLDU
+      DUP
+      123 EQINT
+      IFJMP:<{
+        2DROP
+        s0 s2 XCHG
+        32 PUSHINT
+        SDSKIPFIRST
+        $TransferMessage$_load_without_opcode INLINECALLDICT
+        s6 POP
+        s3 s2 s1 PUSH3
+        s3 s8 PUSH2
+        $Transfer$_store_cell INLINECALLDICT
+            HASHCU
+        48401 PUSHINT
+        s6 s9 XCPU
+            CHKSIGNU
+        s1 s5 XCHG
+        THROWANYIFNOT
+        17654 PUSHINT
+        s3 s6 XCPU
+        EQUAL
+        s1 s3 XCHG
+        THROWANYIFNOT
+        s0 s4 XCHG
+        INC
+        s1 s4 s4 XCHG3
+        s0 s3 XCHG
+        $SendParameters$_constructor_value_to_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+            STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+            // → Stack state
+            // s0: Builder
+            // s1: `data`
+            // s2: `code`
+            // s3: `body`
+            // s4: `mode`
+            // Group 2: Placing the Builder after code and data, then checking those for nullability
+            s2 XCHG0
+            DUP2
+            ISNULL
+            SWAP
+            ISNULL
+            MUL // note that -1 * -1 wraps back to -1
+            // → Stack state
+            // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+            // s1: `code`
+            // s2: `data`
+            // s3: Builder
+            // s4: `body`
+            // s5: `mode`
+            // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+            <{
+                DROP2 // drop `data` and `code`, since either of those is null
+                b{0} STSLICECONST
+            }> PUSHCONT
+            // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+            <{
+                // _ split_depth:(Maybe (## 5))
+                //   special:(Maybe TickTock)
+                //   code:(Maybe ^Cell)
+                //   data:(Maybe ^Cell)
+                //   library:(Maybe ^Cell)
+                // = StateInit;
+                ROT                // place message Builder on top
+                b{10} STSLICECONST // store Maybe = true, Either = false
+                // Start composing inlined StateInit
+                b{00} STSLICECONST // store split_depth and special first
+                STDICT             // store code
+                STDICT             // store data
+                b{0} STSLICECONST  // store library
+            }> PUSHCONT
+            // Group 3: IFELSE that does the branching shown above
+            IFELSE
+            // → Stack state
+            // s0: Builder
+            // s1: null or StateInit
+            // s2: `body`
+            // s3: `mode`
+            // Group 4: Finalizing the message
+            STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+            ENDC
+            // → Stack state
+            // s0: Cell
+            // s1: `mode`
+            // Group 5: Sending the message, with `mode` on top
+            SWAP
+            SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+        s0 s2 XCHG
+        $Wallet$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      SWAP
+    }>
+    OVER
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      s2 POP
+      INC
+      s0 s2 XCHG
+      $Wallet$_contract_store INLINECALLDICT
+    }>
+    0 EQINT
+    IF:<{
+      s2 PUSH
+      HASHSU
+      s3 POP
+      s2 PUSH
+      60529586900441909508163366315693238357781362892506273907639555627111304786502 PUSHINT
+      EQUAL
+      IFJMP:<{
+        s2 POP
+        s0 s2 XCHG
+        $Wallet$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s2 PUSH
+      6394821005585434778314826493057958727299638479680279508357575356610368139954 PUSHINT
+      EQUAL
+      IFJMP:<{
+        s2 POP
+        INC
+        s0 s2 XCHG
+        $Wallet$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s2 PUSH
+      52588023888426133927087855997776392480070287065023594941918871038457014836518 PUSHINT
+      EQUAL
+      IFJMP:<{
+        s2 POP
+        INC
+        s0 s2 XCHG
+        $Wallet$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s0 s2 XCHG
+      70845166824474961660404539579183775280814018357735859006660992311266151320569 PUSHINT
+      EQUAL
+      IFJMP:<{
+        s0 s2 XCHG
+        $Wallet$_contract_store INLINECALLDICT
+        RETALT
+      }>
+    }>ELSE<{
+      s2 POP
+    }>
+    INC
+    s0 s2 XCHG
+    $Wallet$_contract_store INLINECALLDICT
+  }>
+}END>c

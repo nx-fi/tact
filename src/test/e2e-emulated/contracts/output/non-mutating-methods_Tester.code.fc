@@ -1,0 +1,180 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; non-mutating-methods_Tester.headers.fc
+;;
+;; Header files for Tester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $SomeStruct$_get_i
+_ $SomeStruct$_get_i((int, int) v) inline;
+
+;; $SomeStruct$_get_b
+_ $SomeStruct$_get_b((int, int) v) inline;
+
+;; $SomeStruct$_not_null
+((int, int)) $SomeStruct$_not_null(tuple v) inline;
+
+;; $SomeStruct$_as_optional
+tuple $SomeStruct$_as_optional((int, int) v) inline;
+
+;; $Tester$_contract_init
+tuple $Tester$_contract_init() impure inline;
+
+;; $Tester$_contract_load
+tuple $Tester$_contract_load() impure inline_ref;
+
+;; $Tester$_contract_store
+() $Tester$_contract_store(tuple v) impure inline;
+
+;; $SomeStruct$_fun_equal
+int $SomeStruct$_fun_equal(tuple $self, tuple $other) impure inline_ref;
+
+;; $SomeStruct$_constructor_i_b
+((int, int)) $SomeStruct$_constructor_i_b(int $i, int $b) inline;
+
+;; $Tester$_fun_test1
+(tuple, int) $Tester$_fun_test1(tuple $self) impure inline_ref;
+
+
+;; non-mutating-methods_Tester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X0, X1 -> tuple __tact_tuple_create_2((X0, X1) v) asm """
+    2 TUPLE
+""";
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+;; non-mutating-methods_Tester.storage.fc
+;;
+;; Type: SomeStruct
+;; TLB: _ i:int257 b:bool = SomeStruct
+;;
+
+_ $SomeStruct$_get_i((int, int) v) inline {
+    var (v'i, v'b) = v;
+    return v'i;
+}
+
+_ $SomeStruct$_get_b((int, int) v) inline {
+    var (v'i, v'b) = v;
+    return v'b;
+}
+
+((int, int)) $SomeStruct$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'i, int vvv'b) = __tact_tuple_destroy_2(v);
+    return (vvv'i, vvv'b);
+}
+
+tuple $SomeStruct$_as_optional((int, int) v) inline {
+    var (v'i, v'b) = v;
+    return __tact_tuple_create_2(v'i, v'b);
+}
+
+((int, int)) $SomeStruct$_constructor_i_b(int $i, int $b) inline {
+    return ($i, $b);
+}
+
+;;
+;; Type: Tester
+;;
+
+tuple $Tester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Tester$_contract_init();
+    }
+}
+
+() $Tester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Tester functions
+;;
+
+tuple $Tester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+int $SomeStruct$_fun_equal(tuple $self, tuple $other) impure inline_ref {
+    var ($self) = $self;
+    var ($other) = $other;
+    if (( (null?($self)) ? (null?($other)) : (false) )) {
+        return true;
+    }
+    if (( (null?($self)) ? (true) : (null?($other)) )) {
+        return false;
+    }
+    return ( (($SomeStruct$_get_i($SomeStruct$_not_null($self)) == $SomeStruct$_get_i($SomeStruct$_not_null($other)))) ? (($SomeStruct$_get_b($SomeStruct$_not_null($self)) == $SomeStruct$_get_b($SomeStruct$_not_null($other)))) : (false) );
+}
+
+(tuple, int) $Tester$_fun_test1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var ($s1'i, $s1'b) = $SomeStruct$_constructor_i_b(42, true);
+    var ($s2'i, $s2'b) = $SomeStruct$_constructor_i_b(42, false);
+    tuple $s3 = null();
+    var $fresh$ret_585 = ( (( ($SomeStruct$_fun_equal($SomeStruct$_as_optional(($s1'i, $s1'b)), $SomeStruct$_as_optional(($s1'i, $s1'b)))) ? ((~ $SomeStruct$_fun_equal($SomeStruct$_as_optional(($s1'i, $s1'b)), $SomeStruct$_as_optional(($s2'i, $s2'b))))) : (false) )) ? ((~ $SomeStruct$_fun_equal($s3, $SomeStruct$_as_optional(($s2'i, $s2'b))))) : (false) );
+    return ($self, $fresh$ret_585);
+}
+
+;;
+;; Get methods of a Contract Tester
+;;
+
+_ %test1() method_id(70304) {
+    var self = $Tester$_contract_load();
+    var res = self~$Tester$_fun_test1();
+    return res;
+}
+
+;;
+;; Routing of a Contract Tester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Tester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Tester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

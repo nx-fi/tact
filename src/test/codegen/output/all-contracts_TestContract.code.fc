@@ -1,0 +1,108 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; all-contracts_TestContract.headers.fc
+;;
+;; Header files for TestContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $TestContract$_contract_init
+tuple $TestContract$_contract_init() impure inline;
+
+;; $TestContract$_contract_load
+tuple $TestContract$_contract_load() impure inline_ref;
+
+;; $TestContract$_fun_testEq
+(tuple, int) $TestContract$_fun_testEq(tuple $self, cell $s) impure inline_ref;
+
+;; $TestContract$_fun_testNeq
+(tuple, int) $TestContract$_fun_testNeq(tuple $self, cell $s) impure inline_ref;
+
+
+;; all-contracts_TestContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; all-contracts_TestContract.native.fc
+;; an empty FunC file to test imports of files with .func extension
+
+;; all-contracts_TestContract.storage.fc
+;;
+;; Type: TestContract
+;;
+
+tuple $TestContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $TestContract$_contract_init();
+    }
+}
+
+;;
+;; Contract TestContract functions
+;;
+
+tuple $TestContract$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $TestContract$_fun_testEq(tuple $self, cell $s) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_1920 = null?($s);
+    return ($self, $fresh$ret_1920);
+}
+
+(tuple, int) $TestContract$_fun_testNeq(tuple $self, cell $s) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_1921 = (~ null?($s));
+    return ($self, $fresh$ret_1921);
+}
+
+;;
+;; Get methods of a Contract TestContract
+;;
+
+_ %testEq(cell $s) method_id(79960) {
+    cell $s = $s;
+    var self = $TestContract$_contract_load();
+    var res = self~$TestContract$_fun_testEq($s);
+    return res;
+}
+
+_ %testNeq(cell $s) method_id(114347) {
+    cell $s = $s;
+    var self = $TestContract$_contract_load();
+    var res = self~$TestContract$_fun_testNeq($s);
+    return res;
+}
+
+;;
+;; Routing of a Contract TestContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $TestContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}

@@ -1,0 +1,159 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; functions_Functions.headers.fc
+;;
+;; Header files for Functions
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Add$_load_without_opcode
+(slice, ((int))) $Add$_load_without_opcode(slice sc_0) inline;
+
+;; $Sub$_load_without_opcode
+(slice, ((int))) $Sub$_load_without_opcode(slice sc_0) inline;
+
+;; $Functions$_store
+builder $Functions$_store(builder build_0, (int) v) inline;
+
+;; $Functions$_load
+(slice, ((int))) $Functions$_load(slice sc_0) inline;
+
+;; $Functions$_contract_init
+(int) $Functions$_contract_init() impure inline;
+
+;; $Functions$_contract_load
+(int) $Functions$_contract_load() impure inline_ref;
+
+;; $Functions$_contract_store
+() $Functions$_contract_store((int) v) impure inline;
+
+;; $Functions$_fun_update
+((int), ()) $Functions$_fun_update((int) $self, int $delta) impure inline_ref;
+
+
+;; functions_Functions.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; functions_Functions.storage.fc
+;;
+;; Type: Add
+;; Header: 0x3194e434
+;; TLB: add#3194e434 value:int257 = Add
+;;
+
+(slice, ((int))) $Add$_load_without_opcode(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+;;
+;; Type: Sub
+;; Header: 0x9d605aeb
+;; TLB: sub#9d605aeb value:int257 = Sub
+;;
+
+(slice, ((int))) $Sub$_load_without_opcode(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+;;
+;; Type: Functions
+;;
+
+builder $Functions$_store(builder build_0, (int) v) inline {
+    var (v'value) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    return build_0;
+}
+
+(slice, ((int))) $Functions$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+(int) $Functions$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Functions$_load();
+    } else {
+        return $Functions$_contract_init();
+    }
+}
+
+() $Functions$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Functions$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Functions functions
+;;
+
+(int) $Functions$_contract_init() impure inline {
+    var (($self'value)) = (null());
+    $self'value = 0;
+    return ($self'value);
+}
+
+((int), ()) $Functions$_fun_update((int) $self, int $delta) impure inline_ref {
+    var (($self'value)) = $self;
+    $self'value = ($self'value + $delta);
+    return (($self'value), ());
+}
+
+;;
+;; Get methods of a Contract Functions
+;;
+
+;;
+;; Routing of a Contract Functions
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'value) = $Functions$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var (op, _) = in_msg~load_uint_quiet(32);
+    ;; Receive Add message
+    if (op == 831841332) {
+        var ($msg'value) = in_msg~$Add$_load_without_opcode();
+        throw_unless(55789, ($msg'value > 0));
+        ($self'value)~$Functions$_fun_update($msg'value);
+        ;; Persist state
+        $Functions$_contract_store(($self'value));
+        return ();
+    }
+    
+    ;; Receive Sub message
+    if (op == 2640337643) {
+        var ($msg'value) = in_msg~$Sub$_load_without_opcode();
+        throw_unless(55789, ($msg'value > 0));
+        ($self'value)~$Functions$_fun_update((- $msg'value));
+        ;; Persist state
+        $Functions$_contract_store(($self'value));
+        return ();
+    }
+    
+    throw(130);
+}

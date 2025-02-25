@@ -1,0 +1,321 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; deep_C.headers.fc
+;;
+;; Header files for C
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $C$_store
+builder $C$_store(builder build_0, (slice) v) inline;
+
+;; $C$_load
+(slice, ((slice))) $C$_load(slice sc_0) inline;
+
+;; $C$init$_store
+builder $C$init$_store(builder build_0, (slice) v) inline;
+
+;; $C$init$_load
+(slice, ((slice))) $C$init$_load(slice sc_0) inline;
+
+;; $C$_contract_init
+(slice) $C$_contract_init(slice $parent) impure inline;
+
+;; $C$_contract_load
+(slice) $C$_contract_load() impure inline_ref;
+
+;; $C$_contract_store
+() $C$_contract_store((slice) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $C$_init_child
+(cell, cell) $C$_init_child(slice $parent) inline_ref;
+
+;; $SendParameters$_constructor_value_to_mode_bounce_code_data_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_bounce_code_data_body(int $value, slice $to, int $mode, int $bounce, cell $code, cell $data, cell $body) inline;
+
+
+;; deep_C.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+;; deep_C.constants.fc
+;; Cell /DyCESRmWB26I/kEzRoJcjwIaa3qAEW9ZzPqT3bb0nI=
+cell __gen_cell_cell_fc3c82112466581dba23f904cd1a09723c0869adea0045bd6733ea4f76dbd272() asm """
+    B{b5ee9c7241010101000e000018000000004d65737361676532cf81fb3d} B>boc PUSHREF
+""";
+
+;; deep_C.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_bounce_code_data_body(int $value, slice $to, int $mode, int $bounce, cell $code, cell $data, cell $body) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: C
+;;
+
+builder $C$_store(builder build_0, (slice) v) inline {
+    var (v'parent) = v;
+    build_0 = build_0.store_slice(v'parent);
+    return build_0;
+}
+
+(slice, ((slice))) $C$_load(slice sc_0) inline {
+    var v'parent = sc_0~load_msg_addr();
+    return (sc_0, (v'parent));
+}
+
+builder $C$init$_store(builder build_0, (slice) v) inline {
+    var (v'parent) = v;
+    build_0 = build_0.store_slice(v'parent);
+    return build_0;
+}
+
+(slice, ((slice))) $C$init$_load(slice sc_0) inline {
+    var v'parent = sc_0~load_msg_addr();
+    return (sc_0, (v'parent));
+}
+
+(slice) $C$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$C$_load();
+    } else {
+        (slice $parent) = $sc~$C$init$_load();
+        $sc.end_parse();
+        return $C$_contract_init($parent);
+    }
+}
+
+() $C$_contract_store((slice) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $C$_store(b, v);
+    set_data(b.end_cell());
+}
+
+(cell, cell) $C$_init_child(slice $parent) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: C
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $C$init$_store(b, ($parent));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract C functions
+;;
+
+(slice) $C$_contract_init(slice $parent) impure inline {
+    var (($self'parent)) = (null());
+    $self'parent = $parent;
+    return ($self'parent);
+}
+
+;;
+;; Get methods of a Contract C
+;;
+
+;;
+;; Routing of a Contract C
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'parent) = $C$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Message" message
+    if (text_op == 0x2796bd8dcb3155bf85d91ad1db643a3759a7209173fd2c1959d190a66b7aaf38) {
+        var ($init'code, $init'data) = $C$_init_child($self'parent);
+        slice $address = $global_contractAddress(($init'code, $init'data));
+        $global_send($SendParameters$_constructor_value_to_mode_bounce_code_data_body(0, $address, 66, true, $init'code, $init'data, __gen_cell_cell_fc3c82112466581dba23f904cd1a09723c0869adea0045bd6733ea4f76dbd272()));
+        ;; Persist state
+        $C$_contract_store(($self'parent));
+        return ();
+    }
+    ;; Receive "Message2" message
+    if (text_op == 0x5d83a38f50c03d8297a4969a4525917e026c6a16582eb8cf31e5777855e3d71d) {
+        ;; Persist state
+        $C$_contract_store(($self'parent));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

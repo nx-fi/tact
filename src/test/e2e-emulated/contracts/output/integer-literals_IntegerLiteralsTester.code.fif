@@ -1,0 +1,206 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/integer-literals_IntegerLiteralsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $IntegerLiteralsTester$_contract_init
+  DECLPROC $IntegerLiteralsTester$_contract_load
+  DECLPROC $IntegerLiteralsTester$_contract_store
+  DECLPROC $IntegerLiteralsTester$_fun_decLiteral1
+  DECLPROC $IntegerLiteralsTester$_fun_decLiteral2
+  DECLPROC $IntegerLiteralsTester$_fun_decLiteral3
+  DECLPROC $IntegerLiteralsTester$_fun_hexLiteral1
+  DECLPROC $IntegerLiteralsTester$_fun_hexLiteral2
+  DECLPROC $IntegerLiteralsTester$_fun_hexLiteral3
+  DECLPROC $IntegerLiteralsTester$_fun_binLiteral1
+  DECLPROC $IntegerLiteralsTester$_fun_binLiteral2
+  DECLPROC $IntegerLiteralsTester$_fun_binLiteral3
+  DECLPROC $IntegerLiteralsTester$_fun_octLiteral1
+  DECLPROC $IntegerLiteralsTester$_fun_octLiteral2
+  DECLPROC $IntegerLiteralsTester$_fun_octLiteral3
+  102042 DECLMETHOD %decLiteral1
+  114425 DECLMETHOD %decLiteral2
+  110296 DECLMETHOD %decLiteral3
+  76310 DECLMETHOD %hexLiteral1
+  72309 DECLMETHOD %hexLiteral2
+  68180 DECLMETHOD %hexLiteral3
+  116259 DECLMETHOD %binLiteral1
+  128576 DECLMETHOD %binLiteral2
+  124513 DECLMETHOD %binLiteral3
+  115972 DECLMETHOD %octLiteral1
+  128359 DECLMETHOD %octLiteral2
+  124230 DECLMETHOD %octLiteral3
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $IntegerLiteralsTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $IntegerLiteralsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $IntegerLiteralsTester$_contract_init INLINECALLDICT
+  }>
+  $IntegerLiteralsTester$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $IntegerLiteralsTester$_fun_decLiteral1 PROCREF:<{
+    123 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_decLiteral2 PROCREF:<{
+    -123 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_decLiteral3 PROCREF:<{
+    1012300000 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_hexLiteral1 PROCREF:<{
+    291 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_hexLiteral2 PROCREF:<{
+    -291 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_hexLiteral3 PROCREF:<{
+    69024612352 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_binLiteral1 PROCREF:<{
+    42 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_binLiteral2 PROCREF:<{
+    -42 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_binLiteral3 PROCREF:<{
+    672 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_octLiteral1 PROCREF:<{
+    83 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_octLiteral2 PROCREF:<{
+    -83 PUSHINT
+  }>
+  $IntegerLiteralsTester$_fun_octLiteral3 PROCREF:<{
+    136937472 PUSHINT
+  }>
+  %decLiteral1 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_decLiteral1 INLINECALLDICT
+    NIP
+  }>
+  %decLiteral2 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_decLiteral2 INLINECALLDICT
+    NIP
+  }>
+  %decLiteral3 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_decLiteral3 INLINECALLDICT
+    NIP
+  }>
+  %hexLiteral1 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_hexLiteral1 INLINECALLDICT
+    NIP
+  }>
+  %hexLiteral2 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_hexLiteral2 INLINECALLDICT
+    NIP
+  }>
+  %hexLiteral3 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_hexLiteral3 INLINECALLDICT
+    NIP
+  }>
+  %binLiteral1 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_binLiteral1 INLINECALLDICT
+    NIP
+  }>
+  %binLiteral2 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_binLiteral2 INLINECALLDICT
+    NIP
+  }>
+  %binLiteral3 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_binLiteral3 INLINECALLDICT
+    NIP
+  }>
+  %octLiteral1 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_octLiteral1 INLINECALLDICT
+    NIP
+  }>
+  %octLiteral2 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_octLiteral2 INLINECALLDICT
+    NIP
+  }>
+  %octLiteral3 PROC:<{
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    $IntegerLiteralsTester$_fun_octLiteral3 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $IntegerLiteralsTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $IntegerLiteralsTester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

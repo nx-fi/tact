@@ -1,0 +1,152 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; contract-with-init-init-parameter_Test.headers.fc
+;;
+;; Header files for Test
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Init$_load
+(slice, ((int))) $Init$_load(slice sc_0) inline;
+
+;; $Test$_store
+builder $Test$_store(builder build_0, (int) v) inline;
+
+;; $Test$_load
+(slice, ((int))) $Test$_load(slice sc_0) inline;
+
+;; $Test$init$_load
+(slice, (((int)))) $Test$init$_load(slice sc_0) inline;
+
+;; $Test$_contract_init
+(int) $Test$_contract_init((int) $init) impure inline;
+
+;; $Test$_contract_load
+(int) $Test$_contract_load() impure inline_ref;
+
+;; $Test$_contract_store
+() $Test$_contract_store((int) v) impure inline;
+
+;; $Test$_fun_data
+((int), int) $Test$_fun_data((int) $self) impure inline_ref;
+
+
+;; contract-with-init-init-parameter_Test.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; contract-with-init-init-parameter_Test.storage.fc
+;;
+;; Type: Init
+;; TLB: _ foo:uint8 = Init
+;;
+
+(slice, ((int))) $Init$_load(slice sc_0) inline {
+    var v'foo = sc_0~load_uint(8);
+    return (sc_0, (v'foo));
+}
+
+;;
+;; Type: Test
+;;
+
+builder $Test$_store(builder build_0, (int) v) inline {
+    var (v'foo) = v;
+    build_0 = build_0.store_int(v'foo, 257);
+    return build_0;
+}
+
+(slice, ((int))) $Test$_load(slice sc_0) inline {
+    var v'foo = sc_0~load_int(257);
+    return (sc_0, (v'foo));
+}
+
+(slice, (((int)))) $Test$init$_load(slice sc_0) inline {
+    var v'init = sc_0~$Init$_load();
+    return (sc_0, (v'init));
+}
+
+(int) $Test$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Test$_load();
+    } else {
+        ((int) $init) = $sc~$Test$init$_load();
+        $sc.end_parse();
+        return $Test$_contract_init($init);
+    }
+}
+
+() $Test$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Test$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Test functions
+;;
+
+(int) $Test$_contract_init((int) $init) impure inline {
+    var (($init'foo)) = $init;
+    var (($self'foo)) = (null());
+    $self'foo = $init'foo;
+    return ($self'foo);
+}
+
+((int), int) $Test$_fun_data((int) $self) impure inline_ref {
+    var (($self'foo)) = $self;
+    var $fresh$ret_257 = $self'foo;
+    return (($self'foo), $fresh$ret_257);
+}
+
+;;
+;; Get methods of a Contract Test
+;;
+
+_ %data() method_id(100194) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_data();
+    return res;
+}
+
+;;
+;; Routing of a Contract Test
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'foo) = $Test$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Test$_contract_store(($self'foo));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

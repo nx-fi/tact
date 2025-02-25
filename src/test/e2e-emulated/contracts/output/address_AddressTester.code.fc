@@ -1,0 +1,145 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; address_AddressTester.headers.fc
+;;
+;; Header files for AddressTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $AddressTester$_contract_init
+tuple $AddressTester$_contract_init() impure inline;
+
+;; $AddressTester$_contract_load
+tuple $AddressTester$_contract_load() impure inline_ref;
+
+;; $AddressTester$_contract_store
+() $AddressTester$_contract_store(tuple v) impure inline;
+
+;; $AddressTester$_fun_test1
+(tuple, slice) $AddressTester$_fun_test1(tuple $self) impure inline_ref;
+
+;; $AddressTester$_fun_test2
+(tuple, slice) $AddressTester$_fun_test2(tuple $self) impure inline_ref;
+
+;; $AddressTester$_fun_test3
+(tuple, slice) $AddressTester$_fun_test3(tuple $self) impure inline_ref;
+
+
+;; address_AddressTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; address_AddressTester.constants.fc
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN
+slice __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+""";
+
+;; address_AddressTester.storage.fc
+;;
+;; Type: AddressTester
+;;
+
+tuple $AddressTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $AddressTester$_contract_init();
+    }
+}
+
+() $AddressTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract AddressTester functions
+;;
+
+tuple $AddressTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, slice) $AddressTester$_fun_test1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_143 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_143);
+}
+
+(tuple, slice) $AddressTester$_fun_test2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_144 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_144);
+}
+
+(tuple, slice) $AddressTester$_fun_test3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_145 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_145);
+}
+
+;;
+;; Get methods of a Contract AddressTester
+;;
+
+_ %test1() method_id(70304) {
+    var self = $AddressTester$_contract_load();
+    var res = self~$AddressTester$_fun_test1();
+    return res;
+}
+
+_ %test2() method_id(74435) {
+    var self = $AddressTester$_contract_load();
+    var res = self~$AddressTester$_fun_test2();
+    return res;
+}
+
+_ %test3() method_id(78562) {
+    var self = $AddressTester$_contract_load();
+    var res = self~$AddressTester$_fun_test3();
+    return res;
+}
+
+;;
+;; Routing of a Contract AddressTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $AddressTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $AddressTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

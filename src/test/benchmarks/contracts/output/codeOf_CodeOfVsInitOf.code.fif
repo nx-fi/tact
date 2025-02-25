@@ -1,0 +1,150 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/benchmarks/contracts/output/codeOf_CodeOfVsInitOf.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $StateInit$_get_code
+  DECLPROC $Child$init$_store
+  DECLPROC $CodeOfVsInitOf$_contract_init
+  DECLPROC $CodeOfVsInitOf$_contract_load
+  DECLPROC $CodeOfVsInitOf$_contract_store
+  DECLPROC $Child$_code_child
+  DECLPROC $CodeOfVsInitOf$_fun_withCodeOf
+  DECLPROC $Child$_init_child
+  DECLPROC $CodeOfVsInitOf$_fun_withInitOf
+  DECLPROC $CodeOfVsInitOf$_fun_codeOfSelf
+  DECLPROC $CodeOfVsInitOf$_fun_myCode
+  85163 DECLMETHOD %withCodeOf
+  77101 DECLMETHOD %withInitOf
+  95696 DECLMETHOD %codeOfSelf
+  73046 DECLMETHOD %myCode
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $StateInit$_get_code PROCINLINE:<{
+    DROP
+  }>
+  $Child$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $CodeOfVsInitOf$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $CodeOfVsInitOf$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $CodeOfVsInitOf$_contract_init INLINECALLDICT
+  }>
+  $CodeOfVsInitOf$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $Child$_code_child PROCINLINE:<{
+        B{b5ee9c7201010301005f000114ff00f4a413f4bcf2c80b010186d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09930c87f01ca00c9ed54e030f2c082020014ed44d0d20030916de06d} B>boc PUSHREF
+  }>
+  $CodeOfVsInitOf$_fun_withCodeOf PROCREF:<{
+    $Child$_code_child INLINECALLDICT
+  }>
+  $Child$_init_child PROCREF:<{
+        B{b5ee9c7201010301005f000114ff00f4a413f4bcf2c80b010186d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09930c87f01ca00c9ed54e030f2c082020014ed44d0d20030916de06d} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $Child$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $CodeOfVsInitOf$_fun_withInitOf PROCREF:<{
+    $Child$_init_child INLINECALLDICT
+    $StateInit$_get_code INLINECALLDICT
+  }>
+  $CodeOfVsInitOf$_fun_codeOfSelf PROCREF:<{
+    MYCODE
+  }>
+  $CodeOfVsInitOf$_fun_myCode PROCREF:<{
+        MYCODE
+  }>
+  %withCodeOf PROC:<{
+    $CodeOfVsInitOf$_contract_load INLINECALLDICT
+    $CodeOfVsInitOf$_fun_withCodeOf INLINECALLDICT
+    NIP
+  }>
+  %withInitOf PROC:<{
+    $CodeOfVsInitOf$_contract_load INLINECALLDICT
+    $CodeOfVsInitOf$_fun_withInitOf INLINECALLDICT
+    NIP
+  }>
+  %codeOfSelf PROC:<{
+    $CodeOfVsInitOf$_contract_load INLINECALLDICT
+    $CodeOfVsInitOf$_fun_codeOfSelf INLINECALLDICT
+    NIP
+  }>
+  %myCode PROC:<{
+    $CodeOfVsInitOf$_contract_load INLINECALLDICT
+    $CodeOfVsInitOf$_fun_myCode INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $CodeOfVsInitOf$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $CodeOfVsInitOf$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

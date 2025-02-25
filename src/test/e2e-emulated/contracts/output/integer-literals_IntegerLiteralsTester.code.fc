@@ -1,0 +1,274 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; integer-literals_IntegerLiteralsTester.headers.fc
+;;
+;; Header files for IntegerLiteralsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $IntegerLiteralsTester$_contract_init
+tuple $IntegerLiteralsTester$_contract_init() impure inline;
+
+;; $IntegerLiteralsTester$_contract_load
+tuple $IntegerLiteralsTester$_contract_load() impure inline_ref;
+
+;; $IntegerLiteralsTester$_contract_store
+() $IntegerLiteralsTester$_contract_store(tuple v) impure inline;
+
+;; $IntegerLiteralsTester$_fun_decLiteral1
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral1(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_decLiteral2
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral2(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_decLiteral3
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral3(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_hexLiteral1
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral1(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_hexLiteral2
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral2(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_hexLiteral3
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral3(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_binLiteral1
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral1(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_binLiteral2
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral2(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_binLiteral3
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral3(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_octLiteral1
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral1(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_octLiteral2
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral2(tuple $self) impure inline_ref;
+
+;; $IntegerLiteralsTester$_fun_octLiteral3
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral3(tuple $self) impure inline_ref;
+
+
+;; integer-literals_IntegerLiteralsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; integer-literals_IntegerLiteralsTester.storage.fc
+;;
+;; Type: IntegerLiteralsTester
+;;
+
+tuple $IntegerLiteralsTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $IntegerLiteralsTester$_contract_init();
+    }
+}
+
+() $IntegerLiteralsTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract IntegerLiteralsTester functions
+;;
+
+tuple $IntegerLiteralsTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_319 = 123;
+    return ($self, $fresh$ret_319);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_320 = -123;
+    return ($self, $fresh$ret_320);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_decLiteral3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_321 = 1012300000;
+    return ($self, $fresh$ret_321);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_322 = 291;
+    return ($self, $fresh$ret_322);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_323 = -291;
+    return ($self, $fresh$ret_323);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_hexLiteral3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_324 = 69024612352;
+    return ($self, $fresh$ret_324);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_325 = 42;
+    return ($self, $fresh$ret_325);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_326 = -42;
+    return ($self, $fresh$ret_326);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_binLiteral3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_327 = 672;
+    return ($self, $fresh$ret_327);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_328 = 83;
+    return ($self, $fresh$ret_328);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_329 = -83;
+    return ($self, $fresh$ret_329);
+}
+
+(tuple, int) $IntegerLiteralsTester$_fun_octLiteral3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_330 = 136937472;
+    return ($self, $fresh$ret_330);
+}
+
+;;
+;; Get methods of a Contract IntegerLiteralsTester
+;;
+
+_ %decLiteral1() method_id(102042) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_decLiteral1();
+    return res;
+}
+
+_ %decLiteral2() method_id(114425) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_decLiteral2();
+    return res;
+}
+
+_ %decLiteral3() method_id(110296) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_decLiteral3();
+    return res;
+}
+
+_ %hexLiteral1() method_id(76310) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_hexLiteral1();
+    return res;
+}
+
+_ %hexLiteral2() method_id(72309) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_hexLiteral2();
+    return res;
+}
+
+_ %hexLiteral3() method_id(68180) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_hexLiteral3();
+    return res;
+}
+
+_ %binLiteral1() method_id(116259) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_binLiteral1();
+    return res;
+}
+
+_ %binLiteral2() method_id(128576) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_binLiteral2();
+    return res;
+}
+
+_ %binLiteral3() method_id(124513) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_binLiteral3();
+    return res;
+}
+
+_ %octLiteral1() method_id(115972) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_octLiteral1();
+    return res;
+}
+
+_ %octLiteral2() method_id(128359) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_octLiteral2();
+    return res;
+}
+
+_ %octLiteral3() method_id(124230) {
+    var self = $IntegerLiteralsTester$_contract_load();
+    var res = self~$IntegerLiteralsTester$_fun_octLiteral3();
+    return res;
+}
+
+;;
+;; Routing of a Contract IntegerLiteralsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $IntegerLiteralsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $IntegerLiteralsTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

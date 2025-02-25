@@ -1,0 +1,249 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; underscore-variable_UnderscoreVariableTestContract.headers.fc
+;;
+;; Header files for UnderscoreVariableTestContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_min_int_int
+(int, int, int) __tact_dict_min_int_int(cell d, int kl, int vl) inline;
+
+;; __tact_dict_next_int_int
+(int, int, int) __tact_dict_next_int_int(cell d, int kl, int pivot, int vl) inline;
+
+;; __tact_dict_set_int_int
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; $UnderscoreVariableTestContract$_store
+builder $UnderscoreVariableTestContract$_store(builder build_0, (int) v) inline;
+
+;; $UnderscoreVariableTestContract$_load
+(slice, ((int))) $UnderscoreVariableTestContract$_load(slice sc_0) inline;
+
+;; $UnderscoreVariableTestContract$_contract_init
+(int) $UnderscoreVariableTestContract$_contract_init() impure inline;
+
+;; $UnderscoreVariableTestContract$_contract_load
+(int) $UnderscoreVariableTestContract$_contract_load() impure inline_ref;
+
+;; $UnderscoreVariableTestContract$_contract_store
+() $UnderscoreVariableTestContract$_contract_store((int) v) impure inline;
+
+;; $UnderscoreVariableTestContract$_fun_increaseSomething
+((int), int) $UnderscoreVariableTestContract$_fun_increaseSomething((int) $self) impure inline_ref;
+
+;; $UnderscoreVariableTestContract$_fun_test1
+((int), int) $UnderscoreVariableTestContract$_fun_test1((int) $self) impure inline_ref;
+
+;; $UnderscoreVariableTestContract$_fun_test2
+((int), int) $UnderscoreVariableTestContract$_fun_test2((int) $self) impure inline_ref;
+
+;; $UnderscoreVariableTestContract$_fun_test3
+((int), int) $UnderscoreVariableTestContract$_fun_test3((int) $self) impure inline_ref;
+
+;; $UnderscoreVariableTestContract$_fun_test4
+((int), int) $UnderscoreVariableTestContract$_fun_test4((int) $self) impure inline_ref;
+
+
+;; underscore-variable_UnderscoreVariableTestContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, int, int) __tact_dict_min_int_int(cell d, int kl, int vl) inline {
+    var (key, value, flag) = idict_get_min?(d, kl);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, int, int) __tact_dict_next_int_int(cell d, int kl, int pivot, int vl) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+;; underscore-variable_UnderscoreVariableTestContract.storage.fc
+;;
+;; Type: UnderscoreVariableTestContract
+;;
+
+builder $UnderscoreVariableTestContract$_store(builder build_0, (int) v) inline {
+    var (v'something) = v;
+    build_0 = build_0.store_int(v'something, 257);
+    return build_0;
+}
+
+(slice, ((int))) $UnderscoreVariableTestContract$_load(slice sc_0) inline {
+    var v'something = sc_0~load_int(257);
+    return (sc_0, (v'something));
+}
+
+(int) $UnderscoreVariableTestContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$UnderscoreVariableTestContract$_load();
+    } else {
+        return $UnderscoreVariableTestContract$_contract_init();
+    }
+}
+
+() $UnderscoreVariableTestContract$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $UnderscoreVariableTestContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract UnderscoreVariableTestContract functions
+;;
+
+(int) $UnderscoreVariableTestContract$_contract_init() impure inline {
+    var (($self'something)) = (null());
+    $self'something = 0;
+    return ($self'something);
+}
+
+((int), int) $UnderscoreVariableTestContract$_fun_increaseSomething((int) $self) impure inline_ref {
+    var (($self'something)) = $self;
+    $self'something = $self'something + 1;
+    var $fresh$ret_1092 = 123;
+    return (($self'something), $fresh$ret_1092);
+}
+
+((int), int) $UnderscoreVariableTestContract$_fun_test1((int) $self) impure inline_ref {
+    var (($self'something)) = $self;
+    try {
+        throw_if(1, true);
+    } catch (_) {
+        var $fresh$ret_1093 = 0;
+        return (($self'something), $fresh$ret_1093);
+    }
+    var $fresh$ret_1094 = 1;
+    return (($self'something), $fresh$ret_1094);
+}
+
+((int), int) $UnderscoreVariableTestContract$_fun_test2((int) $self) impure inline_ref {
+    var (($self'something)) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 2, 257);
+    $m~__tact_dict_set_int_int(257, 2, 4, 257);
+    $m~__tact_dict_set_int_int(257, 3, 6, 257);
+    int $x = 0;
+    var ($fresh$underscore_1096, $v, $fresh$flag_1095) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_1095) {
+        $x = $x + $v;
+        ($fresh$underscore_1096, $v, $fresh$flag_1095) = __tact_dict_next_int_int($m, 257, $fresh$underscore_1096, 257);
+    }
+    var $fresh$ret_1097 = $x;
+    return (($self'something), $fresh$ret_1097);
+}
+
+((int), int) $UnderscoreVariableTestContract$_fun_test3((int) $self) impure inline_ref {
+    var (($self'something)) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 2, 257);
+    $m~__tact_dict_set_int_int(257, 2, 4, 257);
+    $m~__tact_dict_set_int_int(257, 3, 6, 257);
+    int $x = 0;
+    var ($k, $fresh$underscore_1099, $fresh$flag_1098) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_1098) {
+        $x = $x + $k;
+        ($k, $fresh$underscore_1099, $fresh$flag_1098) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_1100 = $x;
+    return (($self'something), $fresh$ret_1100);
+}
+
+((int), int) $UnderscoreVariableTestContract$_fun_test4((int) $self) impure inline_ref {
+    var (($self'something)) = $self;
+    ($self'something)~$UnderscoreVariableTestContract$_fun_increaseSomething();
+    ($self'something)~$UnderscoreVariableTestContract$_fun_increaseSomething();
+    ($self'something)~$UnderscoreVariableTestContract$_fun_increaseSomething();
+    ($self'something)~$UnderscoreVariableTestContract$_fun_increaseSomething();
+    var $fresh$ret_1101 = $self'something;
+    return (($self'something), $fresh$ret_1101);
+}
+
+;;
+;; Get methods of a Contract UnderscoreVariableTestContract
+;;
+
+_ %test1() method_id(70304) {
+    var self = $UnderscoreVariableTestContract$_contract_load();
+    var res = self~$UnderscoreVariableTestContract$_fun_test1();
+    return res;
+}
+
+_ %test2() method_id(74435) {
+    var self = $UnderscoreVariableTestContract$_contract_load();
+    var res = self~$UnderscoreVariableTestContract$_fun_test2();
+    return res;
+}
+
+_ %test3() method_id(78562) {
+    var self = $UnderscoreVariableTestContract$_contract_load();
+    var res = self~$UnderscoreVariableTestContract$_fun_test3();
+    return res;
+}
+
+_ %test4() method_id(82437) {
+    var self = $UnderscoreVariableTestContract$_contract_load();
+    var res = self~$UnderscoreVariableTestContract$_fun_test4();
+    return res;
+}
+
+;;
+;; Routing of a Contract UnderscoreVariableTestContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'something) = $UnderscoreVariableTestContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $UnderscoreVariableTestContract$_contract_store(($self'something));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

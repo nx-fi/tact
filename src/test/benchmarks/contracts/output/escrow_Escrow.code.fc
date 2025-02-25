@@ -1,0 +1,828 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; escrow_Escrow.headers.fc
+;;
+;; Header files for Escrow
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_load_address_opt
+(slice, slice) __tact_load_address_opt(slice cs) inline;
+
+;; __tact_store_address_opt
+builder __tact_store_address_opt(builder b, slice address) inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $JettonWalletData$_store
+builder $JettonWalletData$_store(builder build_0, (int, slice, slice, cell) v) inline;
+
+;; $JettonWalletData$_store_cell
+cell $JettonWalletData$_store_cell((int, slice, slice, cell) v) inline;
+
+;; $JettonTransfer$_store
+builder $JettonTransfer$_store(builder build_0, (int, int, slice, slice, cell, int, slice) v) inline_ref;
+
+;; $JettonTransfer$_store_cell
+cell $JettonTransfer$_store_cell((int, int, slice, slice, cell, int, slice) v) inline;
+
+;; $JettonNotification$_load_without_opcode
+(slice, ((int, int, slice, slice))) $JettonNotification$_load_without_opcode(slice sc_0) inline;
+
+;; $UpdateJettonWalletCode$_load_without_opcode
+(slice, ((cell))) $UpdateJettonWalletCode$_load_without_opcode(slice sc_0) inline;
+
+;; $EscrowData$_store
+builder $EscrowData$_store(builder build_0, (int, slice, slice, int, int, int, slice, cell, slice) v) inline_ref;
+
+;; $TakeEscrowData$_store
+builder $TakeEscrowData$_store(builder build_0, ((int, slice, slice, int, int, int, slice, cell, slice)) v) inline;
+
+;; $TakeEscrowData$_store_cell
+cell $TakeEscrowData$_store_cell(((int, slice, slice, int, int, int, slice, cell, slice)) v) inline;
+
+;; $Escrow$_store
+builder $Escrow$_store(builder build_0, (int, slice, slice, slice, int, int, int, slice, cell) v) inline;
+
+;; $Escrow$_load
+(slice, ((int, slice, slice, slice, int, int, int, slice, cell))) $Escrow$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $Context$_get_sender
+_ $Context$_get_sender((int, slice, int, slice) v) inline;
+
+;; $EscrowData$_to_external
+(int, slice, slice, int, int, int, slice, cell, slice) $EscrowData$_to_external(((int, slice, slice, int, int, int, slice, cell, slice)) v) inline;
+
+;; $Escrow$init$_load
+(slice, ((int, slice, slice, int, int, slice, cell))) $Escrow$init$_load(slice sc_0) inline_ref;
+
+;; $Escrow$_contract_init
+(int, slice, slice, slice, int, int, int, slice, cell) $Escrow$_contract_init(int $id, slice $sellerAddress, slice $guarantorAddress, int $dealAmount, int $guarantorRoyaltyPercent, slice $assetAddress, cell $jettonWalletCode) impure inline;
+
+;; $Escrow$_contract_load
+(int, slice, slice, slice, int, int, int, slice, cell) $Escrow$_contract_load() impure inline_ref;
+
+;; $Escrow$_contract_store
+() $Escrow$_contract_store((int, slice, slice, slice, int, int, int, slice, cell) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $JettonWalletData$_constructor_balance_owner_master_code
+((int, slice, slice, cell)) $JettonWalletData$_constructor_balance_owner_master_code(int $balance, slice $owner, slice $master, cell $code) inline;
+
+;; $StateInit$_constructor_code_data
+((cell, cell)) $StateInit$_constructor_code_data(cell $code, cell $data) inline;
+
+;; $global_calculateJettonWalletAddress
+slice $global_calculateJettonWalletAddress(slice $owner, slice $master, cell $code) impure inline_ref;
+
+;; $SendParameters$_constructor_to_value_body_mode
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_body_mode(slice $to, int $value, cell $body, int $mode) inline;
+
+;; $JettonTransfer$_constructor_queryId_amount_destination_responseDestination_forwardTonAmount_forwardPayload_customPayload
+((int, int, slice, slice, cell, int, slice)) $JettonTransfer$_constructor_queryId_amount_destination_responseDestination_forwardTonAmount_forwardPayload_customPayload(int $queryId, int $amount, slice $destination, slice $responseDestination, int $forwardTonAmount, slice $forwardPayload, cell $customPayload) inline;
+
+;; $Escrow$_fun_sendJettons
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_sendJettons((int, slice, slice, slice, int, int, int, slice, cell) $self, slice $receiver, int $amount, int $mode) impure inline_ref;
+
+;; $Escrow$_fun_calculateRoyaltyAmount
+((int, slice, slice, slice, int, int, int, slice, cell), int) $Escrow$_fun_calculateRoyaltyAmount((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref;
+
+;; $Escrow$_fun_walletAddress
+((int, slice, slice, slice, int, int, int, slice, cell), slice) $Escrow$_fun_walletAddress((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref;
+
+;; $EscrowData$_constructor_id_sellerAddress_guarantorAddress_dealAmount_guarantorRoyaltyPercent_isFunded_assetAddress_jettonWalletCode_buyerAddress
+((int, slice, slice, int, int, int, slice, cell, slice)) $EscrowData$_constructor_id_sellerAddress_guarantorAddress_dealAmount_guarantorRoyaltyPercent_isFunded_assetAddress_jettonWalletCode_buyerAddress(int $id, slice $sellerAddress, slice $guarantorAddress, int $dealAmount, int $guarantorRoyaltyPercent, int $isFunded, slice $assetAddress, cell $jettonWalletCode, slice $buyerAddress) inline;
+
+;; $Escrow$_fun_escrowInfo
+((int, slice, slice, slice, int, int, int, slice, cell), (int, slice, slice, int, int, int, slice, cell, slice)) $Escrow$_fun_escrowInfo((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $Escrow$_fun_forward
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_forward((int, slice, slice, slice, int, int, int, slice, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $Escrow$_fun_reply
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_reply((int, slice, slice, slice, int, int, int, slice, cell) $self, cell $body) impure inline;
+
+;; $Escrow$_fun_notify
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_notify((int, slice, slice, slice, int, int, int, slice, cell) $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+;; $SendParameters$_constructor_to_value_mode
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode(slice $to, int $value, int $mode) inline;
+
+;; $TakeEscrowData$_constructor_escrowData
+(((int, slice, slice, int, int, int, slice, cell, slice))) $TakeEscrowData$_constructor_escrowData((int, slice, slice, int, int, int, slice, cell, slice) $escrowData) inline;
+
+
+;; escrow_Escrow.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(slice, slice) __tact_load_address_opt(slice cs) inline {
+    if (cs.preload_uint(2) != 0) {
+        slice raw = cs~load_msg_addr();
+        return (cs, raw);
+    } else {
+        cs~skip_bits(2);
+        return (cs, null());
+    }
+}
+
+builder __tact_store_address_opt(builder b, slice address) inline {
+    if (null?(address)) {
+        b = b.store_uint(0, 2);
+        return b;
+    } else {
+        return b.store_slice(address);
+    }
+}
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $global_emptySlice() impure asm """
+    b{} PUSHSLICE
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_forward((int, slice, slice, slice, int, int, int, slice, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), ());
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_reply((int, slice, slice, slice, int, int, int, slice, cell) $self, cell $body) impure inline {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), ());
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_notify((int, slice, slice, slice, int, int, int, slice, cell) $self, cell $body) impure inline {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), ());
+}
+
+;; escrow_Escrow.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+((cell, cell)) $StateInit$_constructor_code_data(cell $code, cell $data) inline {
+    return ($code, $data);
+}
+
+;;
+;; Type: Context
+;; TLB: _ bounceable:bool sender:address value:int257 raw:^slice = Context
+;;
+
+_ $Context$_get_sender((int, slice, int, slice) v) inline {
+    var (v'bounceable, v'sender, v'value, v'raw) = v;
+    return v'sender;
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_body_mode(slice $to, int $value, cell $body, int $mode) inline {
+    return ($mode, $body, null(), null(), $value, $to, true);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode(slice $to, int $value, int $mode) inline {
+    return ($mode, null(), null(), null(), $value, $to, true);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: JettonWalletData
+;; TLB: _ balance:int257 owner:address master:address code:^cell = JettonWalletData
+;;
+
+builder $JettonWalletData$_store(builder build_0, (int, slice, slice, cell) v) inline {
+    var (v'balance, v'owner, v'master, v'code) = v;
+    build_0 = build_0.store_int(v'balance, 257);
+    build_0 = build_0.store_slice(v'owner);
+    build_0 = build_0.store_slice(v'master);
+    build_0 = build_0.store_ref(v'code);
+    return build_0;
+}
+
+cell $JettonWalletData$_store_cell((int, slice, slice, cell) v) inline {
+    return $JettonWalletData$_store(begin_cell(), v).end_cell();
+}
+
+((int, slice, slice, cell)) $JettonWalletData$_constructor_balance_owner_master_code(int $balance, slice $owner, slice $master, cell $code) inline {
+    return ($balance, $owner, $master, $code);
+}
+
+;;
+;; Type: JettonTransfer
+;; Header: 0x0f8a7ea5
+;; TLB: jetton_transfer#0f8a7ea5 queryId:uint64 amount:coins destination:address responseDestination:Maybe address customPayload:Maybe ^cell forwardTonAmount:coins forwardPayload:remainder<slice> = JettonTransfer
+;;
+
+builder $JettonTransfer$_store(builder build_0, (int, int, slice, slice, cell, int, slice) v) inline_ref {
+    var (v'queryId, v'amount, v'destination, v'responseDestination, v'customPayload, v'forwardTonAmount, v'forwardPayload) = v;
+    build_0 = store_uint(build_0, 260734629, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    build_0 = build_0.store_varuint16(v'amount);
+    build_0 = build_0.store_slice(v'destination);
+    build_0 = __tact_store_address_opt(build_0, v'responseDestination);
+    build_0 = ~ null?(v'customPayload) ? build_0.store_int(true, 1).store_ref(v'customPayload) : build_0.store_int(false, 1);
+    build_0 = build_0.store_varuint16(v'forwardTonAmount);
+    build_0 = build_0.store_slice(v'forwardPayload);
+    return build_0;
+}
+
+cell $JettonTransfer$_store_cell((int, int, slice, slice, cell, int, slice) v) inline {
+    return $JettonTransfer$_store(begin_cell(), v).end_cell();
+}
+
+((int, int, slice, slice, cell, int, slice)) $JettonTransfer$_constructor_queryId_amount_destination_responseDestination_forwardTonAmount_forwardPayload_customPayload(int $queryId, int $amount, slice $destination, slice $responseDestination, int $forwardTonAmount, slice $forwardPayload, cell $customPayload) inline {
+    return ($queryId, $amount, $destination, $responseDestination, $customPayload, $forwardTonAmount, $forwardPayload);
+}
+
+;;
+;; Type: JettonNotification
+;; Header: 0x7362d09c
+;; TLB: jetton_notification#7362d09c queryId:uint64 amount:coins sender:address forwardPayload:remainder<slice> = JettonNotification
+;;
+
+(slice, ((int, int, slice, slice))) $JettonNotification$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    var v'amount = sc_0~load_varuint16();
+    var v'sender = sc_0~load_msg_addr();
+    var v'forwardPayload = sc_0;
+    return (sc_0, (v'queryId, v'amount, v'sender, v'forwardPayload));
+}
+
+;;
+;; Type: UpdateJettonWalletCode
+;; Header: 0x1d5a120d
+;; TLB: update_jetton_wallet_code#1d5a120d newJettonWalletCode:^cell = UpdateJettonWalletCode
+;;
+
+(slice, ((cell))) $UpdateJettonWalletCode$_load_without_opcode(slice sc_0) inline {
+    var v'newJettonWalletCode = sc_0~load_ref();
+    return (sc_0, (v'newJettonWalletCode));
+}
+
+;;
+;; Type: EscrowData
+;; TLB: _ id:uint32 sellerAddress:address guarantorAddress:address dealAmount:coins guarantorRoyaltyPercent:uint32 isFunded:bool assetAddress:Maybe address jettonWalletCode:Maybe ^cell buyerAddress:Maybe address = EscrowData
+;;
+
+builder $EscrowData$_store(builder build_0, (int, slice, slice, int, int, int, slice, cell, slice) v) inline_ref {
+    var (v'id, v'sellerAddress, v'guarantorAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'isFunded, v'assetAddress, v'jettonWalletCode, v'buyerAddress) = v;
+    build_0 = build_0.store_uint(v'id, 32);
+    build_0 = build_0.store_slice(v'sellerAddress);
+    build_0 = build_0.store_slice(v'guarantorAddress);
+    build_0 = build_0.store_varuint16(v'dealAmount);
+    build_0 = build_0.store_uint(v'guarantorRoyaltyPercent, 32);
+    build_0 = build_0.store_int(v'isFunded, 1);
+    build_0 = __tact_store_address_opt(build_0, v'assetAddress);
+    build_0 = ~ null?(v'jettonWalletCode) ? build_0.store_int(true, 1).store_ref(v'jettonWalletCode) : build_0.store_int(false, 1);
+    var build_1 = begin_cell();
+    build_1 = __tact_store_address_opt(build_1, v'buyerAddress);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(int, slice, slice, int, int, int, slice, cell, slice) $EscrowData$_to_external(((int, slice, slice, int, int, int, slice, cell, slice)) v) inline {
+    var (v'id, v'sellerAddress, v'guarantorAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'isFunded, v'assetAddress, v'jettonWalletCode, v'buyerAddress) = v; 
+    return (v'id, v'sellerAddress, v'guarantorAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'isFunded, v'assetAddress, v'jettonWalletCode, v'buyerAddress);
+}
+
+((int, slice, slice, int, int, int, slice, cell, slice)) $EscrowData$_constructor_id_sellerAddress_guarantorAddress_dealAmount_guarantorRoyaltyPercent_isFunded_assetAddress_jettonWalletCode_buyerAddress(int $id, slice $sellerAddress, slice $guarantorAddress, int $dealAmount, int $guarantorRoyaltyPercent, int $isFunded, slice $assetAddress, cell $jettonWalletCode, slice $buyerAddress) inline {
+    return ($id, $sellerAddress, $guarantorAddress, $dealAmount, $guarantorRoyaltyPercent, $isFunded, $assetAddress, $jettonWalletCode, $buyerAddress);
+}
+
+;;
+;; Type: TakeEscrowData
+;; Header: 0x2c394a7e
+;; TLB: take_escrow_data#2c394a7e escrowData:EscrowData{id:uint32,sellerAddress:address,guarantorAddress:address,dealAmount:coins,guarantorRoyaltyPercent:uint32,isFunded:bool,assetAddress:Maybe address,jettonWalletCode:Maybe ^cell,buyerAddress:Maybe address} = TakeEscrowData
+;;
+
+builder $TakeEscrowData$_store(builder build_0, ((int, slice, slice, int, int, int, slice, cell, slice)) v) inline {
+    var ((v'escrowData'id, v'escrowData'sellerAddress, v'escrowData'guarantorAddress, v'escrowData'dealAmount, v'escrowData'guarantorRoyaltyPercent, v'escrowData'isFunded, v'escrowData'assetAddress, v'escrowData'jettonWalletCode, v'escrowData'buyerAddress)) = v;
+    build_0 = store_uint(build_0, 741952126, 32);
+    var build_1 = begin_cell();
+    build_1 = $EscrowData$_store(build_1, (v'escrowData'id, v'escrowData'sellerAddress, v'escrowData'guarantorAddress, v'escrowData'dealAmount, v'escrowData'guarantorRoyaltyPercent, v'escrowData'isFunded, v'escrowData'assetAddress, v'escrowData'jettonWalletCode, v'escrowData'buyerAddress));
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+cell $TakeEscrowData$_store_cell(((int, slice, slice, int, int, int, slice, cell, slice)) v) inline {
+    return $TakeEscrowData$_store(begin_cell(), v).end_cell();
+}
+
+(((int, slice, slice, int, int, int, slice, cell, slice))) $TakeEscrowData$_constructor_escrowData((int, slice, slice, int, int, int, slice, cell, slice) $escrowData) inline {
+    return ($escrowData);
+}
+
+;;
+;; Type: Escrow
+;;
+
+builder $Escrow$_store(builder build_0, (int, slice, slice, slice, int, int, int, slice, cell) v) inline {
+    var (v'id, v'sellerAddress, v'guarantorAddress, v'buyerAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'isFunded, v'assetAddress, v'jettonWalletCode) = v;
+    build_0 = build_0.store_uint(v'id, 32);
+    build_0 = build_0.store_slice(v'sellerAddress);
+    build_0 = build_0.store_slice(v'guarantorAddress);
+    build_0 = __tact_store_address_opt(build_0, v'buyerAddress);
+    build_0 = build_0.store_varuint16(v'dealAmount);
+    build_0 = build_0.store_uint(v'guarantorRoyaltyPercent, 32);
+    build_0 = build_0.store_int(v'isFunded, 1);
+    var build_1 = begin_cell();
+    build_1 = __tact_store_address_opt(build_1, v'assetAddress);
+    build_1 = ~ null?(v'jettonWalletCode) ? build_1.store_int(true, 1).store_ref(v'jettonWalletCode) : build_1.store_int(false, 1);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, slice, slice, slice, int, int, int, slice, cell))) $Escrow$_load(slice sc_0) inline {
+    var v'id = sc_0~load_uint(32);
+    var v'sellerAddress = sc_0~load_msg_addr();
+    var v'guarantorAddress = sc_0~load_msg_addr();
+    var v'buyerAddress = sc_0~__tact_load_address_opt();
+    var v'dealAmount = sc_0~load_varuint16();
+    var v'guarantorRoyaltyPercent = sc_0~load_uint(32);
+    var v'isFunded = sc_0~load_int(1);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'assetAddress = sc_1~__tact_load_address_opt();
+    var v'jettonWalletCode = sc_1~load_int(1) ? sc_1~load_ref() : null();
+    return (sc_0, (v'id, v'sellerAddress, v'guarantorAddress, v'buyerAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'isFunded, v'assetAddress, v'jettonWalletCode));
+}
+
+(slice, ((int, slice, slice, int, int, slice, cell))) $Escrow$init$_load(slice sc_0) inline_ref {
+    var v'id = sc_0~load_int(257);
+    var v'sellerAddress = sc_0~load_msg_addr();
+    var v'guarantorAddress = sc_0~load_msg_addr();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'dealAmount = sc_1~load_int(257);
+    var v'guarantorRoyaltyPercent = sc_1~load_int(257);
+    var v'assetAddress = sc_1~__tact_load_address_opt();
+    var v'jettonWalletCode = sc_1~load_int(1) ? sc_1~load_ref() : null();
+    return (sc_0, (v'id, v'sellerAddress, v'guarantorAddress, v'dealAmount, v'guarantorRoyaltyPercent, v'assetAddress, v'jettonWalletCode));
+}
+
+(int, slice, slice, slice, int, int, int, slice, cell) $Escrow$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Escrow$_load();
+    } else {
+        (int $id, slice $sellerAddress, slice $guarantorAddress, int $dealAmount, int $guarantorRoyaltyPercent, slice $assetAddress, cell $jettonWalletCode) = $sc~$Escrow$init$_load();
+        $sc.end_parse();
+        return $Escrow$_contract_init($id, $sellerAddress, $guarantorAddress, $dealAmount, $guarantorRoyaltyPercent, $assetAddress, $jettonWalletCode);
+    }
+}
+
+() $Escrow$_contract_store((int, slice, slice, slice, int, int, int, slice, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Escrow$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Escrow functions
+;;
+
+(int, slice, slice, slice, int, int, int, slice, cell) $Escrow$_contract_init(int $id, slice $sellerAddress, slice $guarantorAddress, int $dealAmount, int $guarantorRoyaltyPercent, slice $assetAddress, cell $jettonWalletCode) impure inline {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = (null(), null(), null(), null(), null(), null(), null(), null(), null());
+    $self'id = $id;
+    $self'sellerAddress = $sellerAddress;
+    $self'guarantorAddress = $guarantorAddress;
+    $self'dealAmount = $dealAmount;
+    $self'guarantorRoyaltyPercent = $guarantorRoyaltyPercent;
+    $self'assetAddress = $assetAddress;
+    $self'jettonWalletCode = $jettonWalletCode;
+    $self'isFunded = false;
+    $self'buyerAddress = null();
+    return ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode);
+}
+
+slice $global_calculateJettonWalletAddress(slice $owner, slice $master, cell $code) impure inline_ref {
+    var ($initData'balance, $initData'owner, $initData'master, $initData'code) = $JettonWalletData$_constructor_balance_owner_master_code(0, $owner, $master, $code);
+    return $global_contractAddress($StateInit$_constructor_code_data($code, $JettonWalletData$_store_cell(($initData'balance, $initData'owner, $initData'master, $initData'code))));
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), ()) $Escrow$_fun_sendJettons((int, slice, slice, slice, int, int, int, slice, cell) $self, slice $receiver, int $amount, int $mode) impure inline_ref {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    slice $escrowJettonWalletAddress = $global_calculateJettonWalletAddress($global_myAddress(), $self'assetAddress, $self'jettonWalletCode);
+    $global_send($SendParameters$_constructor_to_value_body_mode($escrowJettonWalletAddress, 50000000, $JettonTransfer$_store_cell($JettonTransfer$_constructor_queryId_amount_destination_responseDestination_forwardTonAmount_forwardPayload_customPayload(0, $amount, $receiver, $receiver, 10000000, $global_emptySlice(), null())), $mode));
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), ());
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), int) $Escrow$_fun_calculateRoyaltyAmount((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    int $percent = $self'guarantorRoyaltyPercent;
+    if (($percent >= 90000)) {
+        $percent = 90000;
+    }
+    var $fresh$ret_14 = (($self'dealAmount * $percent) / 100000);
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), $fresh$ret_14);
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), slice) $Escrow$_fun_walletAddress((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    var $fresh$ret_15 = $global_calculateJettonWalletAddress($global_myAddress(), $self'assetAddress, $self'jettonWalletCode);
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), $fresh$ret_15);
+}
+
+((int, slice, slice, slice, int, int, int, slice, cell), (int, slice, slice, int, int, int, slice, cell, slice)) $Escrow$_fun_escrowInfo((int, slice, slice, slice, int, int, int, slice, cell) $self) impure inline_ref {
+    var (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)) = $self;
+    var $fresh$ret_16 = $EscrowData$_constructor_id_sellerAddress_guarantorAddress_dealAmount_guarantorRoyaltyPercent_isFunded_assetAddress_jettonWalletCode_buyerAddress($self'id, $self'sellerAddress, $self'guarantorAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode, $self'buyerAddress);
+    return (($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode), $fresh$ret_16);
+}
+
+;;
+;; Get methods of a Contract Escrow
+;;
+
+_ %calculateRoyaltyAmount() method_id(78929) {
+    var self = $Escrow$_contract_load();
+    var res = self~$Escrow$_fun_calculateRoyaltyAmount();
+    return res;
+}
+
+_ %walletAddress() method_id(129664) {
+    var self = $Escrow$_contract_load();
+    var res = self~$Escrow$_fun_walletAddress();
+    return res;
+}
+
+_ %escrowInfo() method_id(94138) {
+    var self = $Escrow$_contract_load();
+    var res = self~$Escrow$_fun_escrowInfo();
+    return $EscrowData$_to_external(res);
+}
+
+;;
+;; Routing of a Contract Escrow
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode) = $Escrow$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive UpdateJettonWalletCode message
+        if (op == 492442125) {
+            var ($msg'newJettonWalletCode) = in_msg~$UpdateJettonWalletCode$_load_without_opcode();
+            throw_unless(33704, ($self'isFunded == false));
+            throw_unless(52368, (~ null?($self'assetAddress)));
+            throw_unless(63374, ( equal_slices_bits($Context$_get_sender(__tact_context_get()), $self'sellerAddress) ));
+            $self'jettonWalletCode = $msg'newJettonWalletCode;
+            ;; Persist state
+            $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+            return ();
+        }
+        
+        ;; Receive JettonNotification message
+        if (op == 0x7362d09c) {
+            var ($msg'queryId, $msg'amount, $msg'sender, $msg'forwardPayload) = in_msg~$JettonNotification$_load_without_opcode();
+            throw_unless(33704, ($self'isFunded == false));
+            throw_unless(52368, (~ null?($self'assetAddress)));
+            throw_unless(48761, (~ null?($self'jettonWalletCode)));
+            slice $escrowJettonWalletAddress = $global_calculateJettonWalletAddress($global_myAddress(), $self'assetAddress, $self'jettonWalletCode);
+            throw_unless(37726, ( equal_slices_bits($escrowJettonWalletAddress, __tact_context_get_sender()) ));
+            throw_unless(15301, ($self'dealAmount == $msg'amount));
+            $self'isFunded = true;
+            $self'buyerAddress = $msg'sender;
+            ;; Persist state
+            $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+            return ();
+        }
+        
+        ;; Receive Deploy message
+        if (op == 2490013878) {
+            var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+            ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+            ;; Persist state
+            $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+            return ();
+        }
+        
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "funding" message
+    if (text_op == 0x06359f0ad6956faa273605ad33d509b6330538e4832b61de63cea587c32a30ea) {
+        throw_unless(33704, ($self'isFunded == false));
+        throw_unless(52368, null?($self'assetAddress));
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        throw_unless(15301, ($ctx'value == $self'dealAmount));
+        $self'isFunded = true;
+        $self'buyerAddress = $ctx'sender;
+        ;; Persist state
+        $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+        return ();
+    }
+    ;; Receive "approve" message
+    if (text_op == 0x74994cc9bbb5e9ffcd6e60dfc111f82cc096eec58236836788195e903b6b69e4) {
+        throw_unless(14215, ($self'isFunded == true));
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        throw_unless(21150, ( equal_slices_bits($ctx'sender, $self'guarantorAddress) ));
+        int $royaltyAmount = ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_calculateRoyaltyAmount();
+        if (null?($self'assetAddress)) {
+            throw_unless(5357, ($ctx'value > 30000000));
+            $global_send($SendParameters$_constructor_to_value_mode($self'sellerAddress, ($self'dealAmount - $royaltyAmount), 1));
+            $global_send($SendParameters$_constructor_to_value_mode($self'guarantorAddress, $royaltyAmount, 160));
+        } else {
+            throw_unless(5357, ($ctx'value > 100000000));
+            ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_sendJettons($self'sellerAddress, ($self'dealAmount - $royaltyAmount), 1);
+            ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_sendJettons($self'guarantorAddress, $royaltyAmount, 160);
+        }
+        ;; Persist state
+        $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+        return ();
+    }
+    ;; Receive "cancel" message
+    if (text_op == 0x58a8da595ebc67ade998341da3ce9ed13b402f05eb3747bb401c6b1ad7d202a3) {
+        throw_unless(14215, ($self'isFunded == true));
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        throw_unless(21150, ( equal_slices_bits($ctx'sender, $self'guarantorAddress) ));
+        if (null?($self'assetAddress)) {
+            $global_send($SendParameters$_constructor_to_value_mode($self'buyerAddress, $self'dealAmount, 160));
+        } else {
+            ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_sendJettons($self'buyerAddress, $self'dealAmount, 160);
+        }
+        ;; Persist state
+        $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+        return ();
+    }
+    ;; Receive "provideEscrowData" message
+    if (text_op == 0x4764f42b41d8e7dfc7afb956c278b0e0998fc9209a0a8e32333dc3d21532b9cb) {
+        ($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_reply($TakeEscrowData$_store_cell($TakeEscrowData$_constructor_escrowData(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode)~$Escrow$_fun_escrowInfo())));
+        ;; Persist state
+        $Escrow$_contract_store(($self'id, $self'sellerAddress, $self'guarantorAddress, $self'buyerAddress, $self'dealAmount, $self'guarantorRoyaltyPercent, $self'isFunded, $self'assetAddress, $self'jettonWalletCode));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

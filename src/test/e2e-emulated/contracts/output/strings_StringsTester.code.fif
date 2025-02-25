@@ -1,0 +1,1096 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/strings_StringsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_crc16
+  DECLPROC __tact_base64_encode
+  DECLPROC __tact_address_to_user_friendly
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_comment
+  DECLPROC __tact_string_builder_start_string
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_end_slice
+  DECLPROC __tact_string_builder_append
+  DECLPROC __tact_string_builder_append_not_mut
+  DECLPROC $StringsTester$_contract_init
+  DECLPROC $StringsTester$_contract_load
+  DECLPROC $StringsTester$_contract_store
+  DECLPROC $Builder$_fun_asSlice
+  DECLPROC $Slice$_fun_fromBase64
+  DECLPROC $String$_fun_fromBase64
+  DECLPROC $StringsTester$_fun_constantString
+  DECLPROC $StringsTester$_fun_constantStringUnicode
+  DECLPROC $StringsTester$_fun_constantStringUnicodeLong
+  DECLPROC $StringsTester$_fun_dynamicStringCell
+  DECLPROC $StringsTester$_fun_dynamicStringCell2
+  DECLPROC $StringsTester$_fun_dynamicCommentCell
+  DECLPROC $StringsTester$_fun_dynamicCommentCellLarge
+  DECLPROC $StringsTester$_fun_dynamicCommentStringLarge
+  DECLPROC $StringsTester$_fun_stringWithNumber
+  DECLPROC $StringsTester$_fun_stringWithNegativeNumber
+  DECLPROC $StringsTester$_fun_stringWithLargeNumber
+  DECLPROC $StringsTester$_fun_stringWithFloat
+  DECLPROC $StringsTester$_fun_intToString
+  DECLPROC $StringsTester$_fun_floatToString
+  DECLPROC $StringsTester$_fun_base64
+  DECLPROC $StringsTester$_fun_processBase64
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars1
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars2
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars3
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars4
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars5
+  DECLPROC $StringsTester$_fun_stringWithEscapedChars6
+  DECLPROC $StringsTester$_fun_stringWithAddress
+  93932 DECLMETHOD %constantString
+  94939 DECLMETHOD %constantStringUnicode
+  104680 DECLMETHOD %constantStringUnicodeLong
+  122225 DECLMETHOD %dynamicStringCell
+  97729 DECLMETHOD %dynamicStringCell2
+  122531 DECLMETHOD %dynamicCommentCell
+  74771 DECLMETHOD %dynamicCommentCellLarge
+  74191 DECLMETHOD %dynamicCommentStringLarge
+  68752 DECLMETHOD %stringWithNumber
+  82914 DECLMETHOD %stringWithNegativeNumber
+  94811 DECLMETHOD %stringWithLargeNumber
+  80064 DECLMETHOD %stringWithFloat
+  104498 DECLMETHOD %intToString
+  90680 DECLMETHOD %floatToString
+  71427 DECLMETHOD %base64
+  128362 DECLMETHOD %processBase64
+  82062 DECLMETHOD %stringWithEscapedChars1
+  94445 DECLMETHOD %stringWithEscapedChars2
+  90316 DECLMETHOD %stringWithEscapedChars3
+  69675 DECLMETHOD %stringWithEscapedChars4
+  65546 DECLMETHOD %stringWithEscapedChars5
+  77929 DECLMETHOD %stringWithEscapedChars6
+  84575 DECLMETHOD %stringWithAddress
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_crc16 PROCREF:<{
+    NEWC
+    SWAP
+    STSLICER
+    x{0000} PUSHSLICE
+    STSLICER
+    ENDC
+    CTOS
+    0 PUSHINT
+    WHILE:<{
+      OVER
+      SDEMPTY
+      NOT
+    }>DO<{
+      SWAP
+      8 LDU
+      7 PUSHPOW2
+      WHILE:<{
+        DUP
+        0 GTINT
+      }>DO<{
+        s0 s3 XCHG
+        1 LSHIFT#
+        s2 s3 PUSH2
+        AND
+        IF:<{
+          INC
+        }>
+        s0 s3 XCHG
+        1 RSHIFT#
+        s3 PUSH
+        16 PUSHPOW2DEC
+        GREATER
+        IF:<{
+          s0 s3 XCHG
+          16 PUSHPOW2DEC
+          AND
+          4129 PUSHINT
+          XOR
+          s0 s3 XCHG
+        }>
+      }>
+      DROP
+      NIP
+      SWAP
+    }>
+    NIP
+    8 PUSHPOW2
+    DIVMOD
+    SWAP
+    NEWC
+    8 STU
+    8 STU
+    ENDC
+    CTOS
+  }>
+  __tact_base64_encode PROCREF:<{
+    x{4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F} PUSHSLICE
+    NEWC
+    WHILE:<{
+      s2 PUSH
+      SBITS
+      23 GTINT
+    }>DO<{
+      s0 s2 XCHG
+      8 LDU
+      8 LDU
+      8 LDU
+      s0 s3 XCHG
+      16 LSHIFT#
+      s0 s2 XCHG
+      8 LSHIFT#
+      s1 s2 XCHG
+      OR
+      SWAP
+      OR
+      DUP
+      18 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s4 XCHG
+      STSLICER
+      s3 PUSH
+      12 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s3 PUSH
+      6 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s0 s3 XCHG
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s2 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s3 XCHG
+      STSLICER
+    }>
+    2 1 BLKDROP2
+    ENDC
+    CTOS
+  }>
+  __tact_address_to_user_friendly PROCREF:<{
+    REWRITESTDADDR
+    NEWC
+    x{11} PUSHSLICE
+    STSLICER
+    s0 s2 XCHG
+    8 PUSHPOW2
+    ADD
+    8 MODPOW2#
+    ROT
+    8 STU
+    256 STU
+    ENDC
+    CTOS
+    DUP
+    __tact_crc16 INLINECALLDICT
+    NEWC
+    ROT
+    STSLICER
+    SWAP
+    STSLICER
+    ENDC
+    CTOS
+    __tact_base64_encode INLINECALLDICT
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_comment PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    32 STU
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_start_string PROCINLINE:<{
+    NEWC
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_end_slice PROCINLINE:<{
+    __tact_string_builder_end INLINECALLDICT
+    CTOS
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s3 s3 XCHG2
+        STSLICER
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  __tact_string_builder_append_not_mut PROCREF:<{
+    __tact_string_builder_append INLINECALLDICT
+  }>
+  $StringsTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $StringsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $StringsTester$_contract_init INLINECALLDICT
+  }>
+  $StringsTester$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $Builder$_fun_asSlice PROCINLINE:<{
+        ENDC
+        CTOS
+  }>
+  $Slice$_fun_fromBase64 PROCREF:<{
+    DUP
+        SBITS
+    3 RSHIFT#
+        NEWC
+    SWAP
+    REPEAT:<{
+      SWAP
+      8 LDU
+      OVER
+      64 GTINT
+      IF:<{
+        OVER
+        91 LESSINT
+      }>ELSE<{
+        FALSE
+      }>
+      IF:<{
+        SWAP
+        -65 ADDCONST
+        ROT
+        6 STU
+      }>ELSE<{
+        OVER
+        96 GTINT
+        IF:<{
+          OVER
+          123 LESSINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -71 ADDCONST
+          ROT
+          6 STU
+        }>ELSE<{
+          OVER
+          47 GTINT
+          IF:<{
+            OVER
+            58 LESSINT
+          }>ELSE<{
+            FALSE
+          }>
+          IF:<{
+            SWAP
+            4 ADDCONST
+            ROT
+            6 STU
+          }>ELSE<{
+            OVER
+            45 EQINT
+            IF:<{
+              TRUE
+            }>ELSE<{
+              OVER
+              43 EQINT
+            }>
+            IF:<{
+              62 PUSHINT
+              s2 POP
+              s0 s2 XCHG
+              6 STU
+            }>ELSE<{
+              OVER
+              95 EQINT
+              IF:<{
+                TRUE
+              }>ELSE<{
+                OVER
+                47 EQINT
+              }>
+              IF:<{
+                63 PUSHINT
+                s2 POP
+                s0 s2 XCHG
+                6 STU
+              }>ELSE<{
+                SWAP
+                61 EQINT
+                IFNOT:<{
+                  134 THROW
+                }>
+                SWAP
+              }>
+            }>
+          }>
+        }>
+      }>
+    }>
+    NIP
+    DUP
+        BBITS
+    DUP
+    3 MODPOW2#
+    DUP
+    0 NEQINT
+    IFJMP:<{
+      s0 s2 XCHG
+      $Builder$_fun_asSlice INLINECALLDICT
+      s0 s2 XCHG
+      SUB
+      LDSLICEX
+      DROP
+    }>
+    2DROP
+    $Builder$_fun_asSlice INLINECALLDICT
+  }>
+  $String$_fun_fromBase64 PROCINLINE:<{
+    $Slice$_fun_fromBase64 INLINECALLDICT
+  }>
+  $StringsTester$_fun_constantString PROCREF:<{
+        B{b5ee9c7241010101000d0000167465737420737472696e67ee608f50} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_constantStringUnicode PROCREF:<{
+        B{b5ee9c7241010101001a000030d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d8d539ad} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_constantStringUnicodeLong PROCREF:<{
+        B{b5ee9c72410206010002fa0001fed0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f918020d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b80101fed0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d182200201fed0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d180200301fef09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd10401fe80d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b50500dcd18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0918e6a} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_dynamicStringCell PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000800000c48656c6c6f21a44219b3} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $StringsTester$_fun_dynamicStringCell2 PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000800000c48656c6c6f2c770e310c} B>boc <s PUSHSLICE
+    __tact_string_builder_append_not_mut INLINECALLDICT
+        B{b5ee9c72410101010003000002200de96161} B>boc <s PUSHSLICE
+    __tact_string_builder_append_not_mut INLINECALLDICT
+        B{b5ee9c7241010101000800000c576f726c642169e98952} B>boc <s PUSHSLICE
+    __tact_string_builder_append_not_mut INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $StringsTester$_fun_dynamicCommentCell PROCREF:<{
+    __tact_string_builder_start_comment INLINECALLDICT
+        B{b5ee9c7241010101001c000034536f6d657468696e6720736f6d657468696e6720776f726c64212a90ca7f} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $StringsTester$_fun_dynamicCommentCellLarge PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000800000c48656c6c6f21a44219b3} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c72410206010002fa0001fed0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f918020d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b80101fed0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d182200201fed0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d180200301fef09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd10401fe80d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b50500dcd18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0918e6a} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $StringsTester$_fun_dynamicCommentStringLarge PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000800000c48656c6c6f21a44219b3} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c72410206010002fa0001fed0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f918020d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b80101fed0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d182200201fed0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d180200301fef09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd10401fe80d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b50500dcd18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0918e6a} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithNumber PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101001700002a48656c6c6f2c20796f75722062616c616e63653a201d628127} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    123 PUSHINT
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithNegativeNumber PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101001700002a48656c6c6f2c20796f75722062616c616e63653a201d628127} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    -123 PUSHINT
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithLargeNumber PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101001700002a48656c6c6f2c20796f75722062616c616e63653a201d628127} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    1000000000000000000000000000000000000000000000000000000000000 PUSHINTX
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithFloat PROCREF:<{
+    95 PUSHINT
+    1 PUSHINT
+        DUP // x digits digits
+        1 LESSINT // x digits digits<=0
+        134 THROWIF // x digits
+        DUP // x digits digits
+        77 GTINT // x digits digits>77
+        134 THROWIF // x digits
+        NEWC // x digits b
+        ROTREV // b x digits
+        s1 PUSH // b x digits x
+        0 LESSINT // b x digits x<0?
+        <{
+            // b x digits
+            ROT // x digits b
+            x{2d} STSLICECONST // x digits b
+            ROT // digits b x
+            NEGATE // digits b -x
+            ROT // b -x digits
+        }>CONT IF
+        // b x digits
+        ONE // b x digits 1
+        OVER // b x digits 1 digits
+        <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+        s1 s2 XCHG // b digits x 10^digits
+        DIVMOD // b digits left right
+        s3 s3 XCHG2 // right digits b left
+        <{
+            // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 2 1 CALLXARGS
+        // right digits "left"
+        ROT // digits "left" right
+        DUP // digits "left" right right
+        ISZERO // digits "left" right right==0?
+        <{
+            // digits "left" right
+            DROP // digits "left"
+            NIP // "left"
+        }>CONT
+        <{
+            // digits "left" right
+            ZERO // digits "left" right 0
+            SWAP // digits "left" 0 right
+            <{
+                // digits "left" i right
+                DUP // digits "left" i right right
+                10 PUSHINT // digits "left" i right right 10
+                MOD // digits "left" i right right%10
+                ISZERO // digits "left" i right right%10==0?
+            }>CONT
+            <{
+                // digits "left" i right
+                10 PUSHINT // digits "left" i right 10
+                DIV // digits "left" i right/10
+                SWAP // digits "left" right/10 i
+                INC // digits "left" right/10 i+1
+                SWAP // digits "left" i+1 right/10
+            }>CONT
+            WHILE // digits "left" i right
+            <{
+                // x
+                NEWC // x b
+                SWAP // b x
+                <{
+                    // b x
+                    10 PUSHINT DIVMOD // b x/10 x%10 
+                    48 ADDCONST // b x/10 (x%10+48)
+                    s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                }>CONT UNTIL
+                // ... b x
+                DROP // ... b
+                DEPTH DEC DUP // ... b n n
+                ROTREV // ... n b n
+                <{
+                    // ... c n b
+                    s1 s2 XCHG // ... n c b
+                    8 STU // ... n b
+                }>CONT REPEAT // n b
+            }>CONT 1 2 CALLXARGS
+            // digits "left" i right_digits "right"
+            ROTREV // digits "left" "right" i right_digits
+            ADD // digits "left" "right" right_digits
+            s3 s1 XCHG // "right" "left" digits right_digits
+            SUB // "right" "left" digits_diff
+            SWAP // "right" digits_diff "left"
+            x{2e} STSLICECONST // "right" digits_diff "left."
+            SWAP // "right" "left." digits_diff
+            <{
+                // "right" "left."
+                x{30} STSLICECONST // "right" "left.0"
+            }>CONT REPEAT // "right" "left.000"
+            STB // "left.000right"
+        }>CONT
+        IFELSE // b
+        ENDC CTOS // s
+  }>
+  $StringsTester$_fun_intToString PROCREF:<{
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+  }>
+  $StringsTester$_fun_floatToString PROCREF:<{
+        DUP // x digits digits
+        1 LESSINT // x digits digits<=0
+        134 THROWIF // x digits
+        DUP // x digits digits
+        77 GTINT // x digits digits>77
+        134 THROWIF // x digits
+        NEWC // x digits b
+        ROTREV // b x digits
+        s1 PUSH // b x digits x
+        0 LESSINT // b x digits x<0?
+        <{
+            // b x digits
+            ROT // x digits b
+            x{2d} STSLICECONST // x digits b
+            ROT // digits b x
+            NEGATE // digits b -x
+            ROT // b -x digits
+        }>CONT IF
+        // b x digits
+        ONE // b x digits 1
+        OVER // b x digits 1 digits
+        <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+        s1 s2 XCHG // b digits x 10^digits
+        DIVMOD // b digits left right
+        s3 s3 XCHG2 // right digits b left
+        <{
+            // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 2 1 CALLXARGS
+        // right digits "left"
+        ROT // digits "left" right
+        DUP // digits "left" right right
+        ISZERO // digits "left" right right==0?
+        <{
+            // digits "left" right
+            DROP // digits "left"
+            NIP // "left"
+        }>CONT
+        <{
+            // digits "left" right
+            ZERO // digits "left" right 0
+            SWAP // digits "left" 0 right
+            <{
+                // digits "left" i right
+                DUP // digits "left" i right right
+                10 PUSHINT // digits "left" i right right 10
+                MOD // digits "left" i right right%10
+                ISZERO // digits "left" i right right%10==0?
+            }>CONT
+            <{
+                // digits "left" i right
+                10 PUSHINT // digits "left" i right 10
+                DIV // digits "left" i right/10
+                SWAP // digits "left" right/10 i
+                INC // digits "left" right/10 i+1
+                SWAP // digits "left" i+1 right/10
+            }>CONT
+            WHILE // digits "left" i right
+            <{
+                // x
+                NEWC // x b
+                SWAP // b x
+                <{
+                    // b x
+                    10 PUSHINT DIVMOD // b x/10 x%10 
+                    48 ADDCONST // b x/10 (x%10+48)
+                    s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                }>CONT UNTIL
+                // ... b x
+                DROP // ... b
+                DEPTH DEC DUP // ... b n n
+                ROTREV // ... n b n
+                <{
+                    // ... c n b
+                    s1 s2 XCHG // ... n c b
+                    8 STU // ... n b
+                }>CONT REPEAT // n b
+            }>CONT 1 2 CALLXARGS
+            // digits "left" i right_digits "right"
+            ROTREV // digits "left" "right" i right_digits
+            ADD // digits "left" "right" right_digits
+            s3 s1 XCHG // "right" "left" digits right_digits
+            SUB // "right" "left" digits_diff
+            SWAP // "right" digits_diff "left"
+            x{2e} STSLICECONST // "right" digits_diff "left."
+            SWAP // "right" "left." digits_diff
+            <{
+                // "right" "left."
+                x{30} STSLICECONST // "right" "left.0"
+            }>CONT REPEAT // "right" "left.000"
+            STB // "left.000right"
+        }>CONT
+        IFELSE // b
+        ENDC CTOS // s
+  }>
+  $StringsTester$_fun_base64 PROCREF:<{
+        B{b5ee9c72410101010026000048545746756553426f5957356b637942745957746c494778705a32683049486476636d7375ff762436} B>boc <s PUSHSLICE
+    $String$_fun_fromBase64 INLINECALLDICT
+  }>
+  $StringsTester$_fun_processBase64 PROCREF:<{
+    $String$_fun_fromBase64 INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithEscapedChars1 PROCREF:<{
+        B{b5ee9c7241010101001800002c74657374200a200a205c205c0a2022737472696e67227b8221e2} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_stringWithEscapedChars2 PROCREF:<{
+        B{b5ee9c7241010101004800008c74657374200a207465737420092074657374200d207465737420082074657374200c20746573742022207465737420272074657374205c205c5c20225f22202222207465737440741c54} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_stringWithEscapedChars3 PROCREF:<{
+        B{b5ee9c7241010101005c0000b474657374205c6e2074657374205c742074657374205c722074657374205c5c62082074657374205c662074657374205c222074657374205c272074657374200b200b205c5c205c5c5c5c205c225f5c22205c225c222074657374bdc83e3b} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_stringWithEscapedChars4 PROCREF:<{
+        B{b5ee9c7241010101000e000018e280a8e280a9204420414243bd4cd513} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_stringWithEscapedChars5 PROCREF:<{
+        B{b5ee9c7241010101001100001e002000200020002000200020002000ad520db8} B>boc <s PUSHSLICE
+  }>
+  $StringsTester$_fun_stringWithEscapedChars6 PROCREF:<{
+        NEWC
+    127 PUSHINT
+    SWAP
+    8 STU
+    31 PUSHINT
+    SWAP
+    8 STU
+    10 PUSHINT
+    SWAP
+    8 STU
+    0 PUSHINT
+    SWAP
+    8 STU
+    32 PUSHINT
+    SWAP
+    8 STU
+    84 PUSHINT
+    SWAP
+    8 STU
+    65 PUSHINT
+    SWAP
+    8 STU
+    67 PUSHINT
+    SWAP
+    8 STU
+    84 PUSHINT
+    SWAP
+    8 STU
+    $Builder$_fun_asSlice INLINECALLDICT
+  }>
+  $StringsTester$_fun_stringWithAddress PROCREF:<{
+        B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+    __tact_address_to_user_friendly INLINECALLDICT
+  }>
+  %constantString PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_constantString INLINECALLDICT
+    NIP
+  }>
+  %constantStringUnicode PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_constantStringUnicode INLINECALLDICT
+    NIP
+  }>
+  %constantStringUnicodeLong PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_constantStringUnicodeLong INLINECALLDICT
+    NIP
+  }>
+  %dynamicStringCell PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_dynamicStringCell INLINECALLDICT
+    NIP
+  }>
+  %dynamicStringCell2 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_dynamicStringCell2 INLINECALLDICT
+    NIP
+  }>
+  %dynamicCommentCell PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_dynamicCommentCell INLINECALLDICT
+    NIP
+  }>
+  %dynamicCommentCellLarge PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_dynamicCommentCellLarge INLINECALLDICT
+    NIP
+  }>
+  %dynamicCommentStringLarge PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_dynamicCommentStringLarge INLINECALLDICT
+    NIP
+  }>
+  %stringWithNumber PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithNumber INLINECALLDICT
+    NIP
+  }>
+  %stringWithNegativeNumber PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithNegativeNumber INLINECALLDICT
+    NIP
+  }>
+  %stringWithLargeNumber PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithLargeNumber INLINECALLDICT
+    NIP
+  }>
+  %stringWithFloat PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithFloat INLINECALLDICT
+    NIP
+  }>
+  %intToString PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    SWAP
+    $StringsTester$_fun_intToString INLINECALLDICT
+    NIP
+  }>
+  %floatToString PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    -ROT
+    $StringsTester$_fun_floatToString INLINECALLDICT
+    NIP
+  }>
+  %base64 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_base64 INLINECALLDICT
+    NIP
+  }>
+  %processBase64 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    SWAP
+    $StringsTester$_fun_processBase64 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars1 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars1 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars2 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars2 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars3 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars3 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars4 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars4 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars5 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars5 INLINECALLDICT
+    NIP
+  }>
+  %stringWithEscapedChars6 PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithEscapedChars6 INLINECALLDICT
+    NIP
+  }>
+  %stringWithAddress PROC:<{
+    $StringsTester$_contract_load INLINECALLDICT
+    $StringsTester$_fun_stringWithAddress INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $StringsTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      $StringsTester$_contract_store INLINECALLDICT
+    }>
+    HASHSU
+    76410397024530607642020266794111925034170012928074059569902555401456180201048 PUSHINT
+    EQUAL
+    IFJMP:<{
+      31733 PUSHINT
+      THROWANY
+      $StringsTester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

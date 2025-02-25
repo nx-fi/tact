@@ -1,0 +1,219 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/star-contract-dependency_Child5.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_dict_set_code
+  DECLPROC __tact_dict_get_code
+  DECLPROC $Child5$_store
+  DECLPROC $Child5$_load
+  DECLPROC $StateInit$_to_external
+  DECLPROC $Parent$init$_store
+  DECLPROC $Child5$_contract_init
+  DECLPROC $Child5$_contract_load
+  DECLPROC $Child5$_contract_store
+  DECLPROC $Parent$_init_child
+  DECLPROC $Child5$_fun_getParent
+  115590 DECLMETHOD %getParent
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_dict_set_code PROCINLINE:<{
+    s0 s2 XCHG
+    16 PUSHINT
+    DICTUSETREF
+  }>
+  __tact_dict_get_code PROCINLINE:<{
+    SWAP
+    16 PUSHINT
+    DICTUGETREF
+    NULLSWAPIFNOT
+    135 THROWIFNOT
+  }>
+  $Child5$_store PROCINLINE:<{
+    SWAP
+    32 STU
+  }>
+  $Child5$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $Parent$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $Child5$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $Child5$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    LDREF
+    SWAP
+    __tact_child_contract_codes SETGLOB
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Child5$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $Child5$_contract_init INLINECALLDICT
+  }>
+  $Child5$_contract_store PROCINLINE:<{
+    NEWC
+    __tact_child_contract_codes GETGLOB
+    SWAP
+    STREF
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $Child5$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Parent$_init_child PROCREF:<{
+    __tact_child_contract_codes GETGLOB
+    CTOS
+    LDDICT
+    DROP
+    DUP
+    2729 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    NEWDICT
+    s2 PUSH
+    2579 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    2579 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    6706 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    6706 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    10833 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    10833 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    14960 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    14960 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    19095 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    19095 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    23222 PUSHINT
+    MYCODE
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    27349 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    27349 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    31476 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    31476 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s2 PUSH
+    35611 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    35611 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    s0 s2 XCHG
+    39738 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    s1 s2 XCHG
+    39738 PUSHINT
+    SWAP
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $Parent$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $Child5$_fun_getParent PROCREF:<{
+    $Parent$_init_child INLINECALLDICT
+  }>
+  %getParent PROC:<{
+    $Child5$_contract_load INLINECALLDICT
+    $Child5$_fun_getParent INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Child5$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $Child5$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

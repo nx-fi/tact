@@ -1,0 +1,422 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; message-mode-tester_MessageModeTester.headers.fc
+;;
+;; Header files for MessageModeTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $AverageRequest$_store
+builder $AverageRequest$_store(builder build_0, (int, int, int) v) inline;
+
+;; $AverageRequest$_store_cell
+cell $AverageRequest$_store_cell((int, int, int) v) inline;
+
+;; $AverageRequest$_load_bounced
+(slice, ((int, int))) $AverageRequest$_load_bounced(slice sc_0) inline;
+
+;; $AverageResult$_load_without_opcode
+(slice, ((int))) $AverageResult$_load_without_opcode(slice sc_0) inline;
+
+;; $DoCalculatorRequest$_load_without_opcode
+(slice, ((int, int, int, int))) $DoCalculatorRequest$_load_without_opcode(slice sc_0) inline;
+
+;; $MessageModeTester$_store
+builder $MessageModeTester$_store(builder build_0, (int) v) inline;
+
+;; $MessageModeTester$_load
+(slice, ((int))) $MessageModeTester$_load(slice sc_0) inline;
+
+;; $Calculator$init$_store
+builder $Calculator$init$_store(builder build_0, tuple v) inline;
+
+;; $MessageModeTester$_contract_init
+(int) $MessageModeTester$_contract_init() impure inline;
+
+;; $MessageModeTester$_contract_load
+(int) $MessageModeTester$_contract_load() impure inline_ref;
+
+;; $MessageModeTester$_contract_store
+() $MessageModeTester$_contract_store((int) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $Calculator$_init_child
+(cell, cell) $Calculator$_init_child() inline_ref;
+
+;; $MessageModeTester$_fun_currentResult
+((int), int) $MessageModeTester$_fun_currentResult((int) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_to_bounce_value_mode_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_bounce_value_mode_body(slice $to, int $bounce, int $value, int $mode, cell $body) inline;
+
+;; $AverageRequest$_constructor_from_to_amountToPayInResponse
+((int, int, int)) $AverageRequest$_constructor_from_to_amountToPayInResponse(int $from, int $to, int $amountToPayInResponse) inline;
+
+
+;; message-mode-tester_MessageModeTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+;; message-mode-tester_MessageModeTester.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_bounce_value_mode_body(slice $to, int $bounce, int $value, int $mode, cell $body) inline {
+    return ($mode, $body, null(), null(), $value, $to, $bounce);
+}
+
+;;
+;; Type: AverageRequest
+;; Header: 0xc6efd40e
+;; TLB: average_request#c6efd40e from:uint32 to:uint32 amountToPayInResponse:int257 = AverageRequest
+;;
+
+builder $AverageRequest$_store(builder build_0, (int, int, int) v) inline {
+    var (v'from, v'to, v'amountToPayInResponse) = v;
+    build_0 = store_uint(build_0, 3337606158, 32);
+    build_0 = build_0.store_uint(v'from, 32);
+    build_0 = build_0.store_uint(v'to, 32);
+    build_0 = build_0.store_int(v'amountToPayInResponse, 257);
+    return build_0;
+}
+
+cell $AverageRequest$_store_cell((int, int, int) v) inline {
+    return $AverageRequest$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, int))) $AverageRequest$_load_bounced(slice sc_0) inline {
+    var v'from = sc_0~load_uint(32);
+    var v'to = sc_0~load_uint(32);
+    return (sc_0, (v'from, v'to));
+}
+
+((int, int, int)) $AverageRequest$_constructor_from_to_amountToPayInResponse(int $from, int $to, int $amountToPayInResponse) inline {
+    return ($from, $to, $amountToPayInResponse);
+}
+
+;;
+;; Type: AverageResult
+;; Header: 0x016bce84
+;; TLB: average_result#016bce84 res:uint32 = AverageResult
+;;
+
+(slice, ((int))) $AverageResult$_load_without_opcode(slice sc_0) inline {
+    var v'res = sc_0~load_uint(32);
+    return (sc_0, (v'res));
+}
+
+;;
+;; Type: DoCalculatorRequest
+;; Header: 0x5fcc1434
+;; TLB: do_calculator_request#5fcc1434 from:uint32 to:uint32 amountToPayInRequest:int257 amountToPayInCalculatorResponse:int257 = DoCalculatorRequest
+;;
+
+(slice, ((int, int, int, int))) $DoCalculatorRequest$_load_without_opcode(slice sc_0) inline {
+    var v'from = sc_0~load_uint(32);
+    var v'to = sc_0~load_uint(32);
+    var v'amountToPayInRequest = sc_0~load_int(257);
+    var v'amountToPayInCalculatorResponse = sc_0~load_int(257);
+    return (sc_0, (v'from, v'to, v'amountToPayInRequest, v'amountToPayInCalculatorResponse));
+}
+
+;;
+;; Type: Calculator
+;;
+
+builder $Calculator$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $Calculator$_child_get_code() impure asm """
+    B{b5ee9c720101040100e8000114ff00f4a413f4bcf2c80b010298d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f02de218210c6efd40ebae30232c00001c121b09930c87f01ca00c9ed54e030f2c08202030014ed44d0d20030916de06d00fa5bd31fd31f810101d7005520338163735312a1c2fff2f45301a1a470925dbb9523a003a403e83331a904f8427002c80182096bce8458cb1fcb1fc9137050346d036d5023c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb0030c87f01ca00c9ed54} B>boc PUSHREF
+""";
+
+(cell, cell) $Calculator$_init_child() inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: Calculator
+    cell init_code = $Calculator$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Calculator$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: MessageModeTester
+;;
+
+builder $MessageModeTester$_store(builder build_0, (int) v) inline {
+    var (v'val) = v;
+    build_0 = build_0.store_int(v'val, 257);
+    return build_0;
+}
+
+(slice, ((int))) $MessageModeTester$_load(slice sc_0) inline {
+    var v'val = sc_0~load_int(257);
+    return (sc_0, (v'val));
+}
+
+(int) $MessageModeTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$MessageModeTester$_load();
+    } else {
+        return $MessageModeTester$_contract_init();
+    }
+}
+
+() $MessageModeTester$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $MessageModeTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MessageModeTester functions
+;;
+
+(int) $MessageModeTester$_contract_init() impure inline {
+    var (($self'val)) = (-1);
+    return ($self'val);
+}
+
+((int), int) $MessageModeTester$_fun_currentResult((int) $self) impure inline_ref {
+    var (($self'val)) = $self;
+    var $fresh$ret_1928 = $self'val;
+    return (($self'val), $fresh$ret_1928);
+}
+
+;;
+;; Get methods of a Contract MessageModeTester
+;;
+
+_ %currentResult() method_id(109211) {
+    var self = $MessageModeTester$_contract_load();
+    var res = self~$MessageModeTester$_fun_currentResult();
+    return res;
+}
+
+;;
+;; Routing of a Contract MessageModeTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'val) = $MessageModeTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        ;; Skip 0xFFFFFFFF prefix of a bounced message
+        in_msg~skip_bits(32);
+        int op = 0;
+        if (slice_bits(in_msg) >= 32) {
+            op = in_msg~load_uint(32);
+        }
+        ;; Bounced handler for AverageRequest message
+        if (op == 3337606158) {
+            var ($msg'from, $msg'to) = in_msg~$AverageRequest$_load_bounced();
+            $self'val = -2;
+            ;; Persist state
+            $MessageModeTester$_contract_store(($self'val));
+            return ();
+        }
+        
+        return ();
+    }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive AverageResult message
+    if (op == 23842436) {
+        var ($msg'res) = in_msg~$AverageResult$_load_without_opcode();
+        $self'val = $msg'res;
+        ;; Persist state
+        $MessageModeTester$_contract_store(($self'val));
+        return ();
+    }
+    
+    ;; Receive DoCalculatorRequest message
+    if (op == 1607210036) {
+        var ($msg'from, $msg'to, $msg'amountToPayInRequest, $msg'amountToPayInCalculatorResponse) = in_msg~$DoCalculatorRequest$_load_without_opcode();
+        slice $addr = $global_contractAddress($Calculator$_init_child());
+        $global_send($SendParameters$_constructor_to_bounce_value_mode_body($addr, true, $msg'amountToPayInRequest, 0, $AverageRequest$_store_cell($AverageRequest$_constructor_from_to_amountToPayInResponse($msg'from, $msg'to, $msg'amountToPayInCalculatorResponse))));
+        $self'val = -3;
+        ;; Persist state
+        $MessageModeTester$_contract_store(($self'val));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $MessageModeTester$_contract_store(($self'val));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

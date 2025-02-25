@@ -1,0 +1,3929 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/structs_StructsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_dict_get_int_cell
+  DECLPROC __tact_dict_set_int_cell
+  DECLPROC $S$_store
+  DECLPROC $S$_load
+  DECLPROC $T$_store
+  DECLPROC $T$_load
+  DECLPROC $MyStruct1$_store
+  DECLPROC $MyStruct1$_store_cell
+  DECLPROC $MyStruct1$_load
+  DECLPROC $MyStruct1$_load_not_mut
+  DECLPROC $MyStruct1$_not_null
+  DECLPROC $MyStruct2$_store
+  DECLPROC $MyStruct2$_store_cell
+  DECLPROC $MyStruct1$_as_optional
+  DECLPROC $MyStruct2$_load
+  DECLPROC $MyStruct2$_load_not_mut
+  DECLPROC $MyMessage1$_store
+  DECLPROC $MyMessage1$_store_cell
+  DECLPROC $MyMessage1$_load
+  DECLPROC $MyMessage1$_load_not_mut
+  DECLPROC $Coin$_load
+  DECLPROC $Coin$_load_not_mut
+  DECLPROC $VarIntegers$_load
+  DECLPROC $VarIntegers$_load_not_mut
+  DECLPROC $IntFields$_load
+  DECLPROC $IntFields$_load_not_mut
+  DECLPROC $UintFields$_load
+  DECLPROC $UintFields$_load_not_mut
+  DECLPROC $LongStruct15$_store
+  DECLPROC $LongStruct15$_store_cell
+  DECLPROC $LongStruct15$_load
+  DECLPROC $LongStruct15$_as_optional
+  DECLPROC $LongStruct15$_load_opt
+  DECLPROC $LongStruct16$_store
+  DECLPROC $LongStruct16$_store_cell
+  DECLPROC $LongStruct16$_load
+  DECLPROC $LongStruct16$_as_optional
+  DECLPROC $LongStruct16$_load_opt
+  DECLPROC $LongStruct32$_store
+  DECLPROC $LongStruct32$_store_cell
+  DECLPROC $LongStruct32$_load
+  DECLPROC $LongStruct32$_as_optional
+  DECLPROC $LongStruct32$_load_opt
+  DECLPROC $Foo$_load_without_opcode
+  DECLPROC $Dict$_store
+  DECLPROC $Dict$_store_cell
+  DECLPROC $Dict$_load
+  DECLPROC $Dict$_load_not_mut
+  DECLPROC $StructsTester$_store
+  DECLPROC $StructsTester$_load
+  DECLPROC $MyStruct1$_from_tuple
+  DECLPROC $MyStruct1$_from_opt_tuple
+  DECLPROC $MyStruct1$_to_external
+  DECLPROC $MyStruct2$_from_tuple
+  DECLPROC $MyStruct2$_to_external
+  DECLPROC $MyStruct3$_to_external
+  DECLPROC $MyMessage1$_from_tuple
+  DECLPROC $MyMessage1$_to_external
+  DECLPROC $IntFields$_to_external
+  DECLPROC $UintFields$_to_external
+  DECLPROC $LongStruct15$_not_null
+  DECLPROC $LongStruct15$_to_external
+  DECLPROC $LongStruct16$_not_null
+  DECLPROC $LongStruct16$_to_external
+  DECLPROC $LongStruct32$_not_null
+  DECLPROC $LongStruct32$_to_external
+  DECLPROC $LongNestedStruct$_to_external
+  DECLPROC $LongNestedStructWithOpts$_to_external
+  DECLPROC $Line$_as_optional
+  DECLPROC $Location$_to_external
+  DECLPROC $DoubleNestedStructOpt$_as_optional
+  DECLPROC $TripleNestedStructOpt$_as_optional
+  DECLPROC $TripleNestedStructOpt$_to_external
+  DECLPROC $LongAndDeepNestedStruct$_to_external
+  DECLPROC $OptionalFields$_to_external
+  DECLPROC $S1$_to_external
+  DECLPROC $S$_constructor_a_b
+  DECLPROC $T$_constructor_a_s
+  DECLPROC $StructsTester$_contract_init
+  DECLPROC $StructsTester$_contract_load
+  DECLPROC $StructsTester$_contract_store
+  DECLPROC $global_directParse
+  DECLPROC $global_directParseVarIntegers
+  DECLPROC $S1$_constructor_a_b_c
+  DECLPROC $StructsTester$_fun_structInitializerTest
+  DECLPROC $StructsTester$_fun_toCell1
+  DECLPROC $StructsTester$_fun_toSlice1
+  DECLPROC $StructsTester$_fun_fromCell1
+  DECLPROC $StructsTester$_fun_fromSlice1
+  DECLPROC $StructsTester$_fun_toCell2
+  DECLPROC $StructsTester$_fun_fromCell2
+  DECLPROC $StructsTester$_fun_fromSlice2
+  DECLPROC $StructsTester$_fun_test1
+  DECLPROC $StructsTester$_fun_toCellMessage1
+  DECLPROC $StructsTester$_fun_fromCellMessage1
+  DECLPROC $StructsTester$_fun_fromSliceMessage1
+  DECLPROC $MyStruct3$_constructor_s
+  DECLPROC $StructsTester$_fun_contractStructConstantImmediate
+  DECLPROC $StructsTester$_fun_globalConstStructConstantImmediate
+  DECLPROC $StructsTester$_fun_contractStructConstantFieldImmediate
+  DECLPROC $StructsTester$_fun_globalConstStructConstantFieldImmediate
+  DECLPROC $StructsTester$_fun_contractStructConstantViaVar
+  DECLPROC $StructsTester$_fun_globalConstStructConstantViaVar
+  DECLPROC $StructsTester$_fun_contractStructConstantFieldViaVar
+  DECLPROC $StructsTester$_fun_globalConstStructConstantFieldViaVar
+  DECLPROC $LongStruct15$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15
+  DECLPROC $StructsTester$_fun_longStruct15Test
+  DECLPROC $LongStruct16$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16
+  DECLPROC $StructsTester$_fun_longStruct16Test
+  DECLPROC $LongStruct32$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_x21_x22_x23_x24_x25_x26_x27_x28_x29_x30_x31_x32
+  DECLPROC $StructsTester$_fun_longStruct32Test
+  DECLPROC $LongNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3
+  DECLPROC $StructsTester$_fun_longNestedStructTest
+  DECLPROC $LongNestedStructWithOpts$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3
+  DECLPROC $StructsTester$_fun_longNestedStructWithOptsTest
+  DECLPROC $StructsTester$_fun_longContractTest
+  DECLPROC $Point$_constructor_x_y
+  DECLPROC $Location$_constructor_idx_line1_line2
+  DECLPROC $Line$_constructor_start_end
+  DECLPROC $StructsTester$_fun_location1
+  DECLPROC $StructsTester$_fun_location2
+  DECLPROC $TripleNestedStructOpt$_constructor_a_s
+  DECLPROC $DoubleNestedStructOpt$_constructor_a_s
+  DECLPROC $MyStruct1$_constructor_a_b_c
+  DECLPROC $StructsTester$_fun_tripleNestedStructOpt1
+  DECLPROC $StructsTester$_fun_tripleNestedStructOpt2
+  DECLPROC $StructsTester$_fun_tripleNestedStructOpt3
+  DECLPROC $LongAndDeepNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_s1_s2_s3_s4
+  DECLPROC $StructsTester$_fun_longAndDeepNestedStruct1
+  DECLPROC $StructsTester$_fun_longAndDeepNestedStruct2
+  DECLPROC $StructsTester$_fun_longAndDeepNestedStruct3
+  DECLPROC $IntFields$_constructor_i1_i2_i3_i255_i256_i257
+  DECLPROC $StructsTester$_fun_intFieldsStruct
+  DECLPROC $StructsTester$_fun_intFieldsFromCell
+  DECLPROC $UintFields$_constructor_u1_u2_u3_u254_u255_u256
+  DECLPROC $StructsTester$_fun_uintFieldsMessage
+  DECLPROC $StructsTester$_fun_uintFieldsFromCell
+  DECLPROC $OptionalFields$_constructor_nickname_avatar
+  DECLPROC $StructsTester$_fun_optionalFields
+  DECLPROC $StructsTester$_fun_destructuringTest1
+  DECLPROC $StructsTester$_fun_destructuringTest1Const
+  DECLPROC $StructsTester$_fun_destructuringTest2
+  DECLPROC $StructsTester$_fun_destructuringTest2Const
+  DECLPROC $StructsTester$_fun_destructuringTest3
+  DECLPROC $StructsTester$_fun_destructuringTest3Const
+  DECLPROC $StructsTester$_fun_destructuringTest4
+  DECLPROC $StructsTester$_fun_destructuringTest4Const
+  DECLPROC $StructsTester$_fun_destructuringTest5
+  DECLPROC $StructsTester$_fun_destructuringTest5Const
+  DECLPROC $StructsTester$_fun_destructuringTest6
+  DECLPROC $StructsTester$_fun_destructuringTest6Const
+  DECLPROC $StructsTester$_fun_destructuringTest7
+  DECLPROC $StructsTester$_fun_destructuringTest7Const
+  DECLPROC $StructsTester$_fun_destructuringTest8
+  DECLPROC $StructsTester$_fun_destructuringTest8Const
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body
+  69602 DECLMETHOD %structInitializerTest
+  82862 DECLMETHOD %toCell1
+  69666 DECLMETHOD %toSlice1
+  76221 DECLMETHOD %fromCell1
+  118478 DECLMETHOD %fromSlice1
+  95181 DECLMETHOD %toCell2
+  72158 DECLMETHOD %fromCell2
+  130733 DECLMETHOD %fromSlice2
+  70304 DECLMETHOD %test1
+  103675 DECLMETHOD %toCellMessage1
+  65739 DECLMETHOD %fromCellMessage1
+  100880 DECLMETHOD %fromSliceMessage1
+  131046 DECLMETHOD %contractStructConstantImmediate
+  96485 DECLMETHOD %globalConstStructConstantImmediate
+  115253 DECLMETHOD %contractStructConstantFieldImmediate
+  72941 DECLMETHOD %globalConstStructConstantFieldImmediate
+  103564 DECLMETHOD %contractStructConstantViaVar
+  105147 DECLMETHOD %globalConstStructConstantViaVar
+  97692 DECLMETHOD %contractStructConstantFieldViaVar
+  118768 DECLMETHOD %globalConstStructConstantFieldViaVar
+  92569 DECLMETHOD %longStruct15Test
+  100171 DECLMETHOD %longStruct16Test
+  99597 DECLMETHOD %longStruct32Test
+  101744 DECLMETHOD %longNestedStructTest
+  103572 DECLMETHOD %longNestedStructWithOptsTest
+  81181 DECLMETHOD %longContractTest
+  126791 DECLMETHOD %location1
+  122660 DECLMETHOD %location2
+  102164 DECLMETHOD %tripleNestedStructOpt1
+  114551 DECLMETHOD %tripleNestedStructOpt2
+  110422 DECLMETHOD %tripleNestedStructOpt3
+  87259 DECLMETHOD %longAndDeepNestedStruct1
+  91320 DECLMETHOD %longAndDeepNestedStruct2
+  95385 DECLMETHOD %longAndDeepNestedStruct3
+  98928 DECLMETHOD %intFieldsStruct
+  75138 DECLMETHOD %intFieldsFromCell
+  72699 DECLMETHOD %uintFieldsMessage
+  121259 DECLMETHOD %uintFieldsFromCell
+  79909 DECLMETHOD %optionalFields
+  121307 DECLMETHOD %destructuringTest1
+  112759 DECLMETHOD %destructuringTest1Const
+  125368 DECLMETHOD %destructuringTest2
+  95895 DECLMETHOD %destructuringTest2Const
+  129433 DECLMETHOD %destructuringTest3
+  78647 DECLMETHOD %destructuringTest3Const
+  100734 DECLMETHOD %destructuringTest4
+  129910 DECLMETHOD %destructuringTest4Const
+  104799 DECLMETHOD %destructuringTest5
+  114390 DECLMETHOD %destructuringTest5Const
+  108860 DECLMETHOD %destructuringTest6
+  94262 DECLMETHOD %destructuringTest6Const
+  112925 DECLMETHOD %destructuringTest7
+  79254 DECLMETHOD %destructuringTest7Const
+  84210 DECLMETHOD %destructuringTest8
+  127125 DECLMETHOD %destructuringTest8Const
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_dict_get_int_cell PROCINLINE:<{
+    -ROT
+    DICTIGETREF
+    NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTISETREF
+    }>
+  }>
+  $S$_store PROCINLINE:<{
+    s0 s2 XCHG
+    1 STI
+    257 PUSHINT
+    STIX
+  }>
+  $S$_load PROCINLINE:<{
+    1 LDI
+    257 PUSHINT
+    LDIX
+    -ROT
+  }>
+  $T$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    257 PUSHINT
+    STIX
+    s0 s2 XCHG
+    $S$_store INLINECALLDICT
+  }>
+  $T$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    $S$_load INLINECALLDICT
+    s2 s3 XCHG
+  }>
+  $MyStruct1$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    257 PUSHINT
+    STIX
+    32 STU
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      SWAP
+      1 STI
+      257 PUSHINT
+      STIX
+    }>ELSE<{
+      FALSE
+      s2 POP
+      1 STI
+    }>
+  }>
+  $MyStruct1$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $MyStruct1$_store INLINECALLDICT
+    ENDC
+  }>
+  $MyStruct1$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    32 LDU
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    3 -ROLL
+  }>
+  $MyStruct1$_load_not_mut PROCINLINE:<{
+    $MyStruct1$_load INLINECALLDICT
+    s0 s3 XCHG
+    ENDS
+    ROT
+  }>
+  $MyStruct1$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        3 UNTUPLE
+  }>
+  $MyStruct2$_store PROCINLINE:<{
+    s0 s2 XCHG
+    STDICT
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      SWAP
+      1 STI
+      SWAP
+      $MyStruct1$_not_null INLINECALLDICT
+      $MyStruct1$_store INLINECALLDICT
+    }>ELSE<{
+      FALSE
+      s2 POP
+      1 STI
+    }>
+  }>
+  $MyStruct2$_store_cell PROCINLINE:<{
+    NEWC
+    -ROT
+    $MyStruct2$_store INLINECALLDICT
+    ENDC
+  }>
+  $MyStruct1$_as_optional PROCINLINE:<{
+        3 TUPLE
+  }>
+  $MyStruct2$_load PROCINLINE:<{
+    LDDICT
+    1 LDI
+    SWAP
+    IF:<{
+      $MyStruct1$_load INLINECALLDICT
+      $MyStruct1$_as_optional INLINECALLDICT
+    }>ELSE<{
+      PUSHNULL
+    }>
+    s1 s2 XCHG
+  }>
+  $MyStruct2$_load_not_mut PROCINLINE:<{
+    $MyStruct2$_load INLINECALLDICT
+    s0 s2 XCHG
+    ENDS
+    SWAP
+  }>
+  $MyMessage1$_store PROCINLINE:<{
+    2844430700 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    s0 s2 XCHG
+    $MyStruct2$_store INLINECALLDICT
+  }>
+  $MyMessage1$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $MyMessage1$_store INLINECALLDICT
+    ENDC
+  }>
+  $MyMessage1$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    2844430700 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    257 PUSHINT
+    LDIX
+    $MyStruct2$_load INLINECALLDICT
+    s2 s3 XCHG
+  }>
+  $MyMessage1$_load_not_mut PROCINLINE:<{
+    $MyMessage1$_load INLINECALLDICT
+    s0 s3 XCHG
+    ENDS
+    ROT
+  }>
+  $Coin$_load PROCINLINE:<{
+    LDVARUINT16
+    32 LDU
+    -ROT
+  }>
+  $Coin$_load_not_mut PROCINLINE:<{
+    $Coin$_load INLINECALLDICT
+    s0 s2 XCHG
+    ENDS
+    SWAP
+  }>
+  $VarIntegers$_load PROCINLINE:<{
+    LDVARINT16
+    LDVARINT32
+    LDVARUINT16
+    LDVARUINT32
+    4 -ROLL
+  }>
+  $VarIntegers$_load_not_mut PROCINLINE:<{
+    $VarIntegers$_load INLINECALLDICT
+    s0 s4 XCHG
+    ENDS
+    3 ROLL
+  }>
+  $IntFields$_load PROCREF:<{
+    1 LDI
+    2 LDI
+    3 LDI
+    255 LDI
+    256 LDI
+    257 PUSHINT
+    LDIX
+    6 -ROLL
+  }>
+  $IntFields$_load_not_mut PROCREF:<{
+    $IntFields$_load INLINECALLDICT
+    s0 s6 XCHG
+    ENDS
+    5 ROLL
+  }>
+  $UintFields$_load PROCREF:<{
+    32 LDU
+    SWAP
+    3925996650 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    1 LDU
+    2 LDU
+    3 LDU
+    254 LDU
+    255 LDU
+    256 LDU
+    6 -ROLL
+  }>
+  $UintFields$_load_not_mut PROCREF:<{
+    $UintFields$_load INLINECALLDICT
+    s0 s6 XCHG
+    ENDS
+    5 ROLL
+  }>
+  $LongStruct15$_store PROCREF:<{
+    s14 s15 XCHG2
+    257 PUSHINT
+    STIX
+    s1 s12 XCHG
+    257 PUSHINT
+    STIX
+    s1 s10 XCHG
+    257 PUSHINT
+    STIX
+    s0 s8 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s7 XCHG
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s0 s3 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    257 PUSHINT
+    STIX
+    s0 s2 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    s1 s4 XCHG
+    257 PUSHINT
+    STIX
+    s0 s4 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $LongStruct15$_store_cell PROCINLINE:<{
+    NEWC
+    15 -ROLL
+    $LongStruct15$_store INLINECALLDICT
+    ENDC
+  }>
+  $LongStruct15$_load PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    DROP
+    s12 s15 XCHG
+    s12 s14 XCHG
+    s12 s13 XCHG
+  }>
+  $LongStruct15$_as_optional PROCINLINE:<{
+        15 TUPLE
+  }>
+  $LongStruct15$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $LongStruct15$_load INLINECALLDICT
+      1 15 BLKDROP2
+      $LongStruct15$_as_optional INLINECALLDICT
+    }>
+  }>
+  $LongStruct16$_store PROCREF:<{
+    s0 16 s() XCHG
+    s1 s15 XCHG
+    257 PUSHINT
+    STIX
+    s1 s13 XCHG
+    257 PUSHINT
+    STIX
+    s1 s11 XCHG
+    257 PUSHINT
+    STIX
+    s0 s9 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s8 XCHG
+    257 PUSHINT
+    STIX
+    s1 s6 XCHG
+    257 PUSHINT
+    STIX
+    s0 s4 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    257 PUSHINT
+    STIX
+    SWAP
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    s0 s4 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s0 s5 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $LongStruct16$_store_cell PROCINLINE:<{
+    NEWC
+    s0 16 s() XCHG
+    15 -ROLL
+    $LongStruct16$_store INLINECALLDICT
+    ENDC
+  }>
+  $LongStruct16$_load PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    DROP
+    s13 16 s() XCHG
+    s13 s15 XCHG
+    s13 s14 XCHG
+  }>
+  $LongStruct16$_as_optional PROCINLINE:<{
+    PAIR
+        15 TUPLE
+  }>
+  $LongStruct16$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $LongStruct16$_load INLINECALLDICT
+      16 s() POP
+      15 ROLL
+      $LongStruct16$_as_optional INLINECALLDICT
+    }>
+  }>
+  $LongStruct32$_store PROCREF:<{
+    s1 31 s() XCHG
+    s0 32 s() XCHG
+    257 PUSHINT
+    STIX
+    s1 29 s() XCHG
+    257 PUSHINT
+    STIX
+    s1 27 s() XCHG
+    257 PUSHINT
+    STIX
+    s0 25 s() XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 24 s() XCHG
+    257 PUSHINT
+    STIX
+    s1 22 s() XCHG
+    257 PUSHINT
+    STIX
+    s0 20 s() XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 19 s() XCHG
+    257 PUSHINT
+    STIX
+    s1 17 s() XCHG
+    257 PUSHINT
+    STIX
+    s0 s15 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s14 XCHG
+    257 PUSHINT
+    STIX
+    s1 s12 XCHG
+    257 PUSHINT
+    STIX
+    s0 s10 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s9 XCHG
+    257 PUSHINT
+    STIX
+    s1 s7 XCHG
+    257 PUSHINT
+    STIX
+    s0 s5 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s4 XCHG
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    SWAP
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    s0 s3 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s0 s6 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s7 XCHG
+    257 PUSHINT
+    STIX
+    s1 s8 XCHG
+    257 PUSHINT
+    STIX
+    s0 s8 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s10 XCHG
+    257 PUSHINT
+    STIX
+    s1 s10 XCHG
+    257 PUSHINT
+    STIX
+    s0 s10 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s11 XCHG
+    257 PUSHINT
+    STIX
+    ENDC
+    s0 s9 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    s0 s7 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $LongStruct32$_store_cell PROCINLINE:<{
+    NEWC
+    s0 32 s() XCHG
+    s0 31 s() XCHG
+    s0 30 s() XCHG
+    s0 29 s() XCHG
+    s0 28 s() XCHG
+    s0 27 s() XCHG
+    s0 26 s() XCHG
+    s0 25 s() XCHG
+    s0 24 s() XCHG
+    s0 23 s() XCHG
+    s0 22 s() XCHG
+    s0 21 s() XCHG
+    s0 20 s() XCHG
+    s0 19 s() XCHG
+    s0 18 s() XCHG
+    s0 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $LongStruct32$_store INLINECALLDICT
+    ENDC
+  }>
+  $LongStruct32$_load PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    DROP
+    29 s() 32 s() XCHG
+    29 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+  }>
+  $LongStruct32$_as_optional PROCINLINE:<{
+    4 TUPLE
+    15 TUPLE
+        15 TUPLE
+  }>
+  $LongStruct32$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $LongStruct32$_load INLINECALLDICT
+      32 s() POP
+      30 s() 31 s() XCHG
+      29 s() 30 s() XCHG
+      28 s() 29 s() XCHG
+      27 s() 28 s() XCHG
+      26 s() 27 s() XCHG
+      25 s() 26 s() XCHG
+      24 s() 25 s() XCHG
+      23 s() 24 s() XCHG
+      22 s() 23 s() XCHG
+      21 s() 22 s() XCHG
+      20 s() 21 s() XCHG
+      19 s() 20 s() XCHG
+      18 s() 19 s() XCHG
+      17 s() 18 s() XCHG
+      16 s() 17 s() XCHG
+      s15 16 s() XCHG
+      15 ROLL
+      $LongStruct32$_as_optional INLINECALLDICT
+    }>
+  }>
+  $Foo$_load_without_opcode PROCINLINE:<{
+    DUP
+  }>
+  $Dict$_store PROCINLINE:<{
+    SWAP
+    STDICT
+  }>
+  $Dict$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $Dict$_store INLINECALLDICT
+    ENDC
+  }>
+  $Dict$_load PROCINLINE:<{
+    LDDICT
+    SWAP
+  }>
+  $Dict$_load_not_mut PROCINLINE:<{
+    $Dict$_load INLINECALLDICT
+    SWAP
+    ENDS
+  }>
+  $StructsTester$_store PROCINLINE:<{
+    s2 33 s() XCHG
+    s1 32 s() XCHG
+    s0 31 s() XCHG
+    $S$_store INLINECALLDICT
+    s0 s2 XCHG
+    s1 28 s() XCHG
+    s0 27 s() XCHG
+    $S$_store INLINECALLDICT
+    NEWC
+    s0 s3 XCHG
+    s2 25 s() XCHG
+    s1 24 s() XCHG
+    s0 23 s() XCHG
+    $T$_store INLINECALLDICT
+    NEWC
+    s0 s3 XCHG
+    s2 20 s() XCHG
+    s1 19 s() XCHG
+    s0 18 s() XCHG
+    $T$_store INLINECALLDICT
+    s1 s14 XCHG
+    STDICT
+    s1 s12 XCHG
+    STDICT
+    s1 s10 XCHG
+    STDICT
+    s1 s8 XCHG
+    257 PUSHINT
+    STIX
+    s0 s6 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s1 s3 XCHG
+    257 PUSHINT
+    STIX
+    SWAP
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    s1 s2 XCHG
+    257 PUSHINT
+    STIX
+    s0 s3 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s4 XCHG
+    257 PUSHINT
+    STIX
+    s1 s4 XCHG
+    257 PUSHINT
+    STIX
+    s0 s4 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s5 XCHG
+    257 PUSHINT
+    STIX
+    s1 s6 XCHG
+    257 PUSHINT
+    STIX
+    s0 s6 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s8 XCHG
+    257 PUSHINT
+    STIX
+    s1 s8 XCHG
+    257 PUSHINT
+    STIX
+    s0 s8 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    s1 s11 XCHG
+    257 PUSHINT
+    STIX
+    s1 s9 XCHG
+    257 PUSHINT
+    STIX
+    s0 s7 XCHG
+    NEWC
+    257 PUSHINT
+    STIX
+    ENDC
+    s0 s7 XCHG2
+    STREF
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $StructsTester$_load PROCINLINE:<{
+    $S$_load INLINECALLDICT
+    s0 s2 XCHG
+    $S$_load INLINECALLDICT
+    s0 s2 XCHG
+    LDREF
+    SWAP
+    CTOS
+    $T$_load INLINECALLDICT
+    s0 s3 XCHG
+    LDREF
+    DROP
+    CTOS
+    $T$_load INLINECALLDICT
+    s0 s3 XCHG
+    LDDICT
+    LDDICT
+    LDDICT
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    DROP
+    29 s() 33 s() XCHG
+    29 s() 31 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+  }>
+  $MyStruct1$_from_tuple PROCINLINE:<{
+        3 UNTUPLE
+  }>
+  $MyStruct1$_from_opt_tuple PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      $MyStruct1$_from_tuple INLINECALLDICT
+      $MyStruct1$_as_optional INLINECALLDICT
+    }>
+  }>
+  $MyStruct1$_to_external PROCINLINE:<{
+  }>
+  $MyStruct2$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+    $MyStruct1$_from_opt_tuple INLINECALLDICT
+  }>
+  $MyStruct2$_to_external PROCINLINE:<{
+  }>
+  $MyStruct3$_to_external PROCINLINE:<{
+  }>
+  $MyMessage1$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+    $MyStruct2$_from_tuple INLINECALLDICT
+  }>
+  $MyMessage1$_to_external PROCINLINE:<{
+  }>
+  $IntFields$_to_external PROCINLINE:<{
+  }>
+  $UintFields$_to_external PROCINLINE:<{
+  }>
+  $LongStruct15$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        15 UNTUPLE
+  }>
+  $LongStruct15$_to_external PROCINLINE:<{
+  }>
+  $LongStruct16$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        15 UNTUPLE
+        2 UNTUPLE
+  }>
+  $LongStruct16$_to_external PROCINLINE:<{
+  }>
+  $LongStruct32$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        15 UNTUPLE
+        15 UNTUPLE
+        4 UNTUPLE
+  }>
+  $LongStruct32$_to_external PROCINLINE:<{
+  }>
+  $LongNestedStruct$_to_external PROCINLINE:<{
+  }>
+  $LongNestedStructWithOpts$_to_external PROCINLINE:<{
+  }>
+  $Line$_as_optional PROCINLINE:<{
+        4 TUPLE
+  }>
+  $Location$_to_external PROCINLINE:<{
+  }>
+  $DoubleNestedStructOpt$_as_optional PROCINLINE:<{
+        2 TUPLE
+  }>
+  $TripleNestedStructOpt$_as_optional PROCINLINE:<{
+        2 TUPLE
+  }>
+  $TripleNestedStructOpt$_to_external PROCINLINE:<{
+  }>
+  $LongAndDeepNestedStruct$_to_external PROCINLINE:<{
+  }>
+  $OptionalFields$_to_external PROCINLINE:<{
+  }>
+  $S1$_to_external PROCINLINE:<{
+  }>
+  $S$_constructor_a_b PROCINLINE:<{
+  }>
+  $T$_constructor_a_s PROCINLINE:<{
+  }>
+  $StructsTester$_contract_init PROCINLINE:<{
+    FALSE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    43 PUSHINT
+    TRUE
+    44 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    $T$_constructor_a_s INLINECALLDICT
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    FALSE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    43 PUSHINT
+    TRUE
+    44 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    $T$_constructor_a_s INLINECALLDICT
+    s4 30 s() XCHG
+    s3 29 s() XCHG
+    s4 28 s() XCHG
+    s3 27 s() XCHG
+    s4 26 s() XCHG
+    s2 25 s() XCHG
+    s1 24 s() XCHG
+    s0 23 s() XCHG
+    s3 22 s() XCHG
+    s4 21 s() XCHG
+    s2 20 s() XCHG
+    s1 19 s() XCHG
+    s0 18 s() XCHG
+    s3 17 s() XCHG
+    s4 16 s() XCHG
+    s15 s14 s13 XCHG3
+    s3 s12 XCHG
+    s4 s11 XCHG
+    s10 s9 s8 XCHG3
+    5 3 REVERSE
+    s5 s1 s3 XCHG3
+    s4 s2 XCHG2
+  }>
+  $StructsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $StructsTester$_load INLINECALLDICT
+      33 s() POP
+      31 s() 32 s() XCHG
+      30 s() 31 s() XCHG
+      29 s() 30 s() XCHG
+      28 s() 29 s() XCHG
+      27 s() 28 s() XCHG
+      26 s() 27 s() XCHG
+      25 s() 26 s() XCHG
+      24 s() 25 s() XCHG
+      23 s() 24 s() XCHG
+      22 s() 23 s() XCHG
+      21 s() 22 s() XCHG
+      20 s() 21 s() XCHG
+      19 s() 20 s() XCHG
+      18 s() 19 s() XCHG
+      17 s() 18 s() XCHG
+      16 s() 17 s() XCHG
+      s15 16 s() XCHG
+      15 ROLL
+    }>
+    DROP
+    $StructsTester$_contract_init INLINECALLDICT
+  }>
+  $StructsTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    s0 33 s() XCHG
+    s0 32 s() XCHG
+    s0 31 s() XCHG
+    s0 30 s() XCHG
+    s0 29 s() XCHG
+    s0 28 s() XCHG
+    s0 27 s() XCHG
+    s0 26 s() XCHG
+    s0 25 s() XCHG
+    s0 24 s() XCHG
+    s0 23 s() XCHG
+    s0 22 s() XCHG
+    s0 21 s() XCHG
+    s0 20 s() XCHG
+    s0 19 s() XCHG
+    s0 18 s() XCHG
+    s0 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $StructsTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $global_directParse PROCREF:<{
+    CTOS
+    $Coin$_load_not_mut INLINECALLDICT
+  }>
+  $global_directParseVarIntegers PROCREF:<{
+    CTOS
+    $VarIntegers$_load_not_mut INLINECALLDICT
+  }>
+  $S1$_constructor_a_b_c PROCINLINE:<{
+  }>
+  $StructsTester$_fun_structInitializerTest PROCREF:<{
+    32 s() PUSH
+    31 s() PUSH
+    EQUAL
+    IF:<{
+      31 s() PUSH
+      30 s() PUSH
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      28 s() PUSH
+      26 s() PUSH
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      27 s() PUSH
+      25 s() PUSH
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      26 s() PUSH
+      24 s() PUSH
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+  }>
+  $StructsTester$_fun_toCell1 PROCREF:<{
+    $MyStruct1$_store_cell INLINECALLDICT
+  }>
+  $StructsTester$_fun_toSlice1 PROCREF:<{
+    $MyStruct1$_store_cell INLINECALLDICT
+    CTOS
+  }>
+  $StructsTester$_fun_fromCell1 PROCREF:<{
+    CTOS
+    $MyStruct1$_load_not_mut INLINECALLDICT
+  }>
+  $StructsTester$_fun_fromSlice1 PROCREF:<{
+    $MyStruct1$_load_not_mut INLINECALLDICT
+  }>
+  $StructsTester$_fun_toCell2 PROCREF:<{
+    $MyStruct2$_store_cell INLINECALLDICT
+  }>
+  $StructsTester$_fun_fromCell2 PROCREF:<{
+    CTOS
+    $MyStruct2$_load_not_mut INLINECALLDICT
+  }>
+  $StructsTester$_fun_fromSlice2 PROCREF:<{
+    $MyStruct2$_load_not_mut INLINECALLDICT
+  }>
+  $StructsTester$_fun_test1 PROCREF:<{
+    $MyStruct2$_store_cell INLINECALLDICT
+    3 -ROLL
+    $MyStruct1$_store_cell INLINECALLDICT
+        NEWC
+        STREF
+        STREF
+        ENDC
+        CTOS
+        LDREF
+    SWAP
+    CTOS
+    $MyStruct1$_load_not_mut INLINECALLDICT
+    s0 s3 XCHG
+        LDREF
+    DROP
+        CTOS
+    $MyStruct2$_load_not_mut INLINECALLDICT
+    $MyStruct2$_store_cell INLINECALLDICT
+    s0 s3 XCHG
+    $MyStruct1$_store_cell INLINECALLDICT
+        NEWC
+        STREF
+        STREF
+        ENDC
+  }>
+  $StructsTester$_fun_toCellMessage1 PROCREF:<{
+    $MyMessage1$_store_cell INLINECALLDICT
+  }>
+  $StructsTester$_fun_fromCellMessage1 PROCREF:<{
+    CTOS
+    $MyMessage1$_load_not_mut INLINECALLDICT
+  }>
+  $StructsTester$_fun_fromSliceMessage1 PROCREF:<{
+    $MyMessage1$_load_not_mut INLINECALLDICT
+  }>
+  $MyStruct3$_constructor_s PROCINLINE:<{
+  }>
+  $StructsTester$_fun_contractStructConstantImmediate PROCREF:<{
+        B{b5ee9c7241010101001c000034636f6e747261637420636f6e7374207374727563742074657374bd57f83c} B>boc <s PUSHSLICE
+    $MyStruct3$_constructor_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_globalConstStructConstantImmediate PROCREF:<{
+        B{b5ee9c7241010101001a000030676c6f62616c20636f6e7374207374727563742074657374c20d027c} B>boc <s PUSHSLICE
+    $MyStruct3$_constructor_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_contractStructConstantFieldImmediate PROCREF:<{
+        B{b5ee9c7241010101001c000034636f6e747261637420636f6e7374207374727563742074657374bd57f83c} B>boc <s PUSHSLICE
+  }>
+  $StructsTester$_fun_globalConstStructConstantFieldImmediate PROCREF:<{
+        B{b5ee9c7241010101001a000030676c6f62616c20636f6e7374207374727563742074657374c20d027c} B>boc <s PUSHSLICE
+  }>
+  $StructsTester$_fun_contractStructConstantViaVar PROCREF:<{
+        B{b5ee9c7241010101001c000034636f6e747261637420636f6e7374207374727563742074657374bd57f83c} B>boc <s PUSHSLICE
+    $MyStruct3$_constructor_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_globalConstStructConstantViaVar PROCREF:<{
+        B{b5ee9c7241010101001a000030676c6f62616c20636f6e7374207374727563742074657374c20d027c} B>boc <s PUSHSLICE
+    $MyStruct3$_constructor_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_contractStructConstantFieldViaVar PROCREF:<{
+        B{b5ee9c7241010101001c000034636f6e747261637420636f6e7374207374727563742074657374bd57f83c} B>boc <s PUSHSLICE
+  }>
+  $StructsTester$_fun_globalConstStructConstantFieldViaVar PROCREF:<{
+        B{b5ee9c7241010101001a000030676c6f62616c20636f6e7374207374727563742074657374c20d027c} B>boc <s PUSHSLICE
+  }>
+  $LongStruct15$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longStruct15Test PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    $LongStruct15$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15 INLINECALLDICT
+    DROP
+    s13 POP
+    1 PUSHINT
+    15 PUSHINT
+    257 PUSHINT
+    s2 PUSH
+    s3 s14 XCHG
+    s13 s15 XCHG
+    s3 s12 XCHG
+    s11 s15 XCHG
+    s3 s10 XCHG
+    s9 s15 XCHG
+    s3 s8 XCHG
+    s7 s15 XCHG
+    s3 s6 XCHG
+    s5 s15 XCHG
+    s3 s4 XCHG
+    s3 s15 XCHG
+    s2 s15 XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $LongStruct15$_store_cell INLINECALLDICT
+    s3 25 s() XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    DUP
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $LongStruct15$_load_opt INLINECALLDICT
+    $LongStruct15$_not_null INLINECALLDICT
+    s15 37 s() XCHG
+  }>
+  $LongStruct16$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longStruct16Test PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    $LongStruct16$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16 INLINECALLDICT
+    DROP
+    s14 POP
+    1 PUSHINT
+    16 PUSHINT
+    257 PUSHINT
+    s2 PUSH
+    s3 s15 XCHG
+    s14 16 s() XCHG
+    s3 s13 XCHG
+    s12 16 s() XCHG
+    s3 s11 XCHG
+    s10 16 s() XCHG
+    s3 s9 XCHG
+    s8 16 s() XCHG
+    s3 s7 XCHG
+    s6 16 s() XCHG
+    s3 s5 XCHG
+    s4 16 s() XCHG
+    s2 16 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $LongStruct16$_store_cell INLINECALLDICT
+    s3 24 s() XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    DUP
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $LongStruct16$_load_opt INLINECALLDICT
+    $LongStruct16$_not_null INLINECALLDICT
+    16 s() 37 s() XCHG
+  }>
+  $LongStruct32$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_x21_x22_x23_x24_x25_x26_x27_x28_x29_x30_x31_x32 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longStruct32Test PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    21 PUSHINT
+    22 PUSHINT
+    23 PUSHINT
+    24 PUSHINT
+    25 PUSHINT
+    26 PUSHINT
+    27 PUSHINT
+    28 PUSHINT
+    29 PUSHINT
+    30 PUSHINT
+    31 PUSHINT
+    32 PUSHINT
+    $LongStruct32$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_x21_x22_x23_x24_x25_x26_x27_x28_x29_x30_x31_x32 INLINECALLDICT
+    DROP
+    30 s() POP
+    1 PUSHINT
+    32 PUSHINT
+    257 PUSHINT
+    s2 PUSH
+    s3 31 s() XCHG
+    30 s() 32 s() XCHG
+    s3 29 s() XCHG
+    28 s() 32 s() XCHG
+    s3 27 s() XCHG
+    26 s() 32 s() XCHG
+    s3 25 s() XCHG
+    24 s() 32 s() XCHG
+    s3 23 s() XCHG
+    22 s() 32 s() XCHG
+    s3 21 s() XCHG
+    20 s() 32 s() XCHG
+    s3 19 s() XCHG
+    18 s() 32 s() XCHG
+    s3 17 s() XCHG
+    16 s() 32 s() XCHG
+    s3 s15 XCHG
+    s14 32 s() XCHG
+    s3 s13 XCHG
+    s12 32 s() XCHG
+    s3 s11 XCHG
+    s10 32 s() XCHG
+    s3 s9 XCHG
+    s8 32 s() XCHG
+    s3 s7 XCHG
+    s6 32 s() XCHG
+    s3 s5 XCHG
+    s4 32 s() XCHG
+    s2 32 s() XCHG
+    s1 33 s() XCHG
+    s0 32 s() XCHG
+    $LongStruct32$_store_cell INLINECALLDICT
+    s3 23 s() XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    DUP
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $LongStruct32$_load_opt INLINECALLDICT
+    $LongStruct32$_not_null INLINECALLDICT
+    32 s() 52 s() XCHG
+  }>
+  $LongNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longNestedStructTest PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    19 s() PUSH
+    $LongStruct15$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15 INLINECALLDICT
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    34 s() PUSH
+    $LongStruct16$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16 INLINECALLDICT
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    50 s() PUSH
+    21 PUSHINT
+    22 PUSHINT
+    23 PUSHINT
+    24 PUSHINT
+    25 PUSHINT
+    26 PUSHINT
+    27 PUSHINT
+    28 PUSHINT
+    29 PUSHINT
+    30 PUSHINT
+    31 PUSHINT
+    32 PUSHINT
+    $LongStruct32$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_x21_x22_x23_x24_x25_x26_x27_x28_x29_x30_x31_x32 INLINECALLDICT
+    $LongNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3 INLINECALLDICT
+  }>
+  $LongNestedStructWithOpts$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longNestedStructWithOptsTest PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    PUSHNULL
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    20 s() PUSH
+    $LongStruct16$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16 INLINECALLDICT
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    36 s() PUSH
+    21 PUSHINT
+    22 PUSHINT
+    23 PUSHINT
+    24 PUSHINT
+    25 PUSHINT
+    26 PUSHINT
+    27 PUSHINT
+    28 PUSHINT
+    29 PUSHINT
+    30 PUSHINT
+    31 PUSHINT
+    32 PUSHINT
+    $LongStruct32$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_x21_x22_x23_x24_x25_x26_x27_x28_x29_x30_x31_x32 INLINECALLDICT
+    $LongStruct32$_as_optional INLINECALLDICT
+    $LongNestedStructWithOpts$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_x17_x18_x19_x20_s1_s2_s3 INLINECALLDICT
+  }>
+  $StructsTester$_fun_longContractTest PROCREF:<{
+    19 s() PUSH
+    19 s() PUSH
+    ADD
+    18 s() PUSH
+    ADD
+    17 s() PUSH
+    ADD
+    16 s() PUSH
+    ADD
+    s15 PUSH
+    ADD
+    s14 PUSH
+    ADD
+    s13 PUSH
+    ADD
+    s12 PUSH
+    ADD
+    s11 PUSH
+    ADD
+    s10 PUSH
+    ADD
+    s9 PUSH
+    ADD
+    s8 PUSH
+    ADD
+    s7 PUSH
+    ADD
+    s6 PUSH
+    ADD
+    s5 PUSH
+    ADD
+    s4 PUSH
+    ADD
+    s3 PUSH
+    ADD
+    s2 PUSH
+    ADD
+    OVER
+    ADD
+  }>
+  $Point$_constructor_x_y PROCINLINE:<{
+  }>
+  $Location$_constructor_idx_line1_line2 PROCINLINE:<{
+  }>
+  $Line$_constructor_start_end PROCINLINE:<{
+  }>
+  $StructsTester$_fun_location1 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $Point$_constructor_x_y INLINECALLDICT
+    3 PUSHINT
+    4 PUSHINT
+    $Point$_constructor_x_y INLINECALLDICT
+    3 -ROLL
+    1 PUSHINT
+    s0 s4 XCHG
+    $Line$_constructor_start_end INLINECALLDICT
+    PUSHNULL
+    $Location$_constructor_idx_line1_line2 INLINECALLDICT
+  }>
+  $StructsTester$_fun_location2 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $Point$_constructor_x_y INLINECALLDICT
+    3 PUSHINT
+    4 PUSHINT
+    $Point$_constructor_x_y INLINECALLDICT
+    2 PUSHINT
+    s4 s3 s2 PUSH3
+    s4 PUSH
+    $Line$_constructor_start_end INLINECALLDICT
+    s3 s8 XCHG
+    s7 s6 s5 XCHG3
+    $Line$_constructor_start_end INLINECALLDICT
+    $Line$_as_optional INLINECALLDICT
+    s1 s5 XCHG
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+    $Location$_constructor_idx_line1_line2 INLINECALLDICT
+  }>
+  $TripleNestedStructOpt$_constructor_a_s PROCINLINE:<{
+  }>
+  $DoubleNestedStructOpt$_constructor_a_s PROCINLINE:<{
+  }>
+  $MyStruct1$_constructor_a_b_c PROCINLINE:<{
+  }>
+  $StructsTester$_fun_tripleNestedStructOpt1 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_tripleNestedStructOpt2 PROCREF:<{
+    1 PUSHINT
+    PUSHNULL
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+  }>
+  $StructsTester$_fun_tripleNestedStructOpt3 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    PUSHNULL
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+  }>
+  $LongAndDeepNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_s1_s2_s3_s4 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_longAndDeepNestedStruct1 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    s15 s14 s13 PUSH3
+    s15 s14 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    s12 s11 s10 PUSH3
+    s12 s11 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    PUSHNULL
+    PUSHNULL
+    $LongAndDeepNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_s1_s2_s3_s4 INLINECALLDICT
+  }>
+  $StructsTester$_fun_longAndDeepNestedStruct2 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    s15 s14 s13 PUSH3
+    s15 s14 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    s12 s11 s10 PUSH3
+    s12 s11 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    s9 s8 s7 PUSH3
+    s9 s8 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $TripleNestedStructOpt$_as_optional INLINECALLDICT
+    s5 PUSH
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $TripleNestedStructOpt$_as_optional INLINECALLDICT
+    $LongAndDeepNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_s1_s2_s3_s4 INLINECALLDICT
+  }>
+  $StructsTester$_fun_longAndDeepNestedStruct3 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    4 PUSHINT
+    5 PUSHINT
+    6 PUSHINT
+    7 PUSHINT
+    8 PUSHINT
+    9 PUSHINT
+    10 PUSHINT
+    11 PUSHINT
+    12 PUSHINT
+    13 PUSHINT
+    14 PUSHINT
+    15 PUSHINT
+    16 PUSHINT
+    s15 s14 s13 PUSH3
+    s15 s14 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    s12 s11 s10 PUSH3
+    s12 s11 PUSH2
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    PUSHNULL
+    s5 PUSH
+    17 PUSHINT
+    18 PUSHINT
+    19 PUSHINT
+    20 PUSHINT
+    $MyStruct1$_constructor_a_b_c INLINECALLDICT
+    $MyStruct1$_as_optional INLINECALLDICT
+    $DoubleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $DoubleNestedStructOpt$_as_optional INLINECALLDICT
+    $TripleNestedStructOpt$_constructor_a_s INLINECALLDICT
+    $TripleNestedStructOpt$_as_optional INLINECALLDICT
+    $LongAndDeepNestedStruct$_constructor_x1_x2_x3_x4_x5_x6_x7_x8_x9_x10_x11_x12_x13_x14_x15_x16_s1_s2_s3_s4 INLINECALLDICT
+  }>
+  $IntFields$_constructor_i1_i2_i3_i255_i256_i257 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_intFieldsStruct PROCREF:<{
+    -1 PUSHINT
+    -2 PUSHINT
+    -4 PUSHINT
+    254 PUSHNEGPOW2
+    255 PUSHNEGPOW2
+    256 PUSHNEGPOW2
+    $IntFields$_constructor_i1_i2_i3_i255_i256_i257 INLINECALLDICT
+  }>
+  $StructsTester$_fun_intFieldsFromCell PROCREF:<{
+    CTOS
+    $IntFields$_load_not_mut INLINECALLDICT
+  }>
+  $UintFields$_constructor_u1_u2_u3_u254_u255_u256 PROCINLINE:<{
+  }>
+  $StructsTester$_fun_uintFieldsMessage PROCREF:<{
+    1 PUSHINT
+    3 PUSHINT
+    7 PUSHINT
+    254 PUSHPOW2DEC
+    255 PUSHPOW2DEC
+    256 PUSHPOW2DEC
+    $UintFields$_constructor_u1_u2_u3_u254_u255_u256 INLINECALLDICT
+  }>
+  $StructsTester$_fun_uintFieldsFromCell PROCREF:<{
+    CTOS
+    $UintFields$_load_not_mut INLINECALLDICT
+  }>
+  $OptionalFields$_constructor_nickname_avatar PROCINLINE:<{
+  }>
+  $StructsTester$_fun_optionalFields PROCREF:<{
+    PUSHNULL
+        B{b5ee9c7241010101001100001e6e6f6e2d6e756c6c20737472696e67bee85687} B>boc <s PUSHSLICE
+    $OptionalFields$_constructor_nickname_avatar INLINECALLDICT
+  }>
+  $StructsTester$_fun_destructuringTest1 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    SWAP
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      0 PUSHINT
+    }>
+    SWAP
+    ADD
+  }>
+  $StructsTester$_fun_destructuringTest1Const PROCREF:<{
+    43 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest2 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    NIP
+  }>
+  $StructsTester$_fun_destructuringTest2Const PROCREF:<{
+    42 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest3 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    SWAP
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      0 PUSHINT
+    }>
+    SWAP
+    ADD
+  }>
+  $StructsTester$_fun_destructuringTest3Const PROCREF:<{
+    43 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest4 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    SWAP
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      0 PUSHINT
+    }>
+    SWAP
+    ADD
+  }>
+  $StructsTester$_fun_destructuringTest4Const PROCREF:<{
+    43 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest5 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    SWAP
+    IF:<{
+      1 PUSHINT
+    }>ELSE<{
+      0 PUSHINT
+    }>
+    SWAP
+    ADD
+  }>
+  $StructsTester$_fun_destructuringTest5Const PROCREF:<{
+    43 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest6 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    $S1$_constructor_a_b_c INLINECALLDICT
+    -ROT
+    ADD
+    SWAP
+    ADD
+  }>
+  $StructsTester$_fun_destructuringTest6Const PROCREF:<{
+    6 PUSHINT
+  }>
+  $StructsTester$_fun_destructuringTest7 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    3 PUSHINT
+    $S1$_constructor_a_b_c INLINECALLDICT
+    s0 s2 XCHG
+    $S1$_constructor_a_b_c INLINECALLDICT
+  }>
+  $StructsTester$_fun_destructuringTest7Const PROCREF:<{
+    3 PUSHINT
+    2 PUSHINT
+    1 PUSHINT
+    $S1$_constructor_a_b_c INLINECALLDICT
+  }>
+  $StructsTester$_fun_destructuringTest8 PROCREF:<{
+    TRUE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+    NIP
+  }>
+  $StructsTester$_fun_destructuringTest8Const PROCREF:<{
+    42 PUSHINT
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body PROCINLINE:<{
+    s1 s4 XCHG
+    PUSHNULL
+    s4 s3 XCHG2
+    PUSHNULL
+    s2 s3 XCHG2
+  }>
+  %structInitializerTest PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_structInitializerTest INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %toCell1 PROC:<{
+    $MyStruct1$_from_tuple INLINECALLDICT
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 35 s() XCHG
+    31 s() 34 s() XCHG
+    30 s() 33 s() XCHG
+    29 s() 32 s() XCHG
+    28 s() 31 s() XCHG
+    27 s() 30 s() XCHG
+    26 s() 29 s() XCHG
+    25 s() 28 s() XCHG
+    24 s() 27 s() XCHG
+    23 s() 26 s() XCHG
+    22 s() 25 s() XCHG
+    21 s() 24 s() XCHG
+    20 s() 23 s() XCHG
+    19 s() 22 s() XCHG
+    18 s() 21 s() XCHG
+    17 s() 20 s() XCHG
+    16 s() 19 s() XCHG
+    s15 18 s() XCHG
+    s14 17 s() XCHG
+    s13 16 s() XCHG
+    s12 s15 XCHG
+    3 12 BLKSWAP
+    $StructsTester$_fun_toCell1 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %toSlice1 PROC:<{
+    $MyStruct1$_from_tuple INLINECALLDICT
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 35 s() XCHG
+    31 s() 34 s() XCHG
+    30 s() 33 s() XCHG
+    29 s() 32 s() XCHG
+    28 s() 31 s() XCHG
+    27 s() 30 s() XCHG
+    26 s() 29 s() XCHG
+    25 s() 28 s() XCHG
+    24 s() 27 s() XCHG
+    23 s() 26 s() XCHG
+    22 s() 25 s() XCHG
+    21 s() 24 s() XCHG
+    20 s() 23 s() XCHG
+    19 s() 22 s() XCHG
+    18 s() 21 s() XCHG
+    17 s() 20 s() XCHG
+    16 s() 19 s() XCHG
+    s15 18 s() XCHG
+    s14 17 s() XCHG
+    s13 16 s() XCHG
+    s12 s15 XCHG
+    3 12 BLKSWAP
+    $StructsTester$_fun_toSlice1 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %fromCell1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromCell1 INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $MyStruct1$_to_external INLINECALLDICT
+  }>
+  %fromSlice1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromSlice1 INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $MyStruct1$_to_external INLINECALLDICT
+  }>
+  %toCell2 PROC:<{
+    $MyStruct2$_from_tuple INLINECALLDICT
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 34 s() XCHG
+    31 s() 33 s() XCHG
+    30 s() 32 s() XCHG
+    29 s() 31 s() XCHG
+    28 s() 30 s() XCHG
+    27 s() 29 s() XCHG
+    26 s() 28 s() XCHG
+    25 s() 27 s() XCHG
+    24 s() 26 s() XCHG
+    23 s() 25 s() XCHG
+    22 s() 24 s() XCHG
+    21 s() 23 s() XCHG
+    20 s() 22 s() XCHG
+    19 s() 21 s() XCHG
+    18 s() 20 s() XCHG
+    17 s() 19 s() XCHG
+    16 s() 18 s() XCHG
+    s15 17 s() XCHG
+    s14 16 s() XCHG
+    s13 s15 XCHG
+    2 13 BLKSWAP
+    $StructsTester$_fun_toCell2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %fromCell2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromCell2 INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $MyStruct2$_to_external INLINECALLDICT
+  }>
+  %fromSlice2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromSlice2 INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $MyStruct2$_to_external INLINECALLDICT
+  }>
+  %test1 PROC:<{
+    SWAP
+    $MyStruct1$_from_tuple INLINECALLDICT
+    s0 s3 XCHG
+    $MyStruct2$_from_tuple INLINECALLDICT
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 37 s() XCHG
+    31 s() 36 s() XCHG
+    30 s() 35 s() XCHG
+    29 s() 34 s() XCHG
+    28 s() 33 s() XCHG
+    27 s() 32 s() XCHG
+    26 s() 31 s() XCHG
+    25 s() 30 s() XCHG
+    24 s() 29 s() XCHG
+    23 s() 28 s() XCHG
+    22 s() 27 s() XCHG
+    21 s() 26 s() XCHG
+    20 s() 25 s() XCHG
+    19 s() 24 s() XCHG
+    18 s() 23 s() XCHG
+    17 s() 22 s() XCHG
+    16 s() 21 s() XCHG
+    s15 20 s() XCHG
+    s14 19 s() XCHG
+    s13 18 s() XCHG
+    s12 17 s() XCHG
+    s11 16 s() XCHG
+    s10 s15 XCHG
+    s9 s14 XCHG
+    s8 s13 XCHG
+    s7 s12 XCHG
+    s6 s11 XCHG
+    s5 s10 XCHG
+    s4 s9 XCHG
+    s3 s8 XCHG
+    s7 s1 s5 XCHG3
+    s6 s3 XCHG2
+    s1 s4 XCHG
+    $StructsTester$_fun_test1 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %toCellMessage1 PROC:<{
+    $MyMessage1$_from_tuple INLINECALLDICT
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 35 s() XCHG
+    31 s() 34 s() XCHG
+    30 s() 33 s() XCHG
+    29 s() 32 s() XCHG
+    28 s() 31 s() XCHG
+    27 s() 30 s() XCHG
+    26 s() 29 s() XCHG
+    25 s() 28 s() XCHG
+    24 s() 27 s() XCHG
+    23 s() 26 s() XCHG
+    22 s() 25 s() XCHG
+    21 s() 24 s() XCHG
+    20 s() 23 s() XCHG
+    19 s() 22 s() XCHG
+    18 s() 21 s() XCHG
+    17 s() 20 s() XCHG
+    16 s() 19 s() XCHG
+    s15 18 s() XCHG
+    s14 17 s() XCHG
+    s13 16 s() XCHG
+    s12 s15 XCHG
+    3 12 BLKSWAP
+    $StructsTester$_fun_toCellMessage1 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %fromCellMessage1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromCellMessage1 INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $MyMessage1$_to_external INLINECALLDICT
+  }>
+  %fromSliceMessage1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_fromSliceMessage1 INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $MyMessage1$_to_external INLINECALLDICT
+  }>
+  %contractStructConstantImmediate PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_contractStructConstantImmediate INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+    $MyStruct3$_to_external INLINECALLDICT
+  }>
+  %globalConstStructConstantImmediate PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_globalConstStructConstantImmediate INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+    $MyStruct3$_to_external INLINECALLDICT
+  }>
+  %contractStructConstantFieldImmediate PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_contractStructConstantFieldImmediate INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %globalConstStructConstantFieldImmediate PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_globalConstStructConstantFieldImmediate INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %contractStructConstantViaVar PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_contractStructConstantViaVar INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+    $MyStruct3$_to_external INLINECALLDICT
+  }>
+  %globalConstStructConstantViaVar PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_globalConstStructConstantViaVar INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+    $MyStruct3$_to_external INLINECALLDICT
+  }>
+  %contractStructConstantFieldViaVar PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_contractStructConstantFieldViaVar INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %globalConstStructConstantFieldViaVar PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_globalConstStructConstantFieldViaVar INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %longStruct15Test PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longStruct15Test INLINECALLDICT
+    15 15 BLKDROP2
+    15 15 BLKDROP2
+    3 15 BLKDROP2
+    $LongStruct15$_to_external INLINECALLDICT
+  }>
+  %longStruct16Test PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longStruct16Test INLINECALLDICT
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    16 s() POP
+    17 s() POP
+    1 15 BLKDROP2
+    $LongStruct16$_to_external INLINECALLDICT
+  }>
+  %longStruct32Test PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longStruct32Test INLINECALLDICT
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    32 s() POP
+    33 s() POP
+    31 s() POP
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $LongStruct32$_to_external INLINECALLDICT
+  }>
+  %longNestedStructTest PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longNestedStructTest INLINECALLDICT
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    83 s() POP
+    49 s() 82 s() XCHG
+    48 s() 81 s() XCHG
+    47 s() 80 s() XCHG
+    46 s() 79 s() XCHG
+    45 s() 78 s() XCHG
+    44 s() 77 s() XCHG
+    43 s() 76 s() XCHG
+    42 s() 75 s() XCHG
+    41 s() 74 s() XCHG
+    40 s() 73 s() XCHG
+    39 s() 72 s() XCHG
+    38 s() 71 s() XCHG
+    37 s() 70 s() XCHG
+    36 s() 69 s() XCHG
+    35 s() 68 s() XCHG
+    34 s() 67 s() XCHG
+    33 s() 66 s() XCHG
+    32 s() 65 s() XCHG
+    31 s() 64 s() XCHG
+    30 s() 63 s() XCHG
+    29 s() 62 s() XCHG
+    28 s() 61 s() XCHG
+    27 s() 60 s() XCHG
+    26 s() 59 s() XCHG
+    25 s() 58 s() XCHG
+    24 s() 57 s() XCHG
+    23 s() 56 s() XCHG
+    22 s() 55 s() XCHG
+    21 s() 54 s() XCHG
+    20 s() 53 s() XCHG
+    19 s() 52 s() XCHG
+    18 s() 51 s() XCHG
+    17 s() 50 s() XCHG
+    16 s() 49 s() XCHG
+    s15 48 s() XCHG
+    s14 47 s() XCHG
+    s13 46 s() XCHG
+    s12 45 s() XCHG
+    s11 44 s() XCHG
+    s10 43 s() XCHG
+    s9 42 s() XCHG
+    s8 41 s() XCHG
+    s7 40 s() XCHG
+    s6 39 s() XCHG
+    s5 38 s() XCHG
+    s4 37 s() XCHG
+    s3 36 s() XCHG
+    s2 35 s() XCHG
+    s1 34 s() XCHG
+    s0 33 s() XCHG
+    16 s() 32 s() XCHG
+    s15 31 s() XCHG
+    s14 30 s() XCHG
+    s13 29 s() XCHG
+    s12 28 s() XCHG
+    s11 27 s() XCHG
+    s10 26 s() XCHG
+    s9 25 s() XCHG
+    s8 24 s() XCHG
+    s7 23 s() XCHG
+    s6 22 s() XCHG
+    s5 21 s() XCHG
+    s4 20 s() XCHG
+    s3 19 s() XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $LongNestedStruct$_to_external INLINECALLDICT
+  }>
+  %longNestedStructWithOptsTest PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longNestedStructWithOptsTest INLINECALLDICT
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    38 s() POP
+    s4 37 s() XCHG
+    s3 36 s() XCHG
+    s2 35 s() XCHG
+    s1 34 s() XCHG
+    s0 33 s() XCHG
+    s4 32 s() XCHG
+    s3 31 s() XCHG
+    s2 30 s() XCHG
+    s1 29 s() XCHG
+    s0 28 s() XCHG
+    s4 27 s() XCHG
+    s3 26 s() XCHG
+    s2 25 s() XCHG
+    s1 24 s() XCHG
+    s0 23 s() XCHG
+    s4 22 s() XCHG
+    s3 21 s() XCHG
+    s2 20 s() XCHG
+    s1 19 s() XCHG
+    s0 18 s() XCHG
+    s4 17 s() XCHG
+    s3 16 s() XCHG
+    s15 s14 s13 XCHG3
+    8 5 BLKSWAP
+    $LongNestedStructWithOpts$_to_external INLINECALLDICT
+  }>
+  %longContractTest PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longContractTest INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %location1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_location1 INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $Location$_to_external INLINECALLDICT
+  }>
+  %location2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_location2 INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $Location$_to_external INLINECALLDICT
+  }>
+  %tripleNestedStructOpt1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_tripleNestedStructOpt1 INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $TripleNestedStructOpt$_to_external INLINECALLDICT
+  }>
+  %tripleNestedStructOpt2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_tripleNestedStructOpt2 INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $TripleNestedStructOpt$_to_external INLINECALLDICT
+  }>
+  %tripleNestedStructOpt3 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_tripleNestedStructOpt3 INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $TripleNestedStructOpt$_to_external INLINECALLDICT
+  }>
+  %longAndDeepNestedStruct1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longAndDeepNestedStruct1 INLINECALLDICT
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    s10 21 s() XCHG
+    s9 20 s() XCHG
+    s8 19 s() XCHG
+    s7 18 s() XCHG
+    s6 17 s() XCHG
+    s5 16 s() XCHG
+    s4 s15 XCHG
+    s3 s14 XCHG
+    s13 s12 s11 XCHG3
+    $LongAndDeepNestedStruct$_to_external INLINECALLDICT
+  }>
+  %longAndDeepNestedStruct2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longAndDeepNestedStruct2 INLINECALLDICT
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    s10 21 s() XCHG
+    s9 20 s() XCHG
+    s8 19 s() XCHG
+    s7 18 s() XCHG
+    s6 17 s() XCHG
+    s5 16 s() XCHG
+    s4 s15 XCHG
+    s3 s14 XCHG
+    s13 s12 s11 XCHG3
+    $LongAndDeepNestedStruct$_to_external INLINECALLDICT
+  }>
+  %longAndDeepNestedStruct3 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_longAndDeepNestedStruct3 INLINECALLDICT
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    22 s() POP
+    s10 21 s() XCHG
+    s9 20 s() XCHG
+    s8 19 s() XCHG
+    s7 18 s() XCHG
+    s6 17 s() XCHG
+    s5 16 s() XCHG
+    s4 s15 XCHG
+    s3 s14 XCHG
+    s13 s12 s11 XCHG3
+    $LongAndDeepNestedStruct$_to_external INLINECALLDICT
+  }>
+  %intFieldsStruct PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_intFieldsStruct INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $IntFields$_to_external INLINECALLDICT
+  }>
+  %intFieldsFromCell PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_intFieldsFromCell INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $IntFields$_to_external INLINECALLDICT
+  }>
+  %uintFieldsMessage PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_uintFieldsMessage INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $UintFields$_to_external INLINECALLDICT
+  }>
+  %uintFieldsFromCell PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    32 s() 33 s() XCHG
+    31 s() 32 s() XCHG
+    30 s() 31 s() XCHG
+    29 s() 30 s() XCHG
+    28 s() 29 s() XCHG
+    27 s() 28 s() XCHG
+    26 s() 27 s() XCHG
+    25 s() 26 s() XCHG
+    24 s() 25 s() XCHG
+    23 s() 24 s() XCHG
+    22 s() 23 s() XCHG
+    21 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $StructsTester$_fun_uintFieldsFromCell INLINECALLDICT
+    12 6 BLKDROP2
+    12 6 BLKDROP2
+    9 6 BLKDROP2
+    $UintFields$_to_external INLINECALLDICT
+  }>
+  %optionalFields PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_optionalFields INLINECALLDICT
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    17 s() POP
+    s15 POP
+    14 BLKDROP
+    $OptionalFields$_to_external INLINECALLDICT
+  }>
+  %destructuringTest1 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest1 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest1Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest1Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest2 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest2 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest2Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest2Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest3 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest3 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest3Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest3Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest4 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest4 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest4Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest4Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest5 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest5 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest5Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest5Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest6 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest6 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest6Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest6Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest7 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest7 INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $S1$_to_external INLINECALLDICT
+  }>
+  %destructuringTest7Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest7Const INLINECALLDICT
+    15 3 BLKDROP2
+    15 3 BLKDROP2
+    3 3 BLKDROP2
+    $S1$_to_external INLINECALLDICT
+  }>
+  %destructuringTest8 PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest8 INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %destructuringTest8Const PROC:<{
+    $StructsTester$_contract_load INLINECALLDICT
+    $StructsTester$_fun_destructuringTest8Const INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $StructsTester$_contract_load INLINECALLDICT
+    s0 34 s() XCHG
+    IFJMP:<{
+      15 BLKDROP
+      15 BLKDROP
+      4 BLKDROP
+    }>
+    0 PUSHINT
+    33 s() PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 33 s() XCHG
+      32 LDU
+      OVER
+      42 EQINT
+      IFJMP:<{
+        NIP
+        33 s() POP
+        s0 32 s() XCHG
+        $Foo$_load_without_opcode INLINECALLDICT
+        NIP
+        $Dict$_load_not_mut INLINECALLDICT
+        FALSE
+        __tact_context_get_sender INLINECALLDICT
+        10000000 PUSHINT
+        1 PUSHINT
+        s0 s4 XCHG
+        $Dict$_store_cell INLINECALLDICT
+        s3 s4 XCHG
+        s1 s3 s0 XCHG3
+        $SendParameters$_constructor_bounce_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+            STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+            // → Stack state
+            // s0: Builder
+            // s1: `data`
+            // s2: `code`
+            // s3: `body`
+            // s4: `mode`
+            // Group 2: Placing the Builder after code and data, then checking those for nullability
+            s2 XCHG0
+            DUP2
+            ISNULL
+            SWAP
+            ISNULL
+            MUL // note that -1 * -1 wraps back to -1
+            // → Stack state
+            // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+            // s1: `code`
+            // s2: `data`
+            // s3: Builder
+            // s4: `body`
+            // s5: `mode`
+            // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+            <{
+                DROP2 // drop `data` and `code`, since either of those is null
+                b{0} STSLICECONST
+            }> PUSHCONT
+            // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+            <{
+                // _ split_depth:(Maybe (## 5))
+                //   special:(Maybe TickTock)
+                //   code:(Maybe ^Cell)
+                //   data:(Maybe ^Cell)
+                //   library:(Maybe ^Cell)
+                // = StateInit;
+                ROT                // place message Builder on top
+                b{10} STSLICECONST // store Maybe = true, Either = false
+                // Start composing inlined StateInit
+                b{00} STSLICECONST // store split_depth and special first
+                STDICT             // store code
+                STDICT             // store data
+                b{0} STSLICECONST  // store library
+            }> PUSHCONT
+            // Group 3: IFELSE that does the branching shown above
+            IFELSE
+            // → Stack state
+            // s0: Builder
+            // s1: null or StateInit
+            // s2: `body`
+            // s3: `mode`
+            // Group 4: Finalizing the message
+            STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+            ENDC
+            // → Stack state
+            // s0: Cell
+            // s1: `mode`
+            // Group 5: Sending the message, with `mode` on top
+            SWAP
+            SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+        30 s() 32 s() XCHG
+        29 s() 31 s() XCHG
+        28 s() 30 s() XCHG
+        27 s() 29 s() XCHG
+        26 s() 28 s() XCHG
+        25 s() 27 s() XCHG
+        24 s() 26 s() XCHG
+        23 s() 25 s() XCHG
+        22 s() 24 s() XCHG
+        21 s() 23 s() XCHG
+        20 s() 22 s() XCHG
+        19 s() 21 s() XCHG
+        18 s() 20 s() XCHG
+        17 s() 19 s() XCHG
+        16 s() 18 s() XCHG
+        s15 17 s() XCHG
+        s14 16 s() XCHG
+        2 14 BLKSWAP
+        $StructsTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s0 34 s() XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      32 s() POP
+      30 s() 32 s() XCHG
+      29 s() 31 s() XCHG
+      28 s() 30 s() XCHG
+      27 s() 29 s() XCHG
+      26 s() 28 s() XCHG
+      25 s() 27 s() XCHG
+      24 s() 26 s() XCHG
+      23 s() 25 s() XCHG
+      22 s() 24 s() XCHG
+      21 s() 23 s() XCHG
+      20 s() 22 s() XCHG
+      19 s() 21 s() XCHG
+      18 s() 20 s() XCHG
+      17 s() 19 s() XCHG
+      16 s() 18 s() XCHG
+      s15 17 s() XCHG
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $StructsTester$_contract_store INLINECALLDICT
+    }>
+    s0 32 s() XCHG
+    HASHSU
+    DUP
+    14239128265848982202859035924150971095226202256188128321166830797419136345576 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          NEWC
+      42 PUSHINT
+          STVARUINT16
+      35 PUSHINT
+      SWAP
+      31 STU
+          ENDC
+      $global_directParse INLINECALLDICT
+      SWAP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001200002064756d7028636f696e2e6669727374290f2f863c} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3439343a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001300002264756d7028636f696e2e7365636f6e642926f9482f} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3439353a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      30 s() 32 s() XCHG
+      29 s() 31 s() XCHG
+      28 s() 30 s() XCHG
+      27 s() 29 s() XCHG
+      26 s() 28 s() XCHG
+      25 s() 27 s() XCHG
+      24 s() 26 s() XCHG
+      23 s() 25 s() XCHG
+      22 s() 24 s() XCHG
+      21 s() 23 s() XCHG
+      20 s() 22 s() XCHG
+      19 s() 21 s() XCHG
+      18 s() 20 s() XCHG
+      17 s() 19 s() XCHG
+      16 s() 18 s() XCHG
+      s15 17 s() XCHG
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $StructsTester$_contract_store INLINECALLDICT
+    }>
+    637562944602960113223430066273907883609115546533718651320472771400482173063 PUSHINT
+    EQUAL
+    IFJMP:<{
+          NEWC
+      1 PUSHINT
+          STVARINT16
+      2 PUSHINT
+          STVARINT32
+      3 PUSHINT
+          STVARUINT16
+      4 PUSHINT
+          STVARUINT32
+          ENDC
+      $global_directParseVarIntegers INLINECALLDICT
+      s0 s3 XCHG
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001100001e64756d7028766172496e74732e6129df504534} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3530373a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      SWAP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001100001e64756d7028766172496e74732e622946f8a200} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3530383a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001100001e64756d7028766172496e74732e632931600013} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3530393a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001100001e64756d7028766172496e74732e642974a96d69} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f737472756374732e746163743a3531303a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      30 s() 32 s() XCHG
+      29 s() 31 s() XCHG
+      28 s() 30 s() XCHG
+      27 s() 29 s() XCHG
+      26 s() 28 s() XCHG
+      25 s() 27 s() XCHG
+      24 s() 26 s() XCHG
+      23 s() 25 s() XCHG
+      22 s() 24 s() XCHG
+      21 s() 23 s() XCHG
+      20 s() 22 s() XCHG
+      19 s() 21 s() XCHG
+      18 s() 20 s() XCHG
+      17 s() 19 s() XCHG
+      16 s() 18 s() XCHG
+      s15 17 s() XCHG
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $StructsTester$_contract_store INLINECALLDICT
+    }>
+    15 BLKDROP
+    15 BLKDROP
+    3 BLKDROP
+    130 THROW
+  }>
+}END>c

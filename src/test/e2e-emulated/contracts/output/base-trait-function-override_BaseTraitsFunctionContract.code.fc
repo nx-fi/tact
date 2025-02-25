@@ -1,0 +1,137 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; base-trait-function-override_BaseTraitsFunctionContract.headers.fc
+;;
+;; Header files for BaseTraitsFunctionContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $BaseTraitsFunctionContract$_store
+builder $BaseTraitsFunctionContract$_store(builder build_0, (int) v) inline;
+
+;; $BaseTraitsFunctionContract$_load
+(slice, ((int))) $BaseTraitsFunctionContract$_load(slice sc_0) inline;
+
+;; $BaseTraitsFunctionContract$_contract_init
+(int) $BaseTraitsFunctionContract$_contract_init() impure inline;
+
+;; $BaseTraitsFunctionContract$_contract_load
+(int) $BaseTraitsFunctionContract$_contract_load() impure inline_ref;
+
+;; $BaseTraitsFunctionContract$_contract_store
+() $BaseTraitsFunctionContract$_contract_store((int) v) impure inline;
+
+;; $BaseTraitsFunctionContract$_fun_notify
+((int), ()) $BaseTraitsFunctionContract$_fun_notify((int) $self, cell $body) impure inline_ref;
+
+;; $BaseTraitsFunctionContract$_fun_value
+((int), int) $BaseTraitsFunctionContract$_fun_value((int) $self) impure inline_ref;
+
+
+;; base-trait-function-override_BaseTraitsFunctionContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; base-trait-function-override_BaseTraitsFunctionContract.storage.fc
+;;
+;; Type: BaseTraitsFunctionContract
+;;
+
+builder $BaseTraitsFunctionContract$_store(builder build_0, (int) v) inline {
+    var (v'value) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    return build_0;
+}
+
+(slice, ((int))) $BaseTraitsFunctionContract$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'value));
+}
+
+(int) $BaseTraitsFunctionContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$BaseTraitsFunctionContract$_load();
+    } else {
+        return $BaseTraitsFunctionContract$_contract_init();
+    }
+}
+
+() $BaseTraitsFunctionContract$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $BaseTraitsFunctionContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract BaseTraitsFunctionContract functions
+;;
+
+(int) $BaseTraitsFunctionContract$_contract_init() impure inline {
+    var (($self'value)) = (0);
+    return ($self'value);
+}
+
+((int), ()) $BaseTraitsFunctionContract$_fun_notify((int) $self, cell $body) impure inline_ref {
+    var (($self'value)) = $self;
+    $self'value = 1000;
+    return (($self'value), ());
+}
+
+((int), int) $BaseTraitsFunctionContract$_fun_value((int) $self) impure inline_ref {
+    var (($self'value)) = $self;
+    ($self'value)~$BaseTraitsFunctionContract$_fun_notify(null());
+    var $fresh$ret_163 = $self'value;
+    return (($self'value), $fresh$ret_163);
+}
+
+;;
+;; Get methods of a Contract BaseTraitsFunctionContract
+;;
+
+_ %value() method_id(121536) {
+    var self = $BaseTraitsFunctionContract$_contract_load();
+    var res = self~$BaseTraitsFunctionContract$_fun_value();
+    return res;
+}
+
+;;
+;; Routing of a Contract BaseTraitsFunctionContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'value) = $BaseTraitsFunctionContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $BaseTraitsFunctionContract$_contract_store(($self'value));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

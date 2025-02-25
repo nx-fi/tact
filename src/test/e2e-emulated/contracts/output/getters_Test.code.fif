@@ -1,0 +1,405 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/getters_Test.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $SetIdAndData$_load_without_opcode
+  DECLPROC $Test$_store
+  DECLPROC $Test$_load
+  DECLPROC $StateInit$_not_null
+  DECLPROC $S$_from_tuple
+  DECLPROC $S$_to_external
+  DECLPROC $SetIdAndData$_from_tuple
+  DECLPROC $SetIdAndData$_to_external
+  DECLPROC $Test$_from_tuple
+  DECLPROC $Test$_to_external
+  DECLPROC $Test$_contract_init
+  DECLPROC $Test$_contract_load
+  DECLPROC $Test$_contract_store
+  DECLPROC $Test$_fun_testGetter
+  DECLPROC $Test$_fun_test_getter
+  DECLPROC $Test$_fun_Test_getter
+  DECLPROC $Test$_fun_contractData
+  DECLPROC $Test$_fun_structAsInput
+  DECLPROC $Test$_fun_messageAsInput1
+  DECLPROC $Test$_fun_messageAsInput2
+  DECLPROC $Test$_fun_contractAsInput
+  DECLPROC $Test$_fun_methodIdExpr
+  DECLPROC $Test$_fun_methodIdConst
+  DECLPROC $Test$_fun_methodIdMin
+  DECLPROC $Test$_fun_methodIdMax
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $Test$_fun_forward
+  DECLPROC $Test$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  97823 DECLMETHOD %testGetter
+  111014 DECLMETHOD %test_getter
+  72668 DECLMETHOD %Test_getter
+  71601 DECLMETHOD %contractData
+  128711 DECLMETHOD %structAsInput
+  122562 DECLMETHOD %messageAsInput1
+  126625 DECLMETHOD %messageAsInput2
+  125793 DECLMETHOD %contractAsInput
+  45032 DECLMETHOD %methodIdExpr
+  16384 DECLMETHOD %methodIdConst
+  -262144 DECLMETHOD %methodIdMin
+  262143 DECLMETHOD %methodIdMax
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $SetIdAndData$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    LDREF
+    -ROT
+  }>
+  $Test$_store PROCINLINE:<{
+    s0 s2 XCHG
+    32 STU
+    STREF
+  }>
+  $Test$_load PROCINLINE:<{
+    32 LDU
+    LDREF
+    -ROT
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $S$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+  }>
+  $S$_to_external PROCINLINE:<{
+  }>
+  $SetIdAndData$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+  }>
+  $SetIdAndData$_to_external PROCINLINE:<{
+  }>
+  $Test$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+  }>
+  $Test$_to_external PROCINLINE:<{
+  }>
+  $Test$_contract_init PROCINLINE:<{
+    0 PUSHINT
+        NEWC
+        ENDC
+  }>
+  $Test$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Test$_load INLINECALLDICT
+      1 2 BLKDROP2
+    }>
+    DROP
+    $Test$_contract_init INLINECALLDICT
+  }>
+  $Test$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    -ROT
+    $Test$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Test$_fun_testGetter PROCREF:<{
+    1 PUSHINT
+  }>
+  $Test$_fun_test_getter PROCREF:<{
+    2 PUSHINT
+  }>
+  $Test$_fun_Test_getter PROCREF:<{
+    3 PUSHINT
+  }>
+  $Test$_fun_contractData PROCREF:<{
+    2DUP
+  }>
+  $Test$_fun_structAsInput PROCREF:<{
+  }>
+  $Test$_fun_messageAsInput1 PROCREF:<{
+    DROP
+  }>
+  $Test$_fun_messageAsInput2 PROCREF:<{
+  }>
+  $Test$_fun_contractAsInput PROCREF:<{
+  }>
+  $Test$_fun_methodIdExpr PROCREF:<{
+    TRUE
+  }>
+  $Test$_fun_methodIdConst PROCREF:<{
+    14 PUSHPOW2
+  }>
+  $Test$_fun_methodIdMin PROCREF:<{
+    TRUE
+  }>
+  $Test$_fun_methodIdMax PROCREF:<{
+    TRUE
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $Test$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $Test$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $Test$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  %testGetter PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_testGetter INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %test_getter PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_test_getter INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %Test_getter PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_Test_getter INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %contractData PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_contractData INLINECALLDICT
+    2 2 BLKDROP2
+    $Test$_to_external INLINECALLDICT
+  }>
+  %structAsInput PROC:<{
+    $S$_from_tuple INLINECALLDICT
+    $Test$_contract_load INLINECALLDICT
+    2SWAP
+    $Test$_fun_structAsInput INLINECALLDICT
+    2 2 BLKDROP2
+    $S$_to_external INLINECALLDICT
+  }>
+  %messageAsInput1 PROC:<{
+    $SetIdAndData$_from_tuple INLINECALLDICT
+    $Test$_contract_load INLINECALLDICT
+    2SWAP
+    $Test$_fun_messageAsInput1 INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %messageAsInput2 PROC:<{
+    $SetIdAndData$_from_tuple INLINECALLDICT
+    $Test$_contract_load INLINECALLDICT
+    2SWAP
+    $Test$_fun_messageAsInput2 INLINECALLDICT
+    2 2 BLKDROP2
+    $SetIdAndData$_to_external INLINECALLDICT
+  }>
+  %contractAsInput PROC:<{
+    $Test$_from_tuple INLINECALLDICT
+    $Test$_contract_load INLINECALLDICT
+    2SWAP
+    $Test$_fun_contractAsInput INLINECALLDICT
+    2 2 BLKDROP2
+    $Test$_to_external INLINECALLDICT
+  }>
+  %methodIdExpr PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_methodIdExpr INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %methodIdConst PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_methodIdConst INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %methodIdMin PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_methodIdMin INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  %methodIdMax PROC:<{
+    $Test$_contract_load INLINECALLDICT
+    $Test$_fun_methodIdMax INLINECALLDICT
+    2 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Test$_contract_load INLINECALLDICT
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+    }>
+    SWAP
+    32 PUSHINT
+    LDUXQ NULLROTRIFNOT
+    DROP
+    OVER
+    1746430141 PUSHINT
+    EQUAL
+    IFJMP:<{
+      3 1 BLKDROP2
+      $SetIdAndData$_load_without_opcode INLINECALLDICT
+      1 2 BLKDROP2
+      $Test$_contract_store INLINECALLDICT
+    }>
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      $Deploy$_load_without_opcode INLINECALLDICT
+      NIP
+      $DeployOk$_constructor_queryId INLINECALLDICT
+      $DeployOk$_store_cell INLINECALLDICT
+      s1 s2 XCHG
+      $Test$_fun_notify INLINECALLDICT
+      $Test$_contract_store INLINECALLDICT
+    }>
+    3 BLKDROP
+    130 THROW
+  }>
+}END>c

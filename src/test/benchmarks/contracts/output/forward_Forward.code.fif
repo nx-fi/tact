@@ -1,0 +1,101 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/benchmarks/contracts/output/forward_Forward.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC $TestGetFwdFee$_load_without_opcode
+  DECLPROC $Forward$_contract_init
+  DECLPROC $Forward$_contract_load
+  DECLPROC $Forward$_contract_store
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  $TestGetFwdFee$_load_without_opcode PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $Forward$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Forward$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $Forward$_contract_init INLINECALLDICT
+  }>
+  $Forward$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Forward$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    32 PUSHINT
+    LDUXQ NULLROTRIFNOT
+    2DROP
+    604921109 PUSHINT
+    EQUAL
+    IFJMP:<{
+      __tact_context_get INLINECALLDICT
+          LDMSGADDR   // load dest:MsgAddressInt
+          LDGRAMS     // load value:CurrencyCollection
+          ONE
+          SDSKIPFIRST // skip extra currency collection
+          LDGRAMS     // load ihr_fee
+          LDGRAMS     // load fwd_fee, we'll be using this!
+          DROP        // drop remaining Slice (with created_lt and created_at)
+          // There are 7 entries on the stack — first 3 fields of Context plus 4 loaded ones.
+          // The topmost is fwd_fee, which is the only one we're after, so let's drop 6 entries below:
+          6 1 BLKDROP2 // drop the loaded values as well as the first 3 fields of Context
+          ZERO              // not masterchain
+          GETORIGINALFWDFEE // (fwd_fee * 2^16) / first_frac, where
+                            // first_frac is a value listed in config param 25
+                            // of the blockchain: https://tonscan.org/config#25
+          NOP
+      $Forward$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

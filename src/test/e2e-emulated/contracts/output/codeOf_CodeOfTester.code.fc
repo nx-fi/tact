@@ -1,0 +1,330 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; codeOf_CodeOfTester.headers.fc
+;;
+;; Header files for CodeOfTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_cell_eq
+int __tact_cell_eq(cell a, cell b) inline;
+
+;; __tact_cell_neq
+int __tact_cell_neq(cell a, cell b) inline;
+
+;; $CodeOfTester$_store
+builder $CodeOfTester$_store(builder build_0, (int, int) v) inline;
+
+;; $CodeOfTester$_load
+(slice, ((int, int))) $CodeOfTester$_load(slice sc_0) inline;
+
+;; $StateInit$_get_code
+_ $StateInit$_get_code((cell, cell) v) inline;
+
+;; $CodeOfTester$init$_store
+builder $CodeOfTester$init$_store(builder build_0, (int, int) v) inline;
+
+;; $CodeOfTester$init$_load
+(slice, ((int, int))) $CodeOfTester$init$_load(slice sc_0) inline;
+
+;; $ChildContract$init$_store
+builder $ChildContract$init$_store(builder build_0, (int) v) inline;
+
+;; $CodeOfTester$_contract_init
+(int, int) $CodeOfTester$_contract_init(int $value, int $value2) impure inline;
+
+;; $CodeOfTester$_contract_load
+(int, int) $CodeOfTester$_contract_load() impure inline_ref;
+
+;; $CodeOfTester$_contract_store
+() $CodeOfTester$_contract_store((int, int) v) impure inline;
+
+;; $CodeOfTester$_init_child
+(cell, cell) $CodeOfTester$_init_child(int $value, int $value2) inline_ref;
+
+;; $CodeOfTester$_fun_selfCode
+((int, int), cell) $CodeOfTester$_fun_selfCode((int, int) $self) impure inline_ref;
+
+;; $ChildContract$_code_child
+cell $ChildContract$_code_child() inline;
+
+;; $CodeOfTester$_fun_childCode
+((int, int), cell) $CodeOfTester$_fun_childCode((int, int) $self) impure inline_ref;
+
+;; $CodeOfTester$_fun_testThatMyCodeEqualToCodeOfSelf
+((int, int), int) $CodeOfTester$_fun_testThatMyCodeEqualToCodeOfSelf((int, int) $self) impure inline_ref;
+
+;; $CodeOfTester$_fun_testThatMyCodeNotEqualToCodeOfChild
+((int, int), int) $CodeOfTester$_fun_testThatMyCodeNotEqualToCodeOfChild((int, int) $self) impure inline_ref;
+
+;; $CodeOfTester$_fun_testThatInitOfSelfCodeEqualToCodeOf
+((int, int), int) $CodeOfTester$_fun_testThatInitOfSelfCodeEqualToCodeOf((int, int) $self) impure inline_ref;
+
+;; $ChildContract$_init_child
+(cell, cell) $ChildContract$_init_child(int $value) inline_ref;
+
+;; $CodeOfTester$_fun_testThatInitOfChildCodeEqualToCodeOf
+((int, int), int) $CodeOfTester$_fun_testThatInitOfChildCodeEqualToCodeOf((int, int) $self) impure inline_ref;
+
+;; $CodeOfTester$_fun_testThatInitOfSelfCodeNotEqualToCodeOfChild
+((int, int), int) $CodeOfTester$_fun_testThatInitOfSelfCodeNotEqualToCodeOfChild((int, int) $self) impure inline_ref;
+
+
+;; codeOf_CodeOfTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int __tact_cell_eq(cell a, cell b) inline {
+    return (a.cell_hash() ==  b.cell_hash());
+}
+
+int __tact_cell_neq(cell a, cell b) inline {
+    return (a.cell_hash() !=  b.cell_hash());
+}
+
+cell $global_myCode() impure asm """
+    MYCODE
+""";
+
+;; codeOf_CodeOfTester.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+_ $StateInit$_get_code((cell, cell) v) inline {
+    var (v'code, v'data) = v;
+    return v'code;
+}
+
+;;
+;; Type: CodeOfTester
+;;
+
+builder $CodeOfTester$_store(builder build_0, (int, int) v) inline {
+    var (v'value, v'value2) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    build_0 = build_0.store_int(v'value2, 1);
+    return build_0;
+}
+
+(slice, ((int, int))) $CodeOfTester$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    var v'value2 = sc_0~load_int(1);
+    return (sc_0, (v'value, v'value2));
+}
+
+builder $CodeOfTester$init$_store(builder build_0, (int, int) v) inline {
+    var (v'value, v'value2) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    build_0 = build_0.store_int(v'value2, 1);
+    return build_0;
+}
+
+(slice, ((int, int))) $CodeOfTester$init$_load(slice sc_0) inline {
+    var v'value = sc_0~load_int(257);
+    var v'value2 = sc_0~load_int(1);
+    return (sc_0, (v'value, v'value2));
+}
+
+(int, int) $CodeOfTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$CodeOfTester$_load();
+    } else {
+        (int $value, int $value2) = $sc~$CodeOfTester$init$_load();
+        $sc.end_parse();
+        return $CodeOfTester$_contract_init($value, $value2);
+    }
+}
+
+() $CodeOfTester$_contract_store((int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $CodeOfTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+(cell, cell) $CodeOfTester$_init_child(int $value, int $value2) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: CodeOfTester
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $CodeOfTester$init$_store(b, ($value, $value2));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: ChildContract
+;;
+
+builder $ChildContract$init$_store(builder build_0, (int) v) inline {
+    var (v'value) = v;
+    build_0 = build_0.store_int(v'value, 257);
+    return build_0;
+}
+
+cell $ChildContract$_child_get_code() impure asm """
+    B{b5ee9c72010106010086000114ff00f4a413f4bcf2c80b0102016202030192d001d072d721d200d200fa4021103450666f04f86102f862db3c02915be07021d74920c21f953101d31f309132e2c00001c121b09fc87f01ca000101810101cf00c9ed54e030f2c08204020fa1b581b679b678630405002eed44d0d2000197810101d7000131e0810101d7000101d1000220} B>boc PUSHREF
+""";
+
+cell $ChildContract$_code_child() inline {
+    return $ChildContract$_child_get_code();
+}
+
+(cell, cell) $ChildContract$_init_child(int $value) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: ChildContract
+    cell init_code = $ChildContract$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $ChildContract$init$_store(b, ($value));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract CodeOfTester functions
+;;
+
+(int, int) $CodeOfTester$_contract_init(int $value, int $value2) impure inline {
+    var (($self'value, $self'value2)) = (null(), null());
+    $self'value = $value;
+    $self'value2 = $value2;
+    return ($self'value, $self'value2);
+}
+
+((int, int), cell) $CodeOfTester$_fun_selfCode((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_180 = my_code();
+    return (($self'value, $self'value2), $fresh$ret_180);
+}
+
+((int, int), cell) $CodeOfTester$_fun_childCode((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_181 = $ChildContract$_code_child();
+    return (($self'value, $self'value2), $fresh$ret_181);
+}
+
+((int, int), int) $CodeOfTester$_fun_testThatMyCodeEqualToCodeOfSelf((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_182 = __tact_cell_eq(my_code(), $global_myCode());
+    return (($self'value, $self'value2), $fresh$ret_182);
+}
+
+((int, int), int) $CodeOfTester$_fun_testThatMyCodeNotEqualToCodeOfChild((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_183 = __tact_cell_neq($ChildContract$_code_child(), $global_myCode());
+    return (($self'value, $self'value2), $fresh$ret_183);
+}
+
+((int, int), int) $CodeOfTester$_fun_testThatInitOfSelfCodeEqualToCodeOf((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_184 = __tact_cell_eq(my_code(), $StateInit$_get_code($CodeOfTester$_init_child(0, false)));
+    return (($self'value, $self'value2), $fresh$ret_184);
+}
+
+((int, int), int) $CodeOfTester$_fun_testThatInitOfChildCodeEqualToCodeOf((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_185 = __tact_cell_eq($ChildContract$_code_child(), $StateInit$_get_code($ChildContract$_init_child(0)));
+    return (($self'value, $self'value2), $fresh$ret_185);
+}
+
+((int, int), int) $CodeOfTester$_fun_testThatInitOfSelfCodeNotEqualToCodeOfChild((int, int) $self) impure inline_ref {
+    var (($self'value, $self'value2)) = $self;
+    var $fresh$ret_186 = __tact_cell_neq($ChildContract$_code_child(), $StateInit$_get_code($CodeOfTester$_init_child(0, false)));
+    return (($self'value, $self'value2), $fresh$ret_186);
+}
+
+;;
+;; Get methods of a Contract CodeOfTester
+;;
+
+_ %selfCode() method_id(101265) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_selfCode();
+    return res;
+}
+
+_ %childCode() method_id(107267) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_childCode();
+    return res;
+}
+
+_ %testThatMyCodeEqualToCodeOfSelf() method_id(96976) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_testThatMyCodeEqualToCodeOfSelf();
+    return res;
+}
+
+_ %testThatMyCodeNotEqualToCodeOfChild() method_id(99799) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_testThatMyCodeNotEqualToCodeOfChild();
+    return res;
+}
+
+_ %testThatInitOfSelfCodeEqualToCodeOf() method_id(114302) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_testThatInitOfSelfCodeEqualToCodeOf();
+    return res;
+}
+
+_ %testThatInitOfChildCodeEqualToCodeOf() method_id(101139) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_testThatInitOfChildCodeEqualToCodeOf();
+    return res;
+}
+
+_ %testThatInitOfSelfCodeNotEqualToCodeOfChild() method_id(69686) {
+    var self = $CodeOfTester$_contract_load();
+    var res = self~$CodeOfTester$_fun_testThatInitOfSelfCodeNotEqualToCodeOfChild();
+    return res;
+}
+
+;;
+;; Routing of a Contract CodeOfTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'value, $self'value2) = $CodeOfTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $CodeOfTester$_contract_store(($self'value, $self'value2));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

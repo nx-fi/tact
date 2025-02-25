@@ -1,0 +1,338 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; serialization_SerializationTester.headers.fc
+;;
+;; Header files for SerializationTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Update$_load_without_opcode
+(slice, ((int, int, int, int, int, int, int, int, int))) $Update$_load_without_opcode(slice sc_0) inline_ref;
+
+;; $SerializationTester$_store
+builder $SerializationTester$_store(builder build_0, (int, int, int, int, int, int, int, int, int) v) inline;
+
+;; $SerializationTester$_load
+(slice, ((int, int, int, int, int, int, int, int, int))) $SerializationTester$_load(slice sc_0) inline;
+
+;; $SerializationTester$init$_load
+(slice, ((int, int, int, int, int, int, int, int, int))) $SerializationTester$init$_load(slice sc_0) inline_ref;
+
+;; $SerializationTester$_contract_init
+(int, int, int, int, int, int, int, int, int) $SerializationTester$_contract_init(int $a, int $b, int $c, int $d, int $e, int $f, int $g, int $h, int $i) impure inline;
+
+;; $SerializationTester$_contract_load
+(int, int, int, int, int, int, int, int, int) $SerializationTester$_contract_load() impure inline_ref;
+
+;; $SerializationTester$_contract_store
+() $SerializationTester$_contract_store((int, int, int, int, int, int, int, int, int) v) impure inline;
+
+;; $SerializationTester$_fun_getA
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getA((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getB
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getB((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getC
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getC((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getD
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getD((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getE
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getE((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getF
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getF((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getG
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getG((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getH
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getH((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SerializationTester$_fun_getI
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getI((int, int, int, int, int, int, int, int, int) $self) impure inline_ref;
+
+
+;; serialization_SerializationTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; serialization_SerializationTester.storage.fc
+;;
+;; Type: Update
+;; Header: 0x329ba577
+;; TLB: update#329ba577 a:int257 b:int257 c:int257 d:int257 e:int257 f:int257 g:int257 h:int257 i:int257 = Update
+;;
+
+(slice, ((int, int, int, int, int, int, int, int, int))) $Update$_load_without_opcode(slice sc_0) inline_ref {
+    var v'a = sc_0~load_int(257);
+    var v'b = sc_0~load_int(257);
+    var v'c = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'd = sc_1~load_int(257);
+    var v'e = sc_1~load_int(257);
+    var v'f = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'g = sc_2~load_int(257);
+    var v'h = sc_2~load_int(257);
+    var v'i = sc_2~load_int(257);
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i));
+}
+
+;;
+;; Type: SerializationTester
+;;
+
+builder $SerializationTester$_store(builder build_0, (int, int, int, int, int, int, int, int, int) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i) = v;
+    build_0 = build_0.store_int(v'a, 257);
+    build_0 = build_0.store_int(v'b, 257);
+    build_0 = build_0.store_int(v'c, 257);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_int(v'd, 257);
+    build_1 = build_1.store_int(v'e, 257);
+    build_1 = build_1.store_int(v'f, 257);
+    var build_2 = begin_cell();
+    build_2 = build_2.store_int(v'g, 257);
+    build_2 = build_2.store_int(v'h, 257);
+    build_2 = build_2.store_int(v'i, 257);
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, int, int, int, int, int, int, int, int))) $SerializationTester$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(257);
+    var v'b = sc_0~load_int(257);
+    var v'c = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'd = sc_1~load_int(257);
+    var v'e = sc_1~load_int(257);
+    var v'f = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'g = sc_2~load_int(257);
+    var v'h = sc_2~load_int(257);
+    var v'i = sc_2~load_int(257);
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i));
+}
+
+(slice, ((int, int, int, int, int, int, int, int, int))) $SerializationTester$init$_load(slice sc_0) inline_ref {
+    var v'a = sc_0~load_int(257);
+    var v'b = sc_0~load_int(257);
+    var v'c = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'd = sc_1~load_int(257);
+    var v'e = sc_1~load_int(257);
+    var v'f = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'g = sc_2~load_int(257);
+    var v'h = sc_2~load_int(257);
+    var v'i = sc_2~load_int(257);
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i));
+}
+
+(int, int, int, int, int, int, int, int, int) $SerializationTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$SerializationTester$_load();
+    } else {
+        (int $a, int $b, int $c, int $d, int $e, int $f, int $g, int $h, int $i) = $sc~$SerializationTester$init$_load();
+        $sc.end_parse();
+        return $SerializationTester$_contract_init($a, $b, $c, $d, $e, $f, $g, $h, $i);
+    }
+}
+
+() $SerializationTester$_contract_store((int, int, int, int, int, int, int, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $SerializationTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract SerializationTester functions
+;;
+
+(int, int, int, int, int, int, int, int, int) $SerializationTester$_contract_init(int $a, int $b, int $c, int $d, int $e, int $f, int $g, int $h, int $i) impure inline {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = (null(), null(), null(), null(), null(), null(), null(), null(), null());
+    $self'a = $a;
+    $self'b = $b;
+    $self'c = $c;
+    $self'd = $d;
+    $self'e = $e;
+    $self'f = $f;
+    $self'g = $g;
+    $self'h = $h;
+    $self'i = $i;
+    return ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getA((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_830 = $self'a;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_830);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getB((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_831 = $self'b;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_831);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getC((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_832 = $self'c;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_832);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getD((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_833 = $self'd;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_833);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getE((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_834 = $self'e;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_834);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getF((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_835 = $self'f;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_835);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getG((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_836 = $self'g;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_836);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getH((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_837 = $self'h;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_837);
+}
+
+((int, int, int, int, int, int, int, int, int), int) $SerializationTester$_fun_getI((int, int, int, int, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i)) = $self;
+    var $fresh$ret_838 = $self'i;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i), $fresh$ret_838);
+}
+
+;;
+;; Get methods of a Contract SerializationTester
+;;
+
+_ %getA() method_id(123932) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getA();
+    return res;
+}
+
+_ %getB() method_id(119935) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getB();
+    return res;
+}
+
+_ %getC() method_id(115806) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getC();
+    return res;
+}
+
+_ %getD() method_id(111801) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getD();
+    return res;
+}
+
+_ %getE() method_id(107672) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getE();
+    return res;
+}
+
+_ %getF() method_id(103675) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getF();
+    return res;
+}
+
+_ %getG() method_id(99546) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getG();
+    return res;
+}
+
+_ %getH() method_id(95541) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getH();
+    return res;
+}
+
+_ %getI() method_id(91412) {
+    var self = $SerializationTester$_contract_load();
+    var res = self~$SerializationTester$_fun_getI();
+    return res;
+}
+
+;;
+;; Routing of a Contract SerializationTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i) = $SerializationTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive Update message
+    if (op == 849061239) {
+        var ($msg'a, $msg'b, $msg'c, $msg'd, $msg'e, $msg'f, $msg'g, $msg'h, $msg'i) = in_msg~$Update$_load_without_opcode();
+        $self'a = $msg'a;
+        $self'b = $msg'b;
+        $self'c = $msg'c;
+        $self'd = $msg'd;
+        $self'e = $msg'e;
+        $self'f = $msg'f;
+        $self'h = $msg'h;
+        $self'i = $msg'i;
+        ;; Persist state
+        $SerializationTester$_contract_store(($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $SerializationTester$_contract_store(($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

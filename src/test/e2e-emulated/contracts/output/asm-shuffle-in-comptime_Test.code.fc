@@ -1,0 +1,129 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; asm-shuffle-in-comptime_Test.headers.fc
+;;
+;; Header files for Test
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Test$_contract_init
+tuple $Test$_contract_init() impure inline;
+
+;; $Test$_contract_load
+tuple $Test$_contract_load() impure inline_ref;
+
+;; $Test$_contract_store
+() $Test$_contract_store(tuple v) impure inline;
+
+;; $Test$_fun_foo
+(tuple, int) $Test$_fun_foo(tuple $self, int $a) impure inline_ref;
+
+
+;; asm-shuffle-in-comptime_Test.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; asm-shuffle-in-comptime_Test.constants.fc
+;; String "hello"
+slice __gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988() asm """
+    B{b5ee9c7241010101000700000a68656c6c6f4d1ca352} B>boc <s PUSHSLICE
+""";
+
+;; asm-shuffle-in-comptime_Test.storage.fc
+;;
+;; Type: Test
+;;
+
+tuple $Test$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Test$_contract_init();
+    }
+}
+
+() $Test$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Test functions
+;;
+
+tuple $Test$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+() $Int$_fun_testFunc2(slice $other, int $self) impure asm """
+    2 BLKDROP
+""";
+
+int $Int$_fun_testFunc3(int $nullable, slice $other, int $self) impure asm """
+    2 BLKDROP
+""";
+
+(tuple, int) $Test$_fun_foo(tuple $self, int $a) impure inline_ref {
+    var ($self) = $self;
+    $Int$_fun_testFunc2(__gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988(), $a);
+    if (( (null?($Int$_fun_testFunc3(null(), __gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988(), $a))) ? (($a != 100)) : (false) )) {
+        var $fresh$ret_159 = ($a + 10);
+        return ($self, $fresh$ret_159);
+    }
+    var $fresh$ret_160 = $a;
+    return ($self, $fresh$ret_160);
+}
+
+;;
+;; Get methods of a Contract Test
+;;
+
+_ %foo(int $a) method_id(110486) {
+    int $a = $a;
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_foo($a);
+    return res;
+}
+
+;;
+;; Routing of a Contract Test
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Test$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Test$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

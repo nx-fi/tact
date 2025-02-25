@@ -1,0 +1,108 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; address-injectivity_C5i.headers.fc
+;;
+;; Header files for C5i
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $C5i$_load
+(slice, ((int))) $C5i$_load(slice sc_0) inline;
+
+;; $C5i$init$_load
+(slice, ((int))) $C5i$init$_load(slice sc_0) inline;
+
+;; $C5i$_contract_init
+(int) $C5i$_contract_init(int $n) impure inline;
+
+;; $C5i$_contract_load
+(int) $C5i$_contract_load() impure inline_ref;
+
+;; $C5i$_fun_incrAndGetField1
+((int), int) $C5i$_fun_incrAndGetField1((int) $self, int $n) impure inline_ref;
+
+
+;; address-injectivity_C5i.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; address-injectivity_C5i.storage.fc
+;;
+;; Type: C5i
+;;
+
+(slice, ((int))) $C5i$_load(slice sc_0) inline {
+    var v'f1 = sc_0~load_int(257);
+    return (sc_0, (v'f1));
+}
+
+(slice, ((int))) $C5i$init$_load(slice sc_0) inline {
+    var v'n = sc_0~load_int(257);
+    return (sc_0, (v'n));
+}
+
+(int) $C5i$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$C5i$_load();
+    } else {
+        (int $n) = $sc~$C5i$init$_load();
+        $sc.end_parse();
+        return $C5i$_contract_init($n);
+    }
+}
+
+;;
+;; Contract C5i functions
+;;
+
+(int) $C5i$_contract_init(int $n) impure inline {
+    var (($self'f1)) = (null());
+    $self'f1 = $n;
+    return ($self'f1);
+}
+
+((int), int) $C5i$_fun_incrAndGetField1((int) $self, int $n) impure inline_ref {
+    var (($self'f1)) = $self;
+    var $fresh$ret_56 = ($self'f1 + $n);
+    return (($self'f1), $fresh$ret_56);
+}
+
+;;
+;; Get methods of a Contract C5i
+;;
+
+_ %incrAndGetField1(int $n) method_id(111350) {
+    int $n = $n;
+    var self = $C5i$_contract_load();
+    var res = self~$C5i$_fun_incrAndGetField1($n);
+    return res;
+}
+
+;;
+;; Routing of a Contract C5i
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'f1) = $C5i$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}

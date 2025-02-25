@@ -1,0 +1,99 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/star-contract-dependency_Child4.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Child4$_store
+  DECLPROC $Child4$_load
+  DECLPROC $Child4$_contract_init
+  DECLPROC $Child4$_contract_load
+  DECLPROC $Child4$_contract_store
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Child4$_store PROCINLINE:<{
+    SWAP
+    32 STU
+  }>
+  $Child4$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+  }>
+  $Child4$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $Child4$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Child4$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $Child4$_contract_init INLINECALLDICT
+  }>
+  $Child4$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $Child4$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Child4$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $Child4$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

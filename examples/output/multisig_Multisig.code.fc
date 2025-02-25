@@ -1,0 +1,486 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; multisig_Multisig.headers.fc
+;;
+;; Header files for Multisig
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_dict_get_slice_int
+int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline;
+
+;; $Request$_store
+builder $Request$_store(builder build_0, (slice, slice, int, int, int, int, cell) v) inline_ref;
+
+;; $Request$_load
+(slice, ((slice, slice, int, int, int, int, cell))) $Request$_load(slice sc_0) inline_ref;
+
+;; $Request$_load_without_opcode
+(slice, ((slice, slice, int, int, int, int, cell))) $Request$_load_without_opcode(slice sc_0) inline_ref;
+
+;; $Signed$_load_without_opcode
+(slice, (((slice, slice, int, int, int, int, cell)))) $Signed$_load_without_opcode(slice sc_0) inline;
+
+;; $Multisig$_store
+builder $Multisig$_store(builder build_0, (int, cell, int, int) v) inline;
+
+;; $Multisig$_load
+(slice, ((int, cell, int, int))) $Multisig$_load(slice sc_0) inline;
+
+;; $MultisigSigner$init$_store
+builder $MultisigSigner$init$_store(builder build_0, (slice, cell, int, (slice, slice, int, int, int, int, cell)) v) inline;
+
+;; $Multisig$init$_load
+(slice, ((cell, int, int))) $Multisig$init$_load(slice sc_0) inline;
+
+;; $Multisig$_contract_init
+(int, cell, int, int) $Multisig$_contract_init(cell $members, int $totalWeight, int $requiredWeight) impure inline;
+
+;; $Multisig$_contract_load
+(int, cell, int, int) $Multisig$_contract_load() impure inline_ref;
+
+;; $Multisig$_contract_store
+() $Multisig$_contract_store((int, cell, int, int) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $MultisigSigner$_init_child
+(cell, cell) $MultisigSigner$_init_child(slice $master, cell $members, int $requiredWeight, (slice, slice, int, int, int, int, cell) $request) inline_ref;
+
+;; $Multisig$_fun_member
+((int, cell, int, int), int) $Multisig$_fun_member((int, cell, int, int) $self, slice $address) impure inline_ref;
+
+;; $Multisig$_fun_members
+((int, cell, int, int), cell) $Multisig$_fun_members((int, cell, int, int) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_value_to_mode_bounce_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_bounce_code_data(int $value, slice $to, int $mode, int $bounce, cell $code, cell $data) inline;
+
+;; $SendParameters$_constructor_to_value_mode_bounce_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline;
+
+
+;; multisig_Multisig.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+(slice, int) __tact_dict_get(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTGET NULLSWAPIFNOT
+""";
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline {
+    var (r, ok) = __tact_dict_get(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_now() impure asm """
+    NOW
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm """
+    NOP
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+;; multisig_Multisig.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_bounce_code_data(int $value, slice $to, int $mode, int $bounce, cell $code, cell $data) inline {
+    return ($mode, null(), $code, $data, $value, $to, $bounce);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline {
+    return ($mode, $body, null(), null(), $value, $to, $bounce);
+}
+
+;;
+;; Type: Request
+;; Header: 0xfe519883
+;; TLB: request#fe519883 requested:address to:address value:coins timeout:uint32 bounce:bool mode:uint8 body:Maybe ^cell = Request
+;;
+
+builder $Request$_store(builder build_0, (slice, slice, int, int, int, int, cell) v) inline_ref {
+    var (v'requested, v'to, v'value, v'timeout, v'bounce, v'mode, v'body) = v;
+    build_0 = store_uint(build_0, 4266760323, 32);
+    build_0 = build_0.store_slice(v'requested);
+    build_0 = build_0.store_slice(v'to);
+    build_0 = build_0.store_varuint16(v'value);
+    build_0 = build_0.store_uint(v'timeout, 32);
+    build_0 = build_0.store_int(v'bounce, 1);
+    build_0 = build_0.store_uint(v'mode, 8);
+    build_0 = ~ null?(v'body) ? build_0.store_int(true, 1).store_ref(v'body) : build_0.store_int(false, 1);
+    return build_0;
+}
+
+(slice, ((slice, slice, int, int, int, int, cell))) $Request$_load(slice sc_0) inline_ref {
+    throw_unless(129, sc_0~load_uint(32) == 4266760323);
+    var v'requested = sc_0~load_msg_addr();
+    var v'to = sc_0~load_msg_addr();
+    var v'value = sc_0~load_varuint16();
+    var v'timeout = sc_0~load_uint(32);
+    var v'bounce = sc_0~load_int(1);
+    var v'mode = sc_0~load_uint(8);
+    var v'body = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    return (sc_0, (v'requested, v'to, v'value, v'timeout, v'bounce, v'mode, v'body));
+}
+
+(slice, ((slice, slice, int, int, int, int, cell))) $Request$_load_without_opcode(slice sc_0) inline_ref {
+    var v'requested = sc_0~load_msg_addr();
+    var v'to = sc_0~load_msg_addr();
+    var v'value = sc_0~load_varuint16();
+    var v'timeout = sc_0~load_uint(32);
+    var v'bounce = sc_0~load_int(1);
+    var v'mode = sc_0~load_uint(8);
+    var v'body = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    return (sc_0, (v'requested, v'to, v'value, v'timeout, v'bounce, v'mode, v'body));
+}
+
+;;
+;; Type: Signed
+;; Header: 0x83ea5599
+;; TLB: signed#83ea5599 request:Request{requested:address,to:address,value:coins,timeout:uint32,bounce:bool,mode:uint8,body:Maybe ^cell} = Signed
+;;
+
+(slice, (((slice, slice, int, int, int, int, cell)))) $Signed$_load_without_opcode(slice sc_0) inline {
+    var v'request = sc_0~$Request$_load();
+    return (sc_0, (v'request));
+}
+
+;;
+;; Type: MultisigSigner
+;;
+
+builder $MultisigSigner$init$_store(builder build_0, (slice, cell, int, (slice, slice, int, int, int, int, cell)) v) inline {
+    var (v'master, v'members, v'requiredWeight, (v'request'requested, v'request'to, v'request'value, v'request'timeout, v'request'bounce, v'request'mode, v'request'body)) = v;
+    build_0 = build_0.store_slice(v'master);
+    build_0 = build_0.store_dict(v'members);
+    build_0 = build_0.store_int(v'requiredWeight, 257);
+    var build_1 = begin_cell();
+    build_1 = $Request$_store(build_1, (v'request'requested, v'request'to, v'request'value, v'request'timeout, v'request'bounce, v'request'mode, v'request'body));
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+cell $MultisigSigner$_child_get_code() impure asm """
+    B{b5ee9c7201020c0100025f000114ff00f4a413f4bcf2c80b01020162020303d4d001d072d721d200d200fa4021103450666f04f86102f862db3c0d925f0de0702cd74920c21f95310cd31f0dde01c00001c121b08eb03b109b5518c87f01ca0055b050cbcf1619f40017810101cf0015810101cf0013ca00c84617103518db3cc901ccc9ed54e00bf9010908040211a145fdb679b678d98f090a015482f08fb8a03d9cbc969d34600eea833ce02fd8a9d4c56aa07f9d5827ecc8426a5789bae3025f0cf2c0820502c8811293f8235230bcf2f482009f6a26b3f2f4f8422981010b228101014133f40a6fa19401d70030925b6de2206ef2d0801a81010b500b6d810101216e955b59f4593098c801cf004133f441e25089a05306bee300109b108a091068105710461035443012060701ba357f7081008270547765537d56125614c85560821083ea55995008cb1f07db3cc92d552010246d50436d5023c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb0005080156c87f01ca0055b050cbcf1619f40017810101cf0015810101cf0013ca00c84617103518db3cc901ccc9ed540800548210fe5198835008cb1f5006cf165004cf1658fa02cb1fca00cb07216eb3957f01ca00cc947032ca00e2029eed44d0d200018ea4fa40f404810101d700810101d700d200d401d0db3c37107c107b107a1079107855056c1ce0fa40f404810101d700d401d0db3c37107a1079107855050ad15508700807700755410b0b000e547654547654260048d31f018210fe519883baf2e081fa40fa40fa00d31fd200d307d2000191d4926d01e25560} B>boc PUSHREF
+""";
+
+(cell, cell) $MultisigSigner$_init_child(slice $master, cell $members, int $requiredWeight, (slice, slice, int, int, int, int, cell) $request) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: MultisigSigner
+    cell init_code = $MultisigSigner$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $MultisigSigner$init$_store(b, ($master, $members, $requiredWeight, $request));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Multisig
+;;
+
+builder $Multisig$_store(builder build_0, (int, cell, int, int) v) inline {
+    var (v'seqno, v'members, v'totalWeight, v'requiredWeight) = v;
+    build_0 = build_0.store_int(v'seqno, 257);
+    build_0 = build_0.store_dict(v'members);
+    build_0 = build_0.store_int(v'totalWeight, 257);
+    build_0 = build_0.store_int(v'requiredWeight, 257);
+    return build_0;
+}
+
+(slice, ((int, cell, int, int))) $Multisig$_load(slice sc_0) inline {
+    var v'seqno = sc_0~load_int(257);
+    var v'members = sc_0~load_dict();
+    var v'totalWeight = sc_0~load_int(257);
+    var v'requiredWeight = sc_0~load_int(257);
+    return (sc_0, (v'seqno, v'members, v'totalWeight, v'requiredWeight));
+}
+
+(slice, ((cell, int, int))) $Multisig$init$_load(slice sc_0) inline {
+    var v'members = sc_0~load_dict();
+    var v'totalWeight = sc_0~load_int(257);
+    var v'requiredWeight = sc_0~load_int(257);
+    return (sc_0, (v'members, v'totalWeight, v'requiredWeight));
+}
+
+(int, cell, int, int) $Multisig$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Multisig$_load();
+    } else {
+        (cell $members, int $totalWeight, int $requiredWeight) = $sc~$Multisig$init$_load();
+        $sc.end_parse();
+        return $Multisig$_contract_init($members, $totalWeight, $requiredWeight);
+    }
+}
+
+() $Multisig$_contract_store((int, cell, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Multisig$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Multisig functions
+;;
+
+(int, cell, int, int) $Multisig$_contract_init(cell $members, int $totalWeight, int $requiredWeight) impure inline {
+    var (($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight)) = (null(), null(), null(), null());
+    $self'members = $members;
+    $self'requiredWeight = $requiredWeight;
+    $self'totalWeight = $totalWeight;
+    $self'totalWeight = 0;
+    $self'seqno = 0;
+    return ($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight);
+}
+
+((int, cell, int, int), int) $Multisig$_fun_member((int, cell, int, int) $self, slice $address) impure inline_ref {
+    var (($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight)) = $self;
+    var $fresh$ret_39 = __tact_dict_get_slice_int($self'members, 267, $address, 257);
+    return (($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight), $fresh$ret_39);
+}
+
+((int, cell, int, int), cell) $Multisig$_fun_members((int, cell, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight)) = $self;
+    var $fresh$ret_40 = $self'members;
+    return (($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight), $fresh$ret_40);
+}
+
+;;
+;; Get methods of a Contract Multisig
+;;
+
+_ %member(slice $address) method_id(70789) {
+    slice $address = $address;
+    var self = $Multisig$_contract_load();
+    var res = self~$Multisig$_fun_member($address);
+    return res;
+}
+
+_ %members() method_id(104769) {
+    var self = $Multisig$_contract_load();
+    var res = self~$Multisig$_fun_members();
+    return res;
+}
+
+;;
+;; Routing of a Contract Multisig
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight) = $Multisig$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var (op, _) = in_msg~load_uint_quiet(32);
+    ;; Receive Request message
+    if (op == 4266760323) {
+        var ($msg'requested, $msg'to, $msg'value, $msg'timeout, $msg'bounce, $msg'mode, $msg'body) = in_msg~$Request$_load_without_opcode();
+        slice $sender = __tact_context_get_sender();
+        int $weight = __tact_not_null(__tact_dict_get_slice_int($self'members, 267, $sender, 257));
+        throw_unless(46307, ($weight > 0));
+        var ($opInit'code, $opInit'data) = $MultisigSigner$_init_child($global_myAddress(), $self'members, $self'requiredWeight, ($msg'requested, $msg'to, $msg'value, $msg'timeout, $msg'bounce, $msg'mode, $msg'body));
+        slice $opAddress = $global_contractAddress(($opInit'code, $opInit'data));
+        $global_send($SendParameters$_constructor_value_to_mode_bounce_code_data(0, $opAddress, 66, true, $opInit'code, $opInit'data));
+        ;; Persist state
+        $Multisig$_contract_store(($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight));
+        return ();
+    }
+    
+    ;; Receive Signed message
+    if (op == 2213172633) {
+        var (($msg'request'requested, $msg'request'to, $msg'request'value, $msg'request'timeout, $msg'request'bounce, $msg'request'mode, $msg'request'body)) = in_msg~$Signed$_load_without_opcode();
+        slice $sender = __tact_context_get_sender();
+        var ($opInit'code, $opInit'data) = $MultisigSigner$_init_child($global_myAddress(), $self'members, $self'requiredWeight, ($msg'request'requested, $msg'request'to, $msg'request'value, $msg'request'timeout, $msg'request'bounce, $msg'request'mode, $msg'request'body));
+        slice $opAddress = $global_contractAddress(($opInit'code, $opInit'data));
+        throw_unless(4429, ( equal_slices_bits($sender, $opAddress) ));
+        throw_unless(4755, ($msg'request'timeout > $global_now()));
+        $global_send($SendParameters$_constructor_to_value_mode_bounce_body($msg'request'to, $msg'request'value, $msg'request'mode, $msg'request'bounce, $msg'request'body));
+        ;; Persist state
+        $Multisig$_contract_store(($self'seqno, $self'members, $self'totalWeight, $self'requiredWeight));
+        return ();
+    }
+    
+    throw(130);
+}

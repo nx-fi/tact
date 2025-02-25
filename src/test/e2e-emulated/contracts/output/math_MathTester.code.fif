@@ -1,0 +1,1756 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/math_MathTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_slice_eq_bits_nullable_one
+  DECLPROC __tact_slice_eq_bits_nullable
+  DECLPROC __tact_int_eq_nullable_one
+  DECLPROC __tact_int_neq_nullable_one
+  DECLPROC __tact_int_eq_nullable
+  DECLPROC __tact_int_neq_nullable
+  DECLPROC __tact_cell_eq
+  DECLPROC __tact_cell_neq
+  DECLPROC __tact_cell_eq_nullable_one
+  DECLPROC __tact_cell_neq_nullable_one
+  DECLPROC __tact_cell_eq_nullable
+  DECLPROC __tact_cell_neq_nullable
+  DECLPROC __tact_slice_eq
+  DECLPROC __tact_slice_neq
+  DECLPROC __tact_slice_eq_nullable_one
+  DECLPROC __tact_slice_neq_nullable_one
+  DECLPROC __tact_slice_eq_nullable
+  DECLPROC __tact_slice_neq_nullable
+  DECLPROC __tact_log
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $StateInit$_not_null
+  DECLPROC $MathTester$_contract_init
+  DECLPROC $MathTester$_contract_load
+  DECLPROC $MathTester$_contract_store
+  DECLPROC $global_pow
+  DECLPROC $global_sqrt
+  DECLPROC $MathTester$_fun_add
+  DECLPROC $MathTester$_fun_sub
+  DECLPROC $MathTester$_fun_mul
+  DECLPROC $MathTester$_fun_div
+  DECLPROC $MathTester$_fun_mod
+  DECLPROC $MathTester$_fun_shr
+  DECLPROC $MathTester$_fun_shl
+  DECLPROC $MathTester$_fun_and
+  DECLPROC $MathTester$_fun_or
+  DECLPROC $MathTester$_fun_xor
+  DECLPROC $MathTester$_fun_bitwise_not
+  DECLPROC $MathTester$_fun_addAug
+  DECLPROC $MathTester$_fun_subAug
+  DECLPROC $MathTester$_fun_mulAug
+  DECLPROC $MathTester$_fun_divAug
+  DECLPROC $MathTester$_fun_modAug
+  DECLPROC $MathTester$_fun_bitwiseOrAug
+  DECLPROC $MathTester$_fun_bitwiseAndAug
+  DECLPROC $MathTester$_fun_bitwiseXorAug
+  DECLPROC $MathTester$_fun_compare1
+  DECLPROC $MathTester$_fun_compare2
+  DECLPROC $MathTester$_fun_compare3
+  DECLPROC $MathTester$_fun_compare4
+  DECLPROC $MathTester$_fun_compare5
+  DECLPROC $MathTester$_fun_compare6
+  DECLPROC $MathTester$_fun_compare7
+  DECLPROC $MathTester$_fun_compare8
+  DECLPROC $MathTester$_fun_compare9
+  DECLPROC $MathTester$_fun_compare10
+  DECLPROC $MathTester$_fun_compare11
+  DECLPROC $MathTester$_fun_compare12
+  DECLPROC $MathTester$_fun_compare13
+  DECLPROC $MathTester$_fun_compare14
+  DECLPROC $MathTester$_fun_compare15
+  DECLPROC $MathTester$_fun_compare16
+  DECLPROC $MathTester$_fun_compare17
+  DECLPROC $MathTester$_fun_compare18
+  DECLPROC $MathTester$_fun_compare19
+  DECLPROC $MathTester$_fun_compare20
+  DECLPROC $MathTester$_fun_compare21
+  DECLPROC $MathTester$_fun_compare22
+  DECLPROC $MathTester$_fun_compare23
+  DECLPROC $MathTester$_fun_compare24
+  DECLPROC $MathTester$_fun_compare25
+  DECLPROC $MathTester$_fun_compare26
+  DECLPROC $MathTester$_fun_compare27
+  DECLPROC $MathTester$_fun_compare28
+  DECLPROC $MathTester$_fun_compare29
+  DECLPROC $MathTester$_fun_compare30
+  DECLPROC $MathTester$_fun_compare31
+  DECLPROC $MathTester$_fun_compare32
+  DECLPROC $MathTester$_fun_compare33
+  DECLPROC $MathTester$_fun_compare34
+  DECLPROC $MathTester$_fun_compare35
+  DECLPROC $MathTester$_fun_compare36
+  DECLPROC $MathTester$_fun_compare37
+  DECLPROC $MathTester$_fun_compare38
+  DECLPROC $MathTester$_fun_compare39
+  DECLPROC $MathTester$_fun_compare40
+  DECLPROC $MathTester$_fun_compare41
+  DECLPROC $MathTester$_fun_compare42
+  DECLPROC $MathTester$_fun_compare43
+  DECLPROC $MathTester$_fun_compare44
+  DECLPROC $MathTester$_fun_isNull1
+  DECLPROC $MathTester$_fun_isNotNull1
+  DECLPROC $MathTester$_fun_isNull2
+  DECLPROC $MathTester$_fun_isNotNull2
+  DECLPROC $MathTester$_fun_isNull3
+  DECLPROC $MathTester$_fun_isNotNull3
+  DECLPROC $MathTester$_fun_log2
+  DECLPROC $MathTester$_fun_log
+  DECLPROC $MathTester$_fun_pow
+  DECLPROC $MathTester$_fun_pow2
+  DECLPROC $MathTester$_fun_precedence1
+  DECLPROC $MathTester$_fun_precedence2
+  DECLPROC $MathTester$_fun_precedence3
+  DECLPROC $MathTester$_fun_precedence4
+  DECLPROC $MathTester$_fun_precedence5
+  DECLPROC $MathTester$_fun_precedence6
+  DECLPROC $MathTester$_fun_precedence7
+  DECLPROC $MathTester$_fun_precedence8
+  DECLPROC $MathTester$_fun_precedence9
+  DECLPROC $MathTester$_fun_precedence10
+  DECLPROC $MathTester$_fun_precedence11
+  DECLPROC $MathTester$_fun_precedence12
+  DECLPROC $MathTester$_fun_bitwiseNot1
+  DECLPROC $MathTester$_fun_bitwiseNot2
+  DECLPROC $MathTester$_fun_bitwiseNot3
+  DECLPROC $MathTester$_fun_bitwiseNot4
+  DECLPROC $MathTester$_fun_augmentedAnd
+  DECLPROC $MathTester$_fun_augmentedOr
+  DECLPROC $MathTester$_fun_augmentedShiftLeft
+  DECLPROC $MathTester$_fun_augmentedShiftRight
+  DECLPROC $MathTester$_fun_shiftLeft0
+  DECLPROC $MathTester$_fun_shiftRight0
+  DECLPROC $MathTester$_fun_sign
+  DECLPROC $MathTester$_fun_divc
+  DECLPROC $MathTester$_fun_muldivc
+  DECLPROC $MathTester$_fun_mulShiftRight
+  DECLPROC $MathTester$_fun_mulShiftRightRound
+  DECLPROC $MathTester$_fun_mulShiftRightCeil
+  DECLPROC $MathTester$_fun_sqrt
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $MathTester$_fun_forward
+  DECLPROC $MathTester$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  83863 DECLMETHOD %add
+  80400 DECLMETHOD %sub
+  99260 DECLMETHOD %mul
+  125000 DECLMETHOD %div
+  126476 DECLMETHOD %mod
+  89358 DECLMETHOD %shr
+  110321 DECLMETHOD %shl
+  108636 DECLMETHOD %and
+  83393 DECLMETHOD %or
+  78952 DECLMETHOD %xor
+  85436 DECLMETHOD %bitwise_not
+  120881 DECLMETHOD %addAug
+  114791 DECLMETHOD %subAug
+  129050 DECLMETHOD %mulAug
+  85125 DECLMETHOD %divAug
+  81709 DECLMETHOD %modAug
+  116497 DECLMETHOD %bitwiseOrAug
+  89159 DECLMETHOD %bitwiseAndAug
+  104526 DECLMETHOD %bitwiseXorAug
+  80704 DECLMETHOD %compare1
+  68387 DECLMETHOD %compare2
+  72450 DECLMETHOD %compare3
+  93157 DECLMETHOD %compare4
+  97220 DECLMETHOD %compare5
+  84903 DECLMETHOD %compare6
+  88966 DECLMETHOD %compare7
+  109161 DECLMETHOD %compare8
+  113224 DECLMETHOD %compare9
+  127339 DECLMETHOD %compare10
+  123210 DECLMETHOD %compare11
+  119081 DECLMETHOD %compare12
+  114952 DECLMETHOD %compare13
+  111087 DECLMETHOD %compare14
+  106958 DECLMETHOD %compare15
+  102829 DECLMETHOD %compare16
+  98700 DECLMETHOD %compare17
+  94307 DECLMETHOD %compare18
+  90178 DECLMETHOD %compare19
+  107576 DECLMETHOD %compare20
+  111641 DECLMETHOD %compare21
+  99450 DECLMETHOD %compare22
+  103515 DECLMETHOD %compare23
+  124092 DECLMETHOD %compare24
+  128157 DECLMETHOD %compare25
+  115966 DECLMETHOD %compare26
+  120031 DECLMETHOD %compare27
+  75056 DECLMETHOD %compare28
+  79121 DECLMETHOD %compare29
+  104201 DECLMETHOD %compare30
+  100136 DECLMETHOD %compare31
+  112459 DECLMETHOD %compare32
+  108394 DECLMETHOD %compare33
+  120717 DECLMETHOD %compare34
+  116652 DECLMETHOD %compare35
+  128975 DECLMETHOD %compare36
+  124910 DECLMETHOD %compare37
+  71169 DECLMETHOD %compare38
+  67104 DECLMETHOD %compare39
+  69278 DECLMETHOD %compare40
+  73407 DECLMETHOD %compare41
+  77532 DECLMETHOD %compare42
+  81661 DECLMETHOD %compare43
+  85530 DECLMETHOD %compare44
+  111973 DECLMETHOD %isNull1
+  89158 DECLMETHOD %isNotNull1
+  99590 DECLMETHOD %isNull2
+  93221 DECLMETHOD %isNotNull2
+  103719 DECLMETHOD %isNull3
+  97284 DECLMETHOD %isNotNull3
+  75030 DECLMETHOD %log2
+  125279 DECLMETHOD %log
+  118124 DECLMETHOD %pow
+  94960 DECLMETHOD %pow2
+  78380 DECLMETHOD %precedence1
+  66127 DECLMETHOD %precedence2
+  70254 DECLMETHOD %precedence3
+  90761 DECLMETHOD %precedence4
+  94888 DECLMETHOD %precedence5
+  82635 DECLMETHOD %precedence6
+  86762 DECLMETHOD %precedence7
+  107269 DECLMETHOD %precedence8
+  111396 DECLMETHOD %precedence9
+  68674 DECLMETHOD %precedence10
+  72803 DECLMETHOD %precedence11
+  76800 DECLMETHOD %precedence12
+  118903 DECLMETHOD %bitwiseNot1
+  122900 DECLMETHOD %bitwiseNot2
+  127029 DECLMETHOD %bitwiseNot3
+  98514 DECLMETHOD %bitwiseNot4
+  127849 DECLMETHOD %augmentedAnd
+  121304 DECLMETHOD %augmentedOr
+  104823 DECLMETHOD %augmentedShiftLeft
+  110189 DECLMETHOD %augmentedShiftRight
+  106230 DECLMETHOD %shiftLeft0
+  78486 DECLMETHOD %shiftRight0
+  115590 DECLMETHOD %sign
+  92387 DECLMETHOD %divc
+  107929 DECLMETHOD %muldivc
+  127246 DECLMETHOD %mulShiftRight
+  121903 DECLMETHOD %mulShiftRightRound
+  93115 DECLMETHOD %mulShiftRightCeil
+  91833 DECLMETHOD %sqrt
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_slice_eq_bits_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      FALSE
+    }>ELSE<{
+      SDEQ
+    }>
+  }>
+  __tact_slice_eq_bits_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SDEQ
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  __tact_int_eq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      FALSE
+    }>ELSE<{
+      EQUAL
+    }>
+  }>
+  __tact_int_neq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      TRUE
+    }>ELSE<{
+      NEQ
+    }>
+  }>
+  __tact_int_eq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        EQUAL
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  __tact_int_neq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      FALSE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        NEQ
+      }>ELSE<{
+        2DROP
+        TRUE
+      }>
+    }>
+  }>
+  __tact_cell_eq PROCINLINE:<{
+    SWAP
+    HASHCU
+    SWAP
+    HASHCU
+    EQUAL
+  }>
+  __tact_cell_neq PROCINLINE:<{
+    SWAP
+    HASHCU
+    SWAP
+    HASHCU
+    NEQ
+  }>
+  __tact_cell_eq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      FALSE
+    }>ELSE<{
+      SWAP
+      HASHCU
+      SWAP
+      HASHCU
+      EQUAL
+    }>
+  }>
+  __tact_cell_neq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      HASHCU
+      SWAP
+      HASHCU
+      NEQ
+    }>
+  }>
+  __tact_cell_eq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHCU
+        SWAP
+        HASHCU
+        EQUAL
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  __tact_cell_neq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      FALSE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHCU
+        SWAP
+        HASHCU
+        NEQ
+      }>ELSE<{
+        2DROP
+        TRUE
+      }>
+    }>
+  }>
+  __tact_slice_eq PROCINLINE:<{
+    SWAP
+    HASHSU
+    SWAP
+    HASHSU
+    EQUAL
+  }>
+  __tact_slice_neq PROCINLINE:<{
+    SWAP
+    HASHSU
+    SWAP
+    HASHSU
+    NEQ
+  }>
+  __tact_slice_eq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      FALSE
+    }>ELSE<{
+      SWAP
+      HASHSU
+      SWAP
+      HASHSU
+      EQUAL
+    }>
+  }>
+  __tact_slice_neq_nullable_one PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      HASHSU
+      SWAP
+      HASHSU
+      NEQ
+    }>
+  }>
+  __tact_slice_eq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHSU
+        SWAP
+        HASHSU
+        EQUAL
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  __tact_slice_neq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      FALSE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHSU
+        SWAP
+        HASHSU
+        NEQ
+      }>ELSE<{
+        2DROP
+        TRUE
+      }>
+    }>
+  }>
+  __tact_log PROCINLINE:<{
+    OVER
+    0 GTINT
+    5 THROWIFNOT
+    DUP
+    1 GTINT
+    5 THROWIFNOT
+    2DUP
+    LESS
+    IF:<{
+      2DROP
+      0 PUSHINT
+    }>ELSE<{
+      0 PUSHINT
+      WHILE:<{
+        s2 s1 PUSH2
+        GEQ
+      }>DO<{
+        s2 s1 XCPU
+        DIV
+        s0 s2 XCHG
+        INC
+      }>
+      2 1 BLKDROP2
+    }>
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $MathTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $MathTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $MathTester$_contract_init INLINECALLDICT
+  }>
+  $MathTester$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $global_pow PROCINLINE:<{
+    DUP
+    -1 GTINT
+    5 THROWIFNOT
+    1 PUSHINT
+    SWAP
+    REPEAT:<{
+      OVER
+      MUL
+    }>
+    NIP
+  }>
+  $global_sqrt PROCREF:<{
+    DUP
+    0 EQINT
+    IFJMP:<{
+      DROP
+      0 PUSHINT
+    }>
+    DUP
+        DUP 5 THROWIFNOT UBITSIZE DEC
+    DUP
+    1 EQINT
+    IF:<{
+      DROP
+      DUP
+      DEC
+      1 RSHIFT#
+      INC
+    }>ELSE<{
+      INC
+      1 RSHIFT#
+      POW2
+    }>
+    UNTIL:<{
+      2DUP
+          DIVC
+      OVER
+      SUB
+      1 RSHIFT#
+      TUCK
+      ADD
+      SWAP
+      0 EQINT
+    }>
+    NIP
+  }>
+  $MathTester$_fun_add PROCREF:<{
+    ADD
+  }>
+  $MathTester$_fun_sub PROCREF:<{
+    SUB
+  }>
+  $MathTester$_fun_mul PROCREF:<{
+    MUL
+  }>
+  $MathTester$_fun_div PROCREF:<{
+    DIV
+  }>
+  $MathTester$_fun_mod PROCREF:<{
+    MOD
+  }>
+  $MathTester$_fun_shr PROCREF:<{
+    RSHIFT
+  }>
+  $MathTester$_fun_shl PROCREF:<{
+    LSHIFT
+  }>
+  $MathTester$_fun_and PROCREF:<{
+    AND
+  }>
+  $MathTester$_fun_or PROCREF:<{
+    OR
+  }>
+  $MathTester$_fun_xor PROCREF:<{
+    XOR
+  }>
+  $MathTester$_fun_bitwise_not PROCREF:<{
+    NOT
+  }>
+  $MathTester$_fun_addAug PROCREF:<{
+    ADD
+  }>
+  $MathTester$_fun_subAug PROCREF:<{
+    SUB
+  }>
+  $MathTester$_fun_mulAug PROCREF:<{
+    MUL
+  }>
+  $MathTester$_fun_divAug PROCREF:<{
+    DIV
+  }>
+  $MathTester$_fun_modAug PROCREF:<{
+    MOD
+  }>
+  $MathTester$_fun_bitwiseOrAug PROCREF:<{
+    OR
+  }>
+  $MathTester$_fun_bitwiseAndAug PROCREF:<{
+    AND
+  }>
+  $MathTester$_fun_bitwiseXorAug PROCREF:<{
+    XOR
+  }>
+  $MathTester$_fun_compare1 PROCREF:<{
+    SWAP
+    __tact_int_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare2 PROCREF:<{
+    SWAP
+    __tact_int_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare3 PROCREF:<{
+    __tact_int_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare4 PROCREF:<{
+    __tact_int_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare5 PROCREF:<{
+    __tact_int_eq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare6 PROCREF:<{
+    __tact_int_neq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare7 PROCREF:<{
+    GREATER
+  }>
+  $MathTester$_fun_compare8 PROCREF:<{
+    GEQ
+  }>
+  $MathTester$_fun_compare9 PROCREF:<{
+    LESS
+  }>
+  $MathTester$_fun_compare10 PROCREF:<{
+    LEQ
+  }>
+  $MathTester$_fun_compare11 PROCREF:<{
+    SWAP
+    SDEQ
+  }>
+  $MathTester$_fun_compare12 PROCREF:<{
+    SWAP
+    __tact_slice_eq_bits_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare13 PROCREF:<{
+    __tact_slice_eq_bits_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare14 PROCREF:<{
+    __tact_slice_eq_bits_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare15 PROCREF:<{
+    SWAP
+    SDEQ
+    NOT
+  }>
+  $MathTester$_fun_compare16 PROCREF:<{
+    SWAP
+    __tact_slice_eq_bits_nullable_one INLINECALLDICT
+    NOT
+  }>
+  $MathTester$_fun_compare17 PROCREF:<{
+    __tact_slice_eq_bits_nullable_one INLINECALLDICT
+    NOT
+  }>
+  $MathTester$_fun_compare18 PROCREF:<{
+    __tact_slice_eq_bits_nullable INLINECALLDICT
+    NOT
+  }>
+  $MathTester$_fun_compare19 PROCREF:<{
+    SWAP
+    __tact_cell_eq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare20 PROCREF:<{
+    SWAP
+    __tact_cell_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare21 PROCREF:<{
+    __tact_cell_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare22 PROCREF:<{
+    __tact_cell_eq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare23 PROCREF:<{
+    SWAP
+    __tact_cell_neq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare24 PROCREF:<{
+    SWAP
+    __tact_cell_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare25 PROCREF:<{
+    __tact_cell_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare26 PROCREF:<{
+    __tact_cell_neq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare27 PROCREF:<{
+    __tact_cell_eq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare28 PROCREF:<{
+    __tact_cell_neq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare29 PROCREF:<{
+    SWAP
+    __tact_slice_eq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare30 PROCREF:<{
+    SWAP
+    __tact_slice_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare31 PROCREF:<{
+    __tact_slice_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare32 PROCREF:<{
+    __tact_slice_eq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare33 PROCREF:<{
+    SWAP
+    __tact_slice_neq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare34 PROCREF:<{
+    SWAP
+    __tact_slice_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare35 PROCREF:<{
+    __tact_slice_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare36 PROCREF:<{
+    __tact_slice_neq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare37 PROCREF:<{
+    SWAP
+    __tact_slice_eq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare38 PROCREF:<{
+    SWAP
+    __tact_slice_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare39 PROCREF:<{
+    __tact_slice_eq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare40 PROCREF:<{
+    __tact_slice_eq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_compare41 PROCREF:<{
+    SWAP
+    __tact_slice_neq INLINECALLDICT
+  }>
+  $MathTester$_fun_compare42 PROCREF:<{
+    SWAP
+    __tact_slice_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare43 PROCREF:<{
+    __tact_slice_neq_nullable_one INLINECALLDICT
+  }>
+  $MathTester$_fun_compare44 PROCREF:<{
+    __tact_slice_neq_nullable INLINECALLDICT
+  }>
+  $MathTester$_fun_isNull1 PROCREF:<{
+    ISNULL
+  }>
+  $MathTester$_fun_isNotNull1 PROCREF:<{
+    ISNULL
+    NOT
+  }>
+  $MathTester$_fun_isNull2 PROCREF:<{
+    ISNULL
+  }>
+  $MathTester$_fun_isNotNull2 PROCREF:<{
+    ISNULL
+    NOT
+  }>
+  $MathTester$_fun_isNull3 PROCREF:<{
+    ISNULL
+  }>
+  $MathTester$_fun_isNotNull3 PROCREF:<{
+    ISNULL
+    NOT
+  }>
+  $MathTester$_fun_log2 PROCREF:<{
+        DUP 5 THROWIFNOT UBITSIZE DEC
+  }>
+  $MathTester$_fun_log PROCREF:<{
+    __tact_log INLINECALLDICT
+  }>
+  $MathTester$_fun_pow PROCREF:<{
+    $global_pow INLINECALLDICT
+  }>
+  $MathTester$_fun_pow2 PROCREF:<{
+        POW2
+  }>
+  $MathTester$_fun_precedence1 PROCREF:<{
+    12 PUSHINT
+  }>
+  $MathTester$_fun_precedence2 PROCREF:<{
+    4 PUSHINT
+  }>
+  $MathTester$_fun_precedence3 PROCREF:<{
+    12 PUSHINT
+  }>
+  $MathTester$_fun_precedence4 PROCREF:<{
+    12 PUSHINT
+  }>
+  $MathTester$_fun_precedence5 PROCREF:<{
+    5 PUSHINT
+  }>
+  $MathTester$_fun_precedence6 PROCREF:<{
+    0 PUSHINT
+  }>
+  $MathTester$_fun_precedence7 PROCREF:<{
+    7 PUSHINT
+  }>
+  $MathTester$_fun_precedence8 PROCREF:<{
+    3 PUSHINT
+  }>
+  $MathTester$_fun_precedence9 PROCREF:<{
+    7 PUSHINT
+  }>
+  $MathTester$_fun_precedence10 PROCREF:<{
+    3 PUSHINT
+  }>
+  $MathTester$_fun_precedence11 PROCREF:<{
+    3 PUSHINT
+  }>
+  $MathTester$_fun_precedence12 PROCREF:<{
+    5 PUSHINT
+  }>
+  $MathTester$_fun_bitwiseNot1 PROCREF:<{
+    NOT
+    NOT
+  }>
+  $MathTester$_fun_bitwiseNot2 PROCREF:<{
+    NOT
+    NOT
+    NOT
+  }>
+  $MathTester$_fun_bitwiseNot3 PROCREF:<{
+    NEGATE
+    NOT
+  }>
+  $MathTester$_fun_bitwiseNot4 PROCREF:<{
+    NOT
+    NEGATE
+  }>
+  $MathTester$_fun_augmentedAnd PROCREF:<{
+    AND
+  }>
+  $MathTester$_fun_augmentedOr PROCREF:<{
+    OR
+  }>
+  $MathTester$_fun_augmentedShiftLeft PROCREF:<{
+    LSHIFT
+  }>
+  $MathTester$_fun_augmentedShiftRight PROCREF:<{
+    RSHIFT
+  }>
+  $MathTester$_fun_shiftLeft0 PROCREF:<{
+    POW2
+    1 EQINT
+  }>
+  $MathTester$_fun_shiftRight0 PROCREF:<{
+    1 PUSHINT
+    SWAP
+    RSHIFT
+    1 EQINT
+  }>
+  $MathTester$_fun_sign PROCREF:<{
+        SGN
+  }>
+  $MathTester$_fun_divc PROCREF:<{
+        DIVC
+  }>
+  $MathTester$_fun_muldivc PROCREF:<{
+        MULDIVC
+  }>
+  $MathTester$_fun_mulShiftRight PROCREF:<{
+        MULRSHIFT
+  }>
+  $MathTester$_fun_mulShiftRightRound PROCREF:<{
+        MULRSHIFTR
+  }>
+  $MathTester$_fun_mulShiftRightCeil PROCREF:<{
+        MULRSHIFTC
+  }>
+  $MathTester$_fun_sqrt PROCREF:<{
+    $global_sqrt INLINECALLDICT
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $MathTester$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $MathTester$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $MathTester$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  %add PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_add INLINECALLDICT
+    NIP
+  }>
+  %sub PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_sub INLINECALLDICT
+    NIP
+  }>
+  %mul PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_mul INLINECALLDICT
+    NIP
+  }>
+  %div PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_div INLINECALLDICT
+    NIP
+  }>
+  %mod PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_mod INLINECALLDICT
+    NIP
+  }>
+  %shr PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_shr INLINECALLDICT
+    NIP
+  }>
+  %shl PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_shl INLINECALLDICT
+    NIP
+  }>
+  %and PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_and INLINECALLDICT
+    NIP
+  }>
+  %or PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_or INLINECALLDICT
+    NIP
+  }>
+  %xor PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_xor INLINECALLDICT
+    NIP
+  }>
+  %bitwise_not PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_bitwise_not INLINECALLDICT
+    NIP
+  }>
+  %addAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_addAug INLINECALLDICT
+    NIP
+  }>
+  %subAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_subAug INLINECALLDICT
+    NIP
+  }>
+  %mulAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_mulAug INLINECALLDICT
+    NIP
+  }>
+  %divAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_divAug INLINECALLDICT
+    NIP
+  }>
+  %modAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_modAug INLINECALLDICT
+    NIP
+  }>
+  %bitwiseOrAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_bitwiseOrAug INLINECALLDICT
+    NIP
+  }>
+  %bitwiseAndAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_bitwiseAndAug INLINECALLDICT
+    NIP
+  }>
+  %bitwiseXorAug PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_bitwiseXorAug INLINECALLDICT
+    NIP
+  }>
+  %compare1 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare1 INLINECALLDICT
+    NIP
+  }>
+  %compare2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare2 INLINECALLDICT
+    NIP
+  }>
+  %compare3 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare3 INLINECALLDICT
+    NIP
+  }>
+  %compare4 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare4 INLINECALLDICT
+    NIP
+  }>
+  %compare5 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare5 INLINECALLDICT
+    NIP
+  }>
+  %compare6 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare6 INLINECALLDICT
+    NIP
+  }>
+  %compare7 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare7 INLINECALLDICT
+    NIP
+  }>
+  %compare8 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare8 INLINECALLDICT
+    NIP
+  }>
+  %compare9 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare9 INLINECALLDICT
+    NIP
+  }>
+  %compare10 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare10 INLINECALLDICT
+    NIP
+  }>
+  %compare11 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare11 INLINECALLDICT
+    NIP
+  }>
+  %compare12 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare12 INLINECALLDICT
+    NIP
+  }>
+  %compare13 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare13 INLINECALLDICT
+    NIP
+  }>
+  %compare14 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare14 INLINECALLDICT
+    NIP
+  }>
+  %compare15 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare15 INLINECALLDICT
+    NIP
+  }>
+  %compare16 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare16 INLINECALLDICT
+    NIP
+  }>
+  %compare17 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare17 INLINECALLDICT
+    NIP
+  }>
+  %compare18 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare18 INLINECALLDICT
+    NIP
+  }>
+  %compare19 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare19 INLINECALLDICT
+    NIP
+  }>
+  %compare20 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare20 INLINECALLDICT
+    NIP
+  }>
+  %compare21 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare21 INLINECALLDICT
+    NIP
+  }>
+  %compare22 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare22 INLINECALLDICT
+    NIP
+  }>
+  %compare23 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare23 INLINECALLDICT
+    NIP
+  }>
+  %compare24 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare24 INLINECALLDICT
+    NIP
+  }>
+  %compare25 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare25 INLINECALLDICT
+    NIP
+  }>
+  %compare26 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare26 INLINECALLDICT
+    NIP
+  }>
+  %compare27 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare27 INLINECALLDICT
+    NIP
+  }>
+  %compare28 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare28 INLINECALLDICT
+    NIP
+  }>
+  %compare29 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare29 INLINECALLDICT
+    NIP
+  }>
+  %compare30 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare30 INLINECALLDICT
+    NIP
+  }>
+  %compare31 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare31 INLINECALLDICT
+    NIP
+  }>
+  %compare32 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare32 INLINECALLDICT
+    NIP
+  }>
+  %compare33 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare33 INLINECALLDICT
+    NIP
+  }>
+  %compare34 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare34 INLINECALLDICT
+    NIP
+  }>
+  %compare35 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare35 INLINECALLDICT
+    NIP
+  }>
+  %compare36 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare36 INLINECALLDICT
+    NIP
+  }>
+  %compare37 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare37 INLINECALLDICT
+    NIP
+  }>
+  %compare38 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare38 INLINECALLDICT
+    NIP
+  }>
+  %compare39 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare39 INLINECALLDICT
+    NIP
+  }>
+  %compare40 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare40 INLINECALLDICT
+    NIP
+  }>
+  %compare41 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare41 INLINECALLDICT
+    NIP
+  }>
+  %compare42 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare42 INLINECALLDICT
+    NIP
+  }>
+  %compare43 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare43 INLINECALLDICT
+    NIP
+  }>
+  %compare44 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_compare44 INLINECALLDICT
+    NIP
+  }>
+  %isNull1 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNull1 INLINECALLDICT
+    NIP
+  }>
+  %isNotNull1 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNotNull1 INLINECALLDICT
+    NIP
+  }>
+  %isNull2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNull2 INLINECALLDICT
+    NIP
+  }>
+  %isNotNull2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNotNull2 INLINECALLDICT
+    NIP
+  }>
+  %isNull3 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNull3 INLINECALLDICT
+    NIP
+  }>
+  %isNotNull3 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_isNotNull3 INLINECALLDICT
+    NIP
+  }>
+  %log2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_log2 INLINECALLDICT
+    NIP
+  }>
+  %log PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_log INLINECALLDICT
+    NIP
+  }>
+  %pow PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_pow INLINECALLDICT
+    NIP
+  }>
+  %pow2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_pow2 INLINECALLDICT
+    NIP
+  }>
+  %precedence1 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence1 INLINECALLDICT
+    NIP
+  }>
+  %precedence2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence2 INLINECALLDICT
+    NIP
+  }>
+  %precedence3 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence3 INLINECALLDICT
+    NIP
+  }>
+  %precedence4 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence4 INLINECALLDICT
+    NIP
+  }>
+  %precedence5 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence5 INLINECALLDICT
+    NIP
+  }>
+  %precedence6 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence6 INLINECALLDICT
+    NIP
+  }>
+  %precedence7 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence7 INLINECALLDICT
+    NIP
+  }>
+  %precedence8 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence8 INLINECALLDICT
+    NIP
+  }>
+  %precedence9 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence9 INLINECALLDICT
+    NIP
+  }>
+  %precedence10 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence10 INLINECALLDICT
+    NIP
+  }>
+  %precedence11 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence11 INLINECALLDICT
+    NIP
+  }>
+  %precedence12 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    $MathTester$_fun_precedence12 INLINECALLDICT
+    NIP
+  }>
+  %bitwiseNot1 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_bitwiseNot1 INLINECALLDICT
+    NIP
+  }>
+  %bitwiseNot2 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_bitwiseNot2 INLINECALLDICT
+    NIP
+  }>
+  %bitwiseNot3 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_bitwiseNot3 INLINECALLDICT
+    NIP
+  }>
+  %bitwiseNot4 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_bitwiseNot4 INLINECALLDICT
+    NIP
+  }>
+  %augmentedAnd PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_augmentedAnd INLINECALLDICT
+    NIP
+  }>
+  %augmentedOr PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_augmentedOr INLINECALLDICT
+    NIP
+  }>
+  %augmentedShiftLeft PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_augmentedShiftLeft INLINECALLDICT
+    NIP
+  }>
+  %augmentedShiftRight PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_augmentedShiftRight INLINECALLDICT
+    NIP
+  }>
+  %shiftLeft0 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_shiftLeft0 INLINECALLDICT
+    NIP
+  }>
+  %shiftRight0 PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_shiftRight0 INLINECALLDICT
+    NIP
+  }>
+  %sign PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_sign INLINECALLDICT
+    NIP
+  }>
+  %divc PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    -ROT
+    $MathTester$_fun_divc INLINECALLDICT
+    NIP
+  }>
+  %muldivc PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    3 -ROLL
+    $MathTester$_fun_muldivc INLINECALLDICT
+    NIP
+  }>
+  %mulShiftRight PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    3 -ROLL
+    $MathTester$_fun_mulShiftRight INLINECALLDICT
+    NIP
+  }>
+  %mulShiftRightRound PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    3 -ROLL
+    $MathTester$_fun_mulShiftRightRound INLINECALLDICT
+    NIP
+  }>
+  %mulShiftRightCeil PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    3 -ROLL
+    $MathTester$_fun_mulShiftRightCeil INLINECALLDICT
+    NIP
+  }>
+  %sqrt PROC:<{
+    $MathTester$_contract_load INLINECALLDICT
+    SWAP
+    $MathTester$_fun_sqrt INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $MathTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    32 PUSHINT
+    LDUXQ NULLROTRIFNOT
+    DROP
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      $Deploy$_load_without_opcode INLINECALLDICT
+      NIP
+      $DeployOk$_constructor_queryId INLINECALLDICT
+      $DeployOk$_store_cell INLINECALLDICT
+      $MathTester$_fun_notify INLINECALLDICT
+      $MathTester$_contract_store INLINECALLDICT
+    }>
+    2DROP
+    130 THROW
+  }>
+}END>c

@@ -1,0 +1,1109 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; intrinsics_IntrinsicsTester.headers.fc
+;;
+;; Header files for IntrinsicsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $IntrinsicsTester$_store
+builder $IntrinsicsTester$_store(builder build_0, (int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) v) inline;
+
+;; $IntrinsicsTester$_load
+(slice, ((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice))) $IntrinsicsTester$_load(slice sc_0) inline;
+
+;; $IntrinsicsTester$_contract_init
+(int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $IntrinsicsTester$_contract_init() impure inline;
+
+;; $IntrinsicsTester$_contract_load
+(int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $IntrinsicsTester$_contract_load() impure inline_ref;
+
+;; $IntrinsicsTester$_contract_store
+() $IntrinsicsTester$_contract_store((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) v) impure inline;
+
+;; $global_emit
+() $global_emit(cell $body) impure inline;
+
+;; $IntrinsicsTester$_fun_getTons
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getTons((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getTons2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getTons2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getString
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getString((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getString2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getString2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAddress
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getAddress((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAddress2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getAddress2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCell
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getCell((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCell2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getCell2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getPow
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getPow((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getPow2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getPow2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getComment
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getComment((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHash
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashSlice
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHash2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHash3
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHash4
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashLongComptime
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongComptime((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashLongRuntime
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongRuntime((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashLongRuntimeSlice
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongRuntimeSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashSHA256U
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashSHA256U((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getHashHASHEXTSHA256
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashHASHEXTSHA256((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getSlice
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getSlice2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getSlice2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice3
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice4
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAscii
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAscii2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAscii3
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getAscii4
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCrc32
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCrc32_2
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCrc32_3
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getCrc32_4
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice5
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice5((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice6
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice6((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice7
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice7((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice8
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice8((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice9
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice9((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice10
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice10((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice11
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice11((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice12
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice12((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice13
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice13((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice14
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice14((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice15
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice15((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice16
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice16((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice17
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice17((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice18
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice18((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice19
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice19((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice20
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice20((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice21
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice21((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice22
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice22((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice23
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice23((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+;; $IntrinsicsTester$_fun_getRawSlice24
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice24((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref;
+
+
+;; intrinsics_IntrinsicsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+() $global_nativeSendMessage(cell $cell, int $mode) impure asm """
+    SENDRAWMSG
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+() $global_emit(cell $body) impure inline {
+    cell $c = $Builder$_fun_endCell($Builder$_fun_storeRef($body, store_uint($global_beginCell(), 15211807202738752817960438464513, 104)));
+    $global_nativeSendMessage($c, 0);
+}
+
+;; intrinsics_IntrinsicsTester.constants.fc
+;; String "Hello world"
+slice __gen_slice_string_fddd37b8318ce351584ce13d887b2bdfd89a245250fa3ccc433cc820d90bcae1() asm """
+    B{b5ee9c7241010101000d00001648656c6c6f20776f726c64ae013d34} B>boc <s PUSHSLICE
+""";
+
+;; EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N
+slice __gen_slice_address_58e2d2fc9446d00e70b3ad3ea1eb88797c323bae517f2527f807f62d09a56fdc() asm """
+    B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+""";
+
+;; Cell vgMxOKjihLPaHO5W6SRH3iNo9kMdZKPG/k2zGDrrnDY=
+cell __gen_cell_cell_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36() asm """
+    B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc PUSHREF
+""";
+
+;; Slice vgMxOKjihLPaHO5W6SRH3iNo9kMdZKPG/k2zGDrrnDY=
+slice __gen_slice_slice_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36() asm """
+    B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+""";
+
+;; Slice tHO19IeDmKWVdtbps6haC2/LHr5/KkMSpiqT1d1Did8=
+slice __gen_slice_slice_b473b5f4878398a59576d6e9b3a85a0b6fcb1ebe7f2a4312a62a93d5dd4389df() asm """
+    B{b5ee9c72410101010005000006abcdefe1e98884} B>boc <s PUSHSLICE
+""";
+
+;; Slice lqKW0iTyhcZ77pPDD4owkVfw2qNdxbh+QQt4YwoJz8c=
+slice __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7() asm """
+    B{b5ee9c724101010100020000004cacb9cd} B>boc <s PUSHSLICE
+""";
+
+;; Slice SygC45pJVmSyeG2fqjpodTvK2BfzRg0i1xye0NMLxxQ=
+slice __gen_slice_slice_4b2802e39a495664b2786d9faa3a68753bcad817f3460d22d71c9ed0d30bc714() asm """
+    B{b5ee9c724101010100030000014acefaa25f} B>boc <s PUSHSLICE
+""";
+
+;; Slice 61iQS2F5Rc308zBCFpxGLNNs8XcqIinwYXH9iZ6SC38=
+slice __gen_slice_slice_eb58904b617945cdf4f33042169c462cd36cf1772a2229f06171fd899e920b7f() asm """
+    B{b5ee9c724101010100030000011025086565} B>boc <s PUSHSLICE
+""";
+
+;; Slice 40nCD4P7pIhr7sUGR+ttjpIaDMSSgAV6f8Ozlt6CqdM=
+slice __gen_slice_slice_e349c20f83fba4886beec50647eb6d8e921a0cc49280057a7fc3b396de82a9d3() asm """
+    B{b5ee9c724101010100030000017888c37a8e} B>boc <s PUSHSLICE
+""";
+
+;; Slice ZpSkphsNx8fV9ju9OURJ9pId57KtnLIoYldQv96Cqp4=
+slice __gen_slice_slice_6694a4a61b0dc7c7d5f63bbd394449f6921de7b2ad9cb228625750bfde82aa9e() asm """
+    B{b5ee9c724101010100820000ffabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcf51215192} B>boc <s PUSHSLICE
+""";
+
+;; Slice gLJrq4XzfiveN5WZPN90As1C5o7/YYfoOICDzmz+fJI=
+slice __gen_slice_slice_80b26bab85f37e2bde3795993cdf7402cd42e68eff6187e8388083ce6cfe7c92() asm """
+    B{b5ee9c724101010100030000018a0adc2f9c} B>boc <s PUSHSLICE
+""";
+
+;; Cell lHpU1Q4ghRlF7Jz+NEDt0Qfv6lpXrLxQIUxsRGMaikU=
+cell __gen_cell_cell_947a54d50e20851945ec9cfe3440edd107efea5a57acbc50214c6c44631a8a45() asm """
+    B{b5ee9c7241010101001100001e0000000048656c6c6f20776f726c64f5e7b6c8} B>boc PUSHREF
+""";
+
+;; String "hello world"
+slice __gen_slice_string_e3f85eb426d40008090255016d73ef2f09a300fbb999ca2472fdf0f0c1ec6566() asm """
+    B{b5ee9c7241010101000d00001668656c6c6f20776f726c647c7b1c8f} B>boc <s PUSHSLICE
+""";
+
+;; intrinsics_IntrinsicsTester.storage.fc
+;;
+;; Type: IntrinsicsTester
+;;
+
+builder $IntrinsicsTester$_store(builder build_0, (int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i, v'j, v'k, v'l, v'm, v'n, v'o, v'p, v'q, v'r, v's, v't, v'u, v'w, v'v) = v;
+    build_0 = build_0.store_int(v'a, 257);
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'b).end_cell());
+    build_0 = build_0.store_slice(v'c);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_ref(v'd);
+    build_1 = build_1.store_int(v'e, 257);
+    build_1 = build_1.store_int(v'f, 257);
+    build_1 = build_1.store_ref(begin_cell().store_slice(v'g).end_cell());
+    build_1 = build_1.store_ref(begin_cell().store_slice(v'h).end_cell());
+    build_1 = build_1.store_int(v'i, 257);
+    var build_2 = begin_cell();
+    build_2 = build_2.store_int(v'j, 257);
+    build_2 = build_2.store_int(v'k, 257);
+    build_2 = build_2.store_int(v'l, 257);
+    build_2 = build_2.store_ref(begin_cell().store_slice(v'm).end_cell());
+    build_2 = build_2.store_ref(begin_cell().store_slice(v'n).end_cell());
+    build_2 = build_2.store_ref(begin_cell().store_slice(v'o).end_cell());
+    var build_3 = begin_cell();
+    build_3 = build_3.store_ref(begin_cell().store_slice(v'p).end_cell());
+    build_3 = build_3.store_ref(begin_cell().store_slice(v'q).end_cell());
+    build_3 = build_3.store_ref(begin_cell().store_slice(v'r).end_cell());
+    var build_4 = begin_cell();
+    build_4 = build_4.store_ref(begin_cell().store_slice(v's).end_cell());
+    build_4 = build_4.store_ref(begin_cell().store_slice(v't).end_cell());
+    build_4 = build_4.store_ref(begin_cell().store_slice(v'u).end_cell());
+    var build_5 = begin_cell();
+    build_5 = build_5.store_ref(begin_cell().store_slice(v'w).end_cell());
+    build_5 = build_5.store_ref(begin_cell().store_slice(v'v).end_cell());
+    build_4 = store_ref(build_4, build_5.end_cell());
+    build_3 = store_ref(build_3, build_4.end_cell());
+    build_2 = store_ref(build_2, build_3.end_cell());
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice))) $IntrinsicsTester$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(257);
+    var v'b = sc_0~load_ref().begin_parse();
+    var v'c = sc_0~load_msg_addr();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'd = sc_1~load_ref();
+    var v'e = sc_1~load_int(257);
+    var v'f = sc_1~load_int(257);
+    var v'g = sc_1~load_ref().begin_parse();
+    var v'h = sc_1~load_ref().begin_parse();
+    var v'i = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'j = sc_2~load_int(257);
+    var v'k = sc_2~load_int(257);
+    var v'l = sc_2~load_int(257);
+    var v'm = sc_2~load_ref().begin_parse();
+    var v'n = sc_2~load_ref().begin_parse();
+    var v'o = sc_2~load_ref().begin_parse();
+    slice sc_3 = sc_2~load_ref().begin_parse();
+    var v'p = sc_3~load_ref().begin_parse();
+    var v'q = sc_3~load_ref().begin_parse();
+    var v'r = sc_3~load_ref().begin_parse();
+    slice sc_4 = sc_3~load_ref().begin_parse();
+    var v's = sc_4~load_ref().begin_parse();
+    var v't = sc_4~load_ref().begin_parse();
+    var v'u = sc_4~load_ref().begin_parse();
+    slice sc_5 = sc_4~load_ref().begin_parse();
+    var v'w = sc_5~load_ref().begin_parse();
+    var v'v = sc_5~load_ref().begin_parse();
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f, v'g, v'h, v'i, v'j, v'k, v'l, v'm, v'n, v'o, v'p, v'q, v'r, v's, v't, v'u, v'w, v'v));
+}
+
+(int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $IntrinsicsTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$IntrinsicsTester$_load();
+    } else {
+        return $IntrinsicsTester$_contract_init();
+    }
+}
+
+() $IntrinsicsTester$_contract_store((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $IntrinsicsTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract IntrinsicsTester functions
+;;
+
+(int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $IntrinsicsTester$_contract_init() impure inline {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = (10123400000, __gen_slice_string_fddd37b8318ce351584ce13d887b2bdfd89a245250fa3ccc433cc820d90bcae1(), __gen_slice_address_58e2d2fc9446d00e70b3ad3ea1eb88797c323bae517f2527f807f62d09a56fdc(), __gen_cell_cell_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36(), 512, 83814198383102558219731078260892729932246618004265700685467928187377105751529, __gen_slice_slice_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36(), __gen_slice_slice_b473b5f4878398a59576d6e9b3a85a0b6fcb1ebe7f2a4312a62a93d5dd4389df(), 126207244316550804821666916, 2235694568, 0, 1563963554659859369353828835329962428465513941646011501275668087180532385, __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7(), __gen_slice_slice_4b2802e39a495664b2786d9faa3a68753bcad817f3460d22d71c9ed0d30bc714(), __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7(), __gen_slice_slice_eb58904b617945cdf4f33042169c462cd36cf1772a2229f06171fd899e920b7f(), __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7(), __gen_slice_slice_e349c20f83fba4886beec50647eb6d8e921a0cc49280057a7fc3b396de82a9d3(), __gen_slice_slice_6694a4a61b0dc7c7d5f63bbd394449f6921de7b2ad9cb228625750bfde82aa9e(), __gen_slice_slice_80b26bab85f37e2bde3795993cdf7402cd42e68eff6187e8388083ce6cfe7c92(), __gen_slice_slice_80b26bab85f37e2bde3795993cdf7402cd42e68eff6187e8388083ce6cfe7c92(), __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7(), __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7());
+    return ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v);
+}
+
+int $global_hashSHA256U(slice $src) impure asm """
+    SHA256U
+""";
+
+int $global_hashHASHEXTSHA256(slice $src) impure asm """
+    ONE HASHEXT_SHA256
+""";
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getTons((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_331 = 10123400000;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_331);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getTons2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_332 = $self'a;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_332);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getString((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_333 = __gen_slice_string_fddd37b8318ce351584ce13d887b2bdfd89a245250fa3ccc433cc820d90bcae1();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_333);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getString2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_334 = $self'b;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_334);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getAddress((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_335 = __gen_slice_address_58e2d2fc9446d00e70b3ad3ea1eb88797c323bae517f2527f807f62d09a56fdc();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_335);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getAddress2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_336 = $self'c;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_336);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getCell((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_337 = __gen_cell_cell_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_337);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getCell2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_338 = $self'd;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_338);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getPow((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_339 = 512;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_339);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getPow2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_340 = $self'e;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_340);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), cell) $IntrinsicsTester$_fun_getComment((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_341 = __gen_cell_cell_947a54d50e20851945ec9cfe3440edd107efea5a57acbc50214c6c44631a8a45();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_341);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_342 = 83814198383102558219731078260892729932246618004265700685467928187377105751529;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_342);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_343 = __tact_sha256(__tact_str_to_slice(__gen_slice_string_e3f85eb426d40008090255016d73ef2f09a300fbb999ca2472fdf0f0c1ec6566()));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_343);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_344 = $self'f;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_344);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_345 = __tact_sha256($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_345);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHash4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_346 = __tact_sha256($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_346);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongComptime((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_347 = 58194485868373170300817693691861672340562080930616192288976816887940544073377;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_347);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongRuntime((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_348 = __tact_sha256($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_348);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashLongRuntimeSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_349 = __tact_sha256($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_349);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashSHA256U((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_350 = $global_hashSHA256U($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_350);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getHashHASHEXTSHA256((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self, slice $src) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_351 = $global_hashHASHEXTSHA256($src);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_351);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_352 = __gen_slice_slice_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_352);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getSlice2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_353 = $self'g;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_353);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_354 = __gen_slice_slice_b473b5f4878398a59576d6e9b3a85a0b6fcb1ebe7f2a4312a62a93d5dd4389df();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_354);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_355 = $self'h;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_355);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_356 = __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_356);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_357 = $self'm;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_357);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_358 = 126207244316550804821666916;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_358);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_359 = $self'i;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_359);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_360 = 1563963554659859369353828835329962428465513941646011501275668087180532385;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_360);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getAscii4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_361 = $self'l;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_361);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_362 = 2235694568;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_362);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_2((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_363 = $self'j;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_363);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_3((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_364 = $self'k;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_364);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), int) $IntrinsicsTester$_fun_getCrc32_4((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_365 = 0;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_365);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice5((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_366 = __gen_slice_slice_4b2802e39a495664b2786d9faa3a68753bcad817f3460d22d71c9ed0d30bc714();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_366);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice6((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_367 = $self'n;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_367);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice7((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_368 = __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_368);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice8((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_369 = $self'o;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_369);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice9((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_370 = __gen_slice_slice_eb58904b617945cdf4f33042169c462cd36cf1772a2229f06171fd899e920b7f();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_370);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice10((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_371 = $self'p;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_371);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice11((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_372 = __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_372);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice12((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_373 = $self'q;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_373);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice13((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_374 = __gen_slice_slice_e349c20f83fba4886beec50647eb6d8e921a0cc49280057a7fc3b396de82a9d3();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_374);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice14((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_375 = $self'r;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_375);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice15((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_376 = __gen_slice_slice_6694a4a61b0dc7c7d5f63bbd394449f6921de7b2ad9cb228625750bfde82aa9e();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_376);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice16((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_377 = $self's;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_377);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice17((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_378 = __gen_slice_slice_80b26bab85f37e2bde3795993cdf7402cd42e68eff6187e8388083ce6cfe7c92();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_378);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice18((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_379 = $self't;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_379);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice19((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_380 = __gen_slice_slice_80b26bab85f37e2bde3795993cdf7402cd42e68eff6187e8388083ce6cfe7c92();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_380);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice20((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_381 = $self'u;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_381);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice21((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_382 = __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_382);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice22((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_383 = $self'w;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_383);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice23((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_384 = __gen_slice_slice_96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7();
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_384);
+}
+
+((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice), slice) $IntrinsicsTester$_fun_getRawSlice24((int, slice, slice, cell, int, int, slice, slice, int, int, int, int, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice, slice) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v)) = $self;
+    var $fresh$ret_385 = $self'v;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v), $fresh$ret_385);
+}
+
+;;
+;; Get methods of a Contract IntrinsicsTester
+;;
+
+_ %getTons() method_id(85126) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getTons();
+    return res;
+}
+
+_ %getTons2() method_id(72025) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getTons2();
+    return res;
+}
+
+_ %getString() method_id(97624) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getString();
+    return res;
+}
+
+_ %getString2() method_id(123179) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getString2();
+    return res;
+}
+
+_ %getAddress() method_id(67571) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAddress();
+    return res;
+}
+
+_ %getAddress2() method_id(103926) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAddress2();
+    return res;
+}
+
+_ %getCell() method_id(83057) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCell();
+    return res;
+}
+
+_ %getCell2() method_id(94033) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCell2();
+    return res;
+}
+
+_ %getPow() method_id(93948) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getPow();
+    return res;
+}
+
+_ %getPow2() method_id(92025) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getPow2();
+    return res;
+}
+
+_ %getComment() method_id(116303) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getComment();
+    return res;
+}
+
+_ %getHash() method_id(120167) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHash();
+    return res;
+}
+
+_ %getHashSlice() method_id(104138) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashSlice();
+    return res;
+}
+
+_ %getHash2() method_id(125641) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHash2();
+    return res;
+}
+
+_ %getHash3(slice $src) method_id(129768) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHash3($src);
+    return res;
+}
+
+_ %getHash4(slice $src) method_id(100879) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHash4($src);
+    return res;
+}
+
+_ %getHashLongComptime() method_id(121679) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashLongComptime();
+    return res;
+}
+
+_ %getHashLongRuntime(slice $src) method_id(113535) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashLongRuntime($src);
+    return res;
+}
+
+_ %getHashLongRuntimeSlice(slice $src) method_id(122586) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashLongRuntimeSlice($src);
+    return res;
+}
+
+_ %getHashSHA256U(slice $src) method_id(68441) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashSHA256U($src);
+    return res;
+}
+
+_ %getHashHASHEXTSHA256(slice $src) method_id(112782) {
+    slice $src = $src;
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getHashHASHEXTSHA256($src);
+    return res;
+}
+
+_ %getSlice() method_id(84384) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getSlice();
+    return res;
+}
+
+_ %getSlice2() method_id(94204) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getSlice2();
+    return res;
+}
+
+_ %getRawSlice() method_id(78245) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice();
+    return res;
+}
+
+_ %getRawSlice2() method_id(103779) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice2();
+    return res;
+}
+
+_ %getRawSlice3() method_id(99650) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice3();
+    return res;
+}
+
+_ %getRawSlice4() method_id(128421) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice4();
+    return res;
+}
+
+_ %getAscii() method_id(77750) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAscii();
+    return res;
+}
+
+_ %getAscii2() method_id(95644) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAscii2();
+    return res;
+}
+
+_ %getAscii3() method_id(91581) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAscii3();
+    return res;
+}
+
+_ %getAscii4() method_id(71002) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getAscii4();
+    return res;
+}
+
+_ %getCrc32() method_id(71531) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCrc32();
+    return res;
+}
+
+_ %getCrc32_2() method_id(85945) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCrc32_2();
+    return res;
+}
+
+_ %getCrc32_3() method_id(90008) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCrc32_3();
+    return res;
+}
+
+_ %getCrc32_4() method_id(77695) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getCrc32_4();
+    return res;
+}
+
+_ %getRawSlice5() method_id(124292) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice5();
+    return res;
+}
+
+_ %getRawSlice6() method_id(120295) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice6();
+    return res;
+}
+
+_ %getRawSlice7() method_id(116166) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice7();
+    return res;
+}
+
+_ %getRawSlice8() method_id(78889) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice8();
+    return res;
+}
+
+_ %getRawSlice9() method_id(74760) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice9();
+    return res;
+}
+
+_ %getRawSlice10() method_id(119580) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice10();
+    return res;
+}
+
+_ %getRawSlice11() method_id(115517) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice11();
+    return res;
+}
+
+_ %getRawSlice12() method_id(127838) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice12();
+    return res;
+}
+
+_ %getRawSlice13() method_id(123775) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice13();
+    return res;
+}
+
+_ %getRawSlice14() method_id(103320) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice14();
+    return res;
+}
+
+_ %getRawSlice15() method_id(99257) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice15();
+    return res;
+}
+
+_ %getRawSlice16() method_id(111578) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice16();
+    return res;
+}
+
+_ %getRawSlice17() method_id(107515) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice17();
+    return res;
+}
+
+_ %getRawSlice18() method_id(86548) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice18();
+    return res;
+}
+
+_ %getRawSlice19() method_id(82485) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice19();
+    return res;
+}
+
+_ %getRawSlice20() method_id(99919) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice20();
+    return res;
+}
+
+_ %getRawSlice21() method_id(104046) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice21();
+    return res;
+}
+
+_ %getRawSlice22() method_id(108045) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice22();
+    return res;
+}
+
+_ %getRawSlice23() method_id(112172) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice23();
+    return res;
+}
+
+_ %getRawSlice24() method_id(116427) {
+    var self = $IntrinsicsTester$_contract_load();
+    var res = self~$IntrinsicsTester$_fun_getRawSlice24();
+    return res;
+}
+
+;;
+;; Routing of a Contract IntrinsicsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v) = $IntrinsicsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Deploy" message
+    if (text_op == 0xc1c8ebe8e42f1458f2693e8bef345c9c08db8c56d2ca637be9b436ea1f68976f) {
+        ;; Persist state
+        $IntrinsicsTester$_contract_store(($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v));
+        return ();
+    }
+    ;; Receive "emit_1" message
+    if (text_op == 0xaa3af96fc1983ffa6982c949a1bc6234208c148398cf2054e0d0d3e6c283f3be) {
+        $global_emit(__gen_cell_cell_947a54d50e20851945ec9cfe3440edd107efea5a57acbc50214c6c44631a8a45());
+        ;; Persist state
+        $IntrinsicsTester$_contract_store(($self'a, $self'b, $self'c, $self'd, $self'e, $self'f, $self'g, $self'h, $self'i, $self'j, $self'k, $self'l, $self'm, $self'n, $self'o, $self'p, $self'q, $self'r, $self's, $self't, $self'u, $self'w, $self'v));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

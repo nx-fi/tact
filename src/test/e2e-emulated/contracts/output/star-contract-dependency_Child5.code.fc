@@ -1,0 +1,229 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; star-contract-dependency_Child5.headers.fc
+;;
+;; Header files for Child5
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_set_code
+cell __tact_dict_set_code(cell dict, int id, cell code) inline;
+
+;; __tact_dict_get_code
+cell __tact_dict_get_code(cell dict, int id) inline;
+
+;; $Child5$_store
+builder $Child5$_store(builder build_0, (int) v) inline;
+
+;; $Child5$_load
+(slice, ((int))) $Child5$_load(slice sc_0) inline;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $Parent$init$_store
+builder $Parent$init$_store(builder build_0, tuple v) inline;
+
+;; $Child5$_contract_init
+(int) $Child5$_contract_init() impure inline;
+
+;; $Child5$_contract_load
+(int) $Child5$_contract_load() impure inline_ref;
+
+;; $Child5$_contract_store
+() $Child5$_contract_store((int) v) impure inline;
+
+;; $Parent$_init_child
+(cell, cell) $Parent$_init_child() inline_ref;
+
+;; $Child5$_fun_getParent
+((int), (cell, cell)) $Child5$_fun_getParent((int) $self) impure inline_ref;
+
+
+;; star-contract-dependency_Child5.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+cell __tact_dict_set_code(cell dict, int id, cell code) inline {
+    return udict_set_ref(dict, 16, id, code);
+}
+
+cell __tact_dict_get_code(cell dict, int id) inline {
+    var (data, ok) = udict_get_ref?(dict, 16, id);
+    throw_unless(135, ok);
+    return data;
+}
+
+;; star-contract-dependency_Child5.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: Parent
+;;
+
+builder $Parent$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Parent$_init_child() inline_ref {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Parent
+    cell init_code = __tact_dict_get_code(source, 2729);
+
+    ;; Build init data cell
+    cell contracts = new_dict();
+
+    ;; Contract Code: Child0
+    cell code_2579 = __tact_dict_get_code(source, 2579);
+    contracts = __tact_dict_set_code(contracts, 2579, code_2579);
+
+    ;; Contract Code: Child1
+    cell code_6706 = __tact_dict_get_code(source, 6706);
+    contracts = __tact_dict_set_code(contracts, 6706, code_6706);
+
+    ;; Contract Code: Child2
+    cell code_10833 = __tact_dict_get_code(source, 10833);
+    contracts = __tact_dict_set_code(contracts, 10833, code_10833);
+
+    ;; Contract Code: Child3
+    cell code_14960 = __tact_dict_get_code(source, 14960);
+    contracts = __tact_dict_set_code(contracts, 14960, code_14960);
+
+    ;; Contract Code: Child4
+    cell code_19095 = __tact_dict_get_code(source, 19095);
+    contracts = __tact_dict_set_code(contracts, 19095, code_19095);
+
+    ;; Contract Code: Child5
+    contracts = __tact_dict_set_code(contracts, 23222, my_code());
+
+    ;; Contract Code: Child6
+    cell code_27349 = __tact_dict_get_code(source, 27349);
+    contracts = __tact_dict_set_code(contracts, 27349, code_27349);
+
+    ;; Contract Code: Child7
+    cell code_31476 = __tact_dict_get_code(source, 31476);
+    contracts = __tact_dict_set_code(contracts, 31476, code_31476);
+
+    ;; Contract Code: Child8
+    cell code_35611 = __tact_dict_get_code(source, 35611);
+    contracts = __tact_dict_set_code(contracts, 35611, code_35611);
+
+    ;; Contract Code: Child9
+    cell code_39738 = __tact_dict_get_code(source, 39738);
+    contracts = __tact_dict_set_code(contracts, 39738, code_39738);
+
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $Parent$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child5
+;;
+
+builder $Child5$_store(builder build_0, (int) v) inline {
+    var (v'childNum) = v;
+    build_0 = build_0.store_uint(v'childNum, 32);
+    return build_0;
+}
+
+(slice, ((int))) $Child5$_load(slice sc_0) inline {
+    var v'childNum = sc_0~load_uint(32);
+    return (sc_0, (v'childNum));
+}
+
+(int) $Child5$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_child_contract_codes = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Child5$_load();
+    } else {
+        return $Child5$_contract_init();
+    }
+}
+
+() $Child5$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_child_contract_codes);
+    b = b.store_int(true, 1);
+    b = $Child5$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Child5 functions
+;;
+
+(int) $Child5$_contract_init() impure inline {
+    var (($self'childNum)) = (0);
+    return ($self'childNum);
+}
+
+((int), (cell, cell)) $Child5$_fun_getParent((int) $self) impure inline_ref {
+    var (($self'childNum)) = $self;
+    var $fresh$ret_915 = $Parent$_init_child();
+    return (($self'childNum), $fresh$ret_915);
+}
+
+;;
+;; Get methods of a Contract Child5
+;;
+
+_ %getParent() method_id(115590) {
+    var self = $Child5$_contract_load();
+    var res = self~$Child5$_fun_getParent();
+    return $StateInit$_to_external(res);
+}
+
+;;
+;; Routing of a Contract Child5
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'childNum) = $Child5$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $Child5$_contract_store(($self'childNum));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

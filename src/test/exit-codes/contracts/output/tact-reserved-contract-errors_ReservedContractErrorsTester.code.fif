@@ -1,0 +1,1559 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/exit-codes/contracts/output/tact-reserved-contract-errors_ReservedContractErrorsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC __tact_crc16
+  DECLPROC __tact_base64_encode
+  DECLPROC __tact_address_to_user_friendly
+  DECLPROC __tact_debug_address
+  DECLPROC __tact_context_get_sender
+  DECLPROC $SpanishInquisition$_store
+  DECLPROC $SpanishInquisition$_store_cell
+  DECLPROC $ReservedContractErrorsTester$_store
+  DECLPROC $ReservedContractErrorsTester$_load
+  DECLPROC $ReservedContractErrorsTester$_contract_init
+  DECLPROC $ReservedContractErrorsTester$_contract_load
+  DECLPROC $ReservedContractErrorsTester$_contract_store
+  DECLPROC $Builder$_fun_asSlice
+  DECLPROC $Slice$_fun_fromBase64
+  DECLPROC $Slice$_fun_asAddress
+  DECLPROC $String$_fun_fromBase64
+  DECLPROC $ReservedContractErrorsTester$_fun_requireOwner
+  DECLPROC $ReservedContractErrorsTester$_fun_owner
+  DECLPROC $SendParameters$_constructor_to_value_mode_body
+  DECLPROC $SpanishInquisition$_constructor_
+  DECLPROC dns_string_to_internal
+  DECLPROC dns_internal_verify
+  DECLPROC dns_internal_normalize
+  83229 DECLMETHOD %owner
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_crc16 PROCREF:<{
+    NEWC
+    SWAP
+    STSLICER
+    x{0000} PUSHSLICE
+    STSLICER
+    ENDC
+    CTOS
+    0 PUSHINT
+    WHILE:<{
+      OVER
+      SDEMPTY
+      NOT
+    }>DO<{
+      SWAP
+      8 LDU
+      7 PUSHPOW2
+      WHILE:<{
+        DUP
+        0 GTINT
+      }>DO<{
+        s0 s3 XCHG
+        1 LSHIFT#
+        s2 s3 PUSH2
+        AND
+        IF:<{
+          INC
+        }>
+        s0 s3 XCHG
+        1 RSHIFT#
+        s3 PUSH
+        16 PUSHPOW2DEC
+        GREATER
+        IF:<{
+          s0 s3 XCHG
+          16 PUSHPOW2DEC
+          AND
+          4129 PUSHINT
+          XOR
+          s0 s3 XCHG
+        }>
+      }>
+      DROP
+      NIP
+      SWAP
+    }>
+    NIP
+    8 PUSHPOW2
+    DIVMOD
+    SWAP
+    NEWC
+    8 STU
+    8 STU
+    ENDC
+    CTOS
+  }>
+  __tact_base64_encode PROCREF:<{
+    x{4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F} PUSHSLICE
+    NEWC
+    WHILE:<{
+      s2 PUSH
+      SBITS
+      23 GTINT
+    }>DO<{
+      s0 s2 XCHG
+      8 LDU
+      8 LDU
+      8 LDU
+      s0 s3 XCHG
+      16 LSHIFT#
+      s0 s2 XCHG
+      8 LSHIFT#
+      s1 s2 XCHG
+      OR
+      SWAP
+      OR
+      DUP
+      18 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s4 XCHG
+      STSLICER
+      s3 PUSH
+      12 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s3 PUSH
+      6 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s0 s3 XCHG
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s2 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s3 XCHG
+      STSLICER
+    }>
+    2 1 BLKDROP2
+    ENDC
+    CTOS
+  }>
+  __tact_address_to_user_friendly PROCREF:<{
+    REWRITESTDADDR
+    NEWC
+    x{11} PUSHSLICE
+    STSLICER
+    s0 s2 XCHG
+    8 PUSHPOW2
+    ADD
+    8 MODPOW2#
+    ROT
+    8 STU
+    256 STU
+    ENDC
+    CTOS
+    DUP
+    __tact_crc16 INLINECALLDICT
+    NEWC
+    ROT
+    STSLICER
+    SWAP
+    STSLICER
+    ENDC
+    CTOS
+    __tact_base64_encode INLINECALLDICT
+  }>
+  __tact_debug_address PROCREF:<{
+    s0 s2 XCHG
+    __tact_address_to_user_friendly INLINECALLDICT
+    s0 s2 XCHG
+        STRDUMP DROP STRDUMP DROP STRDUMP DROP
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $SpanishInquisition$_store PROCINLINE:<{
+    DROP
+    1478 PUSHINT
+    SWAP
+    32 STU
+  }>
+  $SpanishInquisition$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $SpanishInquisition$_store INLINECALLDICT
+    ENDC
+  }>
+  $ReservedContractErrorsTester$_store PROCINLINE:<{
+    STSLICER
+  }>
+  $ReservedContractErrorsTester$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $ReservedContractErrorsTester$_contract_init PROCINLINE:<{
+        MYADDR
+  }>
+  $ReservedContractErrorsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $ReservedContractErrorsTester$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $ReservedContractErrorsTester$_contract_init INLINECALLDICT
+  }>
+  $ReservedContractErrorsTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $ReservedContractErrorsTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Builder$_fun_asSlice PROCINLINE:<{
+        ENDC
+        CTOS
+  }>
+  $Slice$_fun_fromBase64 PROCREF:<{
+    DUP
+        SBITS
+    3 RSHIFT#
+        NEWC
+    SWAP
+    REPEAT:<{
+      SWAP
+      8 LDU
+      OVER
+      64 GTINT
+      IF:<{
+        OVER
+        91 LESSINT
+      }>ELSE<{
+        FALSE
+      }>
+      IF:<{
+        SWAP
+        -65 ADDCONST
+        ROT
+        6 STU
+      }>ELSE<{
+        OVER
+        96 GTINT
+        IF:<{
+          OVER
+          123 LESSINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -71 ADDCONST
+          ROT
+          6 STU
+        }>ELSE<{
+          OVER
+          47 GTINT
+          IF:<{
+            OVER
+            58 LESSINT
+          }>ELSE<{
+            FALSE
+          }>
+          IF:<{
+            SWAP
+            4 ADDCONST
+            ROT
+            6 STU
+          }>ELSE<{
+            OVER
+            45 EQINT
+            IF:<{
+              TRUE
+            }>ELSE<{
+              OVER
+              43 EQINT
+            }>
+            IF:<{
+              62 PUSHINT
+              s2 POP
+              s0 s2 XCHG
+              6 STU
+            }>ELSE<{
+              OVER
+              95 EQINT
+              IF:<{
+                TRUE
+              }>ELSE<{
+                OVER
+                47 EQINT
+              }>
+              IF:<{
+                63 PUSHINT
+                s2 POP
+                s0 s2 XCHG
+                6 STU
+              }>ELSE<{
+                SWAP
+                61 EQINT
+                IFNOT:<{
+                  134 THROW
+                }>
+                SWAP
+              }>
+            }>
+          }>
+        }>
+      }>
+    }>
+    NIP
+    DUP
+        BBITS
+    DUP
+    3 MODPOW2#
+    DUP
+    0 NEQINT
+    IFJMP:<{
+      s0 s2 XCHG
+      $Builder$_fun_asSlice INLINECALLDICT
+      s0 s2 XCHG
+      SUB
+      LDSLICEX
+      DROP
+    }>
+    2DROP
+    $Builder$_fun_asSlice INLINECALLDICT
+  }>
+  $Slice$_fun_asAddress PROCREF:<{
+    OVER
+        SBITS
+    267 PUSHINT
+    EQUAL
+    136 THROWIFNOT
+    -1 EQINT
+    IF:<{
+      DUP
+      11 PLDU
+      1279 PUSHINT
+      EQUAL
+      136 THROWIFNOT
+    }>ELSE<{
+      DUP
+      3 PLDU
+      4 EQINT
+      136 THROWIFNOT
+    }>
+        NOP
+  }>
+  $String$_fun_fromBase64 PROCINLINE:<{
+    $Slice$_fun_fromBase64 INLINECALLDICT
+  }>
+  $ReservedContractErrorsTester$_fun_requireOwner PROCREF:<{
+    __tact_context_get_sender INLINECALLDICT
+    s1 s(-1) PUXC
+    SDEQ
+    132 THROWIFNOT
+  }>
+  $ReservedContractErrorsTester$_fun_owner PROCREF:<{
+    DUP
+  }>
+  $SendParameters$_constructor_to_value_mode_body PROCINLINE:<{
+    2SWAP
+    PUSHNULL
+    PUSHNULL
+    s0 s0 s3 XCHG3
+    TRUE
+  }>
+  $SpanishInquisition$_constructor_ PROCINLINE:<{
+    NIL
+  }>
+  dns_string_to_internal PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    DUP
+    SBITS
+    8 EQINT
+    OVER
+    SREFS
+    0 EQINT
+    AND
+    IF:<{
+      DUP
+      8 PLDU
+      46 EQINT
+      IFJMP:<{
+        DROP
+        NEWC
+        0 PUSHINT
+        SWAP
+        8 STU
+        ENDC
+        CTOS
+        RETALT
+      }>
+    }>
+    PUSHNULL
+    NEWC
+    TRUE
+    TRUE
+    FALSE
+    TRUE
+    UNTIL:<{
+      s6 PUSH
+      SBITS
+      0 EQINT
+      IF:<{
+        DROP
+        s5 PUSH
+        SREFS
+        DUP
+        1 EQINT
+        IF:<{
+          DROP
+          s0 s5 XCHG
+          LDREF
+          DROP
+          CTOS
+        }>ELSE<{
+          1 GTINT
+          IFJMP:<{
+            6 BLKDROP
+            PUSHNULL
+            RETALT
+          }>
+          s0 s5 XCHG
+        }>
+        s0 s5 XCHG
+        FALSE
+      }>
+      DUP
+      IF:<{
+        NIP
+        s2 POP
+        s0 s4 XCHG
+        8 LDU
+        OVER
+        45 EQINT
+        s2 PUSH
+        46 EQINT
+        2DUP
+        OR
+        s4 PUSH
+        47 GTINT
+        s5 PUSH
+        58 LESSINT
+        AND
+        OR
+        s4 PUSH
+        96 GTINT
+        s5 PUSH
+        123 LESSINT
+        AND
+        OR
+        NOT
+        s8 s2 PUSH2
+        AND
+        OR
+        IFJMP:<{
+          8 BLKDROP
+          PUSHNULL
+          RETALT
+        }>
+        IF:<{
+          s2 POP
+          s5 s5 XCHG2
+          OR
+          IFJMP:<{
+            4 BLKDROP
+            PUSHNULL
+            RETALT
+          }>
+          s0 s2 XCHG
+          CONS
+          NEWC
+          FALSE
+          TRUE
+          TRUE
+        }>ELSE<{
+          s6 POP
+          FALSE
+          s0 s2 XCHG
+          FALSE
+          s0 s5 XCHG
+          8 STU
+          s0 s3 XCHG
+          s0 s5 XCHG
+          s6 s6 s4 XCHG3
+        }>
+        s4 s5 XCHG
+        s0 s3 XCHG
+        s2 s4 XCHG2
+      }>
+      DUP
+      NOT
+    }>
+    DROP
+    NIP
+    s4 POP
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+      PUSHNULL
+    }>
+    s0 s2 XCHG
+    NOT
+    IF:<{
+      CONS
+    }>ELSE<{
+      NIP
+    }>
+    NEWC
+    SWAP
+    UNCONS
+    -ROT
+    STBR
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      0 PUSHINT
+      s0 s3 XCHG2
+      8 STU
+      SWAP
+      STBR
+    }>
+    0 PUSHINT
+    s2 POP
+    8 STU
+    ENDC
+    CTOS
+  }>
+  dns_internal_verify PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    DUP
+    SREFS
+    0 NEQINT
+    IFJMP:<{
+      DROP
+      FALSE
+    }>
+    DUP
+    SBITS
+    DUP
+    3 MODPOW2#
+    0 NEQINT
+    IFJMP:<{
+      2DROP
+      FALSE
+    }>
+    DUP
+    0 EQINT
+    IFJMP:<{
+      2DROP
+      TRUE
+    }>
+    3 RSHIFT#
+    0 PUSHINT
+    TRUE
+    FALSE
+    s0 s3 XCHG
+    REPEAT:<{
+      s0 s3 XCHG
+      8 LDU
+      OVER
+      0 EQINT
+      IF:<{
+        NIP
+        s3 POP
+        0 EQINT
+        IFJMP:<{
+          2DROP
+          FALSE
+          RETALT
+        }>
+        IFJMP:<{
+          DROP
+          FALSE
+          RETALT
+        }>
+        0 PUSHINT
+        FALSE
+        TRUE
+      }>ELSE<{
+        s3 POP
+        DUP
+        45 EQINT
+        OVER
+        47 GTINT
+        s2 PUSH
+        58 LESSINT
+        AND
+        s1 s(-1) PUXC
+        OR
+        s2 PUSH
+        96 GTINT
+        s0 s3 XCHG
+        123 LESSINT
+        s1 s3 XCHG
+        AND
+        s1 s2 XCHG
+        OR
+        NOT
+        IFJMP:<{
+          4 BLKDROP
+          FALSE
+          RETALT
+        }>
+        s0 s3 PUXC
+        AND
+        IFJMP:<{
+          3 BLKDROP
+          FALSE
+          RETALT
+        }>
+        FALSE
+        SWAP
+        INC
+        s0 s3 s3 XCHG3
+      }>
+      s1 s2 XCHG
+    }>
+    DROP
+    s2 POP
+    0 PUSHINT
+    SWAP
+    NOT
+    AND
+    EQUAL
+  }>
+  dns_internal_normalize PROCREF:<{
+    DUP
+    SREFS
+    0 EQINT
+    134 THROWIFNOT
+    NEWC
+    OVER
+    SBITS
+    3 RSHIFT#
+    REPEAT:<{
+      SWAP
+      8 LDU
+      OVER
+      98 EQINT
+      IF:<{
+        54 PUSHINT
+        s2 POP
+      }>
+      OVER
+      103 EQINT
+      s2 PUSH
+      113 EQINT
+      OR
+      IF:<{
+        57 PUSHINT
+        s2 POP
+      }>
+      OVER
+      108 EQINT
+      IF:<{
+        49 PUSHINT
+        s2 POP
+      }>
+      OVER
+      111 EQINT
+      IF:<{
+        48 PUSHINT
+        s2 POP
+      }>
+      OVER
+      115 EQINT
+      IF:<{
+        53 PUSHINT
+        s2 POP
+      }>
+      OVER
+      117 EQINT
+      IF:<{
+        118 PUSHINT
+        s2 POP
+      }>
+      OVER
+      122 EQINT
+      IF:<{
+        50 PUSHINT
+        s2 POP
+      }>
+      s0 s2 XCHG
+      8 STU
+    }>
+    NIP
+    ENDC
+    CTOS
+  }>
+  %owner PROC:<{
+    $ReservedContractErrorsTester$_contract_load INLINECALLDICT
+    $ReservedContractErrorsTester$_fun_owner INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ReservedContractErrorsTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    HASHSU
+    DUP
+    64559521868909796208256962130793322219687082271945683278076493913614822429594 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      PUSHNULL
+      __tact_not_null INLINECALLDICT
+          B{b5ee9c7241010101001000001c64756d7028676f7463686121212987f48517} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a32303a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    33828431718470370435708596599786183422137839401702318837225145661571121267883 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+          MYADDR
+      0 PUSHINT
+      66 PUSHINT
+      $SpanishInquisition$_constructor_ INLINECALLDICT
+      $SpanishInquisition$_store_cell INLINECALLDICT
+      $SendParameters$_constructor_to_value_mode_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+          STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          // Group 2: Placing the Builder after code and data, then checking those for nullability
+          s2 XCHG0
+          DUP2
+          ISNULL
+          SWAP
+          ISNULL
+          MUL // note that -1 * -1 wraps back to -1
+          // → Stack state
+          // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+          // s1: `code`
+          // s2: `data`
+          // s3: Builder
+          // s4: `body`
+          // s5: `mode`
+          // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+          <{
+              DROP2 // drop `data` and `code`, since either of those is null
+              b{0} STSLICECONST
+          }> PUSHCONT
+          // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+          <{
+              // _ split_depth:(Maybe (## 5))
+              //   special:(Maybe TickTock)
+              //   code:(Maybe ^Cell)
+              //   data:(Maybe ^Cell)
+              //   library:(Maybe ^Cell)
+              // = StateInit;
+              ROT                // place message Builder on top
+              b{10} STSLICECONST // store Maybe = true, Either = false
+              // Start composing inlined StateInit
+              b{00} STSLICECONST // store split_depth and special first
+              STDICT             // store code
+              STDICT             // store data
+              b{0} STSLICECONST  // store library
+          }> PUSHCONT
+          // Group 3: IFELSE that does the branching shown above
+          IFELSE
+          // → Stack state
+          // s0: Builder
+          // s1: null or StateInit
+          // s2: `body`
+          // s3: `mode`
+          // Group 4: Finalizing the message
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC
+          // → Stack state
+          // s0: Cell
+          // s1: `mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    87526341293387902008367738048909131019877608861658140594899649798757622159424 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $ReservedContractErrorsTester$_fun_requireOwner INLINECALLDICT
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DUP
+    53095247676522761202618437926946365156769151496493133871543998401535275792449 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      134 PUSHINT
+      2DUP
+      TRUE
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            NEWC
+        0 PUSHINT
+        SWAP
+        8 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        $Slice$_fun_fromBase64 INLINECALLDICT
+            B{b5ee9c7241010101006d0000d664756d7028626567696e43656c6c28290a202020202020202020202020202020202e73746f726555696e7428302c2038290a202020202020202020202020202020202e6173536c69636528290a202020202020202020202020202020202e66726f6d426173653634282929def23bd7} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a34373a31333a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      25189 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+            B{b5ee9c7241010101000300000200d367dc41} B>boc <s PUSHSLICE
+        $String$_fun_fromBase64 INLINECALLDICT
+            B{b5ee9c7241010101001b00003264756d7028225c783030222e66726f6d4261736536342829294274bef4} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a36303a31333a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      46964 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        42 PUSHINT
+        -1 PUSHINT
+            DUP // x digits digits
+            1 LESSINT // x digits digits<=0
+            134 THROWIF // x digits
+            DUP // x digits digits
+            77 GTINT // x digits digits>77
+            134 THROWIF // x digits
+            NEWC // x digits b
+            ROTREV // b x digits
+            s1 PUSH // b x digits x
+            0 LESSINT // b x digits x<0?
+            <{
+                // b x digits
+                ROT // x digits b
+                x{2d} STSLICECONST // x digits b
+                ROT // digits b x
+                NEGATE // digits b -x
+                ROT // b -x digits
+            }>CONT IF
+            // b x digits
+            ONE // b x digits 1
+            OVER // b x digits 1 digits
+            <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+            s1 s2 XCHG // b digits x 10^digits
+            DIVMOD // b digits left right
+            s3 s3 XCHG2 // right digits b left
+            <{
+                // b x
+                <{
+                    // b x
+                    10 PUSHINT DIVMOD // b x/10 x%10 
+                    48 ADDCONST // b x/10 (x%10+48)
+                    s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                }>CONT UNTIL
+                // ... b x
+                DROP // ... b
+                DEPTH DEC // ... b n
+                <{ 8 STU }>CONT REPEAT // b
+            }>CONT 2 1 CALLXARGS
+            // right digits "left"
+            ROT // digits "left" right
+            DUP // digits "left" right right
+            ISZERO // digits "left" right right==0?
+            <{
+                // digits "left" right
+                DROP // digits "left"
+                NIP // "left"
+            }>CONT
+            <{
+                // digits "left" right
+                ZERO // digits "left" right 0
+                SWAP // digits "left" 0 right
+                <{
+                    // digits "left" i right
+                    DUP // digits "left" i right right
+                    10 PUSHINT // digits "left" i right right 10
+                    MOD // digits "left" i right right%10
+                    ISZERO // digits "left" i right right%10==0?
+                }>CONT
+                <{
+                    // digits "left" i right
+                    10 PUSHINT // digits "left" i right 10
+                    DIV // digits "left" i right/10
+                    SWAP // digits "left" right/10 i
+                    INC // digits "left" right/10 i+1
+                    SWAP // digits "left" i+1 right/10
+                }>CONT
+                WHILE // digits "left" i right
+                <{
+                    // x
+                    NEWC // x b
+                    SWAP // b x
+                    <{
+                        // b x
+                        10 PUSHINT DIVMOD // b x/10 x%10 
+                        48 ADDCONST // b x/10 (x%10+48)
+                        s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                    }>CONT UNTIL
+                    // ... b x
+                    DROP // ... b
+                    DEPTH DEC DUP // ... b n n
+                    ROTREV // ... n b n
+                    <{
+                        // ... c n b
+                        s1 s2 XCHG // ... n c b
+                        8 STU // ... n b
+                    }>CONT REPEAT // n b
+                }>CONT 1 2 CALLXARGS
+                // digits "left" i right_digits "right"
+                ROTREV // digits "left" "right" i right_digits
+                ADD // digits "left" "right" right_digits
+                s3 s1 XCHG // "right" "left" digits right_digits
+                SUB // "right" "left" digits_diff
+                SWAP // "right" digits_diff "left"
+                x{2e} STSLICECONST // "right" digits_diff "left."
+                SWAP // "right" "left." digits_diff
+                <{
+                    // "right" "left."
+                    x{30} STSLICECONST // "right" "left.0"
+                }>CONT REPEAT // "right" "left.000"
+                STB // "left.000right"
+            }>CONT
+            IFELSE // b
+            ENDC CTOS // s
+            B{b5ee9c7241010101001e00003864756d7028283432292e746f466c6f6174537472696e67282d31292907e56293} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a36393a31333a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      60204 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        42 PUSHINT
+        78 PUSHINT
+            DUP // x digits digits
+            1 LESSINT // x digits digits<=0
+            134 THROWIF // x digits
+            DUP // x digits digits
+            77 GTINT // x digits digits>77
+            134 THROWIF // x digits
+            NEWC // x digits b
+            ROTREV // b x digits
+            s1 PUSH // b x digits x
+            0 LESSINT // b x digits x<0?
+            <{
+                // b x digits
+                ROT // x digits b
+                x{2d} STSLICECONST // x digits b
+                ROT // digits b x
+                NEGATE // digits b -x
+                ROT // b -x digits
+            }>CONT IF
+            // b x digits
+            ONE // b x digits 1
+            OVER // b x digits 1 digits
+            <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+            s1 s2 XCHG // b digits x 10^digits
+            DIVMOD // b digits left right
+            s3 s3 XCHG2 // right digits b left
+            <{
+                // b x
+                <{
+                    // b x
+                    10 PUSHINT DIVMOD // b x/10 x%10 
+                    48 ADDCONST // b x/10 (x%10+48)
+                    s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                }>CONT UNTIL
+                // ... b x
+                DROP // ... b
+                DEPTH DEC // ... b n
+                <{ 8 STU }>CONT REPEAT // b
+            }>CONT 2 1 CALLXARGS
+            // right digits "left"
+            ROT // digits "left" right
+            DUP // digits "left" right right
+            ISZERO // digits "left" right right==0?
+            <{
+                // digits "left" right
+                DROP // digits "left"
+                NIP // "left"
+            }>CONT
+            <{
+                // digits "left" right
+                ZERO // digits "left" right 0
+                SWAP // digits "left" 0 right
+                <{
+                    // digits "left" i right
+                    DUP // digits "left" i right right
+                    10 PUSHINT // digits "left" i right right 10
+                    MOD // digits "left" i right right%10
+                    ISZERO // digits "left" i right right%10==0?
+                }>CONT
+                <{
+                    // digits "left" i right
+                    10 PUSHINT // digits "left" i right 10
+                    DIV // digits "left" i right/10
+                    SWAP // digits "left" right/10 i
+                    INC // digits "left" right/10 i+1
+                    SWAP // digits "left" i+1 right/10
+                }>CONT
+                WHILE // digits "left" i right
+                <{
+                    // x
+                    NEWC // x b
+                    SWAP // b x
+                    <{
+                        // b x
+                        10 PUSHINT DIVMOD // b x/10 x%10 
+                        48 ADDCONST // b x/10 (x%10+48)
+                        s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+                    }>CONT UNTIL
+                    // ... b x
+                    DROP // ... b
+                    DEPTH DEC DUP // ... b n n
+                    ROTREV // ... n b n
+                    <{
+                        // ... c n b
+                        s1 s2 XCHG // ... n c b
+                        8 STU // ... n b
+                    }>CONT REPEAT // n b
+                }>CONT 1 2 CALLXARGS
+                // digits "left" i right_digits "right"
+                ROTREV // digits "left" "right" i right_digits
+                ADD // digits "left" "right" right_digits
+                s3 s1 XCHG // "right" "left" digits right_digits
+                SUB // "right" "left" digits_diff
+                SWAP // "right" digits_diff "left"
+                x{2e} STSLICECONST // "right" digits_diff "left."
+                SWAP // "right" "left." digits_diff
+                <{
+                    // "right" "left."
+                    x{30} STSLICECONST // "right" "left.0"
+                }>CONT REPEAT // "right" "left.000"
+                STB // "left.000right"
+            }>CONT
+            IFELSE // b
+            ENDC CTOS // s
+            B{b5ee9c7241010101001e00003864756d7028283432292e746f466c6f6174537472696e672837382929e6b835ae} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a37383a31333a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      43850 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        1 3 BLKDROP2
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        DROP
+            <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+            NEWC
+            STREF
+        $Builder$_fun_asSlice INLINECALLDICT
+        dns_internal_normalize INLINECALLDICT
+            B{b5ee9c7241010101002a00005064756d7028646e73496e7465726e616c4e6f726d616c697a6528736c6963655769746852656629290738a346} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a38393a31333a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      20158 PUSHINT
+      SWAP
+      THROWANYIFNOT
+      134 THROW
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    35101883129408859399717237550012677124293950171554014589897186228071481079252 PUSHINT
+    EQUAL
+    IFJMP:<{
+      134 PUSHINT
+      2DUP
+      TRUE
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        -1 PUSHINT
+            NEWC
+        5 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        0 PUSHINT
+        SWAP
+        256 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3131353a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      28760 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        0 PUSHINT
+            NEWC
+        5 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        s1 s(-1) PUXC
+        256 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3133303a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      41357 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        1 PUSHINT
+            NEWC
+        5 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        0 PUSHINT
+        SWAP
+        256 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3134353a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      61605 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        0 PUSHINT
+            NEWC
+        4 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        s1 s(-1) PUXC
+        42 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3136303a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      37468 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        -1 PUSHINT
+            NEWC
+        4 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        0 PUSHINT
+        SWAP
+        42 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3137353a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      49334 PUSHINT
+      OVER
+      THROWANYIFNOT
+      s2 s1 s(-2) PU2XC
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        s0 s2 PUSH2
+        NEQ
+        1 3 BLKDROP2
+        THROWANYIF
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      3 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        DROP
+        1 PUSHINT
+            NEWC
+        4 PUSHINT
+        SWAP
+        3 STU
+        s1 s(-1) PUXC
+        8 STI
+        0 PUSHINT
+        SWAP
+        42 STU
+        $Builder$_fun_asSlice INLINECALLDICT
+        SWAP
+        $Slice$_fun_asAddress INLINECALLDICT
+            B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f657869742d636f6465732f636f6e7472616374732f746163742d72657365727665642d636f6e74726163742d6572726f72732e746163743a3139303a31333a} PUSHSLICE
+        __tact_debug_address INLINECALLDICT
+        FALSE
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      53355 PUSHINT
+      SWAP
+      THROWANYIFNOT
+      134 THROW
+      $ReservedContractErrorsTester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

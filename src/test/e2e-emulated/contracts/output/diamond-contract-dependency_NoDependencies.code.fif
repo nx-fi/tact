@@ -1,0 +1,115 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/diamond-contract-dependency_NoDependencies.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $StateInit$_to_external
+  DECLPROC $NoDependencies$init$_store
+  DECLPROC $NoDependencies$_contract_init
+  DECLPROC $NoDependencies$_contract_load
+  DECLPROC $NoDependencies$_contract_store
+  DECLPROC $NoDependencies$_init_child
+  DECLPROC $NoDependencies$_fun_getState
+  124033 DECLMETHOD %getState
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $NoDependencies$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $NoDependencies$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $NoDependencies$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $NoDependencies$_contract_init INLINECALLDICT
+  }>
+  $NoDependencies$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $NoDependencies$_init_child PROCREF:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $NoDependencies$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $NoDependencies$_fun_getState PROCREF:<{
+    $NoDependencies$_init_child INLINECALLDICT
+  }>
+  %getState PROC:<{
+    $NoDependencies$_contract_load INLINECALLDICT
+    $NoDependencies$_fun_getState INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $NoDependencies$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $NoDependencies$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

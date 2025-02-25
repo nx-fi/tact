@@ -1,0 +1,227 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/send-modes/contracts/output/message-mode-tester_Calculator.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get_sender
+  DECLPROC $AverageRequest$_load_without_opcode
+  DECLPROC $AverageResult$_store
+  DECLPROC $AverageResult$_store_cell
+  DECLPROC $Calculator$_contract_init
+  DECLPROC $Calculator$_contract_load
+  DECLPROC $Calculator$_contract_store
+  DECLPROC $SendParameters$_constructor_to_bounce_value_body
+  DECLPROC $AverageResult$_constructor_res
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $AverageRequest$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    32 LDU
+    257 PUSHINT
+    LDIX
+    3 -ROLL
+  }>
+  $AverageResult$_store PROCINLINE:<{
+    23842436 PUSHINT
+    ROT
+    32 STU
+    32 STU
+  }>
+  $AverageResult$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $AverageResult$_store INLINECALLDICT
+    ENDC
+  }>
+  $Calculator$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Calculator$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IFJMP:<{
+      PUSHNULL
+    }>
+    $Calculator$_contract_init INLINECALLDICT
+  }>
+  $Calculator$_contract_store PROCINLINE:<{
+    DROP
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    ENDC
+    c4 POP
+  }>
+  $SendParameters$_constructor_to_bounce_value_body PROCINLINE:<{
+    0 PUSHINT
+    s3 s4 XCHG2
+    PUSHNULL
+    s0 s3 XCHG
+    PUSHNULL
+    s2 s3 XCHG2
+  }>
+  $AverageResult$_constructor_res PROCINLINE:<{
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Calculator$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    3337606158 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $AverageRequest$_load_without_opcode INLINECALLDICT
+      s3 POP
+      25459 PUSHINT
+      s1 s2 PUSH2
+      SUB
+      -1 GTINT
+      THROWANYIFNOT
+      s0 s1 PUSH2
+      SUB
+      INC
+      0 PUSHINT
+      WHILE:<{
+        2OVER
+        LEQ
+      }>DO<{
+        s3 PUSH
+        ADD
+        s0 s3 XCHG
+        INC
+        s0 s3 XCHG
+      }>
+      s3 POP
+      NIP
+      DIV
+      __tact_context_get_sender INLINECALLDICT
+      FALSE
+      s0 s2 XCHG
+      $AverageResult$_constructor_res INLINECALLDICT
+      $AverageResult$_store_cell INLINECALLDICT
+      s1 s3 XCHG
+      $SendParameters$_constructor_to_bounce_value_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+          STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          // Group 2: Placing the Builder after code and data, then checking those for nullability
+          s2 XCHG0
+          DUP2
+          ISNULL
+          SWAP
+          ISNULL
+          MUL // note that -1 * -1 wraps back to -1
+          // → Stack state
+          // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+          // s1: `code`
+          // s2: `data`
+          // s3: Builder
+          // s4: `body`
+          // s5: `mode`
+          // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+          <{
+              DROP2 // drop `data` and `code`, since either of those is null
+              b{0} STSLICECONST
+          }> PUSHCONT
+          // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+          <{
+              // _ split_depth:(Maybe (## 5))
+              //   special:(Maybe TickTock)
+              //   code:(Maybe ^Cell)
+              //   data:(Maybe ^Cell)
+              //   library:(Maybe ^Cell)
+              // = StateInit;
+              ROT                // place message Builder on top
+              b{10} STSLICECONST // store Maybe = true, Either = false
+              // Start composing inlined StateInit
+              b{00} STSLICECONST // store split_depth and special first
+              STDICT             // store code
+              STDICT             // store data
+              b{0} STSLICECONST  // store library
+          }> PUSHCONT
+          // Group 3: IFELSE that does the branching shown above
+          IFELSE
+          // → Stack state
+          // s0: Builder
+          // s1: null or StateInit
+          // s2: `body`
+          // s3: `mode`
+          // Group 4: Finalizing the message
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC
+          // → Stack state
+          // s0: Cell
+          // s1: `mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+      $Calculator$_contract_store INLINECALLDICT
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $Calculator$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

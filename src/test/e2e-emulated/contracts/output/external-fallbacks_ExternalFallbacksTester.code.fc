@@ -1,0 +1,192 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; external-fallbacks_ExternalFallbacksTester.headers.fc
+;;
+;; Header files for ExternalFallbacksTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Add$_load_without_opcode
+(slice, ((int))) $Add$_load_without_opcode(slice sc_0) inline;
+
+;; $ExternalFallbacksTester$_store
+builder $ExternalFallbacksTester$_store(builder build_0, (int) v) inline;
+
+;; $ExternalFallbacksTester$_load
+(slice, ((int))) $ExternalFallbacksTester$_load(slice sc_0) inline;
+
+;; $ExternalFallbacksTester$_contract_init
+(int) $ExternalFallbacksTester$_contract_init() impure inline;
+
+;; $ExternalFallbacksTester$_contract_load
+(int) $ExternalFallbacksTester$_contract_load() impure inline_ref;
+
+;; $ExternalFallbacksTester$_contract_store
+() $ExternalFallbacksTester$_contract_store((int) v) impure inline;
+
+;; $ExternalFallbacksTester$_fun_getA
+((int), int) $ExternalFallbacksTester$_fun_getA((int) $self) impure inline_ref;
+
+
+;; external-fallbacks_ExternalFallbacksTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+() $global_acceptMessage() impure asm """
+    ACCEPT
+""";
+
+;; external-fallbacks_ExternalFallbacksTester.storage.fc
+;;
+;; Type: Add
+;; Header: 0x8fca5535
+;; TLB: add#8fca5535 x:uint32 = Add
+;;
+
+(slice, ((int))) $Add$_load_without_opcode(slice sc_0) inline {
+    var v'x = sc_0~load_uint(32);
+    return (sc_0, (v'x));
+}
+
+;;
+;; Type: ExternalFallbacksTester
+;;
+
+builder $ExternalFallbacksTester$_store(builder build_0, (int) v) inline {
+    var (v'a) = v;
+    build_0 = build_0.store_int(v'a, 257);
+    return build_0;
+}
+
+(slice, ((int))) $ExternalFallbacksTester$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(257);
+    return (sc_0, (v'a));
+}
+
+(int) $ExternalFallbacksTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ExternalFallbacksTester$_load();
+    } else {
+        return $ExternalFallbacksTester$_contract_init();
+    }
+}
+
+() $ExternalFallbacksTester$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ExternalFallbacksTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ExternalFallbacksTester functions
+;;
+
+(int) $ExternalFallbacksTester$_contract_init() impure inline {
+    var (($self'a)) = (null());
+    $self'a = 100;
+    return ($self'a);
+}
+
+((int), int) $ExternalFallbacksTester$_fun_getA((int) $self) impure inline_ref {
+    var (($self'a)) = $self;
+    var $fresh$ret_292 = $self'a;
+    return (($self'a), $fresh$ret_292);
+}
+
+;;
+;; Get methods of a Contract ExternalFallbacksTester
+;;
+
+_ %getA() method_id(123932) {
+    var self = $ExternalFallbacksTester$_contract_load();
+    var res = self~$ExternalFallbacksTester$_fun_getA();
+    return res;
+}
+
+;;
+;; Routing of a Contract ExternalFallbacksTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'a) = $ExternalFallbacksTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive Add message
+    if (op == 2412401973) {
+        var ($msg'x) = in_msg~$Add$_load_without_opcode();
+        $self'a = $self'a + $msg'x;
+        ;; Persist state
+        $ExternalFallbacksTester$_contract_store(($self'a));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $ExternalFallbacksTester$_contract_store(($self'a));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() recv_external(slice in_msg) impure {
+    ;; Load contract data
+    var ($self'a) = $ExternalFallbacksTester$_contract_load();
+    
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    ;; Receive Add message
+    if (op == 2412401973) {
+        in_msg~skip_bits(32);
+        var ($msg'x) = in_msg~$Add$_load_without_opcode();
+        $global_acceptMessage();
+        $self'a = $self'a + $msg'x;
+        ;; Persist state
+        $ExternalFallbacksTester$_contract_store(($self'a));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        $global_acceptMessage();
+        $self'a = $self'a + 100;
+        ;; Persist state
+        $ExternalFallbacksTester$_contract_store(($self'a));
+        return ();
+    }
+    ;; Receiver fallback
+    slice $s = in_msg;
+    $global_acceptMessage();
+    $self'a = $self'a + 100;
+    ;; Persist state
+    $ExternalFallbacksTester$_contract_store(($self'a));
+    return ();
+}

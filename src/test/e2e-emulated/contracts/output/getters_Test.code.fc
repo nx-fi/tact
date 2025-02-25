@@ -1,0 +1,594 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; getters_Test.headers.fc
+;;
+;; Header files for Test
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $SetIdAndData$_load_without_opcode
+(slice, ((int, cell))) $SetIdAndData$_load_without_opcode(slice sc_0) inline;
+
+;; $Test$_store
+builder $Test$_store(builder build_0, (int, cell) v) inline;
+
+;; $Test$_load
+(slice, ((int, cell))) $Test$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $S$_from_tuple
+(int, int) $S$_from_tuple(tuple v) inline;
+
+;; $S$_to_external
+(int, int) $S$_to_external(((int, int)) v) inline;
+
+;; $SetIdAndData$_from_tuple
+(int, cell) $SetIdAndData$_from_tuple(tuple v) inline;
+
+;; $SetIdAndData$_to_external
+(int, cell) $SetIdAndData$_to_external(((int, cell)) v) inline;
+
+;; $Test$_from_tuple
+(int, cell) $Test$_from_tuple(tuple v) inline;
+
+;; $Test$_to_external
+(int, cell) $Test$_to_external(((int, cell)) v) inline;
+
+;; $Test$_contract_init
+(int, cell) $Test$_contract_init() impure inline;
+
+;; $Test$_contract_load
+(int, cell) $Test$_contract_load() impure inline_ref;
+
+;; $Test$_contract_store
+() $Test$_contract_store((int, cell) v) impure inline;
+
+;; $Test$_fun_testGetter
+((int, cell), int) $Test$_fun_testGetter((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_test_getter
+((int, cell), int) $Test$_fun_test_getter((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_Test_getter
+((int, cell), int) $Test$_fun_Test_getter((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_contractData
+((int, cell), (int, cell)) $Test$_fun_contractData((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_structAsInput
+((int, cell), (int, int)) $Test$_fun_structAsInput((int, cell) $self, (int, int) $s) impure inline_ref;
+
+;; $Test$_fun_messageAsInput1
+((int, cell), int) $Test$_fun_messageAsInput1((int, cell) $self, (int, cell) $m) impure inline_ref;
+
+;; $Test$_fun_messageAsInput2
+((int, cell), (int, cell)) $Test$_fun_messageAsInput2((int, cell) $self, (int, cell) $m) impure inline_ref;
+
+;; $Test$_fun_contractAsInput
+((int, cell), (int, cell)) $Test$_fun_contractAsInput((int, cell) $self, (int, cell) $test) impure inline_ref;
+
+;; $Test$_fun_methodIdExpr
+((int, cell), int) $Test$_fun_methodIdExpr((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_methodIdConst
+((int, cell), int) $Test$_fun_methodIdConst((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_methodIdMin
+((int, cell), int) $Test$_fun_methodIdMin((int, cell) $self) impure inline_ref;
+
+;; $Test$_fun_methodIdMax
+((int, cell), int) $Test$_fun_methodIdMax((int, cell) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $Test$_fun_forward
+((int, cell), ()) $Test$_fun_forward((int, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $Test$_fun_notify
+((int, cell), ()) $Test$_fun_notify((int, cell) $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+
+;; getters_Test.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+((int, cell), ()) $Test$_fun_forward((int, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return (($self'id, $self'anotherData), ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return (($self'id, $self'anotherData), ());
+}
+
+((int, cell), ()) $Test$_fun_notify((int, cell) $self, cell $body) impure inline {
+    var (($self'id, $self'anotherData)) = $self;
+    ($self'id, $self'anotherData)~$Test$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'id, $self'anotherData), ());
+}
+
+;; getters_Test.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: S
+;; TLB: _ a:int257 b:int257 = S
+;;
+
+(int, int) $S$_from_tuple(tuple v) inline {
+    var (int v'a, int v'b) = __tact_tuple_destroy_2(v);
+    return (v'a, v'b);
+}
+
+(int, int) $S$_to_external(((int, int)) v) inline {
+    var (v'a, v'b) = v; 
+    return (v'a, v'b);
+}
+
+;;
+;; Type: SetIdAndData
+;; Header: 0x681868bd
+;; TLB: set_id_and_data#681868bd id:int257 data:^cell = SetIdAndData
+;;
+
+(slice, ((int, cell))) $SetIdAndData$_load_without_opcode(slice sc_0) inline {
+    var v'id = sc_0~load_int(257);
+    var v'data = sc_0~load_ref();
+    return (sc_0, (v'id, v'data));
+}
+
+(int, cell) $SetIdAndData$_from_tuple(tuple v) inline {
+    var (int v'id, cell v'data) = __tact_tuple_destroy_2(v);
+    return (v'id, v'data);
+}
+
+(int, cell) $SetIdAndData$_to_external(((int, cell)) v) inline {
+    var (v'id, v'data) = v; 
+    return (v'id, v'data);
+}
+
+;;
+;; Type: Test
+;;
+
+builder $Test$_store(builder build_0, (int, cell) v) inline {
+    var (v'id, v'anotherData) = v;
+    build_0 = build_0.store_uint(v'id, 32);
+    build_0 = build_0.store_ref(v'anotherData);
+    return build_0;
+}
+
+(slice, ((int, cell))) $Test$_load(slice sc_0) inline {
+    var v'id = sc_0~load_uint(32);
+    var v'anotherData = sc_0~load_ref();
+    return (sc_0, (v'id, v'anotherData));
+}
+
+(int, cell) $Test$_from_tuple(tuple v) inline {
+    var (int v'id, cell v'anotherData) = __tact_tuple_destroy_2(v);
+    return (v'id, v'anotherData);
+}
+
+(int, cell) $Test$_to_external(((int, cell)) v) inline {
+    var (v'id, v'anotherData) = v; 
+    return (v'id, v'anotherData);
+}
+
+(int, cell) $Test$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Test$_load();
+    } else {
+        return $Test$_contract_init();
+    }
+}
+
+() $Test$_contract_store((int, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Test$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Test functions
+;;
+
+(int, cell) $Test$_contract_init() impure inline {
+    var (($self'id, $self'anotherData)) = (0, null());
+    $self'anotherData = $Builder$_fun_endCell($global_beginCell());
+    return ($self'id, $self'anotherData);
+}
+
+((int, cell), int) $Test$_fun_testGetter((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_293 = 1;
+    return (($self'id, $self'anotherData), $fresh$ret_293);
+}
+
+((int, cell), int) $Test$_fun_test_getter((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_294 = 2;
+    return (($self'id, $self'anotherData), $fresh$ret_294);
+}
+
+((int, cell), int) $Test$_fun_Test_getter((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_295 = 3;
+    return (($self'id, $self'anotherData), $fresh$ret_295);
+}
+
+((int, cell), (int, cell)) $Test$_fun_contractData((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_296 = ($self'id, $self'anotherData);
+    return (($self'id, $self'anotherData), $fresh$ret_296);
+}
+
+((int, cell), (int, int)) $Test$_fun_structAsInput((int, cell) $self, (int, int) $s) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var (($s'a, $s'b)) = $s;
+    var $fresh$ret_297 = ($s'a, $s'b);
+    return (($self'id, $self'anotherData), $fresh$ret_297);
+}
+
+((int, cell), int) $Test$_fun_messageAsInput1((int, cell) $self, (int, cell) $m) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var (($m'id, $m'data)) = $m;
+    var $fresh$ret_298 = $m'id;
+    return (($self'id, $self'anotherData), $fresh$ret_298);
+}
+
+((int, cell), (int, cell)) $Test$_fun_messageAsInput2((int, cell) $self, (int, cell) $m) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var (($m'id, $m'data)) = $m;
+    var $fresh$ret_299 = ($m'id, $m'data);
+    return (($self'id, $self'anotherData), $fresh$ret_299);
+}
+
+((int, cell), (int, cell)) $Test$_fun_contractAsInput((int, cell) $self, (int, cell) $test) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var (($test'id, $test'anotherData)) = $test;
+    var $fresh$ret_300 = ($test'id, $test'anotherData);
+    return (($self'id, $self'anotherData), $fresh$ret_300);
+}
+
+((int, cell), int) $Test$_fun_methodIdExpr((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_301 = true;
+    return (($self'id, $self'anotherData), $fresh$ret_301);
+}
+
+((int, cell), int) $Test$_fun_methodIdConst((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_302 = 16384;
+    return (($self'id, $self'anotherData), $fresh$ret_302);
+}
+
+((int, cell), int) $Test$_fun_methodIdMin((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_303 = true;
+    return (($self'id, $self'anotherData), $fresh$ret_303);
+}
+
+((int, cell), int) $Test$_fun_methodIdMax((int, cell) $self) impure inline_ref {
+    var (($self'id, $self'anotherData)) = $self;
+    var $fresh$ret_304 = true;
+    return (($self'id, $self'anotherData), $fresh$ret_304);
+}
+
+;;
+;; Get methods of a Contract Test
+;;
+
+_ %testGetter() method_id(97823) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_testGetter();
+    return res;
+}
+
+_ %test_getter() method_id(111014) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_test_getter();
+    return res;
+}
+
+_ %Test_getter() method_id(72668) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_Test_getter();
+    return res;
+}
+
+_ %contractData() method_id(71601) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_contractData();
+    return $Test$_to_external(res);
+}
+
+_ %structAsInput(tuple $s) method_id(128711) {
+    (int, int) $s = $S$_from_tuple($s);
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_structAsInput($s);
+    return $S$_to_external(res);
+}
+
+_ %messageAsInput1(tuple $m) method_id(122562) {
+    (int, cell) $m = $SetIdAndData$_from_tuple($m);
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_messageAsInput1($m);
+    return res;
+}
+
+_ %messageAsInput2(tuple $m) method_id(126625) {
+    (int, cell) $m = $SetIdAndData$_from_tuple($m);
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_messageAsInput2($m);
+    return $SetIdAndData$_to_external(res);
+}
+
+_ %contractAsInput(tuple $test) method_id(125793) {
+    (int, cell) $test = $Test$_from_tuple($test);
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_contractAsInput($test);
+    return $Test$_to_external(res);
+}
+
+_ %methodIdExpr() method_id(45032) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_methodIdExpr();
+    return res;
+}
+
+_ %methodIdConst() method_id(16384) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_methodIdConst();
+    return res;
+}
+
+_ %methodIdMin() method_id(-262144) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_methodIdMin();
+    return res;
+}
+
+_ %methodIdMax() method_id(262143) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_methodIdMax();
+    return res;
+}
+
+;;
+;; Routing of a Contract Test
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'id, $self'anotherData) = $Test$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var (op, _) = in_msg~load_uint_quiet(32);
+    ;; Receive SetIdAndData message
+    if (op == 1746430141) {
+        var ($msg'id, $msg'data) = in_msg~$SetIdAndData$_load_without_opcode();
+        $self'id = $msg'id;
+        $self'anotherData = $msg'data;
+        ;; Persist state
+        $Test$_contract_store(($self'id, $self'anotherData));
+        return ();
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+        ($self'id, $self'anotherData)~$Test$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+        ;; Persist state
+        $Test$_contract_store(($self'id, $self'anotherData));
+        return ();
+    }
+    
+    throw(130);
+}

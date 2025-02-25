@@ -1,0 +1,211 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; wallet-opt_Wallet.headers.fc
+;;
+;; Header files for Wallet
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $TransferMessage$_load_without_opcode
+(slice, ((slice, slice))) $TransferMessage$_load_without_opcode(slice sc_0) inline;
+
+;; $Wallet$_store
+builder $Wallet$_store(builder build_0, (int, int, int) v) inline;
+
+;; $Wallet$_load
+(slice, ((int, int, int))) $Wallet$_load(slice sc_0) inline;
+
+;; $Wallet$init$_load
+(slice, ((int, int))) $Wallet$init$_load(slice sc_0) inline;
+
+;; $Wallet$_contract_init
+(int, int, int) $Wallet$_contract_init(int $key, int $walletId) impure inline;
+
+;; $Wallet$_contract_load
+(int, int, int) $Wallet$_contract_load() impure inline_ref;
+
+;; $Wallet$_contract_store
+() $Wallet$_contract_store((int, int, int) v) impure inline;
+
+;; $Wallet$_fun_publicKey
+((int, int, int), int) $Wallet$_fun_publicKey((int, int, int) $self) impure inline_ref;
+
+;; $Wallet$_fun_walletId
+((int, int, int), int) $Wallet$_fun_walletId((int, int, int) $self) impure inline_ref;
+
+;; $Wallet$_fun_seqno
+((int, int, int), int) $Wallet$_fun_seqno((int, int, int) $self) impure inline_ref;
+
+
+;; wallet-opt_Wallet.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int $global_checkSignature(int $hash, slice $signature, int $public_key) impure asm """
+    CHKSIGNU
+""";
+
+() $global_nativeSendMessage(cell $cell, int $mode) impure asm """
+    SENDRAWMSG
+""";
+
+(slice, cell) $Slice$_fun_loadRef(slice $self) impure asm( -> 1 0) """
+    LDREF
+""";
+
+int $Slice$_fun_hash(slice $self) impure asm """
+    HASHSU
+""";
+
+;; wallet-opt_Wallet.storage.fc
+;;
+;; Type: TransferMessage
+;; Header: 0xd3817806
+;; TLB: transfer_message#d3817806 signature:fixed_bytes64 transfer:remainder<slice> = TransferMessage
+;;
+
+(slice, ((slice, slice))) $TransferMessage$_load_without_opcode(slice sc_0) inline {
+    var v'signature = sc_0~load_bits(512);
+    var v'transfer = sc_0;
+    return (sc_0, (v'signature, v'transfer));
+}
+
+;;
+;; Type: Wallet
+;;
+
+builder $Wallet$_store(builder build_0, (int, int, int) v) inline {
+    var (v'seqno, v'key, v'walletId) = v;
+    build_0 = build_0.store_uint(v'seqno, 32);
+    build_0 = build_0.store_uint(v'key, 256);
+    build_0 = build_0.store_uint(v'walletId, 64);
+    return build_0;
+}
+
+(slice, ((int, int, int))) $Wallet$_load(slice sc_0) inline {
+    var v'seqno = sc_0~load_uint(32);
+    var v'key = sc_0~load_uint(256);
+    var v'walletId = sc_0~load_uint(64);
+    return (sc_0, (v'seqno, v'key, v'walletId));
+}
+
+(slice, ((int, int))) $Wallet$init$_load(slice sc_0) inline {
+    var v'key = sc_0~load_int(257);
+    var v'walletId = sc_0~load_int(257);
+    return (sc_0, (v'key, v'walletId));
+}
+
+(int, int, int) $Wallet$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Wallet$_load();
+    } else {
+        (int $key, int $walletId) = $sc~$Wallet$init$_load();
+        $sc.end_parse();
+        return $Wallet$_contract_init($key, $walletId);
+    }
+}
+
+() $Wallet$_contract_store((int, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Wallet$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Wallet functions
+;;
+
+(int, int, int) $Wallet$_contract_init(int $key, int $walletId) impure inline {
+    var (($self'seqno, $self'key, $self'walletId)) = (0, null(), null());
+    $self'key = $key;
+    $self'walletId = $walletId;
+    return ($self'seqno, $self'key, $self'walletId);
+}
+
+((int, int, int), int) $Wallet$_fun_publicKey((int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'key, $self'walletId)) = $self;
+    var $fresh$ret_49 = $self'key;
+    return (($self'seqno, $self'key, $self'walletId), $fresh$ret_49);
+}
+
+((int, int, int), int) $Wallet$_fun_walletId((int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'key, $self'walletId)) = $self;
+    var $fresh$ret_50 = $self'walletId;
+    return (($self'seqno, $self'key, $self'walletId), $fresh$ret_50);
+}
+
+((int, int, int), int) $Wallet$_fun_seqno((int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'key, $self'walletId)) = $self;
+    var $fresh$ret_51 = $self'seqno;
+    return (($self'seqno, $self'key, $self'walletId), $fresh$ret_51);
+}
+
+;;
+;; Get methods of a Contract Wallet
+;;
+
+_ %publicKey() method_id(86520) {
+    var self = $Wallet$_contract_load();
+    var res = self~$Wallet$_fun_publicKey();
+    return res;
+}
+
+_ %walletId() method_id(114762) {
+    var self = $Wallet$_contract_load();
+    var res = self~$Wallet$_fun_walletId();
+    return res;
+}
+
+_ %seqno() method_id(85143) {
+    var self = $Wallet$_contract_load();
+    var res = self~$Wallet$_fun_seqno();
+    return res;
+}
+
+;;
+;; Routing of a Contract Wallet
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'seqno, $self'key, $self'walletId) = $Wallet$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var (op, _) = in_msg~load_uint_quiet(32);
+    ;; Receive TransferMessage message
+    if (op == 3548477446) {
+        var ($msg'signature, $msg'transfer) = in_msg~$TransferMessage$_load_without_opcode();
+        int $op_hash = $Slice$_fun_hash($msg'transfer);
+        throw_unless(48401, $global_checkSignature($op_hash, $msg'signature, $self'key));
+        slice $pkg = $msg'transfer;
+        int $seqno = $pkg~load_int(32);
+        int $mode = $pkg~load_int(8);
+        cell $body = $pkg~$Slice$_fun_loadRef();
+        throw_unless(17654, ($seqno == $self'seqno));
+        $self'seqno = (($self'seqno + 1) % 65536);
+        $global_nativeSendMessage($body, $mode);
+        ;; Persist state
+        $Wallet$_contract_store(($self'seqno, $self'key, $self'walletId));
+        return ();
+    }
+    
+    throw(130);
+}

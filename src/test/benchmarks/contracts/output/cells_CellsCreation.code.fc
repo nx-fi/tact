@@ -1,0 +1,132 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; cells_CellsCreation.headers.fc
+;;
+;; Header files for CellsCreation
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $CellsCreation$_contract_init
+tuple $CellsCreation$_contract_init() impure inline;
+
+;; $CellsCreation$_contract_load
+tuple $CellsCreation$_contract_load() impure inline_ref;
+
+;; $CellsCreation$_contract_store
+() $CellsCreation$_contract_store(tuple v) impure inline;
+
+;; $CellsCreation$_fun_emptyCell
+(tuple, cell) $CellsCreation$_fun_emptyCell(tuple $self) impure inline_ref;
+
+;; $CellsCreation$_fun_emptySlice
+(tuple, slice) $CellsCreation$_fun_emptySlice(tuple $self) impure inline_ref;
+
+
+;; cells_CellsCreation.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+cell $global_emptyCell() impure asm """
+    <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+""";
+
+slice $global_emptySlice() impure asm """
+    b{} PUSHSLICE
+""";
+
+;; cells_CellsCreation.storage.fc
+;;
+;; Type: CellsCreation
+;;
+
+tuple $CellsCreation$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $CellsCreation$_contract_init();
+    }
+}
+
+() $CellsCreation$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract CellsCreation functions
+;;
+
+tuple $CellsCreation$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, cell) $CellsCreation$_fun_emptyCell(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_4 = $global_emptyCell();
+    return ($self, $fresh$ret_4);
+}
+
+(tuple, slice) $CellsCreation$_fun_emptySlice(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_5 = $global_emptySlice();
+    return ($self, $fresh$ret_5);
+}
+
+;;
+;; Get methods of a Contract CellsCreation
+;;
+
+_ %emptyCell() method_id(81957) {
+    var self = $CellsCreation$_contract_load();
+    var res = self~$CellsCreation$_fun_emptyCell();
+    return res;
+}
+
+_ %emptySlice() method_id(89380) {
+    var self = $CellsCreation$_contract_load();
+    var res = self~$CellsCreation$_fun_emptySlice();
+    return res;
+}
+
+;;
+;; Routing of a Contract CellsCreation
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $CellsCreation$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $CellsCreation$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

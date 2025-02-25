@@ -1,0 +1,174 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; repeat-range_RepeatRangeTester.headers.fc
+;;
+;; Header files for RepeatRangeTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $RepeatRangeTester$_contract_init
+tuple $RepeatRangeTester$_contract_init() impure inline;
+
+;; $RepeatRangeTester$_contract_load
+tuple $RepeatRangeTester$_contract_load() impure inline_ref;
+
+;; $RepeatRangeTester$_contract_store
+() $RepeatRangeTester$_contract_store(tuple v) impure inline;
+
+;; $RepeatRangeTester$_fun_testIgnoredRange
+(tuple, int) $RepeatRangeTester$_fun_testIgnoredRange(tuple $self) impure inline_ref;
+
+;; $RepeatRangeTester$_fun_testInvalidRange
+(tuple, int) $RepeatRangeTester$_fun_testInvalidRange(tuple $self) impure inline_ref;
+
+;; $RepeatRangeTester$_fun_testMinEffectiveRange
+(tuple, int) $RepeatRangeTester$_fun_testMinEffectiveRange(tuple $self) impure inline_ref;
+
+
+;; repeat-range_RepeatRangeTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; repeat-range_RepeatRangeTester.storage.fc
+;;
+;; Type: RepeatRangeTester
+;;
+
+tuple $RepeatRangeTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $RepeatRangeTester$_contract_init();
+    }
+}
+
+() $RepeatRangeTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract RepeatRangeTester functions
+;;
+
+tuple $RepeatRangeTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $RepeatRangeTester$_fun_testIgnoredRange(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $counter = 0;
+    repeat (-115792089237316195423570985008687907853269984665640564039457584007913129639936) {
+        $counter = $counter + 1;
+    }
+    repeat (-1) {
+        $counter = $counter + 1;
+    }
+    repeat (0) {
+        $counter = $counter + 1;
+    }
+    var $fresh$ret_1922 = ($counter == 0);
+    return ($self, $fresh$ret_1922);
+}
+
+(tuple, int) $RepeatRangeTester$_fun_testInvalidRange(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    try {
+        int $counter = 0;
+        repeat (2147483648) {
+            $counter = $counter + 1;
+        }
+        var $fresh$ret_1923 = false;
+        return ($self, $fresh$ret_1923);
+    } catch (_, $exitCode) {
+        var $fresh$ret_1924 = ($exitCode == 5);
+        return ($self, $fresh$ret_1924);
+    }
+}
+
+(tuple, int) $RepeatRangeTester$_fun_testMinEffectiveRange(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $counter = 0;
+    repeat (1) {
+        $counter = $counter + 1;
+    }
+    var $fresh$ret_1925 = ($counter == 1);
+    return ($self, $fresh$ret_1925);
+}
+
+;;
+;; Get methods of a Contract RepeatRangeTester
+;;
+
+_ %testIgnoredRange() method_id(106114) {
+    var self = $RepeatRangeTester$_contract_load();
+    var res = self~$RepeatRangeTester$_fun_testIgnoredRange();
+    return res;
+}
+
+_ %testInvalidRange() method_id(112673) {
+    var self = $RepeatRangeTester$_contract_load();
+    var res = self~$RepeatRangeTester$_fun_testInvalidRange();
+    return res;
+}
+
+_ %testMinEffectiveRange() method_id(129920) {
+    var self = $RepeatRangeTester$_contract_load();
+    var res = self~$RepeatRangeTester$_fun_testMinEffectiveRange();
+    return res;
+}
+
+;;
+;; Routing of a Contract RepeatRangeTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $RepeatRangeTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $RepeatRangeTester$_contract_store($self);
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "testMaxEffectiveRange" message
+    if (text_op == 0xcec6c603611132c6e24f424ec6a679a457e2f42e557f6d20276abf9a8c74d047) {
+        int $counter = 2147483647;
+        repeat (2147483647) {
+            $counter = $counter + 1;
+        }
+        ;; Persist state
+        $RepeatRangeTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

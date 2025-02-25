@@ -1,0 +1,562 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; rugpull_RugPull.headers.fc
+;;
+;; Header files for RugPull
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_dict_get_int_slice
+slice __tact_dict_get_int_slice(cell d, int kl, int k) inline;
+
+;; __tact_dict_set_int_slice
+(cell, ()) __tact_dict_set_int_slice(cell d, int kl, int k, slice v) inline;
+
+;; $ChangeOwner$_load_without_opcode
+(slice, ((int, slice))) $ChangeOwner$_load_without_opcode(slice sc_0) inline;
+
+;; $ChangeOwnerOk$_store
+builder $ChangeOwnerOk$_store(builder build_0, (int, slice) v) inline;
+
+;; $ChangeOwnerOk$_store_cell
+cell $ChangeOwnerOk$_store_cell((int, slice) v) inline;
+
+;; $RugPull$_store
+builder $RugPull$_store(builder build_0, (slice, int, int, int, int, int, int, int, int, cell) v) inline;
+
+;; $RugPull$_load
+(slice, ((slice, int, int, int, int, int, int, int, int, cell))) $RugPull$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $RugParams$_to_external
+(int, int, int) $RugParams$_to_external(((int, int, int)) v) inline;
+
+;; $RugPull$init$_load
+(slice, ((slice, int, int, int))) $RugPull$init$_load(slice sc_0) inline;
+
+;; $RugPull$_contract_init
+(slice, int, int, int, int, int, int, int, int, cell) $RugPull$_contract_init(slice $owner, int $investment, int $returns, int $fee) impure inline;
+
+;; $RugPull$_contract_load
+(slice, int, int, int, int, int, int, int, int, cell) $RugPull$_contract_load() impure inline_ref;
+
+;; $RugPull$_contract_store
+() $RugPull$_contract_store((slice, int, int, int, int, int, int, int, int, cell) v) impure inline;
+
+;; $SendParameters$_constructor_value_to_mode
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode(int $value, slice $to, int $mode) inline;
+
+;; $RugPull$_fun_sendPayout
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_sendPayout((slice, int, int, int, int, int, int, int, int, cell) $self, slice $to, int $value) impure inline_ref;
+
+;; $RugParams$_constructor_investment_returns_fee
+((int, int, int)) $RugParams$_constructor_investment_returns_fee(int $investment, int $returns, int $fee) inline;
+
+;; $RugPull$_fun_params
+((slice, int, int, int, int, int, int, int, int, cell), (int, int, int)) $RugPull$_fun_params((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $RugPull$_fun_forward
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_forward((slice, int, int, int, int, int, int, int, int, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $RugPull$_fun_reply
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_reply((slice, int, int, int, int, int, int, int, int, cell) $self, cell $body) impure inline;
+
+;; $RugPull$_fun_requireOwner
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_requireOwner((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref;
+
+;; $RugPull$_fun_owner
+((slice, int, int, int, int, int, int, int, int, cell), slice) $RugPull$_fun_owner((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref;
+
+;; $RugPull$_fun_requireNotStopped
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_requireNotStopped((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref;
+
+;; $RugPull$_fun_stopped
+((slice, int, int, int, int, int, int, int, int, cell), int) $RugPull$_fun_stopped((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref;
+
+;; $ChangeOwnerOk$_constructor_queryId_newOwner
+((int, slice)) $ChangeOwnerOk$_constructor_queryId_newOwner(int $queryId, slice $newOwner) inline;
+
+
+;; rugpull_RugPull.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+slice __tact_dict_get_int_slice(cell d, int kl, int k) inline {
+    var (r, ok) = idict_get?(d, kl, k);
+    if (ok) {
+        return r;
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_int_slice(cell d, int kl, int k, slice v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set(d, kl, k, v), ());
+    }
+}
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_forward((slice, int, int, int, int, int, int, int, int, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_reply((slice, int, int, int, int, int, int, int, int, cell) $self, cell $body) impure inline {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_requireOwner((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    throw_unless(132, ( equal_slices_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), slice) $RugPull$_fun_owner((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    var $fresh$ret_46 = $self'owner;
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), $fresh$ret_46);
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_requireNotStopped((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    throw_unless(40368, (~ $self'stopped));
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), int) $RugPull$_fun_stopped((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    var $fresh$ret_47 = $self'stopped;
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), $fresh$ret_47);
+}
+
+;; rugpull_RugPull.constants.fc
+;; Cell j0tqFmVUtPKChV0DM8Yn1bWNKB6kuhHk3vkaEFMZOy0=
+cell __gen_cell_cell_8f4b6a166554b4f282855d0333c627d5b58d281ea4ba11e4def91a1053193b2d() asm """
+    B{b5ee9c7241010101000d0000160000000053746f707065646f94ddb2} B>boc PUSHREF
+""";
+
+;; rugpull_RugPull.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode(int $value, slice $to, int $mode) inline {
+    return ($mode, null(), null(), null(), $value, $to, true);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: ChangeOwner
+;; Header: 0x819dbe99
+;; TLB: change_owner#819dbe99 queryId:uint64 newOwner:address = ChangeOwner
+;;
+
+(slice, ((int, slice))) $ChangeOwner$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    var v'newOwner = sc_0~load_msg_addr();
+    return (sc_0, (v'queryId, v'newOwner));
+}
+
+;;
+;; Type: ChangeOwnerOk
+;; Header: 0x327b2b4a
+;; TLB: change_owner_ok#327b2b4a queryId:uint64 newOwner:address = ChangeOwnerOk
+;;
+
+builder $ChangeOwnerOk$_store(builder build_0, (int, slice) v) inline {
+    var (v'queryId, v'newOwner) = v;
+    build_0 = store_uint(build_0, 846932810, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    build_0 = build_0.store_slice(v'newOwner);
+    return build_0;
+}
+
+cell $ChangeOwnerOk$_store_cell((int, slice) v) inline {
+    return $ChangeOwnerOk$_store(begin_cell(), v).end_cell();
+}
+
+((int, slice)) $ChangeOwnerOk$_constructor_queryId_newOwner(int $queryId, slice $newOwner) inline {
+    return ($queryId, $newOwner);
+}
+
+;;
+;; Type: RugParams
+;; TLB: _ investment:int257 returns:int257 fee:int257 = RugParams
+;;
+
+(int, int, int) $RugParams$_to_external(((int, int, int)) v) inline {
+    var (v'investment, v'returns, v'fee) = v; 
+    return (v'investment, v'returns, v'fee);
+}
+
+((int, int, int)) $RugParams$_constructor_investment_returns_fee(int $investment, int $returns, int $fee) inline {
+    return ($investment, $returns, $fee);
+}
+
+;;
+;; Type: RugPull
+;;
+
+builder $RugPull$_store(builder build_0, (slice, int, int, int, int, int, int, int, int, cell) v) inline {
+    var (v'owner, v'investment, v'returns, v'fee, v'balance, v'rugpulled, v'stopped, v'queueStart, v'queueEnd, v'queue) = v;
+    build_0 = build_0.store_slice(v'owner);
+    build_0 = build_0.store_int(v'investment, 257);
+    build_0 = build_0.store_int(v'returns, 257);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_int(v'fee, 257);
+    build_1 = build_1.store_int(v'balance, 257);
+    build_1 = build_1.store_int(v'rugpulled, 1);
+    build_1 = build_1.store_int(v'stopped, 1);
+    build_1 = build_1.store_int(v'queueStart, 257);
+    var build_2 = begin_cell();
+    build_2 = build_2.store_int(v'queueEnd, 257);
+    build_2 = build_2.store_dict(v'queue);
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((slice, int, int, int, int, int, int, int, int, cell))) $RugPull$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    var v'investment = sc_0~load_int(257);
+    var v'returns = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'fee = sc_1~load_int(257);
+    var v'balance = sc_1~load_int(257);
+    var v'rugpulled = sc_1~load_int(1);
+    var v'stopped = sc_1~load_int(1);
+    var v'queueStart = sc_1~load_int(257);
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'queueEnd = sc_2~load_int(257);
+    var v'queue = sc_2~load_dict();
+    return (sc_0, (v'owner, v'investment, v'returns, v'fee, v'balance, v'rugpulled, v'stopped, v'queueStart, v'queueEnd, v'queue));
+}
+
+(slice, ((slice, int, int, int))) $RugPull$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    var v'investment = sc_0~load_int(257);
+    var v'returns = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'fee = sc_1~load_int(257);
+    return (sc_0, (v'owner, v'investment, v'returns, v'fee));
+}
+
+(slice, int, int, int, int, int, int, int, int, cell) $RugPull$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$RugPull$_load();
+    } else {
+        (slice $owner, int $investment, int $returns, int $fee) = $sc~$RugPull$init$_load();
+        $sc.end_parse();
+        return $RugPull$_contract_init($owner, $investment, $returns, $fee);
+    }
+}
+
+() $RugPull$_contract_store((slice, int, int, int, int, int, int, int, int, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $RugPull$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract RugPull functions
+;;
+
+(slice, int, int, int, int, int, int, int, int, cell) $RugPull$_contract_init(slice $owner, int $investment, int $returns, int $fee) impure inline {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = (null(), null(), null(), null(), null(), null(), null(), null(), null(), null());
+    $self'owner = $owner;
+    $self'rugpulled = false;
+    $self'queueStart = 0;
+    $self'queueEnd = 0;
+    $self'balance = 0;
+    $self'investment = $investment;
+    $self'returns = $returns;
+    $self'fee = $fee;
+    $self'stopped = false;
+    return ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue);
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), ()) $RugPull$_fun_sendPayout((slice, int, int, int, int, int, int, int, int, cell) $self, slice $to, int $value) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    $global_send($SendParameters$_constructor_value_to_mode($value, $to, 2));
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), ());
+}
+
+((slice, int, int, int, int, int, int, int, int, cell), (int, int, int)) $RugPull$_fun_params((slice, int, int, int, int, int, int, int, int, cell) $self) impure inline_ref {
+    var (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)) = $self;
+    var $fresh$ret_45 = $RugParams$_constructor_investment_returns_fee($self'investment, $self'returns, $self'fee);
+    return (($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue), $fresh$ret_45);
+}
+
+;;
+;; Get methods of a Contract RugPull
+;;
+
+_ %params() method_id(116437) {
+    var self = $RugPull$_contract_load();
+    var res = self~$RugPull$_fun_params();
+    return $RugParams$_to_external(res);
+}
+
+_ %owner() method_id(83229) {
+    var self = $RugPull$_contract_load();
+    var res = self~$RugPull$_fun_owner();
+    return res;
+}
+
+_ %stopped() method_id(74107) {
+    var self = $RugPull$_contract_load();
+    var res = self~$RugPull$_fun_stopped();
+    return res;
+}
+
+;;
+;; Routing of a Contract RugPull
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue) = $RugPull$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive ChangeOwner message
+        if (op == 2174598809) {
+            var ($msg'queryId, $msg'newOwner) = in_msg~$ChangeOwner$_load_without_opcode();
+            ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_requireOwner();
+            $self'owner = $msg'newOwner;
+            ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_reply($ChangeOwnerOk$_store_cell($ChangeOwnerOk$_constructor_queryId_newOwner($msg'queryId, $msg'newOwner)));
+            ;; Persist state
+            $RugPull$_contract_store(($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_requireNotStopped();
+        if ($self'rugpulled) {
+            $global_send($SendParameters$_constructor_value_to_mode(0, $self'owner, 128));
+            return ();
+        }
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        throw_unless(16059, ($ctx'value >= ($self'investment + $self'fee)));
+        $self'queue~__tact_dict_set_int_slice(257, $self'queueEnd, $ctx'sender);
+        $self'queueEnd = ($self'queueEnd + 1);
+        $self'balance = ($self'balance + $self'investment);
+        while (( (($self'balance > $self'returns)) ? ((($self'queueEnd - $self'queueStart) > 0)) : (false) )) {
+            slice $investor = __tact_not_null(__tact_dict_get_int_slice($self'queue, 257, $self'queueStart));
+            $self'balance = ($self'balance - $self'returns);
+            $self'queueStart = ($self'queueStart + 1);
+            ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_sendPayout($investor, $self'returns);
+        }
+        ;; Persist state
+        $RugPull$_contract_store(($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "withdraw" message
+    if (text_op == 0x158e394e7cc73a9aeb362957fe037665588aef16f3bd68580c13ab84097cf22a) {
+        ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_requireOwner();
+        if ((~ $self'rugpulled)) {
+            $global_nativeReserve($self'balance, 0);
+        }
+        $global_send($SendParameters$_constructor_value_to_mode(0, $self'owner, 128));
+        ;; Persist state
+        $RugPull$_contract_store(($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue));
+        return ();
+    }
+    ;; Receive "rugpull" message
+    if (text_op == 0xe743b6b0e79fd5d9dddc5a5cdf85b3437d9b61fc9a558b8383a83a0fc0d94bda) {
+        $self'rugpulled = true;
+        $global_send($SendParameters$_constructor_value_to_mode(0, $self'owner, 128));
+        ;; Persist state
+        $RugPull$_contract_store(($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue));
+        return ();
+    }
+    ;; Receive "Stop" message
+    if (text_op == 0xe2766386272bddd6151b177e581ac9f613131b45e13cdc7af80e4091130d73e8) {
+        ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_requireOwner();
+        ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_requireNotStopped();
+        $self'stopped = true;
+        ($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue)~$RugPull$_fun_reply(__gen_cell_cell_8f4b6a166554b4f282855d0333c627d5b58d281ea4ba11e4def91a1053193b2d());
+        ;; Persist state
+        $RugPull$_contract_store(($self'owner, $self'investment, $self'returns, $self'fee, $self'balance, $self'rugpulled, $self'stopped, $self'queueStart, $self'queueEnd, $self'queue));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

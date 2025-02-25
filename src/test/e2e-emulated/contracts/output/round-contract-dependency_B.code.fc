@@ -1,0 +1,251 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; round-contract-dependency_B.headers.fc
+;;
+;; Header files for B
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_set_code
+cell __tact_dict_set_code(cell dict, int id, cell code) inline;
+
+;; __tact_dict_get_code
+cell __tact_dict_get_code(cell dict, int id) inline;
+
+;; $B$_store
+builder $B$_store(builder build_0, (int) v) inline;
+
+;; $B$_load
+(slice, ((int))) $B$_load(slice sc_0) inline;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $A$init$_store
+builder $A$init$_store(builder build_0, tuple v) inline;
+
+;; $C$init$_store
+builder $C$init$_store(builder build_0, tuple v) inline;
+
+;; $B$_contract_init
+(int) $B$_contract_init() impure inline;
+
+;; $B$_contract_load
+(int) $B$_contract_load() impure inline_ref;
+
+;; $B$_contract_store
+() $B$_contract_store((int) v) impure inline;
+
+;; $A$_init_child
+(cell, cell) $A$_init_child() inline_ref;
+
+;; $C$_init_child
+(cell, cell) $C$_init_child() inline_ref;
+
+;; $B$_fun_getNext
+((int), (cell, cell)) $B$_fun_getNext((int) $self) impure inline_ref;
+
+;; $B$_fun_getNestedNext
+((int), (cell, cell)) $B$_fun_getNestedNext((int) $self) impure inline_ref;
+
+
+;; round-contract-dependency_B.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+cell __tact_dict_set_code(cell dict, int id, cell code) inline {
+    return udict_set_ref(dict, 16, id, code);
+}
+
+cell __tact_dict_get_code(cell dict, int id) inline {
+    var (data, ok) = udict_get_ref?(dict, 16, id);
+    throw_unless(135, ok);
+    return data;
+}
+
+;; round-contract-dependency_B.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: A
+;;
+
+builder $A$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $A$_init_child() inline_ref {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: A
+    cell init_code = __tact_dict_get_code(source, 22757);
+
+    ;; Build init data cell
+    cell contracts = new_dict();
+
+    ;; Contract Code: B
+    contracts = __tact_dict_set_code(contracts, 26758, my_code());
+
+    ;; Contract Code: C
+    cell code_30887 = __tact_dict_get_code(source, 30887);
+    contracts = __tact_dict_set_code(contracts, 30887, code_30887);
+
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $A$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: B
+;;
+
+builder $B$_store(builder build_0, (int) v) inline {
+    var (v'number) = v;
+    build_0 = build_0.store_uint(v'number, 32);
+    return build_0;
+}
+
+(slice, ((int))) $B$_load(slice sc_0) inline {
+    var v'number = sc_0~load_uint(32);
+    return (sc_0, (v'number));
+}
+
+(int) $B$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_child_contract_codes = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$B$_load();
+    } else {
+        return $B$_contract_init();
+    }
+}
+
+() $B$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_child_contract_codes);
+    b = b.store_int(true, 1);
+    b = $B$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Type: C
+;;
+
+builder $C$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $C$_init_child() inline_ref {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: C
+    cell init_code = __tact_dict_get_code(source, 30887);
+
+    ;; Build init data cell
+    cell contracts = new_dict();
+
+    ;; Contract Code: A
+    cell code_22757 = __tact_dict_get_code(source, 22757);
+    contracts = __tact_dict_set_code(contracts, 22757, code_22757);
+
+    ;; Contract Code: B
+    contracts = __tact_dict_set_code(contracts, 26758, my_code());
+
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $C$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract B functions
+;;
+
+(int) $B$_contract_init() impure inline {
+    var (($self'number)) = (1);
+    return ($self'number);
+}
+
+((int), (cell, cell)) $B$_fun_getNext((int) $self) impure inline_ref {
+    var (($self'number)) = $self;
+    var $fresh$ret_692 = $C$_init_child();
+    return (($self'number), $fresh$ret_692);
+}
+
+((int), (cell, cell)) $B$_fun_getNestedNext((int) $self) impure inline_ref {
+    var (($self'number)) = $self;
+    var $fresh$ret_693 = $A$_init_child();
+    return (($self'number), $fresh$ret_693);
+}
+
+;;
+;; Get methods of a Contract B
+;;
+
+_ %getNext() method_id(74105) {
+    var self = $B$_contract_load();
+    var res = self~$B$_fun_getNext();
+    return $StateInit$_to_external(res);
+}
+
+_ %getNestedNext() method_id(105600) {
+    var self = $B$_contract_load();
+    var res = self~$B$_fun_getNestedNext();
+    return $StateInit$_to_external(res);
+}
+
+;;
+;; Routing of a Contract B
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'number) = $B$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $B$_contract_store(($self'number));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

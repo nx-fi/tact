@@ -1,0 +1,135 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/contract-methods_Test.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Test$_store
+  DECLPROC $Test$_load
+  DECLPROC $Test$_contract_init
+  DECLPROC $Test$_contract_load
+  DECLPROC $Test$_contract_store
+  DECLPROC $Test$_fun_check
+  DECLPROC $Test$_fun_checkImmediateReturn
+  DECLPROC $Test$_fun_checkReturnViaLocalVar
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Test$_store PROCINLINE:<{
+    s0 s2 XCHG
+    256 STU
+    257 PUSHINT
+    STIX
+  }>
+  $Test$_load PROCINLINE:<{
+    256 LDU
+    257 PUSHINT
+    LDIX
+    -ROT
+  }>
+  $Test$_contract_init PROCINLINE:<{
+    0 PUSHINT
+    239 PUSHINT
+  }>
+  $Test$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $Test$_load INLINECALLDICT
+      1 2 BLKDROP2
+    }>
+    DROP
+    $Test$_contract_init INLINECALLDICT
+  }>
+  $Test$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    -ROT
+    $Test$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Test$_fun_check PROCREF:<{
+    42 PUSHINT
+    s2 POP
+    TRUE
+  }>
+  $Test$_fun_checkImmediateReturn PROCREF:<{
+    $Test$_fun_check INLINECALLDICT
+  }>
+  $Test$_fun_checkReturnViaLocalVar PROCREF:<{
+    $Test$_fun_check INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Test$_contract_load INLINECALLDICT
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+    }>
+    0 PUSHINT
+    s2 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 s2 XCHG
+      32 LDU
+      DROP
+    }>ELSE<{
+      s3 POP
+    }>
+    0 EQINT
+    s0 s2 XCHG
+    33 LESSINT
+    s1 s2 XCHG
+    AND
+    IFJMP:<{
+      SWAP
+      $Test$_fun_checkImmediateReturn INLINECALLDICT
+      DROP
+      37609 PUSHINT
+      s0 s2 XCHG
+      42 EQINT
+      s1 s2 XCHG
+      THROWANYIFNOT
+      0 PUSHINT
+      SWAP
+      $Test$_fun_checkReturnViaLocalVar INLINECALLDICT
+      DROP
+      31465 PUSHINT
+      s2 PUSH
+      42 EQINT
+      THROWANYIFNOT
+      $Test$_contract_store INLINECALLDICT
+    }>
+    2DROP
+    130 THROW
+  }>
+}END>c

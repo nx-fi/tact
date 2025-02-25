@@ -1,0 +1,283 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; map-comparison_MapComparisonTestContract.headers.fc
+;;
+;; Header files for MapComparisonTestContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_eq
+int __tact_dict_eq(cell a, cell b, int kl) inline;
+
+;; __tact_cell_eq_nullable
+int __tact_cell_eq_nullable(cell a, cell b) inline;
+
+;; $Compare$_load_without_opcode
+(slice, ((cell, cell))) $Compare$_load_without_opcode(slice sc_0) inline;
+
+;; $CompareDeep$_load_without_opcode
+(slice, ((cell, cell))) $CompareDeep$_load_without_opcode(slice sc_0) inline;
+
+;; $MapComparisonTestContract$_contract_init
+tuple $MapComparisonTestContract$_contract_init() impure inline;
+
+;; $MapComparisonTestContract$_contract_load
+tuple $MapComparisonTestContract$_contract_load() impure inline_ref;
+
+;; $MapComparisonTestContract$_contract_store
+() $MapComparisonTestContract$_contract_store(tuple v) impure inline;
+
+;; $MapComparisonTestContract$_fun_compareIntInt
+(tuple, int) $MapComparisonTestContract$_fun_compareIntInt(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+;; $MapComparisonTestContract$_fun_compareIntCell
+(tuple, int) $MapComparisonTestContract$_fun_compareIntCell(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+;; $MapComparisonTestContract$_fun_compareIntAddress
+(tuple, int) $MapComparisonTestContract$_fun_compareIntAddress(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+;; $MapComparisonTestContract$_fun_compareAddressInt
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressInt(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+;; $MapComparisonTestContract$_fun_compareAddressCell
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressCell(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+;; $MapComparisonTestContract$_fun_compareAddressAddress
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressAddress(tuple $self, cell $m1, cell $m2) impure inline_ref;
+
+
+;; map-comparison_MapComparisonTestContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(cell, (slice, int)) __tact_dict_delete_get(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTDELGET NULLSWAPIFNOT
+""";
+
+(slice, slice, int) __tact_dict_min(cell dict, int key_len) asm(dict key_len -> 1 0 2) """
+    DICTMIN  NULLSWAPIFNOT2
+""";
+
+(slice, slice, int) __tact_dict_next(cell dict, int key_len, slice pivot) asm(pivot dict key_len -> 1 0 2) """
+    DICTGETNEXT NULLSWAPIFNOT2
+""";
+
+int __tact_dict_eq(cell a, cell b, int kl) inline {
+    (slice key, slice value, int flag) = __tact_dict_min(a, kl);
+    while (flag) {
+        (slice value_b, int flag_b) = b~__tact_dict_delete_get(kl, key);
+        ifnot (flag_b) {
+            return 0;
+        }
+        ifnot (value.slice_hash() == value_b.slice_hash()) {
+            return 0;
+        }
+        (key, value, flag) = __tact_dict_next(a, kl, key);
+    }
+    return null?(b);
+}
+
+int __tact_cell_eq_nullable(cell a, cell b) inline {
+    var a_is_null = null?(a);
+    var b_is_null = null?(b);
+    return ( a_is_null & b_is_null ) ? ( true ) : ( ( ( ~ a_is_null ) & ( ~ b_is_null ) ) ? ( a.cell_hash() == b.cell_hash() ) : ( false ) );
+}
+
+;; map-comparison_MapComparisonTestContract.storage.fc
+;;
+;; Type: Compare
+;; Header: 0x57d61171
+;; TLB: compare#57d61171 m1:dict<uint8, bool> m2:dict<uint8, bool> = Compare
+;;
+
+(slice, ((cell, cell))) $Compare$_load_without_opcode(slice sc_0) inline {
+    var v'm1 = sc_0~load_dict();
+    var v'm2 = sc_0~load_dict();
+    return (sc_0, (v'm1, v'm2));
+}
+
+;;
+;; Type: CompareDeep
+;; Header: 0xe2817bbe
+;; TLB: compare_deep#e2817bbe m1:dict<uint8, bool> m2:dict<uint8, bool> = CompareDeep
+;;
+
+(slice, ((cell, cell))) $CompareDeep$_load_without_opcode(slice sc_0) inline {
+    var v'm1 = sc_0~load_dict();
+    var v'm2 = sc_0~load_dict();
+    return (sc_0, (v'm1, v'm2));
+}
+
+;;
+;; Type: MapComparisonTestContract
+;;
+
+tuple $MapComparisonTestContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $MapComparisonTestContract$_contract_init();
+    }
+}
+
+() $MapComparisonTestContract$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MapComparisonTestContract functions
+;;
+
+tuple $MapComparisonTestContract$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareIntInt(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_405 = __tact_dict_eq($m1, $m2, 257);
+    return ($self, $fresh$ret_405);
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareIntCell(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_406 = __tact_dict_eq($m1, $m2, 257);
+    return ($self, $fresh$ret_406);
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareIntAddress(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_407 = __tact_dict_eq($m1, $m2, 257);
+    return ($self, $fresh$ret_407);
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressInt(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_408 = __tact_dict_eq($m1, $m2, 267);
+    return ($self, $fresh$ret_408);
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressCell(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_409 = __tact_dict_eq($m1, $m2, 267);
+    return ($self, $fresh$ret_409);
+}
+
+(tuple, int) $MapComparisonTestContract$_fun_compareAddressAddress(tuple $self, cell $m1, cell $m2) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_410 = __tact_dict_eq($m1, $m2, 267);
+    return ($self, $fresh$ret_410);
+}
+
+;;
+;; Get methods of a Contract MapComparisonTestContract
+;;
+
+_ %compareIntInt(cell $m1, cell $m2) method_id(69033) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareIntInt($m1, $m2);
+    return res;
+}
+
+_ %compareIntCell(cell $m1, cell $m2) method_id(116487) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareIntCell($m1, $m2);
+    return res;
+}
+
+_ %compareIntAddress(cell $m1, cell $m2) method_id(116486) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareIntAddress($m1, $m2);
+    return res;
+}
+
+_ %compareAddressInt(cell $m1, cell $m2) method_id(96411) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareAddressInt($m1, $m2);
+    return res;
+}
+
+_ %compareAddressCell(cell $m1, cell $m2) method_id(121653) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareAddressCell($m1, $m2);
+    return res;
+}
+
+_ %compareAddressAddress(cell $m1, cell $m2) method_id(103155) {
+    cell $m1 = $m1;
+    cell $m2 = $m2;
+    var self = $MapComparisonTestContract$_contract_load();
+    var res = self~$MapComparisonTestContract$_fun_compareAddressAddress($m1, $m2);
+    return res;
+}
+
+;;
+;; Routing of a Contract MapComparisonTestContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $MapComparisonTestContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive Compare message
+    if (op == 1473646961) {
+        var ($msg'm1, $msg'm2) = in_msg~$Compare$_load_without_opcode();
+        throw_unless(53111, __tact_cell_eq_nullable($msg'm1, $msg'm2));
+        ;; Persist state
+        $MapComparisonTestContract$_contract_store($self);
+        return ();
+    }
+    
+    ;; Receive CompareDeep message
+    if (op == 3800136638) {
+        var ($msg'm1, $msg'm2) = in_msg~$CompareDeep$_load_without_opcode();
+        throw_unless(53111, __tact_dict_eq($msg'm1, $msg'm2, 8));
+        ;; Persist state
+        $MapComparisonTestContract$_contract_store($self);
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $MapComparisonTestContract$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

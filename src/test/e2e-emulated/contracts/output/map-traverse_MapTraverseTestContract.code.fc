@@ -1,0 +1,1263 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; map-traverse_MapTraverseTestContract.headers.fc
+;;
+;; Header files for MapTraverseTestContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_min_slice_slice
+(slice, slice, int) __tact_dict_min_slice_slice(cell d, int kl) inline;
+
+;; __tact_dict_next_slice_slice
+(slice, slice, int) __tact_dict_next_slice_slice(cell d, int kl, slice pivot) inline;
+
+;; __tact_dict_set_slice_slice
+(cell, ()) __tact_dict_set_slice_slice(cell d, int kl, slice k, slice v) inline;
+
+;; __tact_dict_min_slice_int
+(slice, int, int) __tact_dict_min_slice_int(cell d, int kl, int vl) inline;
+
+;; __tact_dict_next_slice_int
+(slice, int, int) __tact_dict_next_slice_int(cell d, int kl, slice pivot, int vl) inline;
+
+;; __tact_dict_set_slice_int
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline;
+
+;; __tact_dict_min_slice_cell
+(slice, cell, int) __tact_dict_min_slice_cell(cell d, int kl) inline;
+
+;; __tact_dict_next_slice_cell
+(slice, cell, int) __tact_dict_next_slice_cell(cell d, int kl, slice pivot) inline;
+
+;; __tact_dict_set_slice_cell
+(cell, ()) __tact_dict_set_slice_cell(cell d, int kl, slice k, cell v) inline;
+
+;; __tact_dict_min_slice_coins
+(slice, int, int) __tact_dict_min_slice_coins(cell d, int kl) inline;
+
+;; __tact_dict_next_slice_coins
+(slice, int, int) __tact_dict_next_slice_coins(cell d, int kl, slice pivot) inline;
+
+;; __tact_dict_set_slice_coins
+(cell, ()) __tact_dict_set_slice_coins(cell d, int kl, slice k, int v) inline;
+
+;; __tact_dict_min_slice_varint16
+(slice, int, int) __tact_dict_min_slice_varint16(cell d, int kl) inline;
+
+;; __tact_dict_next_slice_varint16
+(slice, int, int) __tact_dict_next_slice_varint16(cell d, int kl, slice pivot) inline;
+
+;; __tact_dict_set_slice_varint16
+(cell, ()) __tact_dict_set_slice_varint16(cell d, int kl, slice k, int v) inline;
+
+;; __tact_dict_min_int_slice
+(int, slice, int) __tact_dict_min_int_slice(cell d, int kl) inline;
+
+;; __tact_dict_next_int_slice
+(int, slice, int) __tact_dict_next_int_slice(cell d, int kl, int pivot) inline;
+
+;; __tact_dict_set_int_slice
+(cell, ()) __tact_dict_set_int_slice(cell d, int kl, int k, slice v) inline;
+
+;; __tact_dict_min_int_int
+(int, int, int) __tact_dict_min_int_int(cell d, int kl, int vl) inline;
+
+;; __tact_dict_next_int_int
+(int, int, int) __tact_dict_next_int_int(cell d, int kl, int pivot, int vl) inline;
+
+;; __tact_dict_set_int_int
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; __tact_dict_min_int_cell
+(int, cell, int) __tact_dict_min_int_cell(cell d, int kl) inline;
+
+;; __tact_dict_next_int_cell
+(int, cell, int) __tact_dict_next_int_cell(cell d, int kl, int pivot) inline;
+
+;; __tact_dict_set_int_cell
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline;
+
+;; __tact_dict_min_int_coins
+(int, int, int) __tact_dict_min_int_coins(cell d, int kl) inline;
+
+;; __tact_dict_next_int_coins
+(int, int, int) __tact_dict_next_int_coins(cell d, int kl, int pivot) inline;
+
+;; __tact_dict_set_int_coins
+(cell, ()) __tact_dict_set_int_coins(cell d, int kl, int k, int v) inline;
+
+;; __tact_dict_min_int_varint16
+(int, int, int) __tact_dict_min_int_varint16(cell d, int kl) inline;
+
+;; __tact_dict_next_int_varint16
+(int, int, int) __tact_dict_next_int_varint16(cell d, int kl, int pivot) inline;
+
+;; __tact_dict_set_int_varint16
+(cell, ()) __tact_dict_set_int_varint16(cell d, int kl, int k, int v) inline;
+
+;; $MyStruct$_store
+builder $MyStruct$_store(builder build_0, (int, int) v) inline;
+
+;; $MyStruct$_store_cell
+cell $MyStruct$_store_cell((int, int) v) inline;
+
+;; $MyStruct$_load
+(slice, ((int, int))) $MyStruct$_load(slice sc_0) inline;
+
+;; $MyStruct$_as_optional
+tuple $MyStruct$_as_optional((int, int) v) inline;
+
+;; $MyStruct$_load_opt
+tuple $MyStruct$_load_opt(cell cl) inline;
+
+;; $MyStructWithMap$_store
+builder $MyStructWithMap$_store(builder build_0, (cell) v) inline;
+
+;; $MyStructWithMap$_load
+(slice, ((cell))) $MyStructWithMap$_load(slice sc_0) inline;
+
+;; $MapTraverseTestContract$_store
+builder $MapTraverseTestContract$_store(builder build_0, (cell, (cell)) v) inline;
+
+;; $MapTraverseTestContract$_load
+(slice, ((cell, (cell)))) $MapTraverseTestContract$_load(slice sc_0) inline;
+
+;; $MyStruct$_not_null
+((int, int)) $MyStruct$_not_null(tuple v) inline;
+
+;; $MyStructWithMap$_constructor_m
+((cell)) $MyStructWithMap$_constructor_m(cell $m) inline;
+
+;; $MapTraverseTestContract$_contract_init
+(cell, (cell)) $MapTraverseTestContract$_contract_init() impure inline;
+
+;; $MapTraverseTestContract$_contract_load
+(cell, (cell)) $MapTraverseTestContract$_contract_load() impure inline_ref;
+
+;; $MapTraverseTestContract$_contract_store
+() $MapTraverseTestContract$_contract_store((cell, (cell)) v) impure inline;
+
+;; $MapTraverseTestContract$_fun_test_int_int
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_int((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_int_coins
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_coins((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_int_varint16
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_varint16((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_int_bool
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_bool((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_int_cell
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_cell((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_int_address
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_address((cell, (cell)) $self) impure inline_ref;
+
+;; $MyStruct$_constructor_a_b
+((int, int)) $MyStruct$_constructor_a_b(int $a, int $b) inline;
+
+;; $MapTraverseTestContract$_fun_test_int_struct
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_struct((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_int
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_int((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_coins
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_coins((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_varint16
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_varint16((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_bool
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_bool((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_cell
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_cell((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_address
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_address((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_address_struct
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_struct((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_empty_map
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_empty_map((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_null
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_null((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_map_modification_during_traversal1
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_modification_during_traversal1((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_map_modification_during_traversal2
+((cell, (cell)), ()) $MapTraverseTestContract$_fun_test_map_modification_during_traversal2((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_map_size
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_size((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_map_as_field
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_as_field((cell, (cell)) $self) impure inline_ref;
+
+;; $MapTraverseTestContract$_fun_test_map_as_struct_field
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_as_struct_field((cell, (cell)) $self) impure inline_ref;
+
+
+;; map-traverse_MapTraverseTestContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(cell, int) __tact_dict_delete(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTDEL
+""";
+
+(cell, int) __tact_dict_delete_int(cell dict, int key_len, int index) asm(index dict key_len) """
+    DICTIDEL
+""";
+
+((cell), ()) __tact_dict_set_ref(cell dict, int key_len, slice index, cell value) asm(value index dict key_len) """
+    DICTSETREF
+""";
+
+(slice, slice, int) __tact_dict_min(cell dict, int key_len) asm(dict key_len -> 1 0 2) """
+    DICTMIN  NULLSWAPIFNOT2
+""";
+
+(slice, cell, int) __tact_dict_min_ref(cell dict, int key_len) asm(dict key_len -> 1 0 2) """
+    DICTMINREF NULLSWAPIFNOT2
+""";
+
+(slice, slice, int) __tact_dict_next(cell dict, int key_len, slice pivot) asm(pivot dict key_len -> 1 0 2) """
+    DICTGETNEXT NULLSWAPIFNOT2
+""";
+
+forall X0, X1 -> tuple __tact_tuple_create_2((X0, X1) v) asm """
+    2 TUPLE
+""";
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+(slice, slice, int) __tact_dict_min_slice_slice(cell d, int kl) inline {
+    var (key, value, flag) = __tact_dict_min(d, kl);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(slice, slice, int) __tact_dict_next_slice_slice(cell d, int kl, slice pivot) inline {
+    return __tact_dict_next(d, kl, pivot);
+}
+
+(cell, ()) __tact_dict_set_slice_slice(cell d, int kl, slice k, slice v) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_slice(v)), ());
+    }
+}
+
+(slice, int, int) __tact_dict_min_slice_int(cell d, int kl, int vl) inline {
+    var (key, value, flag) = __tact_dict_min(d, kl);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(slice, int, int) __tact_dict_next_slice_int(cell d, int kl, slice pivot, int vl) inline {
+    var (key, value, flag) = __tact_dict_next(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+(slice, cell, int) __tact_dict_min_slice_cell(cell d, int kl) inline {
+    var (key, value, flag) = __tact_dict_min_ref(d, kl);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(slice, cell, int) __tact_dict_next_slice_cell(cell d, int kl, slice pivot) inline {
+    var (key, value, flag) = __tact_dict_next(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_ref(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_cell(cell d, int kl, slice k, cell v) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return __tact_dict_set_ref(d, kl, k, v);
+    }
+}
+
+(slice, int, int) __tact_dict_min_slice_coins(cell d, int kl) inline {
+    var (key, value, flag) = __tact_dict_min(d, kl);
+    if (flag) {
+        return (key, value~load_coins(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(slice, int, int) __tact_dict_next_slice_coins(cell d, int kl, slice pivot) inline {
+    var (key, value, flag) = __tact_dict_next(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_coins(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_coins(cell d, int kl, slice k, int v) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_coins(v)), ());
+    }
+}
+
+(slice, int, int) __tact_dict_min_slice_varint16(cell d, int kl) inline {
+    var (key, value, flag) = __tact_dict_min(d, kl);
+    if (flag) {
+        return (key, value~load_varint16(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(slice, int, int) __tact_dict_next_slice_varint16(cell d, int kl, slice pivot) inline {
+    var (key, value, flag) = __tact_dict_next(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_varint16(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_varint16(cell d, int kl, slice k, int v) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_varint16(v)), ());
+    }
+}
+
+(int, slice, int) __tact_dict_min_int_slice(cell d, int kl) inline {
+    var (key, value, flag) = idict_get_min?(d, kl);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, slice, int) __tact_dict_next_int_slice(cell d, int kl, int pivot) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_slice(cell d, int kl, int k, slice v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set(d, kl, k, v), ());
+    }
+}
+
+(int, int, int) __tact_dict_min_int_int(cell d, int kl, int vl) inline {
+    var (key, value, flag) = idict_get_min?(d, kl);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, int, int) __tact_dict_next_int_int(cell d, int kl, int pivot, int vl) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_int(vl), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+(int, cell, int) __tact_dict_min_int_cell(cell d, int kl) inline {
+    var (key, value, flag) = idict_get_min_ref?(d, kl);
+    if (flag) {
+        return (key, value, flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, cell, int) __tact_dict_next_int_cell(cell d, int kl, int pivot) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_ref(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_ref(d, kl, k, v), ());
+    }
+}
+
+(int, int, int) __tact_dict_min_int_coins(cell d, int kl) inline {
+    var (key, value, flag) = idict_get_min?(d, kl);
+    if (flag) {
+        return (key, value~load_coins(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, int, int) __tact_dict_next_int_coins(cell d, int kl, int pivot) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_coins(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_coins(cell d, int kl, int k, int v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_coins(v)), ());
+    }
+}
+
+(int, int, int) __tact_dict_min_int_varint16(cell d, int kl) inline {
+    var (key, value, flag) = idict_get_min?(d, kl);
+    if (flag) {
+        return (key, value~load_varint16(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(int, int, int) __tact_dict_next_int_varint16(cell d, int kl, int pivot) inline {
+    var (key, value, flag) = idict_get_next?(d, kl, pivot);
+    if (flag) {
+        return (key, value~load_varint16(), flag);
+    } else {
+        return (null(), null(), flag);
+    }
+}
+
+(cell, ()) __tact_dict_set_int_varint16(cell d, int kl, int k, int v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_varint16(v)), ());
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $Builder$_fun_storeAddress(builder $self, slice $address) impure asm """
+    STSLICER
+""";
+
+(slice, ()) $Slice$_fun_skipBits(slice $self, int $l) impure asm """
+    SDSKIPFIRST
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+;; map-traverse_MapTraverseTestContract.constants.fc
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN
+slice __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9dodBmq
+slice __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e902cb04b17} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9dodQmL
+slice __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0eb0f23ef637} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9dodjno
+slice __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0ed090ad3056} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9dodynJ
+slice __gen_slice_address_b0f9807e9fa0ad0c7f56d7e897efad5966ae936299fd0bc87c6cc463fc63fbcb() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0ef04e238d76} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doeNgm
+slice __gen_slice_address_0f926a326068bab7cfcb2d78f5c7b1f7d50121eb20b922e78efacc7e909ce92c() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0f1023131f86} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doecgH
+slice __gen_slice_address_ca8d555567973475adbd542d57d909f92e8b8235c0f94a25850d093ec9a9a0e6() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0f30fd9da2a6} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9dogLYx
+slice __gen_slice_address_2ee5b88e961af2d57e501bcd898c566271a138d42113def0a4c17b2077792b98() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed10105fe8a35e} B>boc <s PUSHSLICE
+""";
+
+;; map-traverse_MapTraverseTestContract.storage.fc
+;;
+;; Type: MyStruct
+;; TLB: _ a:int257 b:bool = MyStruct
+;;
+
+builder $MyStruct$_store(builder build_0, (int, int) v) inline {
+    var (v'a, v'b) = v;
+    build_0 = build_0.store_int(v'a, 257);
+    build_0 = build_0.store_int(v'b, 1);
+    return build_0;
+}
+
+cell $MyStruct$_store_cell((int, int) v) inline {
+    return $MyStruct$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, int))) $MyStruct$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(257);
+    var v'b = sc_0~load_int(1);
+    return (sc_0, (v'a, v'b));
+}
+
+tuple $MyStruct$_as_optional((int, int) v) inline {
+    var (v'a, v'b) = v;
+    return __tact_tuple_create_2(v'a, v'b);
+}
+
+tuple $MyStruct$_load_opt(cell cl) inline {
+    if (null?(cl)) {
+        return null();
+    }
+    var sc = cl.begin_parse();
+    return $MyStruct$_as_optional(sc~$MyStruct$_load());
+}
+
+((int, int)) $MyStruct$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'a, int vvv'b) = __tact_tuple_destroy_2(v);
+    return (vvv'a, vvv'b);
+}
+
+((int, int)) $MyStruct$_constructor_a_b(int $a, int $b) inline {
+    return ($a, $b);
+}
+
+;;
+;; Type: MyStructWithMap
+;; TLB: _ m:dict<int, int> = MyStructWithMap
+;;
+
+builder $MyStructWithMap$_store(builder build_0, (cell) v) inline {
+    var (v'm) = v;
+    build_0 = build_0.store_dict(v'm);
+    return build_0;
+}
+
+(slice, ((cell))) $MyStructWithMap$_load(slice sc_0) inline {
+    var v'm = sc_0~load_dict();
+    return (sc_0, (v'm));
+}
+
+((cell)) $MyStructWithMap$_constructor_m(cell $m) inline {
+    return ($m);
+}
+
+;;
+;; Type: MapTraverseTestContract
+;;
+
+builder $MapTraverseTestContract$_store(builder build_0, (cell, (cell)) v) inline {
+    var (v'm, (v's'm)) = v;
+    build_0 = build_0.store_dict(v'm);
+    build_0 = $MyStructWithMap$_store(build_0, (v's'm));
+    return build_0;
+}
+
+(slice, ((cell, (cell)))) $MapTraverseTestContract$_load(slice sc_0) inline {
+    var v'm = sc_0~load_dict();
+    var v's = sc_0~$MyStructWithMap$_load();
+    return (sc_0, (v'm, v's));
+}
+
+(cell, (cell)) $MapTraverseTestContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$MapTraverseTestContract$_load();
+    } else {
+        return $MapTraverseTestContract$_contract_init();
+    }
+}
+
+() $MapTraverseTestContract$_contract_store((cell, (cell)) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $MapTraverseTestContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MapTraverseTestContract functions
+;;
+
+(cell, (cell)) $MapTraverseTestContract$_contract_init() impure inline {
+    var (($self'm, ($self's'm))) = (null(), null());
+    $self'm = null();
+    $self'm~__tact_dict_set_int_int(257, 1, 100, 257);
+    $self'm~__tact_dict_set_int_int(257, 2, 200, 257);
+    $self'm~__tact_dict_set_int_int(257, 3, 300, 257);
+    ($self's'm) = $MyStructWithMap$_constructor_m($self'm);
+    return ($self'm, ($self's'm));
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_int((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 100, 257);
+    $m~__tact_dict_set_int_int(257, 2, 200, 257);
+    $m~__tact_dict_set_int_int(257, 3, 300, 257);
+    $m~__tact_dict_set_int_int(257, 4, 400, 257);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_411) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_411) {
+        $sum1 = $sum1 + $k;
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_411) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_412 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_412);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_coins((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_coins(257, 1, 100);
+    $m~__tact_dict_set_int_coins(257, 2, 200);
+    $m~__tact_dict_set_int_coins(257, 3, 300);
+    $m~__tact_dict_set_int_coins(257, 4, 400);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_413) = __tact_dict_min_int_coins($m, 257);
+    while ($fresh$flag_413) {
+        $sum1 = $sum1 + $k;
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_413) = __tact_dict_next_int_coins($m, 257, $k);
+    }
+    var $fresh$ret_414 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_414);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_varint16((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_varint16(257, 1, 100);
+    $m~__tact_dict_set_int_varint16(257, 2, 200);
+    $m~__tact_dict_set_int_varint16(257, 3, 300);
+    $m~__tact_dict_set_int_varint16(257, 4, 400);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_415) = __tact_dict_min_int_varint16($m, 257);
+    while ($fresh$flag_415) {
+        $sum1 = $sum1 + $k;
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_415) = __tact_dict_next_int_varint16($m, 257, $k);
+    }
+    var $fresh$ret_416 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_416);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_bool((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, true, 1);
+    $m~__tact_dict_set_int_int(257, 2, false, 1);
+    $m~__tact_dict_set_int_int(257, 3, true, 1);
+    $m~__tact_dict_set_int_int(257, 4, false, 1);
+    int $sum11 = 0;
+    int $sum12 = 0;
+    int $sum21 = 0;
+    var ($k, $v, $fresh$flag_417) = __tact_dict_min_int_int($m, 257, 1);
+    while ($fresh$flag_417) {
+        if ($v) {
+            $sum11 = $sum11 + $k;
+            $sum12 = $sum12 + 1;
+        } else {
+            $sum21 = $sum21 + $k;
+        }
+        ($k, $v, $fresh$flag_417) = __tact_dict_next_int_int($m, 257, $k, 1);
+    }
+    var $fresh$ret_418 = (($sum11 + $sum12) + $sum21);
+    return (($self'm, ($self's'm)), $fresh$ret_418);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_cell((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_cell(257, 1, $Builder$_fun_endCell(store_uint($global_beginCell(), 100, 16)));
+    $m~__tact_dict_set_int_cell(257, 2, $Builder$_fun_endCell(store_uint($global_beginCell(), 200, 16)));
+    $m~__tact_dict_set_int_cell(257, 3, $Builder$_fun_endCell(store_uint($global_beginCell(), 300, 16)));
+    $m~__tact_dict_set_int_cell(257, 4, $Builder$_fun_endCell(store_uint($global_beginCell(), 400, 16)));
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_419) = __tact_dict_min_int_cell($m, 257);
+    while ($fresh$flag_419) {
+        slice $s = $Cell$_fun_beginParse($v);
+        $sum1 = $sum1 + $k;
+        $sum2 = $sum2 + $s~load_uint(16);
+        ($k, $v, $fresh$flag_419) = __tact_dict_next_int_cell($m, 257, $k);
+    }
+    var $fresh$ret_420 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_420);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_address((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_slice(257, 1, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43());
+    $m~__tact_dict_set_int_slice(257, 2, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b());
+    $m~__tact_dict_set_int_slice(257, 3, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9());
+    $m~__tact_dict_set_int_slice(257, 4, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3());
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_421) = __tact_dict_min_int_slice($m, 257);
+    while ($fresh$flag_421) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $v)));
+        $s~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $k;
+        $sum2 = $sum2 + $s~load_uint(3);
+        ($k, $v, $fresh$flag_421) = __tact_dict_next_int_slice($m, 257, $k);
+    }
+    var $fresh$ret_422 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_422);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_int_struct((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_cell(257, 1, $MyStruct$_store_cell($MyStruct$_constructor_a_b(100, true)));
+    $m~__tact_dict_set_int_cell(257, 2, $MyStruct$_store_cell($MyStruct$_constructor_a_b(200, false)));
+    $m~__tact_dict_set_int_cell(257, 3, $MyStruct$_store_cell($MyStruct$_constructor_a_b(300, true)));
+    $m~__tact_dict_set_int_cell(257, 4, $MyStruct$_store_cell($MyStruct$_constructor_a_b(400, false)));
+    int $sum11 = 0;
+    int $sum12 = 0;
+    int $sum21 = 0;
+    int $sum22 = 0;
+    var ($k, $v, $fresh$flag_423) = __tact_dict_min_int_cell($m, 257);
+    while ($fresh$flag_423) {
+        var ($v'a, $v'b) = $MyStruct$_not_null($MyStruct$_load_opt($v));
+        if ($v'b) {
+            $sum11 = $sum11 + $k;
+            $sum12 = $sum12 + $v'a;
+        } else {
+            $sum21 = $sum21 + $k;
+            $sum22 = $sum22 + $v'a;
+        }
+        ($k, $v, $fresh$flag_423) = __tact_dict_next_int_cell($m, 257, $k);
+    }
+    var $fresh$ret_424 = ((($sum11 + $sum12) + $sum21) + $sum22);
+    return (($self'm, ($self's'm)), $fresh$ret_424);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_int((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), 100, 257);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), 200, 257);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), 300, 257);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), 400, 257);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_425) = __tact_dict_min_slice_int($m, 267, 257);
+    while ($fresh$flag_425) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $s~load_uint(3);
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_425) = __tact_dict_next_slice_int($m, 267, $k, 257);
+    }
+    var $fresh$ret_426 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_426);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_coins((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_coins(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), 100);
+    $m~__tact_dict_set_slice_coins(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), 200);
+    $m~__tact_dict_set_slice_coins(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), 300);
+    $m~__tact_dict_set_slice_coins(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), 400);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_427) = __tact_dict_min_slice_coins($m, 267);
+    while ($fresh$flag_427) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $s~load_uint(3);
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_427) = __tact_dict_next_slice_coins($m, 267, $k);
+    }
+    var $fresh$ret_428 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_428);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_varint16((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_varint16(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), 100);
+    $m~__tact_dict_set_slice_varint16(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), 200);
+    $m~__tact_dict_set_slice_varint16(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), 300);
+    $m~__tact_dict_set_slice_varint16(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), 400);
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_429) = __tact_dict_min_slice_varint16($m, 267);
+    while ($fresh$flag_429) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $s~load_uint(3);
+        $sum2 = $sum2 + $v;
+        ($k, $v, $fresh$flag_429) = __tact_dict_next_slice_varint16($m, 267, $k);
+    }
+    var $fresh$ret_430 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_430);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_bool((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), true, 1);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), false, 1);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), true, 1);
+    $m~__tact_dict_set_slice_int(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), false, 1);
+    int $sum11 = 0;
+    int $sum12 = 0;
+    int $sum21 = 0;
+    var ($k, $v, $fresh$flag_431) = __tact_dict_min_slice_int($m, 267, 1);
+    while ($fresh$flag_431) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        if ($v) {
+            $sum11 = $sum11 + $s~load_uint(3);
+            $sum12 = $sum12 + 1;
+        } else {
+            $sum21 = $sum21 + $s~load_uint(3);
+        }
+        ($k, $v, $fresh$flag_431) = __tact_dict_next_slice_int($m, 267, $k, 1);
+    }
+    var $fresh$ret_432 = (($sum11 + $sum12) + $sum21);
+    return (($self'm, ($self's'm)), $fresh$ret_432);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_cell((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), $Builder$_fun_endCell(store_uint($global_beginCell(), 100, 16)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), $Builder$_fun_endCell(store_uint($global_beginCell(), 200, 16)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), $Builder$_fun_endCell(store_uint($global_beginCell(), 300, 16)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), $Builder$_fun_endCell(store_uint($global_beginCell(), 400, 16)));
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_433) = __tact_dict_min_slice_cell($m, 267);
+    while ($fresh$flag_433) {
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $s~load_uint(3);
+        slice $vs = $Cell$_fun_beginParse($v);
+        $sum2 = $sum2 + $vs~load_uint(16);
+        ($k, $v, $fresh$flag_433) = __tact_dict_next_slice_cell($m, 267, $k);
+    }
+    var $fresh$ret_434 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_434);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_address((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_slice(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b());
+    $m~__tact_dict_set_slice_slice(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3());
+    $m~__tact_dict_set_slice_slice(267, __gen_slice_address_b0f9807e9fa0ad0c7f56d7e897efad5966ae936299fd0bc87c6cc463fc63fbcb(), __gen_slice_address_0f926a326068bab7cfcb2d78f5c7b1f7d50121eb20b922e78efacc7e909ce92c());
+    $m~__tact_dict_set_slice_slice(267, __gen_slice_address_ca8d555567973475adbd542d57d909f92e8b8235c0f94a25850d093ec9a9a0e6(), __gen_slice_address_2ee5b88e961af2d57e501bcd898c566271a138d42113def0a4c17b2077792b98());
+    int $sum1 = 0;
+    int $sum2 = 0;
+    var ($k, $v, $fresh$flag_435) = __tact_dict_min_slice_slice($m, 267);
+    while ($fresh$flag_435) {
+        slice $s1 = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s1~$Slice$_fun_skipBits(264);
+        $sum1 = $sum1 + $s1~load_uint(3);
+        slice $s2 = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $v)));
+        $s2~$Slice$_fun_skipBits(264);
+        $sum2 = $sum2 + $s2~load_uint(3);
+        ($k, $v, $fresh$flag_435) = __tact_dict_next_slice_slice($m, 267, $k);
+    }
+    var $fresh$ret_436 = ($sum1 + $sum2);
+    return (($self'm, ($self's'm)), $fresh$ret_436);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_address_struct((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43(), $MyStruct$_store_cell($MyStruct$_constructor_a_b(100, true)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_b39f3547b3788af1b2b928670d8730f60d7e6761d40a26107f8bc6918b3af20b(), $MyStruct$_store_cell($MyStruct$_constructor_a_b(200, false)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_77917135e9cdfc326f1ea2c4e9abae0b00967c76231d73c173802959bd81d9c9(), $MyStruct$_store_cell($MyStruct$_constructor_a_b(300, true)));
+    $m~__tact_dict_set_slice_cell(267, __gen_slice_address_4eefafc7b52df33d6863d2b61796e1ce93a40b1006fdd2da7077df3349a149c3(), $MyStruct$_store_cell($MyStruct$_constructor_a_b(400, false)));
+    int $sum11 = 0;
+    int $sum12 = 0;
+    int $sum21 = 0;
+    int $sum22 = 0;
+    var ($k, $v, $fresh$flag_437) = __tact_dict_min_slice_cell($m, 267);
+    while ($fresh$flag_437) {
+        var ($v'a, $v'b) = $MyStruct$_not_null($MyStruct$_load_opt($v));
+        slice $s = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeAddress($global_beginCell(), $k)));
+        $s~$Slice$_fun_skipBits(264);
+        if ($v'b) {
+            $sum11 = $sum11 + $s~load_uint(3);
+            $sum12 = $sum12 + $v'a;
+        } else {
+            $sum21 = $sum21 + $s~load_uint(3);
+            $sum22 = $sum22 + $v'a;
+        }
+        ($k, $v, $fresh$flag_437) = __tact_dict_next_slice_cell($m, 267, $k);
+    }
+    var $fresh$ret_438 = ((($sum11 + $sum12) + $sum21) + $sum22);
+    return (($self'm, ($self's'm)), $fresh$ret_438);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_empty_map((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_439) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_439) {
+        var $fresh$ret_440 = 42;
+        return (($self'm, ($self's'm)), $fresh$ret_440);
+        ($k, $v, $fresh$flag_439) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_441 = $sum;
+    return (($self'm, ($self's'm)), $fresh$ret_441);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_null((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_442) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_442) {
+        var $fresh$ret_443 = 42;
+        return (($self'm, ($self's'm)), $fresh$ret_443);
+        ($k, $v, $fresh$flag_442) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_444 = $sum;
+    return (($self'm, ($self's'm)), $fresh$ret_444);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_modification_during_traversal1((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 100, 257);
+    $m~__tact_dict_set_int_int(257, 2, 200, 257);
+    $m~__tact_dict_set_int_int(257, 3, 300, 257);
+    $m~__tact_dict_set_int_int(257, 4, 400, 257);
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_445) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_445) {
+        $m~__tact_dict_delete_int(257, 2);
+        $sum = $sum + ($k + $v);
+        ($k, $v, $fresh$flag_445) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_446 = $sum;
+    return (($self'm, ($self's'm)), $fresh$ret_446);
+}
+
+((cell, (cell)), ()) $MapTraverseTestContract$_fun_test_map_modification_during_traversal2((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 100, 257);
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_447) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_447) {
+        $m~__tact_dict_set_int_int(257, ($k + 1), ($v + 1), 257);
+        ($k, $v, $fresh$flag_447) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    return (($self'm, ($self's'm)), ());
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_size((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 100, 257);
+    $m~__tact_dict_set_int_int(257, 2, 200, 257);
+    $m~__tact_dict_set_int_int(257, 3, 300, 257);
+    $m~__tact_dict_set_int_int(257, 4, 400, 257);
+    int $size = 0;
+    var ($k, $v, $fresh$flag_448) = __tact_dict_min_int_int($m, 257, 257);
+    while ($fresh$flag_448) {
+        $size = $size + 1;
+        ($k, $v, $fresh$flag_448) = __tact_dict_next_int_int($m, 257, $k, 257);
+    }
+    var $fresh$ret_449 = $size;
+    return (($self'm, ($self's'm)), $fresh$ret_449);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_as_field((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_450) = __tact_dict_min_int_int($self'm, 257, 257);
+    while ($fresh$flag_450) {
+        $sum = $sum + ($k + $v);
+        ($k, $v, $fresh$flag_450) = __tact_dict_next_int_int($self'm, 257, $k, 257);
+    }
+    var $fresh$ret_451 = $sum;
+    return (($self'm, ($self's'm)), $fresh$ret_451);
+}
+
+((cell, (cell)), int) $MapTraverseTestContract$_fun_test_map_as_struct_field((cell, (cell)) $self) impure inline_ref {
+    var (($self'm, ($self's'm))) = $self;
+    int $sum = 0;
+    var ($k, $v, $fresh$flag_452) = __tact_dict_min_int_int($self's'm, 257, 257);
+    while ($fresh$flag_452) {
+        $sum = $sum + ($k + $v);
+        ($k, $v, $fresh$flag_452) = __tact_dict_next_int_int($self's'm, 257, $k, 257);
+    }
+    var $fresh$ret_453 = $sum;
+    return (($self'm, ($self's'm)), $fresh$ret_453);
+}
+
+;;
+;; Get methods of a Contract MapTraverseTestContract
+;;
+
+_ %test_int_int() method_id(115949) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_int();
+    return res;
+}
+
+_ %test_int_coins() method_id(106986) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_coins();
+    return res;
+}
+
+_ %test_int_varint16() method_id(117373) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_varint16();
+    return res;
+}
+
+_ %test_int_bool() method_id(77636) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_bool();
+    return res;
+}
+
+_ %test_int_cell() method_id(117602) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_cell();
+    return res;
+}
+
+_ %test_int_address() method_id(83640) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_address();
+    return res;
+}
+
+_ %test_int_struct() method_id(79520) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_int_struct();
+    return res;
+}
+
+_ %test_address_int() method_id(65769) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_int();
+    return res;
+}
+
+_ %test_address_coins() method_id(80894) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_coins();
+    return res;
+}
+
+_ %test_address_varint16() method_id(113202) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_varint16();
+    return res;
+}
+
+_ %test_address_bool() method_id(111244) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_bool();
+    return res;
+}
+
+_ %test_address_cell() method_id(87722) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_cell();
+    return res;
+}
+
+_ %test_address_address() method_id(123693) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_address();
+    return res;
+}
+
+_ %test_address_struct() method_id(65619) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_address_struct();
+    return res;
+}
+
+_ %test_empty_map() method_id(96611) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_empty_map();
+    return res;
+}
+
+_ %test_null() method_id(112186) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_null();
+    return res;
+}
+
+_ %test_map_modification_during_traversal1() method_id(104258) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_map_modification_during_traversal1();
+    return res;
+}
+
+_ %test_map_modification_during_traversal2() method_id(108321) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_map_modification_during_traversal2();
+    return res;
+}
+
+_ %test_map_size() method_id(73341) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_map_size();
+    return res;
+}
+
+_ %test_map_as_field() method_id(95491) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_map_as_field();
+    return res;
+}
+
+_ %test_map_as_struct_field() method_id(79374) {
+    var self = $MapTraverseTestContract$_contract_load();
+    var res = self~$MapTraverseTestContract$_fun_test_map_as_struct_field();
+    return res;
+}
+
+;;
+;; Routing of a Contract MapTraverseTestContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'm, ($self's'm)) = $MapTraverseTestContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        ;; Persist state
+        $MapTraverseTestContract$_contract_store(($self'm, ($self's'm)));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

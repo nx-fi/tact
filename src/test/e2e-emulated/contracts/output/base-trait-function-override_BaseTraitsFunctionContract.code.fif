@@ -1,0 +1,118 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/base-trait-function-override_BaseTraitsFunctionContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $BaseTraitsFunctionContract$_store
+  DECLPROC $BaseTraitsFunctionContract$_load
+  DECLPROC $BaseTraitsFunctionContract$_contract_init
+  DECLPROC $BaseTraitsFunctionContract$_contract_load
+  DECLPROC $BaseTraitsFunctionContract$_contract_store
+  DECLPROC $BaseTraitsFunctionContract$_fun_notify
+  DECLPROC $BaseTraitsFunctionContract$_fun_value
+  121536 DECLMETHOD %value
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $BaseTraitsFunctionContract$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $BaseTraitsFunctionContract$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $BaseTraitsFunctionContract$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $BaseTraitsFunctionContract$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $BaseTraitsFunctionContract$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $BaseTraitsFunctionContract$_contract_init INLINECALLDICT
+  }>
+  $BaseTraitsFunctionContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $BaseTraitsFunctionContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $BaseTraitsFunctionContract$_fun_notify PROCREF:<{
+    2DROP
+    1000 PUSHINT
+  }>
+  $BaseTraitsFunctionContract$_fun_value PROCREF:<{
+    PUSHNULL
+    $BaseTraitsFunctionContract$_fun_notify INLINECALLDICT
+    DUP
+  }>
+  %value PROC:<{
+    $BaseTraitsFunctionContract$_contract_load INLINECALLDICT
+    $BaseTraitsFunctionContract$_fun_value INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $BaseTraitsFunctionContract$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $BaseTraitsFunctionContract$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

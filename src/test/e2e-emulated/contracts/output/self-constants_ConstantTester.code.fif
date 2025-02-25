@@ -1,0 +1,151 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/self-constants_ConstantTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $ConstantTester$_store
+  DECLPROC $ConstantTester$_load
+  DECLPROC $ConstantTester$_contract_init
+  DECLPROC $ConstantTester$_contract_load
+  DECLPROC $ConstantTester$_contract_store
+  DECLPROC $ConstantTester$_fun_b
+  DECLPROC $ConstantTester$_fun_c2
+  DECLPROC $ConstantTester$_fun_value
+  DECLPROC $ConstantTester$_fun_traitB
+  DECLPROC $ConstantTester$_fun_traitC2
+  85220 DECLMETHOD %b
+  84072 DECLMETHOD %c2
+  121536 DECLMETHOD %value
+  105663 DECLMETHOD %traitB
+  120853 DECLMETHOD %traitC2
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $ConstantTester$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $ConstantTester$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $ConstantTester$_contract_init PROCINLINE:<{
+    69 PUSHINT
+  }>
+  $ConstantTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $ConstantTester$_load INLINECALLDICT
+      NIP
+    }>
+    DROP
+    $ConstantTester$_contract_init INLINECALLDICT
+  }>
+  $ConstantTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $ConstantTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $ConstantTester$_fun_b PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_c2 PROCREF:<{
+    51 PUSHINT
+  }>
+  $ConstantTester$_fun_value PROCREF:<{
+    DUP
+  }>
+  $ConstantTester$_fun_traitB PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_traitC2 PROCREF:<{
+    51 PUSHINT
+  }>
+  %b PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_b INLINECALLDICT
+    NIP
+  }>
+  %c2 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_c2 INLINECALLDICT
+    NIP
+  }>
+  %value PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_value INLINECALLDICT
+    NIP
+  }>
+  %traitB PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_traitB INLINECALLDICT
+    NIP
+  }>
+  %traitC2 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_traitC2 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ConstantTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      $ConstantTester$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

@@ -1,0 +1,254 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/deep_B.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $B$_store
+  DECLPROC $B$_load
+  DECLPROC $StateInit$_to_external
+  DECLPROC $B$init$_load
+  DECLPROC $C$init$_store
+  DECLPROC $B$_contract_init
+  DECLPROC $B$_contract_load
+  DECLPROC $B$_contract_store
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $C$_init_child
+  DECLPROC $B$_fun_getNext
+  DECLPROC $SendParameters$_constructor_value_to_mode_bounce_code_data_body
+  74105 DECLMETHOD %getNext
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $B$_store PROCINLINE:<{
+    STSLICER
+  }>
+  $B$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $B$init$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $C$init$_store PROCINLINE:<{
+    STSLICER
+  }>
+  $B$_contract_init PROCINLINE:<{
+  }>
+  $B$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $B$_load INLINECALLDICT
+      NIP
+    }>
+    $B$init$_load INLINECALLDICT
+    SWAP
+    ENDS
+    $B$_contract_init INLINECALLDICT
+  }>
+  $B$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $B$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+        NOP
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $C$_init_child PROCREF:<{
+        B{b5ee9c7201020701000147000114ff00f4a413f4bcf2c80b0103f2d301d072d721d200d200fa4021103450666f04f86102f862db3c02915be020d749c21f93d31f31def9012082f02796bd8dcb3155bf85d91ad1db643a3759a7209173fd2c1959d190a66b7aaf38bae30282f05d83a38f50c03d8297a4969a4525917e026c6a16582eb8cf31e5777855e3d71dbae30230f2c0820203040022ed44d0d2000194fa400131e0fa400101d102fa3020db3c5c705920f90022f9005ad76501d76582020134c8cb17cb0fcb0fcbffcbff71f90400c87401cb0212ca07cbffc9d0007080427f885e234430121046445503c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb00c87f01ca0001cf16c9ed5405060016c87f01ca0001cf16c9ed540016f82ac87001ca0058cf16c90018000000004d65737361676532} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $C$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $B$_fun_getNext PROCREF:<{
+        MYADDR
+    $C$_init_child INLINECALLDICT
+  }>
+  $SendParameters$_constructor_value_to_mode_bounce_code_data_body PROCINLINE:<{
+    s4 s6 XCHG
+    s4 s5 s5 XCHG3
+    s0 s3 XCHG
+  }>
+  %getNext PROC:<{
+    $B$_contract_load INLINECALLDICT
+    $B$_fun_getNext INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $B$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    DUP
+    SBITS
+    31 GTINT
+    IF:<{
+      32 LDU
+      NIP
+    }>
+    HASHSU
+    17906536407274860712279605252355888328213352419534283283354847319154734313272 PUSHINT
+    EQUAL
+    IFJMP:<{
+          MYADDR
+      $C$_init_child INLINECALLDICT
+      2DUP
+      $global_contractAddress INLINECALLDICT
+      0 PUSHINT
+      66 PUSHINT
+      TRUE
+          B{b5ee9c7241010101000d000016000000004d6573736167652e559ef2} B>boc PUSHREF
+      4 3 REVERSE
+      s4 s3 s0 XCHG3
+      s1 s2 XCHG
+      $SendParameters$_constructor_value_to_mode_bounce_code_data_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+          STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          // Group 2: Placing the Builder after code and data, then checking those for nullability
+          s2 XCHG0
+          DUP2
+          ISNULL
+          SWAP
+          ISNULL
+          MUL // note that -1 * -1 wraps back to -1
+          // → Stack state
+          // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+          // s1: `code`
+          // s2: `data`
+          // s3: Builder
+          // s4: `body`
+          // s5: `mode`
+          // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+          <{
+              DROP2 // drop `data` and `code`, since either of those is null
+              b{0} STSLICECONST
+          }> PUSHCONT
+          // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+          <{
+              // _ split_depth:(Maybe (## 5))
+              //   special:(Maybe TickTock)
+              //   code:(Maybe ^Cell)
+              //   data:(Maybe ^Cell)
+              //   library:(Maybe ^Cell)
+              // = StateInit;
+              ROT                // place message Builder on top
+              b{10} STSLICECONST // store Maybe = true, Either = false
+              // Start composing inlined StateInit
+              b{00} STSLICECONST // store split_depth and special first
+              STDICT             // store code
+              STDICT             // store data
+              b{0} STSLICECONST  // store library
+          }> PUSHCONT
+          // Group 3: IFELSE that does the branching shown above
+          IFELSE
+          // → Stack state
+          // s0: Builder
+          // s1: null or StateInit
+          // s2: `body`
+          // s3: `mode`
+          // Group 4: Finalizing the message
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC
+          // → Stack state
+          // s0: Cell
+          // s1: `mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+      $B$_contract_store INLINECALLDICT
+    }>
+    DROP
+    130 THROW
+  }>
+}END>c

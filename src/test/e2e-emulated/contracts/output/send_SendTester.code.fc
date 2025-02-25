@@ -1,0 +1,419 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; send_SendTester.headers.fc
+;;
+;; Header files for SendTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $global_emit
+() $global_emit(cell $body) impure inline;
+
+;; $SendTester$_contract_init
+tuple $SendTester$_contract_init() impure inline;
+
+;; $SendTester$_contract_load
+tuple $SendTester$_contract_load() impure inline_ref;
+
+;; $SendTester$_contract_store
+() $SendTester$_contract_store(tuple v) impure inline;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $SendTester$_fun_forward
+(tuple, ()) $SendTester$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $SendTester$_fun_reply
+(tuple, ()) $SendTester$_fun_reply(tuple $self, cell $body) impure inline;
+
+;; $SendTester$_fun_notify
+(tuple, ()) $SendTester$_fun_notify(tuple $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+;; $SendParameters$_constructor_to_value_mode_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline;
+
+
+;; send_SendTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+() $global_nativeSendMessage(cell $cell, int $mode) impure asm """
+    SENDRAWMSG
+""";
+
+() $global_emit(cell $body) impure inline {
+    cell $c = $Builder$_fun_endCell($Builder$_fun_storeRef($body, store_uint($global_beginCell(), 15211807202738752817960438464513, 104)));
+    $global_nativeSendMessage($c, 0);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+(tuple, ()) $SendTester$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var ($self) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return ($self, ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return ($self, ());
+}
+
+(tuple, ()) $SendTester$_fun_reply(tuple $self, cell $body) impure inline {
+    var ($self) = $self;
+    $self~$SendTester$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return ($self, ());
+}
+
+(tuple, ()) $SendTester$_fun_notify(tuple $self, cell $body) impure inline {
+    var ($self) = $self;
+    $self~$SendTester$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return ($self, ());
+}
+
+;; send_SendTester.constants.fc
+;; Cell ULiBLfSnM8WiJm62jeyVLGTQSjF0uuQlZqHhkdvbRww=
+cell __gen_cell_cell_50b8812df4a733c5a2266eb68dec952c64d04a3174bae42566a1e191dbdb470c() asm """
+    B{b5ee9c72410101010014000024000000004465706c6f7920737563636573736c569015} B>boc PUSHREF
+""";
+
+;; Cell lfv9Z8MeVJtdQ4btSivuvClL5VrLPt2tqn+d+GvjbUI=
+cell __gen_cell_cell_95fbfd67c31e549b5d4386ed4a2beebc294be55acb3eddadaa7f9df86be36d42() asm """
+    B{b5ee9c7241010101000b00001200000000576f726c64cf8219c9} B>boc PUSHREF
+""";
+
+;; Cell 7GXHR0fbIIlqOdh0sEc91eYeCPyfNRbVbVjq7qUDHqQ=
+cell __gen_cell_cell_ec65c74747db20896a39d874b0473dd5e61e08fc9f3516d56d58eaeea5031ea4() asm """
+    B{b5ee9c7241010101000f00001a00000000536f6d657468696e6707ec49a0} B>boc PUSHREF
+""";
+
+;; Cell j4xuC1dTW/nndF01c2iUy7I+4o+nIIm+3TXlxVZt5sU=
+cell __gen_cell_cell_8f8c6e0b57535bf9e7745d35736894cbb23ee28fa72089bedd35e5c5566de6c5() asm """
+    B{b5ee9c7241010101002100003e000000004861766520796f75207365656e2074686973206d6573736167653fd9839a0a} B>boc PUSHREF
+""";
+
+;; Cell KJ0Yxb9b38jiYMr3cjtLkVakcxlKF8LRSLcUakW9MUg=
+cell __gen_cell_cell_289d18c5bf5bdfc8e260caf7723b4b9156a473194a17c2d148b7146a45bd3148() asm """
+    B{b5ee9c724101010100330000620000000049206769766520796f75206d7920616c6c212057656c6c2c20616c6c20746861742773206e6f74206d696e6521539fcc2a} B>boc PUSHREF
+""";
+
+;; Cell xKHw+dpiFx+psjLIjeBqwaoDmljevmnjjLK9mpIvE+E=
+cell __gen_cell_cell_c4a1f0f9da62171fa9b232c88de06ac1aa039a58debe69e38cb2bd9a922f13e1() asm """
+    B{b5ee9c7241010101000b00001200000000746f7075705f2f5ab3} B>boc PUSHREF
+""";
+
+;; Cell Lqr5GnkO2V2RZhUYJwzOY8+Wk+C25fw4ef/4abTZmRU=
+cell __gen_cell_cell_2eaaf91a790ed95d91661518270cce63cf9693e0b6e5fc3879fff869b4d99915() asm """
+    B{b5ee9c7241010101002800004c0000000049206769766520616c6d6f737420616c6c20746861742773206e6f74206d696e65219db3de22} B>boc PUSHREF
+""";
+
+;; send_SendTester.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline {
+    return ($mode, $body, null(), null(), $value, $to, true);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: SendTester
+;;
+
+tuple $SendTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $SendTester$_contract_init();
+    }
+}
+
+() $SendTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract SendTester functions
+;;
+
+tuple $SendTester$_contract_init() impure inline {
+    tuple $self = null();
+    $global_emit(__gen_cell_cell_50b8812df4a733c5a2266eb68dec952c64d04a3174bae42566a1e191dbdb470c());
+    return $self;
+}
+
+;;
+;; Get methods of a Contract SendTester
+;;
+
+;;
+;; Routing of a Contract SendTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $SendTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive Deploy message
+        if (op == 2490013878) {
+            var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+            $self~$SendTester$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+            ;; Persist state
+            $SendTester$_contract_store($self);
+            return ();
+        }
+        
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Hello" message
+    if (text_op == 0xbb1cba91be1e73057ed9eadc8484d50bdfa70e14bad6065b82a88fd68929d243) {
+        $self~$SendTester$_fun_reply(__gen_cell_cell_95fbfd67c31e549b5d4386ed4a2beebc294be55acb3eddadaa7f9df86be36d42());
+        $global_emit(__gen_cell_cell_ec65c74747db20896a39d874b0473dd5e61e08fc9f3516d56d58eaeea5031ea4());
+        ;; Persist state
+        $SendTester$_contract_store($self);
+        return ();
+    }
+    ;; Receive "topup" message
+    if (text_op == 0xf31c0f43c5e15c5d812c472f984c341bf2477bf5722c621bed44f57754b725a2) {
+        ;; Persist state
+        $SendTester$_contract_store($self);
+        return ();
+    }
+    ;; Receive "ReserveAtMost_1" message
+    if (text_op == 0x061f610fe6bfda44cb0b25a9a3be4bea60474a5dce364b0828f4d32ddfb3e1fd) {
+        $global_emit(__gen_cell_cell_8f8c6e0b57535bf9e7745d35736894cbb23ee28fa72089bedd35e5c5566de6c5());
+        $global_nativeReserve(50000000, 6);
+        $global_send($SendParameters$_constructor_to_value_mode_body(__tact_context_get_sender(), 0, 128, __gen_cell_cell_289d18c5bf5bdfc8e260caf7723b4b9156a473194a17c2d148b7146a45bd3148()));
+        ;; Persist state
+        $SendTester$_contract_store($self);
+        return ();
+    }
+    ;; Receive "ReserveAtMost_2" message
+    if (text_op == 0x12caf4c19e4722fde05ba811a7e837cca01ba88df481e9b99d666402af5df2b5) {
+        $global_send($SendParameters$_constructor_to_value_mode_body($global_myAddress(), 0, 1, __gen_cell_cell_c4a1f0f9da62171fa9b232c88de06ac1aa039a58debe69e38cb2bd9a922f13e1()));
+        $global_nativeReserve(50000000, 6);
+        $global_send($SendParameters$_constructor_to_value_mode_body(__tact_context_get_sender(), 0, 128, __gen_cell_cell_2eaaf91a790ed95d91661518270cce63cf9693e0b6e5fc3879fff869b4d99915()));
+        ;; Persist state
+        $SendTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

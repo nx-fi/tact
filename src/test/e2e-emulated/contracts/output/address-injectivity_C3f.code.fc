@@ -1,0 +1,109 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; address-injectivity_C3f.headers.fc
+;;
+;; Header files for C3f
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $C3f$_load
+(slice, ((int, int))) $C3f$_load(slice sc_0) inline;
+
+;; $C3f$init$_load
+(slice, ((int))) $C3f$init$_load(slice sc_0) inline;
+
+;; $C3f$_contract_init
+(int, int) $C3f$_contract_init(int $v) impure inline;
+
+;; $C3f$_contract_load
+(int, int) $C3f$_contract_load() impure inline_ref;
+
+;; $C3f$_fun_incrAndGetField1
+((int, int), int) $C3f$_fun_incrAndGetField1((int, int) $self, int $n) impure inline_ref;
+
+
+;; address-injectivity_C3f.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; address-injectivity_C3f.storage.fc
+;;
+;; Type: C3f
+;;
+
+(slice, ((int, int))) $C3f$_load(slice sc_0) inline {
+    var v'f1 = sc_0~load_int(257);
+    var v'f2 = sc_0~load_int(257);
+    return (sc_0, (v'f1, v'f2));
+}
+
+(slice, ((int))) $C3f$init$_load(slice sc_0) inline {
+    var v'v = sc_0~load_int(257);
+    return (sc_0, (v'v));
+}
+
+(int, int) $C3f$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$C3f$_load();
+    } else {
+        (int $v) = $sc~$C3f$init$_load();
+        $sc.end_parse();
+        return $C3f$_contract_init($v);
+    }
+}
+
+;;
+;; Contract C3f functions
+;;
+
+(int, int) $C3f$_contract_init(int $v) impure inline {
+    var (($self'f1, $self'f2)) = (null(), 100);
+    $self'f1 = $v;
+    return ($self'f1, $self'f2);
+}
+
+((int, int), int) $C3f$_fun_incrAndGetField1((int, int) $self, int $n) impure inline_ref {
+    var (($self'f1, $self'f2)) = $self;
+    var $fresh$ret_28 = ($self'f1 + $n);
+    return (($self'f1, $self'f2), $fresh$ret_28);
+}
+
+;;
+;; Get methods of a Contract C3f
+;;
+
+_ %incrAndGetField1(int $n) method_id(111350) {
+    int $n = $n;
+    var self = $C3f$_contract_load();
+    var res = self~$C3f$_fun_incrAndGetField1($n);
+    return res;
+}
+
+;;
+;; Routing of a Contract C3f
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'f1, $self'f2) = $C3f$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}

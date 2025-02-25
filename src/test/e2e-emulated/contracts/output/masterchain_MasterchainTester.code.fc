@@ -1,0 +1,134 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; masterchain_MasterchainTester.headers.fc
+;;
+;; Header files for MasterchainTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $MasterchainTester$_contract_init
+tuple $MasterchainTester$_contract_init() impure inline;
+
+;; $MasterchainTester$_contract_load
+tuple $MasterchainTester$_contract_load() impure inline_ref;
+
+;; $MasterchainTester$_contract_store
+() $MasterchainTester$_contract_store(tuple v) impure inline;
+
+;; $global_verifyAddress
+() $global_verifyAddress(slice $addr, int $enabledMasterChain) impure inline_ref;
+
+
+;; masterchain_MasterchainTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+slice $Address$_fun_asSlice(slice $self) impure asm """
+    NOP
+""";
+
+int $Slice$_fun_bits(slice $self) impure asm """
+    SBITS
+""";
+
+;; masterchain_MasterchainTester.storage.fc
+;;
+;; Type: MasterchainTester
+;;
+
+tuple $MasterchainTester$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $MasterchainTester$_contract_init();
+    }
+}
+
+() $MasterchainTester$_contract_store(tuple v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MasterchainTester functions
+;;
+
+tuple $MasterchainTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+() $global_verifyAddress(slice $addr, int $enabledMasterChain) impure inline_ref {
+    slice $addrSlice = $Address$_fun_asSlice($addr);
+    throw_unless(1136, ($Slice$_fun_bits($addrSlice) == 267));
+    int $h = preload_uint($addrSlice, 11);
+    if ($enabledMasterChain) {
+        throw_unless(1136, ( (($h == 1024)) ? (true) : (($h == 1279)) ));
+    } else {
+        throw_if(1137, ($h == 1279));
+        throw_unless(1136, ($h == 1024));
+    }
+}
+
+;;
+;; Get methods of a Contract MasterchainTester
+;;
+
+;;
+;; Routing of a Contract MasterchainTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $MasterchainTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "DeployToWorkchain" message
+    if (text_op == 0x66015e8c0c487967aa259e1e14f55cd57855555888ce7f3f03df4990cbee361d) {
+        $global_verifyAddress(__tact_context_get_sender(), false);
+        ;; Persist state
+        $MasterchainTester$_contract_store($self);
+        return ();
+    }
+    ;; Receive "DeployToMasterchain" message
+    if (text_op == 0x55251542d52413eb56cca90c0e9306ac0f3ea76656ad041c6661a10e96143aee) {
+        $global_verifyAddress(__tact_context_get_sender(), true);
+        ;; Persist state
+        $MasterchainTester$_contract_store($self);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}

@@ -1,0 +1,369 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; multisig-3_MultisigContract.headers.fc
+;;
+;; Header files for MultisigContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Operation$_store
+builder $Operation$_store(builder build_0, (int, int, slice) v) inline;
+
+;; $Operation$_store_cell
+cell $Operation$_store_cell((int, int, slice) v) inline;
+
+;; $Operation$_load
+(slice, ((int, int, slice))) $Operation$_load(slice sc_0) inline;
+
+;; $Execute$_load_without_opcode
+(slice, (((int, int, slice), slice, slice, slice))) $Execute$_load_without_opcode(slice sc_0) inline;
+
+;; $MultisigContract$_store
+builder $MultisigContract$_store(builder build_0, (int, int, int, int) v) inline;
+
+;; $MultisigContract$_load
+(slice, ((int, int, int, int))) $MultisigContract$_load(slice sc_0) inline;
+
+;; $MultisigContract$init$_load
+(slice, ((int, int, int))) $MultisigContract$init$_load(slice sc_0) inline;
+
+;; $MultisigContract$_contract_init
+(int, int, int, int) $MultisigContract$_contract_init(int $key1, int $key2, int $key3) impure inline;
+
+;; $MultisigContract$_contract_load
+(int, int, int, int) $MultisigContract$_contract_load() impure inline_ref;
+
+;; $MultisigContract$_contract_store
+() $MultisigContract$_contract_store((int, int, int, int) v) impure inline;
+
+;; $SendParameters$_constructor_to_value
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value(slice $to, int $value) inline;
+
+;; $MultisigContract$_fun_execute
+((int, int, int, int), ()) $MultisigContract$_fun_execute((int, int, int, int) $self, (int, int, slice) $op) impure inline_ref;
+
+;; $MultisigContract$_fun_key1
+((int, int, int, int), int) $MultisigContract$_fun_key1((int, int, int, int) $self) impure inline_ref;
+
+;; $MultisigContract$_fun_key2
+((int, int, int, int), int) $MultisigContract$_fun_key2((int, int, int, int) $self) impure inline_ref;
+
+;; $MultisigContract$_fun_key3
+((int, int, int, int), int) $MultisigContract$_fun_key3((int, int, int, int) $self) impure inline_ref;
+
+;; $MultisigContract$_fun_seqno
+((int, int, int, int), int) $MultisigContract$_fun_seqno((int, int, int, int) $self) impure inline_ref;
+
+
+;; multisig-3_MultisigContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int $global_checkSignature(int $hash, slice $signature, int $public_key) impure asm """
+    CHKSIGNU
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+int $Cell$_fun_hash(cell $self) impure asm """
+    HASHCU
+""";
+
+;; multisig-3_MultisigContract.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value(slice $to, int $value) inline {
+    return (0, null(), null(), null(), $value, $to, true);
+}
+
+;;
+;; Type: Operation
+;; TLB: _ seqno:uint32 amount:coins target:address = Operation
+;;
+
+builder $Operation$_store(builder build_0, (int, int, slice) v) inline {
+    var (v'seqno, v'amount, v'target) = v;
+    build_0 = build_0.store_uint(v'seqno, 32);
+    build_0 = build_0.store_varuint16(v'amount);
+    build_0 = build_0.store_slice(v'target);
+    return build_0;
+}
+
+cell $Operation$_store_cell((int, int, slice) v) inline {
+    return $Operation$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int, int, slice))) $Operation$_load(slice sc_0) inline {
+    var v'seqno = sc_0~load_uint(32);
+    var v'amount = sc_0~load_varuint16();
+    var v'target = sc_0~load_msg_addr();
+    return (sc_0, (v'seqno, v'amount, v'target));
+}
+
+((int, int, slice)) $Operation$_tensor_cast((int, int, slice) v) asm """
+    NOP
+""";
+
+;;
+;; Type: Execute
+;; Header: 0x1f0d5570
+;; TLB: execute#1f0d5570 operation:Operation{seqno:uint32,amount:coins,target:address} signature1:^slice signature2:^slice signature3:^slice = Execute
+;;
+
+(slice, (((int, int, slice), slice, slice, slice))) $Execute$_load_without_opcode(slice sc_0) inline {
+    var v'operation = sc_0~$Operation$_load();
+    var v'signature1 = sc_0~load_ref().begin_parse();
+    var v'signature2 = sc_0~load_ref().begin_parse();
+    var v'signature3 = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'operation, v'signature1, v'signature2, v'signature3));
+}
+
+;;
+;; Type: MultisigContract
+;;
+
+builder $MultisigContract$_store(builder build_0, (int, int, int, int) v) inline {
+    var (v'seqno, v'user1_key, v'user2_key, v'user3_key) = v;
+    build_0 = build_0.store_uint(v'seqno, 32);
+    build_0 = build_0.store_uint(v'user1_key, 256);
+    build_0 = build_0.store_uint(v'user2_key, 256);
+    build_0 = build_0.store_uint(v'user3_key, 256);
+    return build_0;
+}
+
+(slice, ((int, int, int, int))) $MultisigContract$_load(slice sc_0) inline {
+    var v'seqno = sc_0~load_uint(32);
+    var v'user1_key = sc_0~load_uint(256);
+    var v'user2_key = sc_0~load_uint(256);
+    var v'user3_key = sc_0~load_uint(256);
+    return (sc_0, (v'seqno, v'user1_key, v'user2_key, v'user3_key));
+}
+
+(slice, ((int, int, int))) $MultisigContract$init$_load(slice sc_0) inline {
+    var v'key1 = sc_0~load_int(257);
+    var v'key2 = sc_0~load_int(257);
+    var v'key3 = sc_0~load_int(257);
+    return (sc_0, (v'key1, v'key2, v'key3));
+}
+
+(int, int, int, int) $MultisigContract$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$MultisigContract$_load();
+    } else {
+        (int $key1, int $key2, int $key3) = $sc~$MultisigContract$init$_load();
+        $sc.end_parse();
+        return $MultisigContract$_contract_init($key1, $key2, $key3);
+    }
+}
+
+() $MultisigContract$_contract_store((int, int, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $MultisigContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MultisigContract functions
+;;
+
+(int, int, int, int) $MultisigContract$_contract_init(int $key1, int $key2, int $key3) impure inline {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = (0, null(), null(), null());
+    $self'user1_key = $key1;
+    $self'user2_key = $key2;
+    $self'user3_key = $key3;
+    return ($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key);
+}
+
+((int, int, int, int), ()) $MultisigContract$_fun_execute((int, int, int, int) $self, (int, int, slice) $op) impure inline_ref {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = $self;
+    var (($op'seqno, $op'amount, $op'target)) = $op;
+    $global_send($SendParameters$_constructor_to_value($op'target, $op'amount));
+    return (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key), ());
+}
+
+((int, int, int, int), int) $MultisigContract$_fun_key1((int, int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = $self;
+    var $fresh$ret_31 = $self'user1_key;
+    return (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key), $fresh$ret_31);
+}
+
+((int, int, int, int), int) $MultisigContract$_fun_key2((int, int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = $self;
+    var $fresh$ret_32 = $self'user2_key;
+    return (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key), $fresh$ret_32);
+}
+
+((int, int, int, int), int) $MultisigContract$_fun_key3((int, int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = $self;
+    var $fresh$ret_33 = $self'user3_key;
+    return (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key), $fresh$ret_33);
+}
+
+((int, int, int, int), int) $MultisigContract$_fun_seqno((int, int, int, int) $self) impure inline_ref {
+    var (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)) = $self;
+    var $fresh$ret_34 = $self'seqno;
+    return (($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key), $fresh$ret_34);
+}
+
+;;
+;; Get methods of a Contract MultisigContract
+;;
+
+_ %key1() method_id(107493) {
+    var self = $MultisigContract$_contract_load();
+    var res = self~$MultisigContract$_fun_key1();
+    return res;
+}
+
+_ %key2() method_id(103302) {
+    var self = $MultisigContract$_contract_load();
+    var res = self~$MultisigContract$_fun_key2();
+    return res;
+}
+
+_ %key3() method_id(99239) {
+    var self = $MultisigContract$_contract_load();
+    var res = self~$MultisigContract$_fun_key3();
+    return res;
+}
+
+_ %seqno() method_id(85143) {
+    var self = $MultisigContract$_contract_load();
+    var res = self~$MultisigContract$_fun_seqno();
+    return res;
+}
+
+;;
+;; Routing of a Contract MultisigContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key) = $MultisigContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive Execute message
+        if (op == 520967536) {
+            var (($msg'operation'seqno, $msg'operation'amount, $msg'operation'target), $msg'signature1, $msg'signature2, $msg'signature3) = in_msg~$Execute$_load_without_opcode();
+            int $op_hash = $Cell$_fun_hash($Operation$_store_cell(($msg'operation'seqno, $msg'operation'amount, $msg'operation'target)));
+            int $ok1 = $global_checkSignature($op_hash, $msg'signature1, $self'user1_key);
+            int $ok2 = $global_checkSignature($op_hash, $msg'signature2, $self'user2_key);
+            int $ok3 = $global_checkSignature($op_hash, $msg'signature3, $self'user3_key);
+            throw_unless(17654, ($msg'operation'seqno == $self'seqno));
+            throw_unless(48401, ( (( ($ok1) ? ($ok2) : (false) )) ? ($ok3) : (false) ));
+            ($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key)~$MultisigContract$_fun_execute($Operation$_tensor_cast(($msg'operation'seqno, $msg'operation'amount, $msg'operation'target)));
+            ;; Persist state
+            $MultisigContract$_contract_store(($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key));
+            return ();
+        }
+        
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Deploy" message
+    if (text_op == 0xc1c8ebe8e42f1458f2693e8bef345c9c08db8c56d2ca637be9b436ea1f68976f) {
+        ;; Persist state
+        $MultisigContract$_contract_store(($self'seqno, $self'user1_key, $self'user2_key, $self'user3_key));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
