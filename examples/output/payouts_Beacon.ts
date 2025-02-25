@@ -1,31 +1,31 @@
-import { 
+import {
     Cell,
-    Slice, 
-    Address, 
-    Builder, 
-    beginCell, 
-    ComputeError, 
-    TupleItem, 
-    TupleReader, 
-    Dictionary, 
-    contractAddress, 
-    ContractProvider, 
-    Sender, 
-    Contract, 
-    ContractABI, 
+    Slice,
+    Address,
+    Builder,
+    beginCell,
+    ComputeError,
+    TupleItem,
+    TupleReader,
+    Dictionary,
+    contractAddress,
+    ContractProvider,
+    Sender,
+    Contract,
+    ContractABI,
     ABIType,
     ABIGetter,
     ABIReceiver,
     TupleBuilder,
-    DictionaryValue
-} from '@ton/core';
+    DictionaryValue,
+} from "@ton/core";
 
 export type DataSize = {
-    $$type: 'DataSize';
+    $$type: "DataSize";
     cells: bigint;
     bits: bigint;
     refs: bigint;
-}
+};
 
 export function storeDataSize(src: DataSize) {
     return (builder: Builder) => {
@@ -41,21 +41,36 @@ export function loadDataSize(slice: Slice) {
     const _cells = sc_0.loadIntBig(257);
     const _bits = sc_0.loadIntBig(257);
     const _refs = sc_0.loadIntBig(257);
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadGetterTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function storeTupleDataSize(source: DataSize) {
@@ -73,15 +88,15 @@ function dictValueParserDataSize(): DictionaryValue<DataSize> {
         },
         parse: (src) => {
             return loadDataSize(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StateInit = {
-    $$type: 'StateInit';
+    $$type: "StateInit";
     code: Cell;
     data: Cell;
-}
+};
 
 export function storeStateInit(src: StateInit) {
     return (builder: Builder) => {
@@ -95,19 +110,19 @@ export function loadStateInit(slice: Slice) {
     const sc_0 = slice;
     const _code = sc_0.loadRef();
     const _data = sc_0.loadRef();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadGetterTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function storeTupleStateInit(source: StateInit) {
@@ -124,17 +139,17 @@ function dictValueParserStateInit(): DictionaryValue<StateInit> {
         },
         parse: (src) => {
             return loadStateInit(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Context = {
-    $$type: 'Context';
+    $$type: "Context";
     bounceable: boolean;
     sender: Address;
     value: bigint;
     raw: Slice;
-}
+};
 
 export function storeContext(src: Context) {
     return (builder: Builder) => {
@@ -152,7 +167,13 @@ export function loadContext(slice: Slice) {
     const _sender = sc_0.loadAddress();
     const _value = sc_0.loadIntBig(257);
     const _raw = sc_0.loadRef().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadTupleContext(source: TupleReader) {
@@ -160,7 +181,13 @@ function loadTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadGetterTupleContext(source: TupleReader) {
@@ -168,7 +195,13 @@ function loadGetterTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function storeTupleContext(source: Context) {
@@ -187,12 +220,12 @@ function dictValueParserContext(): DictionaryValue<Context> {
         },
         parse: (src) => {
             return loadContext(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type SendParameters = {
-    $$type: 'SendParameters';
+    $$type: "SendParameters";
     mode: bigint;
     body: Cell | null;
     code: Cell | null;
@@ -200,15 +233,27 @@ export type SendParameters = {
     value: bigint;
     to: Address;
     bounce: boolean;
-}
+};
 
 export function storeSendParameters(src: SendParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
-        if (src.code !== null && src.code !== undefined) { b_0.storeBit(true).storeRef(src.code); } else { b_0.storeBit(false); }
-        if (src.data !== null && src.data !== undefined) { b_0.storeBit(true).storeRef(src.data); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.code !== null && src.code !== undefined) {
+            b_0.storeBit(true).storeRef(src.code);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.data !== null && src.data !== undefined) {
+            b_0.storeBit(true).storeRef(src.data);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeAddress(src.to);
         b_0.storeBit(src.bounce);
@@ -224,7 +269,16 @@ export function loadSendParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _to = sc_0.loadAddress();
     const _bounce = sc_0.loadBit();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadTupleSendParameters(source: TupleReader) {
@@ -235,7 +289,16 @@ function loadTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadGetterTupleSendParameters(source: TupleReader) {
@@ -246,7 +309,16 @@ function loadGetterTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function storeTupleSendParameters(source: SendParameters) {
@@ -264,28 +336,34 @@ function storeTupleSendParameters(source: SendParameters) {
 function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeSendParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeSendParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadSendParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type DeployParameters = {
-    $$type: 'DeployParameters';
+    $$type: "DeployParameters";
     mode: bigint;
     body: Cell | null;
     value: bigint;
     bounce: boolean;
     init: StateInit;
-}
+};
 
 export function storeDeployParameters(src: DeployParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeBit(src.bounce);
         b_0.store(storeStateInit(src.init));
@@ -299,7 +377,14 @@ export function loadDeployParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _bounce = sc_0.loadBit();
     const _init = loadStateInit(sc_0);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadTupleDeployParameters(source: TupleReader) {
@@ -308,7 +393,14 @@ function loadTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadGetterTupleDeployParameters(source: TupleReader) {
@@ -317,7 +409,14 @@ function loadGetterTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadGetterTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function storeTupleDeployParameters(source: DeployParameters) {
@@ -333,19 +432,21 @@ function storeTupleDeployParameters(source: DeployParameters) {
 function dictValueParserDeployParameters(): DictionaryValue<DeployParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeDeployParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeDeployParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadDeployParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StdAddress = {
-    $$type: 'StdAddress';
+    $$type: "StdAddress";
     workchain: bigint;
     address: bigint;
-}
+};
 
 export function storeStdAddress(src: StdAddress) {
     return (builder: Builder) => {
@@ -359,19 +460,31 @@ export function loadStdAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(8);
     const _address = sc_0.loadUintBig(256);
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleStdAddress(source: StdAddress) {
@@ -388,15 +501,15 @@ function dictValueParserStdAddress(): DictionaryValue<StdAddress> {
         },
         parse: (src) => {
             return loadStdAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type VarAddress = {
-    $$type: 'VarAddress';
+    $$type: "VarAddress";
     workchain: bigint;
     address: Slice;
-}
+};
 
 export function storeVarAddress(src: VarAddress) {
     return (builder: Builder) => {
@@ -410,19 +523,31 @@ export function loadVarAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(32);
     const _address = sc_0.loadRef().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleVarAddress(source: VarAddress) {
@@ -439,15 +564,15 @@ function dictValueParserVarAddress(): DictionaryValue<VarAddress> {
         },
         parse: (src) => {
             return loadVarAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type ChangeOwner = {
-    $$type: 'ChangeOwner';
+    $$type: "ChangeOwner";
     queryId: bigint;
     newOwner: Address;
-}
+};
 
 export function storeChangeOwner(src: ChangeOwner) {
     return (builder: Builder) => {
@@ -460,22 +585,36 @@ export function storeChangeOwner(src: ChangeOwner) {
 
 export function loadChangeOwner(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 2174598809) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 2174598809) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _newOwner = sc_0.loadAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadTupleChangeOwner(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadGetterTupleChangeOwner(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function storeTupleChangeOwner(source: ChangeOwner) {
@@ -488,19 +627,21 @@ function storeTupleChangeOwner(source: ChangeOwner) {
 function dictValueParserChangeOwner(): DictionaryValue<ChangeOwner> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeChangeOwner(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeChangeOwner(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadChangeOwner(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type ChangeOwnerOk = {
-    $$type: 'ChangeOwnerOk';
+    $$type: "ChangeOwnerOk";
     queryId: bigint;
     newOwner: Address;
-}
+};
 
 export function storeChangeOwnerOk(src: ChangeOwnerOk) {
     return (builder: Builder) => {
@@ -513,22 +654,36 @@ export function storeChangeOwnerOk(src: ChangeOwnerOk) {
 
 export function loadChangeOwnerOk(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 846932810) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 846932810) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _newOwner = sc_0.loadAddress();
-    return { $$type: 'ChangeOwnerOk' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwnerOk" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadTupleChangeOwnerOk(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwnerOk' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwnerOk" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadGetterTupleChangeOwnerOk(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwnerOk' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwnerOk" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function storeTupleChangeOwnerOk(source: ChangeOwnerOk) {
@@ -541,18 +696,20 @@ function storeTupleChangeOwnerOk(source: ChangeOwnerOk) {
 function dictValueParserChangeOwnerOk(): DictionaryValue<ChangeOwnerOk> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeChangeOwnerOk(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeChangeOwnerOk(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadChangeOwnerOk(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type CanPayout = {
-    $$type: 'CanPayout';
+    $$type: "CanPayout";
     amount: bigint;
-}
+};
 
 export function storeCanPayout(src: CanPayout) {
     return (builder: Builder) => {
@@ -564,19 +721,21 @@ export function storeCanPayout(src: CanPayout) {
 
 export function loadCanPayout(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 3289991647) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 3289991647) {
+        throw Error("Invalid prefix");
+    }
     const _amount = sc_0.loadIntBig(257);
-    return { $$type: 'CanPayout' as const, amount: _amount };
+    return { $$type: "CanPayout" as const, amount: _amount };
 }
 
 function loadTupleCanPayout(source: TupleReader) {
     const _amount = source.readBigNumber();
-    return { $$type: 'CanPayout' as const, amount: _amount };
+    return { $$type: "CanPayout" as const, amount: _amount };
 }
 
 function loadGetterTupleCanPayout(source: TupleReader) {
     const _amount = source.readBigNumber();
-    return { $$type: 'CanPayout' as const, amount: _amount };
+    return { $$type: "CanPayout" as const, amount: _amount };
 }
 
 function storeTupleCanPayout(source: CanPayout) {
@@ -592,16 +751,16 @@ function dictValueParserCanPayout(): DictionaryValue<CanPayout> {
         },
         parse: (src) => {
             return loadCanPayout(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type CanPayoutResponse = {
-    $$type: 'CanPayoutResponse';
+    $$type: "CanPayoutResponse";
     amount: bigint;
     address: Address;
     ok: boolean;
-}
+};
 
 export function storeCanPayoutResponse(src: CanPayoutResponse) {
     return (builder: Builder) => {
@@ -615,25 +774,42 @@ export function storeCanPayoutResponse(src: CanPayoutResponse) {
 
 export function loadCanPayoutResponse(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 4293607646) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 4293607646) {
+        throw Error("Invalid prefix");
+    }
     const _amount = sc_0.loadIntBig(257);
     const _address = sc_0.loadAddress();
     const _ok = sc_0.loadBit();
-    return { $$type: 'CanPayoutResponse' as const, amount: _amount, address: _address, ok: _ok };
+    return {
+        $$type: "CanPayoutResponse" as const,
+        amount: _amount,
+        address: _address,
+        ok: _ok,
+    };
 }
 
 function loadTupleCanPayoutResponse(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _address = source.readAddress();
     const _ok = source.readBoolean();
-    return { $$type: 'CanPayoutResponse' as const, amount: _amount, address: _address, ok: _ok };
+    return {
+        $$type: "CanPayoutResponse" as const,
+        amount: _amount,
+        address: _address,
+        ok: _ok,
+    };
 }
 
 function loadGetterTupleCanPayoutResponse(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _address = source.readAddress();
     const _ok = source.readBoolean();
-    return { $$type: 'CanPayoutResponse' as const, amount: _amount, address: _address, ok: _ok };
+    return {
+        $$type: "CanPayoutResponse" as const,
+        amount: _amount,
+        address: _address,
+        ok: _ok,
+    };
 }
 
 function storeTupleCanPayoutResponse(source: CanPayoutResponse) {
@@ -647,20 +823,22 @@ function storeTupleCanPayoutResponse(source: CanPayoutResponse) {
 function dictValueParserCanPayoutResponse(): DictionaryValue<CanPayoutResponse> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeCanPayoutResponse(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeCanPayoutResponse(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadCanPayoutResponse(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Beacon$Data = {
-    $$type: 'Beacon$Data';
+    $$type: "Beacon$Data";
     master: Address;
     owner: Address;
     completed: boolean;
-}
+};
 
 export function storeBeacon$Data(src: Beacon$Data) {
     return (builder: Builder) => {
@@ -676,21 +854,36 @@ export function loadBeacon$Data(slice: Slice) {
     const _master = sc_0.loadAddress();
     const _owner = sc_0.loadAddress();
     const _completed = sc_0.loadBit();
-    return { $$type: 'Beacon$Data' as const, master: _master, owner: _owner, completed: _completed };
+    return {
+        $$type: "Beacon$Data" as const,
+        master: _master,
+        owner: _owner,
+        completed: _completed,
+    };
 }
 
 function loadTupleBeacon$Data(source: TupleReader) {
     const _master = source.readAddress();
     const _owner = source.readAddress();
     const _completed = source.readBoolean();
-    return { $$type: 'Beacon$Data' as const, master: _master, owner: _owner, completed: _completed };
+    return {
+        $$type: "Beacon$Data" as const,
+        master: _master,
+        owner: _owner,
+        completed: _completed,
+    };
 }
 
 function loadGetterTupleBeacon$Data(source: TupleReader) {
     const _master = source.readAddress();
     const _owner = source.readAddress();
     const _completed = source.readBoolean();
-    return { $$type: 'Beacon$Data' as const, master: _master, owner: _owner, completed: _completed };
+    return {
+        $$type: "Beacon$Data" as const,
+        master: _master,
+        owner: _owner,
+        completed: _completed,
+    };
 }
 
 function storeTupleBeacon$Data(source: Beacon$Data) {
@@ -704,19 +897,21 @@ function storeTupleBeacon$Data(source: Beacon$Data) {
 function dictValueParserBeacon$Data(): DictionaryValue<Beacon$Data> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeBeacon$Data(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeBeacon$Data(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadBeacon$Data(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Payouts$Data = {
-    $$type: 'Payouts$Data';
+    $$type: "Payouts$Data";
     owner: Address;
     publicKey: bigint;
-}
+};
 
 export function storePayouts$Data(src: Payouts$Data) {
     return (builder: Builder) => {
@@ -730,19 +925,31 @@ export function loadPayouts$Data(slice: Slice) {
     const sc_0 = slice;
     const _owner = sc_0.loadAddress();
     const _publicKey = sc_0.loadIntBig(257);
-    return { $$type: 'Payouts$Data' as const, owner: _owner, publicKey: _publicKey };
+    return {
+        $$type: "Payouts$Data" as const,
+        owner: _owner,
+        publicKey: _publicKey,
+    };
 }
 
 function loadTuplePayouts$Data(source: TupleReader) {
     const _owner = source.readAddress();
     const _publicKey = source.readBigNumber();
-    return { $$type: 'Payouts$Data' as const, owner: _owner, publicKey: _publicKey };
+    return {
+        $$type: "Payouts$Data" as const,
+        owner: _owner,
+        publicKey: _publicKey,
+    };
 }
 
 function loadGetterTuplePayouts$Data(source: TupleReader) {
     const _owner = source.readAddress();
     const _publicKey = source.readBigNumber();
-    return { $$type: 'Payouts$Data' as const, owner: _owner, publicKey: _publicKey };
+    return {
+        $$type: "Payouts$Data" as const,
+        owner: _owner,
+        publicKey: _publicKey,
+    };
 }
 
 function storeTuplePayouts$Data(source: Payouts$Data) {
@@ -755,19 +962,21 @@ function storeTuplePayouts$Data(source: Payouts$Data) {
 function dictValueParserPayouts$Data(): DictionaryValue<Payouts$Data> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storePayouts$Data(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storePayouts$Data(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadPayouts$Data(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
- type Beacon_init_args = {
-    $$type: 'Beacon_init_args';
+type Beacon_init_args = {
+    $$type: "Beacon_init_args";
     master: Address;
     owner: Address;
-}
+};
 
 function initBeacon_init_args(src: Beacon_init_args) {
     return (builder: Builder) => {
@@ -778,10 +987,14 @@ function initBeacon_init_args(src: Beacon_init_args) {
 }
 
 async function Beacon_init(master: Address, owner: Address) {
-    const __code = Cell.fromBase64('te6ccgECCQEAAWwAART/APSkE/S88sgLAQIBYgIDApTQAdBy1yHSANIA+kAhEDRQZm8E+GEC+GLbPASOFWwicMh/AcoAVSBazxZYzxbKAMntVOACgCDXBW+jMAGCEMQZSd+64wJfBPLAggcEAhGgiju2ebZ42GMHCAPogQEB1wABMfhBbyQQI18DIoERTQLHBfL0ghAF9eEAcPsCI46oM39/VBBDWMhVIIIQ/+tA3lAEyx8SgQEBzwABzxbKAMkT+EIBf23bPI6lcFETWMhVIIIQ/+tA3lAEyx8SgQEBzwABzxbKAMkT+EIBf23bPOIFBQYAoG1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQIxA2VSISyM+FgMoAz4RAzgH6AoBpz0ACXG4BbqiTW8+BnVjPhoDPhID0APQAz4Hi9ADJAfsAACTIfwHKAFUgWs8WWM8WygDJ7VQANu1E0NIAAZr6QPpA0gBVIGwT4PpA+kBZAtEBcAACIQ==');
+    const __code = Cell.fromBase64(
+        "te6ccgECCQEAAWwAART/APSkE/S88sgLAQIBYgIDApTQAdBy1yHSANIA+kAhEDRQZm8E+GEC+GLbPASOFWwicMh/AcoAVSBazxZYzxbKAMntVOACgCDXBW+jMAGCEMQZSd+64wJfBPLAggcEAhGgiju2ebZ42GMHCAPogQEB1wABMfhBbyQQI18DIoERTQLHBfL0ghAF9eEAcPsCI46oM39/VBBDWMhVIIIQ/+tA3lAEyx8SgQEBzwABzxbKAMkT+EIBf23bPI6lcFETWMhVIIIQ/+tA3lAEyx8SgQEBzwABzxbKAMkT+EIBf23bPOIFBQYAoG1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQIxA2VSISyM+FgMoAz4RAzgH6AoBpz0ACXG4BbqiTW8+BnVjPhoDPhID0APQAz4Hi9ADJAfsAACTIfwHKAFUgWs8WWM8WygDJ7VQANu1E0NIAAZr6QPpA0gBVIGwT4PpA+kBZAtEBcAACIQ==",
+    );
     const builder = beginCell();
     builder.storeUint(0, 1);
-    initBeacon_init_args({ $$type: 'Beacon_init_args', master, owner })(builder);
+    initBeacon_init_args({ $$type: "Beacon_init_args", master, owner })(
+        builder,
+    );
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
@@ -807,11 +1020,15 @@ const Beacon_errors: { [key: number]: { message: string } } = {
     36: { message: `Invalid destination address in outbound message` },
     37: { message: `Not enough Toncoin` },
     38: { message: `Not enough extra currencies` },
-    39: { message: `Outbound message does not fit into a cell after rewriting` },
+    39: {
+        message: `Outbound message does not fit into a cell after rewriting`,
+    },
     40: { message: `Cannot process a message` },
     41: { message: `Library reference is null` },
     42: { message: `Library change action error` },
-    43: { message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree` },
+    43: {
+        message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree`,
+    },
     50: { message: `Account state size exceeded limits` },
     128: { message: `Null reference exception` },
     129: { message: `Invalid serialization prefix` },
@@ -826,83 +1043,394 @@ const Beacon_errors: { [key: number]: { message: string } } = {
     16059: { message: `Invalid value` },
     48401: { message: `Invalid signature` },
     62972: { message: `Invalid balance` },
-}
+};
 
 const Beacon_types: ABIType[] = [
-    {"name":"DataSize","header":null,"fields":[{"name":"cells","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bits","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"refs","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-    {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"Context","header":null,"fields":[{"name":"bounceable","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"SendParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"DeployParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"init","type":{"kind":"simple","type":"StateInit","optional":false}}]},
-    {"name":"StdAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":8}},{"name":"address","type":{"kind":"simple","type":"uint","optional":false,"format":256}}]},
-    {"name":"VarAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":32}},{"name":"address","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"ChangeOwner","header":2174598809,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"newOwner","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"ChangeOwnerOk","header":846932810,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"newOwner","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"CanPayout","header":3289991647,"fields":[{"name":"amount","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-    {"name":"CanPayoutResponse","header":4293607646,"fields":[{"name":"amount","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"address","type":{"kind":"simple","type":"address","optional":false}},{"name":"ok","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"Beacon$Data","header":null,"fields":[{"name":"master","type":{"kind":"simple","type":"address","optional":false}},{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"completed","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"Payouts$Data","header":null,"fields":[{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"publicKey","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-]
+    {
+        name: "DataSize",
+        header: null,
+        fields: [
+            {
+                name: "cells",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bits",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "refs",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+        ],
+    },
+    {
+        name: "StateInit",
+        header: null,
+        fields: [
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "Context",
+        header: null,
+        fields: [
+            {
+                name: "bounceable",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "raw",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "SendParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "to",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "DeployParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "init",
+                type: { kind: "simple", type: "StateInit", optional: false },
+            },
+        ],
+    },
+    {
+        name: "StdAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 8,
+                },
+            },
+            {
+                name: "address",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 256,
+                },
+            },
+        ],
+    },
+    {
+        name: "VarAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 32,
+                },
+            },
+            {
+                name: "address",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "ChangeOwner",
+        header: 2174598809,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "newOwner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+    },
+    {
+        name: "ChangeOwnerOk",
+        header: 846932810,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "newOwner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+    },
+    {
+        name: "CanPayout",
+        header: 3289991647,
+        fields: [
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+        ],
+    },
+    {
+        name: "CanPayoutResponse",
+        header: 4293607646,
+        fields: [
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "address",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "ok",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "Beacon$Data",
+        header: null,
+        fields: [
+            {
+                name: "master",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "completed",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "Payouts$Data",
+        header: null,
+        fields: [
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "publicKey",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+        ],
+    },
+];
 
 const Beacon_getters: ABIGetter[] = [
-    {"name":"owner","methodId":83229,"arguments":[],"returnType":{"kind":"simple","type":"address","optional":false}},
-]
+    {
+        name: "owner",
+        methodId: 83229,
+        arguments: [],
+        returnType: { kind: "simple", type: "address", optional: false },
+    },
+];
 
 export const Beacon_getterMapping: { [key: string]: string } = {
-    'owner': 'getOwner',
-}
+    owner: "getOwner",
+};
 
 const Beacon_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"typed","type":"CanPayout"}},
-]
+    { receiver: "internal", message: { kind: "typed", type: "CanPayout" } },
+];
 
 export class Beacon implements Contract {
-    
     static async init(master: Address, owner: Address) {
         return await Beacon_init(master, owner);
     }
-    
+
     static async fromInit(master: Address, owner: Address) {
         const __gen_init = await Beacon_init(master, owner);
         const address = contractAddress(0, __gen_init);
         return new Beacon(address, __gen_init);
     }
-    
+
     static fromAddress(address: Address) {
         return new Beacon(address);
     }
-    
-    readonly address: Address; 
-    readonly init?: { code: Cell, data: Cell };
+
+    readonly address: Address;
+    readonly init?: { code: Cell; data: Cell };
     readonly abi: ContractABI = {
-        types:  Beacon_types,
+        types: Beacon_types,
         getters: Beacon_getters,
         receivers: Beacon_receivers,
         errors: Beacon_errors,
     };
-    
-    private constructor(address: Address, init?: { code: Cell, data: Cell }) {
+
+    private constructor(address: Address, init?: { code: Cell; data: Cell }) {
         this.address = address;
         this.init = init;
     }
-    
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: CanPayout) {
-        
+
+    async send(
+        provider: ContractProvider,
+        via: Sender,
+        args: { value: bigint; bounce?: boolean | null | undefined },
+        message: CanPayout,
+    ) {
         let body: Cell | null = null;
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'CanPayout') {
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "CanPayout"
+        ) {
             body = beginCell().store(storeCanPayout(message)).endCell();
         }
-        if (body === null) { throw new Error('Invalid message type'); }
-        
+        if (body === null) {
+            throw new Error("Invalid message type");
+        }
+
         await provider.internal(via, { ...args, body: body });
-        
     }
-    
+
     async getOwner(provider: ContractProvider) {
         const builder = new TupleBuilder();
-        const source = (await provider.get(83229 as any, builder.build())).stack;
+        const source = (await provider.get(83229 as any, builder.build()))
+            .stack;
         const result = source.readAddress();
         return result;
     }
-    
 }

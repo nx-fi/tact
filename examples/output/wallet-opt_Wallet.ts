@@ -1,31 +1,31 @@
-import { 
+import {
     Cell,
-    Slice, 
-    Address, 
-    Builder, 
-    beginCell, 
-    ComputeError, 
-    TupleItem, 
-    TupleReader, 
-    Dictionary, 
-    contractAddress, 
-    ContractProvider, 
-    Sender, 
-    Contract, 
-    ContractABI, 
+    Slice,
+    Address,
+    Builder,
+    beginCell,
+    ComputeError,
+    TupleItem,
+    TupleReader,
+    Dictionary,
+    contractAddress,
+    ContractProvider,
+    Sender,
+    Contract,
+    ContractABI,
     ABIType,
     ABIGetter,
     ABIReceiver,
     TupleBuilder,
-    DictionaryValue
-} from '@ton/core';
+    DictionaryValue,
+} from "@ton/core";
 
 export type DataSize = {
-    $$type: 'DataSize';
+    $$type: "DataSize";
     cells: bigint;
     bits: bigint;
     refs: bigint;
-}
+};
 
 export function storeDataSize(src: DataSize) {
     return (builder: Builder) => {
@@ -41,21 +41,36 @@ export function loadDataSize(slice: Slice) {
     const _cells = sc_0.loadIntBig(257);
     const _bits = sc_0.loadIntBig(257);
     const _refs = sc_0.loadIntBig(257);
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadGetterTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function storeTupleDataSize(source: DataSize) {
@@ -73,15 +88,15 @@ function dictValueParserDataSize(): DictionaryValue<DataSize> {
         },
         parse: (src) => {
             return loadDataSize(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StateInit = {
-    $$type: 'StateInit';
+    $$type: "StateInit";
     code: Cell;
     data: Cell;
-}
+};
 
 export function storeStateInit(src: StateInit) {
     return (builder: Builder) => {
@@ -95,19 +110,19 @@ export function loadStateInit(slice: Slice) {
     const sc_0 = slice;
     const _code = sc_0.loadRef();
     const _data = sc_0.loadRef();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadGetterTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function storeTupleStateInit(source: StateInit) {
@@ -124,17 +139,17 @@ function dictValueParserStateInit(): DictionaryValue<StateInit> {
         },
         parse: (src) => {
             return loadStateInit(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Context = {
-    $$type: 'Context';
+    $$type: "Context";
     bounceable: boolean;
     sender: Address;
     value: bigint;
     raw: Slice;
-}
+};
 
 export function storeContext(src: Context) {
     return (builder: Builder) => {
@@ -152,7 +167,13 @@ export function loadContext(slice: Slice) {
     const _sender = sc_0.loadAddress();
     const _value = sc_0.loadIntBig(257);
     const _raw = sc_0.loadRef().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadTupleContext(source: TupleReader) {
@@ -160,7 +181,13 @@ function loadTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadGetterTupleContext(source: TupleReader) {
@@ -168,7 +195,13 @@ function loadGetterTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function storeTupleContext(source: Context) {
@@ -187,12 +220,12 @@ function dictValueParserContext(): DictionaryValue<Context> {
         },
         parse: (src) => {
             return loadContext(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type SendParameters = {
-    $$type: 'SendParameters';
+    $$type: "SendParameters";
     mode: bigint;
     body: Cell | null;
     code: Cell | null;
@@ -200,15 +233,27 @@ export type SendParameters = {
     value: bigint;
     to: Address;
     bounce: boolean;
-}
+};
 
 export function storeSendParameters(src: SendParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
-        if (src.code !== null && src.code !== undefined) { b_0.storeBit(true).storeRef(src.code); } else { b_0.storeBit(false); }
-        if (src.data !== null && src.data !== undefined) { b_0.storeBit(true).storeRef(src.data); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.code !== null && src.code !== undefined) {
+            b_0.storeBit(true).storeRef(src.code);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.data !== null && src.data !== undefined) {
+            b_0.storeBit(true).storeRef(src.data);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeAddress(src.to);
         b_0.storeBit(src.bounce);
@@ -224,7 +269,16 @@ export function loadSendParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _to = sc_0.loadAddress();
     const _bounce = sc_0.loadBit();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadTupleSendParameters(source: TupleReader) {
@@ -235,7 +289,16 @@ function loadTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadGetterTupleSendParameters(source: TupleReader) {
@@ -246,7 +309,16 @@ function loadGetterTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function storeTupleSendParameters(source: SendParameters) {
@@ -264,28 +336,34 @@ function storeTupleSendParameters(source: SendParameters) {
 function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeSendParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeSendParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadSendParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type DeployParameters = {
-    $$type: 'DeployParameters';
+    $$type: "DeployParameters";
     mode: bigint;
     body: Cell | null;
     value: bigint;
     bounce: boolean;
     init: StateInit;
-}
+};
 
 export function storeDeployParameters(src: DeployParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeBit(src.bounce);
         b_0.store(storeStateInit(src.init));
@@ -299,7 +377,14 @@ export function loadDeployParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _bounce = sc_0.loadBit();
     const _init = loadStateInit(sc_0);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadTupleDeployParameters(source: TupleReader) {
@@ -308,7 +393,14 @@ function loadTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadGetterTupleDeployParameters(source: TupleReader) {
@@ -317,7 +409,14 @@ function loadGetterTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadGetterTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function storeTupleDeployParameters(source: DeployParameters) {
@@ -333,19 +432,21 @@ function storeTupleDeployParameters(source: DeployParameters) {
 function dictValueParserDeployParameters(): DictionaryValue<DeployParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeDeployParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeDeployParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadDeployParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StdAddress = {
-    $$type: 'StdAddress';
+    $$type: "StdAddress";
     workchain: bigint;
     address: bigint;
-}
+};
 
 export function storeStdAddress(src: StdAddress) {
     return (builder: Builder) => {
@@ -359,19 +460,31 @@ export function loadStdAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(8);
     const _address = sc_0.loadUintBig(256);
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleStdAddress(source: StdAddress) {
@@ -388,15 +501,15 @@ function dictValueParserStdAddress(): DictionaryValue<StdAddress> {
         },
         parse: (src) => {
             return loadStdAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type VarAddress = {
-    $$type: 'VarAddress';
+    $$type: "VarAddress";
     workchain: bigint;
     address: Slice;
-}
+};
 
 export function storeVarAddress(src: VarAddress) {
     return (builder: Builder) => {
@@ -410,19 +523,31 @@ export function loadVarAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(32);
     const _address = sc_0.loadRef().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleVarAddress(source: VarAddress) {
@@ -439,15 +564,15 @@ function dictValueParserVarAddress(): DictionaryValue<VarAddress> {
         },
         parse: (src) => {
             return loadVarAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type TransferMessage = {
-    $$type: 'TransferMessage';
+    $$type: "TransferMessage";
     signature: Buffer;
     transfer: Slice;
-}
+};
 
 export function storeTransferMessage(src: TransferMessage) {
     return (builder: Builder) => {
@@ -460,22 +585,36 @@ export function storeTransferMessage(src: TransferMessage) {
 
 export function loadTransferMessage(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 3548477446) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 3548477446) {
+        throw Error("Invalid prefix");
+    }
     const _signature = sc_0.loadBuffer(64);
     const _transfer = sc_0;
-    return { $$type: 'TransferMessage' as const, signature: _signature, transfer: _transfer };
+    return {
+        $$type: "TransferMessage" as const,
+        signature: _signature,
+        transfer: _transfer,
+    };
 }
 
 function loadTupleTransferMessage(source: TupleReader) {
     const _signature = source.readBuffer();
     const _transfer = source.readCell().asSlice();
-    return { $$type: 'TransferMessage' as const, signature: _signature, transfer: _transfer };
+    return {
+        $$type: "TransferMessage" as const,
+        signature: _signature,
+        transfer: _transfer,
+    };
 }
 
 function loadGetterTupleTransferMessage(source: TupleReader) {
     const _signature = source.readBuffer();
     const _transfer = source.readCell().asSlice();
-    return { $$type: 'TransferMessage' as const, signature: _signature, transfer: _transfer };
+    return {
+        $$type: "TransferMessage" as const,
+        signature: _signature,
+        transfer: _transfer,
+    };
 }
 
 function storeTupleTransferMessage(source: TransferMessage) {
@@ -488,20 +627,22 @@ function storeTupleTransferMessage(source: TransferMessage) {
 function dictValueParserTransferMessage(): DictionaryValue<TransferMessage> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeTransferMessage(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeTransferMessage(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadTransferMessage(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Wallet$Data = {
-    $$type: 'Wallet$Data';
+    $$type: "Wallet$Data";
     seqno: bigint;
     key: bigint;
     walletId: bigint;
-}
+};
 
 export function storeWallet$Data(src: Wallet$Data) {
     return (builder: Builder) => {
@@ -517,21 +658,36 @@ export function loadWallet$Data(slice: Slice) {
     const _seqno = sc_0.loadUintBig(32);
     const _key = sc_0.loadUintBig(256);
     const _walletId = sc_0.loadUintBig(64);
-    return { $$type: 'Wallet$Data' as const, seqno: _seqno, key: _key, walletId: _walletId };
+    return {
+        $$type: "Wallet$Data" as const,
+        seqno: _seqno,
+        key: _key,
+        walletId: _walletId,
+    };
 }
 
 function loadTupleWallet$Data(source: TupleReader) {
     const _seqno = source.readBigNumber();
     const _key = source.readBigNumber();
     const _walletId = source.readBigNumber();
-    return { $$type: 'Wallet$Data' as const, seqno: _seqno, key: _key, walletId: _walletId };
+    return {
+        $$type: "Wallet$Data" as const,
+        seqno: _seqno,
+        key: _key,
+        walletId: _walletId,
+    };
 }
 
 function loadGetterTupleWallet$Data(source: TupleReader) {
     const _seqno = source.readBigNumber();
     const _key = source.readBigNumber();
     const _walletId = source.readBigNumber();
-    return { $$type: 'Wallet$Data' as const, seqno: _seqno, key: _key, walletId: _walletId };
+    return {
+        $$type: "Wallet$Data" as const,
+        seqno: _seqno,
+        key: _key,
+        walletId: _walletId,
+    };
 }
 
 function storeTupleWallet$Data(source: Wallet$Data) {
@@ -545,19 +701,21 @@ function storeTupleWallet$Data(source: Wallet$Data) {
 function dictValueParserWallet$Data(): DictionaryValue<Wallet$Data> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeWallet$Data(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeWallet$Data(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadWallet$Data(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
- type Wallet_init_args = {
-    $$type: 'Wallet_init_args';
+type Wallet_init_args = {
+    $$type: "Wallet_init_args";
     key: bigint;
     walletId: bigint;
-}
+};
 
 function initWallet_init_args(src: Wallet_init_args) {
     return (builder: Builder) => {
@@ -568,10 +726,14 @@ function initWallet_init_args(src: Wallet_init_args) {
 }
 
 async function Wallet_init(key: bigint, walletId: bigint) {
-    const __code = Cell.fromBase64('te6ccgEBDAEA5wABFP8A9KQT9LzyyAsBAgFiAgMB6NAB0HLXIdIA0gD6QCEQNFBmbwT4YQL4Yts8BJJfBOACgCDXBW+jMAGCENOBeAa6jj2DCNcYZjIh+QGCAL0RUSX5EPL00h/SB9QwgUT2UTS6E/L0AqSpOA8C+wACyH8BygBVIFAjyx/L/8s/ye1U4F8E8sCCCgIBIAQFAgFqBgcCEb4CVtnm2eNhjAoLAhGzJfbPNs8bDGAKCAIRsH42zzbPGwxgCgkAAiIAAiEARO1E0NIAAZrTH9P/0z9VIGwT4IEBAdcAgQEB1wBZAtEBcFkAAiA=');
+    const __code = Cell.fromBase64(
+        "te6ccgEBDAEA5wABFP8A9KQT9LzyyAsBAgFiAgMB6NAB0HLXIdIA0gD6QCEQNFBmbwT4YQL4Yts8BJJfBOACgCDXBW+jMAGCENOBeAa6jj2DCNcYZjIh+QGCAL0RUSX5EPL00h/SB9QwgUT2UTS6E/L0AqSpOA8C+wACyH8BygBVIFAjyx/L/8s/ye1U4F8E8sCCCgIBIAQFAgFqBgcCEb4CVtnm2eNhjAoLAhGzJfbPNs8bDGAKCAIRsH42zzbPGwxgCgkAAiIAAiEARO1E0NIAAZrTH9P/0z9VIGwT4IEBAdcAgQEB1wBZAtEBcFkAAiA=",
+    );
     const builder = beginCell();
     builder.storeUint(0, 1);
-    initWallet_init_args({ $$type: 'Wallet_init_args', key, walletId })(builder);
+    initWallet_init_args({ $$type: "Wallet_init_args", key, walletId })(
+        builder,
+    );
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
@@ -597,11 +759,15 @@ const Wallet_errors: { [key: number]: { message: string } } = {
     36: { message: `Invalid destination address in outbound message` },
     37: { message: `Not enough Toncoin` },
     38: { message: `Not enough extra currencies` },
-    39: { message: `Outbound message does not fit into a cell after rewriting` },
+    39: {
+        message: `Outbound message does not fit into a cell after rewriting`,
+    },
     40: { message: `Cannot process a message` },
     41: { message: `Library reference is null` },
     42: { message: `Library change action error` },
-    43: { message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree` },
+    43: {
+        message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree`,
+    },
     50: { message: `Account state size exceeded limits` },
     128: { message: `Null reference exception` },
     129: { message: `Invalid serialization prefix` },
@@ -614,97 +780,386 @@ const Wallet_errors: { [key: number]: { message: string } } = {
     136: { message: `Invalid standard address` },
     17654: { message: `Invalid seqno` },
     48401: { message: `Invalid signature` },
-}
+};
 
 const Wallet_types: ABIType[] = [
-    {"name":"DataSize","header":null,"fields":[{"name":"cells","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bits","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"refs","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-    {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"Context","header":null,"fields":[{"name":"bounceable","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"SendParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"DeployParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"init","type":{"kind":"simple","type":"StateInit","optional":false}}]},
-    {"name":"StdAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":8}},{"name":"address","type":{"kind":"simple","type":"uint","optional":false,"format":256}}]},
-    {"name":"VarAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":32}},{"name":"address","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"TransferMessage","header":3548477446,"fields":[{"name":"signature","type":{"kind":"simple","type":"fixed-bytes","optional":false,"format":64}},{"name":"transfer","type":{"kind":"simple","type":"slice","optional":false,"format":"remainder"}}]},
-    {"name":"Wallet$Data","header":null,"fields":[{"name":"seqno","type":{"kind":"simple","type":"uint","optional":false,"format":32}},{"name":"key","type":{"kind":"simple","type":"uint","optional":false,"format":256}},{"name":"walletId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
-]
+    {
+        name: "DataSize",
+        header: null,
+        fields: [
+            {
+                name: "cells",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bits",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "refs",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+        ],
+    },
+    {
+        name: "StateInit",
+        header: null,
+        fields: [
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "Context",
+        header: null,
+        fields: [
+            {
+                name: "bounceable",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "raw",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "SendParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "to",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "DeployParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "init",
+                type: { kind: "simple", type: "StateInit", optional: false },
+            },
+        ],
+    },
+    {
+        name: "StdAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 8,
+                },
+            },
+            {
+                name: "address",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 256,
+                },
+            },
+        ],
+    },
+    {
+        name: "VarAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 32,
+                },
+            },
+            {
+                name: "address",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "TransferMessage",
+        header: 3548477446,
+        fields: [
+            {
+                name: "signature",
+                type: {
+                    kind: "simple",
+                    type: "fixed-bytes",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "transfer",
+                type: {
+                    kind: "simple",
+                    type: "slice",
+                    optional: false,
+                    format: "remainder",
+                },
+            },
+        ],
+    },
+    {
+        name: "Wallet$Data",
+        header: null,
+        fields: [
+            {
+                name: "seqno",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 32,
+                },
+            },
+            {
+                name: "key",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 256,
+                },
+            },
+            {
+                name: "walletId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+        ],
+    },
+];
 
 const Wallet_getters: ABIGetter[] = [
-    {"name":"publicKey","methodId":86520,"arguments":[],"returnType":{"kind":"simple","type":"int","optional":false,"format":257}},
-    {"name":"walletId","methodId":114762,"arguments":[],"returnType":{"kind":"simple","type":"int","optional":false,"format":257}},
-    {"name":"seqno","methodId":85143,"arguments":[],"returnType":{"kind":"simple","type":"int","optional":false,"format":257}},
-]
+    {
+        name: "publicKey",
+        methodId: 86520,
+        arguments: [],
+        returnType: {
+            kind: "simple",
+            type: "int",
+            optional: false,
+            format: 257,
+        },
+    },
+    {
+        name: "walletId",
+        methodId: 114762,
+        arguments: [],
+        returnType: {
+            kind: "simple",
+            type: "int",
+            optional: false,
+            format: 257,
+        },
+    },
+    {
+        name: "seqno",
+        methodId: 85143,
+        arguments: [],
+        returnType: {
+            kind: "simple",
+            type: "int",
+            optional: false,
+            format: 257,
+        },
+    },
+];
 
 export const Wallet_getterMapping: { [key: string]: string } = {
-    'publicKey': 'getPublicKey',
-    'walletId': 'getWalletId',
-    'seqno': 'getSeqno',
-}
+    publicKey: "getPublicKey",
+    walletId: "getWalletId",
+    seqno: "getSeqno",
+};
 
 const Wallet_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"typed","type":"TransferMessage"}},
-]
+    {
+        receiver: "internal",
+        message: { kind: "typed", type: "TransferMessage" },
+    },
+];
 
 export class Wallet implements Contract {
-    
     static async init(key: bigint, walletId: bigint) {
         return await Wallet_init(key, walletId);
     }
-    
+
     static async fromInit(key: bigint, walletId: bigint) {
         const __gen_init = await Wallet_init(key, walletId);
         const address = contractAddress(0, __gen_init);
         return new Wallet(address, __gen_init);
     }
-    
+
     static fromAddress(address: Address) {
         return new Wallet(address);
     }
-    
-    readonly address: Address; 
-    readonly init?: { code: Cell, data: Cell };
+
+    readonly address: Address;
+    readonly init?: { code: Cell; data: Cell };
     readonly abi: ContractABI = {
-        types:  Wallet_types,
+        types: Wallet_types,
         getters: Wallet_getters,
         receivers: Wallet_receivers,
         errors: Wallet_errors,
     };
-    
-    private constructor(address: Address, init?: { code: Cell, data: Cell }) {
+
+    private constructor(address: Address, init?: { code: Cell; data: Cell }) {
         this.address = address;
         this.init = init;
     }
-    
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: TransferMessage) {
-        
+
+    async send(
+        provider: ContractProvider,
+        via: Sender,
+        args: { value: bigint; bounce?: boolean | null | undefined },
+        message: TransferMessage,
+    ) {
         let body: Cell | null = null;
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'TransferMessage') {
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "TransferMessage"
+        ) {
             body = beginCell().store(storeTransferMessage(message)).endCell();
         }
-        if (body === null) { throw new Error('Invalid message type'); }
-        
+        if (body === null) {
+            throw new Error("Invalid message type");
+        }
+
         await provider.internal(via, { ...args, body: body });
-        
     }
-    
+
     async getPublicKey(provider: ContractProvider) {
         const builder = new TupleBuilder();
-        const source = (await provider.get(86520 as any, builder.build())).stack;
+        const source = (await provider.get(86520 as any, builder.build()))
+            .stack;
         const result = source.readBigNumber();
         return result;
     }
-    
+
     async getWalletId(provider: ContractProvider) {
         const builder = new TupleBuilder();
-        const source = (await provider.get(114762 as any, builder.build())).stack;
+        const source = (await provider.get(114762 as any, builder.build()))
+            .stack;
         const result = source.readBigNumber();
         return result;
     }
-    
+
     async getSeqno(provider: ContractProvider) {
         const builder = new TupleBuilder();
-        const source = (await provider.get(85143 as any, builder.build())).stack;
+        const source = (await provider.get(85143 as any, builder.build()))
+            .stack;
         const result = source.readBigNumber();
         return result;
     }
-    
 }

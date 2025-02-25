@@ -1,31 +1,31 @@
-import { 
+import {
     Cell,
-    Slice, 
-    Address, 
-    Builder, 
-    beginCell, 
-    ComputeError, 
-    TupleItem, 
-    TupleReader, 
-    Dictionary, 
-    contractAddress, 
-    ContractProvider, 
-    Sender, 
-    Contract, 
-    ContractABI, 
+    Slice,
+    Address,
+    Builder,
+    beginCell,
+    ComputeError,
+    TupleItem,
+    TupleReader,
+    Dictionary,
+    contractAddress,
+    ContractProvider,
+    Sender,
+    Contract,
+    ContractABI,
     ABIType,
     ABIGetter,
     ABIReceiver,
     TupleBuilder,
-    DictionaryValue
-} from '@ton/core';
+    DictionaryValue,
+} from "@ton/core";
 
 export type DataSize = {
-    $$type: 'DataSize';
+    $$type: "DataSize";
     cells: bigint;
     bits: bigint;
     refs: bigint;
-}
+};
 
 export function storeDataSize(src: DataSize) {
     return (builder: Builder) => {
@@ -41,21 +41,36 @@ export function loadDataSize(slice: Slice) {
     const _cells = sc_0.loadIntBig(257);
     const _bits = sc_0.loadIntBig(257);
     const _refs = sc_0.loadIntBig(257);
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function loadGetterTupleDataSize(source: TupleReader) {
     const _cells = source.readBigNumber();
     const _bits = source.readBigNumber();
     const _refs = source.readBigNumber();
-    return { $$type: 'DataSize' as const, cells: _cells, bits: _bits, refs: _refs };
+    return {
+        $$type: "DataSize" as const,
+        cells: _cells,
+        bits: _bits,
+        refs: _refs,
+    };
 }
 
 function storeTupleDataSize(source: DataSize) {
@@ -73,15 +88,15 @@ function dictValueParserDataSize(): DictionaryValue<DataSize> {
         },
         parse: (src) => {
             return loadDataSize(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StateInit = {
-    $$type: 'StateInit';
+    $$type: "StateInit";
     code: Cell;
     data: Cell;
-}
+};
 
 export function storeStateInit(src: StateInit) {
     return (builder: Builder) => {
@@ -95,19 +110,19 @@ export function loadStateInit(slice: Slice) {
     const sc_0 = slice;
     const _code = sc_0.loadRef();
     const _data = sc_0.loadRef();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function loadGetterTupleStateInit(source: TupleReader) {
     const _code = source.readCell();
     const _data = source.readCell();
-    return { $$type: 'StateInit' as const, code: _code, data: _data };
+    return { $$type: "StateInit" as const, code: _code, data: _data };
 }
 
 function storeTupleStateInit(source: StateInit) {
@@ -124,17 +139,17 @@ function dictValueParserStateInit(): DictionaryValue<StateInit> {
         },
         parse: (src) => {
             return loadStateInit(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Context = {
-    $$type: 'Context';
+    $$type: "Context";
     bounceable: boolean;
     sender: Address;
     value: bigint;
     raw: Slice;
-}
+};
 
 export function storeContext(src: Context) {
     return (builder: Builder) => {
@@ -152,7 +167,13 @@ export function loadContext(slice: Slice) {
     const _sender = sc_0.loadAddress();
     const _value = sc_0.loadIntBig(257);
     const _raw = sc_0.loadRef().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadTupleContext(source: TupleReader) {
@@ -160,7 +181,13 @@ function loadTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function loadGetterTupleContext(source: TupleReader) {
@@ -168,7 +195,13 @@ function loadGetterTupleContext(source: TupleReader) {
     const _sender = source.readAddress();
     const _value = source.readBigNumber();
     const _raw = source.readCell().asSlice();
-    return { $$type: 'Context' as const, bounceable: _bounceable, sender: _sender, value: _value, raw: _raw };
+    return {
+        $$type: "Context" as const,
+        bounceable: _bounceable,
+        sender: _sender,
+        value: _value,
+        raw: _raw,
+    };
 }
 
 function storeTupleContext(source: Context) {
@@ -187,12 +220,12 @@ function dictValueParserContext(): DictionaryValue<Context> {
         },
         parse: (src) => {
             return loadContext(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type SendParameters = {
-    $$type: 'SendParameters';
+    $$type: "SendParameters";
     mode: bigint;
     body: Cell | null;
     code: Cell | null;
@@ -200,15 +233,27 @@ export type SendParameters = {
     value: bigint;
     to: Address;
     bounce: boolean;
-}
+};
 
 export function storeSendParameters(src: SendParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
-        if (src.code !== null && src.code !== undefined) { b_0.storeBit(true).storeRef(src.code); } else { b_0.storeBit(false); }
-        if (src.data !== null && src.data !== undefined) { b_0.storeBit(true).storeRef(src.data); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.code !== null && src.code !== undefined) {
+            b_0.storeBit(true).storeRef(src.code);
+        } else {
+            b_0.storeBit(false);
+        }
+        if (src.data !== null && src.data !== undefined) {
+            b_0.storeBit(true).storeRef(src.data);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeAddress(src.to);
         b_0.storeBit(src.bounce);
@@ -224,7 +269,16 @@ export function loadSendParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _to = sc_0.loadAddress();
     const _bounce = sc_0.loadBit();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadTupleSendParameters(source: TupleReader) {
@@ -235,7 +289,16 @@ function loadTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function loadGetterTupleSendParameters(source: TupleReader) {
@@ -246,7 +309,16 @@ function loadGetterTupleSendParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _to = source.readAddress();
     const _bounce = source.readBoolean();
-    return { $$type: 'SendParameters' as const, mode: _mode, body: _body, code: _code, data: _data, value: _value, to: _to, bounce: _bounce };
+    return {
+        $$type: "SendParameters" as const,
+        mode: _mode,
+        body: _body,
+        code: _code,
+        data: _data,
+        value: _value,
+        to: _to,
+        bounce: _bounce,
+    };
 }
 
 function storeTupleSendParameters(source: SendParameters) {
@@ -264,28 +336,34 @@ function storeTupleSendParameters(source: SendParameters) {
 function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeSendParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeSendParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadSendParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type DeployParameters = {
-    $$type: 'DeployParameters';
+    $$type: "DeployParameters";
     mode: bigint;
     body: Cell | null;
     value: bigint;
     bounce: boolean;
     init: StateInit;
-}
+};
 
 export function storeDeployParameters(src: DeployParameters) {
     return (builder: Builder) => {
         const b_0 = builder;
         b_0.storeInt(src.mode, 257);
-        if (src.body !== null && src.body !== undefined) { b_0.storeBit(true).storeRef(src.body); } else { b_0.storeBit(false); }
+        if (src.body !== null && src.body !== undefined) {
+            b_0.storeBit(true).storeRef(src.body);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeInt(src.value, 257);
         b_0.storeBit(src.bounce);
         b_0.store(storeStateInit(src.init));
@@ -299,7 +377,14 @@ export function loadDeployParameters(slice: Slice) {
     const _value = sc_0.loadIntBig(257);
     const _bounce = sc_0.loadBit();
     const _init = loadStateInit(sc_0);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadTupleDeployParameters(source: TupleReader) {
@@ -308,7 +393,14 @@ function loadTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function loadGetterTupleDeployParameters(source: TupleReader) {
@@ -317,7 +409,14 @@ function loadGetterTupleDeployParameters(source: TupleReader) {
     const _value = source.readBigNumber();
     const _bounce = source.readBoolean();
     const _init = loadGetterTupleStateInit(source);
-    return { $$type: 'DeployParameters' as const, mode: _mode, body: _body, value: _value, bounce: _bounce, init: _init };
+    return {
+        $$type: "DeployParameters" as const,
+        mode: _mode,
+        body: _body,
+        value: _value,
+        bounce: _bounce,
+        init: _init,
+    };
 }
 
 function storeTupleDeployParameters(source: DeployParameters) {
@@ -333,19 +432,21 @@ function storeTupleDeployParameters(source: DeployParameters) {
 function dictValueParserDeployParameters(): DictionaryValue<DeployParameters> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeDeployParameters(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeDeployParameters(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadDeployParameters(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type StdAddress = {
-    $$type: 'StdAddress';
+    $$type: "StdAddress";
     workchain: bigint;
     address: bigint;
-}
+};
 
 export function storeStdAddress(src: StdAddress) {
     return (builder: Builder) => {
@@ -359,19 +460,31 @@ export function loadStdAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(8);
     const _address = sc_0.loadUintBig(256);
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleStdAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readBigNumber();
-    return { $$type: 'StdAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "StdAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleStdAddress(source: StdAddress) {
@@ -388,15 +501,15 @@ function dictValueParserStdAddress(): DictionaryValue<StdAddress> {
         },
         parse: (src) => {
             return loadStdAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type VarAddress = {
-    $$type: 'VarAddress';
+    $$type: "VarAddress";
     workchain: bigint;
     address: Slice;
-}
+};
 
 export function storeVarAddress(src: VarAddress) {
     return (builder: Builder) => {
@@ -410,19 +523,31 @@ export function loadVarAddress(slice: Slice) {
     const sc_0 = slice;
     const _workchain = sc_0.loadIntBig(32);
     const _address = sc_0.loadRef().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function loadGetterTupleVarAddress(source: TupleReader) {
     const _workchain = source.readBigNumber();
     const _address = source.readCell().asSlice();
-    return { $$type: 'VarAddress' as const, workchain: _workchain, address: _address };
+    return {
+        $$type: "VarAddress" as const,
+        workchain: _workchain,
+        address: _address,
+    };
 }
 
 function storeTupleVarAddress(source: VarAddress) {
@@ -439,16 +564,16 @@ function dictValueParserVarAddress(): DictionaryValue<VarAddress> {
         },
         parse: (src) => {
             return loadVarAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonWallet$Data = {
-    $$type: 'JettonWallet$Data';
+    $$type: "JettonWallet$Data";
     balance: bigint;
     owner: Address;
     master: Address;
-}
+};
 
 export function storeJettonWallet$Data(src: JettonWallet$Data) {
     return (builder: Builder) => {
@@ -464,21 +589,36 @@ export function loadJettonWallet$Data(slice: Slice) {
     const _balance = sc_0.loadCoins();
     const _owner = sc_0.loadAddress();
     const _master = sc_0.loadAddress();
-    return { $$type: 'JettonWallet$Data' as const, balance: _balance, owner: _owner, master: _master };
+    return {
+        $$type: "JettonWallet$Data" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+    };
 }
 
 function loadTupleJettonWallet$Data(source: TupleReader) {
     const _balance = source.readBigNumber();
     const _owner = source.readAddress();
     const _master = source.readAddress();
-    return { $$type: 'JettonWallet$Data' as const, balance: _balance, owner: _owner, master: _master };
+    return {
+        $$type: "JettonWallet$Data" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+    };
 }
 
 function loadGetterTupleJettonWallet$Data(source: TupleReader) {
     const _balance = source.readBigNumber();
     const _owner = source.readAddress();
     const _master = source.readAddress();
-    return { $$type: 'JettonWallet$Data' as const, balance: _balance, owner: _owner, master: _master };
+    return {
+        $$type: "JettonWallet$Data" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+    };
 }
 
 function storeTupleJettonWallet$Data(source: JettonWallet$Data) {
@@ -492,22 +632,24 @@ function storeTupleJettonWallet$Data(source: JettonWallet$Data) {
 function dictValueParserJettonWallet$Data(): DictionaryValue<JettonWallet$Data> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonWallet$Data(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonWallet$Data(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonWallet$Data(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonData = {
-    $$type: 'JettonData';
+    $$type: "JettonData";
     totalSupply: bigint;
     mintable: boolean;
     owner: Address;
     content: Cell;
     jettonWalletCode: Cell;
-}
+};
 
 export function storeJettonData(src: JettonData) {
     return (builder: Builder) => {
@@ -527,7 +669,14 @@ export function loadJettonData(slice: Slice) {
     const _owner = sc_0.loadAddress();
     const _content = sc_0.loadRef();
     const _jettonWalletCode = sc_0.loadRef();
-    return { $$type: 'JettonData' as const, totalSupply: _totalSupply, mintable: _mintable, owner: _owner, content: _content, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonData" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        owner: _owner,
+        content: _content,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function loadTupleJettonData(source: TupleReader) {
@@ -536,7 +685,14 @@ function loadTupleJettonData(source: TupleReader) {
     const _owner = source.readAddress();
     const _content = source.readCell();
     const _jettonWalletCode = source.readCell();
-    return { $$type: 'JettonData' as const, totalSupply: _totalSupply, mintable: _mintable, owner: _owner, content: _content, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonData" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        owner: _owner,
+        content: _content,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function loadGetterTupleJettonData(source: TupleReader) {
@@ -545,7 +701,14 @@ function loadGetterTupleJettonData(source: TupleReader) {
     const _owner = source.readAddress();
     const _content = source.readCell();
     const _jettonWalletCode = source.readCell();
-    return { $$type: 'JettonData' as const, totalSupply: _totalSupply, mintable: _mintable, owner: _owner, content: _content, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonData" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        owner: _owner,
+        content: _content,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function storeTupleJettonData(source: JettonData) {
@@ -565,17 +728,17 @@ function dictValueParserJettonData(): DictionaryValue<JettonData> {
         },
         parse: (src) => {
             return loadJettonData(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonWalletData = {
-    $$type: 'JettonWalletData';
+    $$type: "JettonWalletData";
     balance: bigint;
     owner: Address;
     master: Address;
     code: Cell;
-}
+};
 
 export function storeJettonWalletData(src: JettonWalletData) {
     return (builder: Builder) => {
@@ -593,7 +756,13 @@ export function loadJettonWalletData(slice: Slice) {
     const _owner = sc_0.loadAddress();
     const _master = sc_0.loadAddress();
     const _code = sc_0.loadRef();
-    return { $$type: 'JettonWalletData' as const, balance: _balance, owner: _owner, master: _master, code: _code };
+    return {
+        $$type: "JettonWalletData" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+        code: _code,
+    };
 }
 
 function loadTupleJettonWalletData(source: TupleReader) {
@@ -601,7 +770,13 @@ function loadTupleJettonWalletData(source: TupleReader) {
     const _owner = source.readAddress();
     const _master = source.readAddress();
     const _code = source.readCell();
-    return { $$type: 'JettonWalletData' as const, balance: _balance, owner: _owner, master: _master, code: _code };
+    return {
+        $$type: "JettonWalletData" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+        code: _code,
+    };
 }
 
 function loadGetterTupleJettonWalletData(source: TupleReader) {
@@ -609,7 +784,13 @@ function loadGetterTupleJettonWalletData(source: TupleReader) {
     const _owner = source.readAddress();
     const _master = source.readAddress();
     const _code = source.readCell();
-    return { $$type: 'JettonWalletData' as const, balance: _balance, owner: _owner, master: _master, code: _code };
+    return {
+        $$type: "JettonWalletData" as const,
+        balance: _balance,
+        owner: _owner,
+        master: _master,
+        code: _code,
+    };
 }
 
 function storeTupleJettonWalletData(source: JettonWalletData) {
@@ -624,18 +805,20 @@ function storeTupleJettonWalletData(source: JettonWalletData) {
 function dictValueParserJettonWalletData(): DictionaryValue<JettonWalletData> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonWalletData(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonWalletData(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonWalletData(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type MaybeAddress = {
-    $$type: 'MaybeAddress';
+    $$type: "MaybeAddress";
     address: Address | null;
-}
+};
 
 export function storeMaybeAddress(src: MaybeAddress) {
     return (builder: Builder) => {
@@ -647,17 +830,17 @@ export function storeMaybeAddress(src: MaybeAddress) {
 export function loadMaybeAddress(slice: Slice) {
     const sc_0 = slice;
     const _address = sc_0.loadMaybeAddress();
-    return { $$type: 'MaybeAddress' as const, address: _address };
+    return { $$type: "MaybeAddress" as const, address: _address };
 }
 
 function loadTupleMaybeAddress(source: TupleReader) {
     const _address = source.readAddressOpt();
-    return { $$type: 'MaybeAddress' as const, address: _address };
+    return { $$type: "MaybeAddress" as const, address: _address };
 }
 
 function loadGetterTupleMaybeAddress(source: TupleReader) {
     const _address = source.readAddressOpt();
-    return { $$type: 'MaybeAddress' as const, address: _address };
+    return { $$type: "MaybeAddress" as const, address: _address };
 }
 
 function storeTupleMaybeAddress(source: MaybeAddress) {
@@ -669,19 +852,21 @@ function storeTupleMaybeAddress(source: MaybeAddress) {
 function dictValueParserMaybeAddress(): DictionaryValue<MaybeAddress> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeMaybeAddress(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeMaybeAddress(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadMaybeAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonUpdateContent = {
-    $$type: 'JettonUpdateContent';
+    $$type: "JettonUpdateContent";
     queryId: bigint;
     content: Cell;
-}
+};
 
 export function storeJettonUpdateContent(src: JettonUpdateContent) {
     return (builder: Builder) => {
@@ -694,22 +879,36 @@ export function storeJettonUpdateContent(src: JettonUpdateContent) {
 
 export function loadJettonUpdateContent(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 4) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 4) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _content = sc_0.loadRef();
-    return { $$type: 'JettonUpdateContent' as const, queryId: _queryId, content: _content };
+    return {
+        $$type: "JettonUpdateContent" as const,
+        queryId: _queryId,
+        content: _content,
+    };
 }
 
 function loadTupleJettonUpdateContent(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _content = source.readCell();
-    return { $$type: 'JettonUpdateContent' as const, queryId: _queryId, content: _content };
+    return {
+        $$type: "JettonUpdateContent" as const,
+        queryId: _queryId,
+        content: _content,
+    };
 }
 
 function loadGetterTupleJettonUpdateContent(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _content = source.readCell();
-    return { $$type: 'JettonUpdateContent' as const, queryId: _queryId, content: _content };
+    return {
+        $$type: "JettonUpdateContent" as const,
+        queryId: _queryId,
+        content: _content,
+    };
 }
 
 function storeTupleJettonUpdateContent(source: JettonUpdateContent) {
@@ -722,16 +921,18 @@ function storeTupleJettonUpdateContent(source: JettonUpdateContent) {
 function dictValueParserJettonUpdateContent(): DictionaryValue<JettonUpdateContent> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonUpdateContent(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonUpdateContent(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonUpdateContent(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonTransfer = {
-    $$type: 'JettonTransfer';
+    $$type: "JettonTransfer";
     queryId: bigint;
     amount: bigint;
     destination: Address;
@@ -739,7 +940,7 @@ export type JettonTransfer = {
     customPayload: Cell | null;
     forwardTonAmount: bigint;
     forwardPayload: Slice;
-}
+};
 
 export function storeJettonTransfer(src: JettonTransfer) {
     return (builder: Builder) => {
@@ -749,7 +950,11 @@ export function storeJettonTransfer(src: JettonTransfer) {
         b_0.storeCoins(src.amount);
         b_0.storeAddress(src.destination);
         b_0.storeAddress(src.responseDestination);
-        if (src.customPayload !== null && src.customPayload !== undefined) { b_0.storeBit(true).storeRef(src.customPayload); } else { b_0.storeBit(false); }
+        if (src.customPayload !== null && src.customPayload !== undefined) {
+            b_0.storeBit(true).storeRef(src.customPayload);
+        } else {
+            b_0.storeBit(false);
+        }
         b_0.storeCoins(src.forwardTonAmount);
         b_0.storeBuilder(src.forwardPayload.asBuilder());
     };
@@ -757,7 +962,9 @@ export function storeJettonTransfer(src: JettonTransfer) {
 
 export function loadJettonTransfer(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 260734629) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 260734629) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _amount = sc_0.loadCoins();
     const _destination = sc_0.loadAddress();
@@ -765,7 +972,16 @@ export function loadJettonTransfer(slice: Slice) {
     const _customPayload = sc_0.loadBit() ? sc_0.loadRef() : null;
     const _forwardTonAmount = sc_0.loadCoins();
     const _forwardPayload = sc_0;
-    return { $$type: 'JettonTransfer' as const, queryId: _queryId, amount: _amount, destination: _destination, responseDestination: _responseDestination, customPayload: _customPayload, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransfer" as const,
+        queryId: _queryId,
+        amount: _amount,
+        destination: _destination,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadTupleJettonTransfer(source: TupleReader) {
@@ -776,7 +992,16 @@ function loadTupleJettonTransfer(source: TupleReader) {
     const _customPayload = source.readCellOpt();
     const _forwardTonAmount = source.readBigNumber();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonTransfer' as const, queryId: _queryId, amount: _amount, destination: _destination, responseDestination: _responseDestination, customPayload: _customPayload, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransfer" as const,
+        queryId: _queryId,
+        amount: _amount,
+        destination: _destination,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadGetterTupleJettonTransfer(source: TupleReader) {
@@ -787,7 +1012,16 @@ function loadGetterTupleJettonTransfer(source: TupleReader) {
     const _customPayload = source.readCellOpt();
     const _forwardTonAmount = source.readBigNumber();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonTransfer' as const, queryId: _queryId, amount: _amount, destination: _destination, responseDestination: _responseDestination, customPayload: _customPayload, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransfer" as const,
+        queryId: _queryId,
+        amount: _amount,
+        destination: _destination,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function storeTupleJettonTransfer(source: JettonTransfer) {
@@ -805,23 +1039,25 @@ function storeTupleJettonTransfer(source: JettonTransfer) {
 function dictValueParserJettonTransfer(): DictionaryValue<JettonTransfer> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonTransfer(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonTransfer(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonTransfer(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonTransferInternal = {
-    $$type: 'JettonTransferInternal';
+    $$type: "JettonTransferInternal";
     queryId: bigint;
     amount: bigint;
     sender: Address;
     responseDestination: Address | null;
     forwardTonAmount: bigint;
     forwardPayload: Slice;
-}
+};
 
 export function storeJettonTransferInternal(src: JettonTransferInternal) {
     return (builder: Builder) => {
@@ -838,14 +1074,24 @@ export function storeJettonTransferInternal(src: JettonTransferInternal) {
 
 export function loadJettonTransferInternal(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 395134233) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 395134233) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _amount = sc_0.loadCoins();
     const _sender = sc_0.loadAddress();
     const _responseDestination = sc_0.loadMaybeAddress();
     const _forwardTonAmount = sc_0.loadCoins();
     const _forwardPayload = sc_0;
-    return { $$type: 'JettonTransferInternal' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransferInternal" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadTupleJettonTransferInternal(source: TupleReader) {
@@ -855,7 +1101,15 @@ function loadTupleJettonTransferInternal(source: TupleReader) {
     const _responseDestination = source.readAddressOpt();
     const _forwardTonAmount = source.readBigNumber();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonTransferInternal' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransferInternal" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadGetterTupleJettonTransferInternal(source: TupleReader) {
@@ -865,7 +1119,15 @@ function loadGetterTupleJettonTransferInternal(source: TupleReader) {
     const _responseDestination = source.readAddressOpt();
     const _forwardTonAmount = source.readBigNumber();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonTransferInternal' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination, forwardTonAmount: _forwardTonAmount, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonTransferInternal" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+        forwardTonAmount: _forwardTonAmount,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function storeTupleJettonTransferInternal(source: JettonTransferInternal) {
@@ -882,21 +1144,23 @@ function storeTupleJettonTransferInternal(source: JettonTransferInternal) {
 function dictValueParserJettonTransferInternal(): DictionaryValue<JettonTransferInternal> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonTransferInternal(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonTransferInternal(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonTransferInternal(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonNotification = {
-    $$type: 'JettonNotification';
+    $$type: "JettonNotification";
     queryId: bigint;
     amount: bigint;
     sender: Address;
     forwardPayload: Slice;
-}
+};
 
 export function storeJettonNotification(src: JettonNotification) {
     return (builder: Builder) => {
@@ -911,12 +1175,20 @@ export function storeJettonNotification(src: JettonNotification) {
 
 export function loadJettonNotification(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 1935855772) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 1935855772) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _amount = sc_0.loadCoins();
     const _sender = sc_0.loadAddress();
     const _forwardPayload = sc_0;
-    return { $$type: 'JettonNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadTupleJettonNotification(source: TupleReader) {
@@ -924,7 +1196,13 @@ function loadTupleJettonNotification(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _sender = source.readAddress();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function loadGetterTupleJettonNotification(source: TupleReader) {
@@ -932,7 +1210,13 @@ function loadGetterTupleJettonNotification(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _sender = source.readAddress();
     const _forwardPayload = source.readCell().asSlice();
-    return { $$type: 'JettonNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, forwardPayload: _forwardPayload };
+    return {
+        $$type: "JettonNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        forwardPayload: _forwardPayload,
+    };
 }
 
 function storeTupleJettonNotification(source: JettonNotification) {
@@ -947,21 +1231,23 @@ function storeTupleJettonNotification(source: JettonNotification) {
 function dictValueParserJettonNotification(): DictionaryValue<JettonNotification> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonNotification(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonNotification(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonNotification(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonBurn = {
-    $$type: 'JettonBurn';
+    $$type: "JettonBurn";
     queryId: bigint;
     amount: bigint;
     responseDestination: Address;
     customPayload: Cell | null;
-}
+};
 
 export function storeJettonBurn(src: JettonBurn) {
     return (builder: Builder) => {
@@ -970,18 +1256,30 @@ export function storeJettonBurn(src: JettonBurn) {
         b_0.storeUint(src.queryId, 64);
         b_0.storeCoins(src.amount);
         b_0.storeAddress(src.responseDestination);
-        if (src.customPayload !== null && src.customPayload !== undefined) { b_0.storeBit(true).storeRef(src.customPayload); } else { b_0.storeBit(false); }
+        if (src.customPayload !== null && src.customPayload !== undefined) {
+            b_0.storeBit(true).storeRef(src.customPayload);
+        } else {
+            b_0.storeBit(false);
+        }
     };
 }
 
 export function loadJettonBurn(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 1499400124) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 1499400124) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _amount = sc_0.loadCoins();
     const _responseDestination = sc_0.loadAddress();
     const _customPayload = sc_0.loadBit() ? sc_0.loadRef() : null;
-    return { $$type: 'JettonBurn' as const, queryId: _queryId, amount: _amount, responseDestination: _responseDestination, customPayload: _customPayload };
+    return {
+        $$type: "JettonBurn" as const,
+        queryId: _queryId,
+        amount: _amount,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+    };
 }
 
 function loadTupleJettonBurn(source: TupleReader) {
@@ -989,7 +1287,13 @@ function loadTupleJettonBurn(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _responseDestination = source.readAddress();
     const _customPayload = source.readCellOpt();
-    return { $$type: 'JettonBurn' as const, queryId: _queryId, amount: _amount, responseDestination: _responseDestination, customPayload: _customPayload };
+    return {
+        $$type: "JettonBurn" as const,
+        queryId: _queryId,
+        amount: _amount,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+    };
 }
 
 function loadGetterTupleJettonBurn(source: TupleReader) {
@@ -997,7 +1301,13 @@ function loadGetterTupleJettonBurn(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _responseDestination = source.readAddress();
     const _customPayload = source.readCellOpt();
-    return { $$type: 'JettonBurn' as const, queryId: _queryId, amount: _amount, responseDestination: _responseDestination, customPayload: _customPayload };
+    return {
+        $$type: "JettonBurn" as const,
+        queryId: _queryId,
+        amount: _amount,
+        responseDestination: _responseDestination,
+        customPayload: _customPayload,
+    };
 }
 
 function storeTupleJettonBurn(source: JettonBurn) {
@@ -1016,17 +1326,17 @@ function dictValueParserJettonBurn(): DictionaryValue<JettonBurn> {
         },
         parse: (src) => {
             return loadJettonBurn(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonBurnNotification = {
-    $$type: 'JettonBurnNotification';
+    $$type: "JettonBurnNotification";
     queryId: bigint;
     amount: bigint;
     sender: Address;
     responseDestination: Address;
-}
+};
 
 export function storeJettonBurnNotification(src: JettonBurnNotification) {
     return (builder: Builder) => {
@@ -1041,12 +1351,20 @@ export function storeJettonBurnNotification(src: JettonBurnNotification) {
 
 export function loadJettonBurnNotification(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 2078119902) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 2078119902) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _amount = sc_0.loadCoins();
     const _sender = sc_0.loadAddress();
     const _responseDestination = sc_0.loadAddress();
-    return { $$type: 'JettonBurnNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination };
+    return {
+        $$type: "JettonBurnNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+    };
 }
 
 function loadTupleJettonBurnNotification(source: TupleReader) {
@@ -1054,7 +1372,13 @@ function loadTupleJettonBurnNotification(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _sender = source.readAddress();
     const _responseDestination = source.readAddress();
-    return { $$type: 'JettonBurnNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination };
+    return {
+        $$type: "JettonBurnNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+    };
 }
 
 function loadGetterTupleJettonBurnNotification(source: TupleReader) {
@@ -1062,7 +1386,13 @@ function loadGetterTupleJettonBurnNotification(source: TupleReader) {
     const _amount = source.readBigNumber();
     const _sender = source.readAddress();
     const _responseDestination = source.readAddress();
-    return { $$type: 'JettonBurnNotification' as const, queryId: _queryId, amount: _amount, sender: _sender, responseDestination: _responseDestination };
+    return {
+        $$type: "JettonBurnNotification" as const,
+        queryId: _queryId,
+        amount: _amount,
+        sender: _sender,
+        responseDestination: _responseDestination,
+    };
 }
 
 function storeTupleJettonBurnNotification(source: JettonBurnNotification) {
@@ -1077,18 +1407,20 @@ function storeTupleJettonBurnNotification(source: JettonBurnNotification) {
 function dictValueParserJettonBurnNotification(): DictionaryValue<JettonBurnNotification> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonBurnNotification(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonBurnNotification(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonBurnNotification(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonExcesses = {
-    $$type: 'JettonExcesses';
+    $$type: "JettonExcesses";
     queryId: bigint;
-}
+};
 
 export function storeJettonExcesses(src: JettonExcesses) {
     return (builder: Builder) => {
@@ -1100,19 +1432,21 @@ export function storeJettonExcesses(src: JettonExcesses) {
 
 export function loadJettonExcesses(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 3576854235) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 3576854235) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
-    return { $$type: 'JettonExcesses' as const, queryId: _queryId };
+    return { $$type: "JettonExcesses" as const, queryId: _queryId };
 }
 
 function loadTupleJettonExcesses(source: TupleReader) {
     const _queryId = source.readBigNumber();
-    return { $$type: 'JettonExcesses' as const, queryId: _queryId };
+    return { $$type: "JettonExcesses" as const, queryId: _queryId };
 }
 
 function loadGetterTupleJettonExcesses(source: TupleReader) {
     const _queryId = source.readBigNumber();
-    return { $$type: 'JettonExcesses' as const, queryId: _queryId };
+    return { $$type: "JettonExcesses" as const, queryId: _queryId };
 }
 
 function storeTupleJettonExcesses(source: JettonExcesses) {
@@ -1124,20 +1458,22 @@ function storeTupleJettonExcesses(source: JettonExcesses) {
 function dictValueParserJettonExcesses(): DictionaryValue<JettonExcesses> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonExcesses(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonExcesses(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonExcesses(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type ProvideWalletAddress = {
-    $$type: 'ProvideWalletAddress';
+    $$type: "ProvideWalletAddress";
     queryId: bigint;
     ownerAddress: Address;
     includeAddress: boolean;
-}
+};
 
 export function storeProvideWalletAddress(src: ProvideWalletAddress) {
     return (builder: Builder) => {
@@ -1151,25 +1487,42 @@ export function storeProvideWalletAddress(src: ProvideWalletAddress) {
 
 export function loadProvideWalletAddress(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 745978227) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 745978227) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _ownerAddress = sc_0.loadAddress();
     const _includeAddress = sc_0.loadBit();
-    return { $$type: 'ProvideWalletAddress' as const, queryId: _queryId, ownerAddress: _ownerAddress, includeAddress: _includeAddress };
+    return {
+        $$type: "ProvideWalletAddress" as const,
+        queryId: _queryId,
+        ownerAddress: _ownerAddress,
+        includeAddress: _includeAddress,
+    };
 }
 
 function loadTupleProvideWalletAddress(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _ownerAddress = source.readAddress();
     const _includeAddress = source.readBoolean();
-    return { $$type: 'ProvideWalletAddress' as const, queryId: _queryId, ownerAddress: _ownerAddress, includeAddress: _includeAddress };
+    return {
+        $$type: "ProvideWalletAddress" as const,
+        queryId: _queryId,
+        ownerAddress: _ownerAddress,
+        includeAddress: _includeAddress,
+    };
 }
 
 function loadGetterTupleProvideWalletAddress(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _ownerAddress = source.readAddress();
     const _includeAddress = source.readBoolean();
-    return { $$type: 'ProvideWalletAddress' as const, queryId: _queryId, ownerAddress: _ownerAddress, includeAddress: _includeAddress };
+    return {
+        $$type: "ProvideWalletAddress" as const,
+        queryId: _queryId,
+        ownerAddress: _ownerAddress,
+        includeAddress: _includeAddress,
+    };
 }
 
 function storeTupleProvideWalletAddress(source: ProvideWalletAddress) {
@@ -1183,20 +1536,22 @@ function storeTupleProvideWalletAddress(source: ProvideWalletAddress) {
 function dictValueParserProvideWalletAddress(): DictionaryValue<ProvideWalletAddress> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeProvideWalletAddress(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeProvideWalletAddress(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadProvideWalletAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type TakeWalletAddress = {
-    $$type: 'TakeWalletAddress';
+    $$type: "TakeWalletAddress";
     queryId: bigint;
     walletAddress: Address;
     ownerAddress: Cell | null;
-}
+};
 
 export function storeTakeWalletAddress(src: TakeWalletAddress) {
     return (builder: Builder) => {
@@ -1204,31 +1559,52 @@ export function storeTakeWalletAddress(src: TakeWalletAddress) {
         b_0.storeUint(3513996288, 32);
         b_0.storeUint(src.queryId, 64);
         b_0.storeAddress(src.walletAddress);
-        if (src.ownerAddress !== null && src.ownerAddress !== undefined) { b_0.storeBit(true).storeRef(src.ownerAddress); } else { b_0.storeBit(false); }
+        if (src.ownerAddress !== null && src.ownerAddress !== undefined) {
+            b_0.storeBit(true).storeRef(src.ownerAddress);
+        } else {
+            b_0.storeBit(false);
+        }
     };
 }
 
 export function loadTakeWalletAddress(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 3513996288) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 3513996288) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _walletAddress = sc_0.loadAddress();
     const _ownerAddress = sc_0.loadBit() ? sc_0.loadRef() : null;
-    return { $$type: 'TakeWalletAddress' as const, queryId: _queryId, walletAddress: _walletAddress, ownerAddress: _ownerAddress };
+    return {
+        $$type: "TakeWalletAddress" as const,
+        queryId: _queryId,
+        walletAddress: _walletAddress,
+        ownerAddress: _ownerAddress,
+    };
 }
 
 function loadTupleTakeWalletAddress(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _walletAddress = source.readAddress();
     const _ownerAddress = source.readCellOpt();
-    return { $$type: 'TakeWalletAddress' as const, queryId: _queryId, walletAddress: _walletAddress, ownerAddress: _ownerAddress };
+    return {
+        $$type: "TakeWalletAddress" as const,
+        queryId: _queryId,
+        walletAddress: _walletAddress,
+        ownerAddress: _ownerAddress,
+    };
 }
 
 function loadGetterTupleTakeWalletAddress(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _walletAddress = source.readAddress();
     const _ownerAddress = source.readCellOpt();
-    return { $$type: 'TakeWalletAddress' as const, queryId: _queryId, walletAddress: _walletAddress, ownerAddress: _ownerAddress };
+    return {
+        $$type: "TakeWalletAddress" as const,
+        queryId: _queryId,
+        walletAddress: _walletAddress,
+        ownerAddress: _ownerAddress,
+    };
 }
 
 function storeTupleTakeWalletAddress(source: TakeWalletAddress) {
@@ -1242,21 +1618,23 @@ function storeTupleTakeWalletAddress(source: TakeWalletAddress) {
 function dictValueParserTakeWalletAddress(): DictionaryValue<TakeWalletAddress> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeTakeWalletAddress(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeTakeWalletAddress(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadTakeWalletAddress(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type Mint = {
-    $$type: 'Mint';
+    $$type: "Mint";
     queryId: bigint;
     receiver: Address;
     tonAmount: bigint;
     mintMessage: JettonTransferInternal;
-}
+};
 
 export function storeMint(src: Mint) {
     return (builder: Builder) => {
@@ -1273,13 +1651,21 @@ export function storeMint(src: Mint) {
 
 export function loadMint(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 21) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 21) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _receiver = sc_0.loadAddress();
     const _tonAmount = sc_0.loadCoins();
     const sc_1 = sc_0.loadRef().beginParse();
     const _mintMessage = loadJettonTransferInternal(sc_1);
-    return { $$type: 'Mint' as const, queryId: _queryId, receiver: _receiver, tonAmount: _tonAmount, mintMessage: _mintMessage };
+    return {
+        $$type: "Mint" as const,
+        queryId: _queryId,
+        receiver: _receiver,
+        tonAmount: _tonAmount,
+        mintMessage: _mintMessage,
+    };
 }
 
 function loadTupleMint(source: TupleReader) {
@@ -1287,7 +1673,13 @@ function loadTupleMint(source: TupleReader) {
     const _receiver = source.readAddress();
     const _tonAmount = source.readBigNumber();
     const _mintMessage = loadTupleJettonTransferInternal(source);
-    return { $$type: 'Mint' as const, queryId: _queryId, receiver: _receiver, tonAmount: _tonAmount, mintMessage: _mintMessage };
+    return {
+        $$type: "Mint" as const,
+        queryId: _queryId,
+        receiver: _receiver,
+        tonAmount: _tonAmount,
+        mintMessage: _mintMessage,
+    };
 }
 
 function loadGetterTupleMint(source: TupleReader) {
@@ -1295,7 +1687,13 @@ function loadGetterTupleMint(source: TupleReader) {
     const _receiver = source.readAddress();
     const _tonAmount = source.readBigNumber();
     const _mintMessage = loadGetterTupleJettonTransferInternal(source);
-    return { $$type: 'Mint' as const, queryId: _queryId, receiver: _receiver, tonAmount: _tonAmount, mintMessage: _mintMessage };
+    return {
+        $$type: "Mint" as const,
+        queryId: _queryId,
+        receiver: _receiver,
+        tonAmount: _tonAmount,
+        mintMessage: _mintMessage,
+    };
 }
 
 function storeTupleMint(source: Mint) {
@@ -1314,15 +1712,15 @@ function dictValueParserMint(): DictionaryValue<Mint> {
         },
         parse: (src) => {
             return loadMint(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type ChangeOwner = {
-    $$type: 'ChangeOwner';
+    $$type: "ChangeOwner";
     queryId: bigint;
     newOwner: Address;
-}
+};
 
 export function storeChangeOwner(src: ChangeOwner) {
     return (builder: Builder) => {
@@ -1335,22 +1733,36 @@ export function storeChangeOwner(src: ChangeOwner) {
 
 export function loadChangeOwner(slice: Slice) {
     const sc_0 = slice;
-    if (sc_0.loadUint(32) !== 3) { throw Error('Invalid prefix'); }
+    if (sc_0.loadUint(32) !== 3) {
+        throw Error("Invalid prefix");
+    }
     const _queryId = sc_0.loadUintBig(64);
     const _newOwner = sc_0.loadAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadTupleChangeOwner(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function loadGetterTupleChangeOwner(source: TupleReader) {
     const _queryId = source.readBigNumber();
     const _newOwner = source.readAddress();
-    return { $$type: 'ChangeOwner' as const, queryId: _queryId, newOwner: _newOwner };
+    return {
+        $$type: "ChangeOwner" as const,
+        queryId: _queryId,
+        newOwner: _newOwner,
+    };
 }
 
 function storeTupleChangeOwner(source: ChangeOwner) {
@@ -1363,22 +1775,24 @@ function storeTupleChangeOwner(source: ChangeOwner) {
 function dictValueParserChangeOwner(): DictionaryValue<ChangeOwner> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeChangeOwner(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeChangeOwner(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadChangeOwner(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonMasterState = {
-    $$type: 'JettonMasterState';
+    $$type: "JettonMasterState";
     totalSupply: bigint;
     mintable: boolean;
     adminAddress: Address;
     jettonContent: Cell;
     jettonWalletCode: Cell;
-}
+};
 
 export function storeJettonMasterState(src: JettonMasterState) {
     return (builder: Builder) => {
@@ -1398,7 +1812,14 @@ export function loadJettonMasterState(slice: Slice) {
     const _adminAddress = sc_0.loadAddress();
     const _jettonContent = sc_0.loadRef();
     const _jettonWalletCode = sc_0.loadRef();
-    return { $$type: 'JettonMasterState' as const, totalSupply: _totalSupply, mintable: _mintable, adminAddress: _adminAddress, jettonContent: _jettonContent, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonMasterState" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        adminAddress: _adminAddress,
+        jettonContent: _jettonContent,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function loadTupleJettonMasterState(source: TupleReader) {
@@ -1407,7 +1828,14 @@ function loadTupleJettonMasterState(source: TupleReader) {
     const _adminAddress = source.readAddress();
     const _jettonContent = source.readCell();
     const _jettonWalletCode = source.readCell();
-    return { $$type: 'JettonMasterState' as const, totalSupply: _totalSupply, mintable: _mintable, adminAddress: _adminAddress, jettonContent: _jettonContent, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonMasterState" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        adminAddress: _adminAddress,
+        jettonContent: _jettonContent,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function loadGetterTupleJettonMasterState(source: TupleReader) {
@@ -1416,7 +1844,14 @@ function loadGetterTupleJettonMasterState(source: TupleReader) {
     const _adminAddress = source.readAddress();
     const _jettonContent = source.readCell();
     const _jettonWalletCode = source.readCell();
-    return { $$type: 'JettonMasterState' as const, totalSupply: _totalSupply, mintable: _mintable, adminAddress: _adminAddress, jettonContent: _jettonContent, jettonWalletCode: _jettonWalletCode };
+    return {
+        $$type: "JettonMasterState" as const,
+        totalSupply: _totalSupply,
+        mintable: _mintable,
+        adminAddress: _adminAddress,
+        jettonContent: _jettonContent,
+        jettonWalletCode: _jettonWalletCode,
+    };
 }
 
 function storeTupleJettonMasterState(source: JettonMasterState) {
@@ -1432,20 +1867,22 @@ function storeTupleJettonMasterState(source: JettonMasterState) {
 function dictValueParserJettonMasterState(): DictionaryValue<JettonMasterState> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonMasterState(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonMasterState(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonMasterState(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
 export type JettonMinter$Data = {
-    $$type: 'JettonMinter$Data';
+    $$type: "JettonMinter$Data";
     totalSupply: bigint;
     owner: Address;
     jettonContent: Cell;
-}
+};
 
 export function storeJettonMinter$Data(src: JettonMinter$Data) {
     return (builder: Builder) => {
@@ -1461,21 +1898,36 @@ export function loadJettonMinter$Data(slice: Slice) {
     const _totalSupply = sc_0.loadCoins();
     const _owner = sc_0.loadAddress();
     const _jettonContent = sc_0.loadRef();
-    return { $$type: 'JettonMinter$Data' as const, totalSupply: _totalSupply, owner: _owner, jettonContent: _jettonContent };
+    return {
+        $$type: "JettonMinter$Data" as const,
+        totalSupply: _totalSupply,
+        owner: _owner,
+        jettonContent: _jettonContent,
+    };
 }
 
 function loadTupleJettonMinter$Data(source: TupleReader) {
     const _totalSupply = source.readBigNumber();
     const _owner = source.readAddress();
     const _jettonContent = source.readCell();
-    return { $$type: 'JettonMinter$Data' as const, totalSupply: _totalSupply, owner: _owner, jettonContent: _jettonContent };
+    return {
+        $$type: "JettonMinter$Data" as const,
+        totalSupply: _totalSupply,
+        owner: _owner,
+        jettonContent: _jettonContent,
+    };
 }
 
 function loadGetterTupleJettonMinter$Data(source: TupleReader) {
     const _totalSupply = source.readBigNumber();
     const _owner = source.readAddress();
     const _jettonContent = source.readCell();
-    return { $$type: 'JettonMinter$Data' as const, totalSupply: _totalSupply, owner: _owner, jettonContent: _jettonContent };
+    return {
+        $$type: "JettonMinter$Data" as const,
+        totalSupply: _totalSupply,
+        owner: _owner,
+        jettonContent: _jettonContent,
+    };
 }
 
 function storeTupleJettonMinter$Data(source: JettonMinter$Data) {
@@ -1489,19 +1941,21 @@ function storeTupleJettonMinter$Data(source: JettonMinter$Data) {
 function dictValueParserJettonMinter$Data(): DictionaryValue<JettonMinter$Data> {
     return {
         serialize: (src, builder) => {
-            builder.storeRef(beginCell().store(storeJettonMinter$Data(src)).endCell());
+            builder.storeRef(
+                beginCell().store(storeJettonMinter$Data(src)).endCell(),
+            );
         },
         parse: (src) => {
             return loadJettonMinter$Data(src.loadRef().beginParse());
-        }
-    }
+        },
+    };
 }
 
- type JettonMinter_init_args = {
-    $$type: 'JettonMinter_init_args';
+type JettonMinter_init_args = {
+    $$type: "JettonMinter_init_args";
     owner: Address;
     jettonContent: Cell;
-}
+};
 
 function initJettonMinter_init_args(src: JettonMinter_init_args) {
     return (builder: Builder) => {
@@ -1512,10 +1966,16 @@ function initJettonMinter_init_args(src: JettonMinter_init_args) {
 }
 
 async function JettonMinter_init(owner: Address, jettonContent: Cell) {
-    const __code = Cell.fromBase64('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');
+    const __code = Cell.fromBase64(
+        "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",
+    );
     const builder = beginCell();
     builder.storeUint(0, 1);
-    initJettonMinter_init_args({ $$type: 'JettonMinter_init_args', owner, jettonContent })(builder);
+    initJettonMinter_init_args({
+        $$type: "JettonMinter_init_args",
+        owner,
+        jettonContent,
+    })(builder);
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
@@ -1541,11 +2001,15 @@ const JettonMinter_errors: { [key: number]: { message: string } } = {
     36: { message: `Invalid destination address in outbound message` },
     37: { message: `Not enough Toncoin` },
     38: { message: `Not enough extra currencies` },
-    39: { message: `Outbound message does not fit into a cell after rewriting` },
+    39: {
+        message: `Outbound message does not fit into a cell after rewriting`,
+    },
     40: { message: `Cannot process a message` },
     41: { message: `Library reference is null` },
     42: { message: `Library change action error` },
-    43: { message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree` },
+    43: {
+        message: `Exceeded maximum number of cells in the library or the maximum depth of the Merkle tree`,
+    },
     50: { message: `Account state size exceeded limits` },
     128: { message: `Null reference exception` },
     129: { message: `Invalid serialization prefix` },
@@ -1560,120 +2024,850 @@ const JettonMinter_errors: { [key: number]: { message: string } } = {
     57978: { message: `Invalid balance after burn` },
     60555: { message: `Invalid workchain of destination address` },
     62972: { message: `Invalid balance` },
-}
+};
 
 const JettonMinter_types: ABIType[] = [
-    {"name":"DataSize","header":null,"fields":[{"name":"cells","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bits","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"refs","type":{"kind":"simple","type":"int","optional":false,"format":257}}]},
-    {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"Context","header":null,"fields":[{"name":"bounceable","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"SendParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"DeployParameters","header":null,"fields":[{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"init","type":{"kind":"simple","type":"StateInit","optional":false}}]},
-    {"name":"StdAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":8}},{"name":"address","type":{"kind":"simple","type":"uint","optional":false,"format":256}}]},
-    {"name":"VarAddress","header":null,"fields":[{"name":"workchain","type":{"kind":"simple","type":"int","optional":false,"format":32}},{"name":"address","type":{"kind":"simple","type":"slice","optional":false}}]},
-    {"name":"JettonWallet$Data","header":null,"fields":[{"name":"balance","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"master","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"JettonData","header":null,"fields":[{"name":"totalSupply","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"mintable","type":{"kind":"simple","type":"bool","optional":false}},{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"content","type":{"kind":"simple","type":"cell","optional":false}},{"name":"jettonWalletCode","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"JettonWalletData","header":null,"fields":[{"name":"balance","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"master","type":{"kind":"simple","type":"address","optional":false}},{"name":"code","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"MaybeAddress","header":null,"fields":[{"name":"address","type":{"kind":"simple","type":"address","optional":true}}]},
-    {"name":"JettonUpdateContent","header":4,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"content","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"JettonTransfer","header":260734629,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"amount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"destination","type":{"kind":"simple","type":"address","optional":false}},{"name":"responseDestination","type":{"kind":"simple","type":"address","optional":true}},{"name":"customPayload","type":{"kind":"simple","type":"cell","optional":true}},{"name":"forwardTonAmount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"forwardPayload","type":{"kind":"simple","type":"slice","optional":false,"format":"remainder"}}]},
-    {"name":"JettonTransferInternal","header":395134233,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"amount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"responseDestination","type":{"kind":"simple","type":"address","optional":true}},{"name":"forwardTonAmount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"forwardPayload","type":{"kind":"simple","type":"slice","optional":false,"format":"remainder"}}]},
-    {"name":"JettonNotification","header":1935855772,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"amount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"forwardPayload","type":{"kind":"simple","type":"slice","optional":false,"format":"remainder"}}]},
-    {"name":"JettonBurn","header":1499400124,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"amount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"responseDestination","type":{"kind":"simple","type":"address","optional":false}},{"name":"customPayload","type":{"kind":"simple","type":"cell","optional":true}}]},
-    {"name":"JettonBurnNotification","header":2078119902,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"amount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"responseDestination","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"JettonExcesses","header":3576854235,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
-    {"name":"ProvideWalletAddress","header":745978227,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"ownerAddress","type":{"kind":"simple","type":"address","optional":false}},{"name":"includeAddress","type":{"kind":"simple","type":"bool","optional":false}}]},
-    {"name":"TakeWalletAddress","header":3513996288,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"walletAddress","type":{"kind":"simple","type":"address","optional":false}},{"name":"ownerAddress","type":{"kind":"simple","type":"cell","optional":true}}]},
-    {"name":"Mint","header":21,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"receiver","type":{"kind":"simple","type":"address","optional":false}},{"name":"tonAmount","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"mintMessage","type":{"kind":"simple","type":"JettonTransferInternal","optional":false}}]},
-    {"name":"ChangeOwner","header":3,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"newOwner","type":{"kind":"simple","type":"address","optional":false}}]},
-    {"name":"JettonMasterState","header":null,"fields":[{"name":"totalSupply","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"mintable","type":{"kind":"simple","type":"bool","optional":false}},{"name":"adminAddress","type":{"kind":"simple","type":"address","optional":false}},{"name":"jettonContent","type":{"kind":"simple","type":"cell","optional":false}},{"name":"jettonWalletCode","type":{"kind":"simple","type":"cell","optional":false}}]},
-    {"name":"JettonMinter$Data","header":null,"fields":[{"name":"totalSupply","type":{"kind":"simple","type":"uint","optional":false,"format":"coins"}},{"name":"owner","type":{"kind":"simple","type":"address","optional":false}},{"name":"jettonContent","type":{"kind":"simple","type":"cell","optional":false}}]},
-]
+    {
+        name: "DataSize",
+        header: null,
+        fields: [
+            {
+                name: "cells",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bits",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "refs",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+        ],
+    },
+    {
+        name: "StateInit",
+        header: null,
+        fields: [
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "Context",
+        header: null,
+        fields: [
+            {
+                name: "bounceable",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "raw",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "SendParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "data",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "to",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "DeployParameters",
+        header: null,
+        fields: [
+            {
+                name: "mode",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "body",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "value",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "bounce",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "init",
+                type: { kind: "simple", type: "StateInit", optional: false },
+            },
+        ],
+    },
+    {
+        name: "StdAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 8,
+                },
+            },
+            {
+                name: "address",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 256,
+                },
+            },
+        ],
+    },
+    {
+        name: "VarAddress",
+        header: null,
+        fields: [
+            {
+                name: "workchain",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 32,
+                },
+            },
+            {
+                name: "address",
+                type: { kind: "simple", type: "slice", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonWallet$Data",
+        header: null,
+        fields: [
+            {
+                name: "balance",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "master",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonData",
+        header: null,
+        fields: [
+            {
+                name: "totalSupply",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "mintable",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "content",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+            {
+                name: "jettonWalletCode",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonWalletData",
+        header: null,
+        fields: [
+            {
+                name: "balance",
+                type: {
+                    kind: "simple",
+                    type: "int",
+                    optional: false,
+                    format: 257,
+                },
+            },
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "master",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "code",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "MaybeAddress",
+        header: null,
+        fields: [
+            {
+                name: "address",
+                type: { kind: "simple", type: "address", optional: true },
+            },
+        ],
+    },
+    {
+        name: "JettonUpdateContent",
+        header: 4,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "content",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonTransfer",
+        header: 260734629,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "destination",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "responseDestination",
+                type: { kind: "simple", type: "address", optional: true },
+            },
+            {
+                name: "customPayload",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+            {
+                name: "forwardTonAmount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "forwardPayload",
+                type: {
+                    kind: "simple",
+                    type: "slice",
+                    optional: false,
+                    format: "remainder",
+                },
+            },
+        ],
+    },
+    {
+        name: "JettonTransferInternal",
+        header: 395134233,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "responseDestination",
+                type: { kind: "simple", type: "address", optional: true },
+            },
+            {
+                name: "forwardTonAmount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "forwardPayload",
+                type: {
+                    kind: "simple",
+                    type: "slice",
+                    optional: false,
+                    format: "remainder",
+                },
+            },
+        ],
+    },
+    {
+        name: "JettonNotification",
+        header: 1935855772,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "forwardPayload",
+                type: {
+                    kind: "simple",
+                    type: "slice",
+                    optional: false,
+                    format: "remainder",
+                },
+            },
+        ],
+    },
+    {
+        name: "JettonBurn",
+        header: 1499400124,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "responseDestination",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "customPayload",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+        ],
+    },
+    {
+        name: "JettonBurnNotification",
+        header: 2078119902,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "amount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "sender",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "responseDestination",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonExcesses",
+        header: 3576854235,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+        ],
+    },
+    {
+        name: "ProvideWalletAddress",
+        header: 745978227,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "ownerAddress",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "includeAddress",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+        ],
+    },
+    {
+        name: "TakeWalletAddress",
+        header: 3513996288,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "walletAddress",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "ownerAddress",
+                type: { kind: "simple", type: "cell", optional: true },
+            },
+        ],
+    },
+    {
+        name: "Mint",
+        header: 21,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "receiver",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "tonAmount",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "mintMessage",
+                type: {
+                    kind: "simple",
+                    type: "JettonTransferInternal",
+                    optional: false,
+                },
+            },
+        ],
+    },
+    {
+        name: "ChangeOwner",
+        header: 3,
+        fields: [
+            {
+                name: "queryId",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: 64,
+                },
+            },
+            {
+                name: "newOwner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonMasterState",
+        header: null,
+        fields: [
+            {
+                name: "totalSupply",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "mintable",
+                type: { kind: "simple", type: "bool", optional: false },
+            },
+            {
+                name: "adminAddress",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "jettonContent",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+            {
+                name: "jettonWalletCode",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+    {
+        name: "JettonMinter$Data",
+        header: null,
+        fields: [
+            {
+                name: "totalSupply",
+                type: {
+                    kind: "simple",
+                    type: "uint",
+                    optional: false,
+                    format: "coins",
+                },
+            },
+            {
+                name: "owner",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+            {
+                name: "jettonContent",
+                type: { kind: "simple", type: "cell", optional: false },
+            },
+        ],
+    },
+];
 
 const JettonMinter_getters: ABIGetter[] = [
-    {"name":"get_jetton_data","methodId":106029,"arguments":[],"returnType":{"kind":"simple","type":"JettonMasterState","optional":false}},
-    {"name":"get_wallet_address","methodId":103289,"arguments":[{"name":"ownerAddress","type":{"kind":"simple","type":"address","optional":false}}],"returnType":{"kind":"simple","type":"address","optional":false}},
-]
+    {
+        name: "get_jetton_data",
+        methodId: 106029,
+        arguments: [],
+        returnType: {
+            kind: "simple",
+            type: "JettonMasterState",
+            optional: false,
+        },
+    },
+    {
+        name: "get_wallet_address",
+        methodId: 103289,
+        arguments: [
+            {
+                name: "ownerAddress",
+                type: { kind: "simple", type: "address", optional: false },
+            },
+        ],
+        returnType: { kind: "simple", type: "address", optional: false },
+    },
+];
 
 export const JettonMinter_getterMapping: { [key: string]: string } = {
-    'get_jetton_data': 'getGetJettonData',
-    'get_wallet_address': 'getGetWalletAddress',
-}
+    get_jetton_data: "getGetJettonData",
+    get_wallet_address: "getGetWalletAddress",
+};
 
 const JettonMinter_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"typed","type":"ProvideWalletAddress"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"JettonBurnNotification"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"JettonUpdateContent"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"Mint"}},
-    {"receiver":"internal","message":{"kind":"typed","type":"ChangeOwner"}},
-]
+    {
+        receiver: "internal",
+        message: { kind: "typed", type: "ProvideWalletAddress" },
+    },
+    {
+        receiver: "internal",
+        message: { kind: "typed", type: "JettonBurnNotification" },
+    },
+    {
+        receiver: "internal",
+        message: { kind: "typed", type: "JettonUpdateContent" },
+    },
+    { receiver: "internal", message: { kind: "typed", type: "Mint" } },
+    { receiver: "internal", message: { kind: "typed", type: "ChangeOwner" } },
+];
 
 export class JettonMinter implements Contract {
-    
     static async init(owner: Address, jettonContent: Cell) {
         return await JettonMinter_init(owner, jettonContent);
     }
-    
+
     static async fromInit(owner: Address, jettonContent: Cell) {
         const __gen_init = await JettonMinter_init(owner, jettonContent);
         const address = contractAddress(0, __gen_init);
         return new JettonMinter(address, __gen_init);
     }
-    
+
     static fromAddress(address: Address) {
         return new JettonMinter(address);
     }
-    
-    readonly address: Address; 
-    readonly init?: { code: Cell, data: Cell };
+
+    readonly address: Address;
+    readonly init?: { code: Cell; data: Cell };
     readonly abi: ContractABI = {
-        types:  JettonMinter_types,
+        types: JettonMinter_types,
         getters: JettonMinter_getters,
         receivers: JettonMinter_receivers,
         errors: JettonMinter_errors,
     };
-    
-    private constructor(address: Address, init?: { code: Cell, data: Cell }) {
+
+    private constructor(address: Address, init?: { code: Cell; data: Cell }) {
         this.address = address;
         this.init = init;
     }
-    
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: ProvideWalletAddress | JettonBurnNotification | JettonUpdateContent | Mint | ChangeOwner) {
-        
+
+    async send(
+        provider: ContractProvider,
+        via: Sender,
+        args: { value: bigint; bounce?: boolean | null | undefined },
+        message:
+            | ProvideWalletAddress
+            | JettonBurnNotification
+            | JettonUpdateContent
+            | Mint
+            | ChangeOwner,
+    ) {
         let body: Cell | null = null;
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'ProvideWalletAddress') {
-            body = beginCell().store(storeProvideWalletAddress(message)).endCell();
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "ProvideWalletAddress"
+        ) {
+            body = beginCell()
+                .store(storeProvideWalletAddress(message))
+                .endCell();
         }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'JettonBurnNotification') {
-            body = beginCell().store(storeJettonBurnNotification(message)).endCell();
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "JettonBurnNotification"
+        ) {
+            body = beginCell()
+                .store(storeJettonBurnNotification(message))
+                .endCell();
         }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'JettonUpdateContent') {
-            body = beginCell().store(storeJettonUpdateContent(message)).endCell();
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "JettonUpdateContent"
+        ) {
+            body = beginCell()
+                .store(storeJettonUpdateContent(message))
+                .endCell();
         }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'Mint') {
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "Mint"
+        ) {
             body = beginCell().store(storeMint(message)).endCell();
         }
-        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'ChangeOwner') {
+        if (
+            message &&
+            typeof message === "object" &&
+            !(message instanceof Slice) &&
+            message.$$type === "ChangeOwner"
+        ) {
             body = beginCell().store(storeChangeOwner(message)).endCell();
         }
-        if (body === null) { throw new Error('Invalid message type'); }
-        
+        if (body === null) {
+            throw new Error("Invalid message type");
+        }
+
         await provider.internal(via, { ...args, body: body });
-        
     }
-    
+
     async getGetJettonData(provider: ContractProvider) {
         const builder = new TupleBuilder();
-        const source = (await provider.get(106029 as any, builder.build())).stack;
+        const source = (await provider.get(106029 as any, builder.build()))
+            .stack;
         const result = loadGetterTupleJettonMasterState(source);
         return result;
     }
-    
-    async getGetWalletAddress(provider: ContractProvider, ownerAddress: Address) {
+
+    async getGetWalletAddress(
+        provider: ContractProvider,
+        ownerAddress: Address,
+    ) {
         const builder = new TupleBuilder();
         builder.writeAddress(ownerAddress);
-        const source = (await provider.get(103289 as any, builder.build())).stack;
+        const source = (await provider.get(103289 as any, builder.build()))
+            .stack;
         const result = source.readAddress();
         return result;
     }
-    
 }
