@@ -1,0 +1,629 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/local-type-inference_LocalTypeInferenceTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_string
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_end_slice
+  DECLPROC __tact_string_builder_append
+  DECLPROC __tact_string_builder_append_not_mut
+  DECLPROC __tact_dict_get_int_int
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $StateInit$_not_null
+  DECLPROC $StateInit$_to_external
+  DECLPROC $MyStruct$_to_external
+  DECLPROC $LocalTypeInferenceTester$init$_store
+  DECLPROC $LocalTypeInferenceTester$_contract_init
+  DECLPROC $LocalTypeInferenceTester$_contract_load
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $LocalTypeInferenceTester$_init_child
+  DECLPROC $LocalTypeInferenceTester$_fun_test1
+  DECLPROC $LocalTypeInferenceTester$_fun_test2
+  DECLPROC $LocalTypeInferenceTester$_fun_test3
+  DECLPROC $LocalTypeInferenceTester$_fun_test4
+  DECLPROC $LocalTypeInferenceTester$_fun_test5
+  DECLPROC $LocalTypeInferenceTester$_fun_test6
+  DECLPROC $LocalTypeInferenceTester$_fun_test7
+  DECLPROC $LocalTypeInferenceTester$_fun_test8
+  DECLPROC $LocalTypeInferenceTester$_fun_test9
+  DECLPROC $LocalTypeInferenceTester$_fun_test10
+  DECLPROC $LocalTypeInferenceTester$_fun_test11
+  DECLPROC $LocalTypeInferenceTester$_fun_test12
+  DECLPROC $LocalTypeInferenceTester$_fun_test13
+  DECLPROC $MyStruct$_constructor_x_y
+  DECLPROC $LocalTypeInferenceTester$_fun_test14
+  DECLPROC $LocalTypeInferenceTester$_fun_test15
+  DECLPROC $LocalTypeInferenceTester$_fun_test16
+  DECLPROC $LocalTypeInferenceTester$_fun_test17
+  DECLPROC $LocalTypeInferenceTester$_fun_test18
+  DECLPROC $LocalTypeInferenceTester$_fun_test19
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $LocalTypeInferenceTester$_fun_forward
+  DECLPROC $LocalTypeInferenceTester$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  70304 DECLMETHOD %test1
+  74435 DECLMETHOD %test2
+  78562 DECLMETHOD %test3
+  82437 DECLMETHOD %test4
+  86564 DECLMETHOD %test5
+  90695 DECLMETHOD %test6
+  94822 DECLMETHOD %test7
+  99209 DECLMETHOD %test8
+  103336 DECLMETHOD %test9
+  107552 DECLMETHOD %test10
+  111617 DECLMETHOD %test11
+  99426 DECLMETHOD %test12
+  103491 DECLMETHOD %test13
+  124068 DECLMETHOD %test14
+  128133 DECLMETHOD %test15
+  115942 DECLMETHOD %test16
+  120007 DECLMETHOD %test17
+  75048 DECLMETHOD %test18
+  79113 DECLMETHOD %test19
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_string PROCINLINE:<{
+    NEWC
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_end_slice PROCINLINE:<{
+    __tact_string_builder_end INLINECALLDICT
+    CTOS
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s3 s3 XCHG2
+        STSLICER
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  __tact_string_builder_append_not_mut PROCREF:<{
+    __tact_string_builder_append INLINECALLDICT
+  }>
+  __tact_dict_get_int_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $StateInit$_to_external PROCINLINE:<{
+  }>
+  $MyStruct$_to_external PROCINLINE:<{
+  }>
+  $LocalTypeInferenceTester$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $LocalTypeInferenceTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $LocalTypeInferenceTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $LocalTypeInferenceTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $LocalTypeInferenceTester$_init_child PROCINLINE:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $LocalTypeInferenceTester$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $LocalTypeInferenceTester$_fun_test1 PROCREF:<{
+    1 PUSHINT
+  }>
+  $LocalTypeInferenceTester$_fun_test2 PROCREF:<{
+    2 PUSHINT
+  }>
+  $LocalTypeInferenceTester$_fun_test3 PROCREF:<{
+        MYADDR
+  }>
+  $LocalTypeInferenceTester$_fun_test4 PROCREF:<{
+        MYADDR
+  }>
+  $LocalTypeInferenceTester$_fun_test5 PROCREF:<{
+    TRUE
+  }>
+  $LocalTypeInferenceTester$_fun_test6 PROCREF:<{
+        NEWC
+    123 PUSHINT
+    SWAP
+    64 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test7 PROCREF:<{
+        NEWC
+    123 PUSHINT
+    SWAP
+    64 STU
+        ENDC
+  }>
+  $LocalTypeInferenceTester$_fun_test8 PROCREF:<{
+        NEWC
+    123 PUSHINT
+    SWAP
+    64 STU
+  }>
+  $LocalTypeInferenceTester$_fun_test9 PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000700000a68656c6c6f4d1ca352} B>boc <s PUSHSLICE
+    __tact_string_builder_append_not_mut INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test10 PROCREF:<{
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c7241010101000700000a68656c6c6f4d1ca352} B>boc <s PUSHSLICE
+    __tact_string_builder_append_not_mut INLINECALLDICT
+    __tact_string_builder_end_slice INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test11 PROCREF:<{
+    $LocalTypeInferenceTester$_init_child INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test12 PROCREF:<{
+    PUSHNULL
+  }>
+  $LocalTypeInferenceTester$_fun_test13 PROCREF:<{
+    PUSHNULL
+  }>
+  $MyStruct$_constructor_x_y PROCINLINE:<{
+  }>
+  $LocalTypeInferenceTester$_fun_test14 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $MyStruct$_constructor_x_y INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test15 PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $MyStruct$_constructor_x_y INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test16 PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    OVER
+    __tact_dict_get_int_int INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test17 PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    OVER
+    __tact_dict_get_int_int INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test18 PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    2 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    1 PUSHINT
+    OVER
+    __tact_dict_get_int_int INLINECALLDICT
+  }>
+  $LocalTypeInferenceTester$_fun_test19 PROCREF:<{
+    PUSHNULL
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $LocalTypeInferenceTester$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $LocalTypeInferenceTester$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $LocalTypeInferenceTester$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  %test1 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test1 INLINECALLDICT
+    NIP
+  }>
+  %test2 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test2 INLINECALLDICT
+    NIP
+  }>
+  %test3 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test3 INLINECALLDICT
+    NIP
+  }>
+  %test4 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test4 INLINECALLDICT
+    NIP
+  }>
+  %test5 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test5 INLINECALLDICT
+    NIP
+  }>
+  %test6 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test6 INLINECALLDICT
+    NIP
+  }>
+  %test7 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test7 INLINECALLDICT
+    NIP
+  }>
+  %test8 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test8 INLINECALLDICT
+    NIP
+  }>
+  %test9 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test9 INLINECALLDICT
+    NIP
+  }>
+  %test10 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test10 INLINECALLDICT
+    NIP
+  }>
+  %test11 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test11 INLINECALLDICT
+    1 2 BLKDROP2
+    $StateInit$_to_external INLINECALLDICT
+  }>
+  %test12 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test12 INLINECALLDICT
+    NIP
+  }>
+  %test13 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test13 INLINECALLDICT
+    NIP
+  }>
+  %test14 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test14 INLINECALLDICT
+    1 2 BLKDROP2
+    $MyStruct$_to_external INLINECALLDICT
+  }>
+  %test15 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test15 INLINECALLDICT
+    1 2 BLKDROP2
+    $MyStruct$_to_external INLINECALLDICT
+  }>
+  %test16 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test16 INLINECALLDICT
+    NIP
+  }>
+  %test17 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test17 INLINECALLDICT
+    NIP
+  }>
+  %test18 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test18 INLINECALLDICT
+    NIP
+  }>
+  %test19 PROC:<{
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    $LocalTypeInferenceTester$_fun_test19 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $LocalTypeInferenceTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    32 LDUQ 130 THROWIFNOT
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      $Deploy$_load_without_opcode INLINECALLDICT
+      NIP
+      $DeployOk$_constructor_queryId INLINECALLDICT
+      $DeployOk$_store_cell INLINECALLDICT
+      $LocalTypeInferenceTester$_fun_notify INLINECALLDICT
+      DROP
+    }>
+    2DROP
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

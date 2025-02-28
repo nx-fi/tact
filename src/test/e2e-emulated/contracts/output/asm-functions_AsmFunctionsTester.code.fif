@@ -1,0 +1,396 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/asm-functions_AsmFunctionsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_cell_eq_nullable
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC $MapIntIntSlice$_get_val
+  DECLPROC $IntSlice$_get_val
+  DECLPROC $SliceInt$_get_val
+  DECLPROC $Two$_from_tuple
+  DECLPROC $TwoInTwo$_from_tuple
+  DECLPROC $AsmFunctionsTester$_contract_init
+  DECLPROC $AsmFunctionsTester$_contract_load
+  DECLPROC $Builder$_fun_asSlice
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $AsmFunctionsTester$_fun_testAsmStoreDict
+  DECLPROC $AsmFunctionsTester$_fun_testAsmLoadCoins
+  DECLPROC $AsmFunctionsTester$_fun_testAsmLoadCoinsMut
+  DECLPROC $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime
+  DECLPROC $AsmFunctionsTester$_fun_testAsmLoadInt
+  DECLPROC $AsmFunctionsTester$_fun_testAsmDebugStr
+  DECLPROC $AsmFunctionsTester$_fun_testAsmCreateUseWord
+  DECLPROC $Two$_constructor_a_b
+  DECLPROC $AsmFunctionsTester$_fun_testAsmSecondToLast
+  DECLPROC $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime
+  DECLPROC $TwoInTwo$_constructor_a_b
+  DECLPROC $AsmFunctionsTester$_fun_testAsmFirst
+  DECLPROC $AsmFunctionsTester$_fun_testAsmFirstRuntime
+  81432 DECLMETHOD %testAsmStoreDict
+  86431 DECLMETHOD %testAsmLoadCoins
+  128872 DECLMETHOD %testAsmLoadCoinsMut
+  127504 DECLMETHOD %testAsmLoadCoinsMutRuntime
+  78218 DECLMETHOD %testAsmLoadInt
+  93496 DECLMETHOD %testAsmDebugStr
+  111813 DECLMETHOD %testAsmCreateUseWord
+  67436 DECLMETHOD %testAsmSecondToLast
+  121641 DECLMETHOD %testAsmSecondToLastRuntime
+  124989 DECLMETHOD %testAsmFirst
+  97303 DECLMETHOD %testAsmFirstRuntime
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_cell_eq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHCU
+        SWAP
+        HASHCU
+        EQUAL
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  $MapIntIntSlice$_get_val PROCINLINE:<{
+    DROP
+  }>
+  $IntSlice$_get_val PROCINLINE:<{
+    DROP
+  }>
+  $SliceInt$_get_val PROCINLINE:<{
+    NIP
+  }>
+  $Two$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+  }>
+  $TwoInTwo$_from_tuple PROCINLINE:<{
+        2 UNTUPLE
+    SWAP
+    $Two$_from_tuple INLINECALLDICT
+    s0 s2 XCHG
+    $Two$_from_tuple INLINECALLDICT
+    s2 s3 XCHG
+  }>
+  $AsmFunctionsTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $AsmFunctionsTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $AsmFunctionsTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Builder$_fun_asSlice PROCINLINE:<{
+        ENDC
+        CTOS
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $AsmFunctionsTester$_fun_testAsmStoreDict PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    35 PUSHINT
+    34 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    42 PUSHINT
+    27 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+        NEWC
+    s1 s(-1) PUXC
+        STDICT
+    $Builder$_fun_asSlice INLINECALLDICT
+        LDDICT
+    $MapIntIntSlice$_get_val INLINECALLDICT
+    SWAP
+    __tact_cell_eq_nullable INLINECALLDICT
+  }>
+  $AsmFunctionsTester$_fun_testAsmLoadCoins PROCREF:<{
+        NEWC
+    42 PUSHINT
+        STVARUINT16
+    $Builder$_fun_asSlice INLINECALLDICT
+        LDVARUINT16
+    $IntSlice$_get_val INLINECALLDICT
+    42 EQINT
+  }>
+  $AsmFunctionsTester$_fun_testAsmLoadCoinsMut PROCREF:<{
+        NEWC
+    42 PUSHINT
+        STVARUINT16
+    $Builder$_fun_asSlice INLINECALLDICT
+        LDVARUINT16
+    SWAP
+    42 EQINT
+    IF:<{
+          SEMPTY
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime PROCREF:<{
+    $Cell$_fun_asSlice INLINECALLDICT
+        LDVARUINT16
+        ENDS
+  }>
+  $AsmFunctionsTester$_fun_testAsmLoadInt PROCREF:<{
+        NEWC
+    42 PUSHINT
+    SWAP
+    7 STI
+    $Builder$_fun_asSlice INLINECALLDICT
+    7 PUSHINT
+        LDIX
+    SWAP
+    $SliceInt$_get_val INLINECALLDICT
+    42 EQINT
+  }>
+  $AsmFunctionsTester$_fun_testAsmDebugStr PROCREF:<{
+        "Works!" DEBUGSTR
+    TRUE
+  }>
+  $AsmFunctionsTester$_fun_testAsmCreateUseWord PROCREF:<{
+    6 PUSHINT
+        { INC INC INC } : 🥰🥰🥰
+        { DEC DEC DEC } : 💀💀💀
+        🥰🥰🥰 💀💀💀 INC
+    7 EQINT
+  }>
+  $Two$_constructor_a_b PROCINLINE:<{
+  }>
+  $AsmFunctionsTester$_fun_testAsmSecondToLast PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    3 PUSHINT
+    4 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    2SWAP
+        DROP DROP DROP
+    3 EQINT
+  }>
+  $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime PROCREF:<{
+    2SWAP
+        DROP DROP DROP
+  }>
+  $TwoInTwo$_constructor_a_b PROCINLINE:<{
+  }>
+  $AsmFunctionsTester$_fun_testAsmFirst PROCREF:<{
+    1 PUSHINT
+    2 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    3 PUSHINT
+    4 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    $TwoInTwo$_constructor_a_b INLINECALLDICT
+    5 PUSHINT
+    6 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    7 PUSHINT
+    8 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    $TwoInTwo$_constructor_a_b INLINECALLDICT
+    9 PUSHINT
+    10 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    11 PUSHINT
+    12 PUSHINT
+    $Two$_constructor_a_b INLINECALLDICT
+    $TwoInTwo$_constructor_a_b INLINECALLDICT
+    4 4 BLKSWAP
+        DROP2 DROP2 DROP2 DROP2 DROP2 DROP
+    1 EQINT
+  }>
+  $AsmFunctionsTester$_fun_testAsmFirstRuntime PROCREF:<{
+    4 4 BLKSWAP
+        DROP2 DROP2 DROP2 DROP2 DROP2 DROP
+  }>
+  %testAsmStoreDict PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmStoreDict INLINECALLDICT
+    NIP
+  }>
+  %testAsmLoadCoins PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmLoadCoins INLINECALLDICT
+    NIP
+  }>
+  %testAsmLoadCoinsMut PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmLoadCoinsMut INLINECALLDICT
+    NIP
+  }>
+  %testAsmLoadCoinsMutRuntime PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    SWAP
+    $AsmFunctionsTester$_fun_testAsmLoadCoinsMutRuntime INLINECALLDICT
+    NIP
+  }>
+  %testAsmLoadInt PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmLoadInt INLINECALLDICT
+    NIP
+  }>
+  %testAsmDebugStr PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmDebugStr INLINECALLDICT
+    NIP
+  }>
+  %testAsmCreateUseWord PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmCreateUseWord INLINECALLDICT
+    NIP
+  }>
+  %testAsmSecondToLast PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmSecondToLast INLINECALLDICT
+    NIP
+  }>
+  %testAsmSecondToLastRuntime PROC:<{
+    SWAP
+    $Two$_from_tuple INLINECALLDICT
+    s0 s2 XCHG
+    $Two$_from_tuple INLINECALLDICT
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    s4 s4 s4 XCHG3
+    $AsmFunctionsTester$_fun_testAsmSecondToLastRuntime INLINECALLDICT
+    NIP
+  }>
+  %testAsmFirst PROC:<{
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    $AsmFunctionsTester$_fun_testAsmFirst INLINECALLDICT
+    NIP
+  }>
+  %testAsmFirstRuntime PROC:<{
+    s0 s2 XCHG
+    $TwoInTwo$_from_tuple INLINECALLDICT
+    s0 s4 XCHG
+    $TwoInTwo$_from_tuple INLINECALLDICT
+    s0 s8 XCHG
+    $TwoInTwo$_from_tuple INLINECALLDICT
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    s0 s12 XCHG
+    s10 s11 XCHG
+    s9 s10 XCHG
+    s8 s9 XCHG
+    4 -ROLL
+    $AsmFunctionsTester$_fun_testAsmFirstRuntime INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $AsmFunctionsTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

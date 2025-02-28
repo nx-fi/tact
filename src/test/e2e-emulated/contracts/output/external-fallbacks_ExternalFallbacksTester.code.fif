@@ -1,0 +1,193 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/external-fallbacks_ExternalFallbacksTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Add$_load_without_opcode
+  DECLPROC $ExternalFallbacksTester$_store
+  DECLPROC $ExternalFallbacksTester$_load
+  DECLPROC $ExternalFallbacksTester$_contract_init
+  DECLPROC $ExternalFallbacksTester$_contract_load
+  DECLPROC $ExternalFallbacksTester$_contract_store
+  DECLPROC $ExternalFallbacksTester$_fun_getA
+  123932 DECLMETHOD %getA
+  DECLPROC recv_internal
+  DECLPROC recv_external
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Add$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    SWAP
+  }>
+  $ExternalFallbacksTester$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $ExternalFallbacksTester$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $ExternalFallbacksTester$_contract_init PROCINLINE:<{
+    100 PUSHINT
+  }>
+  $ExternalFallbacksTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $ExternalFallbacksTester$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $ExternalFallbacksTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $ExternalFallbacksTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $ExternalFallbacksTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $ExternalFallbacksTester$_fun_getA PROCREF:<{
+    DUP
+  }>
+  %getA PROC:<{
+    $ExternalFallbacksTester$_contract_load INLINECALLDICT
+    $ExternalFallbacksTester$_fun_getA INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ExternalFallbacksTester$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    2412401973 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $Add$_load_without_opcode INLINECALLDICT
+      NIP
+      ADD
+      $ExternalFallbacksTester$_contract_store INLINECALLDICT
+    }>
+    s3 POP
+    NIP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  recv_external PROC:<{
+    $ExternalFallbacksTester$_contract_load INLINECALLDICT
+    0 PUSHINT
+    s2 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s2 PUSH
+      32 PLDU
+      SWAP
+    }>
+    OVER
+    2412401973 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      SWAP
+      32 PUSHINT
+      SDSKIPFIRST
+      $Add$_load_without_opcode INLINECALLDICT
+      NIP
+          ACCEPT
+      ADD
+      $ExternalFallbacksTester$_contract_store INLINECALLDICT
+    }>
+    s3 POP
+    0 EQINT
+    s0 s2 XCHG
+    33 LESSINT
+    s1 s2 XCHG
+    AND
+    IFJMP:<{
+          ACCEPT
+      100 ADDCONST
+      $ExternalFallbacksTester$_contract_store INLINECALLDICT
+    }>
+        ACCEPT
+    100 ADDCONST
+    $ExternalFallbacksTester$_contract_store INLINECALLDICT
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    DUP -1 EQINT IFJMP:<{
+                    DROP over <s ref@ -1 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,652 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; star-contract-dependency_Parent.headers.fc
+;;
+;; Header files for Parent
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_set_code
+cell __tact_dict_set_code(cell dict, int id, cell code) inline;
+
+;; __tact_dict_get_code
+cell __tact_dict_get_code(cell dict, int id) inline;
+
+;; $Parent$_load
+(slice, ((int))) $Parent$_load(slice sc_0) inline;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $Child0$init$_store
+builder $Child0$init$_store(builder build_0, tuple v) inline;
+
+;; $Child1$init$_store
+builder $Child1$init$_store(builder build_0, tuple v) inline;
+
+;; $Child2$init$_store
+builder $Child2$init$_store(builder build_0, tuple v) inline;
+
+;; $Child3$init$_store
+builder $Child3$init$_store(builder build_0, tuple v) inline;
+
+;; $Child4$init$_store
+builder $Child4$init$_store(builder build_0, tuple v) inline;
+
+;; $Child5$init$_store
+builder $Child5$init$_store(builder build_0, tuple v) inline;
+
+;; $Child6$init$_store
+builder $Child6$init$_store(builder build_0, tuple v) inline;
+
+;; $Child7$init$_store
+builder $Child7$init$_store(builder build_0, tuple v) inline;
+
+;; $Child8$init$_store
+builder $Child8$init$_store(builder build_0, tuple v) inline;
+
+;; $Child9$init$_store
+builder $Child9$init$_store(builder build_0, tuple v) inline;
+
+;; $Parent$_contract_init
+(int) $Parent$_contract_init() impure inline;
+
+;; $Parent$_contract_load
+(int) $Parent$_contract_load() impure inline;
+
+;; $Child0$_init_child
+(cell, cell) $Child0$_init_child() inline;
+
+;; $Parent$_fun_getChild0
+((int), (cell, cell)) $Parent$_fun_getChild0((int) $self) impure inline_ref;
+
+;; $Child1$_init_child
+(cell, cell) $Child1$_init_child() inline;
+
+;; $Parent$_fun_getChild1
+((int), (cell, cell)) $Parent$_fun_getChild1((int) $self) impure inline_ref;
+
+;; $Child2$_init_child
+(cell, cell) $Child2$_init_child() inline;
+
+;; $Parent$_fun_getChild2
+((int), (cell, cell)) $Parent$_fun_getChild2((int) $self) impure inline_ref;
+
+;; $Child3$_init_child
+(cell, cell) $Child3$_init_child() inline;
+
+;; $Parent$_fun_getChild3
+((int), (cell, cell)) $Parent$_fun_getChild3((int) $self) impure inline_ref;
+
+;; $Child4$_init_child
+(cell, cell) $Child4$_init_child() inline;
+
+;; $Parent$_fun_getChild4
+((int), (cell, cell)) $Parent$_fun_getChild4((int) $self) impure inline_ref;
+
+;; $Child5$_init_child
+(cell, cell) $Child5$_init_child() inline;
+
+;; $Parent$_fun_getChild5
+((int), (cell, cell)) $Parent$_fun_getChild5((int) $self) impure inline_ref;
+
+;; $Child6$_init_child
+(cell, cell) $Child6$_init_child() inline;
+
+;; $Parent$_fun_getChild6
+((int), (cell, cell)) $Parent$_fun_getChild6((int) $self) impure inline_ref;
+
+;; $Child7$_init_child
+(cell, cell) $Child7$_init_child() inline;
+
+;; $Parent$_fun_getChild7
+((int), (cell, cell)) $Parent$_fun_getChild7((int) $self) impure inline_ref;
+
+;; $Child8$_init_child
+(cell, cell) $Child8$_init_child() inline;
+
+;; $Parent$_fun_getChild8
+((int), (cell, cell)) $Parent$_fun_getChild8((int) $self) impure inline_ref;
+
+;; $Child9$_init_child
+(cell, cell) $Child9$_init_child() inline;
+
+;; $Parent$_fun_getChild9
+((int), (cell, cell)) $Parent$_fun_getChild9((int) $self) impure inline_ref;
+
+
+;; star-contract-dependency_Parent.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+cell __tact_dict_set_code(cell dict, int id, cell code) inline {
+    return udict_set_ref(dict, 16, id, code);
+}
+
+cell __tact_dict_get_code(cell dict, int id) inline {
+    var (data, ok) = udict_get_ref?(dict, 16, id);
+    throw_unless(135, ok);
+    return data;
+}
+
+;; star-contract-dependency_Parent.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: Parent
+;; TLB: _ parentMark:int257 = Parent
+;;
+
+(slice, ((int))) $Parent$_load(slice sc_0) inline {
+    var v'parentMark = sc_0~load_int(257);
+    return (sc_0, (v'parentMark));
+}
+
+(int) $Parent$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    __tact_child_contract_codes = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Parent$_load();
+    } else {
+        return $Parent$_contract_init();
+    }
+}
+
+;;
+;; Type: Child0
+;; TLB: _ childNum:uint32 = Child0
+;;
+
+builder $Child0$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child0$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child0
+    cell init_code = __tact_dict_get_code(source, 2579);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child0$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child1
+;; TLB: _ childNum:uint32 = Child1
+;;
+
+builder $Child1$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child1$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child1
+    cell init_code = __tact_dict_get_code(source, 6706);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child1$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child2
+;; TLB: _ childNum:uint32 = Child2
+;;
+
+builder $Child2$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child2$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child2
+    cell init_code = __tact_dict_get_code(source, 10833);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child2$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child3
+;; TLB: _ childNum:uint32 = Child3
+;;
+
+builder $Child3$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child3$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child3
+    cell init_code = __tact_dict_get_code(source, 14960);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child3$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child4
+;; TLB: _ childNum:uint32 = Child4
+;;
+
+builder $Child4$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child4$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child4
+    cell init_code = __tact_dict_get_code(source, 19095);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child4$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child5
+;; TLB: _ childNum:uint32 = Child5
+;;
+
+builder $Child5$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child5$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child5
+    cell init_code = __tact_dict_get_code(source, 23222);
+
+    ;; Build init data cell
+    cell contracts = new_dict();
+
+    ;; Contract Code: Parent
+    contracts = __tact_dict_set_code(contracts, 2729, my_code());
+
+    ;; Contract Code: Child0
+    cell code_2579 = __tact_dict_get_code(source, 2579);
+    contracts = __tact_dict_set_code(contracts, 2579, code_2579);
+
+    ;; Contract Code: Child1
+    cell code_6706 = __tact_dict_get_code(source, 6706);
+    contracts = __tact_dict_set_code(contracts, 6706, code_6706);
+
+    ;; Contract Code: Child2
+    cell code_10833 = __tact_dict_get_code(source, 10833);
+    contracts = __tact_dict_set_code(contracts, 10833, code_10833);
+
+    ;; Contract Code: Child3
+    cell code_14960 = __tact_dict_get_code(source, 14960);
+    contracts = __tact_dict_set_code(contracts, 14960, code_14960);
+
+    ;; Contract Code: Child4
+    cell code_19095 = __tact_dict_get_code(source, 19095);
+    contracts = __tact_dict_set_code(contracts, 19095, code_19095);
+
+    ;; Contract Code: Child6
+    cell code_27349 = __tact_dict_get_code(source, 27349);
+    contracts = __tact_dict_set_code(contracts, 27349, code_27349);
+
+    ;; Contract Code: Child7
+    cell code_31476 = __tact_dict_get_code(source, 31476);
+    contracts = __tact_dict_set_code(contracts, 31476, code_31476);
+
+    ;; Contract Code: Child8
+    cell code_35611 = __tact_dict_get_code(source, 35611);
+    contracts = __tact_dict_set_code(contracts, 35611, code_35611);
+
+    ;; Contract Code: Child9
+    cell code_39738 = __tact_dict_get_code(source, 39738);
+    contracts = __tact_dict_set_code(contracts, 39738, code_39738);
+
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $Child5$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child6
+;; TLB: _ childNum:uint32 = Child6
+;;
+
+builder $Child6$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child6$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child6
+    cell init_code = __tact_dict_get_code(source, 27349);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child6$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child7
+;; TLB: _ childNum:uint32 = Child7
+;;
+
+builder $Child7$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child7$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child7
+    cell init_code = __tact_dict_get_code(source, 31476);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child7$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child8
+;; TLB: _ childNum:uint32 = Child8
+;;
+
+builder $Child8$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child8$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child8
+    cell init_code = __tact_dict_get_code(source, 35611);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child8$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: Child9
+;; TLB: _ childNum:uint32 = Child9
+;;
+
+builder $Child9$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+(cell, cell) $Child9$_init_child() inline {
+    ;; Build init code cell
+
+    slice sc' = __tact_child_contract_codes.begin_parse();
+    cell source = sc'~load_dict();
+    ;; Contract Code: Child9
+    cell init_code = __tact_dict_get_code(source, 39738);
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Child9$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract Parent functions
+;;
+
+(int) $Parent$_contract_init() impure inline {
+    var (($self'parentMark)) = (2);
+    return ($self'parentMark);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild0((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2287 = $Child0$_init_child();
+    return (($self'parentMark), $fresh$ret_2287);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild1((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2288 = $Child1$_init_child();
+    return (($self'parentMark), $fresh$ret_2288);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild2((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2289 = $Child2$_init_child();
+    return (($self'parentMark), $fresh$ret_2289);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild3((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2290 = $Child3$_init_child();
+    return (($self'parentMark), $fresh$ret_2290);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild4((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2291 = $Child4$_init_child();
+    return (($self'parentMark), $fresh$ret_2291);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild5((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2292 = $Child5$_init_child();
+    return (($self'parentMark), $fresh$ret_2292);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild6((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2293 = $Child6$_init_child();
+    return (($self'parentMark), $fresh$ret_2293);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild7((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2294 = $Child7$_init_child();
+    return (($self'parentMark), $fresh$ret_2294);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild8((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2295 = $Child8$_init_child();
+    return (($self'parentMark), $fresh$ret_2295);
+}
+
+((int), (cell, cell)) $Parent$_fun_getChild9((int) $self) impure inline_ref {
+    var (($self'parentMark)) = $self;
+    var $fresh$ret_2296 = $Child9$_init_child();
+    return (($self'parentMark), $fresh$ret_2296);
+}
+
+;;
+;; Get methods of a Contract Parent
+;;
+
+_ %getChild0() method_id(115516) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild0();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild1() method_id(119581) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild1();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild2() method_id(123774) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild2();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild3() method_id(127839) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild3();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild4() method_id(99256) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild4();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild5() method_id(103321) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild5();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild6() method_id(107514) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild6();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild7() method_id(111579) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild7();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild8() method_id(82484) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild8();
+    return $StateInit$_to_external(res);
+}
+
+_ %getChild9() method_id(86549) {
+    var self = $Parent$_contract_load();
+    var res = self~$Parent$_fun_getChild9();
+    return $StateInit$_to_external(res);
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Parent
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'parentMark) = $Parent$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

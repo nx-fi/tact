@@ -1,0 +1,258 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; optionals_Opt2.headers.fc
+;;
+;; Header files for Opt2
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $StateInit$_load
+(slice, ((cell, cell))) $StateInit$_load(slice sc_0) inline;
+
+;; $Struct2$_store
+builder $Struct2$_store(builder build_0, (int) v) inline;
+
+;; $Opt2$_load
+(slice, (((cell, cell)))) $Opt2$_load(slice sc_0) inline;
+
+;; $Struct2$_not_null
+((int)) $Struct2$_not_null(tuple v) inline;
+
+;; $Struct2$_as_optional
+tuple $Struct2$_as_optional((int) v) inline;
+
+;; $Opt3$init$_store
+builder $Opt3$init$_store(builder build_0, (tuple) v) inline;
+
+;; $Struct2$_constructor_v
+((int)) $Struct2$_constructor_v(int $v) inline;
+
+;; $Opt3$_init_child
+(cell, cell) $Opt3$_init_child(tuple $arg) inline;
+
+;; $Opt2$_contract_init
+((cell, cell)) $Opt2$_contract_init() impure inline;
+
+;; $Opt2$_contract_load
+((cell, cell)) $Opt2$_contract_load() impure inline;
+
+;; $OptStruct$_constructor_s
+((tuple)) $OptStruct$_constructor_s(tuple $s) inline;
+
+;; $Opt2$_fun_sample
+(((cell, cell)), ()) $Opt2$_fun_sample(((cell, cell)) $self, tuple $src) impure inline_ref;
+
+;; $Opt2$_fun_sample2
+(((cell, cell)), ()) $Opt2$_fun_sample2(((cell, cell)) $self, (int) $src) impure inline_ref;
+
+
+;; optionals_Opt2.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X0 -> tuple __tact_tuple_create_1((X0) v) asm """
+    1 TUPLE
+""";
+
+forall X0 -> (X0) __tact_tuple_destroy_1(tuple v) asm """
+    1 UNTUPLE
+""";
+
+;; optionals_Opt2.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(slice, ((cell, cell))) $StateInit$_load(slice sc_0) inline {
+    var v'code = sc_0~load_ref();
+    var v'data = sc_0~load_ref();
+    return (sc_0, (v'code, v'data));
+}
+
+;;
+;; Type: Struct2
+;; Header: 0xb119629a
+;; TLB: struct2#b119629a v:int257 = Struct2
+;;
+
+builder $Struct2$_store(builder build_0, (int) v) inline {
+    var (v'v) = v;
+    build_0 = store_uint(build_0, 2971230874, 32);
+    build_0 = build_0.store_int(v'v, 257);
+    return build_0;
+}
+
+((int)) $Struct2$_tensor_cast((int) v) asm "NOP";
+
+((int)) $Struct2$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'v) = __tact_tuple_destroy_1(v);
+    return (vvv'v);
+}
+
+tuple $Struct2$_as_optional((int) v) inline {
+    var (v'v) = v;
+    return __tact_tuple_create_1(v'v);
+}
+
+((int)) $Struct2$_constructor_v(int $v) inline {
+    return ($v);
+}
+
+;;
+;; Type: OptStruct
+;; TLB: _ s:Maybe Struct2{v:int257} = OptStruct
+;;
+
+((tuple)) $OptStruct$_constructor_s(tuple $s) inline {
+    return ($s);
+}
+
+;;
+;; Type: Opt2
+;; TLB: _ stateInit:StateInit{code:^cell,data:^cell} = Opt2
+;;
+
+(slice, (((cell, cell)))) $Opt2$_load(slice sc_0) inline {
+    var v'stateInit = sc_0~$StateInit$_load();
+    return (sc_0, (v'stateInit));
+}
+
+((cell, cell)) $Opt2$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Opt2$_load();
+    } else {
+        return $Opt2$_contract_init();
+    }
+}
+
+;;
+;; Type: Opt3
+;; TLB: _  = Opt3
+;;
+
+builder $Opt3$init$_store(builder build_0, (tuple) v) inline {
+    var (v'arg) = v;
+    build_0 = ~ null?(v'arg) ? build_0.store_int(true, 1).$Struct2$_store($Struct2$_not_null(v'arg)) : build_0.store_int(false, 1);
+    return build_0;
+}
+
+cell $Opt3$_child_get_code() impure asm """
+    B{b5ee9c7201010101005a0000b0ff00208e4a3030d072d721d200d200fa4021103450556f04f86101f862ed44d0d2000192306d8e21d200018e15d31f018210b119629abaf2e081810101d700016f01916de201d1306de230dcf2c082e16d8013f4bcf2c80b} B>boc PUSHREF
+""";
+
+(cell, cell) $Opt3$_init_child(tuple $arg) inline {
+    ;; Build init code cell
+
+    ;; Contract Code: Opt3
+    cell init_code = $Opt3$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Opt3$init$_store(b, ($arg));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract Opt2 functions
+;;
+
+((cell, cell)) $Opt2$_contract_init() impure inline {
+    var ((($self'stateInit'code, $self'stateInit'data))) = (null());
+    ($self'stateInit'code, $self'stateInit'data) = $Opt3$_init_child($Struct2$_as_optional($Struct2$_constructor_v(1)));
+    return (($self'stateInit'code, $self'stateInit'data));
+}
+
+(((cell, cell)), ()) $Opt2$_fun_sample(((cell, cell)) $self, tuple $src) impure inline_ref {
+    var ((($self'stateInit'code, $self'stateInit'data))) = $self;
+    var ($src) = $src;
+    return ((($self'stateInit'code, $self'stateInit'data)), ());
+}
+
+(((cell, cell)), ()) $Opt2$_fun_sample2(((cell, cell)) $self, (int) $src) impure inline_ref {
+    var ((($self'stateInit'code, $self'stateInit'data))) = $self;
+    var (($src'v)) = $src;
+    return ((($self'stateInit'code, $self'stateInit'data)), ());
+}
+
+;;
+;; Get methods of a Contract Opt2
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Opt2
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var (($self'stateInit'code, $self'stateInit'data)) = $Opt2$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Test" message
+    if (text_op == 0x457a876813ab40760124d323ef84b7ae41c76ff976cd13f1b8e5f0ab0cbd4df7) {
+        (($self'stateInit'code, $self'stateInit'data))~$Opt2$_fun_sample($Struct2$_as_optional($Struct2$_constructor_v(1)));
+        (($self'stateInit'code, $self'stateInit'data))~$Opt2$_fun_sample(null());
+        (($self'stateInit'code, $self'stateInit'data))~$Opt2$_fun_sample2($Struct2$_tensor_cast($Struct2$_constructor_v(1)));
+        $OptStruct$_constructor_s($Struct2$_as_optional($Struct2$_constructor_v(1)));
+        $OptStruct$_constructor_s(null());
+        $OptStruct$_constructor_s($Struct2$_as_optional($Struct2$_constructor_v(1)));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

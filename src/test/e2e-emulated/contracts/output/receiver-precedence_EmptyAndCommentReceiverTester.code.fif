@@ -1,0 +1,184 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/receiver-precedence_EmptyAndCommentReceiverTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $EmptyAndCommentReceiverTester$_store
+  DECLPROC $EmptyAndCommentReceiverTester$_load
+  DECLPROC $EmptyAndCommentReceiverTester$_contract_init
+  DECLPROC $EmptyAndCommentReceiverTester$_contract_load
+  DECLPROC $EmptyAndCommentReceiverTester$_contract_store
+  DECLPROC $EmptyAndCommentReceiverTester$_fun_receiver
+  78947 DECLMETHOD %receiver
+  DECLPROC recv_internal
+  DECLPROC recv_external
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $EmptyAndCommentReceiverTester$_store PROCINLINE:<{
+    NEWC
+    SWAP
+    STSLICER
+    ENDC
+    SWAP
+    STREF
+  }>
+  $EmptyAndCommentReceiverTester$_load PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $EmptyAndCommentReceiverTester$_contract_init PROCINLINE:<{
+        B{b5ee9c7241010101000900000e756e6b6e6f776e86bcd037} B>boc <s PUSHSLICE
+  }>
+  $EmptyAndCommentReceiverTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $EmptyAndCommentReceiverTester$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $EmptyAndCommentReceiverTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $EmptyAndCommentReceiverTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $EmptyAndCommentReceiverTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $EmptyAndCommentReceiverTester$_fun_receiver PROCREF:<{
+    DUP
+  }>
+  %receiver PROC:<{
+    $EmptyAndCommentReceiverTester$_contract_load INLINECALLDICT
+    $EmptyAndCommentReceiverTester$_fun_receiver INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $EmptyAndCommentReceiverTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+          B{b5ee9c7241010101000700000a656d707479cd50d7fb} B>boc <s PUSHSLICE
+      $EmptyAndCommentReceiverTester$_contract_store INLINECALLDICT
+    }>
+    HASHSU
+    20546146713196970919329509801059573512099277766111487747731230633556770492318 PUSHINT
+    EQUAL
+    IFJMP:<{
+          B{b5ee9c7241010101000900000e636f6d6d656e747870e97e} B>boc <s PUSHSLICE
+      $EmptyAndCommentReceiverTester$_contract_store INLINECALLDICT
+    }>
+    130 THROW
+  }>
+  recv_external PROC:<{
+    $EmptyAndCommentReceiverTester$_contract_load INLINECALLDICT
+    DROP
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+          ACCEPT
+          B{b5ee9c7241010101001000001c65787465726e616c5f656d7074798ec2e3da} B>boc <s PUSHSLICE
+      $EmptyAndCommentReceiverTester$_contract_store INLINECALLDICT
+    }>
+    HASHSU
+    20546146713196970919329509801059573512099277766111487747731230633556770492318 PUSHINT
+    EQUAL
+    IFJMP:<{
+          ACCEPT
+          B{b5ee9c7241010101001200002065787465726e616c5f636f6d6d656e7456d763e7} B>boc <s PUSHSLICE
+      $EmptyAndCommentReceiverTester$_contract_store INLINECALLDICT
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    DUP -1 EQINT IFJMP:<{
+                    DROP over <s ref@ -1 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

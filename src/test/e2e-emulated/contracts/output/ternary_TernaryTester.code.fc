@@ -1,0 +1,270 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; ternary_TernaryTester.headers.fc
+;;
+;; Header files for TernaryTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $TernaryTester$_contract_init
+tuple $TernaryTester$_contract_init() impure inline;
+
+;; $TernaryTester$_contract_load
+tuple $TernaryTester$_contract_load() impure inline;
+
+;; $TernaryTester$_fun_test1
+(tuple, int) $TernaryTester$_fun_test1(tuple $self, int $a) impure inline_ref;
+
+;; $TernaryTester$_fun_test2
+(tuple, int) $TernaryTester$_fun_test2(tuple $self, int $a) impure inline_ref;
+
+;; $TernaryTester$_fun_test3
+(tuple, int) $TernaryTester$_fun_test3(tuple $self, int $a, int $b) impure inline_ref;
+
+;; $TernaryTester$_fun_test4
+(tuple, int) $TernaryTester$_fun_test4(tuple $self, int $a, int $b) impure inline_ref;
+
+;; $TernaryTester$_fun_test5
+(tuple, int) $TernaryTester$_fun_test5(tuple $self) impure inline_ref;
+
+;; $TernaryTester$_fun_test6
+(tuple, int) $TernaryTester$_fun_test6(tuple $self) impure inline_ref;
+
+;; $TernaryTester$_fun_test7
+(tuple, int) $TernaryTester$_fun_test7(tuple $self) impure inline_ref;
+
+;; $TernaryTester$_fun_test8
+(tuple, int) $TernaryTester$_fun_test8(tuple $self) impure inline_ref;
+
+;; $TernaryTester$_fun_test9
+(tuple, int) $TernaryTester$_fun_test9(tuple $self) impure inline_ref;
+
+;; $TernaryTester$_fun_test10
+(tuple, int) $TernaryTester$_fun_test10(tuple $self, int $a) impure inline_ref;
+
+
+;; ternary_TernaryTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; ternary_TernaryTester.storage.fc
+;;
+;; Type: TernaryTester
+;; TLB: _  = TernaryTester
+;;
+
+tuple $TernaryTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $TernaryTester$_contract_init();
+    }
+}
+
+;;
+;; Contract TernaryTester functions
+;;
+
+tuple $TernaryTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $TernaryTester$_fun_test1(tuple $self, int $a) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2517 = (($a == 123) ? 1 : 2);
+    return ($self, $fresh$ret_2517);
+}
+
+(tuple, int) $TernaryTester$_fun_test2(tuple $self, int $a) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2518 = (($a == 123) ? ($a * 2) : ($a * 3));
+    return ($self, $fresh$ret_2518);
+}
+
+(tuple, int) $TernaryTester$_fun_test3(tuple $self, int $a, int $b) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2519 = (($a == $b) ? 1 : 2);
+    return ($self, $fresh$ret_2519);
+}
+
+(tuple, int) $TernaryTester$_fun_test4(tuple $self, int $a, int $b) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2520 = (($a == 123) ? (($b == 456) ? 1 : 2) : (($b == 789) ? 3 : 4));
+    return ($self, $fresh$ret_2520);
+}
+
+(tuple, int) $TernaryTester$_fun_test5(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2521 = 1;
+    return ($self, $fresh$ret_2521);
+}
+
+(tuple, int) $TernaryTester$_fun_test6(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2522 = 1;
+    return ($self, $fresh$ret_2522);
+}
+
+(tuple, int) $TernaryTester$_fun_test7(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2523 = 2;
+    return ($self, $fresh$ret_2523);
+}
+
+(tuple, int) $TernaryTester$_fun_test8(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2524 = 3;
+    return ($self, $fresh$ret_2524);
+}
+
+(tuple, int) $TernaryTester$_fun_test9(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2525 = 3;
+    return ($self, $fresh$ret_2525);
+}
+
+(tuple, int) $TernaryTester$_fun_test10(tuple $self, int $a) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2526 = (($a == 1) ? 42 : (($a == 2) ? 43 : (($a == 3) ? 44 : 45)));
+    return ($self, $fresh$ret_2526);
+}
+
+;;
+;; Get methods of a Contract TernaryTester
+;;
+
+_ %test1(int $a) method_id(70304) {
+    int $a = $a;
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test1($a);
+    return res;
+}
+
+_ %test2(int $a) method_id(74435) {
+    int $a = $a;
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test2($a);
+    return res;
+}
+
+_ %test3(int $a, int $b) method_id(78562) {
+    int $a = $a;
+    int $b = $b;
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test3($a, $b);
+    return res;
+}
+
+_ %test4(int $a, int $b) method_id(82437) {
+    int $a = $a;
+    int $b = $b;
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test4($a, $b);
+    return res;
+}
+
+_ %test5() method_id(86564) {
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test5();
+    return res;
+}
+
+_ %test6() method_id(90695) {
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test6();
+    return res;
+}
+
+_ %test7() method_id(94822) {
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test7();
+    return res;
+}
+
+_ %test8() method_id(99209) {
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test8();
+    return res;
+}
+
+_ %test9() method_id(103336) {
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test9();
+    return res;
+}
+
+_ %test10(int $a) method_id(107552) {
+    int $a = $a;
+    var self = $TernaryTester$_contract_load();
+    var res = self~$TernaryTester$_fun_test10($a);
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract TernaryTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $TernaryTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

@@ -1,0 +1,498 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; deploy_DeployContract.headers.fc
+;;
+;; Header files for DeployContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $DeployParamsMsg$_load_without_opcode
+(slice, ((int, int, int, slice))) $DeployParamsMsg$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployComparisonMsg$_load_without_opcode
+(slice, ((int, int, int, int, slice))) $DeployComparisonMsg$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployComparisonNoBodyMsg$_load_without_opcode
+(slice, ((int, int, int, int))) $DeployComparisonNoBodyMsg$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployContract$_load
+(slice, ((int))) $DeployContract$_load(slice sc_0) inline;
+
+;; $DeployContract$init$_store
+builder $DeployContract$init$_store(builder build_0, (int) v) inline;
+
+;; $DeployContract$init$_load
+(slice, ((int))) $DeployContract$init$_load(slice sc_0) inline;
+
+;; $DeployContract$_contract_init
+(int) $DeployContract$_contract_init(int $newNum) impure inline;
+
+;; $DeployContract$_contract_load
+(int) $DeployContract$_contract_load() impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $Slice$_fun_asCell
+cell $Slice$_fun_asCell(slice $self) impure inline;
+
+;; $DeployContract$_init_child
+(cell, cell) $DeployContract$_init_child(int $newNum) inline;
+
+;; $DeployParameters$_constructor_mode_body_value_bounce_init
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_mode_body_value_bounce_init(int $mode, cell $body, int $value, int $bounce, (cell, cell) $init) inline;
+
+;; $SendParameters$_constructor_mode_body_code_data_value_bounce_to
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_mode_body_code_data_value_bounce_to(int $mode, cell $body, cell $code, cell $data, int $value, int $bounce, slice $to) inline;
+
+;; $DeployParameters$_constructor_mode_value_bounce_init
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_mode_value_bounce_init(int $mode, int $value, int $bounce, (cell, cell) $init) inline;
+
+;; $SendParameters$_constructor_mode_code_data_value_bounce_to
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_mode_code_data_value_bounce_to(int $mode, cell $code, cell $data, int $value, int $bounce, slice $to) inline;
+
+
+;; deploy_DeployContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+() $global_deploy((int, cell, int, int, (cell, cell)) $params) impure asm """
+    4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+    HASHCU // `init.data` hash
+    SWAP
+    HASHCU // `init.code` hash
+    SWAP2
+    CDEPTH // `init.data` depth
+    SWAP
+    CDEPTH // `init.code` depth
+
+    // Group 2: Calculating destination address
+    // For almost identical logic and instructions,
+    // see comments inside `contractHash()` function in contract.tact
+    131380 INT // (2 << 16) | (1 << 8) | 0x34
+    NEWC
+    24 STU
+    16 STU
+    16 STU
+    256 STU
+    256 STU
+    ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+    // → Stack state
+    // s0: destAddr(hash part)
+    // s1: `init.data`
+    // s2: `init.code`
+    // s3 and below: `bounce`, `value`, `body`, `mode`
+
+    // Group 3: Building a message (CommonMsgInfoRelaxed)
+    s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+    NEWC
+    b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+    1 STI              // store `bounce`
+    s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+    STREF              // store `init.code`
+    STREF              // store `init.data`
+    // Inline StateInit:
+    b{00010000000000} STSLICECONST
+    // 0 + 00 + 10 + 0 + 00000000
+    // 1) 0 - bounced = false
+    // 2) 00 - src = addr_none
+    // 3) 10 - tag of addr_std (part of dest)
+    // 4) 0 - Maybe Anycast = false
+    // 5) 00000000 - workchain_id (part of dest)
+    //
+    256 STU     // store destAddr(hash part)
+    SWAP        // Builder on top, `value` below
+    STGRAMS     // store `value`
+    105 PUSHINT // 1 + 4 + 4 + 64 + 32
+    STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+
+    // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+    // Remaining bits of MessageRelaxed:
+    b{1000110} STSLICECONST
+    // 10 + 0 + 0 + 1 + 1 + 0
+    // 10 - Maybe (Either StateInit ^StateInit) = true false
+    // 0 - split_depth:(Maybe (## 5)) = false
+    // 0 = special:(Maybe TickTock) = false
+    // 1 = code:(Maybe ^Cell) = true
+    // 1 = data:(Maybe ^Cell) = true
+    // 0 = library:(Maybe ^Cell) = false
+    //
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC   // finalize the message
+    // → Stack state
+    // s0: Cell
+    // s1: params.`mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG
+""";
+
+builder $Builder$_fun_storeSlice(builder $self, slice $cell) impure asm """
+    STSLICER
+""";
+
+cell $Slice$_fun_asCell(slice $self) impure inline {
+    var ($self) = $self;
+    return $Builder$_fun_endCell($Builder$_fun_storeSlice($global_beginCell(), $self));
+}
+
+;; deploy_DeployContract.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_mode_body_code_data_value_bounce_to(int $mode, cell $body, cell $code, cell $data, int $value, int $bounce, slice $to) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_mode_code_data_value_bounce_to(int $mode, cell $code, cell $data, int $value, int $bounce, slice $to) inline {
+    return ($mode, null(), $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: DeployParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 bounce:bool init:StateInit{code:^cell,data:^cell} = DeployParameters
+;;
+
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_mode_body_value_bounce_init(int $mode, cell $body, int $value, int $bounce, (cell, cell) $init) inline {
+    return ($mode, $body, $value, $bounce, $init);
+}
+
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_mode_value_bounce_init(int $mode, int $value, int $bounce, (cell, cell) $init) inline {
+    return ($mode, null(), $value, $bounce, $init);
+}
+
+;;
+;; Type: DeployParamsMsg
+;; Header: 0x9ef556fd
+;; TLB: deploy_params_msg#9ef556fd mode:uint8 bounce:bool contractNum:int257 body:remainder<slice> = DeployParamsMsg
+;;
+
+(slice, ((int, int, int, slice))) $DeployParamsMsg$_load_without_opcode(slice sc_0) inline {
+    var v'mode = sc_0~load_uint(8);
+    var v'bounce = sc_0~load_int(1);
+    var v'contractNum = sc_0~load_int(257);
+    var v'body = sc_0;
+    return (sc_0, (v'mode, v'bounce, v'contractNum, v'body));
+}
+
+;;
+;; Type: DeployComparisonMsg
+;; Header: 0xfe306a0c
+;; TLB: deploy_comparison_msg#fe306a0c mode:uint8 bounce:bool contractNum:int257 value:coins body:remainder<slice> = DeployComparisonMsg
+;;
+
+(slice, ((int, int, int, int, slice))) $DeployComparisonMsg$_load_without_opcode(slice sc_0) inline {
+    var v'mode = sc_0~load_uint(8);
+    var v'bounce = sc_0~load_int(1);
+    var v'contractNum = sc_0~load_int(257);
+    var v'value = sc_0~load_varuint16();
+    var v'body = sc_0;
+    return (sc_0, (v'mode, v'bounce, v'contractNum, v'value, v'body));
+}
+
+;;
+;; Type: DeployComparisonNoBodyMsg
+;; Header: 0xe80750fd
+;; TLB: deploy_comparison_no_body_msg#e80750fd mode:uint8 bounce:bool contractNum:int257 value:coins = DeployComparisonNoBodyMsg
+;;
+
+(slice, ((int, int, int, int))) $DeployComparisonNoBodyMsg$_load_without_opcode(slice sc_0) inline {
+    var v'mode = sc_0~load_uint(8);
+    var v'bounce = sc_0~load_int(1);
+    var v'contractNum = sc_0~load_int(257);
+    var v'value = sc_0~load_varuint16();
+    return (sc_0, (v'mode, v'bounce, v'contractNum, v'value));
+}
+
+;;
+;; Type: DeployContract
+;; TLB: _ internalNum:int257 = DeployContract
+;;
+
+(slice, ((int))) $DeployContract$_load(slice sc_0) inline {
+    var v'internalNum = sc_0~load_int(257);
+    return (sc_0, (v'internalNum));
+}
+
+builder $DeployContract$init$_store(builder build_0, (int) v) inline {
+    var (v'newNum) = v;
+    build_0 = build_0.store_int(v'newNum, 257);
+    return build_0;
+}
+
+(slice, ((int))) $DeployContract$init$_load(slice sc_0) inline {
+    var v'newNum = sc_0~load_int(257);
+    return (sc_0, (v'newNum));
+}
+
+(int) $DeployContract$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$DeployContract$_load();
+    } else {
+        (int $newNum) = $sc~$DeployContract$init$_load();
+        $sc.end_parse();
+        return $DeployContract$_contract_init($newNum);
+    }
+}
+
+(cell, cell) $DeployContract$_init_child(int $newNum) inline {
+    ;; Build init code cell
+
+    ;; Contract Code: DeployContract
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $DeployContract$init$_store(b, ($newNum));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract DeployContract functions
+;;
+
+(int) $DeployContract$_contract_init(int $newNum) impure inline {
+    var (($self'internalNum)) = (null());
+    $self'internalNum = $newNum;
+    return ($self'internalNum);
+}
+
+;;
+;; Get methods of a Contract DeployContract
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract DeployContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'internalNum) = $DeployContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    ;; Receive DeployParamsMsg message
+    if (op == 2666878717) {
+        in_msg~skip_bits(32);
+        var ($msg'mode, $msg'bounce, $msg'contractNum, $msg'body) = in_msg~$DeployParamsMsg$_load_without_opcode();
+        $global_deploy($DeployParameters$_constructor_mode_body_value_bounce_init($msg'mode, $Slice$_fun_asCell($msg'body), 0, $msg'bounce, $DeployContract$_init_child($msg'contractNum)));
+        return ();
+    }
+    
+    ;; Receive DeployComparisonMsg message
+    if (op == 4264585740) {
+        in_msg~skip_bits(32);
+        var ($msg'mode, $msg'bounce, $msg'contractNum, $msg'value, $msg'body) = in_msg~$DeployComparisonMsg$_load_without_opcode();
+        var ($initInfo'code, $initInfo'data) = $DeployContract$_init_child($msg'contractNum);
+        $global_deploy($DeployParameters$_constructor_mode_body_value_bounce_init($msg'mode, $Slice$_fun_asCell($msg'body), $msg'value, $msg'bounce, ($initInfo'code, $initInfo'data)));
+        $global_send($SendParameters$_constructor_mode_body_code_data_value_bounce_to($msg'mode, $Slice$_fun_asCell($msg'body), $initInfo'code, $initInfo'data, $msg'value, $msg'bounce, $global_contractAddress(($initInfo'code, $initInfo'data))));
+        return ();
+    }
+    
+    ;; Receive DeployComparisonNoBodyMsg message
+    if (op == 3892793597) {
+        in_msg~skip_bits(32);
+        var ($msg'mode, $msg'bounce, $msg'contractNum, $msg'value) = in_msg~$DeployComparisonNoBodyMsg$_load_without_opcode();
+        var ($initInfo'code, $initInfo'data) = $DeployContract$_init_child($msg'contractNum);
+        $global_deploy($DeployParameters$_constructor_mode_value_bounce_init($msg'mode, $msg'value, $msg'bounce, ($initInfo'code, $initInfo'data)));
+        $global_send($SendParameters$_constructor_mode_code_data_value_bounce_to($msg'mode, $initInfo'code, $initInfo'data, $msg'value, $msg'bounce, $global_contractAddress(($initInfo'code, $initInfo'data))));
+        return ();
+    }
+    
+    ;; Receiver fallback
+    slice $msg = in_msg;
+    return ();
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

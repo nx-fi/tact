@@ -1,0 +1,247 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/receiver-precedence_CommentAndStringAndBinaryAndSliceReceiverTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Message$_load_without_opcode
+  DECLPROC $Empty$_load_without_opcode
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_store
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_load
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_init
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_load
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store
+  DECLPROC $CommentAndStringAndBinaryAndSliceReceiverTester$_fun_receiver
+  78947 DECLMETHOD %receiver
+  DECLPROC recv_internal
+  DECLPROC recv_external
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Message$_load_without_opcode PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $Empty$_load_without_opcode PROCINLINE:<{
+    PUSHNULL
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_store PROCINLINE:<{
+    NEWC
+    SWAP
+    STSLICER
+    ENDC
+    SWAP
+    STREF
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_load PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_init PROCINLINE:<{
+        B{b5ee9c7241010101000900000e756e6b6e6f776e86bcd037} B>boc <s PUSHSLICE
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $CommentAndStringAndBinaryAndSliceReceiverTester$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $CommentAndStringAndBinaryAndSliceReceiverTester$_fun_receiver PROCREF:<{
+    DUP
+  }>
+  %receiver PROC:<{
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_load INLINECALLDICT
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_fun_receiver INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      OVER
+      32 PLDU
+      DUP
+      100 EQINT
+      IFJMP:<{
+        3 BLKDROP
+            B{b5ee9c7241010101000800000c62696e6172797a3be930} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      DUP
+      101 EQINT
+      IFJMP:<{
+        3 BLKDROP
+            B{b5ee9c7241010101001600002862696e6172795f656d7074795f6d657373616765cba1ec4e} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      SWAP
+    }>
+    SWAP
+    0 EQINT
+    IF:<{
+      OVER
+      HASHSU
+      1 2 BLKDROP2
+      12496330766740334683121779060496447633951178410392124241047263068897257131789 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+            B{b5ee9c7241010101000900000e636f6d6d656e747870e97e} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      31 GTINT
+      IFJMP:<{
+            B{b5ee9c7241010101001100001e66616c6c6261636b5f737472696e67276fb68e} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+    }>ELSE<{
+      2DROP
+    }>
+        B{b5ee9c7241010101000a00001066616c6c6261636bbfcb7b68} B>boc <s PUSHSLICE
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+  }>
+  recv_external PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_load INLINECALLDICT
+    DROP
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      OVER
+      32 PLDU
+      DUP
+      101 EQINT
+      IFJMP:<{
+        3 BLKDROP
+            ACCEPT
+            B{b5ee9c7241010101001f00003a65787465726e616c5f62696e6172795f656d7074795f6d657373616765193148cd} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      DUP
+      100 EQINT
+      IFJMP:<{
+        3 BLKDROP
+            ACCEPT
+            B{b5ee9c7241010101001100001e65787465726e616c5f62696e6172799c386b72} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      SWAP
+    }>
+    SWAP
+    0 EQINT
+    IF:<{
+      OVER
+      HASHSU
+      1 2 BLKDROP2
+      12496330766740334683121779060496447633951178410392124241047263068897257131789 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+            ACCEPT
+            B{b5ee9c7241010101001200002065787465726e616c5f636f6d6d656e7456d763e7} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      31 GTINT
+      IFJMP:<{
+            ACCEPT
+            B{b5ee9c7241010101001a00003065787465726e616c5f66616c6c6261636b5f737472696e67c1346b89} B>boc <s PUSHSLICE
+        $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+        RETALT
+      }>
+    }>ELSE<{
+      2DROP
+    }>
+        ACCEPT
+        B{b5ee9c7241010101001300002265787465726e616c5f66616c6c6261636b100c4b5a} B>boc <s PUSHSLICE
+    $CommentAndStringAndBinaryAndSliceReceiverTester$_contract_store INLINECALLDICT
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    DUP -1 EQINT IFJMP:<{
+                    DROP over <s ref@ -1 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

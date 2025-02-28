@@ -1,0 +1,176 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; all-contracts_MapUintBool.headers.fc
+;;
+;; Header files for MapUintBool
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_dict_get_uint_int
+int __tact_dict_get_uint_int(cell d, int kl, int k, int vl) inline;
+
+;; __tact_dict_set_uint_int
+(cell, ()) __tact_dict_set_uint_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; $MapUintBool$_store
+builder $MapUintBool$_store(builder build_0, (cell) v) inline;
+
+;; $MapUintBool$_load
+(slice, ((cell))) $MapUintBool$_load(slice sc_0) inline;
+
+;; $MapUintBool$_contract_init
+(cell) $MapUintBool$_contract_init() impure inline;
+
+;; $MapUintBool$_contract_load
+(cell) $MapUintBool$_contract_load() impure inline;
+
+;; $MapUintBool$_contract_store
+() $MapUintBool$_contract_store((cell) v) impure inline;
+
+
+;; all-contracts_MapUintBool.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(cell, int) __tact_dict_delete_uint(cell dict, int key_len, int index) asm(index dict key_len) """
+    DICTUDEL
+""";
+
+int __tact_dict_get_uint_int(cell d, int kl, int k, int vl) inline {
+    var (r, ok) = udict_get?(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_uint_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = udict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (udict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+;; all-contracts_MapUintBool.native.fc
+;; an empty FunC file to test imports of files with .func extension
+
+;; all-contracts_MapUintBool.storage.fc
+;;
+;; Type: MapUintBool
+;; TLB: _ m:dict<uint64, bool> = MapUintBool
+;;
+
+builder $MapUintBool$_store(builder build_0, (cell) v) inline {
+    var (v'm) = v;
+    build_0 = build_0.store_dict(v'm);
+    return build_0;
+}
+
+(slice, ((cell))) $MapUintBool$_load(slice sc_0) inline {
+    var v'm = sc_0~load_dict();
+    return (sc_0, (v'm));
+}
+
+(cell) $MapUintBool$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$MapUintBool$_load();
+    } else {
+        return $MapUintBool$_contract_init();
+    }
+}
+
+() $MapUintBool$_contract_store((cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $MapUintBool$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract MapUintBool functions
+;;
+
+(cell) $MapUintBool$_contract_init() impure inline {
+    var (($self'm)) = (null());
+    return ($self'm);
+}
+
+;;
+;; Get methods of a Contract MapUintBool
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract MapUintBool
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'm) = $MapUintBool$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        throw_unless(1024, null?(__tact_dict_get_uint_int($self'm, 64, 0, 1)));
+        $self'm~__tact_dict_set_uint_int(64, 0, true, 1);
+        $self'm~__tact_dict_delete_uint(64, 0);
+        ;; Persist state
+        $MapUintBool$_contract_store(($self'm));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

@@ -1,0 +1,389 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; delayed-upgrade-v2_SampleDelayedUpgradeContractV2.headers.fc
+;;
+;; Header files for SampleDelayedUpgradeContractV2
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $Upgrade$_store
+builder $Upgrade$_store(builder build_0, (cell, cell, int) v) inline;
+
+;; $Upgrade$_load
+(slice, ((cell, cell, int))) $Upgrade$_load(slice sc_0) inline;
+
+;; $Upgrade$_load_without_opcode
+(slice, ((cell, cell, int))) $Upgrade$_load_without_opcode(slice sc_0) inline;
+
+;; $Confirm$_load_without_opcode
+(slice, (tuple)) $Confirm$_load_without_opcode(slice sc_0) inline;
+
+;; $SampleDelayedUpgradeContractV2$_store
+builder $SampleDelayedUpgradeContractV2$_store(builder build_0, (int, int, (cell, cell, int), slice, int) v) inline;
+
+;; $SampleDelayedUpgradeContractV2$_load
+(slice, ((int, int, (cell, cell, int), slice, int))) $SampleDelayedUpgradeContractV2$_load(slice sc_0) inline;
+
+;; $SampleDelayedUpgradeContractV2$init$_load
+(slice, ((slice))) $SampleDelayedUpgradeContractV2$init$_load(slice sc_0) inline;
+
+;; $Upgrade$_constructor_code_data_timeout
+((cell, cell, int)) $Upgrade$_constructor_code_data_timeout(cell $code, cell $data, int $timeout) inline;
+
+;; $SampleDelayedUpgradeContractV2$_contract_init
+(int, int, (cell, cell, int), slice, int) $SampleDelayedUpgradeContractV2$_contract_init(slice $owner) impure inline;
+
+;; $SampleDelayedUpgradeContractV2$_contract_load
+(int, int, (cell, cell, int), slice, int) $SampleDelayedUpgradeContractV2$_contract_load() impure inline;
+
+;; $SampleDelayedUpgradeContractV2$_contract_store
+() $SampleDelayedUpgradeContractV2$_contract_store((int, int, (cell, cell, int), slice, int) v) impure inline;
+
+;; $SampleDelayedUpgradeContractV2$_fun_add
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_add((int, int, (cell, cell, int), slice, int) $self, int $v) impure inline_ref;
+
+;; $SampleDelayedUpgradeContractV2$_fun_counter
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_counter((int, int, (cell, cell, int), slice, int) $self) impure inline_ref;
+
+;; $SampleDelayedUpgradeContractV2$_fun_upgrade
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_upgrade((int, int, (cell, cell, int), slice, int) $self, (int, slice, int, slice) $_, (cell, cell, int) $msg) impure inline;
+
+;; $SampleDelayedUpgradeContractV2$_fun_requireOwner
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_requireOwner((int, int, (cell, cell, int), slice, int) $self) impure inline_ref;
+
+;; $SampleDelayedUpgradeContractV2$_fun_validateUpgrade
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_validateUpgrade((int, int, (cell, cell, int), slice, int) $self, (int, slice, int, slice) $_, (cell, cell, int) $__) impure inline;
+
+;; $SampleDelayedUpgradeContractV2$_fun_isUpgradable
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_isUpgradable((int, int, (cell, cell, int), slice, int) $self) impure inline_ref;
+
+;; $SampleDelayedUpgradeContractV2$_fun_version
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_version((int, int, (cell, cell, int), slice, int) $self) impure inline_ref;
+
+;; $SampleDelayedUpgradeContractV2$_fun_owner
+((int, int, (cell, cell, int), slice, int), slice) $SampleDelayedUpgradeContractV2$_fun_owner((int, int, (cell, cell, int), slice, int) $self) impure inline_ref;
+
+
+;; delayed-upgrade-v2_SampleDelayedUpgradeContractV2.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+int $global_now() impure asm """
+    NOW
+""";
+
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_requireOwner((int, int, (cell, cell, int), slice, int) $self) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    throw_unless(132, ( equal_slices_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), ());
+}
+
+((int, int, (cell, cell, int), slice, int), slice) $SampleDelayedUpgradeContractV2$_fun_owner((int, int, (cell, cell, int), slice, int) $self) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var $fresh$ret_285 = $self'owner;
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), $fresh$ret_285);
+}
+
+;; delayed-upgrade-v2_SampleDelayedUpgradeContractV2.storage.fc
+;;
+;; Type: Upgrade
+;; Header: 0x200b8d07
+;; TLB: upgrade#200b8d07 code:Maybe ^cell data:Maybe ^cell timeout:int257 = Upgrade
+;;
+
+builder $Upgrade$_store(builder build_0, (cell, cell, int) v) inline {
+    var (v'code, v'data, v'timeout) = v;
+    build_0 = store_uint(build_0, 537627911, 32);
+    build_0 = ~ null?(v'code) ? build_0.store_int(true, 1).store_ref(v'code) : build_0.store_int(false, 1);
+    build_0 = ~ null?(v'data) ? build_0.store_int(true, 1).store_ref(v'data) : build_0.store_int(false, 1);
+    build_0 = build_0.store_int(v'timeout, 257);
+    return build_0;
+}
+
+(slice, ((cell, cell, int))) $Upgrade$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 537627911);
+    var v'code = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'data = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'timeout = sc_0~load_int(257);
+    return (sc_0, (v'code, v'data, v'timeout));
+}
+
+(slice, ((cell, cell, int))) $Upgrade$_load_without_opcode(slice sc_0) inline {
+    var v'code = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'data = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'timeout = sc_0~load_int(257);
+    return (sc_0, (v'code, v'data, v'timeout));
+}
+
+((cell, cell, int)) $Upgrade$_constructor_code_data_timeout(cell $code, cell $data, int $timeout) inline {
+    return ($code, $data, $timeout);
+}
+
+;;
+;; Type: Confirm
+;; Header: 0x83fc27d8
+;; TLB: confirm#83fc27d8  = Confirm
+;;
+
+(slice, (tuple)) $Confirm$_load_without_opcode(slice sc_0) inline {
+    return (sc_0, null());
+}
+
+;;
+;; Type: SampleDelayedUpgradeContractV2
+;; TLB: _ _version:uint32 initiatedAt:int257 upgradeInfo:Upgrade{code:Maybe ^cell,data:Maybe ^cell,timeout:int257} owner:address counter:uint32 = SampleDelayedUpgradeContractV2
+;;
+
+builder $SampleDelayedUpgradeContractV2$_store(builder build_0, (int, int, (cell, cell, int), slice, int) v) inline {
+    var (v'_version, v'initiatedAt, (v'upgradeInfo'code, v'upgradeInfo'data, v'upgradeInfo'timeout), v'owner, v'counter) = v;
+    build_0 = build_0.store_uint(v'_version, 32);
+    build_0 = build_0.store_int(v'initiatedAt, 257);
+    build_0 = $Upgrade$_store(build_0, (v'upgradeInfo'code, v'upgradeInfo'data, v'upgradeInfo'timeout));
+    build_0 = build_0.store_slice(v'owner);
+    build_0 = build_0.store_uint(v'counter, 32);
+    return build_0;
+}
+
+(slice, ((int, int, (cell, cell, int), slice, int))) $SampleDelayedUpgradeContractV2$_load(slice sc_0) inline {
+    var v'_version = sc_0~load_uint(32);
+    var v'initiatedAt = sc_0~load_int(257);
+    var v'upgradeInfo = sc_0~$Upgrade$_load();
+    var v'owner = sc_0~load_msg_addr();
+    var v'counter = sc_0~load_uint(32);
+    return (sc_0, (v'_version, v'initiatedAt, v'upgradeInfo, v'owner, v'counter));
+}
+
+(slice, ((slice))) $SampleDelayedUpgradeContractV2$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(int, int, (cell, cell, int), slice, int) $SampleDelayedUpgradeContractV2$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$SampleDelayedUpgradeContractV2$_load();
+    } else {
+        (slice $owner) = $sc~$SampleDelayedUpgradeContractV2$init$_load();
+        $sc.end_parse();
+        return $SampleDelayedUpgradeContractV2$_contract_init($owner);
+    }
+}
+
+() $SampleDelayedUpgradeContractV2$_contract_store((int, int, (cell, cell, int), slice, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $SampleDelayedUpgradeContractV2$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract SampleDelayedUpgradeContractV2 functions
+;;
+
+(int, int, (cell, cell, int), slice, int) $SampleDelayedUpgradeContractV2$_contract_init(slice $owner) impure inline {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = (0, 0, $Upgrade$_constructor_code_data_timeout(null(), null(), 0), null(), null());
+    $self'owner = $owner;
+    $self'counter = 0;
+    return ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter);
+}
+
+() $global_setCode(cell $code) impure asm """
+    SETCODE
+""";
+
+() $global_setData(cell $data) impure asm """
+    c4 POP
+""";
+
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_add((int, int, (cell, cell, int), slice, int) $self, int $v) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+    throw_unless(4429, ( equal_slices_bits($self'owner, $ctx'sender) ));
+    $self'counter = $self'counter + $v;
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), ());
+}
+
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_counter((int, int, (cell, cell, int), slice, int) $self) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var $fresh$ret_282 = $self'counter;
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), $fresh$ret_282);
+}
+
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_upgrade((int, int, (cell, cell, int), slice, int) $self, (int, slice, int, slice) $_, (cell, cell, int) $msg) impure inline {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var (($_'bounceable, $_'sender, $_'value, $_'raw)) = $_;
+    var (($msg'code, $msg'data, $msg'timeout)) = $msg;
+    ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout) = ($msg'code, $msg'data, $msg'timeout);
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), ());
+}
+
+((int, int, (cell, cell, int), slice, int), ()) $SampleDelayedUpgradeContractV2$_fun_validateUpgrade((int, int, (cell, cell, int), slice, int) $self, (int, slice, int, slice) $_, (cell, cell, int) $__) impure inline {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var (($_'bounceable, $_'sender, $_'value, $_'raw)) = $_;
+    var (($__'code, $__'data, $__'timeout)) = $__;
+    ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)~$SampleDelayedUpgradeContractV2$_fun_requireOwner();
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), ());
+}
+
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_isUpgradable((int, int, (cell, cell, int), slice, int) $self) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var $fresh$ret_283 = true;
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), $fresh$ret_283);
+}
+
+((int, int, (cell, cell, int), slice, int), int) $SampleDelayedUpgradeContractV2$_fun_version((int, int, (cell, cell, int), slice, int) $self) impure inline_ref {
+    var (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)) = $self;
+    var $fresh$ret_284 = $self'_version;
+    return (($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter), $fresh$ret_284);
+}
+
+;;
+;; Get methods of a Contract SampleDelayedUpgradeContractV2
+;;
+
+_ %counter() method_id(104984) {
+    var self = $SampleDelayedUpgradeContractV2$_contract_load();
+    var res = self~$SampleDelayedUpgradeContractV2$_fun_counter();
+    return res;
+}
+
+_ %isUpgradable() method_id(92955) {
+    var self = $SampleDelayedUpgradeContractV2$_contract_load();
+    var res = self~$SampleDelayedUpgradeContractV2$_fun_isUpgradable();
+    return res;
+}
+
+_ %version() method_id(76407) {
+    var self = $SampleDelayedUpgradeContractV2$_contract_load();
+    var res = self~$SampleDelayedUpgradeContractV2$_fun_version();
+    return res;
+}
+
+_ %owner() method_id(83229) {
+    var self = $SampleDelayedUpgradeContractV2$_contract_load();
+    var res = self~$SampleDelayedUpgradeContractV2$_fun_owner();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract SampleDelayedUpgradeContractV2
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter) = $SampleDelayedUpgradeContractV2$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive Confirm message
+        if (op == 2214340568) {
+            var $msg = in_msg~$Confirm$_load_without_opcode();
+            throw_unless(43220, ($global_now() > ($self'initiatedAt + $self'upgradeInfo'timeout)));
+            if ((~ null?($self'upgradeInfo'code))) {
+                $global_setCode(__tact_not_null($self'upgradeInfo'code));
+            }
+            if ((~ null?($self'upgradeInfo'data))) {
+                $global_setData(__tact_not_null($self'upgradeInfo'data));
+                throw(0);
+            }
+            return ();
+        }
+        
+        ;; Receive Upgrade message
+        if (op == 537627911) {
+            var ($msg'code, $msg'data, $msg'timeout) = in_msg~$Upgrade$_load_without_opcode();
+            var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+            ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)~$SampleDelayedUpgradeContractV2$_fun_validateUpgrade(($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw), ($msg'code, $msg'data, $msg'timeout));
+            ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)~$SampleDelayedUpgradeContractV2$_fun_upgrade(($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw), ($msg'code, $msg'data, $msg'timeout));
+            $self'_version = $self'_version + 1;
+            ;; Persist state
+            $SampleDelayedUpgradeContractV2$_contract_store(($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "increment" message
+    if (text_op == 0x99785e1361de95773685af32116e211933c29c96d195ce905c056195855e227c) {
+        ($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter)~$SampleDelayedUpgradeContractV2$_fun_add(100);
+        ;; Persist state
+        $SampleDelayedUpgradeContractV2$_contract_store(($self'_version, $self'initiatedAt, ($self'upgradeInfo'code, $self'upgradeInfo'data, $self'upgradeInfo'timeout), $self'owner, $self'counter));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

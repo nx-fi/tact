@@ -1,0 +1,302 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/constants-for-wrappers_ConstantTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $SimpleStruct$_to_external
+  DECLPROC $NestedStruct$_to_external
+  DECLPROC $ConstantTester$_contract_init
+  DECLPROC $ConstantTester$_contract_load
+  DECLPROC $ConstantTester$_fun_globalInt
+  DECLPROC $ConstantTester$_fun_globalString
+  DECLPROC $ConstantTester$_fun_globalStringWithQuotes
+  DECLPROC $ConstantTester$_fun_globalBool
+  DECLPROC $ConstantTester$_fun_globalAddress
+  DECLPROC $ConstantTester$_fun_globalCell
+  DECLPROC $ConstantTester$_fun_globalSlice
+  DECLPROC $SimpleStruct$_constructor_value
+  DECLPROC $ConstantTester$_fun_globalSimpleStruct
+  DECLPROC $NestedStruct$_constructor_value_other
+  DECLPROC $ConstantTester$_fun_globalNestedStruct
+  DECLPROC $ConstantTester$_fun_contractInt
+  DECLPROC $ConstantTester$_fun_contractString
+  DECLPROC $ConstantTester$_fun_contractStringWithQuotes
+  DECLPROC $ConstantTester$_fun_contractBool
+  DECLPROC $ConstantTester$_fun_contractAddress
+  DECLPROC $ConstantTester$_fun_contractCell
+  DECLPROC $ConstantTester$_fun_contractSlice
+  DECLPROC $ConstantTester$_fun_contractSimpleStruct
+  DECLPROC $ConstantTester$_fun_contractNestedStruct
+  67661 DECLMETHOD %globalInt
+  72260 DECLMETHOD %globalString
+  107522 DECLMETHOD %globalStringWithQuotes
+  104324 DECLMETHOD %globalBool
+  67506 DECLMETHOD %globalAddress
+  95138 DECLMETHOD %globalCell
+  121876 DECLMETHOD %globalSlice
+  69742 DECLMETHOD %globalSimpleStruct
+  69915 DECLMETHOD %globalNestedStruct
+  109434 DECLMETHOD %contractInt
+  90762 DECLMETHOD %contractString
+  107220 DECLMETHOD %contractStringWithQuotes
+  75021 DECLMETHOD %contractBool
+  79405 DECLMETHOD %contractAddress
+  114987 DECLMETHOD %contractCell
+  119437 DECLMETHOD %contractSlice
+  107680 DECLMETHOD %contractSimpleStruct
+  107989 DECLMETHOD %contractNestedStruct
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $SimpleStruct$_to_external PROCINLINE:<{
+  }>
+  $NestedStruct$_to_external PROCINLINE:<{
+  }>
+  $ConstantTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $ConstantTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $ConstantTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $ConstantTester$_fun_globalInt PROCREF:<{
+    10 PUSHINT
+  }>
+  $ConstantTester$_fun_globalString PROCREF:<{
+        B{b5ee9c7241010101000d00001668656c6c6f20776f726c647c7b1c8f} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_globalStringWithQuotes PROCREF:<{
+        B{b5ee9c7241010101000f00001a68656c6c6f2022776f726c6422bb6eddc1} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_globalBool PROCREF:<{
+    TRUE
+  }>
+  $ConstantTester$_fun_globalAddress PROCREF:<{
+        B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_globalCell PROCREF:<{
+        B{b5ee9c724101080100a4000114ff00f4a413f4bcf2c80b01020162020300a6d001d072d721d200d200fa4021103450666f04f86102f862ed44d0d2000194fa4001319330f828e202915be07021d74920c21f953101d31f309132e2c00001c121b09bc87f01ca0001cf16c9ed54e030f2c0820201480406012bb8bd4ed44d0d2000194fa4001319330f828e2db3c3180500027a012bb851ded44d0d2000194fa4001319330f828e2db3c3180700022037abbce9} B>boc PUSHREF
+  }>
+  $ConstantTester$_fun_globalSlice PROCREF:<{
+        B{b5ee9c724101080100a4000114ff00f4a413f4bcf2c80b01020162020300a6d001d072d721d200d200fa4021103450666f04f86102f862ed44d0d2000194fa4001319330f828e202915be07021d74920c21f953101d31f309132e2c00001c121b09bc87f01ca0001cf16c9ed54e030f2c0820201480406012bb8bd4ed44d0d2000194fa4001319330f828e2db3c3180500027a012bb851ded44d0d2000194fa4001319330f828e2db3c3180700022037abbce9} B>boc <s PUSHSLICE
+  }>
+  $SimpleStruct$_constructor_value PROCINLINE:<{
+  }>
+  $ConstantTester$_fun_globalSimpleStruct PROCREF:<{
+    10 PUSHINT
+    $SimpleStruct$_constructor_value INLINECALLDICT
+  }>
+  $NestedStruct$_constructor_value_other PROCINLINE:<{
+  }>
+  $ConstantTester$_fun_globalNestedStruct PROCREF:<{
+    10 PUSHINT
+    11 PUSHINT
+    $SimpleStruct$_constructor_value INLINECALLDICT
+    $NestedStruct$_constructor_value_other INLINECALLDICT
+  }>
+  $ConstantTester$_fun_contractInt PROCREF:<{
+    10 PUSHINT
+  }>
+  $ConstantTester$_fun_contractString PROCREF:<{
+        B{b5ee9c7241010101000d00001668656c6c6f20776f726c647c7b1c8f} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_contractStringWithQuotes PROCREF:<{
+        B{b5ee9c7241010101000f00001a68656c6c6f2022776f726c6422bb6eddc1} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_contractBool PROCREF:<{
+    TRUE
+  }>
+  $ConstantTester$_fun_contractAddress PROCREF:<{
+        B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_contractCell PROCREF:<{
+        B{b5ee9c724101080100a4000114ff00f4a413f4bcf2c80b01020162020300a6d001d072d721d200d200fa4021103450666f04f86102f862ed44d0d2000194fa4001319330f828e202915be07021d74920c21f953101d31f309132e2c00001c121b09bc87f01ca0001cf16c9ed54e030f2c0820201480406012bb8bd4ed44d0d2000194fa4001319330f828e2db3c3180500027a012bb851ded44d0d2000194fa4001319330f828e2db3c3180700022037abbce9} B>boc PUSHREF
+  }>
+  $ConstantTester$_fun_contractSlice PROCREF:<{
+        B{b5ee9c724101080100a4000114ff00f4a413f4bcf2c80b01020162020300a6d001d072d721d200d200fa4021103450666f04f86102f862ed44d0d2000194fa4001319330f828e202915be07021d74920c21f953101d31f309132e2c00001c121b09bc87f01ca0001cf16c9ed54e030f2c0820201480406012bb8bd4ed44d0d2000194fa4001319330f828e2db3c3180500027a012bb851ded44d0d2000194fa4001319330f828e2db3c3180700022037abbce9} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_contractSimpleStruct PROCREF:<{
+    10 PUSHINT
+    $SimpleStruct$_constructor_value INLINECALLDICT
+  }>
+  $ConstantTester$_fun_contractNestedStruct PROCREF:<{
+    10 PUSHINT
+    11 PUSHINT
+    $SimpleStruct$_constructor_value INLINECALLDICT
+    $NestedStruct$_constructor_value_other INLINECALLDICT
+  }>
+  %globalInt PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalInt INLINECALLDICT
+    NIP
+  }>
+  %globalString PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalString INLINECALLDICT
+    NIP
+  }>
+  %globalStringWithQuotes PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalStringWithQuotes INLINECALLDICT
+    NIP
+  }>
+  %globalBool PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalBool INLINECALLDICT
+    NIP
+  }>
+  %globalAddress PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalAddress INLINECALLDICT
+    NIP
+  }>
+  %globalCell PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalCell INLINECALLDICT
+    NIP
+  }>
+  %globalSlice PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalSlice INLINECALLDICT
+    NIP
+  }>
+  %globalSimpleStruct PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalSimpleStruct INLINECALLDICT
+    NIP
+    $SimpleStruct$_to_external INLINECALLDICT
+  }>
+  %globalNestedStruct PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalNestedStruct INLINECALLDICT
+    1 2 BLKDROP2
+    $NestedStruct$_to_external INLINECALLDICT
+  }>
+  %contractInt PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractInt INLINECALLDICT
+    NIP
+  }>
+  %contractString PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractString INLINECALLDICT
+    NIP
+  }>
+  %contractStringWithQuotes PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractStringWithQuotes INLINECALLDICT
+    NIP
+  }>
+  %contractBool PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractBool INLINECALLDICT
+    NIP
+  }>
+  %contractAddress PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractAddress INLINECALLDICT
+    NIP
+  }>
+  %contractCell PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractCell INLINECALLDICT
+    NIP
+  }>
+  %contractSlice PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractSlice INLINECALLDICT
+    NIP
+  }>
+  %contractSimpleStruct PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractSimpleStruct INLINECALLDICT
+    NIP
+    $SimpleStruct$_to_external INLINECALLDICT
+  }>
+  %contractNestedStruct PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_contractNestedStruct INLINECALLDICT
+    1 2 BLKDROP2
+    $NestedStruct$_to_external INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ConstantTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,178 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/codegen/output/all-contracts_Bar.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $FunCKeywords$_load
+  DECLPROC $Bar$_load
+  DECLPROC $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr
+  DECLPROC $Bar$_contract_init
+  DECLPROC $Bar$_contract_load
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $FunCKeywords$_load PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    DROP
+    20 s() 23 s() XCHG
+    20 s() 22 s() XCHG
+    20 s() 21 s() XCHG
+  }>
+  $Bar$_load PROCINLINE:<{
+    $FunCKeywords$_load INLINECALLDICT
+  }>
+  $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr PROCINLINE:<{
+  }>
+  $Bar$_contract_init PROCINLINE:<{
+    1 PUSHINT
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    s0 s0 s0 PUSH3
+    DUP
+    $FunCKeywords$_constructor_var_ifnot_then_elseifnot_int_cell_slice_builder_cont_tuple_type_forall_extern_global_asm_impure_inline_ref_auto_apply_method_id_operator_infix_infixl_infixr INLINECALLDICT
+  }>
+  $Bar$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $Bar$_load INLINECALLDICT
+      23 s() POP
+      21 s() 22 s() XCHG
+      20 s() 21 s() XCHG
+      19 s() 20 s() XCHG
+      18 s() 19 s() XCHG
+      17 s() 18 s() XCHG
+      16 s() 17 s() XCHG
+      s15 16 s() XCHG
+      15 ROLL
+    }>ELSE<{
+      DROP
+      $Bar$_contract_init INLINECALLDICT
+    }>
+  }>
+  recv_internal PROC:<{
+    DROP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s5 s5 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    SWAP
+    __tact_context_sender SETGLOB
+    $Bar$_contract_load INLINECALLDICT
+    15 BLKDROP
+    8 BLKDROP
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

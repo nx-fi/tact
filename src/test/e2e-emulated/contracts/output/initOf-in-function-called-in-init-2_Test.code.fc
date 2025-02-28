@@ -1,0 +1,249 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; initOf-in-function-called-in-init-2_Test.headers.fc
+;;
+;; Header files for Test
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Test$_load
+(slice, ((slice))) $Test$_load(slice sc_0) inline;
+
+;; $MasterV0$init$_store
+builder $MasterV0$init$_store(builder build_0, tuple v) inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $MasterV0$_init_child
+(cell, cell) $MasterV0$_init_child() inline;
+
+;; $global_master_addr
+slice $global_master_addr() impure inline_ref;
+
+;; $global_middle
+slice $global_middle() impure inline_ref;
+
+;; $Test$_contract_init
+(slice) $Test$_contract_init() impure inline;
+
+;; $Test$_contract_load
+(slice) $Test$_contract_load() impure inline;
+
+;; $Test$_fun_owner
+((slice), slice) $Test$_fun_owner((slice) $self) impure inline_ref;
+
+
+;; initOf-in-function-called-in-init-2_Test.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+;; initOf-in-function-called-in-init-2_Test.storage.fc
+;;
+;; Type: Test
+;; TLB: _ owner:address = Test
+;;
+
+(slice, ((slice))) $Test$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice) $Test$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Test$_load();
+    } else {
+        return $Test$_contract_init();
+    }
+}
+
+;;
+;; Type: MasterV0
+;; TLB: _ state:int257 = MasterV0
+;;
+
+builder $MasterV0$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $MasterV0$_child_get_code() impure asm """
+    B{b5ee9c7201010301005f00017aff00208e2f3030d072d721d200d200fa4021103450556f04f86101f862ed44d0d2000197810101d7000131923070e230dcf2c082e1f4a413f4bcf2c80b010131a64bc57b513434800065e0404075c0004c648c1c38b6cf0c6002000220} B>boc PUSHREF
+""";
+
+(cell, cell) $MasterV0$_init_child() inline {
+    ;; Build init code cell
+
+    ;; Contract Code: MasterV0
+    cell init_code = $MasterV0$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $MasterV0$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract Test functions
+;;
+
+slice $global_master_addr() impure inline_ref {
+    return $global_contractAddress($MasterV0$_init_child());
+}
+
+slice $global_middle() impure inline_ref {
+    return $global_master_addr();
+}
+
+(slice) $Test$_contract_init() impure inline {
+    var (($self'owner)) = (null());
+    $self'owner = $global_middle();
+    return ($self'owner);
+}
+
+((slice), slice) $Test$_fun_owner((slice) $self) impure inline_ref {
+    var (($self'owner)) = $self;
+    var $fresh$ret_339 = $self'owner;
+    return (($self'owner), $fresh$ret_339);
+}
+
+;;
+;; Get methods of a Contract Test
+;;
+
+_ %owner() method_id(83229) {
+    var self = $Test$_contract_load();
+    var res = self~$Test$_fun_owner();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Test
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner) = $Test$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

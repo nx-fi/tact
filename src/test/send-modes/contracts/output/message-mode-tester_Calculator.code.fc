@@ -1,0 +1,216 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; message-mode-tester_Calculator.headers.fc
+;;
+;; Header files for Calculator
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $AverageRequest$_load_without_opcode
+(slice, ((int, int, int))) $AverageRequest$_load_without_opcode(slice sc_0) inline;
+
+;; $AverageResult$_store
+builder $AverageResult$_store(builder build_0, (int) v) inline;
+
+;; $AverageResult$_store_cell
+cell $AverageResult$_store_cell((int) v) inline;
+
+;; $Calculator$_contract_init
+tuple $Calculator$_contract_init() impure inline;
+
+;; $Calculator$_contract_load
+tuple $Calculator$_contract_load() impure inline;
+
+;; $MessageParameters$_constructor_to_bounce_value_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline;
+
+;; $AverageResult$_constructor_res
+((int)) $AverageResult$_constructor_res(int $res) inline;
+
+
+;; message-mode-tester_Calculator.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+() $global_message((int, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+    STZEROES
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+    STDICT
+    ENDC
+    SWAP
+    SENDRAWMSG
+""";
+
+;; message-mode-tester_Calculator.storage.fc
+;;
+;; Type: MessageParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 to:address bounce:bool = MessageParameters
+;;
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline {
+    return (0, $body, $value, $to, $bounce);
+}
+
+;;
+;; Type: AverageRequest
+;; Header: 0xc6efd40e
+;; TLB: average_request#c6efd40e from:uint32 to:uint32 amountToPayInResponse:int257 = AverageRequest
+;;
+
+(slice, ((int, int, int))) $AverageRequest$_load_without_opcode(slice sc_0) inline {
+    var v'from = sc_0~load_uint(32);
+    var v'to = sc_0~load_uint(32);
+    var v'amountToPayInResponse = sc_0~load_int(257);
+    return (sc_0, (v'from, v'to, v'amountToPayInResponse));
+}
+
+;;
+;; Type: AverageResult
+;; Header: 0x016bce84
+;; TLB: average_result#016bce84 res:uint32 = AverageResult
+;;
+
+builder $AverageResult$_store(builder build_0, (int) v) inline {
+    var (v'res) = v;
+    build_0 = store_uint(build_0, 23842436, 32);
+    build_0 = build_0.store_uint(v'res, 32);
+    return build_0;
+}
+
+cell $AverageResult$_store_cell((int) v) inline {
+    return $AverageResult$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $AverageResult$_constructor_res(int $res) inline {
+    return ($res);
+}
+
+;;
+;; Type: Calculator
+;; TLB: _  = Calculator
+;;
+
+tuple $Calculator$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Calculator$_contract_init();
+    }
+}
+
+;;
+;; Contract Calculator functions
+;;
+
+tuple $Calculator$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+;;
+;; Get methods of a Contract Calculator
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Calculator
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Calculator$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive AverageRequest message
+    if (op == 3337606158) {
+        var ($request'from, $request'to, $request'amountToPayInResponse) = in_msg~$AverageRequest$_load_without_opcode();
+        throw_unless(25459, (($request'to - $request'from) >= 0));
+        int $n = (($request'to - $request'from) + 1);
+        int $count = $request'from;
+        int $sum = 0;
+        while (($count <= $request'to)) {
+            $sum = $sum + $count;
+            $count = $count + 1;
+        }
+        int $result = ($sum / $n);
+        $global_message($MessageParameters$_constructor_to_bounce_value_body(__tact_context_get_sender(), false, $request'amountToPayInResponse, $AverageResult$_store_cell($AverageResult$_constructor_res($result))));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

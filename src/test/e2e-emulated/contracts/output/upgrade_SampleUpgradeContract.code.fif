@@ -1,0 +1,294 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/upgrade_SampleUpgradeContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC $Upgrade$_load_without_opcode
+  DECLPROC $SampleUpgradeContract$_store
+  DECLPROC $SampleUpgradeContract$_load
+  DECLPROC $SampleUpgradeContract$init$_load
+  DECLPROC $SampleUpgradeContract$_contract_init
+  DECLPROC $SampleUpgradeContract$_contract_load
+  DECLPROC $SampleUpgradeContract$_contract_store
+  DECLPROC $SampleUpgradeContract$_fun_add
+  DECLPROC $SampleUpgradeContract$_fun_counter
+  DECLPROC $SampleUpgradeContract$_fun_requireOwner
+  DECLPROC $SampleUpgradeContract$_fun_validateUpgrade
+  DECLPROC $SampleUpgradeContract$_fun_upgrade
+  DECLPROC $SampleUpgradeContract$_fun_isUpgradable
+  DECLPROC $SampleUpgradeContract$_fun_version
+  DECLPROC $SampleUpgradeContract$_fun_owner
+  104984 DECLMETHOD %counter
+  92955 DECLMETHOD %isUpgradable
+  76407 DECLMETHOD %version
+  83229 DECLMETHOD %owner
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $Upgrade$_load_without_opcode PROCINLINE:<{
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    -ROT
+  }>
+  $SampleUpgradeContract$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    32 STU
+    SWAP
+    STSLICER
+    32 STU
+  }>
+  $SampleUpgradeContract$_load PROCINLINE:<{
+    32 LDU
+    LDMSGADDR
+    32 LDU
+    3 -ROLL
+  }>
+  $SampleUpgradeContract$init$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $SampleUpgradeContract$_contract_init PROCINLINE:<{
+    0 PUSHINT
+    TUCK
+  }>
+  $SampleUpgradeContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $SampleUpgradeContract$_load INLINECALLDICT
+      1 3 BLKDROP2
+    }>ELSE<{
+      $SampleUpgradeContract$init$_load INLINECALLDICT
+      SWAP
+      ENDS
+      $SampleUpgradeContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $SampleUpgradeContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    3 -ROLL
+    $SampleUpgradeContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $SampleUpgradeContract$_fun_add PROCREF:<{
+    __tact_context_get INLINECALLDICT
+    s2 s3 XCHG
+    3 BLKDROP
+    s3 PUSH
+    4429 PUSHINT
+    s0 s2 XCHG
+    SDEQ
+    THROWANYIFNOT
+    ADD
+  }>
+  $SampleUpgradeContract$_fun_counter PROCREF:<{
+    DUP
+  }>
+  $SampleUpgradeContract$_fun_requireOwner PROCREF:<{
+    __tact_context_get_sender INLINECALLDICT
+    s2 s(-1) PUXC
+    SDEQ
+    132 THROWIFNOT
+  }>
+  $SampleUpgradeContract$_fun_validateUpgrade PROCINLINE:<{
+    6 BLKDROP
+    $SampleUpgradeContract$_fun_requireOwner INLINECALLDICT
+  }>
+  $SampleUpgradeContract$_fun_upgrade PROCINLINE:<{
+    4 2 BLKDROP2
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      SWAP
+      __tact_not_null INLINECALLDICT
+          SETCODE
+    }>ELSE<{
+      NIP
+    }>
+    DUP
+    ISNULL
+    NOT
+    IF:<{
+      __tact_not_null INLINECALLDICT
+          c4 POP
+      0 THROW
+    }>ELSE<{
+      DROP
+    }>
+  }>
+  $SampleUpgradeContract$_fun_isUpgradable PROCREF:<{
+    TRUE
+  }>
+  $SampleUpgradeContract$_fun_version PROCREF:<{
+    s2 PUSH
+  }>
+  $SampleUpgradeContract$_fun_owner PROCREF:<{
+    OVER
+  }>
+  %counter PROC:<{
+    $SampleUpgradeContract$_contract_load INLINECALLDICT
+    $SampleUpgradeContract$_fun_counter INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  %isUpgradable PROC:<{
+    $SampleUpgradeContract$_contract_load INLINECALLDICT
+    $SampleUpgradeContract$_fun_isUpgradable INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  %version PROC:<{
+    $SampleUpgradeContract$_contract_load INLINECALLDICT
+    $SampleUpgradeContract$_fun_version INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  %owner PROC:<{
+    $SampleUpgradeContract$_contract_load INLINECALLDICT
+    $SampleUpgradeContract$_fun_owner INLINECALLDICT
+    3 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $SampleUpgradeContract$_contract_load INLINECALLDICT
+    s0 s4 XCHG
+    IFJMP:<{
+      4 BLKDROP
+    }>
+    0 PUSHINT
+    s3 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 s3 XCHG
+      32 LDU
+      OVER
+      3703389397 PUSHINT
+      EQUAL
+      IFJMP:<{
+        NIP
+        s3 POP
+        s0 s2 XCHG
+        $Upgrade$_load_without_opcode INLINECALLDICT
+        s2 POP
+        __tact_context_get INLINECALLDICT
+        s6 s7 s8 XCHG3
+        s3 s6 s7 PUSH3
+        s11 s7 s8 PUSH3
+        $SampleUpgradeContract$_fun_validateUpgrade INLINECALLDICT
+        s8 s7 s6 XCHG3
+        s3 s5 XCHG
+        s4 s4 XCHG2
+        s0 s3 XCHG
+        $SampleUpgradeContract$_fun_upgrade INLINECALLDICT
+        s0 s2 XCHG
+        INC
+        s0 s2 XCHG
+        $SampleUpgradeContract$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s0 s4 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      4 BLKDROP
+    }>
+    s0 s2 XCHG
+    HASHSU
+    69416536767715606506388722885455358241464102324033398280593991534930481259132 PUSHINT
+    EQUAL
+    IFJMP:<{
+      s0 s2 XCHG
+      1 PUSHINT
+      $SampleUpgradeContract$_fun_add INLINECALLDICT
+      $SampleUpgradeContract$_contract_store INLINECALLDICT
+    }>
+    3 BLKDROP
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

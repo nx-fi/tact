@@ -1,0 +1,340 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/examples/output/multisig-3_MultisigContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Operation$_store
+  DECLPROC $Operation$_store_cell
+  DECLPROC $Operation$_load
+  DECLPROC $Execute$_load_without_opcode
+  DECLPROC $MultisigContract$_store
+  DECLPROC $MultisigContract$_load
+  DECLPROC $MultisigContract$init$_load
+  DECLPROC $MultisigContract$_contract_init
+  DECLPROC $MultisigContract$_contract_load
+  DECLPROC $MultisigContract$_contract_store
+  DECLPROC $SendParameters$_constructor_to_value
+  DECLPROC $MultisigContract$_fun_execute
+  DECLPROC $MultisigContract$_fun_key1
+  DECLPROC $MultisigContract$_fun_key2
+  DECLPROC $MultisigContract$_fun_key3
+  DECLPROC $MultisigContract$_fun_seqno
+  107493 DECLMETHOD %key1
+  103302 DECLMETHOD %key2
+  99239 DECLMETHOD %key3
+  85143 DECLMETHOD %seqno
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Operation$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    32 STU
+    SWAP
+    STVARUINT16
+    SWAP
+    STSLICER
+  }>
+  $Operation$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $Operation$_store INLINECALLDICT
+    ENDC
+  }>
+  $Operation$_load PROCINLINE:<{
+    32 LDU
+    LDVARUINT16
+    LDMSGADDR
+    3 -ROLL
+  }>
+  $Execute$_load_without_opcode PROCINLINE:<{
+    $Operation$_load INLINECALLDICT
+    s0 s3 XCHG
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    s1 s6 XCHG
+    s3 s3 s0 XCHG3
+  }>
+  $MultisigContract$_store PROCINLINE:<{
+    s3 s4 XCHG2
+    32 STU
+    256 STU
+    256 STU
+    256 STU
+  }>
+  $MultisigContract$_load PROCINLINE:<{
+    32 LDU
+    256 LDU
+    256 LDU
+    256 LDU
+    4 -ROLL
+  }>
+  $MultisigContract$init$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    3 -ROLL
+  }>
+  $MultisigContract$_contract_init PROCINLINE:<{
+    0 PUSHINT
+    3 -ROLL
+  }>
+  $MultisigContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $MultisigContract$_load INLINECALLDICT
+      1 4 BLKDROP2
+    }>ELSE<{
+      $MultisigContract$init$_load INLINECALLDICT
+      s0 s3 XCHG
+      ENDS
+      ROT
+      $MultisigContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MultisigContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    4 -ROLL
+    $MultisigContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $SendParameters$_constructor_to_value PROCINLINE:<{
+    0 PUSHINT
+    PUSHNULL
+    2SWAP
+    PUSHNULL
+    PUSHNULL
+    s0 s0 s3 XCHG3
+    TRUE
+  }>
+  $MultisigContract$_fun_execute PROCREF:<{
+    s2 POP
+    $SendParameters$_constructor_to_value INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $MultisigContract$_fun_key1 PROCREF:<{
+    s2 PUSH
+  }>
+  $MultisigContract$_fun_key2 PROCREF:<{
+    OVER
+  }>
+  $MultisigContract$_fun_key3 PROCREF:<{
+    DUP
+  }>
+  $MultisigContract$_fun_seqno PROCREF:<{
+    s3 PUSH
+  }>
+  %key1 PROC:<{
+    $MultisigContract$_contract_load INLINECALLDICT
+    $MultisigContract$_fun_key1 INLINECALLDICT
+    4 1 BLKDROP2
+  }>
+  %key2 PROC:<{
+    $MultisigContract$_contract_load INLINECALLDICT
+    $MultisigContract$_fun_key2 INLINECALLDICT
+    4 1 BLKDROP2
+  }>
+  %key3 PROC:<{
+    $MultisigContract$_contract_load INLINECALLDICT
+    $MultisigContract$_fun_key3 INLINECALLDICT
+    4 1 BLKDROP2
+  }>
+  %seqno PROC:<{
+    $MultisigContract$_contract_load INLINECALLDICT
+    $MultisigContract$_fun_seqno INLINECALLDICT
+    4 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $MultisigContract$_contract_load INLINECALLDICT
+    s0 s5 XCHG
+    IFJMP:<{
+      5 BLKDROP
+    }>
+    0 PUSHINT
+    s4 PUSH
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      s3 PUSH
+      32 PLDU
+    }>
+    520967536 PUSHINT
+    EQUAL
+    IFJMP:<{
+      s0 s3 XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      $Execute$_load_without_opcode INLINECALLDICT
+      s6 POP
+      s4 s3 s2 PUSH3
+      $Operation$_store_cell INLINECALLDICT
+          HASHCU
+      s0 s2 PUXC
+      s8 PUSH
+          CHKSIGNU
+      s2 s1 PUXC
+      s10 PUSH
+          CHKSIGNU
+      s2 s6 s10 XC2PU
+          CHKSIGNU
+      17654 PUSHINT
+      s5 s8 PUSH2
+      EQUAL
+      THROWANYIFNOT
+      48401 PUSHINT
+      s0 s2 XCHG
+      IF:<{
+      }>ELSE<{
+        FALSE
+        s6 POP
+      }>
+      s0 s5 XCHG
+      IF:<{
+      }>ELSE<{
+        FALSE
+        s5 POP
+      }>
+      s0 s4 XCHG2
+      THROWANYIFNOT
+      s0 s4 XCHG
+      INC
+          COMMIT
+      s1 s4 s4 XCHG3
+      s4 s6 XCHG
+      s3 s5 XCHG
+      s3 s4 XCHG
+      $MultisigContract$_fun_execute INLINECALLDICT
+      $MultisigContract$_contract_store INLINECALLDICT
+    }>
+    5 BLKDROP
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

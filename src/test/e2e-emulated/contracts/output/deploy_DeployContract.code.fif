@@ -1,0 +1,605 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/deploy_DeployContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $DeployParamsMsg$_load_without_opcode
+  DECLPROC $DeployComparisonMsg$_load_without_opcode
+  DECLPROC $DeployComparisonNoBodyMsg$_load_without_opcode
+  DECLPROC $DeployContract$_load
+  DECLPROC $DeployContract$init$_store
+  DECLPROC $DeployContract$init$_load
+  DECLPROC $DeployContract$_contract_init
+  DECLPROC $DeployContract$_contract_load
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $Slice$_fun_asCell
+  DECLPROC $DeployContract$_init_child
+  DECLPROC $DeployParameters$_constructor_mode_body_value_bounce_init
+  DECLPROC $SendParameters$_constructor_mode_body_code_data_value_bounce_to
+  DECLPROC $DeployParameters$_constructor_mode_value_bounce_init
+  DECLPROC $SendParameters$_constructor_mode_code_data_value_bounce_to
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $DeployParamsMsg$_load_without_opcode PROCINLINE:<{
+    8 LDU
+    1 LDI
+    257 PUSHINT
+    LDIX
+    s3 s3 XCPU
+    s3 s3 s0 XCHG3
+  }>
+  $DeployComparisonMsg$_load_without_opcode PROCINLINE:<{
+    8 LDU
+    1 LDI
+    257 PUSHINT
+    LDIX
+    LDVARUINT16
+    s4 s4 XCPU
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+  }>
+  $DeployComparisonNoBodyMsg$_load_without_opcode PROCINLINE:<{
+    8 LDU
+    1 LDI
+    257 PUSHINT
+    LDIX
+    LDVARUINT16
+    4 -ROLL
+  }>
+  $DeployContract$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $DeployContract$init$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $DeployContract$init$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $DeployContract$_contract_init PROCINLINE:<{
+  }>
+  $DeployContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $DeployContract$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      $DeployContract$init$_load INLINECALLDICT
+      SWAP
+      ENDS
+      $DeployContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $Slice$_fun_asCell PROCINLINE:<{
+        NEWC
+    SWAP
+        STSLICER
+        ENDC
+  }>
+  $DeployContract$_init_child PROCINLINE:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $DeployContract$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $DeployParameters$_constructor_mode_body_value_bounce_init PROCINLINE:<{
+  }>
+  $SendParameters$_constructor_mode_body_code_data_value_bounce_to PROCINLINE:<{
+    SWAP
+  }>
+  $DeployParameters$_constructor_mode_value_bounce_init PROCINLINE:<{
+    PUSHNULL
+    4 -ROLL
+  }>
+  $SendParameters$_constructor_mode_code_data_value_bounce_to PROCINLINE:<{
+    PUSHNULL
+    s0 s5 XCHG
+    s0 s4 XCHG
+    s3 s1 s3 XCHG3
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $DeployContract$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      DUP
+      32 PLDU
+    }>
+    DUP
+    2666878717 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      32 PUSHINT
+      SDSKIPFIRST
+      $DeployParamsMsg$_load_without_opcode INLINECALLDICT
+      s4 POP
+      s0 s3 XCHG
+      $Slice$_fun_asCell INLINECALLDICT
+      0 PUSHINT
+      s0 s4 XCHG
+      $DeployContract$_init_child INLINECALLDICT
+      s4 s5 XCHG
+      s2 s4 XCHG
+      s2 s3 XCHG
+      $DeployParameters$_constructor_mode_body_value_bounce_init INLINECALLDICT
+          4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+          HASHCU // `init.data` hash
+          SWAP
+          HASHCU // `init.code` hash
+          SWAP2
+          CDEPTH // `init.data` depth
+          SWAP
+          CDEPTH // `init.code` depth
+          // Group 2: Calculating destination address
+          // For almost identical logic and instructions,
+          // see comments inside `contractHash()` function in contract.tact
+          131380 INT // (2 << 16) | (1 << 8) | 0x34
+          NEWC
+          24 STU
+          16 STU
+          16 STU
+          256 STU
+          256 STU
+          ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+          // → Stack state
+          // s0: destAddr(hash part)
+          // s1: `init.data`
+          // s2: `init.code`
+          // s3 and below: `bounce`, `value`, `body`, `mode`
+          // Group 3: Building a message (CommonMsgInfoRelaxed)
+          s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+          NEWC
+          b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+          1 STI              // store `bounce`
+          s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+          STREF              // store `init.code`
+          STREF              // store `init.data`
+          // Inline StateInit:
+          b{00010000000000} STSLICECONST
+          // 0 + 00 + 10 + 0 + 00000000
+          // 1) 0 - bounced = false
+          // 2) 00 - src = addr_none
+          // 3) 10 - tag of addr_std (part of dest)
+          // 4) 0 - Maybe Anycast = false
+          // 5) 00000000 - workchain_id (part of dest)
+          //
+          256 STU     // store destAddr(hash part)
+          SWAP        // Builder on top, `value` below
+          STGRAMS     // store `value`
+          105 PUSHINT // 1 + 4 + 4 + 64 + 32
+          STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+          // Remaining bits of MessageRelaxed:
+          b{1000110} STSLICECONST
+          // 10 + 0 + 0 + 1 + 1 + 0
+          // 10 - Maybe (Either StateInit ^StateInit) = true false
+          // 0 - split_depth:(Maybe (## 5)) = false
+          // 0 = special:(Maybe TickTock) = false
+          // 1 = code:(Maybe ^Cell) = true
+          // 1 = data:(Maybe ^Cell) = true
+          // 0 = library:(Maybe ^Cell) = false
+          //
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC   // finalize the message
+          // → Stack state
+          // s0: Cell
+          // s1: params.`mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG
+    }>
+    DUP
+    4264585740 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      32 PUSHINT
+      SDSKIPFIRST
+      $DeployComparisonMsg$_load_without_opcode INLINECALLDICT
+      s5 POP
+      SWAP
+      $DeployContract$_init_child INLINECALLDICT
+      s5 PUSH
+      $Slice$_fun_asCell INLINECALLDICT
+      s5 s3 s(-1) PU2XC
+      s6 s4 s3 PUSH3
+      $DeployParameters$_constructor_mode_body_value_bounce_init INLINECALLDICT
+          4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+          HASHCU // `init.data` hash
+          SWAP
+          HASHCU // `init.code` hash
+          SWAP2
+          CDEPTH // `init.data` depth
+          SWAP
+          CDEPTH // `init.code` depth
+          // Group 2: Calculating destination address
+          // For almost identical logic and instructions,
+          // see comments inside `contractHash()` function in contract.tact
+          131380 INT // (2 << 16) | (1 << 8) | 0x34
+          NEWC
+          24 STU
+          16 STU
+          16 STU
+          256 STU
+          256 STU
+          ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+          // → Stack state
+          // s0: destAddr(hash part)
+          // s1: `init.data`
+          // s2: `init.code`
+          // s3 and below: `bounce`, `value`, `body`, `mode`
+          // Group 3: Building a message (CommonMsgInfoRelaxed)
+          s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+          NEWC
+          b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+          1 STI              // store `bounce`
+          s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+          STREF              // store `init.code`
+          STREF              // store `init.data`
+          // Inline StateInit:
+          b{00010000000000} STSLICECONST
+          // 0 + 00 + 10 + 0 + 00000000
+          // 1) 0 - bounced = false
+          // 2) 00 - src = addr_none
+          // 3) 10 - tag of addr_std (part of dest)
+          // 4) 0 - Maybe Anycast = false
+          // 5) 00000000 - workchain_id (part of dest)
+          //
+          256 STU     // store destAddr(hash part)
+          SWAP        // Builder on top, `value` below
+          STGRAMS     // store `value`
+          105 PUSHINT // 1 + 4 + 4 + 64 + 32
+          STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+          // Remaining bits of MessageRelaxed:
+          b{1000110} STSLICECONST
+          // 10 + 0 + 0 + 1 + 1 + 0
+          // 10 - Maybe (Either StateInit ^StateInit) = true false
+          // 0 - split_depth:(Maybe (## 5)) = false
+          // 0 = special:(Maybe TickTock) = false
+          // 1 = code:(Maybe ^Cell) = true
+          // 1 = data:(Maybe ^Cell) = true
+          // 0 = library:(Maybe ^Cell) = false
+          //
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC   // finalize the message
+          // → Stack state
+          // s0: Cell
+          // s1: params.`mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG
+      s0 s5 XCHG
+      $Slice$_fun_asCell INLINECALLDICT
+      s1 s5 PUSH2
+      $global_contractAddress INLINECALLDICT
+      s1 s5 XCHG
+      s4 s6 s0 XCHG3
+      s3 s3 s0 XCHG3
+      $SendParameters$_constructor_mode_body_code_data_value_bounce_to INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+          STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          // Group 2: Placing the Builder after code and data, then checking those for nullability
+          s2 XCHG0
+          DUP2
+          ISNULL
+          SWAP
+          ISNULL
+          MUL // note that -1 * -1 wraps back to -1
+          // → Stack state
+          // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+          // s1: `code`
+          // s2: `data`
+          // s3: Builder
+          // s4: `body`
+          // s5: `mode`
+          // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+          <{
+              DROP2 // drop `data` and `code`, since either of those is null
+              b{0} STSLICECONST
+          }> PUSHCONT
+          // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+          <{
+              // _ split_depth:(Maybe (## 5))
+              //   special:(Maybe TickTock)
+              //   code:(Maybe ^Cell)
+              //   data:(Maybe ^Cell)
+              //   library:(Maybe ^Cell)
+              // = StateInit;
+              ROT                // place message Builder on top
+              b{10} STSLICECONST // store Maybe = true, Either = false
+              // Start composing inlined StateInit
+              b{00} STSLICECONST // store split_depth and special first
+              STDICT             // store code
+              STDICT             // store data
+              b{0} STSLICECONST  // store library
+          }> PUSHCONT
+          // Group 3: IFELSE that does the branching shown above
+          IFELSE
+          // → Stack state
+          // s0: Builder
+          // s1: null or StateInit
+          // s2: `body`
+          // s3: `mode`
+          // Group 4: Finalizing the message
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC
+          // → Stack state
+          // s0: Cell
+          // s1: `mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+    }>
+    3892793597 PUSHINT
+    EQUAL
+    IFJMP:<{
+      32 PUSHINT
+      SDSKIPFIRST
+      $DeployComparisonNoBodyMsg$_load_without_opcode INLINECALLDICT
+      s4 POP
+      $DeployContract$_init_child INLINECALLDICT
+      s3 s4 s2 PUSH3
+      s4 s3 PUSH2
+      $DeployParameters$_constructor_mode_value_bounce_init INLINECALLDICT
+          4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+          HASHCU // `init.data` hash
+          SWAP
+          HASHCU // `init.code` hash
+          SWAP2
+          CDEPTH // `init.data` depth
+          SWAP
+          CDEPTH // `init.code` depth
+          // Group 2: Calculating destination address
+          // For almost identical logic and instructions,
+          // see comments inside `contractHash()` function in contract.tact
+          131380 INT // (2 << 16) | (1 << 8) | 0x34
+          NEWC
+          24 STU
+          16 STU
+          16 STU
+          256 STU
+          256 STU
+          ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+          // → Stack state
+          // s0: destAddr(hash part)
+          // s1: `init.data`
+          // s2: `init.code`
+          // s3 and below: `bounce`, `value`, `body`, `mode`
+          // Group 3: Building a message (CommonMsgInfoRelaxed)
+          s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+          NEWC
+          b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+          1 STI              // store `bounce`
+          s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+          STREF              // store `init.code`
+          STREF              // store `init.data`
+          // Inline StateInit:
+          b{00010000000000} STSLICECONST
+          // 0 + 00 + 10 + 0 + 00000000
+          // 1) 0 - bounced = false
+          // 2) 00 - src = addr_none
+          // 3) 10 - tag of addr_std (part of dest)
+          // 4) 0 - Maybe Anycast = false
+          // 5) 00000000 - workchain_id (part of dest)
+          //
+          256 STU     // store destAddr(hash part)
+          SWAP        // Builder on top, `value` below
+          STGRAMS     // store `value`
+          105 PUSHINT // 1 + 4 + 4 + 64 + 32
+          STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+          // Remaining bits of MessageRelaxed:
+          b{1000110} STSLICECONST
+          // 10 + 0 + 0 + 1 + 1 + 0
+          // 10 - Maybe (Either StateInit ^StateInit) = true false
+          // 0 - split_depth:(Maybe (## 5)) = false
+          // 0 = special:(Maybe TickTock) = false
+          // 1 = code:(Maybe ^Cell) = true
+          // 1 = data:(Maybe ^Cell) = true
+          // 0 = library:(Maybe ^Cell) = false
+          //
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC   // finalize the message
+          // → Stack state
+          // s0: Cell
+          // s1: params.`mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG
+      2DUP
+      $global_contractAddress INLINECALLDICT
+      s4 s5 XCHG
+      s4 s3 s0 XCHG3
+      $SendParameters$_constructor_mode_code_data_value_bounce_to INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+          STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          // Group 2: Placing the Builder after code and data, then checking those for nullability
+          s2 XCHG0
+          DUP2
+          ISNULL
+          SWAP
+          ISNULL
+          MUL // note that -1 * -1 wraps back to -1
+          // → Stack state
+          // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+          // s1: `code`
+          // s2: `data`
+          // s3: Builder
+          // s4: `body`
+          // s5: `mode`
+          // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+          <{
+              DROP2 // drop `data` and `code`, since either of those is null
+              b{0} STSLICECONST
+          }> PUSHCONT
+          // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+          <{
+              // _ split_depth:(Maybe (## 5))
+              //   special:(Maybe TickTock)
+              //   code:(Maybe ^Cell)
+              //   data:(Maybe ^Cell)
+              //   library:(Maybe ^Cell)
+              // = StateInit;
+              ROT                // place message Builder on top
+              b{10} STSLICECONST // store Maybe = true, Either = false
+              // Start composing inlined StateInit
+              b{00} STSLICECONST // store split_depth and special first
+              STDICT             // store code
+              STDICT             // store data
+              b{0} STSLICECONST  // store library
+          }> PUSHCONT
+          // Group 3: IFELSE that does the branching shown above
+          IFELSE
+          // → Stack state
+          // s0: Builder
+          // s1: null or StateInit
+          // s2: `body`
+          // s3: `mode`
+          // Group 4: Finalizing the message
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC
+          // → Stack state
+          // s0: Cell
+          // s1: `mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+    }>
+    DROP
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

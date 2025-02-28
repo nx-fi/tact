@@ -1,0 +1,721 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; optionals_ContractWithOptionals.headers.fc
+;;
+;; Header files for ContractWithOptionals
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_load_address_opt
+(slice, slice) __tact_load_address_opt(slice cs) inline;
+
+;; __tact_store_address_opt
+builder __tact_store_address_opt(builder b, slice address) inline;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; $SomeGenericStruct$_store
+builder $SomeGenericStruct$_store(builder build_0, (int, int, int, int, int) v) inline;
+
+;; $SomeGenericStruct$_load
+(slice, ((int, int, int, int, int))) $SomeGenericStruct$_load(slice sc_0) inline;
+
+;; $SomeGenericStruct$_not_null
+((int, int, int, int, int)) $SomeGenericStruct$_not_null(tuple v) inline;
+
+;; $StructWithOptionals$_store
+builder $StructWithOptionals$_store(builder build_0, (int, int, cell, slice, tuple) v) inline;
+
+;; $SomeGenericStruct$_as_optional
+tuple $SomeGenericStruct$_as_optional((int, int, int, int, int) v) inline;
+
+;; $StructWithOptionals$_load
+(slice, ((int, int, cell, slice, tuple))) $StructWithOptionals$_load(slice sc_0) inline;
+
+;; $StructWithOptionals$_as_optional
+tuple $StructWithOptionals$_as_optional((int, int, cell, slice, tuple) v) inline;
+
+;; $Update$_load_without_opcode
+(slice, ((int, int, cell, slice, tuple, tuple))) $Update$_load_without_opcode(slice sc_0) inline;
+
+;; $StructWithOptionals$_not_null
+((int, int, cell, slice, tuple)) $StructWithOptionals$_not_null(tuple v) inline;
+
+;; $ContractWithOptionals$_store
+builder $ContractWithOptionals$_store(builder build_0, (int, int, cell, slice, tuple, tuple) v) inline;
+
+;; $ContractWithOptionals$_load
+(slice, ((int, int, cell, slice, tuple, tuple))) $ContractWithOptionals$_load(slice sc_0) inline;
+
+;; $SomeGenericStruct$_to_tuple
+tuple $SomeGenericStruct$_to_tuple(((int, int, int, int, int)) v) inline;
+
+;; $SomeGenericStruct$_to_opt_tuple
+tuple $SomeGenericStruct$_to_opt_tuple(tuple v) inline;
+
+;; $SomeGenericStruct$_to_external
+(int, int, int, int, int) $SomeGenericStruct$_to_external(((int, int, int, int, int)) v) inline;
+
+;; $SomeGenericStruct$_to_opt_external
+tuple $SomeGenericStruct$_to_opt_external(tuple v) inline;
+
+;; $StructWithOptionals$_to_tuple
+tuple $StructWithOptionals$_to_tuple(((int, int, cell, slice, tuple)) v) inline;
+
+;; $StructWithOptionals$_to_opt_tuple
+tuple $StructWithOptionals$_to_opt_tuple(tuple v) inline;
+
+;; $StructWithOptionals$_to_external
+(int, int, cell, slice, tuple) $StructWithOptionals$_to_external(((int, int, cell, slice, tuple)) v) inline;
+
+;; $StructWithOptionals$_to_opt_external
+tuple $StructWithOptionals$_to_opt_external(tuple v) inline;
+
+;; $ContractWithOptionals$init$_load
+(slice, ((int, int, cell, slice, tuple, tuple))) $ContractWithOptionals$init$_load(slice sc_0) inline;
+
+;; $ContractWithOptionals$_contract_init
+(int, int, cell, slice, tuple, tuple) $ContractWithOptionals$_contract_init(int $a, int $b, cell $c, slice $d, tuple $e, tuple $f) impure inline;
+
+;; $ContractWithOptionals$_contract_load
+(int, int, cell, slice, tuple, tuple) $ContractWithOptionals$_contract_load() impure inline_ref;
+
+;; $ContractWithOptionals$_contract_store
+() $ContractWithOptionals$_contract_store((int, int, cell, slice, tuple, tuple) v) impure inline;
+
+;; $ContractWithOptionals$_fun_isNotNullA
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_isNotNullB
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_isNotNullC
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_isNotNullD
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_isNotNullE
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_isNotNullF
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullA
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_nullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullB
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_nullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullC
+((int, int, cell, slice, tuple, tuple), cell) $ContractWithOptionals$_fun_nullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullD
+((int, int, cell, slice, tuple, tuple), slice) $ContractWithOptionals$_fun_nullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullE
+((int, int, cell, slice, tuple, tuple), tuple) $ContractWithOptionals$_fun_nullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_nullF
+((int, int, cell, slice, tuple, tuple), tuple) $ContractWithOptionals$_fun_nullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullA
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_notNullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullB
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_notNullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullC
+((int, int, cell, slice, tuple, tuple), cell) $ContractWithOptionals$_fun_notNullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullD
+((int, int, cell, slice, tuple, tuple), slice) $ContractWithOptionals$_fun_notNullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullE
+((int, int, cell, slice, tuple, tuple), (int, int, int, int, int)) $ContractWithOptionals$_fun_notNullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $ContractWithOptionals$_fun_notNullF
+((int, int, cell, slice, tuple, tuple), (int, int, cell, slice, tuple)) $ContractWithOptionals$_fun_notNullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+;; $SomeGenericStruct$_constructor_value1_value2_value3_value4_value5
+((int, int, int, int, int)) $SomeGenericStruct$_constructor_value1_value2_value3_value4_value5(int $value1, int $value2, int $value3, int $value4, int $value5) inline;
+
+;; $ContractWithOptionals$_fun_testVariables
+((int, int, cell, slice, tuple, tuple), (int, int, int, int, int)) $ContractWithOptionals$_fun_testVariables((int, int, cell, slice, tuple, tuple) $self) impure inline_ref;
+
+
+;; optionals_ContractWithOptionals.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(slice, slice) __tact_load_address_opt(slice cs) inline {
+    if (cs.preload_uint(2) != 0) {
+        slice raw = cs~load_msg_addr();
+        return (cs, raw);
+    } else {
+        cs~skip_bits(2);
+        return (cs, null());
+    }
+}
+
+builder __tact_store_address_opt(builder b, slice address) inline {
+    if (null?(address)) {
+        b = b.store_uint(0, 2);
+        return b;
+    } else {
+        return b.store_slice(address);
+    }
+}
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+forall X0, X1, X2, X3, X4 -> tuple __tact_tuple_create_5((X0, X1, X2, X3, X4) v) asm """
+    5 TUPLE
+""";
+
+forall X0, X1, X2, X3, X4 -> (X0, X1, X2, X3, X4) __tact_tuple_destroy_5(tuple v) asm """
+    5 UNTUPLE
+""";
+
+;; optionals_ContractWithOptionals.storage.fc
+;;
+;; Type: SomeGenericStruct
+;; TLB: _ value1:int257 value2:int257 value3:int257 value4:int257 value5:int257 = SomeGenericStruct
+;;
+
+builder $SomeGenericStruct$_store(builder build_0, (int, int, int, int, int) v) inline {
+    var (v'value1, v'value2, v'value3, v'value4, v'value5) = v;
+    build_0 = build_0.store_int(v'value1, 257);
+    build_0 = build_0.store_int(v'value2, 257);
+    build_0 = build_0.store_int(v'value3, 257);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_int(v'value4, 257);
+    build_1 = build_1.store_int(v'value5, 257);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, int, int, int, int))) $SomeGenericStruct$_load(slice sc_0) inline {
+    var v'value1 = sc_0~load_int(257);
+    var v'value2 = sc_0~load_int(257);
+    var v'value3 = sc_0~load_int(257);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'value4 = sc_1~load_int(257);
+    var v'value5 = sc_1~load_int(257);
+    return (sc_0, (v'value1, v'value2, v'value3, v'value4, v'value5));
+}
+
+((int, int, int, int, int)) $SomeGenericStruct$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'value1, int vvv'value2, int vvv'value3, int vvv'value4, int vvv'value5) = __tact_tuple_destroy_5(v);
+    return (vvv'value1, vvv'value2, vvv'value3, vvv'value4, vvv'value5);
+}
+
+tuple $SomeGenericStruct$_as_optional((int, int, int, int, int) v) inline {
+    var (v'value1, v'value2, v'value3, v'value4, v'value5) = v;
+    return __tact_tuple_create_5(v'value1, v'value2, v'value3, v'value4, v'value5);
+}
+
+tuple $SomeGenericStruct$_to_tuple(((int, int, int, int, int)) v) inline {
+    var (v'value1, v'value2, v'value3, v'value4, v'value5) = v;
+    return __tact_tuple_create_5(v'value1, v'value2, v'value3, v'value4, v'value5);
+}
+
+tuple $SomeGenericStruct$_to_opt_tuple(tuple v) inline {
+    if (null?(v)) { return null(); } 
+    return $SomeGenericStruct$_to_tuple($SomeGenericStruct$_not_null(v)); 
+}
+
+(int, int, int, int, int) $SomeGenericStruct$_to_external(((int, int, int, int, int)) v) inline {
+    var (v'value1, v'value2, v'value3, v'value4, v'value5) = v; 
+    return (v'value1, v'value2, v'value3, v'value4, v'value5);
+}
+
+tuple $SomeGenericStruct$_to_opt_external(tuple v) inline {
+    var loaded = $SomeGenericStruct$_to_opt_tuple(v);
+    if (null?(loaded)) {
+        return null();
+    } else {
+        return (loaded);
+    }
+}
+
+((int, int, int, int, int)) $SomeGenericStruct$_constructor_value1_value2_value3_value4_value5(int $value1, int $value2, int $value3, int $value4, int $value5) inline {
+    return ($value1, $value2, $value3, $value4, $value5);
+}
+
+;;
+;; Type: StructWithOptionals
+;; TLB: _ a:Maybe int257 b:Maybe bool c:Maybe ^cell d:Maybe address e:Maybe SomeGenericStruct{value1:int257,value2:int257,value3:int257,value4:int257,value5:int257} = StructWithOptionals
+;;
+
+builder $StructWithOptionals$_store(builder build_0, (int, int, cell, slice, tuple) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e) = v;
+    build_0 = ~ null?(v'a) ? build_0.store_int(true, 1).store_int(v'a, 257) : build_0.store_int(false, 1);
+    build_0 = ~ null?(v'b) ? build_0.store_int(true, 1).store_int(v'b, 1) : build_0.store_int(false, 1);
+    build_0 = ~ null?(v'c) ? build_0.store_int(true, 1).store_ref(v'c) : build_0.store_int(false, 1);
+    build_0 = __tact_store_address_opt(build_0, v'd);
+    var build_1 = begin_cell();
+    build_1 = ~ null?(v'e) ? build_1.store_int(true, 1).$SomeGenericStruct$_store($SomeGenericStruct$_not_null(v'e)) : build_1.store_int(false, 1);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, int, cell, slice, tuple))) $StructWithOptionals$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(1) ? sc_0~load_int(257) : null();
+    var v'b = sc_0~load_int(1) ? sc_0~load_int(1) : null();
+    var v'c = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'd = sc_0~__tact_load_address_opt();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'e = sc_1~load_int(1) ? $SomeGenericStruct$_as_optional(sc_1~$SomeGenericStruct$_load()) : null();
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e));
+}
+
+tuple $StructWithOptionals$_as_optional((int, int, cell, slice, tuple) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e) = v;
+    return __tact_tuple_create_5(v'a, v'b, v'c, v'd, v'e);
+}
+
+((int, int, cell, slice, tuple)) $StructWithOptionals$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (int vvv'a, int vvv'b, cell vvv'c, slice vvv'd, tuple vvv'e) = __tact_tuple_destroy_5(v);
+    return (vvv'a, vvv'b, vvv'c, vvv'd, vvv'e);
+}
+
+tuple $StructWithOptionals$_to_tuple(((int, int, cell, slice, tuple)) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e) = v;
+    return __tact_tuple_create_5(v'a, v'b, v'c, v'd, $SomeGenericStruct$_to_opt_tuple(v'e));
+}
+
+tuple $StructWithOptionals$_to_opt_tuple(tuple v) inline {
+    if (null?(v)) { return null(); } 
+    return $StructWithOptionals$_to_tuple($StructWithOptionals$_not_null(v)); 
+}
+
+(int, int, cell, slice, tuple) $StructWithOptionals$_to_external(((int, int, cell, slice, tuple)) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e) = v; 
+    return (v'a, v'b, v'c, v'd, v'e);
+}
+
+tuple $StructWithOptionals$_to_opt_external(tuple v) inline {
+    var loaded = $StructWithOptionals$_to_opt_tuple(v);
+    if (null?(loaded)) {
+        return null();
+    } else {
+        return (loaded);
+    }
+}
+
+;;
+;; Type: Update
+;; Header: 0x1554fcfd
+;; TLB: update#1554fcfd a:Maybe int257 b:Maybe bool c:Maybe ^cell d:Maybe address e:Maybe SomeGenericStruct{value1:int257,value2:int257,value3:int257,value4:int257,value5:int257} f:Maybe StructWithOptionals{a:Maybe int257,b:Maybe bool,c:Maybe ^cell,d:Maybe address,e:Maybe SomeGenericStruct{value1:int257,value2:int257,value3:int257,value4:int257,value5:int257}} = Update
+;;
+
+(slice, ((int, int, cell, slice, tuple, tuple))) $Update$_load_without_opcode(slice sc_0) inline {
+    var v'a = sc_0~load_int(1) ? sc_0~load_int(257) : null();
+    var v'b = sc_0~load_int(1) ? sc_0~load_int(1) : null();
+    var v'c = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'd = sc_0~__tact_load_address_opt();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'e = sc_1~load_int(1) ? $SomeGenericStruct$_as_optional(sc_1~$SomeGenericStruct$_load()) : null();
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'f = sc_2~load_int(1) ? $StructWithOptionals$_as_optional(sc_2~$StructWithOptionals$_load()) : null();
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f));
+}
+
+;;
+;; Type: ContractWithOptionals
+;; TLB: _ a:Maybe int257 b:Maybe bool c:Maybe ^cell d:Maybe address e:Maybe SomeGenericStruct{value1:int257,value2:int257,value3:int257,value4:int257,value5:int257} f:Maybe StructWithOptionals{a:Maybe int257,b:Maybe bool,c:Maybe ^cell,d:Maybe address,e:Maybe SomeGenericStruct{value1:int257,value2:int257,value3:int257,value4:int257,value5:int257}} = ContractWithOptionals
+;;
+
+builder $ContractWithOptionals$_store(builder build_0, (int, int, cell, slice, tuple, tuple) v) inline {
+    var (v'a, v'b, v'c, v'd, v'e, v'f) = v;
+    build_0 = ~ null?(v'a) ? build_0.store_int(true, 1).store_int(v'a, 257) : build_0.store_int(false, 1);
+    build_0 = ~ null?(v'b) ? build_0.store_int(true, 1).store_int(v'b, 1) : build_0.store_int(false, 1);
+    build_0 = ~ null?(v'c) ? build_0.store_int(true, 1).store_ref(v'c) : build_0.store_int(false, 1);
+    build_0 = __tact_store_address_opt(build_0, v'd);
+    var build_1 = begin_cell();
+    build_1 = ~ null?(v'e) ? build_1.store_int(true, 1).$SomeGenericStruct$_store($SomeGenericStruct$_not_null(v'e)) : build_1.store_int(false, 1);
+    var build_2 = begin_cell();
+    build_2 = ~ null?(v'f) ? build_2.store_int(true, 1).$StructWithOptionals$_store($StructWithOptionals$_not_null(v'f)) : build_2.store_int(false, 1);
+    build_1 = store_ref(build_1, build_2.end_cell());
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((int, int, cell, slice, tuple, tuple))) $ContractWithOptionals$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(1) ? sc_0~load_int(257) : null();
+    var v'b = sc_0~load_int(1) ? sc_0~load_int(1) : null();
+    var v'c = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'd = sc_0~__tact_load_address_opt();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'e = sc_1~load_int(1) ? $SomeGenericStruct$_as_optional(sc_1~$SomeGenericStruct$_load()) : null();
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'f = sc_2~load_int(1) ? $StructWithOptionals$_as_optional(sc_2~$StructWithOptionals$_load()) : null();
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f));
+}
+
+(slice, ((int, int, cell, slice, tuple, tuple))) $ContractWithOptionals$init$_load(slice sc_0) inline {
+    var v'a = sc_0~load_int(1) ? sc_0~load_int(257) : null();
+    var v'b = sc_0~load_int(1) ? sc_0~load_int(1) : null();
+    var v'c = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    var v'd = sc_0~__tact_load_address_opt();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'e = sc_1~load_int(1) ? $SomeGenericStruct$_as_optional(sc_1~$SomeGenericStruct$_load()) : null();
+    slice sc_2 = sc_1~load_ref().begin_parse();
+    var v'f = sc_2~load_int(1) ? $StructWithOptionals$_as_optional(sc_2~$StructWithOptionals$_load()) : null();
+    return (sc_0, (v'a, v'b, v'c, v'd, v'e, v'f));
+}
+
+(int, int, cell, slice, tuple, tuple) $ContractWithOptionals$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ContractWithOptionals$_load();
+    } else {
+        (int $a, int $b, cell $c, slice $d, tuple $e, tuple $f) = $sc~$ContractWithOptionals$init$_load();
+        $sc.end_parse();
+        return $ContractWithOptionals$_contract_init($a, $b, $c, $d, $e, $f);
+    }
+}
+
+() $ContractWithOptionals$_contract_store((int, int, cell, slice, tuple, tuple) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ContractWithOptionals$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ContractWithOptionals functions
+;;
+
+(int, int, cell, slice, tuple, tuple) $ContractWithOptionals$_contract_init(int $a, int $b, cell $c, slice $d, tuple $e, tuple $f) impure inline {
+    var ($e) = $e;
+    var ($f) = $f;
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = (null(), null(), null(), null(), null(), null());
+    $self'a = $a;
+    $self'b = $b;
+    $self'c = $c;
+    $self'd = $d;
+    $self'e = $e;
+    $self'f = $f;
+    return ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_694 = (~ null?($self'a));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_694);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_695 = (~ null?($self'b));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_695);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_696 = (~ null?($self'c));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_696);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_697 = (~ null?($self'd));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_697);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_698 = (~ null?($self'e));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_698);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_isNotNullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_699 = (~ null?($self'f));
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_699);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_nullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_700 = $self'a;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_700);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_nullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_701 = $self'b;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_701);
+}
+
+((int, int, cell, slice, tuple, tuple), cell) $ContractWithOptionals$_fun_nullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_702 = $self'c;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_702);
+}
+
+((int, int, cell, slice, tuple, tuple), slice) $ContractWithOptionals$_fun_nullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_703 = $self'd;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_703);
+}
+
+((int, int, cell, slice, tuple, tuple), tuple) $ContractWithOptionals$_fun_nullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_704 = $self'e;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_704);
+}
+
+((int, int, cell, slice, tuple, tuple), tuple) $ContractWithOptionals$_fun_nullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_705 = $self'f;
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_705);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_notNullA((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_706 = __tact_not_null($self'a);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_706);
+}
+
+((int, int, cell, slice, tuple, tuple), int) $ContractWithOptionals$_fun_notNullB((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_707 = __tact_not_null($self'b);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_707);
+}
+
+((int, int, cell, slice, tuple, tuple), cell) $ContractWithOptionals$_fun_notNullC((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_708 = __tact_not_null($self'c);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_708);
+}
+
+((int, int, cell, slice, tuple, tuple), slice) $ContractWithOptionals$_fun_notNullD((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_709 = __tact_not_null($self'd);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_709);
+}
+
+((int, int, cell, slice, tuple, tuple), (int, int, int, int, int)) $ContractWithOptionals$_fun_notNullE((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_710 = $SomeGenericStruct$_not_null($self'e);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_710);
+}
+
+((int, int, cell, slice, tuple, tuple), (int, int, cell, slice, tuple)) $ContractWithOptionals$_fun_notNullF((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    var $fresh$ret_711 = $StructWithOptionals$_not_null($self'f);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_711);
+}
+
+((int, int, cell, slice, tuple, tuple), (int, int, int, int, int)) $ContractWithOptionals$_fun_testVariables((int, int, cell, slice, tuple, tuple) $self) impure inline_ref {
+    var (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f)) = $self;
+    tuple $a = $SomeGenericStruct$_as_optional($SomeGenericStruct$_constructor_value1_value2_value3_value4_value5(1, 2, 3, 4, 5));
+    var $fresh$ret_712 = $SomeGenericStruct$_not_null($a);
+    return (($self'a, $self'b, $self'c, $self'd, $self'e, $self'f), $fresh$ret_712);
+}
+
+;;
+;; Get methods of a Contract ContractWithOptionals
+;;
+
+_ %isNotNullA() method_id(74449) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullA();
+    return res;
+}
+
+_ %isNotNullB() method_id(70322) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullB();
+    return res;
+}
+
+_ %isNotNullC() method_id(66195) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullC();
+    return res;
+}
+
+_ %isNotNullD() method_id(94836) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullD();
+    return res;
+}
+
+_ %isNotNullE() method_id(90709) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullE();
+    return res;
+}
+
+_ %isNotNullF() method_id(86582) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_isNotNullF();
+    return res;
+}
+
+_ %nullA() method_id(119020) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullA();
+    return res;
+}
+
+_ %nullB() method_id(123023) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullB();
+    return res;
+}
+
+_ %nullC() method_id(127150) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullC();
+    return res;
+}
+
+_ %nullD() method_id(98377) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullD();
+    return res;
+}
+
+_ %nullE() method_id(102504) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullE();
+    return $SomeGenericStruct$_to_opt_external(res);
+}
+
+_ %nullF() method_id(106507) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_nullF();
+    return $StructWithOptionals$_to_opt_external(res);
+}
+
+_ %notNullA() method_id(110911) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullA();
+    return res;
+}
+
+_ %notNullB() method_id(98652) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullB();
+    return res;
+}
+
+_ %notNullC() method_id(102781) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullC();
+    return res;
+}
+
+_ %notNullD() method_id(123290) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullD();
+    return res;
+}
+
+_ %notNullE() method_id(127419) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullE();
+    return $SomeGenericStruct$_to_external(res);
+}
+
+_ %notNullF() method_id(115160) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_notNullF();
+    return $StructWithOptionals$_to_external(res);
+}
+
+_ %testVariables() method_id(87190) {
+    var self = $ContractWithOptionals$_contract_load();
+    var res = self~$ContractWithOptionals$_fun_testVariables();
+    return $SomeGenericStruct$_to_external(res);
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract ContractWithOptionals
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'a, $self'b, $self'c, $self'd, $self'e, $self'f) = $ContractWithOptionals$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive Update message
+    if (op == 357891325) {
+        var ($msg'a, $msg'b, $msg'c, $msg'd, $msg'e, $msg'f) = in_msg~$Update$_load_without_opcode();
+        $self'a = $msg'a;
+        $self'b = $msg'b;
+        $self'c = $msg'c;
+        $self'd = $msg'd;
+        $self'e = $msg'e;
+        $self'f = $msg'f;
+        ;; Persist state
+        $ContractWithOptionals$_contract_store(($self'a, $self'b, $self'c, $self'd, $self'e, $self'f));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

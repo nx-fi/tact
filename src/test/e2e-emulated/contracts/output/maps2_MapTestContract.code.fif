@@ -1,0 +1,6398 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/maps2_MapTestContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC __tact_dict_get_slice_int
+  DECLPROC __tact_dict_set_slice_int
+  DECLPROC __tact_dict_replace_slice_int
+  DECLPROC __tact_dict_replaceget_slice_int
+  DECLPROC __tact_dict_get_slice_uint
+  DECLPROC __tact_dict_set_slice_uint
+  DECLPROC __tact_dict_replace_slice_uint
+  DECLPROC __tact_dict_replaceget_slice_uint
+  DECLPROC __tact_dict_get_slice_coins
+  DECLPROC __tact_dict_set_slice_coins
+  DECLPROC __tact_dict_replace_slice_coins
+  DECLPROC __tact_dict_replaceget_slice_coins
+  DECLPROC __tact_dict_get_uint_int
+  DECLPROC __tact_dict_set_uint_int
+  DECLPROC __tact_dict_replace_uint_int
+  DECLPROC __tact_dict_replaceget_uint_int
+  DECLPROC __tact_dict_get_uint_uint
+  DECLPROC __tact_dict_set_uint_uint
+  DECLPROC __tact_dict_replace_uint_uint
+  DECLPROC __tact_dict_replaceget_uint_uint
+  DECLPROC __tact_dict_get_uint_coins
+  DECLPROC __tact_dict_set_uint_coins
+  DECLPROC __tact_dict_replace_uint_coins
+  DECLPROC __tact_dict_replaceget_uint_coins
+  DECLPROC __tact_dict_get_int_int
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC __tact_dict_replace_int_int
+  DECLPROC __tact_dict_replaceget_int_int
+  DECLPROC __tact_dict_get_int_uint
+  DECLPROC __tact_dict_set_int_uint
+  DECLPROC __tact_dict_replace_int_uint
+  DECLPROC __tact_dict_replaceget_int_uint
+  DECLPROC __tact_dict_get_int_coins
+  DECLPROC __tact_dict_set_int_coins
+  DECLPROC __tact_dict_replace_int_coins
+  DECLPROC __tact_dict_replaceget_int_coins
+  DECLPROC __tact_dict_exists_slice
+  DECLPROC __tact_dict_exists_uint
+  DECLPROC __tact_dict_exists_int
+  DECLPROC $SetAllMaps$_load_without_opcode
+  DECLPROC $DelAllMaps$_load_without_opcode
+  DECLPROC $ReplaceAllMaps$_load_without_opcode
+  DECLPROC $ReplaceGetAllMaps$_load_without_opcode
+  DECLPROC $CheckNullReference$_load_without_opcode
+  DECLPROC $MapTestContract$_store
+  DECLPROC $MapTestContract$_load
+  DECLPROC $GetAllMapsResult$_to_external
+  DECLPROC $ReplaceAllMapsResult$_to_external
+  DECLPROC $ReplaceGetAllMapsResult$_to_external
+  DECLPROC $ExistsAllMapsResult$_to_external
+  DECLPROC $IsEmptyAllMapsResult$_to_external
+  DECLPROC $AsCellAllMapsResult$_to_external
+  DECLPROC $MapTestContract$_to_external
+  DECLPROC $MapTestContract$_contract_init
+  DECLPROC $MapTestContract$_contract_load
+  DECLPROC $MapTestContract$_contract_store
+  DECLPROC $MapTestContract$_fun_allMaps
+  DECLPROC $GetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_getAllMaps
+  DECLPROC $ReplaceAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_replaceAllMaps
+  DECLPROC $ReplaceGetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_replaceGetAllMaps
+  DECLPROC $ExistsAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_existsAllMaps
+  DECLPROC $IsEmptyAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_isEmptyAllMaps
+  DECLPROC $AsCellAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins
+  DECLPROC $MapTestContract$_fun_asCellAllMaps
+  DECLPROC $MapTestContract$_fun_checkNullReference
+  94363 DECLMETHOD %allMaps
+  96520 DECLMETHOD %getAllMaps
+  66237 DECLMETHOD %replaceAllMaps
+  90912 DECLMETHOD %replaceGetAllMaps
+  66408 DECLMETHOD %existsAllMaps
+  98752 DECLMETHOD %isEmptyAllMaps
+  117227 DECLMETHOD %asCellAllMaps
+  70003 DECLMETHOD %checkNullReference
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_dict_get_slice_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+        DICTGET NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_replace_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+          DICTDELGET NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STIX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_slice_uint PROCINLINE:<{
+    s1 s3 s3 XCHG3
+        DICTGET NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDUX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_slice_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_replace_slice_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_slice_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+          DICTDELGET NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STUX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDUX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_slice_coins PROCINLINE:<{
+    -ROT
+        DICTGET NULLSWAPIFNOT
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_slice_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_replace_slice_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_slice_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDELGET NULLSWAPIFNOT
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      ENDC
+      CTOS
+      s1 s3 s3 XCHG3
+      DICTREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_uint_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTUGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_uint_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTUDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTUSETB
+    }>
+  }>
+  __tact_dict_replace_uint_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTUDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTUREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_uint_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+      DICTUDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STIX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTUREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_uint_uint PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTUGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDUX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_uint_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTUDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTUSETB
+    }>
+  }>
+  __tact_dict_replace_uint_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTUDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTUREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_uint_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+      DICTUDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STUX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTUREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDUX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_uint_coins PROCINLINE:<{
+    -ROT
+    DICTUGET
+    NULLSWAPIFNOT
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_uint_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTUDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTUSETB
+    }>
+  }>
+  __tact_dict_replace_uint_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTUDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTUREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_uint_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTUDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      ENDC
+      CTOS
+      s1 s3 s3 XCHG3
+      DICTUREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_int_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  __tact_dict_replace_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTIREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+      DICTIDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STIX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTIREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_int_uint PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDUX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  __tact_dict_replace_int_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STUX
+      s1 s3 s3 XCHG3
+      DICTIREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_int_uint PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      NIP
+      s1 s3 s3 XCHG3
+      DICTIDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      SWAP
+      NEWC
+      s2 PUSH
+      STUX
+      ENDC
+      CTOS
+      s4 s3 XCHG2
+      DICTIREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      ROT
+      LDUX
+      DROP
+    }>ELSE<{
+      DROP
+      NIP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_get_int_coins PROCINLINE:<{
+    -ROT
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  __tact_dict_replace_int_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      s1 s3 s3 XCHG3
+      DICTIREPLACEB
+    }>
+  }>
+  __tact_dict_replaceget_int_coins PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDELGET
+      NULLSWAPIFNOT
+    }>ELSE<{
+      NEWC
+      SWAP
+      STVARUINT16
+      ENDC
+      CTOS
+      s1 s3 s3 XCHG3
+      DICTIREPLACEGET
+      NULLSWAPIFNOT
+    }>
+    IF:<{
+      LDVARUINT16
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_exists_slice PROCINLINE:<{
+    -ROT
+        DICTGET NULLSWAPIFNOT
+    NIP
+  }>
+  __tact_dict_exists_uint PROCINLINE:<{
+    -ROT
+    DICTUGET
+    NULLSWAPIFNOT
+    NIP
+  }>
+  __tact_dict_exists_int PROCINLINE:<{
+    -ROT
+    DICTIGET
+    NULLSWAPIFNOT
+    NIP
+  }>
+  $SetAllMaps$_load_without_opcode PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    LDMSGADDR
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+    s13 16 s() XCHG
+    s13 s15 XCHG
+    s13 s14 XCHG
+  }>
+  $DelAllMaps$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    LDMSGADDR
+    DROP
+    s5 s8 XCHG
+    s5 s7 XCHG
+    s5 s6 XCHG
+  }>
+  $ReplaceAllMaps$_load_without_opcode PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    LDMSGADDR
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+    s13 16 s() XCHG
+    s13 s15 XCHG
+    s13 s14 XCHG
+  }>
+  $ReplaceGetAllMaps$_load_without_opcode PROCREF:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    SWAP
+    CTOS
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    LDREF
+    DROP
+    CTOS
+    257 PUSHINT
+    LDIX
+    LDMSGADDR
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    LDREF
+    DROP
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      257 PUSHINT
+      LDIX
+      DROP
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+    s13 16 s() XCHG
+    s13 s15 XCHG
+    s13 s14 XCHG
+  }>
+  $CheckNullReference$_load_without_opcode PROCINLINE:<{
+    PUSHNULL
+  }>
+  $MapTestContract$_store PROCINLINE:<{
+    s1 63 s() XCHG
+    s0 64 s() XCHG
+    STDICT
+    s0 61 s() XCHG
+    NEWC
+    STDICT
+    s1 60 s() XCHG
+    STDICT
+    s1 58 s() XCHG
+    STDICT
+    s0 56 s() XCHG
+    NEWC
+    STDICT
+    s1 55 s() XCHG
+    STDICT
+    s1 53 s() XCHG
+    STDICT
+    s0 51 s() XCHG
+    NEWC
+    STDICT
+    s1 50 s() XCHG
+    STDICT
+    s1 48 s() XCHG
+    STDICT
+    s0 46 s() XCHG
+    NEWC
+    STDICT
+    s1 45 s() XCHG
+    STDICT
+    s1 43 s() XCHG
+    STDICT
+    s0 41 s() XCHG
+    NEWC
+    STDICT
+    s1 40 s() XCHG
+    STDICT
+    s1 38 s() XCHG
+    STDICT
+    s0 36 s() XCHG
+    NEWC
+    STDICT
+    s1 35 s() XCHG
+    STDICT
+    s1 33 s() XCHG
+    STDICT
+    s0 31 s() XCHG
+    NEWC
+    STDICT
+    s1 30 s() XCHG
+    STDICT
+    s1 28 s() XCHG
+    STDICT
+    s0 26 s() XCHG
+    NEWC
+    STDICT
+    s1 25 s() XCHG
+    STDICT
+    s1 23 s() XCHG
+    STDICT
+    s0 21 s() XCHG
+    NEWC
+    STDICT
+    s1 20 s() XCHG
+    STDICT
+    s1 18 s() XCHG
+    STDICT
+    s0 16 s() XCHG
+    NEWC
+    STDICT
+    s1 s15 XCHG
+    STDICT
+    s1 s13 XCHG
+    STDICT
+    s0 s11 XCHG
+    NEWC
+    STDICT
+    s1 s10 XCHG
+    STDICT
+    s1 s8 XCHG
+    STDICT
+    s0 s6 XCHG
+    NEWC
+    STDICT
+    s1 s5 XCHG
+    STDICT
+    s1 s3 XCHG
+    STDICT
+    SWAP
+    NEWC
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s0 s3 XCHG
+    NEWC
+    STDICT
+    s1 s4 XCHG
+    STDICT
+    s1 s5 XCHG
+    STDICT
+    s0 s5 XCHG
+    NEWC
+    STDICT
+    s1 s7 XCHG
+    STDICT
+    s1 s7 XCHG
+    STDICT
+    s0 s8 XCHG
+    NEWC
+    STDICT
+    s1 s9 XCHG
+    STDICT
+    s1 s10 XCHG
+    STDICT
+    s0 s10 XCHG
+    NEWC
+    STDICT
+    s1 s12 XCHG
+    STDICT
+    s1 s12 XCHG
+    STDICT
+    s0 s13 XCHG
+    NEWC
+    STDICT
+    s1 s14 XCHG
+    STDICT
+    s1 s15 XCHG
+    STDICT
+    s0 s15 XCHG
+    NEWC
+    STDICT
+    s1 17 s() XCHG
+    STDICT
+    s1 17 s() XCHG
+    STDICT
+    s0 18 s() XCHG
+    NEWC
+    STDICT
+    s1 19 s() XCHG
+    STDICT
+    s1 20 s() XCHG
+    STDICT
+    s0 20 s() XCHG
+    NEWC
+    STDICT
+    s1 22 s() XCHG
+    STDICT
+    s1 22 s() XCHG
+    STDICT
+    ENDC
+    SWAP
+    s0 18 s() XCHG
+    STREF
+    ENDC
+    s0 s13 XCHG2
+    STREF
+    ENDC
+    s0 s7 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    s0 17 s() XCHG
+    STREF
+    ENDC
+    s0 s7 XCHG2
+    STREF
+    ENDC
+    s0 s8 XCHG2
+    STREF
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    s0 s11 XCHG2
+    STREF
+    ENDC
+    s0 s5 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    s0 s4 XCHG2
+    STREF
+    ENDC
+    s0 s6 XCHG2
+    STREF
+    ENDC
+    SWAP
+    STREF
+    ENDC
+    s0 s3 XCHG2
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $MapTestContract$_load PROCINLINE:<{
+    LDDICT
+    LDREF
+    SWAP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDREF
+    DROP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    DROP
+    63 s() 64 s() XCHG
+  }>
+  $GetAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $ReplaceAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $ReplaceGetAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $ExistsAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $IsEmptyAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $AsCellAllMapsResult$_to_external PROCINLINE:<{
+  }>
+  $MapTestContract$_to_external PROCINLINE:<{
+  }>
+  $MapTestContract$_contract_init PROCINLINE:<{
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+  }>
+  $MapTestContract$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $MapTestContract$_load INLINECALLDICT
+      64 s() POP
+      62 s() 63 s() XCHG
+      61 s() 62 s() XCHG
+      60 s() 61 s() XCHG
+      59 s() 60 s() XCHG
+      58 s() 59 s() XCHG
+      57 s() 58 s() XCHG
+      56 s() 57 s() XCHG
+      55 s() 56 s() XCHG
+      54 s() 55 s() XCHG
+      53 s() 54 s() XCHG
+      52 s() 53 s() XCHG
+      51 s() 52 s() XCHG
+      50 s() 51 s() XCHG
+      49 s() 50 s() XCHG
+      48 s() 49 s() XCHG
+      47 s() 48 s() XCHG
+      46 s() 47 s() XCHG
+      45 s() 46 s() XCHG
+      44 s() 45 s() XCHG
+      43 s() 44 s() XCHG
+      42 s() 43 s() XCHG
+      41 s() 42 s() XCHG
+      40 s() 41 s() XCHG
+      39 s() 40 s() XCHG
+      38 s() 39 s() XCHG
+      37 s() 38 s() XCHG
+      36 s() 37 s() XCHG
+      35 s() 36 s() XCHG
+      34 s() 35 s() XCHG
+      33 s() 34 s() XCHG
+      32 s() 33 s() XCHG
+      31 s() 32 s() XCHG
+      30 s() 31 s() XCHG
+      29 s() 30 s() XCHG
+      28 s() 29 s() XCHG
+      27 s() 28 s() XCHG
+      26 s() 27 s() XCHG
+      25 s() 26 s() XCHG
+      24 s() 25 s() XCHG
+      23 s() 24 s() XCHG
+      22 s() 23 s() XCHG
+      21 s() 22 s() XCHG
+      20 s() 21 s() XCHG
+      19 s() 20 s() XCHG
+      18 s() 19 s() XCHG
+      17 s() 18 s() XCHG
+      16 s() 17 s() XCHG
+      s15 16 s() XCHG
+      15 ROLL
+    }>
+    DROP
+    $MapTestContract$_contract_init INLINECALLDICT
+  }>
+  $MapTestContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    s0 64 s() XCHG
+    s0 63 s() XCHG
+    s0 62 s() XCHG
+    s0 61 s() XCHG
+    s0 60 s() XCHG
+    s0 59 s() XCHG
+    s0 58 s() XCHG
+    s0 57 s() XCHG
+    s0 56 s() XCHG
+    s0 55 s() XCHG
+    s0 54 s() XCHG
+    s0 53 s() XCHG
+    s0 52 s() XCHG
+    s0 51 s() XCHG
+    s0 50 s() XCHG
+    s0 49 s() XCHG
+    s0 48 s() XCHG
+    s0 47 s() XCHG
+    s0 46 s() XCHG
+    s0 45 s() XCHG
+    s0 44 s() XCHG
+    s0 43 s() XCHG
+    s0 42 s() XCHG
+    s0 41 s() XCHG
+    s0 40 s() XCHG
+    s0 39 s() XCHG
+    s0 38 s() XCHG
+    s0 37 s() XCHG
+    s0 36 s() XCHG
+    s0 35 s() XCHG
+    s0 34 s() XCHG
+    s0 33 s() XCHG
+    s0 32 s() XCHG
+    s0 31 s() XCHG
+    s0 30 s() XCHG
+    s0 29 s() XCHG
+    s0 28 s() XCHG
+    s0 27 s() XCHG
+    s0 26 s() XCHG
+    s0 25 s() XCHG
+    s0 24 s() XCHG
+    s0 23 s() XCHG
+    s0 22 s() XCHG
+    s0 21 s() XCHG
+    s0 20 s() XCHG
+    s0 19 s() XCHG
+    s0 18 s() XCHG
+    s0 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $MapTestContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $MapTestContract$_fun_allMaps PROCREF:<{
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+  }>
+  $GetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_getAllMaps PROCREF:<{
+    257 PUSHINT
+    DUP
+    73 s() PUSH
+    s2 s10 s2 XCPUXC
+    __tact_dict_get_int_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s10 PUSH
+    8 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s11 PUSH
+    42 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s12 PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s13 PUSH
+    8 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s14 PUSH
+    42 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s15 PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_uint INLINECALLDICT
+    257 PUSHINT
+    72 s() PUSH
+    s0 s2 XCHG
+    s0 16 s() XCHG
+    __tact_dict_get_int_coins INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    s15 PUSH
+    257 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    72 s() PUSH
+    -ROT
+    17 s() PUSH
+    SWAP
+    __tact_dict_get_int_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    17 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    18 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    72 s() PUSH
+    -ROT
+    20 s() PUSH
+    SWAP
+    __tact_dict_get_int_uint INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    20 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    21 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_uint INLINECALLDICT
+    8 PUSHINT
+    71 s() PUSH
+    s0 s2 XCHG
+    s0 22 s() XCHG
+    __tact_dict_get_int_coins INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    21 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    22 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    71 s() PUSH
+    -ROT
+    24 s() PUSH
+    SWAP
+    __tact_dict_get_int_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    24 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    25 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    71 s() PUSH
+    -ROT
+    27 s() PUSH
+    SWAP
+    __tact_dict_get_int_uint INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    27 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_int_uint INLINECALLDICT
+    42 PUSHINT
+    70 s() PUSH
+    s0 s2 XCHG
+    s0 28 s() XCHG
+    __tact_dict_get_int_coins INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    27 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    28 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    29 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_int_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    70 s() PUSH
+    -ROT
+    31 s() PUSH
+    SWAP
+    __tact_dict_get_int_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    31 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    32 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_int_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    70 s() PUSH
+    -ROT
+    34 s() PUSH
+    SWAP
+    __tact_dict_get_int_uint INLINECALLDICT
+    8 PUSHPOW2
+    69 s() PUSH
+    s0 s2 XCHG
+    s0 34 s() XCHG
+    __tact_dict_get_int_coins INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    33 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    69 s() PUSH
+    -ROT
+    35 s() PUSH
+    SWAP
+    __tact_dict_get_uint_int INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    35 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    36 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    69 s() PUSH
+    -ROT
+    38 s() PUSH
+    SWAP
+    __tact_dict_get_uint_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    38 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_uint_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    39 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_uint_uint INLINECALLDICT
+    8 PUSHINT
+    68 s() PUSH
+    s0 s2 XCHG
+    s0 40 s() XCHG
+    __tact_dict_get_uint_coins INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    39 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    40 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    68 s() PUSH
+    -ROT
+    42 s() PUSH
+    SWAP
+    __tact_dict_get_uint_int INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    42 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_uint_int INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    43 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_uint_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    68 s() PUSH
+    -ROT
+    45 s() PUSH
+    SWAP
+    __tact_dict_get_uint_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    45 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_uint_uint INLINECALLDICT
+    42 PUSHINT
+    67 s() PUSH
+    s0 s2 XCHG
+    s0 46 s() XCHG
+    __tact_dict_get_uint_coins INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    45 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    46 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    47 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_uint_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    67 s() PUSH
+    -ROT
+    49 s() PUSH
+    SWAP
+    __tact_dict_get_uint_int INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    49 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_uint_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    50 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_uint_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    67 s() PUSH
+    -ROT
+    52 s() PUSH
+    SWAP
+    __tact_dict_get_uint_uint INLINECALLDICT
+    8 PUSHPOW2
+    66 s() PUSH
+    s0 s2 XCHG
+    s0 52 s() XCHG
+    __tact_dict_get_uint_coins INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    51 s() PUSH
+    257 PUSHINT
+    __tact_dict_get_slice_int INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    52 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_slice_int INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    53 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_slice_int INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    54 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_slice_int INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    55 s() PUSH
+    8 PUSHINT
+    __tact_dict_get_slice_uint INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    56 s() PUSH
+    42 PUSHINT
+    __tact_dict_get_slice_uint INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    57 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_get_slice_uint INLINECALLDICT
+    267 PUSHINT
+    65 s() PUSH
+    s0 s2 XCHG
+    s0 58 s() XCHG
+    __tact_dict_get_slice_coins INLINECALLDICT
+    55 s() 63 s() XCHG
+    54 s() 62 s() XCHG
+    53 s() 61 s() XCHG
+    52 s() 60 s() XCHG
+    51 s() 59 s() XCHG
+    50 s() 58 s() XCHG
+    55 s() 57 s() XCHG
+    49 s() 56 s() XCHG
+    48 s() 55 s() XCHG
+    47 s() 54 s() XCHG
+    46 s() 53 s() XCHG
+    45 s() 52 s() XCHG
+    44 s() 51 s() XCHG
+    43 s() 50 s() XCHG
+    47 s() 49 s() XCHG
+    42 s() 48 s() XCHG
+    41 s() 47 s() XCHG
+    40 s() 46 s() XCHG
+    39 s() 45 s() XCHG
+    38 s() 44 s() XCHG
+    37 s() 43 s() XCHG
+    36 s() 42 s() XCHG
+    40 s() 41 s() XCHG
+    35 s() 40 s() XCHG
+    34 s() 39 s() XCHG
+    33 s() 38 s() XCHG
+    32 s() 37 s() XCHG
+    31 s() 36 s() XCHG
+    30 s() 35 s() XCHG
+    29 s() 34 s() XCHG
+    29 s() 33 s() XCHG
+    28 s() 32 s() XCHG
+    27 s() 31 s() XCHG
+    26 s() 30 s() XCHG
+    25 s() 29 s() XCHG
+    24 s() 28 s() XCHG
+    23 s() 27 s() XCHG
+    22 s() 26 s() XCHG
+    21 s() 24 s() XCHG
+    20 s() 23 s() XCHG
+    19 s() 22 s() XCHG
+    18 s() 21 s() XCHG
+    17 s() 20 s() XCHG
+    16 s() 19 s() XCHG
+    s15 18 s() XCHG
+    s15 17 s() XCHG
+    s14 16 s() XCHG
+    s13 s15 XCHG
+    s12 s14 XCHG
+    s11 s13 XCHG
+    s10 s12 XCHG
+    s9 s11 XCHG
+    s8 s10 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+    s3 s4 XCHG
+    s1 s3 s0 XCHG3
+    $GetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+  }>
+  $ReplaceAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_replaceAllMaps PROCREF:<{
+    257 PUSHINT
+    DUP
+    s2 81 s() XCHG
+    17 s() PUSH
+    s10 s1 PUXC
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    17 s() PUSH
+    s9 PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    18 s() PUSH
+    s9 PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    19 s() PUSH
+    s9 PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    20 s() PUSH
+    s9 PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    21 s() PUSH
+    s9 PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    22 s() PUSH
+    s9 PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s1 79 s() XCHG
+    257 PUSHINT
+    SWAP
+    s0 23 s() XCHG
+    87 s() PUSH
+    __tact_dict_replace_int_coins INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    22 s() PUSH
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 80 s() XCHG
+    24 s() PUSH
+    SWAP
+    17 s() PUSH
+    SWAP
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    24 s() PUSH
+    16 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    25 s() PUSH
+    16 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 80 s() XCHG
+    27 s() PUSH
+    SWAP
+    17 s() PUSH
+    SWAP
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    27 s() PUSH
+    16 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    28 s() PUSH
+    16 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s1 78 s() XCHG
+    8 PUSHINT
+    SWAP
+    s0 29 s() XCHG
+    94 s() PUSH
+    __tact_dict_replace_int_coins INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    28 s() PUSH
+    23 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    29 s() PUSH
+    23 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 79 s() XCHG
+    31 s() PUSH
+    SWAP
+    24 s() PUSH
+    SWAP
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    31 s() PUSH
+    23 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    32 s() PUSH
+    23 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 79 s() XCHG
+    34 s() PUSH
+    SWAP
+    24 s() PUSH
+    SWAP
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    34 s() PUSH
+    23 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s1 77 s() XCHG
+    42 PUSHINT
+    SWAP
+    s0 35 s() XCHG
+    101 s() PUSH
+    __tact_dict_replace_int_coins INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    34 s() PUSH
+    30 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    35 s() PUSH
+    30 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    36 s() PUSH
+    30 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 78 s() XCHG
+    38 s() PUSH
+    SWAP
+    31 s() PUSH
+    SWAP
+    __tact_dict_replace_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    38 s() PUSH
+    30 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    39 s() PUSH
+    30 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_int_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 78 s() XCHG
+    41 s() PUSH
+    SWAP
+    31 s() PUSH
+    SWAP
+    __tact_dict_replace_int_uint INLINECALLDICT
+    s1 76 s() XCHG
+    8 PUSHPOW2
+    SWAP
+    s0 41 s() XCHG
+    108 s() PUSH
+    __tact_dict_replace_int_coins INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    40 s() PUSH
+    37 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 77 s() XCHG
+    42 s() PUSH
+    SWAP
+    38 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    42 s() PUSH
+    37 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    43 s() PUSH
+    37 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 77 s() XCHG
+    45 s() PUSH
+    SWAP
+    38 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    45 s() PUSH
+    37 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    46 s() PUSH
+    37 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s1 75 s() XCHG
+    8 PUSHINT
+    SWAP
+    s0 47 s() XCHG
+    115 s() PUSH
+    __tact_dict_replace_uint_coins INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    46 s() PUSH
+    44 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    47 s() PUSH
+    44 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 76 s() XCHG
+    49 s() PUSH
+    SWAP
+    45 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    49 s() PUSH
+    44 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    50 s() PUSH
+    44 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 76 s() XCHG
+    52 s() PUSH
+    SWAP
+    45 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    52 s() PUSH
+    44 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s1 74 s() XCHG
+    42 PUSHINT
+    SWAP
+    s0 53 s() XCHG
+    122 s() PUSH
+    __tact_dict_replace_uint_coins INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    52 s() PUSH
+    51 s() PUSH
+    257 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    53 s() PUSH
+    51 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    54 s() PUSH
+    51 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_uint_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 75 s() XCHG
+    56 s() PUSH
+    SWAP
+    52 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    56 s() PUSH
+    51 s() PUSH
+    8 PUSHINT
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    57 s() PUSH
+    51 s() PUSH
+    42 PUSHINT
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 75 s() XCHG
+    59 s() PUSH
+    SWAP
+    52 s() PUSH
+    SWAP
+    __tact_dict_replace_uint_uint INLINECALLDICT
+    s1 73 s() XCHG
+    8 PUSHPOW2
+    SWAP
+    s0 59 s() XCHG
+    129 s() PUSH
+    __tact_dict_replace_uint_coins INLINECALLDICT
+    s1 72 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 58 s() XCHG
+    257 PUSHINT
+    __tact_dict_replace_slice_int INLINECALLDICT
+    s1 71 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 57 s() XCHG
+    8 PUSHINT
+    __tact_dict_replace_slice_int INLINECALLDICT
+    s1 70 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 56 s() XCHG
+    42 PUSHINT
+    __tact_dict_replace_slice_int INLINECALLDICT
+    s1 69 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 55 s() XCHG
+    8 PUSHPOW2
+    __tact_dict_replace_slice_int INLINECALLDICT
+    s1 68 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 54 s() XCHG
+    8 PUSHINT
+    __tact_dict_replace_slice_uint INLINECALLDICT
+    s1 67 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 53 s() XCHG
+    42 PUSHINT
+    __tact_dict_replace_slice_uint INLINECALLDICT
+    s1 66 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 52 s() XCHG
+    8 PUSHPOW2
+    __tact_dict_replace_slice_uint INLINECALLDICT
+    s2 65 s() XCHG
+    267 PUSHINT
+    s0 s2 XCHG
+    s1 58 s() XCHG
+    s0 129 s() XCHG
+    __tact_dict_replace_slice_coins INLINECALLDICT
+    63 s() 126 s() XCHG
+    62 s() 125 s() XCHG
+    61 s() 124 s() XCHG
+    60 s() 123 s() XCHG
+    59 s() 122 s() XCHG
+    58 s() 121 s() XCHG
+    57 s() 126 s() XCHG
+    56 s() 119 s() XCHG
+    55 s() 118 s() XCHG
+    54 s() 117 s() XCHG
+    53 s() 116 s() XCHG
+    52 s() 115 s() XCHG
+    51 s() 114 s() XCHG
+    50 s() 113 s() XCHG
+    49 s() 125 s() XCHG
+    48 s() 111 s() XCHG
+    47 s() 110 s() XCHG
+    46 s() 109 s() XCHG
+    45 s() 108 s() XCHG
+    44 s() 107 s() XCHG
+    43 s() 106 s() XCHG
+    42 s() 105 s() XCHG
+    41 s() 124 s() XCHG
+    40 s() 103 s() XCHG
+    39 s() 102 s() XCHG
+    38 s() 101 s() XCHG
+    37 s() 100 s() XCHG
+    36 s() 99 s() XCHG
+    35 s() 98 s() XCHG
+    34 s() 97 s() XCHG
+    33 s() 123 s() XCHG
+    32 s() 95 s() XCHG
+    31 s() 94 s() XCHG
+    30 s() 93 s() XCHG
+    29 s() 92 s() XCHG
+    28 s() 91 s() XCHG
+    27 s() 90 s() XCHG
+    26 s() 89 s() XCHG
+    25 s() 122 s() XCHG
+    24 s() 87 s() XCHG
+    23 s() 86 s() XCHG
+    22 s() 85 s() XCHG
+    21 s() 84 s() XCHG
+    20 s() 83 s() XCHG
+    19 s() 82 s() XCHG
+    18 s() 81 s() XCHG
+    17 s() 121 s() XCHG
+    16 s() 79 s() XCHG
+    s15 78 s() XCHG
+    s14 77 s() XCHG
+    s13 76 s() XCHG
+    s12 75 s() XCHG
+    s11 74 s() XCHG
+    s10 73 s() XCHG
+    s9 126 s() XCHG
+    s8 118 s() XCHG
+    s7 117 s() XCHG
+    s6 116 s() XCHG
+    s5 115 s() XCHG
+    s4 114 s() XCHG
+    s3 113 s() XCHG
+    s2 125 s() XCHG
+    s1 119 s() XCHG
+    $ReplaceAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+    111 s() 127 s() XCHG
+    110 s() 126 s() XCHG
+    109 s() 125 s() XCHG
+    108 s() 124 s() XCHG
+    107 s() 123 s() XCHG
+    106 s() 122 s() XCHG
+    120 s() 121 s() XCHG
+    105 s() 120 s() XCHG
+    108 s() 119 s() XCHG
+    103 s() 118 s() XCHG
+    102 s() 117 s() XCHG
+    101 s() 116 s() XCHG
+    100 s() 115 s() XCHG
+    99 s() 114 s() XCHG
+    112 s() 113 s() XCHG
+    98 s() 112 s() XCHG
+    97 s() 111 s() XCHG
+    107 s() 110 s() XCHG
+    95 s() 109 s() XCHG
+    94 s() 108 s() XCHG
+    93 s() 107 s() XCHG
+    92 s() 106 s() XCHG
+    104 s() 105 s() XCHG
+    91 s() 104 s() XCHG
+    90 s() 103 s() XCHG
+    89 s() 102 s() XCHG
+    92 s() 101 s() XCHG
+    87 s() 100 s() XCHG
+    86 s() 99 s() XCHG
+    85 s() 98 s() XCHG
+    96 s() 97 s() XCHG
+    84 s() 96 s() XCHG
+    83 s() 95 s() XCHG
+    82 s() 94 s() XCHG
+    81 s() 93 s() XCHG
+    91 s() 92 s() XCHG
+    79 s() 91 s() XCHG
+    78 s() 90 s() XCHG
+    88 s() 89 s() XCHG
+    77 s() 88 s() XCHG
+    76 s() 87 s() XCHG
+    75 s() 86 s() XCHG
+    74 s() 85 s() XCHG
+    73 s() 84 s() XCHG
+    81 s() 83 s() XCHG
+    78 s() 82 s() XCHG
+    80 s() 81 s() XCHG
+    77 s() 80 s() XCHG
+    76 s() 78 s() XCHG
+    75 s() 77 s() XCHG
+    74 s() 76 s() XCHG
+    64 s() 74 s() XCHG
+    72 s() 73 s() XCHG
+    71 s() 72 s() XCHG
+    70 s() 71 s() XCHG
+    69 s() 70 s() XCHG
+    68 s() 69 s() XCHG
+    67 s() 68 s() XCHG
+    66 s() 67 s() XCHG
+    65 s() 66 s() XCHG
+  }>
+  $ReplaceGetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_replaceGetAllMaps PROCREF:<{
+    257 PUSHINT
+    DUP
+    s2 81 s() XCHG
+    17 s() PUSH
+    s10 s1 PUXC
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    17 s() PUSH
+    s9 PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    18 s() PUSH
+    s9 PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    19 s() PUSH
+    s9 PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    20 s() PUSH
+    s9 PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    21 s() PUSH
+    s9 PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 79 s() XCHG
+    257 PUSHINT
+    22 s() PUSH
+    s9 PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s1 79 s() XCHG
+    257 PUSHINT
+    SWAP
+    s0 23 s() XCHG
+    87 s() PUSH
+    __tact_dict_replaceget_int_coins INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    22 s() PUSH
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 80 s() XCHG
+    24 s() PUSH
+    SWAP
+    17 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    24 s() PUSH
+    16 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    25 s() PUSH
+    16 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 80 s() XCHG
+    27 s() PUSH
+    SWAP
+    17 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    27 s() PUSH
+    16 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 78 s() XCHG
+    8 PUSHINT
+    28 s() PUSH
+    16 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s1 78 s() XCHG
+    8 PUSHINT
+    SWAP
+    s0 29 s() XCHG
+    94 s() PUSH
+    __tact_dict_replaceget_int_coins INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    28 s() PUSH
+    23 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    29 s() PUSH
+    23 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 79 s() XCHG
+    31 s() PUSH
+    SWAP
+    24 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    31 s() PUSH
+    23 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    32 s() PUSH
+    23 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 79 s() XCHG
+    34 s() PUSH
+    SWAP
+    24 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 77 s() XCHG
+    42 PUSHINT
+    34 s() PUSH
+    23 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s1 77 s() XCHG
+    42 PUSHINT
+    SWAP
+    s0 35 s() XCHG
+    101 s() PUSH
+    __tact_dict_replaceget_int_coins INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    34 s() PUSH
+    30 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    35 s() PUSH
+    30 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    36 s() PUSH
+    30 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 78 s() XCHG
+    38 s() PUSH
+    SWAP
+    31 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_int INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    38 s() PUSH
+    30 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s0 76 s() XCHG
+    8 PUSHPOW2
+    39 s() PUSH
+    30 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 78 s() XCHG
+    41 s() PUSH
+    SWAP
+    31 s() PUSH
+    SWAP
+    __tact_dict_replaceget_int_uint INLINECALLDICT
+    s1 76 s() XCHG
+    8 PUSHPOW2
+    SWAP
+    s0 41 s() XCHG
+    108 s() PUSH
+    __tact_dict_replaceget_int_coins INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    40 s() PUSH
+    37 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 77 s() XCHG
+    42 s() PUSH
+    SWAP
+    38 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    42 s() PUSH
+    37 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    43 s() PUSH
+    37 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    8 PUSHINT
+    DUP
+    s2 77 s() XCHG
+    45 s() PUSH
+    SWAP
+    38 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    45 s() PUSH
+    37 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s0 75 s() XCHG
+    8 PUSHINT
+    46 s() PUSH
+    37 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s1 75 s() XCHG
+    8 PUSHINT
+    SWAP
+    s0 47 s() XCHG
+    115 s() PUSH
+    __tact_dict_replaceget_uint_coins INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    46 s() PUSH
+    44 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    47 s() PUSH
+    44 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 76 s() XCHG
+    49 s() PUSH
+    SWAP
+    45 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    49 s() PUSH
+    44 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    50 s() PUSH
+    44 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    42 PUSHINT
+    DUP
+    s2 76 s() XCHG
+    52 s() PUSH
+    SWAP
+    45 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s0 74 s() XCHG
+    42 PUSHINT
+    52 s() PUSH
+    44 s() PUSH
+    8 PUSHPOW2
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s1 74 s() XCHG
+    42 PUSHINT
+    SWAP
+    s0 53 s() XCHG
+    122 s() PUSH
+    __tact_dict_replaceget_uint_coins INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    52 s() PUSH
+    51 s() PUSH
+    257 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    53 s() PUSH
+    51 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    54 s() PUSH
+    51 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 75 s() XCHG
+    56 s() PUSH
+    SWAP
+    52 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_int INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    56 s() PUSH
+    51 s() PUSH
+    8 PUSHINT
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s0 73 s() XCHG
+    8 PUSHPOW2
+    57 s() PUSH
+    51 s() PUSH
+    42 PUSHINT
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    8 PUSHPOW2
+    DUP
+    s2 75 s() XCHG
+    59 s() PUSH
+    SWAP
+    52 s() PUSH
+    SWAP
+    __tact_dict_replaceget_uint_uint INLINECALLDICT
+    s1 73 s() XCHG
+    8 PUSHPOW2
+    SWAP
+    s0 59 s() XCHG
+    129 s() PUSH
+    __tact_dict_replaceget_uint_coins INLINECALLDICT
+    s1 72 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 58 s() XCHG
+    257 PUSHINT
+    __tact_dict_replaceget_slice_int INLINECALLDICT
+    s1 71 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 57 s() XCHG
+    8 PUSHINT
+    __tact_dict_replaceget_slice_int INLINECALLDICT
+    s1 70 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 56 s() XCHG
+    42 PUSHINT
+    __tact_dict_replaceget_slice_int INLINECALLDICT
+    s1 69 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 55 s() XCHG
+    8 PUSHPOW2
+    __tact_dict_replaceget_slice_int INLINECALLDICT
+    s1 68 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 54 s() XCHG
+    8 PUSHINT
+    __tact_dict_replaceget_slice_uint INLINECALLDICT
+    s1 67 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 53 s() XCHG
+    42 PUSHINT
+    __tact_dict_replaceget_slice_uint INLINECALLDICT
+    s1 66 s() XCHG
+    267 PUSHINT
+    SWAP
+    58 s() PUSH
+    SWAP
+    s0 52 s() XCHG
+    8 PUSHPOW2
+    __tact_dict_replaceget_slice_uint INLINECALLDICT
+    s2 65 s() XCHG
+    267 PUSHINT
+    s0 s2 XCHG
+    s1 58 s() XCHG
+    s0 129 s() XCHG
+    __tact_dict_replaceget_slice_coins INLINECALLDICT
+    63 s() 126 s() XCHG
+    62 s() 125 s() XCHG
+    61 s() 124 s() XCHG
+    60 s() 123 s() XCHG
+    59 s() 122 s() XCHG
+    58 s() 121 s() XCHG
+    57 s() 126 s() XCHG
+    56 s() 119 s() XCHG
+    55 s() 118 s() XCHG
+    54 s() 117 s() XCHG
+    53 s() 116 s() XCHG
+    52 s() 115 s() XCHG
+    51 s() 114 s() XCHG
+    50 s() 113 s() XCHG
+    49 s() 125 s() XCHG
+    48 s() 111 s() XCHG
+    47 s() 110 s() XCHG
+    46 s() 109 s() XCHG
+    45 s() 108 s() XCHG
+    44 s() 107 s() XCHG
+    43 s() 106 s() XCHG
+    42 s() 105 s() XCHG
+    41 s() 124 s() XCHG
+    40 s() 103 s() XCHG
+    39 s() 102 s() XCHG
+    38 s() 101 s() XCHG
+    37 s() 100 s() XCHG
+    36 s() 99 s() XCHG
+    35 s() 98 s() XCHG
+    34 s() 97 s() XCHG
+    33 s() 123 s() XCHG
+    32 s() 95 s() XCHG
+    31 s() 94 s() XCHG
+    30 s() 93 s() XCHG
+    29 s() 92 s() XCHG
+    28 s() 91 s() XCHG
+    27 s() 90 s() XCHG
+    26 s() 89 s() XCHG
+    25 s() 122 s() XCHG
+    24 s() 87 s() XCHG
+    23 s() 86 s() XCHG
+    22 s() 85 s() XCHG
+    21 s() 84 s() XCHG
+    20 s() 83 s() XCHG
+    19 s() 82 s() XCHG
+    18 s() 81 s() XCHG
+    17 s() 121 s() XCHG
+    16 s() 79 s() XCHG
+    s15 78 s() XCHG
+    s14 77 s() XCHG
+    s13 76 s() XCHG
+    s12 75 s() XCHG
+    s11 74 s() XCHG
+    s10 73 s() XCHG
+    s9 126 s() XCHG
+    s8 118 s() XCHG
+    s7 117 s() XCHG
+    s6 116 s() XCHG
+    s5 115 s() XCHG
+    s4 114 s() XCHG
+    s3 113 s() XCHG
+    s2 125 s() XCHG
+    s1 119 s() XCHG
+    $ReplaceGetAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+    111 s() 127 s() XCHG
+    110 s() 126 s() XCHG
+    109 s() 125 s() XCHG
+    108 s() 124 s() XCHG
+    107 s() 123 s() XCHG
+    106 s() 122 s() XCHG
+    120 s() 121 s() XCHG
+    105 s() 120 s() XCHG
+    108 s() 119 s() XCHG
+    103 s() 118 s() XCHG
+    102 s() 117 s() XCHG
+    101 s() 116 s() XCHG
+    100 s() 115 s() XCHG
+    99 s() 114 s() XCHG
+    112 s() 113 s() XCHG
+    98 s() 112 s() XCHG
+    97 s() 111 s() XCHG
+    107 s() 110 s() XCHG
+    95 s() 109 s() XCHG
+    94 s() 108 s() XCHG
+    93 s() 107 s() XCHG
+    92 s() 106 s() XCHG
+    104 s() 105 s() XCHG
+    91 s() 104 s() XCHG
+    90 s() 103 s() XCHG
+    89 s() 102 s() XCHG
+    92 s() 101 s() XCHG
+    87 s() 100 s() XCHG
+    86 s() 99 s() XCHG
+    85 s() 98 s() XCHG
+    96 s() 97 s() XCHG
+    84 s() 96 s() XCHG
+    83 s() 95 s() XCHG
+    82 s() 94 s() XCHG
+    81 s() 93 s() XCHG
+    91 s() 92 s() XCHG
+    79 s() 91 s() XCHG
+    78 s() 90 s() XCHG
+    88 s() 89 s() XCHG
+    77 s() 88 s() XCHG
+    76 s() 87 s() XCHG
+    75 s() 86 s() XCHG
+    74 s() 85 s() XCHG
+    73 s() 84 s() XCHG
+    81 s() 83 s() XCHG
+    78 s() 82 s() XCHG
+    80 s() 81 s() XCHG
+    77 s() 80 s() XCHG
+    76 s() 78 s() XCHG
+    75 s() 77 s() XCHG
+    74 s() 76 s() XCHG
+    64 s() 74 s() XCHG
+    72 s() 73 s() XCHG
+    71 s() 72 s() XCHG
+    70 s() 71 s() XCHG
+    69 s() 70 s() XCHG
+    68 s() 69 s() XCHG
+    67 s() 68 s() XCHG
+    66 s() 67 s() XCHG
+    65 s() 66 s() XCHG
+  }>
+  $ExistsAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_existsAllMaps PROCREF:<{
+    71 s() PUSH
+    257 PUSHINT
+    s9 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s10 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s11 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s12 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s13 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s14 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    71 s() PUSH
+    257 PUSHINT
+    s15 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    257 PUSHINT
+    72 s() PUSH
+    s0 s2 XCHG
+    s0 16 s() XCHG
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    s15 PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    16 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    17 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    18 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    19 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    20 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    70 s() PUSH
+    8 PUSHINT
+    21 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    8 PUSHINT
+    71 s() PUSH
+    s0 s2 XCHG
+    s0 22 s() XCHG
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    21 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    22 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    23 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    24 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    25 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    26 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    69 s() PUSH
+    42 PUSHINT
+    27 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    42 PUSHINT
+    70 s() PUSH
+    s0 s2 XCHG
+    s0 28 s() XCHG
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    27 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    28 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    29 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    30 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    31 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    32 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    68 s() PUSH
+    8 PUSHPOW2
+    33 s() PUSH
+    __tact_dict_exists_int INLINECALLDICT
+    8 PUSHPOW2
+    69 s() PUSH
+    s0 s2 XCHG
+    s0 34 s() XCHG
+    __tact_dict_exists_int INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    33 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    34 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    35 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    36 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    37 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    38 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    67 s() PUSH
+    8 PUSHINT
+    39 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    8 PUSHINT
+    68 s() PUSH
+    s0 s2 XCHG
+    s0 40 s() XCHG
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    39 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    40 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    41 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    42 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    43 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    44 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    66 s() PUSH
+    42 PUSHINT
+    45 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    42 PUSHINT
+    67 s() PUSH
+    s0 s2 XCHG
+    s0 46 s() XCHG
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    45 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    46 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    47 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    48 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    49 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    50 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    65 s() PUSH
+    8 PUSHPOW2
+    51 s() PUSH
+    __tact_dict_exists_uint INLINECALLDICT
+    8 PUSHPOW2
+    66 s() PUSH
+    s0 s2 XCHG
+    s0 52 s() XCHG
+    __tact_dict_exists_uint INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    51 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    52 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    53 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    54 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    55 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    56 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    64 s() PUSH
+    267 PUSHINT
+    57 s() PUSH
+    __tact_dict_exists_slice INLINECALLDICT
+    267 PUSHINT
+    65 s() PUSH
+    s0 s2 XCHG
+    s0 58 s() XCHG
+    __tact_dict_exists_slice INLINECALLDICT
+    55 s() 63 s() XCHG
+    54 s() 62 s() XCHG
+    53 s() 61 s() XCHG
+    52 s() 60 s() XCHG
+    51 s() 59 s() XCHG
+    50 s() 58 s() XCHG
+    55 s() 57 s() XCHG
+    49 s() 56 s() XCHG
+    48 s() 55 s() XCHG
+    47 s() 54 s() XCHG
+    46 s() 53 s() XCHG
+    45 s() 52 s() XCHG
+    44 s() 51 s() XCHG
+    43 s() 50 s() XCHG
+    47 s() 49 s() XCHG
+    42 s() 48 s() XCHG
+    41 s() 47 s() XCHG
+    40 s() 46 s() XCHG
+    39 s() 45 s() XCHG
+    38 s() 44 s() XCHG
+    37 s() 43 s() XCHG
+    36 s() 42 s() XCHG
+    40 s() 41 s() XCHG
+    35 s() 40 s() XCHG
+    34 s() 39 s() XCHG
+    33 s() 38 s() XCHG
+    32 s() 37 s() XCHG
+    31 s() 36 s() XCHG
+    30 s() 35 s() XCHG
+    29 s() 34 s() XCHG
+    29 s() 33 s() XCHG
+    28 s() 32 s() XCHG
+    27 s() 31 s() XCHG
+    26 s() 30 s() XCHG
+    25 s() 29 s() XCHG
+    24 s() 28 s() XCHG
+    23 s() 27 s() XCHG
+    22 s() 26 s() XCHG
+    21 s() 24 s() XCHG
+    20 s() 23 s() XCHG
+    19 s() 22 s() XCHG
+    18 s() 21 s() XCHG
+    17 s() 20 s() XCHG
+    16 s() 19 s() XCHG
+    s15 18 s() XCHG
+    s15 17 s() XCHG
+    s14 16 s() XCHG
+    s13 s15 XCHG
+    s12 s14 XCHG
+    s11 s13 XCHG
+    s10 s12 XCHG
+    s9 s11 XCHG
+    s8 s10 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+    s3 s4 XCHG
+    s1 s3 s0 XCHG3
+    $ExistsAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+  }>
+  $IsEmptyAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_isEmptyAllMaps PROCREF:<{
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    63 s() PUSH
+    ISNULL
+    $IsEmptyAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+  }>
+  $AsCellAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins PROCINLINE:<{
+  }>
+  $MapTestContract$_fun_asCellAllMaps PROCREF:<{
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    63 s() PUSH
+    $AsCellAllMapsResult$_constructor_int_int_int_int8_int_int42_int_int256_int_uint8_int_uint42_int_uint256_int_coins_int8_int_int8_int8_int8_int42_int8_int256_int8_uint8_int8_uint42_int8_uint256_int8_coins_int42_int_int42_int8_int42_int42_int42_int256_int42_uint8_int42_uint42_int42_uint256_int42_coins_int256_int_int256_int8_int256_int42_int256_int256_int256_uint8_int256_uint42_int256_uint256_int256_coins_uint8_int_uint8_int8_uint8_int42_uint8_int256_uint8_uint8_uint8_uint42_uint8_uint256_uint8_coins_uint42_int_uint42_int8_uint42_int42_uint42_int256_uint42_uint8_uint42_uint42_uint42_uint256_uint42_coins_uint256_int_uint256_int8_uint256_int42_uint256_int256_uint256_uint8_uint256_uint42_uint256_uint256_uint256_coins_address_int_address_int8_address_int42_address_int256_address_uint8_address_uint42_address_uint256_address_coins INLINECALLDICT
+  }>
+  $MapTestContract$_fun_checkNullReference PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    0 PUSHINT
+    OVER
+    __tact_dict_get_int_int INLINECALLDICT
+    __tact_not_null INLINECALLDICT
+  }>
+  %allMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    $MapTestContract$_fun_allMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $MapTestContract$_to_external INLINECALLDICT
+  }>
+  %getAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    63 s() 71 s() XCHG
+    62 s() 70 s() XCHG
+    61 s() 69 s() XCHG
+    60 s() 68 s() XCHG
+    59 s() 67 s() XCHG
+    58 s() 66 s() XCHG
+    57 s() 65 s() XCHG
+    56 s() 64 s() XCHG
+    55 s() 63 s() XCHG
+    54 s() 62 s() XCHG
+    53 s() 61 s() XCHG
+    52 s() 60 s() XCHG
+    51 s() 59 s() XCHG
+    50 s() 58 s() XCHG
+    49 s() 57 s() XCHG
+    48 s() 56 s() XCHG
+    47 s() 55 s() XCHG
+    46 s() 54 s() XCHG
+    45 s() 53 s() XCHG
+    44 s() 52 s() XCHG
+    43 s() 51 s() XCHG
+    42 s() 50 s() XCHG
+    41 s() 49 s() XCHG
+    40 s() 48 s() XCHG
+    39 s() 47 s() XCHG
+    38 s() 46 s() XCHG
+    37 s() 45 s() XCHG
+    36 s() 44 s() XCHG
+    35 s() 43 s() XCHG
+    34 s() 42 s() XCHG
+    33 s() 41 s() XCHG
+    32 s() 40 s() XCHG
+    31 s() 39 s() XCHG
+    30 s() 38 s() XCHG
+    29 s() 37 s() XCHG
+    28 s() 36 s() XCHG
+    27 s() 35 s() XCHG
+    26 s() 34 s() XCHG
+    25 s() 33 s() XCHG
+    24 s() 32 s() XCHG
+    23 s() 31 s() XCHG
+    22 s() 30 s() XCHG
+    21 s() 29 s() XCHG
+    20 s() 28 s() XCHG
+    19 s() 27 s() XCHG
+    18 s() 26 s() XCHG
+    17 s() 25 s() XCHG
+    16 s() 24 s() XCHG
+    s15 23 s() XCHG
+    s14 22 s() XCHG
+    s13 21 s() XCHG
+    s12 20 s() XCHG
+    s11 19 s() XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    8 8 BLKSWAP
+    $MapTestContract$_fun_getAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $GetAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %replaceAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    63 s() 79 s() XCHG
+    62 s() 78 s() XCHG
+    61 s() 77 s() XCHG
+    60 s() 76 s() XCHG
+    59 s() 75 s() XCHG
+    58 s() 74 s() XCHG
+    57 s() 73 s() XCHG
+    56 s() 72 s() XCHG
+    55 s() 71 s() XCHG
+    54 s() 70 s() XCHG
+    53 s() 69 s() XCHG
+    52 s() 68 s() XCHG
+    51 s() 67 s() XCHG
+    50 s() 66 s() XCHG
+    49 s() 65 s() XCHG
+    48 s() 64 s() XCHG
+    47 s() 63 s() XCHG
+    46 s() 62 s() XCHG
+    45 s() 61 s() XCHG
+    44 s() 60 s() XCHG
+    43 s() 59 s() XCHG
+    42 s() 58 s() XCHG
+    41 s() 57 s() XCHG
+    40 s() 56 s() XCHG
+    39 s() 55 s() XCHG
+    38 s() 54 s() XCHG
+    37 s() 53 s() XCHG
+    36 s() 52 s() XCHG
+    35 s() 51 s() XCHG
+    34 s() 50 s() XCHG
+    33 s() 49 s() XCHG
+    32 s() 48 s() XCHG
+    31 s() 47 s() XCHG
+    30 s() 46 s() XCHG
+    29 s() 45 s() XCHG
+    28 s() 44 s() XCHG
+    27 s() 43 s() XCHG
+    26 s() 42 s() XCHG
+    25 s() 41 s() XCHG
+    24 s() 40 s() XCHG
+    23 s() 39 s() XCHG
+    22 s() 38 s() XCHG
+    21 s() 37 s() XCHG
+    20 s() 36 s() XCHG
+    19 s() 35 s() XCHG
+    18 s() 34 s() XCHG
+    17 s() 33 s() XCHG
+    16 s() 32 s() XCHG
+    s15 31 s() XCHG
+    s14 30 s() XCHG
+    s13 29 s() XCHG
+    s12 28 s() XCHG
+    s11 27 s() XCHG
+    s10 26 s() XCHG
+    s9 25 s() XCHG
+    s8 24 s() XCHG
+    s7 23 s() XCHG
+    s6 22 s() XCHG
+    s5 21 s() XCHG
+    s4 20 s() XCHG
+    s3 19 s() XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $MapTestContract$_fun_replaceAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $ReplaceAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %replaceGetAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    63 s() 79 s() XCHG
+    62 s() 78 s() XCHG
+    61 s() 77 s() XCHG
+    60 s() 76 s() XCHG
+    59 s() 75 s() XCHG
+    58 s() 74 s() XCHG
+    57 s() 73 s() XCHG
+    56 s() 72 s() XCHG
+    55 s() 71 s() XCHG
+    54 s() 70 s() XCHG
+    53 s() 69 s() XCHG
+    52 s() 68 s() XCHG
+    51 s() 67 s() XCHG
+    50 s() 66 s() XCHG
+    49 s() 65 s() XCHG
+    48 s() 64 s() XCHG
+    47 s() 63 s() XCHG
+    46 s() 62 s() XCHG
+    45 s() 61 s() XCHG
+    44 s() 60 s() XCHG
+    43 s() 59 s() XCHG
+    42 s() 58 s() XCHG
+    41 s() 57 s() XCHG
+    40 s() 56 s() XCHG
+    39 s() 55 s() XCHG
+    38 s() 54 s() XCHG
+    37 s() 53 s() XCHG
+    36 s() 52 s() XCHG
+    35 s() 51 s() XCHG
+    34 s() 50 s() XCHG
+    33 s() 49 s() XCHG
+    32 s() 48 s() XCHG
+    31 s() 47 s() XCHG
+    30 s() 46 s() XCHG
+    29 s() 45 s() XCHG
+    28 s() 44 s() XCHG
+    27 s() 43 s() XCHG
+    26 s() 42 s() XCHG
+    25 s() 41 s() XCHG
+    24 s() 40 s() XCHG
+    23 s() 39 s() XCHG
+    22 s() 38 s() XCHG
+    21 s() 37 s() XCHG
+    20 s() 36 s() XCHG
+    19 s() 35 s() XCHG
+    18 s() 34 s() XCHG
+    17 s() 33 s() XCHG
+    16 s() 32 s() XCHG
+    s15 31 s() XCHG
+    s14 30 s() XCHG
+    s13 29 s() XCHG
+    s12 28 s() XCHG
+    s11 27 s() XCHG
+    s10 26 s() XCHG
+    s9 25 s() XCHG
+    s8 24 s() XCHG
+    s7 23 s() XCHG
+    s6 22 s() XCHG
+    s5 21 s() XCHG
+    s4 20 s() XCHG
+    s3 19 s() XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $MapTestContract$_fun_replaceGetAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $ReplaceGetAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %existsAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    63 s() 71 s() XCHG
+    62 s() 70 s() XCHG
+    61 s() 69 s() XCHG
+    60 s() 68 s() XCHG
+    59 s() 67 s() XCHG
+    58 s() 66 s() XCHG
+    57 s() 65 s() XCHG
+    56 s() 64 s() XCHG
+    55 s() 63 s() XCHG
+    54 s() 62 s() XCHG
+    53 s() 61 s() XCHG
+    52 s() 60 s() XCHG
+    51 s() 59 s() XCHG
+    50 s() 58 s() XCHG
+    49 s() 57 s() XCHG
+    48 s() 56 s() XCHG
+    47 s() 55 s() XCHG
+    46 s() 54 s() XCHG
+    45 s() 53 s() XCHG
+    44 s() 52 s() XCHG
+    43 s() 51 s() XCHG
+    42 s() 50 s() XCHG
+    41 s() 49 s() XCHG
+    40 s() 48 s() XCHG
+    39 s() 47 s() XCHG
+    38 s() 46 s() XCHG
+    37 s() 45 s() XCHG
+    36 s() 44 s() XCHG
+    35 s() 43 s() XCHG
+    34 s() 42 s() XCHG
+    33 s() 41 s() XCHG
+    32 s() 40 s() XCHG
+    31 s() 39 s() XCHG
+    30 s() 38 s() XCHG
+    29 s() 37 s() XCHG
+    28 s() 36 s() XCHG
+    27 s() 35 s() XCHG
+    26 s() 34 s() XCHG
+    25 s() 33 s() XCHG
+    24 s() 32 s() XCHG
+    23 s() 31 s() XCHG
+    22 s() 30 s() XCHG
+    21 s() 29 s() XCHG
+    20 s() 28 s() XCHG
+    19 s() 27 s() XCHG
+    18 s() 26 s() XCHG
+    17 s() 25 s() XCHG
+    16 s() 24 s() XCHG
+    s15 23 s() XCHG
+    s14 22 s() XCHG
+    s13 21 s() XCHG
+    s12 20 s() XCHG
+    s11 19 s() XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    8 8 BLKSWAP
+    $MapTestContract$_fun_existsAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $ExistsAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %isEmptyAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    $MapTestContract$_fun_isEmptyAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $IsEmptyAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %asCellAllMaps PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    $MapTestContract$_fun_asCellAllMaps INLINECALLDICT
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    64 s() POP
+    $AsCellAllMapsResult$_to_external INLINECALLDICT
+  }>
+  %checkNullReference PROC:<{
+    $MapTestContract$_contract_load INLINECALLDICT
+    $MapTestContract$_fun_checkNullReference INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+    16 s() POP
+    15 BLKDROP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $MapTestContract$_contract_load INLINECALLDICT
+    s0 65 s() XCHG
+    IFJMP:<{
+      15 BLKDROP
+      15 BLKDROP
+      15 BLKDROP
+      15 BLKDROP
+      5 BLKDROP
+    }>
+    0 PUSHINT
+    64 s() PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 64 s() XCHG
+      32 LDU
+      s0 65 s() XCHG
+    }>
+    OVER
+    1374781841 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      s0 63 s() XCHG
+      $SetAllMaps$_load_without_opcode INLINECALLDICT
+      16 s() POP
+      257 PUSHINT
+      DUP
+      s2 79 s() XCHG
+      16 s() PUSH
+      s9 s1 PUXC
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 76 s() XCHG
+      257 PUSHINT
+      s15 s6 PUSH2
+      8 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 75 s() XCHG
+      257 PUSHINT
+      s15 s5 PUSH2
+      42 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 74 s() XCHG
+      257 PUSHINT
+      s15 s4 PUSH2
+      8 PUSHPOW2
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 73 s() XCHG
+      257 PUSHINT
+      s15 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 72 s() XCHG
+      257 PUSHINT
+      s15 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 71 s() XCHG
+      257 PUSHINT
+      s15 PUSH
+      79 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_int_uint INLINECALLDICT
+      s1 70 s() XCHG
+      257 PUSHINT
+      s0 s15 XCHG2
+      16 s() PUSH
+      __tact_dict_set_int_coins INLINECALLDICT
+      s0 68 s() XCHG
+      8 PUSHINT
+      s13 s6 PUSH2
+      257 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      8 PUSHINT
+      DUP
+      s2 69 s() XCHG
+      s14 s6 s(-2) PU2XC
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 66 s() XCHG
+      8 PUSHINT
+      s13 s4 PUSH2
+      42 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 65 s() XCHG
+      8 PUSHINT
+      s13 s3 PUSH2
+      8 PUSHPOW2
+      __tact_dict_set_int_int INLINECALLDICT
+      8 PUSHINT
+      DUP
+      s2 66 s() XCHG
+      s14 s3 s(-2) PU2XC
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 63 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      71 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 62 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      78 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_int_uint INLINECALLDICT
+      s1 61 s() XCHG
+      8 PUSHINT
+      s0 s13 s15 XC2PU
+      __tact_dict_set_int_coins INLINECALLDICT
+      s0 59 s() XCHG
+      42 PUSHINT
+      s11 s5 PUSH2
+      257 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 58 s() XCHG
+      42 PUSHINT
+      s11 s4 PUSH2
+      8 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      42 PUSHINT
+      DUP
+      s2 59 s() XCHG
+      s12 s4 s(-2) PU2XC
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 56 s() XCHG
+      42 PUSHINT
+      s11 s2 PUSH2
+      8 PUSHPOW2
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 55 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      62 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      42 PUSHINT
+      DUP
+      s2 56 s() XCHG
+      s12 s(-1) PUXC
+      71 s() PUSH
+      SWAP
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 53 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      77 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_int_uint INLINECALLDICT
+      s1 52 s() XCHG
+      42 PUSHINT
+      s0 s11 s14 XC2PU
+      __tact_dict_set_int_coins INLINECALLDICT
+      s0 50 s() XCHG
+      8 PUSHPOW2
+      s9 s4 PUSH2
+      257 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 49 s() XCHG
+      8 PUSHPOW2
+      s9 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 48 s() XCHG
+      8 PUSHPOW2
+      s9 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_set_int_int INLINECALLDICT
+      8 PUSHPOW2
+      DUP
+      s2 49 s() XCHG
+      s10 s(-1) PUXC
+      54 s() PUSH
+      SWAP
+      __tact_dict_set_int_int INLINECALLDICT
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      61 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      s0 45 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      69 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_int_uint INLINECALLDICT
+      8 PUSHPOW2
+      DUP
+      s2 46 s() XCHG
+      s10 s(-1) PUXC
+      77 s() PUSH
+      SWAP
+      __tact_dict_set_int_uint INLINECALLDICT
+      s1 43 s() XCHG
+      8 PUSHPOW2
+      s0 s9 s13 XC2PU
+      __tact_dict_set_int_coins INLINECALLDICT
+      s0 41 s() XCHG
+      8 PUSHINT
+      s7 s3 PUSH2
+      257 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      8 PUSHINT
+      DUP
+      s2 42 s() XCHG
+      s8 s3 s(-2) PU2XC
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 39 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      44 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 38 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      52 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_uint_int INLINECALLDICT
+      8 PUSHINT
+      DUP
+      s2 39 s() XCHG
+      s8 s(-1) PUXC
+      61 s() PUSH
+      SWAP
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s0 36 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      68 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s0 35 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      75 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s1 34 s() XCHG
+      8 PUSHINT
+      s0 s7 s12 XC2PU
+      __tact_dict_set_uint_coins INLINECALLDICT
+      s0 32 s() XCHG
+      42 PUSHINT
+      s5 s2 PUSH2
+      257 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 31 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      35 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      42 PUSHINT
+      DUP
+      s2 32 s() XCHG
+      s6 s(-1) PUXC
+      44 s() PUSH
+      SWAP
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 29 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      51 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 28 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      59 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_uint_uint INLINECALLDICT
+      42 PUSHINT
+      DUP
+      s2 29 s() XCHG
+      s6 s(-1) PUXC
+      68 s() PUSH
+      SWAP
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s0 26 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      74 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s1 25 s() XCHG
+      42 PUSHINT
+      s0 s5 s11 XC2PU
+      __tact_dict_set_uint_coins INLINECALLDICT
+      s0 23 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      26 s() PUSH
+      257 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 22 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      34 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 21 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      42 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_uint_int INLINECALLDICT
+      8 PUSHPOW2
+      DUP
+      s2 22 s() XCHG
+      s4 s(-1) PUXC
+      51 s() PUSH
+      SWAP
+      __tact_dict_set_uint_int INLINECALLDICT
+      s0 19 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      58 s() PUSH
+      8 PUSHINT
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s0 18 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      66 s() PUSH
+      42 PUSHINT
+      __tact_dict_set_uint_uint INLINECALLDICT
+      8 PUSHPOW2
+      DUP
+      s2 19 s() XCHG
+      s4 s(-1) PUXC
+      74 s() PUSH
+      SWAP
+      __tact_dict_set_uint_uint INLINECALLDICT
+      s1 16 s() XCHG
+      8 PUSHPOW2
+      s0 s3 s10 XC2PU
+      __tact_dict_set_uint_coins INLINECALLDICT
+      s1 s14 XCHG
+      267 PUSHINT
+      SWAP
+      16 s() PUSH
+      SWAP
+      s0 25 s() XCHG
+      257 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      s1 s12 XCHG
+      267 PUSHINT
+      s15 s1 PUXC
+      s0 32 s() XCHG
+      8 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      s1 s10 XCHG
+      267 PUSHINT
+      s14 s1 PUXC
+      s0 39 s() XCHG
+      42 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      s1 s8 XCHG
+      267 PUSHINT
+      s13 s1 PUXC
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_set_slice_int INLINECALLDICT
+      s1 s6 XCHG
+      267 PUSHINT
+      s12 s1 PUXC
+      s0 53 s() XCHG
+      8 PUSHINT
+      __tact_dict_set_slice_uint INLINECALLDICT
+      s1 s4 XCHG
+      267 PUSHINT
+      s11 s1 PUXC
+      s0 60 s() XCHG
+      42 PUSHINT
+      __tact_dict_set_slice_uint INLINECALLDICT
+      s1 65 s() XCHG
+      267 PUSHINT
+      s10 s1 PUXC
+      s0 66 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_set_slice_uint INLINECALLDICT
+      s2 65 s() XCHG
+      267 PUSHINT
+      s9 s2 XCHG2
+      __tact_dict_set_slice_coins INLINECALLDICT
+      60 s() 63 s() XCHG
+      59 s() 62 s() XCHG
+      58 s() 61 s() XCHG
+      57 s() 60 s() XCHG
+      56 s() 59 s() XCHG
+      55 s() 58 s() XCHG
+      56 s() 57 s() XCHG
+      53 s() 56 s() XCHG
+      52 s() 55 s() XCHG
+      51 s() 54 s() XCHG
+      50 s() 53 s() XCHG
+      49 s() 52 s() XCHG
+      48 s() 51 s() XCHG
+      47 s() 50 s() XCHG
+      47 s() 49 s() XCHG
+      45 s() 48 s() XCHG
+      44 s() 47 s() XCHG
+      43 s() 46 s() XCHG
+      42 s() 45 s() XCHG
+      41 s() 44 s() XCHG
+      40 s() 43 s() XCHG
+      39 s() 42 s() XCHG
+      s1 41 s() XCHG
+      37 s() 40 s() XCHG
+      36 s() 39 s() XCHG
+      35 s() 38 s() XCHG
+      34 s() 37 s() XCHG
+      33 s() 36 s() XCHG
+      32 s() 35 s() XCHG
+      31 s() 34 s() XCHG
+      s2 33 s() XCHG
+      29 s() 32 s() XCHG
+      28 s() 31 s() XCHG
+      27 s() 30 s() XCHG
+      26 s() 29 s() XCHG
+      25 s() 28 s() XCHG
+      24 s() 27 s() XCHG
+      23 s() 26 s() XCHG
+      s3 25 s() XCHG
+      21 s() 24 s() XCHG
+      20 s() 23 s() XCHG
+      19 s() 22 s() XCHG
+      18 s() 21 s() XCHG
+      17 s() 20 s() XCHG
+      16 s() 19 s() XCHG
+      s15 18 s() XCHG
+      s4 17 s() XCHG
+      s13 16 s() XCHG
+      s12 s15 XCHG
+      s11 s14 XCHG
+      s10 s13 XCHG
+      s9 s12 XCHG
+      s8 s11 XCHG
+      s7 s10 XCHG
+      s5 s9 XCHG
+      s5 s6 XCHG
+      s4 s5 XCHG
+      s3 s4 XCHG
+      s1 s3 s0 XCHG3
+      $MapTestContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    1261158015 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      s0 63 s() XCHG
+      $DelAllMaps$_load_without_opcode INLINECALLDICT
+      s8 POP
+      s6 s(-1) PUXC
+      s0 70 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 69 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 68 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 67 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 66 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 65 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s6 s(-1) PUXC
+      s0 64 s() XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s0 62 s() XCHG
+      s1 s6 XCHG
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 61 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 60 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 59 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 58 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 57 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 56 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s4 s(-1) PUXC
+      s0 55 s() XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s0 53 s() XCHG
+      s1 s4 XCHG
+      8 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 52 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 51 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 50 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 49 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 48 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 47 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s2 s(-1) PUXC
+      s0 46 s() XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s0 44 s() XCHG
+      s1 s2 XCHG
+      42 PUSHINT
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 43 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 42 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 41 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 40 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 39 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 38 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 37 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s0 35 s() XCHG
+      8 PUSHPOW2
+          DICTIDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 34 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 33 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 32 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 31 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 30 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 29 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 28 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s0 26 s() XCHG
+      8 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 25 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 24 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 23 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 22 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 21 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 20 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s1 s(-1) PUXC
+      s0 19 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      s0 17 s() XCHG
+      42 PUSHINT
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      SWAP
+      s0 16 s() XCHG
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s15 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s14 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s13 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s12 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s11 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      63 s() PUSH
+      s0 s10 XCHG2
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      s1 63 s() XCHG
+      s0 s8 XCHG
+      8 PUSHPOW2
+          DICTUDEL
+      DROP
+      62 s() PUSH
+      s0 s7 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      s0 s6 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      s0 s5 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      s0 s4 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      s0 s3 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      ROT
+      267 PUSHINT
+          DICTDEL
+      DROP
+      62 s() PUSH
+      SWAP
+      s0 64 s() XCHG
+      267 PUSHINT
+          DICTDEL
+      DROP
+      s1 62 s() XCHG
+      s0 64 s() XCHG
+      267 PUSHINT
+          DICTDEL
+      DROP
+      60 s() 63 s() XCHG
+      59 s() 62 s() XCHG
+      58 s() 61 s() XCHG
+      57 s() 60 s() XCHG
+      56 s() 59 s() XCHG
+      55 s() 58 s() XCHG
+      54 s() 57 s() XCHG
+      53 s() 56 s() XCHG
+      52 s() 55 s() XCHG
+      51 s() 54 s() XCHG
+      50 s() 53 s() XCHG
+      49 s() 52 s() XCHG
+      48 s() 51 s() XCHG
+      47 s() 50 s() XCHG
+      46 s() 49 s() XCHG
+      45 s() 48 s() XCHG
+      44 s() 47 s() XCHG
+      43 s() 46 s() XCHG
+      42 s() 45 s() XCHG
+      41 s() 44 s() XCHG
+      40 s() 43 s() XCHG
+      39 s() 42 s() XCHG
+      38 s() 41 s() XCHG
+      37 s() 40 s() XCHG
+      36 s() 39 s() XCHG
+      35 s() 38 s() XCHG
+      34 s() 37 s() XCHG
+      33 s() 36 s() XCHG
+      32 s() 35 s() XCHG
+      31 s() 34 s() XCHG
+      30 s() 33 s() XCHG
+      29 s() 32 s() XCHG
+      28 s() 31 s() XCHG
+      27 s() 30 s() XCHG
+      26 s() 29 s() XCHG
+      25 s() 28 s() XCHG
+      24 s() 27 s() XCHG
+      23 s() 26 s() XCHG
+      22 s() 25 s() XCHG
+      21 s() 24 s() XCHG
+      20 s() 23 s() XCHG
+      19 s() 22 s() XCHG
+      18 s() 21 s() XCHG
+      17 s() 20 s() XCHG
+      16 s() 19 s() XCHG
+      s15 18 s() XCHG
+      s14 17 s() XCHG
+      s13 16 s() XCHG
+      s12 s15 XCHG
+      s11 s14 XCHG
+      s10 s13 XCHG
+      s9 s12 XCHG
+      s8 s11 XCHG
+      s7 s10 XCHG
+      s6 s9 XCHG
+      s5 s8 XCHG
+      s4 s7 XCHG
+      s3 s6 XCHG
+      s5 s4 s0 XCHG3
+      s1 s3 XCHG
+      $MapTestContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    2669006230 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      s0 63 s() XCHG
+      $ReplaceAllMaps$_load_without_opcode INLINECALLDICT
+      16 s() POP
+      257 PUSHINT
+      DUP
+      s2 79 s() XCHG
+      16 s() PUSH
+      s9 s1 PUXC
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 76 s() XCHG
+      257 PUSHINT
+      s15 s6 PUSH2
+      8 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 75 s() XCHG
+      257 PUSHINT
+      s15 s5 PUSH2
+      42 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 74 s() XCHG
+      257 PUSHINT
+      s15 s4 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 73 s() XCHG
+      257 PUSHINT
+      s15 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 72 s() XCHG
+      257 PUSHINT
+      s15 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 71 s() XCHG
+      257 PUSHINT
+      s15 PUSH
+      79 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s1 70 s() XCHG
+      257 PUSHINT
+      s0 s15 XCHG2
+      16 s() PUSH
+      __tact_dict_replace_int_coins INLINECALLDICT
+      DROP
+      s0 68 s() XCHG
+      8 PUSHINT
+      s13 s6 PUSH2
+      257 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 69 s() XCHG
+      s14 s6 s(-2) PU2XC
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 66 s() XCHG
+      8 PUSHINT
+      s13 s4 PUSH2
+      42 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 65 s() XCHG
+      8 PUSHINT
+      s13 s3 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 66 s() XCHG
+      s14 s3 s(-2) PU2XC
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 63 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      71 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 62 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      78 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s1 61 s() XCHG
+      8 PUSHINT
+      s0 s13 s15 XC2PU
+      __tact_dict_replace_int_coins INLINECALLDICT
+      DROP
+      s0 59 s() XCHG
+      42 PUSHINT
+      s11 s5 PUSH2
+      257 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 58 s() XCHG
+      42 PUSHINT
+      s11 s4 PUSH2
+      8 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 59 s() XCHG
+      s12 s4 s(-2) PU2XC
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 56 s() XCHG
+      42 PUSHINT
+      s11 s2 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 55 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      62 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 56 s() XCHG
+      s12 s(-1) PUXC
+      71 s() PUSH
+      SWAP
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 53 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      77 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s1 52 s() XCHG
+      42 PUSHINT
+      s0 s11 s14 XC2PU
+      __tact_dict_replace_int_coins INLINECALLDICT
+      DROP
+      s0 50 s() XCHG
+      8 PUSHPOW2
+      s9 s4 PUSH2
+      257 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 49 s() XCHG
+      8 PUSHPOW2
+      s9 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 48 s() XCHG
+      8 PUSHPOW2
+      s9 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 49 s() XCHG
+      s10 s(-1) PUXC
+      54 s() PUSH
+      SWAP
+      __tact_dict_replace_int_int INLINECALLDICT
+      DROP
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      61 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s0 45 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      69 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 46 s() XCHG
+      s10 s(-1) PUXC
+      77 s() PUSH
+      SWAP
+      __tact_dict_replace_int_uint INLINECALLDICT
+      DROP
+      s1 43 s() XCHG
+      8 PUSHPOW2
+      s0 s9 s13 XC2PU
+      __tact_dict_replace_int_coins INLINECALLDICT
+      DROP
+      s0 41 s() XCHG
+      8 PUSHINT
+      s7 s3 PUSH2
+      257 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 42 s() XCHG
+      s8 s3 s(-2) PU2XC
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 39 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      44 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 38 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      52 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 39 s() XCHG
+      s8 s(-1) PUXC
+      61 s() PUSH
+      SWAP
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s0 36 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      68 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s0 35 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      75 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s1 34 s() XCHG
+      8 PUSHINT
+      s0 s7 s12 XC2PU
+      __tact_dict_replace_uint_coins INLINECALLDICT
+      DROP
+      s0 32 s() XCHG
+      42 PUSHINT
+      s5 s2 PUSH2
+      257 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 31 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      35 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 32 s() XCHG
+      s6 s(-1) PUXC
+      44 s() PUSH
+      SWAP
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 29 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      51 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 28 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      59 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 29 s() XCHG
+      s6 s(-1) PUXC
+      68 s() PUSH
+      SWAP
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s0 26 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      74 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s1 25 s() XCHG
+      42 PUSHINT
+      s0 s5 s11 XC2PU
+      __tact_dict_replace_uint_coins INLINECALLDICT
+      DROP
+      s0 23 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      26 s() PUSH
+      257 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 22 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      34 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 21 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      42 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 22 s() XCHG
+      s4 s(-1) PUXC
+      51 s() PUSH
+      SWAP
+      __tact_dict_replace_uint_int INLINECALLDICT
+      DROP
+      s0 19 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      58 s() PUSH
+      8 PUSHINT
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s0 18 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      66 s() PUSH
+      42 PUSHINT
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 19 s() XCHG
+      s4 s(-1) PUXC
+      74 s() PUSH
+      SWAP
+      __tact_dict_replace_uint_uint INLINECALLDICT
+      DROP
+      s1 16 s() XCHG
+      8 PUSHPOW2
+      s0 s3 s10 XC2PU
+      __tact_dict_replace_uint_coins INLINECALLDICT
+      DROP
+      s1 s14 XCHG
+      267 PUSHINT
+      SWAP
+      16 s() PUSH
+      SWAP
+      s0 25 s() XCHG
+      257 PUSHINT
+      __tact_dict_replace_slice_int INLINECALLDICT
+      DROP
+      s1 s12 XCHG
+      267 PUSHINT
+      s15 s1 PUXC
+      s0 32 s() XCHG
+      8 PUSHINT
+      __tact_dict_replace_slice_int INLINECALLDICT
+      DROP
+      s1 s10 XCHG
+      267 PUSHINT
+      s14 s1 PUXC
+      s0 39 s() XCHG
+      42 PUSHINT
+      __tact_dict_replace_slice_int INLINECALLDICT
+      DROP
+      s1 s8 XCHG
+      267 PUSHINT
+      s13 s1 PUXC
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_replace_slice_int INLINECALLDICT
+      DROP
+      s1 s6 XCHG
+      267 PUSHINT
+      s12 s1 PUXC
+      s0 53 s() XCHG
+      8 PUSHINT
+      __tact_dict_replace_slice_uint INLINECALLDICT
+      DROP
+      s1 s4 XCHG
+      267 PUSHINT
+      s11 s1 PUXC
+      s0 60 s() XCHG
+      42 PUSHINT
+      __tact_dict_replace_slice_uint INLINECALLDICT
+      DROP
+      s1 65 s() XCHG
+      267 PUSHINT
+      s10 s1 PUXC
+      s0 66 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_replace_slice_uint INLINECALLDICT
+      DROP
+      s2 65 s() XCHG
+      267 PUSHINT
+      s9 s2 XCHG2
+      __tact_dict_replace_slice_coins INLINECALLDICT
+      DROP
+      60 s() 63 s() XCHG
+      59 s() 62 s() XCHG
+      58 s() 61 s() XCHG
+      57 s() 60 s() XCHG
+      56 s() 59 s() XCHG
+      55 s() 58 s() XCHG
+      56 s() 57 s() XCHG
+      53 s() 56 s() XCHG
+      52 s() 55 s() XCHG
+      51 s() 54 s() XCHG
+      50 s() 53 s() XCHG
+      49 s() 52 s() XCHG
+      48 s() 51 s() XCHG
+      47 s() 50 s() XCHG
+      47 s() 49 s() XCHG
+      45 s() 48 s() XCHG
+      44 s() 47 s() XCHG
+      43 s() 46 s() XCHG
+      42 s() 45 s() XCHG
+      41 s() 44 s() XCHG
+      40 s() 43 s() XCHG
+      39 s() 42 s() XCHG
+      s1 41 s() XCHG
+      37 s() 40 s() XCHG
+      36 s() 39 s() XCHG
+      35 s() 38 s() XCHG
+      34 s() 37 s() XCHG
+      33 s() 36 s() XCHG
+      32 s() 35 s() XCHG
+      31 s() 34 s() XCHG
+      s2 33 s() XCHG
+      29 s() 32 s() XCHG
+      28 s() 31 s() XCHG
+      27 s() 30 s() XCHG
+      26 s() 29 s() XCHG
+      25 s() 28 s() XCHG
+      24 s() 27 s() XCHG
+      23 s() 26 s() XCHG
+      s3 25 s() XCHG
+      21 s() 24 s() XCHG
+      20 s() 23 s() XCHG
+      19 s() 22 s() XCHG
+      18 s() 21 s() XCHG
+      17 s() 20 s() XCHG
+      16 s() 19 s() XCHG
+      s15 18 s() XCHG
+      s4 17 s() XCHG
+      s13 16 s() XCHG
+      s12 s15 XCHG
+      s11 s14 XCHG
+      s10 s13 XCHG
+      s9 s12 XCHG
+      s8 s11 XCHG
+      s7 s10 XCHG
+      s5 s9 XCHG
+      s5 s6 XCHG
+      s4 s5 XCHG
+      s3 s4 XCHG
+      s1 s3 s0 XCHG3
+      $MapTestContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    3424045530 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      s0 63 s() XCHG
+      $ReplaceGetAllMaps$_load_without_opcode INLINECALLDICT
+      16 s() POP
+      257 PUSHINT
+      DUP
+      s2 79 s() XCHG
+      16 s() PUSH
+      s9 s1 PUXC
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 76 s() XCHG
+      257 PUSHINT
+      s15 s6 PUSH2
+      8 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 75 s() XCHG
+      257 PUSHINT
+      s15 s5 PUSH2
+      42 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 74 s() XCHG
+      257 PUSHINT
+      s15 s4 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 73 s() XCHG
+      257 PUSHINT
+      s15 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 72 s() XCHG
+      257 PUSHINT
+      s15 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 71 s() XCHG
+      257 PUSHINT
+      s15 PUSH
+      79 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s1 70 s() XCHG
+      257 PUSHINT
+      s0 s15 XCHG2
+      16 s() PUSH
+      __tact_dict_replaceget_int_coins INLINECALLDICT
+      DROP
+      s0 68 s() XCHG
+      8 PUSHINT
+      s13 s6 PUSH2
+      257 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 69 s() XCHG
+      s14 s6 s(-2) PU2XC
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 66 s() XCHG
+      8 PUSHINT
+      s13 s4 PUSH2
+      42 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 65 s() XCHG
+      8 PUSHINT
+      s13 s3 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 66 s() XCHG
+      s14 s3 s(-2) PU2XC
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 63 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      71 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 62 s() XCHG
+      8 PUSHINT
+      s13 PUSH
+      78 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s1 61 s() XCHG
+      8 PUSHINT
+      s0 s13 s15 XC2PU
+      __tact_dict_replaceget_int_coins INLINECALLDICT
+      DROP
+      s0 59 s() XCHG
+      42 PUSHINT
+      s11 s5 PUSH2
+      257 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 58 s() XCHG
+      42 PUSHINT
+      s11 s4 PUSH2
+      8 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 59 s() XCHG
+      s12 s4 s(-2) PU2XC
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 56 s() XCHG
+      42 PUSHINT
+      s11 s2 PUSH2
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 55 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      62 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 56 s() XCHG
+      s12 s(-1) PUXC
+      71 s() PUSH
+      SWAP
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 53 s() XCHG
+      42 PUSHINT
+      s11 PUSH
+      77 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s1 52 s() XCHG
+      42 PUSHINT
+      s0 s11 s14 XC2PU
+      __tact_dict_replaceget_int_coins INLINECALLDICT
+      DROP
+      s0 50 s() XCHG
+      8 PUSHPOW2
+      s9 s4 PUSH2
+      257 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 49 s() XCHG
+      8 PUSHPOW2
+      s9 s3 PUSH2
+      8 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 48 s() XCHG
+      8 PUSHPOW2
+      s9 s2 PUSH2
+      42 PUSHINT
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 49 s() XCHG
+      s10 s(-1) PUXC
+      54 s() PUSH
+      SWAP
+      __tact_dict_replaceget_int_int INLINECALLDICT
+      DROP
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      61 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s0 45 s() XCHG
+      8 PUSHPOW2
+      s9 PUSH
+      69 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 46 s() XCHG
+      s10 s(-1) PUXC
+      77 s() PUSH
+      SWAP
+      __tact_dict_replaceget_int_uint INLINECALLDICT
+      DROP
+      s1 43 s() XCHG
+      8 PUSHPOW2
+      s0 s9 s13 XC2PU
+      __tact_dict_replaceget_int_coins INLINECALLDICT
+      DROP
+      s0 41 s() XCHG
+      8 PUSHINT
+      s7 s3 PUSH2
+      257 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 42 s() XCHG
+      s8 s3 s(-2) PU2XC
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 39 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      44 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 38 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      52 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      8 PUSHINT
+      DUP
+      s2 39 s() XCHG
+      s8 s(-1) PUXC
+      61 s() PUSH
+      SWAP
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s0 36 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      68 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s0 35 s() XCHG
+      8 PUSHINT
+      s7 PUSH
+      75 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s1 34 s() XCHG
+      8 PUSHINT
+      s0 s7 s12 XC2PU
+      __tact_dict_replaceget_uint_coins INLINECALLDICT
+      DROP
+      s0 32 s() XCHG
+      42 PUSHINT
+      s5 s2 PUSH2
+      257 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 31 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      35 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 32 s() XCHG
+      s6 s(-1) PUXC
+      44 s() PUSH
+      SWAP
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 29 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      51 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 28 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      59 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      42 PUSHINT
+      DUP
+      s2 29 s() XCHG
+      s6 s(-1) PUXC
+      68 s() PUSH
+      SWAP
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s0 26 s() XCHG
+      42 PUSHINT
+      s5 PUSH
+      74 s() PUSH
+      8 PUSHPOW2
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s1 25 s() XCHG
+      42 PUSHINT
+      s0 s5 s11 XC2PU
+      __tact_dict_replaceget_uint_coins INLINECALLDICT
+      DROP
+      s0 23 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      26 s() PUSH
+      257 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 22 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      34 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 21 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      42 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 22 s() XCHG
+      s4 s(-1) PUXC
+      51 s() PUSH
+      SWAP
+      __tact_dict_replaceget_uint_int INLINECALLDICT
+      DROP
+      s0 19 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      58 s() PUSH
+      8 PUSHINT
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s0 18 s() XCHG
+      8 PUSHPOW2
+      s3 PUSH
+      66 s() PUSH
+      42 PUSHINT
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      8 PUSHPOW2
+      DUP
+      s2 19 s() XCHG
+      s4 s(-1) PUXC
+      74 s() PUSH
+      SWAP
+      __tact_dict_replaceget_uint_uint INLINECALLDICT
+      DROP
+      s1 16 s() XCHG
+      8 PUSHPOW2
+      s0 s3 s10 XC2PU
+      __tact_dict_replaceget_uint_coins INLINECALLDICT
+      DROP
+      s1 s14 XCHG
+      267 PUSHINT
+      SWAP
+      16 s() PUSH
+      SWAP
+      s0 25 s() XCHG
+      257 PUSHINT
+      __tact_dict_replaceget_slice_int INLINECALLDICT
+      DROP
+      s1 s12 XCHG
+      267 PUSHINT
+      s15 s1 PUXC
+      s0 32 s() XCHG
+      8 PUSHINT
+      __tact_dict_replaceget_slice_int INLINECALLDICT
+      DROP
+      s1 s10 XCHG
+      267 PUSHINT
+      s14 s1 PUXC
+      s0 39 s() XCHG
+      42 PUSHINT
+      __tact_dict_replaceget_slice_int INLINECALLDICT
+      DROP
+      s1 s8 XCHG
+      267 PUSHINT
+      s13 s1 PUXC
+      s0 46 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_replaceget_slice_int INLINECALLDICT
+      DROP
+      s1 s6 XCHG
+      267 PUSHINT
+      s12 s1 PUXC
+      s0 53 s() XCHG
+      8 PUSHINT
+      __tact_dict_replaceget_slice_uint INLINECALLDICT
+      DROP
+      s1 s4 XCHG
+      267 PUSHINT
+      s11 s1 PUXC
+      s0 60 s() XCHG
+      42 PUSHINT
+      __tact_dict_replaceget_slice_uint INLINECALLDICT
+      DROP
+      s1 65 s() XCHG
+      267 PUSHINT
+      s10 s1 PUXC
+      s0 66 s() XCHG
+      8 PUSHPOW2
+      __tact_dict_replaceget_slice_uint INLINECALLDICT
+      DROP
+      s2 65 s() XCHG
+      267 PUSHINT
+      s9 s2 XCHG2
+      __tact_dict_replaceget_slice_coins INLINECALLDICT
+      DROP
+      60 s() 63 s() XCHG
+      59 s() 62 s() XCHG
+      58 s() 61 s() XCHG
+      57 s() 60 s() XCHG
+      56 s() 59 s() XCHG
+      55 s() 58 s() XCHG
+      56 s() 57 s() XCHG
+      53 s() 56 s() XCHG
+      52 s() 55 s() XCHG
+      51 s() 54 s() XCHG
+      50 s() 53 s() XCHG
+      49 s() 52 s() XCHG
+      48 s() 51 s() XCHG
+      47 s() 50 s() XCHG
+      47 s() 49 s() XCHG
+      45 s() 48 s() XCHG
+      44 s() 47 s() XCHG
+      43 s() 46 s() XCHG
+      42 s() 45 s() XCHG
+      41 s() 44 s() XCHG
+      40 s() 43 s() XCHG
+      39 s() 42 s() XCHG
+      s1 41 s() XCHG
+      37 s() 40 s() XCHG
+      36 s() 39 s() XCHG
+      35 s() 38 s() XCHG
+      34 s() 37 s() XCHG
+      33 s() 36 s() XCHG
+      32 s() 35 s() XCHG
+      31 s() 34 s() XCHG
+      s2 33 s() XCHG
+      29 s() 32 s() XCHG
+      28 s() 31 s() XCHG
+      27 s() 30 s() XCHG
+      26 s() 29 s() XCHG
+      25 s() 28 s() XCHG
+      24 s() 27 s() XCHG
+      23 s() 26 s() XCHG
+      s3 25 s() XCHG
+      21 s() 24 s() XCHG
+      20 s() 23 s() XCHG
+      19 s() 22 s() XCHG
+      18 s() 21 s() XCHG
+      17 s() 20 s() XCHG
+      16 s() 19 s() XCHG
+      s15 18 s() XCHG
+      s4 17 s() XCHG
+      s13 16 s() XCHG
+      s12 s15 XCHG
+      s11 s14 XCHG
+      s10 s13 XCHG
+      s9 s12 XCHG
+      s8 s11 XCHG
+      s7 s10 XCHG
+      s5 s9 XCHG
+      s5 s6 XCHG
+      s4 s5 XCHG
+      s3 s4 XCHG
+      s1 s3 s0 XCHG3
+      $MapTestContract$_contract_store INLINECALLDICT
+    }>
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    18 s() POP
+    16 s() POP
+    15 BLKDROP
+    14 2 BLKDROP2
+    DUP
+    2978152160 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      PUSHNULL
+      257 PUSHINT
+      0 PUSHINT
+      OVER
+      __tact_dict_get_int_int INLINECALLDICT
+      __tact_not_null INLINECALLDICT
+      DROP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

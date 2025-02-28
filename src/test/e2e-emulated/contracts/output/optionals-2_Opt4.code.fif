@@ -1,0 +1,163 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/optionals-2_Opt4.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_load_address_opt
+  DECLPROC $OptAddr$_load_without_opcode
+  DECLPROC $Opt4$_store
+  DECLPROC $Opt4$_load
+  DECLPROC $Opt4$_contract_init
+  DECLPROC $Opt4$_contract_load
+  DECLPROC $Opt4$_contract_store
+  DECLPROC $Opt4$_fun_z
+  122845 DECLMETHOD %z
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_load_address_opt PROCINLINE:<{
+    DUP
+    2 PLDU
+    0 NEQINT
+    IF:<{
+      LDMSGADDR
+      SWAP
+    }>ELSE<{
+      2 PUSHINT
+      SDSKIPFIRST
+      PUSHNULL
+    }>
+  }>
+  $OptAddr$_load_without_opcode PROCINLINE:<{
+    8 LDU
+    __tact_load_address_opt INLINECALLDICT
+    SWAP
+    16 LDU
+    3 -ROLL
+  }>
+  $Opt4$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $Opt4$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Opt4$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $Opt4$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $Opt4$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $Opt4$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Opt4$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $Opt4$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Opt4$_fun_z PROCREF:<{
+    DUP
+  }>
+  %z PROC:<{
+    $Opt4$_contract_load INLINECALLDICT
+    $Opt4$_fun_z INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Opt4$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    3353994340 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $OptAddr$_load_without_opcode INLINECALLDICT
+      3 1 BLKDROP2
+      $Opt4$_contract_store INLINECALLDICT
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

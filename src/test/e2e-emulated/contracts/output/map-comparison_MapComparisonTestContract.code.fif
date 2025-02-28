@@ -1,0 +1,269 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/map-comparison_MapComparisonTestContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_dict_eq
+  DECLPROC __tact_cell_eq_nullable
+  DECLPROC $Compare$_load_without_opcode
+  DECLPROC $CompareDeep$_load_without_opcode
+  DECLPROC $MapComparisonTestContract$_contract_init
+  DECLPROC $MapComparisonTestContract$_contract_load
+  DECLPROC $MapComparisonTestContract$_fun_compareIntInt
+  DECLPROC $MapComparisonTestContract$_fun_compareIntCell
+  DECLPROC $MapComparisonTestContract$_fun_compareIntAddress
+  DECLPROC $MapComparisonTestContract$_fun_compareAddressInt
+  DECLPROC $MapComparisonTestContract$_fun_compareAddressCell
+  DECLPROC $MapComparisonTestContract$_fun_compareAddressAddress
+  69033 DECLMETHOD %compareIntInt
+  116487 DECLMETHOD %compareIntCell
+  116486 DECLMETHOD %compareIntAddress
+  96411 DECLMETHOD %compareAddressInt
+  121653 DECLMETHOD %compareAddressCell
+  103155 DECLMETHOD %compareAddressAddress
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_dict_eq PROCINLINE:<{
+    CONT:<{
+      c2 SAVE
+      SAMEALTSAVE
+      s2 s0 PUSH2
+          DICTMIN  NULLSWAPIFNOT2
+      WHILE:<{
+      }>DO<{
+        s0 s3 s2 PUXCPU
+            DICTDELGET NULLSWAPIFNOT
+        IFNOTJMP:<{
+          6 BLKDROP
+          0 PUSHINT
+          RETALT
+        }>
+        s0 s2 XCHG
+        HASHSU
+        s0 s2 XCHG
+        HASHSU
+        s1 s2 XCHG
+        EQUAL
+        IFNOTJMP:<{
+          4 BLKDROP
+          0 PUSHINT
+          RETALT
+        }>
+        s2 s3 s1 XCPU2
+            DICTGETNEXT NULLSWAPIFNOT2
+      }>
+      s3 s4 XCHG
+      4 BLKDROP
+      ISNULL
+    }>
+    EXECUTE
+  }>
+  __tact_cell_eq_nullable PROCINLINE:<{
+    OVER
+    ISNULL
+    OVER
+    ISNULL
+    2DUP
+    AND
+    IF:<{
+      4 BLKDROP
+      TRUE
+    }>ELSE<{
+      SWAP
+      NOT
+      SWAP
+      NOT
+      AND
+      IF:<{
+        SWAP
+        HASHCU
+        SWAP
+        HASHCU
+        EQUAL
+      }>ELSE<{
+        2DROP
+        FALSE
+      }>
+    }>
+  }>
+  $Compare$_load_without_opcode PROCINLINE:<{
+    LDDICT
+    LDDICT
+    -ROT
+  }>
+  $CompareDeep$_load_without_opcode PROCINLINE:<{
+    LDDICT
+    LDDICT
+    -ROT
+  }>
+  $MapComparisonTestContract$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $MapComparisonTestContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $MapComparisonTestContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MapComparisonTestContract$_fun_compareIntInt PROCREF:<{
+    257 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  $MapComparisonTestContract$_fun_compareIntCell PROCREF:<{
+    257 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  $MapComparisonTestContract$_fun_compareIntAddress PROCREF:<{
+    257 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  $MapComparisonTestContract$_fun_compareAddressInt PROCREF:<{
+    267 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  $MapComparisonTestContract$_fun_compareAddressCell PROCREF:<{
+    267 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  $MapComparisonTestContract$_fun_compareAddressAddress PROCREF:<{
+    267 PUSHINT
+    __tact_dict_eq INLINECALLDICT
+  }>
+  %compareIntInt PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareIntInt INLINECALLDICT
+    NIP
+  }>
+  %compareIntCell PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareIntCell INLINECALLDICT
+    NIP
+  }>
+  %compareIntAddress PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareIntAddress INLINECALLDICT
+    NIP
+  }>
+  %compareAddressInt PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareAddressInt INLINECALLDICT
+    NIP
+  }>
+  %compareAddressCell PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareAddressCell INLINECALLDICT
+    NIP
+  }>
+  %compareAddressAddress PROC:<{
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    -ROT
+    $MapComparisonTestContract$_fun_compareAddressAddress INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $MapComparisonTestContract$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    1473646961 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $Compare$_load_without_opcode INLINECALLDICT
+      53111 PUSHINT
+      s3 POP
+      __tact_cell_eq_nullable INLINECALLDICT
+      THROWANYIFNOT
+    }>
+    OVER
+    3800136638 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $CompareDeep$_load_without_opcode INLINECALLDICT
+      53111 PUSHINT
+      s3 POP
+      8 PUSHINT
+      __tact_dict_eq INLINECALLDICT
+      THROWANYIFNOT
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

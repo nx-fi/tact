@@ -1,0 +1,381 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/mutating-methods_Tester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC $Tester$_load
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $Tester$_contract_init
+  DECLPROC $Tester$_contract_load
+  DECLPROC $MyStruct$_constructor_age
+  DECLPROC $Int$_fun_multiply
+  DECLPROC $Int$_fun_multiply$not_mut
+  DECLPROC $Int$_fun_multiplyExtends
+  DECLPROC $Builder$_fun_asSlice
+  DECLPROC $Slice$_fun_loadRef$not_mut
+  DECLPROC load_int$not_mut
+  DECLPROC load_uint$not_mut
+  DECLPROC $MyStruct$_fun_setAge
+  DECLPROC $MyStruct$_fun_setAge$not_mut
+  DECLPROC $Tester$_fun_test1
+  DECLPROC $Tester$_fun_test2
+  DECLPROC $Tester$_fun_test3
+  DECLPROC $Tester$_fun_test4
+  DECLPROC $Tester$_fun_test5
+  DECLPROC $Tester$_fun_test6
+  DECLPROC $Tester$_fun_test7
+  DECLPROC $Foo$_constructor_s
+  DECLPROC $Tester$_fun_test8
+  DECLPROC $Tester$_fun_test9
+  DECLPROC $Tester$_fun_test10
+  DECLPROC $Tester$_fun_test11
+  DECLPROC $Tester$_fun_test12
+  70304 DECLMETHOD %test1
+  74435 DECLMETHOD %test2
+  78562 DECLMETHOD %test3
+  82437 DECLMETHOD %test4
+  86564 DECLMETHOD %test5
+  90695 DECLMETHOD %test6
+  94822 DECLMETHOD %test7
+  99209 DECLMETHOD %test8
+  103336 DECLMETHOD %test9
+  107552 DECLMETHOD %test10
+  111617 DECLMETHOD %test11
+  99426 DECLMETHOD %test12
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  $Tester$_load PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $Tester$_contract_init PROCINLINE:<{
+        NEWC
+    3 PUSHINT
+    SWAP
+    2 STU
+    1 PUSHINT
+    SWAP
+    2 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $Tester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $Tester$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $Tester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MyStruct$_constructor_age PROCINLINE:<{
+  }>
+  $Int$_fun_multiply PROCREF:<{
+    MUL
+    DUP
+  }>
+  $Int$_fun_multiply$not_mut PROCREF:<{
+    $Int$_fun_multiply INLINECALLDICT
+    NIP
+  }>
+  $Int$_fun_multiplyExtends PROCREF:<{
+    OVER
+    ISNULL
+    IFJMP:<{
+      2DROP
+      PUSHNULL
+    }>
+    SWAP
+    __tact_not_null INLINECALLDICT
+    SWAP
+    MUL
+  }>
+  $Builder$_fun_asSlice PROCINLINE:<{
+        ENDC
+        CTOS
+  }>
+  $Slice$_fun_loadRef$not_mut PROCREF:<{
+        LDREF
+    DROP
+  }>
+  load_int$not_mut PROCREF:<{
+    LDIX
+    DROP
+  }>
+  load_uint$not_mut PROCREF:<{
+    LDUX
+    DROP
+  }>
+  $MyStruct$_fun_setAge PROCREF:<{
+    TUCK
+    ADD
+  }>
+  $MyStruct$_fun_setAge$not_mut PROCREF:<{
+    $MyStruct$_fun_setAge INLINECALLDICT
+    NIP
+  }>
+  $Tester$_fun_test1 PROCREF:<{
+        NEWC
+    0 PUSHINT
+    SWAP
+    1 STU
+        ENDC
+        CTOS
+    1 PUSHINT
+    load_uint$not_mut INLINECALLDICT
+  }>
+  $Tester$_fun_test2 PROCREF:<{
+        NEWC
+    0 PUSHINT
+    SWAP
+    1 STU
+        ENDC
+        NEWC
+    SWAP
+        CTOS
+    1 PUSHINT
+    load_uint$not_mut INLINECALLDICT
+    SWAP
+    1 STU
+        ENDC
+        CTOS
+    1 LDU
+    DROP
+  }>
+  $Tester$_fun_test3 PROCREF:<{
+    3 PUSHINT
+    2 PUSHINT
+    $Int$_fun_multiply INLINECALLDICT
+    DROP
+  }>
+  $Tester$_fun_test4 PROCREF:<{
+    3 PUSHINT
+    2 PUSHINT
+    $Int$_fun_multiply INLINECALLDICT
+    NIP
+    4 PUSHINT
+    $Int$_fun_multiply$not_mut INLINECALLDICT
+  }>
+  $Tester$_fun_test5 PROCREF:<{
+        B{b5ee9c724101010100050000066162631d957013} B>boc <s PUSHSLICE
+    8 PUSHINT
+    load_uint$not_mut INLINECALLDICT
+  }>
+  $Tester$_fun_test6 PROCREF:<{
+        b{} PUSHSLICE
+    $Slice$_fun_loadRef$not_mut INLINECALLDICT
+    DROP
+  }>
+  $Tester$_fun_test7 PROCREF:<{
+        NEWC
+    42 PUSHINT
+    SWAP
+    7 STI
+    $Builder$_fun_asSlice INLINECALLDICT
+    7 PUSHINT
+    load_int$not_mut INLINECALLDICT
+  }>
+  $Foo$_constructor_s PROCINLINE:<{
+  }>
+  $Tester$_fun_test8 PROCREF:<{
+        NEWC
+    3 PUSHINT
+    SWAP
+    2 STU
+    1 PUSHINT
+    SWAP
+    2 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+    $Foo$_constructor_s INLINECALLDICT
+    1 LDSLICE
+    NIP
+    3 LDU
+    DROP
+  }>
+  $Tester$_fun_test9 PROCREF:<{
+    1 LDU
+    NIP
+    3 LDU
+    SWAP
+  }>
+  $Tester$_fun_test10 PROCREF:<{
+    8 PUSHINT
+    123 PUSHINT
+        B{b5ee9c724101010100040000034568b80797f8} B>boc <s PUSHSLICE
+    s1 s3 s3 XCHG3
+        DICTUSET
+  }>
+  $Tester$_fun_test11 PROCREF:<{
+    DUP
+    2 PUSHINT
+    $Int$_fun_multiplyExtends INLINECALLDICT
+    DROP
+    DUP
+    2 PUSHINT
+    $Int$_fun_multiplyExtends INLINECALLDICT
+    3 PUSHINT
+    $Int$_fun_multiplyExtends INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_multiplyExtends INLINECALLDICT
+    3 PUSHINT
+    $Int$_fun_multiplyExtends INLINECALLDICT
+  }>
+  $Tester$_fun_test12 PROCREF:<{
+    10 PUSHINT
+    $MyStruct$_constructor_age INLINECALLDICT
+    20 PUSHINT
+    $MyStruct$_fun_setAge$not_mut INLINECALLDICT
+  }>
+  %test1 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test1 INLINECALLDICT
+    NIP
+  }>
+  %test2 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test2 INLINECALLDICT
+    NIP
+  }>
+  %test3 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test3 INLINECALLDICT
+    NIP
+  }>
+  %test4 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test4 INLINECALLDICT
+    NIP
+  }>
+  %test5 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test5 INLINECALLDICT
+    NIP
+  }>
+  %test6 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test6 INLINECALLDICT
+    DROP
+  }>
+  %test7 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test7 INLINECALLDICT
+    NIP
+  }>
+  %test8 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test8 INLINECALLDICT
+    NIP
+  }>
+  %test9 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test9 INLINECALLDICT
+    NIP
+  }>
+  %test10 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    SWAP
+    $Tester$_fun_test10 INLINECALLDICT
+    NIP
+  }>
+  %test11 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    SWAP
+    $Tester$_fun_test11 INLINECALLDICT
+    NIP
+  }>
+  %test12 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test12 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Tester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

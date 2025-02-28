@@ -1,0 +1,931 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; stdlib_StdlibTest.headers.fc
+;;
+;; Header files for StdlibTest
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $VarIntStruct$_store
+builder $VarIntStruct$_store(builder build_0, (int, int, int, int) v) inline;
+
+;; $VarIntStruct$_store_cell
+cell $VarIntStruct$_store_cell((int, int, int, int) v) inline;
+
+;; $StdlibTest$_load
+(slice, ((int))) $StdlibTest$_load(slice sc_0) inline;
+
+;; $DataSize$_to_external
+(int, int, int) $DataSize$_to_external(((int, int, int)) v) inline;
+
+;; $StdAddress$_to_external
+(int, int) $StdAddress$_to_external(((int, int)) v) inline;
+
+;; $VarAddress$_to_external
+(int, slice) $VarAddress$_to_external(((int, slice)) v) inline;
+
+;; $StdlibTest$_contract_init
+(int) $StdlibTest$_contract_init() impure inline;
+
+;; $StdlibTest$_contract_load
+(int) $StdlibTest$_contract_load() impure inline;
+
+;; $StdlibTest$_fun_sliceEmpty
+((int), int) $StdlibTest$_fun_sliceEmpty((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_sliceBits
+((int), int) $StdlibTest$_fun_sliceBits((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_sliceRefs
+((int), int) $StdlibTest$_fun_sliceRefs((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_storeBool
+((int), builder) $StdlibTest$_fun_storeBool((int) $self, builder $bl, int $b) impure inline_ref;
+
+;; $StdlibTest$_fun_loadBool
+((int), int) $StdlibTest$_fun_loadBool((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_storeBit
+((int), builder) $StdlibTest$_fun_storeBit((int) $self, builder $bl, int $b) impure inline_ref;
+
+;; $StdlibTest$_fun_loadBit
+((int), int) $StdlibTest$_fun_loadBit((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_tvm_2023_07_upgrade
+((int), int) $StdlibTest$_fun_tvm_2023_07_upgrade((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_tvm_2024_04_upgrade
+((int), int) $StdlibTest$_fun_tvm_2024_04_upgrade((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_storeMaybeRef
+((int), builder) $StdlibTest$_fun_storeMaybeRef((int) $self, builder $bl, cell $c) impure inline_ref;
+
+;; $StdlibTest$_fun_loadMaybeRef
+((int), cell) $StdlibTest$_fun_loadMaybeRef((int) $self, slice $c) impure inline_ref;
+
+;; $StdlibTest$_fun_preloadMaybeRef
+((int), cell) $StdlibTest$_fun_preloadMaybeRef((int) $self, slice $c) impure inline_ref;
+
+;; $StdlibTest$_fun_parseStdAddress
+((int), (int, int)) $StdlibTest$_fun_parseStdAddress((int) $self, slice $slice) impure inline_ref;
+
+;; $StdlibTest$_fun_parseVarAddress
+((int), (int, slice)) $StdlibTest$_fun_parseVarAddress((int) $self, slice $slice) impure inline_ref;
+
+;; $Context$_constructor_bounceable_sender_value_raw
+((int, slice, int, slice)) $Context$_constructor_bounceable_sender_value_raw(int $bounceable, slice $sender, int $value, slice $raw) inline;
+
+;; $StdlibTest$_fun_parseOriginalFwdFee
+((int), int) $StdlibTest$_fun_parseOriginalFwdFee((int) $self, slice $msg) impure inline_ref;
+
+;; $StdlibTest$_fun_builderDepth
+((int), int) $StdlibTest$_fun_builderDepth((int) $self, builder $bl) impure inline_ref;
+
+;; $StdlibTest$_fun_skipLastBits
+((int), slice) $StdlibTest$_fun_skipLastBits((int) $self, slice $sc, int $n) impure inline_ref;
+
+;; $StdlibTest$_fun_firstBits
+((int), slice) $StdlibTest$_fun_firstBits((int) $self, slice $sc, int $n) impure inline_ref;
+
+;; $StdlibTest$_fun_lastBits
+((int), slice) $StdlibTest$_fun_lastBits((int) $self, slice $sc, int $n) impure inline_ref;
+
+;; $StdlibTest$_fun_sliceDepth
+((int), int) $StdlibTest$_fun_sliceDepth((int) $self, slice $sc) impure inline_ref;
+
+;; $StdlibTest$_fun_computeDataSizeCell
+((int), (int, int, int)) $StdlibTest$_fun_computeDataSizeCell((int) $self, cell $c, int $maxCells) impure inline_ref;
+
+;; $StdlibTest$_fun_computeDataSizeSlice
+((int), (int, int, int)) $StdlibTest$_fun_computeDataSizeSlice((int) $self, slice $sc, int $maxCells) impure inline_ref;
+
+;; $StdlibTest$_fun_cellDepth
+((int), int) $StdlibTest$_fun_cellDepth((int) $self, cell $c) impure inline_ref;
+
+;; $StdlibTest$_fun_curLt
+((int), int) $StdlibTest$_fun_curLt((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_blockLt
+((int), int) $StdlibTest$_fun_blockLt((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_setGasLimit
+((int), int) $StdlibTest$_fun_setGasLimit((int) $self, int $gl) impure inline_ref;
+
+;; $StdlibTest$_fun_getSeed
+((int), int) $StdlibTest$_fun_getSeed((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_setSeed
+((int), int) $StdlibTest$_fun_setSeed((int) $self, int $seed) impure inline_ref;
+
+;; $StdlibTest$_fun_myCode
+((int), cell) $StdlibTest$_fun_myCode((int) $self) impure inline_ref;
+
+;; $StdlibTest$_fun_varIntegers1
+((int), int) $StdlibTest$_fun_varIntegers1((int) $self) impure inline_ref;
+
+;; $VarIntStruct$_constructor_a_b_d_e
+((int, int, int, int)) $VarIntStruct$_constructor_a_b_d_e(int $a, int $b, int $d, int $e) inline;
+
+;; $StdlibTest$_fun_varIntegers2
+((int), int) $StdlibTest$_fun_varIntegers2((int) $self) impure inline_ref;
+
+
+;; stdlib_StdlibTest.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+int $global_gasConsumed() impure asm """
+    GASCONSUMED
+""";
+
+int $global_myStorageDue() impure asm """
+    DUEPAYMENT
+""";
+
+int $global_getStorageFee(int $cells, int $bits, int $seconds, int $isMasterchain) impure asm """
+    GETSTORAGEFEE
+""";
+
+int $global_getComputeFee(int $gasUsed, int $isMasterchain) impure asm """
+    GETGASFEE
+""";
+
+int $global_getSimpleComputeFee(int $gasUsed, int $isMasterchain) impure asm """
+    GETGASFEESIMPLE
+""";
+
+int $global_getForwardFee(int $cells, int $bits, int $isMasterchain) impure asm """
+    GETFORWARDFEE
+""";
+
+int $global_getSimpleForwardFee(int $cells, int $bits, int $isMasterchain) impure asm """
+    GETFORWARDFEESIMPLE
+""";
+
+int $global_getOriginalFwdFee(int $fwdFee, int $isMasterchain) impure asm """
+    GETORIGINALFWDFEE
+""";
+
+int $global_curLt() impure asm """
+    LTIME
+""";
+
+int $global_blockLt() impure asm """
+    BLOCKLT
+""";
+
+() $global_setGasLimit(int $limit) impure asm """
+    SETGASLIMIT
+""";
+
+int $global_getSeed() impure asm """
+    RANDSEED
+""";
+
+() $global_setSeed(int $seed) impure asm """
+    SETRAND
+""";
+
+cell $global_myCode() impure asm """
+    MYCODE
+""";
+
+(int, int) $global_parseStdAddress(slice $slice) impure asm """
+    REWRITESTDADDR
+""";
+
+(int, slice) $global_parseVarAddress(slice $slice) impure asm """
+    REWRITEVARADDR
+""";
+
+builder $Builder$_fun_storeBool(int $value, builder $self) impure asm """
+    1 STI
+""";
+
+builder $Builder$_fun_storeBit(int $value, builder $self) impure asm """
+    1 STI
+""";
+
+builder $Builder$_fun_storeVarUint16(builder $self, int $value) impure asm """
+    STVARUINT16
+""";
+
+builder $Builder$_fun_storeVarInt16(builder $self, int $value) impure asm """
+    STVARINT16
+""";
+
+builder $Builder$_fun_storeVarUint32(builder $self, int $value) impure asm """
+    STVARUINT32
+""";
+
+builder $Builder$_fun_storeVarInt32(builder $self, int $value) impure asm """
+    STVARINT32
+""";
+
+builder $Builder$_fun_storeMaybeRef(cell $cell, builder $self) impure asm """
+    STOPTREF
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+int $Builder$_fun_depth(builder $self) impure asm """
+    BDEPTH
+""";
+
+(slice, cell) $Slice$_fun_loadMaybeRef(slice $self) impure asm( -> 1 0) """
+    LDOPTREF
+""";
+
+cell $Slice$_fun_preloadMaybeRef(slice $self) impure asm """
+    PLDOPTREF
+""";
+
+(slice, int) $Slice$_fun_loadBool(slice $self) impure asm( -> 1 0) """
+    1 LDI
+""";
+
+(slice, int) $Slice$_fun_loadBit(slice $self) impure asm( -> 1 0) """
+    1 LDI
+""";
+
+(slice, int) $Slice$_fun_loadVarUint16(slice $self) impure asm( -> 1 0) """
+    LDVARUINT16
+""";
+
+(slice, int) $Slice$_fun_loadVarInt16(slice $self) impure asm( -> 1 0) """
+    LDVARINT16
+""";
+
+(slice, int) $Slice$_fun_loadVarUint32(slice $self) impure asm( -> 1 0) """
+    LDVARUINT32
+""";
+
+(slice, int) $Slice$_fun_loadVarInt32(slice $self) impure asm( -> 1 0) """
+    LDVARINT32
+""";
+
+(slice, ()) $Slice$_fun_skipBits(slice $self, int $l) impure asm """
+    SDSKIPFIRST
+""";
+
+slice $Slice$_fun_skipLastBits(slice $self, int $len) impure asm """
+    SDSKIPLAST
+""";
+
+slice $Slice$_fun_firstBits(slice $self, int $len) impure asm """
+    SDCUTFIRST
+""";
+
+slice $Slice$_fun_lastBits(slice $self, int $len) impure asm """
+    SDCUTLAST
+""";
+
+int $Slice$_fun_depth(slice $self) impure asm """
+    SDEPTH
+""";
+
+int $Slice$_fun_refs(slice $self) impure asm """
+    SREFS
+""";
+
+int $Slice$_fun_bits(slice $self) impure asm """
+    SBITS
+""";
+
+int $Slice$_fun_empty(slice $self) impure asm """
+    SEMPTY
+""";
+
+(int, int, int) $Slice$_fun_computeDataSize(slice $self, int $maxCells) impure asm """
+    SDATASIZE
+""";
+
+(slice, slice) $Slice$_fun_loadAddress(slice $self) impure asm( -> 1 0) """
+    LDMSGADDR
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+(int, int, int) $Cell$_fun_computeDataSize(cell $self, int $maxCells) impure asm """
+    CDATASIZE
+""";
+
+int $Cell$_fun_depth(cell $self) impure asm """
+    CDEPTH
+""";
+
+int $Context$_fun_readForwardFee((int, slice, int, slice) $self) impure asm """
+    LDMSGADDR   // load dest:MsgAddressInt
+    LDGRAMS     // load value:CurrencyCollection
+    ONE
+    SDSKIPFIRST // skip extra currency collection
+    LDGRAMS     // load ihr_fee
+    LDGRAMS     // load fwd_fee, we'll be using this!
+    DROP        // drop remaining Slice (with created_lt and created_at)
+
+    // There are 7 entries on the stack — first 3 fields of Context plus 4 loaded ones.
+    // The topmost is fwd_fee, which is the only one we're after, so let's drop 6 entries below:
+    6 1 BLKDROP2 // drop the loaded values as well as the first 3 fields of Context
+
+    ZERO              // not masterchain
+    GETORIGINALFWDFEE // (fwd_fee * 2^16) / first_frac, where
+                      // first_frac is a value listed in config param 25
+                      // of the blockchain: https://tonscan.org/config#25
+""";
+
+;; stdlib_StdlibTest.storage.fc
+;;
+;; Type: DataSize
+;; TLB: _ cells:int257 bits:int257 refs:int257 = DataSize
+;;
+
+(int, int, int) $DataSize$_to_external(((int, int, int)) v) inline {
+    var (v'cells, v'bits, v'refs) = v; 
+    return (v'cells, v'bits, v'refs);
+}
+
+;;
+;; Type: Context
+;; TLB: _ bounceable:bool sender:address value:int257 raw:^slice = Context
+;;
+
+((int, slice, int, slice)) $Context$_constructor_bounceable_sender_value_raw(int $bounceable, slice $sender, int $value, slice $raw) inline {
+    return ($bounceable, $sender, $value, $raw);
+}
+
+;;
+;; Type: StdAddress
+;; TLB: _ workchain:int8 address:uint256 = StdAddress
+;;
+
+(int, int) $StdAddress$_to_external(((int, int)) v) inline {
+    var (v'workchain, v'address) = v; 
+    return (v'workchain, v'address);
+}
+
+;;
+;; Type: VarAddress
+;; TLB: _ workchain:int32 address:^slice = VarAddress
+;;
+
+(int, slice) $VarAddress$_to_external(((int, slice)) v) inline {
+    var (v'workchain, v'address) = v; 
+    return (v'workchain, v'address);
+}
+
+;;
+;; Type: VarIntStruct
+;; TLB: _ a:varint16 b:varint32 d:varuint16 e:varuint32 = VarIntStruct
+;;
+
+builder $VarIntStruct$_store(builder build_0, (int, int, int, int) v) inline {
+    var (v'a, v'b, v'd, v'e) = v;
+    build_0 = build_0.store_varint16(v'a);
+    build_0 = build_0.store_varint32(v'b);
+    build_0 = build_0.store_varuint16(v'd);
+    build_0 = build_0.store_varuint32(v'e);
+    return build_0;
+}
+
+cell $VarIntStruct$_store_cell((int, int, int, int) v) inline {
+    return $VarIntStruct$_store(begin_cell(), v).end_cell();
+}
+
+((int, int, int, int)) $VarIntStruct$_constructor_a_b_d_e(int $a, int $b, int $d, int $e) inline {
+    return ($a, $b, $d, $e);
+}
+
+;;
+;; Type: StdlibTest
+;; TLB: _ v:int257 = StdlibTest
+;;
+
+(slice, ((int))) $StdlibTest$_load(slice sc_0) inline {
+    var v'v = sc_0~load_int(257);
+    return (sc_0, (v'v));
+}
+
+(int) $StdlibTest$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$StdlibTest$_load();
+    } else {
+        return $StdlibTest$_contract_init();
+    }
+}
+
+;;
+;; Contract StdlibTest functions
+;;
+
+(int) $StdlibTest$_contract_init() impure inline {
+    var (($self'v)) = (0);
+    return ($self'v);
+}
+
+((int), int) $StdlibTest$_fun_sliceEmpty((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2408 = $Slice$_fun_empty($sc);
+    return (($self'v), $fresh$ret_2408);
+}
+
+((int), int) $StdlibTest$_fun_sliceBits((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2409 = $Slice$_fun_bits($sc);
+    return (($self'v), $fresh$ret_2409);
+}
+
+((int), int) $StdlibTest$_fun_sliceRefs((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2410 = $Slice$_fun_refs($sc);
+    return (($self'v), $fresh$ret_2410);
+}
+
+((int), builder) $StdlibTest$_fun_storeBool((int) $self, builder $bl, int $b) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2411 = $Builder$_fun_storeBool($b, $bl);
+    return (($self'v), $fresh$ret_2411);
+}
+
+((int), int) $StdlibTest$_fun_loadBool((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2412 = $sc~$Slice$_fun_loadBool();
+    return (($self'v), $fresh$ret_2412);
+}
+
+((int), builder) $StdlibTest$_fun_storeBit((int) $self, builder $bl, int $b) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2413 = $Builder$_fun_storeBit($b, $bl);
+    return (($self'v), $fresh$ret_2413);
+}
+
+((int), int) $StdlibTest$_fun_loadBit((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2414 = $sc~$Slice$_fun_loadBit();
+    return (($self'v), $fresh$ret_2414);
+}
+
+((int), int) $StdlibTest$_fun_tvm_2023_07_upgrade((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2415 = $global_gasConsumed();
+    return (($self'v), $fresh$ret_2415);
+}
+
+((int), int) $StdlibTest$_fun_tvm_2024_04_upgrade((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2416 = (((((($global_getComputeFee(1000, false) + $global_getStorageFee(1000, 1000, 1000, false)) + $global_getForwardFee(1000, 1000, false)) + $global_getSimpleComputeFee(1000, false)) + $global_getSimpleForwardFee(1000, 1000, false)) + $global_getOriginalFwdFee(1000, false)) + $global_myStorageDue());
+    return (($self'v), $fresh$ret_2416);
+}
+
+((int), builder) $StdlibTest$_fun_storeMaybeRef((int) $self, builder $bl, cell $c) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2417 = $Builder$_fun_storeMaybeRef($c, $bl);
+    return (($self'v), $fresh$ret_2417);
+}
+
+((int), cell) $StdlibTest$_fun_loadMaybeRef((int) $self, slice $c) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2418 = $c~$Slice$_fun_loadMaybeRef();
+    return (($self'v), $fresh$ret_2418);
+}
+
+((int), cell) $StdlibTest$_fun_preloadMaybeRef((int) $self, slice $c) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2419 = $Slice$_fun_preloadMaybeRef($c);
+    return (($self'v), $fresh$ret_2419);
+}
+
+((int), (int, int)) $StdlibTest$_fun_parseStdAddress((int) $self, slice $slice) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2420 = $global_parseStdAddress($slice);
+    return (($self'v), $fresh$ret_2420);
+}
+
+((int), (int, slice)) $StdlibTest$_fun_parseVarAddress((int) $self, slice $slice) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2421 = $global_parseVarAddress($slice);
+    return (($self'v), $fresh$ret_2421);
+}
+
+((int), int) $StdlibTest$_fun_parseOriginalFwdFee((int) $self, slice $msg) impure inline_ref {
+    var (($self'v)) = $self;
+    $msg~$Slice$_fun_skipBits(4);
+    $msg~$Slice$_fun_loadAddress();
+    var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = $Context$_constructor_bounceable_sender_value_raw(false, $global_myAddress(), 1000000000, $msg);
+    var $fresh$ret_2422 = $Context$_fun_readForwardFee(($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw));
+    return (($self'v), $fresh$ret_2422);
+}
+
+((int), int) $StdlibTest$_fun_builderDepth((int) $self, builder $bl) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2423 = $Builder$_fun_depth($bl);
+    return (($self'v), $fresh$ret_2423);
+}
+
+((int), slice) $StdlibTest$_fun_skipLastBits((int) $self, slice $sc, int $n) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2424 = $Slice$_fun_skipLastBits($sc, $n);
+    return (($self'v), $fresh$ret_2424);
+}
+
+((int), slice) $StdlibTest$_fun_firstBits((int) $self, slice $sc, int $n) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2425 = $Slice$_fun_firstBits($sc, $n);
+    return (($self'v), $fresh$ret_2425);
+}
+
+((int), slice) $StdlibTest$_fun_lastBits((int) $self, slice $sc, int $n) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2426 = $Slice$_fun_lastBits($sc, $n);
+    return (($self'v), $fresh$ret_2426);
+}
+
+((int), int) $StdlibTest$_fun_sliceDepth((int) $self, slice $sc) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2427 = $Slice$_fun_depth($sc);
+    return (($self'v), $fresh$ret_2427);
+}
+
+((int), (int, int, int)) $StdlibTest$_fun_computeDataSizeCell((int) $self, cell $c, int $maxCells) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2428 = $Cell$_fun_computeDataSize($c, $maxCells);
+    return (($self'v), $fresh$ret_2428);
+}
+
+((int), (int, int, int)) $StdlibTest$_fun_computeDataSizeSlice((int) $self, slice $sc, int $maxCells) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2429 = $Slice$_fun_computeDataSize($sc, $maxCells);
+    return (($self'v), $fresh$ret_2429);
+}
+
+((int), int) $StdlibTest$_fun_cellDepth((int) $self, cell $c) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2430 = $Cell$_fun_depth($c);
+    return (($self'v), $fresh$ret_2430);
+}
+
+((int), int) $StdlibTest$_fun_curLt((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2431 = $global_curLt();
+    return (($self'v), $fresh$ret_2431);
+}
+
+((int), int) $StdlibTest$_fun_blockLt((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2432 = $global_blockLt();
+    return (($self'v), $fresh$ret_2432);
+}
+
+((int), int) $StdlibTest$_fun_setGasLimit((int) $self, int $gl) impure inline_ref {
+    var (($self'v)) = $self;
+    $global_setGasLimit($gl);
+    int $x = 0;
+    repeat (100) {
+        $x = $x + 1;
+    }
+    var $fresh$ret_2433 = $global_gasConsumed();
+    return (($self'v), $fresh$ret_2433);
+}
+
+((int), int) $StdlibTest$_fun_getSeed((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2434 = $global_getSeed();
+    return (($self'v), $fresh$ret_2434);
+}
+
+((int), int) $StdlibTest$_fun_setSeed((int) $self, int $seed) impure inline_ref {
+    var (($self'v)) = $self;
+    $global_setSeed($seed);
+    var $fresh$ret_2435 = $global_getSeed();
+    return (($self'v), $fresh$ret_2435);
+}
+
+((int), cell) $StdlibTest$_fun_myCode((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var $fresh$ret_2436 = $global_myCode();
+    return (($self'v), $fresh$ret_2436);
+}
+
+((int), int) $StdlibTest$_fun_varIntegers1((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    slice $x = $Cell$_fun_beginParse($Builder$_fun_endCell($Builder$_fun_storeVarUint32($Builder$_fun_storeVarUint16($Builder$_fun_storeVarInt32($Builder$_fun_storeVarInt16($global_beginCell(), 1000), 200), 30), 4)));
+    int $a = $x~$Slice$_fun_loadVarInt16();
+    int $b = $x~$Slice$_fun_loadVarInt32();
+    int $d = $x~$Slice$_fun_loadVarUint16();
+    int $e = $x~$Slice$_fun_loadVarUint32();
+    var $fresh$ret_2437 = ((($a + $b) + $d) + $e);
+    return (($self'v), $fresh$ret_2437);
+}
+
+((int), int) $StdlibTest$_fun_varIntegers2((int) $self) impure inline_ref {
+    var (($self'v)) = $self;
+    var ($s'a, $s'b, $s'd, $s'e) = $VarIntStruct$_constructor_a_b_d_e(1000, 200, 30, 4);
+    cell $c = $VarIntStruct$_store_cell(($s'a, $s'b, $s'd, $s'e));
+    slice $cs = $Cell$_fun_beginParse($c);
+    int $a = $cs~$Slice$_fun_loadVarInt16();
+    int $b = $cs~$Slice$_fun_loadVarInt32();
+    int $d = $cs~$Slice$_fun_loadVarUint16();
+    int $e = $cs~$Slice$_fun_loadVarUint32();
+    var $fresh$ret_2438 = ((($a + $b) + $d) + $e);
+    return (($self'v), $fresh$ret_2438);
+}
+
+;;
+;; Get methods of a Contract StdlibTest
+;;
+
+_ %sliceEmpty(slice $sc) method_id(73995) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_sliceEmpty($sc);
+    return res;
+}
+
+_ %sliceBits(slice $sc) method_id(75090) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_sliceBits($sc);
+    return res;
+}
+
+_ %sliceRefs(slice $sc) method_id(77445) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_sliceRefs($sc);
+    return res;
+}
+
+_ %storeBool(builder $bl, int $b) method_id(95946) {
+    builder $bl = $bl;
+    int $b = $b;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_storeBool($bl, $b);
+    return res;
+}
+
+_ %loadBool(slice $sc) method_id(109838) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_loadBool($sc);
+    return res;
+}
+
+_ %storeBit(builder $bl, int $b) method_id(124731) {
+    builder $bl = $bl;
+    int $b = $b;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_storeBit($bl, $b);
+    return res;
+}
+
+_ %loadBit(slice $sc) method_id(108456) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_loadBit($sc);
+    return res;
+}
+
+_ %tvm_2023_07_upgrade() method_id(70959) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_tvm_2023_07_upgrade();
+    return res;
+}
+
+_ %tvm_2024_04_upgrade() method_id(77856) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_tvm_2024_04_upgrade();
+    return res;
+}
+
+_ %storeMaybeRef(builder $bl, cell $c) method_id(72411) {
+    builder $bl = $bl;
+    cell $c = $c;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_storeMaybeRef($bl, $c);
+    return res;
+}
+
+_ %loadMaybeRef(slice $c) method_id(87792) {
+    slice $c = $c;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_loadMaybeRef($c);
+    return res;
+}
+
+_ %preloadMaybeRef(slice $c) method_id(73300) {
+    slice $c = $c;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_preloadMaybeRef($c);
+    return res;
+}
+
+_ %parseStdAddress(slice $slice) method_id(113654) {
+    slice $slice = $slice;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_parseStdAddress($slice);
+    return $StdAddress$_to_external(res);
+}
+
+_ %parseVarAddress(slice $slice) method_id(123083) {
+    slice $slice = $slice;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_parseVarAddress($slice);
+    return $VarAddress$_to_external(res);
+}
+
+_ %parseOriginalFwdFee(slice $msg) method_id(67390) {
+    slice $msg = $msg;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_parseOriginalFwdFee($msg);
+    return res;
+}
+
+_ %builderDepth(builder $bl) method_id(110284) {
+    builder $bl = $bl;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_builderDepth($bl);
+    return res;
+}
+
+_ %skipLastBits(slice $sc, int $n) method_id(102321) {
+    slice $sc = $sc;
+    int $n = $n;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_skipLastBits($sc, $n);
+    return res;
+}
+
+_ %firstBits(slice $sc, int $n) method_id(98565) {
+    slice $sc = $sc;
+    int $n = $n;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_firstBits($sc, $n);
+    return res;
+}
+
+_ %lastBits(slice $sc, int $n) method_id(99567) {
+    slice $sc = $sc;
+    int $n = $n;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_lastBits($sc, $n);
+    return res;
+}
+
+_ %sliceDepth(slice $sc) method_id(68745) {
+    slice $sc = $sc;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_sliceDepth($sc);
+    return res;
+}
+
+_ %computeDataSizeCell(cell $c, int $maxCells) method_id(86103) {
+    cell $c = $c;
+    int $maxCells = $maxCells;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_computeDataSizeCell($c, $maxCells);
+    return $DataSize$_to_external(res);
+}
+
+_ %computeDataSizeSlice(slice $sc, int $maxCells) method_id(81173) {
+    slice $sc = $sc;
+    int $maxCells = $maxCells;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_computeDataSizeSlice($sc, $maxCells);
+    return $DataSize$_to_external(res);
+}
+
+_ %cellDepth(cell $c) method_id(76079) {
+    cell $c = $c;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_cellDepth($c);
+    return res;
+}
+
+_ %curLt() method_id(117220) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_curLt();
+    return res;
+}
+
+_ %blockLt() method_id(74753) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_blockLt();
+    return res;
+}
+
+_ %setGasLimit(int $gl) method_id(109193) {
+    int $gl = $gl;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_setGasLimit($gl);
+    return res;
+}
+
+_ %getSeed() method_id(91206) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_getSeed();
+    return res;
+}
+
+_ %setSeed(int $seed) method_id(103163) {
+    int $seed = $seed;
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_setSeed($seed);
+    return res;
+}
+
+_ %myCode() method_id(73046) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_myCode();
+    return res;
+}
+
+_ %varIntegers1() method_id(80382) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_varIntegers1();
+    return res;
+}
+
+_ %varIntegers2() method_id(67997) {
+    var self = $StdlibTest$_contract_load();
+    var res = self~$StdlibTest$_fun_varIntegers2();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract StdlibTest
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'v) = $StdlibTest$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

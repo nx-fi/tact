@@ -1,0 +1,1169 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; constants_ConstantTester.headers.fc
+;;
+;; Header files for ConstantTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $S$_to_external
+(int, int) $S$_to_external(((int, int)) v) inline;
+
+;; $T$_to_external
+(int, (int, int)) $T$_to_external(((int, (int, int))) v) inline;
+
+;; $ConstantTester$_contract_init
+tuple $ConstantTester$_contract_init() impure inline;
+
+;; $ConstantTester$_contract_load
+tuple $ConstantTester$_contract_load() impure inline;
+
+;; $ConstantTester$_fun_something1
+(tuple, int) $ConstantTester$_fun_something1(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something2
+(tuple, int) $ConstantTester$_fun_something2(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something3
+(tuple, int) $ConstantTester$_fun_something3(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something4
+(tuple, int) $ConstantTester$_fun_something4(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something5
+(tuple, slice) $ConstantTester$_fun_something5(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something6
+(tuple, int) $ConstantTester$_fun_something6(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something7
+(tuple, int) $ConstantTester$_fun_something7(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something8
+(tuple, int) $ConstantTester$_fun_something8(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something9
+(tuple, slice) $ConstantTester$_fun_something9(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something10
+(tuple, slice) $ConstantTester$_fun_something10(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something11
+(tuple, int) $ConstantTester$_fun_something11(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something12
+(tuple, int) $ConstantTester$_fun_something12(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something13
+(tuple, int) $ConstantTester$_fun_something13(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something14
+(tuple, int) $ConstantTester$_fun_something14(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something15
+(tuple, int) $ConstantTester$_fun_something15(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something16
+(tuple, int) $ConstantTester$_fun_something16(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something17
+(tuple, int) $ConstantTester$_fun_something17(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something18
+(tuple, int) $ConstantTester$_fun_something18(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something19
+(tuple, int) $ConstantTester$_fun_something19(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something20
+(tuple, int) $ConstantTester$_fun_something20(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something21
+(tuple, int) $ConstantTester$_fun_something21(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something22
+(tuple, int) $ConstantTester$_fun_something22(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something23
+(tuple, int) $ConstantTester$_fun_something23(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something24
+(tuple, int) $ConstantTester$_fun_something24(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something25
+(tuple, int) $ConstantTester$_fun_something25(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something26
+(tuple, int) $ConstantTester$_fun_something26(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something27
+(tuple, int) $ConstantTester$_fun_something27(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something28
+(tuple, int) $ConstantTester$_fun_something28(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something29
+(tuple, int) $ConstantTester$_fun_something29(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something30
+(tuple, int) $ConstantTester$_fun_something30(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something31
+(tuple, int) $ConstantTester$_fun_something31(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something32
+(tuple, int) $ConstantTester$_fun_something32(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something33
+(tuple, cell) $ConstantTester$_fun_something33(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something34
+(tuple, cell) $ConstantTester$_fun_something34(tuple $self) impure inline_ref;
+
+;; $S$_constructor_a_b
+((int, int)) $S$_constructor_a_b(int $a, int $b) inline;
+
+;; $ConstantTester$_fun_something35
+(tuple, (int, int)) $ConstantTester$_fun_something35(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something36
+(tuple, (int, int)) $ConstantTester$_fun_something36(tuple $self) impure inline_ref;
+
+;; $T$_constructor_a_s
+((int, (int, int))) $T$_constructor_a_s(int $a, (int, int) $s) inline;
+
+;; $ConstantTester$_fun_something37
+(tuple, (int, (int, int))) $ConstantTester$_fun_something37(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something38
+(tuple, int) $ConstantTester$_fun_something38(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something39
+(tuple, int) $ConstantTester$_fun_something39(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something40
+(tuple, int) $ConstantTester$_fun_something40(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something41
+(tuple, slice) $ConstantTester$_fun_something41(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something42
+(tuple, slice) $ConstantTester$_fun_something42(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something43
+(tuple, slice) $ConstantTester$_fun_something43(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something44
+(tuple, slice) $ConstantTester$_fun_something44(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_something45
+(tuple, int) $ConstantTester$_fun_something45(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst1
+(tuple, int) $ConstantTester$_fun_globalConst1(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst2
+(tuple, int) $ConstantTester$_fun_globalConst2(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst3
+(tuple, int) $ConstantTester$_fun_globalConst3(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst4
+(tuple, int) $ConstantTester$_fun_globalConst4(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst5
+(tuple, int) $ConstantTester$_fun_globalConst5(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst6
+(tuple, int) $ConstantTester$_fun_globalConst6(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst7
+(tuple, int) $ConstantTester$_fun_globalConst7(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst8
+(tuple, int) $ConstantTester$_fun_globalConst8(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst9
+(tuple, int) $ConstantTester$_fun_globalConst9(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst10
+(tuple, int) $ConstantTester$_fun_globalConst10(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst11
+(tuple, int) $ConstantTester$_fun_globalConst11(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst12
+(tuple, int) $ConstantTester$_fun_globalConst12(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst13
+(tuple, int) $ConstantTester$_fun_globalConst13(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_beforeDefinedA
+(tuple, int) $ConstantTester$_fun_beforeDefinedA(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_beforeDefinedC
+(tuple, int) $ConstantTester$_fun_beforeDefinedC(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_defaultFieldB
+(tuple, int) $ConstantTester$_fun_defaultFieldB(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_noCircularA
+(tuple, int) $ConstantTester$_fun_noCircularA(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_minInt1
+(tuple, int) $ConstantTester$_fun_minInt1(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_minInt2
+(tuple, int) $ConstantTester$_fun_minInt2(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_minInt3
+(tuple, int) $ConstantTester$_fun_minInt3(tuple $self) impure inline_ref;
+
+;; $ConstantTester$_fun_globalConst
+(tuple, int) $ConstantTester$_fun_globalConst(tuple $self) impure inline_ref;
+
+
+;; constants_ConstantTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; constants_ConstantTester.constants.fc
+;; String "Hello world!"
+slice __gen_slice_string_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36() asm """
+    B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN
+slice __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+""";
+
+;; EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c
+slice __gen_slice_address_61ab4641fa30d9310391025086eec65d200d79268e1b7cd402565e01ba64be3c() asm """
+    B{b5ee9c72410101010024000043800000000000000000000000000000000000000000000000000000000000000000104aec829d} B>boc <s PUSHSLICE
+""";
+
+;; EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjRbO4
+slice __gen_slice_address_a7069f760ef516cfe9fb9a502b57767b6f83f53f1c1cf7d0dae54abd63c84066() asm """
+    B{b5ee9c72410101010024000043800000000000000000000000000000000000000000000000000000000000002468b05ce0db5d} B>boc <s PUSHSLICE
+""";
+
+;; EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI0VniavN72YJ
+slice __gen_slice_address_0ee5604654cc61cb47b25ae370e7b3143c3a16887ca4f85b70d22a8edcebc50e() asm """
+    B{b5ee9c7241010101002400004380000000000000000000000000000000000000000000000000002468acf13579bdf0b1160dcd} B>boc <s PUSHSLICE
+""";
+
+;; constants_ConstantTester.storage.fc
+;;
+;; Type: S
+;; TLB: _ a:bool b:int257 = S
+;;
+
+(int, int) $S$_to_external(((int, int)) v) inline {
+    var (v'a, v'b) = v; 
+    return (v'a, v'b);
+}
+
+((int, int)) $S$_constructor_a_b(int $a, int $b) inline {
+    return ($a, $b);
+}
+
+;;
+;; Type: T
+;; TLB: _ a:int257 s:S{a:bool,b:int257} = T
+;;
+
+(int, (int, int)) $T$_to_external(((int, (int, int))) v) inline {
+    var (v'a, v's) = v; 
+    return (v'a, v's);
+}
+
+((int, (int, int))) $T$_constructor_a_s(int $a, (int, int) $s) inline {
+    return ($a, $s);
+}
+
+;;
+;; Type: ConstantTester
+;; TLB: _  = ConstantTester
+;;
+
+tuple $ConstantTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $ConstantTester$_contract_init();
+    }
+}
+
+;;
+;; Contract ConstantTester functions
+;;
+
+tuple $ConstantTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $ConstantTester$_fun_something1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_206 = 11;
+    return ($self, $fresh$ret_206);
+}
+
+(tuple, int) $ConstantTester$_fun_something2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_207 = null();
+    return ($self, $fresh$ret_207);
+}
+
+(tuple, int) $ConstantTester$_fun_something3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_208 = 123000000000;
+    return ($self, $fresh$ret_208);
+}
+
+(tuple, int) $ConstantTester$_fun_something4(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_209 = 456000000000;
+    return ($self, $fresh$ret_209);
+}
+
+(tuple, slice) $ConstantTester$_fun_something5(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_210 = __gen_slice_string_be033138a8e284b3da1cee56e92447de2368f6431d64a3c6fe4db3183aeb9c36();
+    return ($self, $fresh$ret_210);
+}
+
+(tuple, int) $ConstantTester$_fun_something6(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_211 = 10;
+    return ($self, $fresh$ret_211);
+}
+
+(tuple, int) $ConstantTester$_fun_something7(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_212 = 5;
+    return ($self, $fresh$ret_212);
+}
+
+(tuple, int) $ConstantTester$_fun_something8(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_213 = 4;
+    return ($self, $fresh$ret_213);
+}
+
+(tuple, slice) $ConstantTester$_fun_something9(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_214 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_214);
+}
+
+(tuple, slice) $ConstantTester$_fun_something10(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_215 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_215);
+}
+
+(tuple, int) $ConstantTester$_fun_something11(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_216 = 88;
+    return ($self, $fresh$ret_216);
+}
+
+(tuple, int) $ConstantTester$_fun_something12(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_217 = -90;
+    return ($self, $fresh$ret_217);
+}
+
+(tuple, int) $ConstantTester$_fun_something13(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_218 = 88;
+    return ($self, $fresh$ret_218);
+}
+
+(tuple, int) $ConstantTester$_fun_something14(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_219 = 243;
+    return ($self, $fresh$ret_219);
+}
+
+(tuple, int) $ConstantTester$_fun_something15(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_220 = 32;
+    return ($self, $fresh$ret_220);
+}
+
+(tuple, int) $ConstantTester$_fun_something16(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_221 = -115792089237316195423570985008687907853269984665640564039457584007913129639936;
+    return ($self, $fresh$ret_221);
+}
+
+(tuple, int) $ConstantTester$_fun_something17(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_222 = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
+    return ($self, $fresh$ret_222);
+}
+
+(tuple, int) $ConstantTester$_fun_something18(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_223 = -115792089237316195423570985008687907853269984665640564039457584007913129639935;
+    return ($self, $fresh$ret_223);
+}
+
+(tuple, int) $ConstantTester$_fun_something19(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_224 = -115792089237316195423570985008687907853269984665640564039457584007913129639936;
+    return ($self, $fresh$ret_224);
+}
+
+(tuple, int) $ConstantTester$_fun_something20(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_225 = -6;
+    return ($self, $fresh$ret_225);
+}
+
+(tuple, int) $ConstantTester$_fun_something21(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_226 = 0;
+    return ($self, $fresh$ret_226);
+}
+
+(tuple, int) $ConstantTester$_fun_something22(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_227 = -1;
+    return ($self, $fresh$ret_227);
+}
+
+(tuple, int) $ConstantTester$_fun_something23(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_228 = -1;
+    return ($self, $fresh$ret_228);
+}
+
+(tuple, int) $ConstantTester$_fun_something24(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_229 = 0;
+    return ($self, $fresh$ret_229);
+}
+
+(tuple, int) $ConstantTester$_fun_something25(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_230 = 1;
+    return ($self, $fresh$ret_230);
+}
+
+(tuple, int) $ConstantTester$_fun_something26(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_231 = 4;
+    return ($self, $fresh$ret_231);
+}
+
+(tuple, int) $ConstantTester$_fun_something27(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_232 = -4;
+    return ($self, $fresh$ret_232);
+}
+
+(tuple, int) $ConstantTester$_fun_something28(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_233 = -1;
+    return ($self, $fresh$ret_233);
+}
+
+(tuple, int) $ConstantTester$_fun_something29(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_234 = 42;
+    return ($self, $fresh$ret_234);
+}
+
+(tuple, int) $ConstantTester$_fun_something30(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_235 = null();
+    return ($self, $fresh$ret_235);
+}
+
+(tuple, int) $ConstantTester$_fun_something31(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_236 = 42;
+    return ($self, $fresh$ret_236);
+}
+
+(tuple, int) $ConstantTester$_fun_something32(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_237 = 42;
+    return ($self, $fresh$ret_237);
+}
+
+(tuple, cell) $ConstantTester$_fun_something33(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_238 = null();
+    return ($self, $fresh$ret_238);
+}
+
+(tuple, cell) $ConstantTester$_fun_something34(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_239 = null();
+    return ($self, $fresh$ret_239);
+}
+
+(tuple, (int, int)) $ConstantTester$_fun_something35(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_240 = $S$_constructor_a_b(false, 42);
+    return ($self, $fresh$ret_240);
+}
+
+(tuple, (int, int)) $ConstantTester$_fun_something36(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_241 = $S$_constructor_a_b(false, 42);
+    return ($self, $fresh$ret_241);
+}
+
+(tuple, (int, (int, int))) $ConstantTester$_fun_something37(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_242 = $T$_constructor_a_s(42, $S$_constructor_a_b(true, 42));
+    return ($self, $fresh$ret_242);
+}
+
+(tuple, int) $ConstantTester$_fun_something38(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_243 = 4;
+    return ($self, $fresh$ret_243);
+}
+
+(tuple, int) $ConstantTester$_fun_something39(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_244 = true;
+    return ($self, $fresh$ret_244);
+}
+
+(tuple, int) $ConstantTester$_fun_something40(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_245 = true;
+    return ($self, $fresh$ret_245);
+}
+
+(tuple, slice) $ConstantTester$_fun_something41(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_246 = __gen_slice_address_61ab4641fa30d9310391025086eec65d200d79268e1b7cd402565e01ba64be3c();
+    return ($self, $fresh$ret_246);
+}
+
+(tuple, slice) $ConstantTester$_fun_something42(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_247 = __gen_slice_address_a7069f760ef516cfe9fb9a502b57767b6f83f53f1c1cf7d0dae54abd63c84066();
+    return ($self, $fresh$ret_247);
+}
+
+(tuple, slice) $ConstantTester$_fun_something43(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_248 = __gen_slice_address_0ee5604654cc61cb47b25ae370e7b3143c3a16887ca4f85b70d22a8edcebc50e();
+    return ($self, $fresh$ret_248);
+}
+
+(tuple, slice) $ConstantTester$_fun_something44(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_249 = __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43();
+    return ($self, $fresh$ret_249);
+}
+
+(tuple, int) $ConstantTester$_fun_something45(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_250 = 42;
+    return ($self, $fresh$ret_250);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_251 = 1;
+    return ($self, $fresh$ret_251);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_252 = 2;
+    return ($self, $fresh$ret_252);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_253 = 4;
+    return ($self, $fresh$ret_253);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst4(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_254 = 15;
+    return ($self, $fresh$ret_254);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst5(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_255 = 15;
+    return ($self, $fresh$ret_255);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst6(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_256 = 26;
+    return ($self, $fresh$ret_256);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst7(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_257 = 27;
+    return ($self, $fresh$ret_257);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst8(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_258 = 2;
+    return ($self, $fresh$ret_258);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst9(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_259 = 2;
+    return ($self, $fresh$ret_259);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst10(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_260 = 24;
+    return ($self, $fresh$ret_260);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst11(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_261 = 24;
+    return ($self, $fresh$ret_261);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst12(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_262 = 8;
+    return ($self, $fresh$ret_262);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst13(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_263 = 8;
+    return ($self, $fresh$ret_263);
+}
+
+(tuple, int) $ConstantTester$_fun_beforeDefinedA(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_264 = 10;
+    return ($self, $fresh$ret_264);
+}
+
+(tuple, int) $ConstantTester$_fun_beforeDefinedC(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_265 = 20;
+    return ($self, $fresh$ret_265);
+}
+
+(tuple, int) $ConstantTester$_fun_defaultFieldB(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_266 = 20;
+    return ($self, $fresh$ret_266);
+}
+
+(tuple, int) $ConstantTester$_fun_noCircularA(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_267 = 200;
+    return ($self, $fresh$ret_267);
+}
+
+(tuple, int) $ConstantTester$_fun_minInt1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_268 = -115792089237316195423570985008687907853269984665640564039457584007913129639936;
+    return ($self, $fresh$ret_268);
+}
+
+(tuple, int) $ConstantTester$_fun_minInt2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_269 = -115792089237316195423570985008687907853269984665640564039457584007913129639935;
+    return ($self, $fresh$ret_269);
+}
+
+(tuple, int) $ConstantTester$_fun_minInt3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_270 = -115792089237316195423570985008687907853269984665640564039457584007913129639936;
+    return ($self, $fresh$ret_270);
+}
+
+(tuple, int) $ConstantTester$_fun_globalConst(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_271 = 100;
+    return ($self, $fresh$ret_271);
+}
+
+;;
+;; Get methods of a Contract ConstantTester
+;;
+
+_ %something1() method_id(121234) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something1();
+    return res;
+}
+
+_ %something2() method_id(125425) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something2();
+    return res;
+}
+
+_ %something3() method_id(129488) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something3();
+    return res;
+}
+
+_ %something4() method_id(100663) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something4();
+    return res;
+}
+
+_ %something5() method_id(104726) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something5();
+    return res;
+}
+
+_ %something6() method_id(108917) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something6();
+    return res;
+}
+
+_ %something7() method_id(112980) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something7();
+    return res;
+}
+
+_ %something8() method_id(84155) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something8();
+    return res;
+}
+
+_ %something9() method_id(88218) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something9();
+    return res;
+}
+
+_ %something10() method_id(130567) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something10();
+    return res;
+}
+
+_ %something11() method_id(126502) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something11();
+    return res;
+}
+
+_ %something12() method_id(122437) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something12();
+    return res;
+}
+
+_ %something13() method_id(118372) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something13();
+    return res;
+}
+
+_ %something14() method_id(114307) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something14();
+    return res;
+}
+
+_ %something15() method_id(110242) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something15();
+    return res;
+}
+
+_ %something16() method_id(106177) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something16();
+    return res;
+}
+
+_ %something17() method_id(102112) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something17();
+    return res;
+}
+
+_ %something18() method_id(98063) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something18();
+    return res;
+}
+
+_ %something19() method_id(93998) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something19();
+    return res;
+}
+
+_ %something20() method_id(109396) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something20();
+    return res;
+}
+
+_ %something21() method_id(113525) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something21();
+    return res;
+}
+
+_ %something22() method_id(101142) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something22();
+    return res;
+}
+
+_ %something23() method_id(105271) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something23();
+    return res;
+}
+
+_ %something24() method_id(125904) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something24();
+    return res;
+}
+
+_ %something25() method_id(130033) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something25();
+    return res;
+}
+
+_ %something26() method_id(117650) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something26();
+    return res;
+}
+
+_ %something27() method_id(121779) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something27();
+    return res;
+}
+
+_ %something28() method_id(76380) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something28();
+    return res;
+}
+
+_ %something29() method_id(80509) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something29();
+    return res;
+}
+
+_ %something30() method_id(104549) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something30();
+    return res;
+}
+
+_ %something31() method_id(100420) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something31();
+    return res;
+}
+
+_ %something32() method_id(112679) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something32();
+    return res;
+}
+
+_ %something33() method_id(108550) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something33();
+    return res;
+}
+
+_ %something34() method_id(121057) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something34();
+    return res;
+}
+
+_ %something35() method_id(116928) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something35();
+    return $S$_to_external(res);
+}
+
+_ %something36() method_id(129187) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something36();
+    return $S$_to_external(res);
+}
+
+_ %something37() method_id(125058) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something37();
+    return $T$_to_external(res);
+}
+
+_ %something38() method_id(72045) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something38();
+    return res;
+}
+
+_ %something39() method_id(67916) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something39();
+    return res;
+}
+
+_ %something40() method_id(66034) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something40();
+    return res;
+}
+
+_ %something41() method_id(70099) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something41();
+    return res;
+}
+
+_ %something42() method_id(74160) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something42();
+    return res;
+}
+
+_ %something43() method_id(78225) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something43();
+    return res;
+}
+
+_ %something44() method_id(82294) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something44();
+    return res;
+}
+
+_ %something45() method_id(86359) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_something45();
+    return res;
+}
+
+_ %globalConst1() method_id(126681) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst1();
+    return res;
+}
+
+_ %globalConst2() method_id(122554) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst2();
+    return res;
+}
+
+_ %globalConst3() method_id(118427) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst3();
+    return res;
+}
+
+_ %globalConst4() method_id(114300) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst4();
+    return res;
+}
+
+_ %globalConst5() method_id(110173) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst5();
+    return res;
+}
+
+_ %globalConst6() method_id(106046) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst6();
+    return res;
+}
+
+_ %globalConst7() method_id(101919) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst7();
+    return res;
+}
+
+_ %globalConst8() method_id(98288) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst8();
+    return res;
+}
+
+_ %globalConst9() method_id(94161) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst9();
+    return res;
+}
+
+_ %globalConst10() method_id(127923) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst10();
+    return res;
+}
+
+_ %globalConst11() method_id(123794) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst11();
+    return res;
+}
+
+_ %globalConst12() method_id(119793) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst12();
+    return res;
+}
+
+_ %globalConst13() method_id(115664) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst13();
+    return res;
+}
+
+_ %beforeDefinedA() method_id(90149) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_beforeDefinedA();
+    return res;
+}
+
+_ %beforeDefinedC() method_id(82023) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_beforeDefinedC();
+    return res;
+}
+
+_ %defaultFieldB() method_id(66374) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_defaultFieldB();
+    return res;
+}
+
+_ %noCircularA() method_id(115089) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_noCircularA();
+    return res;
+}
+
+_ %minInt1() method_id(92144) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_minInt1();
+    return res;
+}
+
+_ %minInt2() method_id(87955) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_minInt2();
+    return res;
+}
+
+_ %minInt3() method_id(83890) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_minInt3();
+    return res;
+}
+
+_ %globalConst() method_id(116577) {
+    var self = $ConstantTester$_contract_load();
+    var res = self~$ConstantTester$_fun_globalConst();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract ConstantTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $ConstantTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

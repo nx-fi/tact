@@ -1,0 +1,302 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/send-modes/contracts/output/message-mode-tester_MessageModeTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $AverageRequest$_store
+  DECLPROC $AverageRequest$_store_cell
+  DECLPROC $AverageRequest$_load_bounced
+  DECLPROC $AverageResult$_load_without_opcode
+  DECLPROC $DoCalculatorRequest$_load_without_opcode
+  DECLPROC $MessageModeTester$_store
+  DECLPROC $MessageModeTester$_load
+  DECLPROC $Calculator$init$_store
+  DECLPROC $MessageModeTester$_contract_init
+  DECLPROC $MessageModeTester$_contract_load
+  DECLPROC $MessageModeTester$_contract_store
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $Calculator$_init_child
+  DECLPROC $MessageModeTester$_fun_currentResult
+  DECLPROC $MessageParameters$_constructor_to_bounce_value_mode_body
+  DECLPROC $AverageRequest$_constructor_from_to_amountToPayInResponse
+  109211 DECLMETHOD %currentResult
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $AverageRequest$_store PROCINLINE:<{
+    3337606158 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    s1 s2 XCHG
+    32 STU
+    32 STU
+    257 PUSHINT
+    STIX
+  }>
+  $AverageRequest$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $AverageRequest$_store INLINECALLDICT
+    ENDC
+  }>
+  $AverageRequest$_load_bounced PROCINLINE:<{
+    32 LDU
+    32 LDU
+    -ROT
+  }>
+  $AverageResult$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    SWAP
+  }>
+  $DoCalculatorRequest$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    32 LDU
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    4 -ROLL
+  }>
+  $MessageModeTester$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $MessageModeTester$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Calculator$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $MessageModeTester$_contract_init PROCINLINE:<{
+    -1 PUSHINT
+  }>
+  $MessageModeTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $MessageModeTester$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $MessageModeTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MessageModeTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $MessageModeTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $Calculator$_init_child PROCINLINE:<{
+        B{b5ee9c720101020100b50001b2ff00208ecb3001d072d721d200d200fa4021103450666f04f86102f862ed44d0d20030916d916de230019130e07021d74920c21f953101d31f02de218210c6efd40ebae30232c00001c121b0dcf2c082e16d8013f4bcf2c80b0100ae5bd31fd31f810101d7005520338163735312a1c2fff2f45301a1a470925dbb9523a003a403e83331a904f8427002c80182096bce8458cb1fcb1fc91370504403c8cf8580ca00cf8440ce01fa02806acf40f400c901fb00} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $Calculator$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $MessageModeTester$_fun_currentResult PROCREF:<{
+    DUP
+  }>
+  $MessageParameters$_constructor_to_bounce_value_mode_body PROCINLINE:<{
+    s4 s3 XCHG2
+  }>
+  $AverageRequest$_constructor_from_to_amountToPayInResponse PROCINLINE:<{
+  }>
+  %currentResult PROC:<{
+    $MessageModeTester$_contract_load INLINECALLDICT
+    $MessageModeTester$_fun_currentResult INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $MessageModeTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      32 PUSHINT
+      SDSKIPFIRST
+      0 PUSHINT
+      OVER
+      SBITS
+      31 GTINT
+      IF:<{
+        DROP
+        32 LDU
+        DROP
+      }>ELSE<{
+        NIP
+      }>
+      3337606158 PUSHINT
+      EQUAL
+      IFJMP:<{
+        -2 PUSHINT
+        $MessageModeTester$_contract_store INLINECALLDICT
+      }>
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    23842436 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $AverageResult$_load_without_opcode INLINECALLDICT
+      NIP
+      $MessageModeTester$_contract_store INLINECALLDICT
+    }>
+    OVER
+    1607210036 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $DoCalculatorRequest$_load_without_opcode INLINECALLDICT
+      s4 POP
+      $Calculator$_init_child INLINECALLDICT
+      $global_contractAddress INLINECALLDICT
+      TRUE
+      s4 s3 XCHG2
+      0 PUSHINT
+      s0 s6 XCHG
+      $AverageRequest$_constructor_from_to_amountToPayInResponse INLINECALLDICT
+      $AverageRequest$_store_cell INLINECALLDICT
+      s3 s4 XCHG
+      s1 s3 s0 XCHG3
+      $MessageParameters$_constructor_to_bounce_value_mode_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+          STZEROES
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          STDICT
+          ENDC
+          SWAP
+          SENDRAWMSG
+      -3 PUSHINT
+      $MessageModeTester$_contract_store INLINECALLDICT
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,182 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/exit-codes/contracts/output/repeat-range_RepeatRangeTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $RepeatRangeTester$_contract_init
+  DECLPROC $RepeatRangeTester$_contract_load
+  DECLPROC $RepeatRangeTester$_fun_testIgnoredRange
+  DECLPROC $RepeatRangeTester$_fun_testInvalidRange
+  DECLPROC $RepeatRangeTester$_fun_testMinEffectiveRange
+  106114 DECLMETHOD %testIgnoredRange
+  112673 DECLMETHOD %testInvalidRange
+  129920 DECLMETHOD %testMinEffectiveRange
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $RepeatRangeTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $RepeatRangeTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $RepeatRangeTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $RepeatRangeTester$_fun_testIgnoredRange PROCREF:<{
+    TRUE
+  }>
+  $RepeatRangeTester$_fun_testInvalidRange PROCREF:<{
+    CONT:<{
+      c2 SAVE
+      SAMEALTSAVE
+      DUP
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        NIP
+        5 EQINT
+        RETALT
+        2DROP
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      1 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        0 PUSHINT
+        31 PUSHPOW2
+        REPEAT:<{
+          INC
+        }>
+        DROP
+        FALSE
+        RETALT
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+    }>
+    1 -1 CALLXARGS
+  }>
+  $RepeatRangeTester$_fun_testMinEffectiveRange PROCREF:<{
+    0 PUSHINT
+    1 PUSHINT
+    REPEAT:<{
+      INC
+    }>
+    1 EQINT
+  }>
+  %testIgnoredRange PROC:<{
+    $RepeatRangeTester$_contract_load INLINECALLDICT
+    $RepeatRangeTester$_fun_testIgnoredRange INLINECALLDICT
+    NIP
+  }>
+  %testInvalidRange PROC:<{
+    $RepeatRangeTester$_contract_load INLINECALLDICT
+    $RepeatRangeTester$_fun_testInvalidRange INLINECALLDICT
+    NIP
+  }>
+  %testMinEffectiveRange PROC:<{
+    $RepeatRangeTester$_contract_load INLINECALLDICT
+    $RepeatRangeTester$_fun_testMinEffectiveRange INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $RepeatRangeTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+    }>
+    HASHSU
+    93527649163857867916780215542608164656487197718063062758732415167186047651911 PUSHINT
+    EQUAL
+    IFJMP:<{
+      31 PUSHPOW2DEC
+      DUP
+      REPEAT:<{
+        INC
+      }>
+      DROP
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,518 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/examples/output/increment_IncrementContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_not_null
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_dict_set_slice_int
+  DECLPROC __tact_dict_get_int_int
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC __tact_dict_set_int_cell
+  DECLPROC __tact_dict_exists_int
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $Increment$_load_without_opcode
+  DECLPROC $Toggle$_load_without_opcode
+  DECLPROC $Persist$_load_without_opcode
+  DECLPROC $Reset$_load_without_opcode
+  DECLPROC $IncrementContract$_store
+  DECLPROC $IncrementContract$_load
+  DECLPROC $StateInit$_not_null
+  DECLPROC $IncrementContract$_contract_init
+  DECLPROC $IncrementContract$_contract_load
+  DECLPROC $IncrementContract$_contract_store
+  DECLPROC $IncrementContract$_fun_counters
+  DECLPROC $IncrementContract$_fun_counters2
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $IncrementContract$_fun_forward
+  DECLPROC $IncrementContract$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  95239 DECLMETHOD %counters
+  77570 DECLMETHOD %counters2
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_dict_set_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_get_int_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGET
+    NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  __tact_dict_set_int_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTISETREF
+    }>
+  }>
+  __tact_dict_exists_int PROCINLINE:<{
+    -ROT
+    DICTIGET
+    NULLSWAPIFNOT
+    NIP
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $Increment$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    257 PUSHINT
+    LDIX
+    -ROT
+  }>
+  $Toggle$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Persist$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    1 LDI
+    SWAP
+    IF:<{
+      LDREF
+    }>ELSE<{
+      PUSHNULL
+      SWAP
+    }>
+    -ROT
+  }>
+  $Reset$_load_without_opcode PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $IncrementContract$_store PROCINLINE:<{
+    s4 s5 XCHG2
+    STDICT
+    s0 s2 XCHG
+    NEWC
+    STDICT
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    ENDC
+    SWAP
+    STREF
+  }>
+  $IncrementContract$_load PROCINLINE:<{
+    LDDICT
+    LDREF
+    SWAP
+    CTOS
+    LDDICT
+    LDDICT
+    LDDICT
+    LDDICT
+    DROP
+    s4 s5 XCHG
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $IncrementContract$_contract_init PROCINLINE:<{
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+  }>
+  $IncrementContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $IncrementContract$_load INLINECALLDICT
+      1 5 BLKDROP2
+    }>ELSE<{
+      DROP
+      $IncrementContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $IncrementContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    5 -ROLL
+    $IncrementContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $IncrementContract$_fun_counters PROCREF:<{
+    s4 PUSH
+  }>
+  $IncrementContract$_fun_counters2 PROCREF:<{
+    OVER
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $IncrementContract$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $IncrementContract$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $IncrementContract$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  %counters PROC:<{
+    $IncrementContract$_contract_load INLINECALLDICT
+    $IncrementContract$_fun_counters INLINECALLDICT
+    5 1 BLKDROP2
+  }>
+  %counters2 PROC:<{
+    $IncrementContract$_contract_load INLINECALLDICT
+    $IncrementContract$_fun_counters2 INLINECALLDICT
+    5 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $IncrementContract$_contract_load INLINECALLDICT
+    s0 s6 XCHG
+    IFJMP:<{
+      6 BLKDROP
+    }>
+    s0 s4 XCHG
+    32 LDUQ 130 THROWIFNOT
+    OVER
+    537284411 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      $Increment$_load_without_opcode INLINECALLDICT
+      s2 POP
+      257 PUSHINT
+      DUP
+      s3 s6 XCHG
+      s2 s6 s(-1) XCPUXC
+      __tact_dict_set_int_int INLINECALLDICT
+      267 PUSHINT
+      __tact_context_get_sender INLINECALLDICT
+      s3 s6 XCHG
+      s1 s0 s5 XCHG3
+      257 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      s4 s0 s3 XCHG3
+      s0 s2 XCHG
+      $IncrementContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    1081595080 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      $Toggle$_load_without_opcode INLINECALLDICT
+      NIP
+      s2 PUSH
+      257 PUSHINT
+      s2 PUSH
+      1 PUSHINT
+      __tact_dict_get_int_int INLINECALLDICT
+      DUP
+      ISNULL
+      IF:<{
+        DROP
+        s1 s2 XCHG
+        257 PUSHINT
+        SWAP
+        TRUE
+        1 PUSHINT
+        __tact_dict_set_int_int INLINECALLDICT
+      }>ELSE<{
+        __tact_not_null INLINECALLDICT
+        257 PUSHINT
+        SWAP
+        NOT
+        s3 s4 XCHG
+        s1 s2 XCHG
+        1 PUSHINT
+        __tact_dict_set_int_int INLINECALLDICT
+      }>
+      s4 s3 s3 XCHG3
+      s0 s2 XCHG
+      $IncrementContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    3801943978 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      $Persist$_load_without_opcode INLINECALLDICT
+      s2 POP
+      52777 PUSHINT
+      s3 PUSH
+      257 PUSHINT
+      s3 PUSH
+      __tact_dict_exists_int INLINECALLDICT
+      NOT
+      THROWANYIFNOT
+      257 PUSHINT
+      s0 s2 XCHG
+      __tact_dict_set_int_cell INLINECALLDICT
+      s0 s3 s4 XCHG3
+      $IncrementContract$_contract_store INLINECALLDICT
+    }>
+    OVER
+    1718153138 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      $Reset$_load_without_opcode INLINECALLDICT
+      NIP
+      s0 s3 PUXC
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s3 s2 PUXC
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      s3 s1 PUXC
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      267 PUSHINT
+      __tact_context_get_sender INLINECALLDICT
+      s0 s6 s6 XCHG3
+          DICTDEL
+      DROP
+      s3 s5 XCHG2
+      257 PUSHINT
+          DICTIDEL
+      DROP
+      4 1 REVERSE
+      $IncrementContract$_contract_store INLINECALLDICT
+    }>
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      $Deploy$_load_without_opcode INLINECALLDICT
+      NIP
+      $DeployOk$_constructor_queryId INLINECALLDICT
+      $DeployOk$_store_cell INLINECALLDICT
+      s3 s5 XCHG
+      s4 s3 s0 XCHG3
+      $IncrementContract$_fun_notify INLINECALLDICT
+      5 BLKDROP
+    }>
+    6 BLKDROP
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

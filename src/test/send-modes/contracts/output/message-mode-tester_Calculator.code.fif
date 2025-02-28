@@ -1,0 +1,188 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/send-modes/contracts/output/message-mode-tester_Calculator.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get_sender
+  DECLPROC $AverageRequest$_load_without_opcode
+  DECLPROC $AverageResult$_store
+  DECLPROC $AverageResult$_store_cell
+  DECLPROC $Calculator$_contract_init
+  DECLPROC $Calculator$_contract_load
+  DECLPROC $MessageParameters$_constructor_to_bounce_value_body
+  DECLPROC $AverageResult$_constructor_res
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $AverageRequest$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    32 LDU
+    257 PUSHINT
+    LDIX
+    3 -ROLL
+  }>
+  $AverageResult$_store PROCINLINE:<{
+    23842436 PUSHINT
+    ROT
+    32 STU
+    32 STU
+  }>
+  $AverageResult$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $AverageResult$_store INLINECALLDICT
+    ENDC
+  }>
+  $Calculator$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Calculator$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $Calculator$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MessageParameters$_constructor_to_bounce_value_body PROCINLINE:<{
+    0 PUSHINT
+    s4 s4 XCHG2
+    s0 s3 XCHG
+  }>
+  $AverageResult$_constructor_res PROCINLINE:<{
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Calculator$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    3337606158 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $AverageRequest$_load_without_opcode INLINECALLDICT
+      s3 POP
+      25459 PUSHINT
+      s1 s2 PUSH2
+      SUB
+      -1 GTINT
+      THROWANYIFNOT
+      s0 s1 PUSH2
+      SUB
+      INC
+      0 PUSHINT
+      WHILE:<{
+        2OVER
+        LEQ
+      }>DO<{
+        s3 PUSH
+        ADD
+        s0 s3 XCHG
+        INC
+        s0 s3 XCHG
+      }>
+      s3 POP
+      NIP
+      DIV
+      __tact_context_get_sender INLINECALLDICT
+      FALSE
+      s0 s2 XCHG
+      $AverageResult$_constructor_res INLINECALLDICT
+      $AverageResult$_store_cell INLINECALLDICT
+      s1 s3 XCHG
+      $MessageParameters$_constructor_to_bounce_value_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+          STZEROES
+          // → Stack state
+          // s0: Builder
+          // s1: `data`
+          // s2: `code`
+          // s3: `body`
+          // s4: `mode`
+          STDICT
+          ENDC
+          SWAP
+          SENDRAWMSG
+    }>
+    s2 POP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

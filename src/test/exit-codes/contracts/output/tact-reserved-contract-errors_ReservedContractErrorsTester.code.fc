@@ -1,0 +1,876 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; tact-reserved-contract-errors_ReservedContractErrorsTester.headers.fc
+;;
+;; Header files for ReservedContractErrorsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_crc16
+(slice) __tact_crc16(slice data) inline_ref;
+
+;; __tact_base64_encode
+(slice) __tact_base64_encode(slice data) inline_ref;
+
+;; __tact_address_to_user_friendly
+(slice) __tact_address_to_user_friendly(slice address) inline_ref;
+
+;; __tact_debug_address
+() __tact_debug_address(slice address, slice debug_print_1, slice debug_print_2) impure inline_ref;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $SpanishInquisition$_store
+builder $SpanishInquisition$_store(builder build_0, tuple v) inline;
+
+;; $SpanishInquisition$_store_cell
+cell $SpanishInquisition$_store_cell(tuple v) inline;
+
+;; $ReservedContractErrorsTester$_load
+(slice, ((slice))) $ReservedContractErrorsTester$_load(slice sc_0) inline;
+
+;; $ReservedContractErrorsTester$_contract_init
+(slice) $ReservedContractErrorsTester$_contract_init() impure inline;
+
+;; $ReservedContractErrorsTester$_contract_load
+(slice) $ReservedContractErrorsTester$_contract_load() impure inline;
+
+;; $Builder$_fun_asSlice
+slice $Builder$_fun_asSlice(builder $self) impure inline;
+
+;; $Slice$_fun_fromBase64
+slice $Slice$_fun_fromBase64(slice $self) impure inline_ref;
+
+;; $Slice$_fun_asAddress
+slice $Slice$_fun_asAddress(slice $self, int $chain) impure inline_ref;
+
+;; $String$_fun_fromBase64
+slice $String$_fun_fromBase64(slice $self) impure inline;
+
+;; $ReservedContractErrorsTester$_fun_requireOwner
+((slice), ()) $ReservedContractErrorsTester$_fun_requireOwner((slice) $self) impure inline_ref;
+
+;; $ReservedContractErrorsTester$_fun_owner
+((slice), slice) $ReservedContractErrorsTester$_fun_owner((slice) $self) impure inline_ref;
+
+;; $MessageParameters$_constructor_to_value_mode_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline;
+
+;; $SpanishInquisition$_constructor_
+(tuple) $SpanishInquisition$_constructor_() inline;
+
+
+;; tact-reserved-contract-errors_ReservedContractErrorsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+forall X -> () __tact_debug(X value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP s0 DUMP DROP
+""";
+
+() __tact_debug_str(slice value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP STRDUMP DROP
+""";
+
+(slice) __tact_preload_offset(slice s, int offset, int bits) asm """
+    SDSUBSTR
+""";
+
+(slice) __tact_crc16(slice data) inline_ref {
+    slice new_data = begin_cell()
+        .store_slice(data)
+        .store_slice("0000"s)
+    .end_cell().begin_parse();
+    int reg = 0;
+    while (~ new_data.slice_data_empty?()) {
+        int byte = new_data~load_uint(8);
+        int mask = 0x80;
+        while (mask > 0) {
+            reg <<= 1;
+            if (byte & mask) {
+                reg += 1;
+            }
+            mask >>= 1;
+            if (reg > 0xffff) {
+                reg &= 0xffff;
+                reg ^= 0x1021;
+            }
+        }
+    }
+    (int q, int r) = divmod(reg, 256);
+    return begin_cell()
+        .store_uint(q, 8)
+        .store_uint(r, 8)
+    .end_cell().begin_parse();
+}
+
+(slice) __tact_base64_encode(slice data) inline_ref {
+    slice chars = "4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F"s;
+    builder res = begin_cell();
+
+    while (data.slice_bits() >= 24) {
+        (int bs1, int bs2, int bs3) = (data~load_uint(8), data~load_uint(8), data~load_uint(8));
+
+        int n = (bs1 << 16) | (bs2 << 8) | bs3;
+
+        res = res
+            .store_slice(__tact_preload_offset(chars, ((n >> 18) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >> 12) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >>  6) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n      ) & 63) * 8, 8));
+    }
+
+    return res.end_cell().begin_parse();
+}
+
+(slice) __tact_address_to_user_friendly(slice address) inline_ref {
+    (int wc, int hash) = address.parse_std_addr();
+
+    slice user_friendly_address = begin_cell()
+        .store_slice("11"s)
+        .store_uint((wc + 0x100) % 0x100, 8)
+        .store_uint(hash, 256)
+    .end_cell().begin_parse();
+
+    slice checksum = __tact_crc16(user_friendly_address);
+    slice user_friendly_address_with_checksum = begin_cell()
+        .store_slice(user_friendly_address)
+        .store_slice(checksum)
+    .end_cell().begin_parse();
+
+    return __tact_base64_encode(user_friendly_address_with_checksum);
+}
+
+() __tact_debug_address(slice address, slice debug_print_1, slice debug_print_2) impure inline_ref {
+    __tact_debug_str(__tact_address_to_user_friendly(address), debug_print_1, debug_print_2);
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+cell $global_emptyCell() impure asm """
+    <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+""";
+
+() $global_message((int, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+    STZEROES
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+    STDICT
+    ENDC
+    SWAP
+    SENDRAWMSG
+""";
+
+slice $Int$_fun_toFloatString(int $self, int $digits) impure asm """
+    DUP // x digits digits
+    1 LESSINT // x digits digits<=0
+    134 THROWIF // x digits
+    DUP // x digits digits
+    77 GTINT // x digits digits>77
+    134 THROWIF // x digits
+
+    NEWC // x digits b
+    ROTREV // b x digits
+    s1 PUSH // b x digits x
+    0 LESSINT // b x digits x<0?
+
+    <{
+        // b x digits
+        ROT // x digits b
+        x{2d} STSLICECONST // x digits b
+        ROT // digits b x
+        NEGATE // digits b -x
+        ROT // b -x digits
+    }>CONT IF
+
+    // b x digits
+    ONE // b x digits 1
+    OVER // b x digits 1 digits
+
+    <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+
+    s1 s2 XCHG // b digits x 10^digits
+    DIVMOD // b digits left right
+    s3 s3 XCHG2 // right digits b left
+
+    <{
+        // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10 
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 2 1 CALLXARGS
+
+    // right digits "left"
+
+    ROT // digits "left" right
+    DUP // digits "left" right right
+    ISZERO // digits "left" right right==0?
+
+    <{
+        // digits "left" right
+        DROP // digits "left"
+        NIP // "left"
+    }>CONT
+
+    <{
+        // digits "left" right
+        ZERO // digits "left" right 0
+        SWAP // digits "left" 0 right
+
+        <{
+            // digits "left" i right
+            DUP // digits "left" i right right
+            10 PUSHINT // digits "left" i right right 10
+            MOD // digits "left" i right right%10
+            ISZERO // digits "left" i right right%10==0?
+        }>CONT
+
+        <{
+            // digits "left" i right
+            10 PUSHINT // digits "left" i right 10
+            DIV // digits "left" i right/10
+            SWAP // digits "left" right/10 i
+            INC // digits "left" right/10 i+1
+            SWAP // digits "left" i+1 right/10
+        }>CONT
+
+        WHILE // digits "left" i right
+
+        <{
+            // x
+            NEWC // x b
+            SWAP // b x
+
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+
+            DROP // ... b
+            DEPTH DEC DUP // ... b n n
+            ROTREV // ... n b n
+            <{
+                // ... c n b
+                s1 s2 XCHG // ... n c b
+                8 STU // ... n b
+            }>CONT REPEAT // n b
+        }>CONT 1 2 CALLXARGS
+        // digits "left" i right_digits "right"
+        ROTREV // digits "left" "right" i right_digits
+        ADD // digits "left" "right" right_digits
+
+        s3 s1 XCHG // "right" "left" digits right_digits
+        SUB // "right" "left" digits_diff
+        SWAP // "right" digits_diff "left"
+        x{2e} STSLICECONST // "right" digits_diff "left."
+        SWAP // "right" "left." digits_diff
+
+        <{
+            // "right" "left."
+            x{30} STSLICECONST // "right" "left.0"
+        }>CONT REPEAT // "right" "left.000"
+
+        STB // "left.000right"
+    }>CONT
+
+    IFELSE // b
+
+    ENDC CTOS // s
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+int $Builder$_fun_bits(builder $self) impure asm """
+    BBITS
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Builder$_fun_asSlice(builder $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($Builder$_fun_endCell($self));
+}
+
+int $Slice$_fun_bits(slice $self) impure asm """
+    SBITS
+""";
+
+slice $Slice$_fun_fromBase64(slice $self) impure inline_ref {
+    var ($self) = $self;
+    int $size = ($Slice$_fun_bits($self) / 8);
+    builder $result = $global_beginCell();
+    repeat ($size) {
+        int $code = $self~load_uint(8);
+        if (( (($code >= 65)) ? (($code <= 90)) : (false) )) {
+            $result = store_uint($result, ($code - 65), 6);
+        } elseif (( (($code >= 97)) ? (($code <= 122)) : (false) )) {
+            $result = store_uint($result, ($code - 71), 6);
+        } elseif (( (($code >= 48)) ? (($code <= 57)) : (false) )) {
+            $result = store_uint($result, ($code + 4), 6);
+        } elseif (( (($code == 45)) ? (true) : (($code == 43)) )) {
+            $result = store_uint($result, 62, 6);
+        } elseif (( (($code == 95)) ? (true) : (($code == 47)) )) {
+            $result = store_uint($result, 63, 6);
+        } elseif (($code == 61)) {
+        } else {
+            throw(134);
+        }
+    }
+    int $total = $Builder$_fun_bits($result);
+    int $padding = ($total % 8);
+    if (($padding != 0)) {
+        slice $s = $Builder$_fun_asSlice($result);
+        return $s~load_bits(($total - $padding));
+    } else {
+        return $Builder$_fun_asSlice($result);
+    }
+}
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Slice$_fun_asAddress(slice $self, int $chain) impure inline_ref {
+    var ($self) = $self;
+    throw_unless(136, ($Slice$_fun_bits($self) == 267));
+    if (($chain == -1)) {
+        throw_unless(136, (preload_uint($self, 11) == 1279));
+    } else {
+        throw_unless(136, (preload_uint($self, 3) == 4));
+    }
+    return $Slice$_fun_asAddressUnsafe($self);
+}
+
+slice $String$_fun_fromBase64(slice $self) impure inline {
+    var ($self) = $self;
+    return $Slice$_fun_fromBase64(__tact_str_to_slice($self));
+}
+
+((slice), ()) $ReservedContractErrorsTester$_fun_requireOwner((slice) $self) impure inline_ref {
+    var (($self'owner)) = $self;
+    throw_unless(132, ( equal_slices_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'owner), ());
+}
+
+((slice), slice) $ReservedContractErrorsTester$_fun_owner((slice) $self) impure inline_ref {
+    var (($self'owner)) = $self;
+    var $fresh$ret_3388 = $self'owner;
+    return (($self'owner), $fresh$ret_3388);
+}
+
+;; tact-reserved-contract-errors_ReservedContractErrorsTester.native.fc
+slice dns_string_to_internal(slice domain) inline_ref {
+
+    ;; Special case for root domain
+    if ((domain.slice_bits() == 8) & (domain.slice_refs() == 0)) {
+        if (domain.preload_uint(8) == 46) {
+            return begin_cell().store_uint(0, 8).end_cell().begin_parse();
+        }
+    }
+
+    ;; Split domain into segments
+    tuple segments = null();
+    builder current = begin_cell();
+    int isCurrentEmpty = true;
+    int isFirst = true;
+    int isHyphen = false;
+    slice cs = domain;
+    int continue = true;
+    do {
+
+        ;; Prepare for loading next character
+        if (cs.slice_bits() == 0) {
+            int refs = cs.slice_refs();
+            if (refs == 1) {
+                cs = cs~load_ref().begin_parse();
+            } elseif (refs > 1) {
+                return null();
+            } else {
+                continue = false;
+            }
+            continue = false;
+        }
+
+        ;; Continue loading next character
+        if (continue) {
+            int char = cs~load_uint(8);
+            ;; we can do it because additional UTF-8 character's octets >= 128 -- https://www.ietf.org/rfc/rfc3629.txt
+            int is_hyphen = (char == 45);
+            int is_dot  = (char == 46);
+            int valid_char = is_hyphen | is_dot | ((char >= 48) & (char <= 57)) | ((char >= 97) & (char <= 122)); ;; '-' or 0-9 or a-z
+            if (~ valid_char | (isFirst & is_hyphen)) {
+                return null();
+            }
+            isHyphen = is_hyphen;
+            if (is_dot) {
+                if (isFirst | isHyphen) { ;; Empty or ends with hyphen
+                    return null();
+                }
+                segments = cons(current, segments);
+                current = begin_cell();
+                isHyphen = false;
+                isFirst = true;
+                isCurrentEmpty = true;
+            } else {
+                isFirst = false;
+                isCurrentEmpty = false;
+                current~store_uint(char, 8);
+            }
+        }
+
+    } until (~ continue);
+    if (isHyphen) { ;; ends with hyphen
+        return null();
+    }
+    if (~ isCurrentEmpty) {
+        segments = cons(current, segments);
+    }
+
+    ;; Concatenate segments
+    builder res = begin_cell();
+    (builder b, tuple tail) = uncons(segments);
+    res = res.store_builder(b);
+    while(~ null?(tail)) {
+        (b, tail) = uncons(tail);
+        res = res.store_uint(0, 8); ;; Add \0 separator
+        res = res.store_builder(b);
+    }
+    res = res.store_uint(0, 8); ;; Add \0 separator
+    return res.end_cell().begin_parse();
+}
+
+int dns_internal_verify(slice sc) inline_ref {
+    if (sc.slice_refs() != 0) {
+        return false;
+    }
+    int bits = sc.slice_bits();
+    if (bits % 8 != 0) {
+        return false;
+    }
+    if (bits == 0) { ;; Case for root domain
+        return true;
+    }
+    int len = bits / 8;
+    int counter = 0;
+    int isFirst = true;
+    int isHyphen = false;
+    repeat(len) {
+        int char = sc~load_uint(8);
+        if (char == 0) {
+            if (counter == 0) {
+                return false;
+            }
+            if (isHyphen) {
+                return false;
+            }
+            counter = 0;
+            isHyphen = false;
+            isFirst = true;
+        } else {
+            int charIsHyphen = (char == 45);
+            int isValid = charIsHyphen | ((char >= 48) & (char <= 57)) | ((char >= 97) & (char <= 122));
+            if (~ isValid) {
+                return false;
+            }
+            if (charIsHyphen & isFirst)  {
+                return false;
+            }
+            isHyphen = charIsHyphen;
+            isFirst = false;
+            counter = counter + 1;
+        }
+    }
+    return counter == 0 & ~ isHyphen;
+}
+
+slice dns_internal_normalize(slice src) impure inline_ref {
+    throw_unless(134, src.slice_refs() == 0); ;; Invalid argument error
+    builder target = begin_cell();
+    repeat(src.slice_bits() / 8) {
+        int char = src~load_uint(8);
+
+        ;; b => 6
+        if (char == 98) {
+            char = 54;
+        }
+
+        ;; g, q => 9
+        if ((char == 103) | (char == 113)) {
+            char = 57;    
+        }
+
+        ;; l => 1
+        if (char == 108) {
+            char = 49;
+        }
+
+        ;; o => 0
+        if (char == 111) {
+            char = 48;
+        }
+
+        ;; s => 5
+        if (char == 115) {
+            char = 53;
+        }
+
+        ;; u => v
+        if (char == 117) {
+            char = 118;
+        }
+
+        ;; z => 2
+        if (char == 122) {
+            char = 50;
+        }
+
+        target = target.store_uint(char, 8);
+    }
+    return target.end_cell().begin_parse();
+}
+
+;; tact-reserved-contract-errors_ReservedContractErrorsTester.constants.fc
+;; String "dump(gotcha!!)"
+slice __gen_slice_string_3626708abf20cff1278f4ed693664fe2128b14a5fac639874fc27fb6b05d8c6c() asm """
+    B{b5ee9c7241010101001000001c64756d7028676f7463686121212987f48517} B>boc <s PUSHSLICE
+""";
+
+;; String "dump(beginCell()\x0a                .storeUint(0, 8)\x0a                .asSlice()\x0a                .fromBase64())"
+slice __gen_slice_string_5366751a86a58a8b94406e474db3ce78733fe4c3a23f2cdac059929c805b139a() asm """
+    B{b5ee9c7241010101006d0000d664756d7028626567696e43656c6c28290a202020202020202020202020202020202e73746f726555696e7428302c2038290a202020202020202020202020202020202e6173536c69636528290a202020202020202020202020202020202e66726f6d426173653634282929def23bd7} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("\x00".fromBase64())"
+slice __gen_slice_string_eb58825fdeed665ae41110f2c2e77d8d0357c1be66a6e15368f7ccb7b0565ed9() asm """
+    B{b5ee9c7241010101001b00003264756d7028225c783030222e66726f6d4261736536342829294274bef4} B>boc <s PUSHSLICE
+""";
+
+;; String "\x00"
+slice __gen_slice_string_dbbc7025e89eb9b1ec9e8e2c7a2db6869dbb50fba21bf374c86529dc311cede9() asm """
+    B{b5ee9c7241010101000300000200d367dc41} B>boc <s PUSHSLICE
+""";
+
+;; String "dump((42).toFloatString(-1))"
+slice __gen_slice_string_75904fc3bcf9d990fc3e732d04588e70d340db1c83f02f5472a4f5230dc123e3() asm """
+    B{b5ee9c7241010101001e00003864756d7028283432292e746f466c6f6174537472696e67282d31292907e56293} B>boc <s PUSHSLICE
+""";
+
+;; String "dump((42).toFloatString(78))"
+slice __gen_slice_string_514c5b951b7b822b8a9903d02752e11f589614d2eb3ba1d35c8cef8f9bc0683c() asm """
+    B{b5ee9c7241010101001e00003864756d7028283432292e746f466c6f6174537472696e672837382929e6b835ae} B>boc <s PUSHSLICE
+""";
+
+;; String "dump(dnsInternalNormalize(sliceWithRef))"
+slice __gen_slice_string_5f5940b58fb65467f0c3e4d9a33d1eb6daaf1eca91ed9d4261f633c8fbecdab3() asm """
+    B{b5ee9c7241010101002a00005064756d7028646e73496e7465726e616c4e6f726d616c697a6528736c6963655769746852656629290738a346} B>boc <s PUSHSLICE
+""";
+
+;; String "dump(addrSlice.asAddress(chainID))"
+slice __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e() asm """
+    B{b5ee9c7241010101002400004464756d702861646472536c6963652e61734164647265737328636861696e494429297511c719} B>boc <s PUSHSLICE
+""";
+
+;; tact-reserved-contract-errors_ReservedContractErrorsTester.storage.fc
+;;
+;; Type: MessageParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 to:address bounce:bool = MessageParameters
+;;
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline {
+    return ($mode, $body, $value, $to, true);
+}
+
+;;
+;; Type: SpanishInquisition
+;; Header: 0x000005c6
+;; TLB: spanish_inquisition#000005c6  = SpanishInquisition
+;;
+
+builder $SpanishInquisition$_store(builder build_0, tuple v) inline {
+    build_0 = store_uint(build_0, 1478, 32);
+    return build_0;
+}
+
+cell $SpanishInquisition$_store_cell(tuple v) inline {
+    return $SpanishInquisition$_store(begin_cell(), v).end_cell();
+}
+
+(tuple) $SpanishInquisition$_constructor_() inline {
+    return empty_tuple();
+}
+
+;;
+;; Type: ReservedContractErrorsTester
+;; TLB: _ owner:address = ReservedContractErrorsTester
+;;
+
+(slice, ((slice))) $ReservedContractErrorsTester$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice) $ReservedContractErrorsTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ReservedContractErrorsTester$_load();
+    } else {
+        return $ReservedContractErrorsTester$_contract_init();
+    }
+}
+
+;;
+;; Contract ReservedContractErrorsTester functions
+;;
+
+(slice) $ReservedContractErrorsTester$_contract_init() impure inline {
+    var (($self'owner)) = (null());
+    $self'owner = $global_myAddress();
+    return ($self'owner);
+}
+
+;;
+;; Get methods of a Contract ReservedContractErrorsTester
+;;
+
+_ %owner() method_id(83229) {
+    var self = $ReservedContractErrorsTester$_contract_load();
+    var res = self~$ReservedContractErrorsTester$_fun_owner();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract ReservedContractErrorsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner) = $ReservedContractErrorsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "128" message
+    if (text_op == 0x8ebb64fc04181f0058b7c418b9c84c4027fb9218ce148c6d5e761474ffa8539a) {
+        slice $gotcha = null();
+        __tact_debug_str(__tact_not_null($gotcha), __gen_slice_string_3626708abf20cff1278f4ed693664fe2128b14a5fac639874fc27fb6b05d8c6c(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:20:9:");
+        return ();
+    }
+    ;; Receive "130" message
+    if (text_op == 0x4aca36bdfb8b832c5f71df0d7df0419fc1e7003d21a64666d6346cbaca1fc4ab) {
+        $global_message($MessageParameters$_constructor_to_value_mode_body($global_myAddress(), 0, 66, $SpanishInquisition$_store_cell($SpanishInquisition$_constructor_())));
+        return ();
+    }
+    ;; Receive "132" message
+    if (text_op == 0xc1822752b9dbaf9fe9268ee6e70105d466e2b622072113e6de608ef3fafb1840) {
+        ($self'owner)~$ReservedContractErrorsTester$_fun_requireOwner();
+        return ();
+    }
+    ;; Receive "134" message
+    if (text_op == 0x7562d8608a5142f15829ca052e57b5b5cee0a0ffe791c5dbe26abac201cd7841) {
+        int $targetCode = 134;
+        int $failed = true;
+        try {
+            __tact_debug($Slice$_fun_fromBase64($Builder$_fun_asSlice(store_uint($global_beginCell(), 0, 8))), __gen_slice_string_5366751a86a58a8b94406e474db3ce78733fe4c3a23f2cdac059929c805b139a(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:47:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(25189, $failed);
+        try {
+            __tact_debug($String$_fun_fromBase64(__gen_slice_string_dbbc7025e89eb9b1ec9e8e2c7a2db6869dbb50fba21bf374c86529dc311cede9()), __gen_slice_string_eb58825fdeed665ae41110f2c2e77d8d0357c1be66a6e15368f7ccb7b0565ed9(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:60:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(46964, $failed);
+        try {
+            __tact_debug_str($Int$_fun_toFloatString(42, -1), __gen_slice_string_75904fc3bcf9d990fc3e732d04588e70d340db1c83f02f5472a4f5230dc123e3(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:69:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(60204, $failed);
+        try {
+            __tact_debug_str($Int$_fun_toFloatString(42, 78), __gen_slice_string_514c5b951b7b822b8a9903d02752e11f589614d2eb3ba1d35c8cef8f9bc0683c(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:78:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(43850, $failed);
+        try {
+            slice $sliceWithRef = $Builder$_fun_asSlice($Builder$_fun_storeRef($global_emptyCell(), $global_beginCell()));
+            __tact_debug(dns_internal_normalize($sliceWithRef), __gen_slice_string_5f5940b58fb65467f0c3e4d9a33d1eb6daaf1eca91ed9d4261f633c8fbecdab3(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:89:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(20158, $failed);
+        throw($targetCode);
+        return ();
+    }
+    ;; Receive "136" message
+    if (text_op == 0x4d9af6380b0b778efde49689c845d6a4cb379fcb5dc3b1c0004a7be21959f5d4) {
+        int $targetCode = 134;
+        int $failed = true;
+        try {
+            int $chainID = -1;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 5, 3), $chainID, 8), 0, 256));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:115:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(28760, $failed);
+        try {
+            int $chainID = 0;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 5, 3), $chainID, 8), 0, 256));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:130:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(41357, $failed);
+        try {
+            int $chainID = 1;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 5, 3), $chainID, 8), 0, 256));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:145:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(61605, $failed);
+        try {
+            int $chainID = 0;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chainID, 8), 0, 42));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:160:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(37468, $failed);
+        try {
+            int $chainID = -1;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chainID, 8), 0, 42));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:175:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(49334, $failed);
+        try {
+            int $chainID = 1;
+            slice $addrSlice = $Builder$_fun_asSlice(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chainID, 8), 0, 42));
+            __tact_debug_address($Slice$_fun_asAddress($addrSlice, $chainID), __gen_slice_string_c8df18dcd2bca1b8df79d94f806b5098f17e0c70c0168a6fb9c685319793d99e(), "File src/test/exit-codes/contracts/tact-reserved-contract-errors.tact:190:13:");
+            $failed = false;
+        } catch (_, $exitCode) {
+            throw_if($exitCode, ($exitCode != $targetCode));
+        }
+        throw_unless(53355, $failed);
+        throw($targetCode);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

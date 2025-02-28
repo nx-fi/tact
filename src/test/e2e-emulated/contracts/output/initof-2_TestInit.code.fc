@@ -1,0 +1,551 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; initof-2_TestInit.headers.fc
+;;
+;; Header files for TestInit
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $Deploy$_store
+builder $Deploy$_store(builder build_0, (int) v) inline;
+
+;; $Deploy$_store_cell
+cell $Deploy$_store_cell((int) v) inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $Foo$_load_without_opcode
+(slice, (tuple)) $Foo$_load_without_opcode(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $TestNested$init$_store
+builder $TestNested$init$_store(builder build_0, tuple v) inline;
+
+;; $TestNested$_init_child
+(cell, cell) $TestNested$_init_child() inline;
+
+;; $SendParameters$_constructor_to_value_mode_code_data_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_code_data_body(slice $to, int $value, int $mode, cell $code, cell $data, cell $body) inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $Deploy$_constructor_queryId
+((int)) $Deploy$_constructor_queryId(int $queryId) inline;
+
+;; $TestInit$_contract_init
+tuple $TestInit$_contract_init() impure inline;
+
+;; $TestInit$_contract_load
+tuple $TestInit$_contract_load() impure inline;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $TestInit$_fun_forward
+(tuple, ()) $TestInit$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $TestInit$_fun_notify
+(tuple, ()) $TestInit$_fun_notify(tuple $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+
+;; initof-2_TestInit.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+() __tact_debug_str(slice value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP STRDUMP DROP
+""";
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $Int$_fun_toString(int $self) impure asm """
+    <{
+        // x
+        NEWC // x b
+        OVER // x b x
+        0 LESSINT // x b <0?
+        <{
+            // x b
+            45 PUSHINT // x b 45
+            SWAP // x 45 b
+            8 STU // x b
+            SWAP // b x
+            NEGATE // b -x
+            SWAP // -x b
+        }>CONT IF
+        // x b
+
+        SWAP // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10 
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 1 1 CALLXARGS
+    // b
+
+    ENDC CTOS // s
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+(tuple, ()) $TestInit$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var ($self) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return ($self, ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return ($self, ());
+}
+
+(tuple, ()) $TestInit$_fun_notify(tuple $self, cell $body) impure inline {
+    var ($self) = $self;
+    $self~$TestInit$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return ($self, ());
+}
+
+;; initof-2_TestInit.constants.fc
+;; String "dump("init@TestInit-1")"
+slice __gen_slice_string_6f677d1b1ae87cf443def1669550d4dc318017e30c38203b79f08e674a65dbdc() asm """
+    B{b5ee9c7241010101001900002e64756d702822696e69744054657374496e69742d31222989ec6db4} B>boc <s PUSHSLICE
+""";
+
+;; String "init@TestInit-1"
+slice __gen_slice_string_54f1fff9be77b7ea2e4c9a0a1ba147194ca5f8cbbb5d7904bcbb4e6566acf7c3() asm """
+    B{b5ee9c7241010101001100001e696e69744054657374496e69742d316e7d324a} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("init@TestInit-SUCCESS")"
+slice __gen_slice_string_69fd521a72c3eff9552bd6db1bf1631546443207db8da7304638c7a7011bf9d6() asm """
+    B{b5ee9c7241010101001f00003a64756d702822696e69744054657374496e69742d5355434345535322297dbec414} B>boc <s PUSHSLICE
+""";
+
+;; String "init@TestInit-SUCCESS"
+slice __gen_slice_string_6cb409f625c61d14a903808827a324eff8e6897747730e5321ef19f662963142() asm """
+    B{b5ee9c7241010101001700002a696e69744054657374496e69742d53554343455353299fa343} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("ERROR@TestInit")"
+slice __gen_slice_string_b11c1e9c8c7b8598e7d0666c9ecc1118d985304ab9f4f743e350b59dc0a06218() asm """
+    B{b5ee9c7241010101001800002c64756d7028224552524f524054657374496e69742229ba0e42f9} B>boc <s PUSHSLICE
+""";
+
+;; String "ERROR@TestInit"
+slice __gen_slice_string_b1158e0f6c42aa02cb329e44167f9aad23b473bd0d3a24532928ec7b68342089() asm """
+    B{b5ee9c7241010101001000001c4552524f524054657374496e6974ef74461e} B>boc <s PUSHSLICE
+""";
+
+;; String "dump(e)"
+slice __gen_slice_string_fc9e2adf429ed62e1efa76e579937f9add57924a59dff18cc182db1e6c0e8971() asm """
+    B{b5ee9c7241010101000900000e64756d70286529da749822} B>boc <s PUSHSLICE
+""";
+
+;; initof-2_TestInit.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_value_mode_code_data_body(slice $to, int $value, int $mode, cell $code, cell $data, cell $body) inline {
+    return ($mode, $body, $code, $data, $value, $to, true);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+builder $Deploy$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2490013878, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $Deploy$_store_cell((int) v) inline {
+    return $Deploy$_store(begin_cell(), v).end_cell();
+}
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+((int)) $Deploy$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: Foo
+;; Header: 0x0000002a
+;; TLB: foo#0000002a  = Foo
+;;
+
+(slice, (tuple)) $Foo$_load_without_opcode(slice sc_0) inline {
+    return (sc_0, null());
+}
+
+;;
+;; Type: TestNested
+;; TLB: _  = TestNested
+;;
+
+builder $TestNested$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $TestNested$_child_get_code() impure asm """
+    B{b5ee9c72010204010001400002ccff00208f583001d072d721d200d200fa4021103450666f04f86102f862ed44d0d20030916d8e82db3ce202915be0d70d1ff2e082018210946a98b6ba8e9ad33f0131c8018210aff90f5758cb1fcb3fc9f84201706ddb3c30e05bf2c082e16d8013f4bcf2c80b010201f66d8d0593995cdd19590b4b4b4b5a5b9a5d1014d550d0d154d4e08d07991d5b5c0a0893995cdd19590b4b4b4b5a5b9a5d1014d550d0d154d4c88a608d0e119a5b19481cdc98cbdd195cdd0bd94c994b595b5d5b185d19590bd8dbdb9d1c9858dd1ccbda5b9a5d1bd98b4c8b9d1858dd0e8d8e8c4d0ea0fe1430fe140300a06d6d226eb3995b206ef2d0806f22019132e21024700304804250231036552212c8cf8580ca00cf8440ce01fa028069cf40025c6e016ea8935bcf819d58cf8680cf8480f400f400cf81e2f400c901fb00000830fe1430} B>boc PUSHREF
+""";
+
+(cell, cell) $TestNested$_init_child() inline {
+    ;; Build init code cell
+
+    ;; Contract Code: TestNested
+    cell init_code = $TestNested$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $TestNested$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: TestInit
+;; TLB: _  = TestInit
+;;
+
+tuple $TestInit$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $TestInit$_contract_init();
+    }
+}
+
+;;
+;; Contract TestInit functions
+;;
+
+tuple $TestInit$_contract_init() impure inline {
+    tuple $self = null();
+    try {
+        var ($init'code, $init'data) = $TestNested$_init_child();
+        __tact_debug_str(__gen_slice_string_54f1fff9be77b7ea2e4c9a0a1ba147194ca5f8cbbb5d7904bcbb4e6566acf7c3(), __gen_slice_string_6f677d1b1ae87cf443def1669550d4dc318017e30c38203b79f08e674a65dbdc(), "File src/test/e2e-emulated/contracts/initof-2.tact:13:13:");
+        $global_send($SendParameters$_constructor_to_value_mode_code_data_body($global_contractAddress(($init'code, $init'data)), 0, 66, $init'code, $init'data, $Deploy$_store_cell($Deploy$_constructor_queryId(0))));
+        __tact_debug_str(__gen_slice_string_6cb409f625c61d14a903808827a324eff8e6897747730e5321ef19f662963142(), __gen_slice_string_69fd521a72c3eff9552bd6db1bf1631546443207db8da7304638c7a7011bf9d6(), "File src/test/e2e-emulated/contracts/initof-2.tact:22:13:");
+    } catch (_, $e) {
+        __tact_debug_str(__gen_slice_string_b1158e0f6c42aa02cb329e44167f9aad23b473bd0d3a24532928ec7b68342089(), __gen_slice_string_b11c1e9c8c7b8598e7d0666c9ecc1118d985304ab9f4f743e350b59dc0a06218(), "File src/test/e2e-emulated/contracts/initof-2.tact:24:13:");
+        __tact_debug_str($Int$_fun_toString($e), __gen_slice_string_fc9e2adf429ed62e1efa76e579937f9add57924a59dff18cc182db1e6c0e8971(), "File src/test/e2e-emulated/contracts/initof-2.tact:25:13:");
+    }
+    return $self;
+}
+
+;;
+;; Get methods of a Contract TestInit
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract TestInit
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $TestInit$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var op = in_msg~load_opcode();
+    ;; Receive Foo message
+    if (op == 42) {
+        var $_ = in_msg~$Foo$_load_without_opcode();
+        return ();
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+        $self~$TestInit$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+        return ();
+    }
+    
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

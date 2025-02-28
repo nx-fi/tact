@@ -1,0 +1,205 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; bounced-routing_SampleContract2.headers.fc
+;;
+;; Header files for SampleContract2
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $First$_load_without_opcode
+(slice, ((int, int, int, slice))) $First$_load_without_opcode(slice sc_0) inline;
+
+;; $MyStruct$_load
+(slice, ((int))) $MyStruct$_load(slice sc_0) inline;
+
+;; $Second$_load_without_opcode
+(slice, ((int, int, int, slice, int, (int), (int)))) $Second$_load_without_opcode(slice sc_0) inline;
+
+;; $SampleContract2$_contract_init
+tuple $SampleContract2$_contract_init() impure inline;
+
+;; $SampleContract2$_contract_load
+tuple $SampleContract2$_contract_load() impure inline;
+
+
+;; bounced-routing_SampleContract2.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+() __tact_debug_str(slice value, slice debug_print_1, slice debug_print_2) impure asm """
+    STRDUMP DROP STRDUMP DROP STRDUMP DROP
+""";
+
+;; bounced-routing_SampleContract2.constants.fc
+;; String "dump("Bouncing First!")"
+slice __gen_slice_string_016da090b39b8f2fe448b1a8cf517198ced062d629f1ab986699e9b84f41ca55() asm """
+    B{b5ee9c7241010101001900002e64756d702822426f756e63696e67204669727374212229dba1e651} B>boc <s PUSHSLICE
+""";
+
+;; String "Bouncing First!"
+slice __gen_slice_string_94c3f101bbe94a48f10dfe5c99449522d57da3d3f44d711da4395dcd9cf8c814() asm """
+    B{b5ee9c7241010101001100001e426f756e63696e6720466972737421fbb0a49f} B>boc <s PUSHSLICE
+""";
+
+;; String "dump("Bouncing Second!")"
+slice __gen_slice_string_2cdfd1ed9dea985f6b5a193e955a5fc3bf861583b98cf457813457e39e4c50e6() asm """
+    B{b5ee9c7241010101001a00003064756d702822426f756e63696e67205365636f6e642122297594cf75} B>boc <s PUSHSLICE
+""";
+
+;; String "Bouncing Second!"
+slice __gen_slice_string_b959dde8a8be0822e78951cc7690fb5182b435b11cc70c801cf2a2b3e9b1e40b() asm """
+    B{b5ee9c72410101010012000020426f756e63696e67205365636f6e64214fa65a46} B>boc <s PUSHSLICE
+""";
+
+;; bounced-routing_SampleContract2.storage.fc
+;;
+;; Type: First
+;; Header: 0xbec08f38
+;; TLB: first#bec08f38 amount:uint32 myCoins:coins myBool3:bool anAddress:address = First
+;;
+
+(slice, ((int, int, int, slice))) $First$_load_without_opcode(slice sc_0) inline {
+    var v'amount = sc_0~load_uint(32);
+    var v'myCoins = sc_0~load_varuint16();
+    var v'myBool3 = sc_0~load_int(1);
+    var v'anAddress = sc_0~load_msg_addr();
+    return (sc_0, (v'amount, v'myCoins, v'myBool3, v'anAddress));
+}
+
+;;
+;; Type: MyStruct
+;; TLB: _ amount:int257 = MyStruct
+;;
+
+(slice, ((int))) $MyStruct$_load(slice sc_0) inline {
+    var v'amount = sc_0~load_int(257);
+    return (sc_0, (v'amount));
+}
+
+;;
+;; Type: Second
+;; Header: 0x17571ec8
+;; TLB: second#17571ec8 amount_bigger:uint64 myBool:bool thisDoesNotFit:uint256 myAddress:address myBool2:bool myStruct:MyStruct{amount:int257} myStruct2:MyStruct{amount:int257} = Second
+;;
+
+(slice, ((int, int, int, slice, int, (int), (int)))) $Second$_load_without_opcode(slice sc_0) inline {
+    var v'amount_bigger = sc_0~load_uint(64);
+    var v'myBool = sc_0~load_int(1);
+    var v'thisDoesNotFit = sc_0~load_uint(256);
+    var v'myAddress = sc_0~load_msg_addr();
+    var v'myBool2 = sc_0~load_int(1);
+    var v'myStruct = sc_0~$MyStruct$_load();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'myStruct2 = sc_1~$MyStruct$_load();
+    return (sc_0, (v'amount_bigger, v'myBool, v'thisDoesNotFit, v'myAddress, v'myBool2, v'myStruct, v'myStruct2));
+}
+
+;;
+;; Type: SampleContract2
+;; TLB: _  = SampleContract2
+;;
+
+tuple $SampleContract2$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $SampleContract2$_contract_init();
+    }
+}
+
+;;
+;; Contract SampleContract2 functions
+;;
+
+tuple $SampleContract2$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+;;
+;; Get methods of a Contract SampleContract2
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract SampleContract2
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $SampleContract2$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive First message
+    if (op == 3200290616) {
+        var ($msg'amount, $msg'myCoins, $msg'myBool3, $msg'anAddress) = in_msg~$First$_load_without_opcode();
+        __tact_debug_str(__gen_slice_string_94c3f101bbe94a48f10dfe5c99449522d57da3d3f44d711da4395dcd9cf8c814(), __gen_slice_string_016da090b39b8f2fe448b1a8cf517198ced062d629f1ab986699e9b84f41ca55(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:133:9:");
+        throw(144);
+        return ();
+    }
+    
+    ;; Receive Second message
+    if (op == 391585480) {
+        var ($msg'amount_bigger, $msg'myBool, $msg'thisDoesNotFit, $msg'myAddress, $msg'myBool2, ($msg'myStruct'amount), ($msg'myStruct2'amount)) = in_msg~$Second$_load_without_opcode();
+        __tact_debug_str(__gen_slice_string_b959dde8a8be0822e78951cc7690fb5182b435b11cc70c801cf2a2b3e9b1e40b(), __gen_slice_string_2cdfd1ed9dea985f6b5a193e955a5fc3bf861583b98cf457813457e39e4c50e6(), "File src/test/e2e-emulated/contracts/bounced-routing.tact:138:9:");
+        throw(145);
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

@@ -1,0 +1,563 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; increment_IncrementContract.headers.fc
+;;
+;; Header files for IncrementContract
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_dict_set_slice_int
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline;
+
+;; __tact_dict_get_int_int
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline;
+
+;; __tact_dict_set_int_int
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; __tact_dict_set_int_cell
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline;
+
+;; __tact_dict_exists_int
+int __tact_dict_exists_int(cell d, int kl, int k) inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $Increment$_load_without_opcode
+(slice, ((int, int))) $Increment$_load_without_opcode(slice sc_0) inline;
+
+;; $Toggle$_load_without_opcode
+(slice, ((int))) $Toggle$_load_without_opcode(slice sc_0) inline;
+
+;; $Persist$_load_without_opcode
+(slice, ((int, cell))) $Persist$_load_without_opcode(slice sc_0) inline;
+
+;; $Reset$_load_without_opcode
+(slice, ((int))) $Reset$_load_without_opcode(slice sc_0) inline;
+
+;; $IncrementContract$_store
+builder $IncrementContract$_store(builder build_0, (cell, cell, cell, cell, cell) v) inline;
+
+;; $IncrementContract$_load
+(slice, ((cell, cell, cell, cell, cell))) $IncrementContract$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $IncrementContract$_contract_init
+(cell, cell, cell, cell, cell) $IncrementContract$_contract_init() impure inline;
+
+;; $IncrementContract$_contract_load
+(cell, cell, cell, cell, cell) $IncrementContract$_contract_load() impure inline;
+
+;; $IncrementContract$_contract_store
+() $IncrementContract$_contract_store((cell, cell, cell, cell, cell) v) impure inline;
+
+;; $IncrementContract$_fun_counters
+((cell, cell, cell, cell, cell), cell) $IncrementContract$_fun_counters((cell, cell, cell, cell, cell) $self) impure inline_ref;
+
+;; $IncrementContract$_fun_counters2
+((cell, cell, cell, cell, cell), cell) $IncrementContract$_fun_counters2((cell, cell, cell, cell, cell) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $IncrementContract$_fun_forward
+((cell, cell, cell, cell, cell), ()) $IncrementContract$_fun_forward((cell, cell, cell, cell, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $IncrementContract$_fun_notify
+((cell, cell, cell, cell, cell), ()) $IncrementContract$_fun_notify((cell, cell, cell, cell, cell) $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+
+;; increment_IncrementContract.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+(cell, int) __tact_dict_delete(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTDEL
+""";
+
+(cell, int) __tact_dict_delete_int(cell dict, int key_len, int index) asm(index dict key_len) """
+    DICTIDEL
+""";
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline {
+    var (r, ok) = idict_get?(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+(cell, ()) __tact_dict_set_int_cell(cell d, int kl, int k, cell v) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_ref(d, kl, k, v), ());
+    }
+}
+
+int __tact_dict_exists_int(cell d, int kl, int k) inline {
+    var (r, ok) = idict_get?(d, kl, k);
+    return ok;
+}
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+((cell, cell, cell, cell, cell), ()) $IncrementContract$_fun_forward((cell, cell, cell, cell, cell) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5), ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5), ());
+}
+
+((cell, cell, cell, cell, cell), ()) $IncrementContract$_fun_notify((cell, cell, cell, cell, cell) $self, cell $body) impure inline {
+    var (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)) = $self;
+    ($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)~$IncrementContract$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5), ());
+}
+
+;; increment_IncrementContract.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: Increment
+;; Header: 0x20064f3b
+;; TLB: increment#20064f3b key:int257 value:int257 = Increment
+;;
+
+(slice, ((int, int))) $Increment$_load_without_opcode(slice sc_0) inline {
+    var v'key = sc_0~load_int(257);
+    var v'value = sc_0~load_int(257);
+    return (sc_0, (v'key, v'value));
+}
+
+;;
+;; Type: Toggle
+;; Header: 0x4077d4c8
+;; TLB: toggle#4077d4c8 key:int257 = Toggle
+;;
+
+(slice, ((int))) $Toggle$_load_without_opcode(slice sc_0) inline {
+    var v'key = sc_0~load_int(257);
+    return (sc_0, (v'key));
+}
+
+;;
+;; Type: Persist
+;; Header: 0xe29d0faa
+;; TLB: persist#e29d0faa key:int257 content:Maybe ^cell = Persist
+;;
+
+(slice, ((int, cell))) $Persist$_load_without_opcode(slice sc_0) inline {
+    var v'key = sc_0~load_int(257);
+    var v'content = sc_0~load_int(1) ? sc_0~load_ref() : null();
+    return (sc_0, (v'key, v'content));
+}
+
+;;
+;; Type: Reset
+;; Header: 0x6668efb2
+;; TLB: reset#6668efb2 key:int257 = Reset
+;;
+
+(slice, ((int))) $Reset$_load_without_opcode(slice sc_0) inline {
+    var v'key = sc_0~load_int(257);
+    return (sc_0, (v'key));
+}
+
+;;
+;; Type: IncrementContract
+;; TLB: _ counters:dict<int, int> counters2:dict<int, bool> counters3:dict<int, ^cell> counters4:dict<address, int> counters5:dict<int, ^Something{value:int257}> = IncrementContract
+;;
+
+builder $IncrementContract$_store(builder build_0, (cell, cell, cell, cell, cell) v) inline {
+    var (v'counters, v'counters2, v'counters3, v'counters4, v'counters5) = v;
+    build_0 = build_0.store_dict(v'counters);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_dict(v'counters2);
+    build_1 = build_1.store_dict(v'counters3);
+    build_1 = build_1.store_dict(v'counters4);
+    build_1 = build_1.store_dict(v'counters5);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((cell, cell, cell, cell, cell))) $IncrementContract$_load(slice sc_0) inline {
+    var v'counters = sc_0~load_dict();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'counters2 = sc_1~load_dict();
+    var v'counters3 = sc_1~load_dict();
+    var v'counters4 = sc_1~load_dict();
+    var v'counters5 = sc_1~load_dict();
+    return (sc_0, (v'counters, v'counters2, v'counters3, v'counters4, v'counters5));
+}
+
+(cell, cell, cell, cell, cell) $IncrementContract$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$IncrementContract$_load();
+    } else {
+        return $IncrementContract$_contract_init();
+    }
+}
+
+() $IncrementContract$_contract_store((cell, cell, cell, cell, cell) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $IncrementContract$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract IncrementContract functions
+;;
+
+(cell, cell, cell, cell, cell) $IncrementContract$_contract_init() impure inline {
+    var (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)) = (null(), null(), null(), null(), null());
+    return ($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5);
+}
+
+((cell, cell, cell, cell, cell), cell) $IncrementContract$_fun_counters((cell, cell, cell, cell, cell) $self) impure inline_ref {
+    var (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)) = $self;
+    var $fresh$ret_3 = $self'counters;
+    return (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5), $fresh$ret_3);
+}
+
+((cell, cell, cell, cell, cell), cell) $IncrementContract$_fun_counters2((cell, cell, cell, cell, cell) $self) impure inline_ref {
+    var (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)) = $self;
+    var $fresh$ret_4 = $self'counters4;
+    return (($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5), $fresh$ret_4);
+}
+
+;;
+;; Get methods of a Contract IncrementContract
+;;
+
+_ %counters() method_id(95239) {
+    var self = $IncrementContract$_contract_load();
+    var res = self~$IncrementContract$_fun_counters();
+    return res;
+}
+
+_ %counters2() method_id(77570) {
+    var self = $IncrementContract$_contract_load();
+    var res = self~$IncrementContract$_fun_counters2();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract IncrementContract
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5) = $IncrementContract$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var op = in_msg~load_opcode();
+    ;; Receive Increment message
+    if (op == 537284411) {
+        var ($msg'key, $msg'value) = in_msg~$Increment$_load_without_opcode();
+        $self'counters~__tact_dict_set_int_int(257, $msg'key, $msg'value, 257);
+        $self'counters4~__tact_dict_set_slice_int(267, __tact_context_get_sender(), $msg'value, 257);
+        ;; Persist state
+        $IncrementContract$_contract_store(($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5));
+        return ();
+    }
+    
+    ;; Receive Toggle message
+    if (op == 1081595080) {
+        var ($msg'key) = in_msg~$Toggle$_load_without_opcode();
+        int $ex = __tact_dict_get_int_int($self'counters2, 257, $msg'key, 1);
+        if (null?($ex)) {
+            $self'counters2~__tact_dict_set_int_int(257, $msg'key, true, 1);
+        } else {
+            int $val = __tact_not_null($ex);
+            $self'counters2~__tact_dict_set_int_int(257, $msg'key, (~ $val), 1);
+        }
+        ;; Persist state
+        $IncrementContract$_contract_store(($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5));
+        return ();
+    }
+    
+    ;; Receive Persist message
+    if (op == 3801943978) {
+        var ($msg'key, $msg'content) = in_msg~$Persist$_load_without_opcode();
+        throw_unless(52777, (~ __tact_dict_exists_int($self'counters3, 257, $msg'key)));
+        $self'counters3~__tact_dict_set_int_cell(257, $msg'key, $msg'content);
+        ;; Persist state
+        $IncrementContract$_contract_store(($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5));
+        return ();
+    }
+    
+    ;; Receive Reset message
+    if (op == 1718153138) {
+        var ($msg'key) = in_msg~$Reset$_load_without_opcode();
+        $self'counters~__tact_dict_delete_int(257, $msg'key);
+        $self'counters2~__tact_dict_delete_int(257, $msg'key);
+        $self'counters3~__tact_dict_delete_int(257, $msg'key);
+        $self'counters4~__tact_dict_delete(267, __tact_context_get_sender());
+        $self'counters5~__tact_dict_delete_int(257, $msg'key);
+        ;; Persist state
+        $IncrementContract$_contract_store(($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5));
+        return ();
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+        ($self'counters, $self'counters2, $self'counters3, $self'counters4, $self'counters5)~$IncrementContract$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+        return ();
+    }
+    
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

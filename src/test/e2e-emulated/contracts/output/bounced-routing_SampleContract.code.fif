@@ -1,0 +1,471 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/bounced-routing_SampleContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_context_get_sender
+  DECLPROC $EntryFirst$_load_without_opcode
+  DECLPROC $EntrySecond$_load_without_opcode
+  DECLPROC $First$_store
+  DECLPROC $First$_store_cell
+  DECLPROC $First$_load_without_opcode
+  DECLPROC $First$_load_bounced
+  DECLPROC $MyStruct$_store
+  DECLPROC $MyStruct$_load
+  DECLPROC $Second$_store
+  DECLPROC $Second$_store_cell
+  DECLPROC $Second$_load_without_opcode
+  DECLPROC $Second$_load_bounced
+  DECLPROC $Large$_load_bounced
+  DECLPROC $SmallBounce$_load_without_opcode
+  DECLPROC $SampleContract$_store
+  DECLPROC $SampleContract$_load
+  DECLPROC $SampleContract$_contract_init
+  DECLPROC $SampleContract$_contract_load
+  DECLPROC $SampleContract$_contract_store
+  DECLPROC $SampleContract$_fun_amount
+  DECLPROC $MessageParameters$_constructor_to_value_mode_bounce_body
+  DECLPROC $First$_constructor_amount_myCoins_myBool3_anAddress
+  DECLPROC $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2
+  DECLPROC $MyStruct$_constructor_amount
+  101100 DECLMETHOD %amount
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $EntryFirst$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    LDMSGADDR
+    -ROT
+  }>
+  $EntrySecond$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    LDMSGADDR
+    -ROT
+  }>
+  $First$_store PROCINLINE:<{
+    3200290616 PUSHINT
+    s0 s5 XCHG2
+    32 STU
+    s1 s3 XCHG
+    32 STU
+    SWAP
+    STVARUINT16
+    1 STI
+    SWAP
+    STSLICER
+  }>
+  $First$_store_cell PROCINLINE:<{
+    NEWC
+    4 -ROLL
+    $First$_store INLINECALLDICT
+    ENDC
+  }>
+  $First$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    LDVARUINT16
+    1 LDI
+    LDMSGADDR
+    4 -ROLL
+  }>
+  $First$_load_bounced PROCINLINE:<{
+    32 LDU
+    LDVARUINT16
+    1 LDI
+    3 -ROLL
+  }>
+  $MyStruct$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $MyStruct$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Second$_store PROCINLINE:<{
+    391585480 PUSHINT
+    s0 s8 XCHG2
+    32 STU
+    s1 s6 XCHG
+    64 STU
+    s1 s4 XCHG
+    1 STI
+    s1 s2 XCHG
+    256 STU
+    SWAP
+    STSLICER
+    1 STI
+    SWAP
+    $MyStruct$_store INLINECALLDICT
+    NEWC
+    ROT
+    $MyStruct$_store INLINECALLDICT
+    ENDC
+    SWAP
+    STREF
+  }>
+  $Second$_store_cell PROCINLINE:<{
+    NEWC
+    7 -ROLL
+    $Second$_store INLINECALLDICT
+    ENDC
+  }>
+  $Second$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    1 LDI
+    256 LDU
+    LDMSGADDR
+    1 LDI
+    $MyStruct$_load INLINECALLDICT
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    $MyStruct$_load INLINECALLDICT
+    NIP
+    s1 s7 XCHG
+    s1 s6 XCHG
+    s1 s5 XCHG
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+  }>
+  $Second$_load_bounced PROCINLINE:<{
+    64 LDU
+    1 LDI
+    -ROT
+  }>
+  $Large$_load_bounced PROCINLINE:<{
+    PUSHNULL
+  }>
+  $SmallBounce$_load_without_opcode PROCINLINE:<{
+    32 LDU
+    1 LDI
+    -ROT
+  }>
+  $SampleContract$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $SampleContract$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $SampleContract$_contract_init PROCINLINE:<{
+    100 PUSHINT
+  }>
+  $SampleContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $SampleContract$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $SampleContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $SampleContract$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $SampleContract$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $SampleContract$_fun_amount PROCREF:<{
+    DUP
+  }>
+  $MessageParameters$_constructor_to_value_mode_bounce_body PROCINLINE:<{
+    s4 s1 s3 XCHG3
+    -ROT
+  }>
+  $First$_constructor_amount_myCoins_myBool3_anAddress PROCINLINE:<{
+  }>
+  $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2 PROCINLINE:<{
+  }>
+  $MyStruct$_constructor_amount PROCINLINE:<{
+  }>
+  %amount PROC:<{
+    $SampleContract$_contract_load INLINECALLDICT
+    $SampleContract$_fun_amount INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $SampleContract$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      32 PUSHINT
+      SDSKIPFIRST
+      0 PUSHINT
+      OVER
+      SBITS
+      31 GTINT
+      IF:<{
+        DROP
+        DUP
+        32 PLDU
+      }>
+      DUP
+      3200290616 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        32 PUSHINT
+        SDSKIPFIRST
+        $First$_load_bounced INLINECALLDICT
+        s2 s3 XCHG
+        3 BLKDROP
+            B{b5ee9c72410101010014000024496e20626f756e6365206f66206669727374a88de4c0} B>boc <s PUSHSLICE
+            B{b5ee9c7241010101001c00003464756d702822496e20626f756e6365206f662066697273742229b36a288a} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f626f756e6365642d726f7574696e672e746163743a39353a393a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        TUCK
+        ADD
+        NIP
+        -2 ADDCONST
+        $SampleContract$_contract_store INLINECALLDICT
+      }>
+      DUP
+      391585480 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        32 PUSHINT
+        SDSKIPFIRST
+        $Second$_load_bounced INLINECALLDICT
+        DROP
+        NIP
+            B{b5ee9c72410101010015000026496e20626f756e6365206f66207365636f6e64fc665418} B>boc <s PUSHSLICE
+            B{b5ee9c7241010101001d00003664756d702822496e20626f756e6365206f66207365636f6e6422291c021b0f} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f626f756e6365642d726f7574696e672e746163743a3130343a393a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        ADD
+        -4 ADDCONST
+        $SampleContract$_contract_store INLINECALLDICT
+      }>
+      DUP
+      3235833558 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        32 PUSHINT
+        SDSKIPFIRST
+        $SmallBounce$_load_without_opcode INLINECALLDICT
+        DROP
+        NIP
+            B{b5ee9c7241010101001b000032496e20626f756e6365206f6620736d616c6c20626f756e636520771682} B>boc <s PUSHSLICE
+            B{b5ee9c7241010101002300004264756d702822496e20626f756e6365206f6620736d616c6c20626f756e63652229e2782627} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f626f756e6365642d726f7574696e672e746163743a3130393a393a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        ADD
+        -4 ADDCONST
+        $SampleContract$_contract_store INLINECALLDICT
+      }>
+      2 1 BLKDROP2
+      618480963 PUSHINT
+      EQUAL
+      IFJMP:<{
+            B{b5ee9c7241010101001b000032496e20626f756e6365206f66206c6172676520626f756e6365b9a85106} B>boc <s PUSHSLICE
+            B{b5ee9c7241010101002300004264756d702822496e20626f756e6365206f66206c6172676520626f756e636522299d7156e0} B>boc <s PUSHSLICE
+        x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f626f756e6365642d726f7574696e672e746163743a3131343a393a} PUSHSLICE
+            STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      }>
+          B{b5ee9c72410101010013000022496e2067656e6572696320626f756e63659b8e2ac3} B>boc <s PUSHSLICE
+          B{b5ee9c7241010101001b00003264756d702822496e2067656e6572696320626f756e6365222912049e70} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f626f756e6365642d726f7574696e672e746163743a38393a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      77 PUSHINT
+      $SampleContract$_contract_store INLINECALLDICT
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      OVER
+      2757457064 PUSHINT
+      EQUAL
+      IFJMP:<{
+        2 1 BLKDROP2
+        $EntryFirst$_load_without_opcode INLINECALLDICT
+        s2 POP
+        s2 s2 XCPU
+        SUB
+        1000000000 PUSHINT
+        2 PUSHINT
+        TRUE
+        3 PUSHINT
+        FALSE
+        __tact_context_get_sender INLINECALLDICT
+        s3 s8 XCHG
+        $First$_constructor_amount_myCoins_myBool3_anAddress INLINECALLDICT
+        $First$_store_cell INLINECALLDICT
+        s1 s3 s0 XCHG3
+        s1 s5 XCHG
+        $MessageParameters$_constructor_to_value_mode_bounce_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `data`
+            // s2: `code`
+            // s3: `body`
+            // s4: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+        $SampleContract$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      OVER
+      4282440720 PUSHINT
+      EQUAL
+      IFJMP:<{
+        2 1 BLKDROP2
+        $EntrySecond$_load_without_opcode INLINECALLDICT
+        s2 POP
+        s2 s2 XCPU
+        SUB
+        1000000000 PUSHINT
+        2 PUSHINT
+        TRUE
+        FALSE
+        1 PUSHINT
+        __tact_context_get_sender INLINECALLDICT
+        FALSE
+        s2 PUSH
+        $MyStruct$_constructor_amount INLINECALLDICT
+        s6 PUSH
+        $MyStruct$_constructor_amount INLINECALLDICT
+        s6 s11 XCHG
+        $Second$_constructor_amount_bigger_myBool_thisDoesNotFit_myAddress_myBool2_myStruct_myStruct2 INLINECALLDICT
+        $Second$_store_cell INLINECALLDICT
+        s1 s3 s0 XCHG3
+        s1 s5 XCHG
+        $MessageParameters$_constructor_to_value_mode_bounce_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `data`
+            // s2: `code`
+            // s3: `body`
+            // s4: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+        $SampleContract$_contract_store INLINECALLDICT
+        RETALT
+      }>
+      s3 POP
+      DUP
+      3200290616 PUSHINT
+      EQUAL
+      IFJMP:<{
+        3 BLKDROP
+        RETALT
+      }>
+      DUP
+      391585480 PUSHINT
+      EQUAL
+      IFJMP:<{
+        3 BLKDROP
+        RETALT
+      }>
+      s1 s2 XCHG
+    }>ELSE<{
+      s3 POP
+    }>
+    0 EQINT
+    s0 s2 XCHG
+    33 LESSINT
+    s1 s2 XCHG
+    AND
+    IFJMP:<{
+      DROP
+    }>
+    HASHSU
+    115453196637582642885928637400764699828550845098888530169314487819834911934909 PUSHINT
+    EQUAL
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

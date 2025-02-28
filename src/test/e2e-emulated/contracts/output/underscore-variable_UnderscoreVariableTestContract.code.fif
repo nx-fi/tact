@@ -1,0 +1,310 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/underscore-variable_UnderscoreVariableTestContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_dict_min_int_int
+  DECLPROC __tact_dict_next_int_int
+  DECLPROC __tact_dict_set_int_int
+  DECLPROC $UnderscoreVariableTestContract$_load
+  DECLPROC $UnderscoreVariableTestContract$_contract_init
+  DECLPROC $UnderscoreVariableTestContract$_contract_load
+  DECLPROC $UnderscoreVariableTestContract$_fun_increaseSomething
+  DECLPROC $UnderscoreVariableTestContract$_fun_test1
+  DECLPROC $UnderscoreVariableTestContract$_fun_test2
+  DECLPROC $UnderscoreVariableTestContract$_fun_test3
+  DECLPROC $UnderscoreVariableTestContract$_fun_test4
+  70304 DECLMETHOD %test1
+  74435 DECLMETHOD %test2
+  78562 DECLMETHOD %test3
+  82437 DECLMETHOD %test4
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_dict_min_int_int PROCINLINE:<{
+    -ROT
+    DICTIMIN
+    NULLSWAPIFNOT2
+    DUP
+    IF:<{
+      s2 s3 XCHG2
+      LDIX
+      DROP
+      ROT
+    }>ELSE<{
+      2 1 BLKDROP2
+      PUSHNULL
+      s2 POP
+      PUSHNULL
+      SWAP
+    }>
+  }>
+  __tact_dict_next_int_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+    DICTIGETNEXT
+    NULLSWAPIFNOT2
+    DUP
+    IF:<{
+      s2 s3 XCHG2
+      LDIX
+      DROP
+      ROT
+    }>ELSE<{
+      2 1 BLKDROP2
+      PUSHNULL
+      s2 POP
+      PUSHNULL
+      SWAP
+    }>
+  }>
+  __tact_dict_set_int_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTISETB
+    }>
+  }>
+  $UnderscoreVariableTestContract$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $UnderscoreVariableTestContract$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $UnderscoreVariableTestContract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $UnderscoreVariableTestContract$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $UnderscoreVariableTestContract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $UnderscoreVariableTestContract$_fun_increaseSomething PROCREF:<{
+    INC
+    123 PUSHINT
+  }>
+  $UnderscoreVariableTestContract$_fun_test1 PROCREF:<{
+    CONT:<{
+      c2 SAVE
+      SAMEALTSAVE
+      DUP
+      c1 PUSH
+      c3 PUSH
+      c4 PUSH
+      c5 PUSH
+      c7 PUSH
+      <{
+        2DROP
+        0 PUSHINT
+        RETALT
+        DROP
+      }>CONT
+      c7 SETCONT
+      c5 SETCONT
+      c4 SETCONT
+      c3 SETCONT
+      c1 SETCONT
+      1 PUSHINT
+      -1 PUSHINT
+      SETCONTVARARGS
+      <{
+        1 THROW
+      }>CONT
+      c1 PUSH
+      COMPOSALT
+      SWAP
+      TRY
+      1 PUSHINT
+    }>
+    1 -1 CALLXARGS
+  }>
+  $UnderscoreVariableTestContract$_fun_test2 PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    2 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    2 PUSHINT
+    4 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    3 PUSHINT
+    6 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    0 PUSHINT
+    257 PUSHINT
+    s2 s(-1) s(-1) PUXCPU
+    __tact_dict_min_int_int INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      s1 s2 XCHG
+      ADD
+      257 PUSHINT
+      s0 s3 PUSH2
+      s0 s3 XCHG
+      s4 s4 XCHG2
+      __tact_dict_next_int_int INLINECALLDICT
+    }>
+    s2 s3 XCHG
+    3 BLKDROP
+  }>
+  $UnderscoreVariableTestContract$_fun_test3 PROCREF:<{
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    2 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    2 PUSHINT
+    4 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    257 PUSHINT
+    3 PUSHINT
+    6 PUSHINT
+    s2 PUSH
+    __tact_dict_set_int_int INLINECALLDICT
+    0 PUSHINT
+    257 PUSHINT
+    s2 s(-1) s(-1) PUXCPU
+    __tact_dict_min_int_int INLINECALLDICT
+    NIP
+    WHILE:<{
+    }>DO<{
+      TUCK
+      ADD
+      257 PUSHINT
+      s0 s3 PUSH2
+      s0 s3 XCHG
+      s4 s4 XCHG2
+      __tact_dict_next_int_int INLINECALLDICT
+      NIP
+    }>
+    DROP
+    NIP
+  }>
+  $UnderscoreVariableTestContract$_fun_test4 PROCREF:<{
+    $UnderscoreVariableTestContract$_fun_increaseSomething INLINECALLDICT
+    DROP
+    $UnderscoreVariableTestContract$_fun_increaseSomething INLINECALLDICT
+    DROP
+    $UnderscoreVariableTestContract$_fun_increaseSomething INLINECALLDICT
+    DROP
+    $UnderscoreVariableTestContract$_fun_increaseSomething INLINECALLDICT
+    DROP
+    DUP
+  }>
+  %test1 PROC:<{
+    $UnderscoreVariableTestContract$_contract_load INLINECALLDICT
+    $UnderscoreVariableTestContract$_fun_test1 INLINECALLDICT
+    NIP
+  }>
+  %test2 PROC:<{
+    $UnderscoreVariableTestContract$_contract_load INLINECALLDICT
+    $UnderscoreVariableTestContract$_fun_test2 INLINECALLDICT
+    NIP
+  }>
+  %test3 PROC:<{
+    $UnderscoreVariableTestContract$_contract_load INLINECALLDICT
+    $UnderscoreVariableTestContract$_fun_test3 INLINECALLDICT
+    NIP
+  }>
+  %test4 PROC:<{
+    $UnderscoreVariableTestContract$_contract_load INLINECALLDICT
+    $UnderscoreVariableTestContract$_fun_test4 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $UnderscoreVariableTestContract$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

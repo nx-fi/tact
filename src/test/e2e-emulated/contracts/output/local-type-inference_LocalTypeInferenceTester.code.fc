@@ -1,0 +1,825 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; local-type-inference_LocalTypeInferenceTester.headers.fc
+;;
+;; Header files for LocalTypeInferenceTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_string_builder_start
+tuple __tact_string_builder_start(builder b) inline;
+
+;; __tact_string_builder_start_string
+tuple __tact_string_builder_start_string() inline;
+
+;; __tact_string_builder_end
+cell __tact_string_builder_end(tuple builders) inline;
+
+;; __tact_string_builder_end_slice
+slice __tact_string_builder_end_slice(tuple builders) inline;
+
+;; __tact_string_builder_append
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref;
+
+;; __tact_string_builder_append_not_mut
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref;
+
+;; __tact_dict_get_int_int
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline;
+
+;; __tact_dict_set_int_int
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline;
+
+;; $Deploy$_load_without_opcode
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $MyStruct$_to_external
+(int, int) $MyStruct$_to_external(((int, int)) v) inline;
+
+;; $LocalTypeInferenceTester$init$_store
+builder $LocalTypeInferenceTester$init$_store(builder build_0, tuple v) inline;
+
+;; $LocalTypeInferenceTester$_contract_init
+tuple $LocalTypeInferenceTester$_contract_init() impure inline;
+
+;; $LocalTypeInferenceTester$_contract_load
+tuple $LocalTypeInferenceTester$_contract_load() impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $LocalTypeInferenceTester$_init_child
+(cell, cell) $LocalTypeInferenceTester$_init_child() inline;
+
+;; $LocalTypeInferenceTester$_fun_test1
+(tuple, int) $LocalTypeInferenceTester$_fun_test1(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test2
+(tuple, int) $LocalTypeInferenceTester$_fun_test2(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test3
+(tuple, slice) $LocalTypeInferenceTester$_fun_test3(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test4
+(tuple, slice) $LocalTypeInferenceTester$_fun_test4(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test5
+(tuple, int) $LocalTypeInferenceTester$_fun_test5(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test6
+(tuple, slice) $LocalTypeInferenceTester$_fun_test6(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test7
+(tuple, cell) $LocalTypeInferenceTester$_fun_test7(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test8
+(tuple, builder) $LocalTypeInferenceTester$_fun_test8(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test9
+(tuple, slice) $LocalTypeInferenceTester$_fun_test9(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test10
+(tuple, slice) $LocalTypeInferenceTester$_fun_test10(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test11
+(tuple, (cell, cell)) $LocalTypeInferenceTester$_fun_test11(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test12
+(tuple, cell) $LocalTypeInferenceTester$_fun_test12(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test13
+(tuple, cell) $LocalTypeInferenceTester$_fun_test13(tuple $self) impure inline_ref;
+
+;; $MyStruct$_constructor_x_y
+((int, int)) $MyStruct$_constructor_x_y(int $x, int $y) inline;
+
+;; $LocalTypeInferenceTester$_fun_test14
+(tuple, (int, int)) $LocalTypeInferenceTester$_fun_test14(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test15
+(tuple, (int, int)) $LocalTypeInferenceTester$_fun_test15(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test16
+(tuple, int) $LocalTypeInferenceTester$_fun_test16(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test17
+(tuple, int) $LocalTypeInferenceTester$_fun_test17(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test18
+(tuple, int) $LocalTypeInferenceTester$_fun_test18(tuple $self) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_test19
+(tuple, int) $LocalTypeInferenceTester$_fun_test19(tuple $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $LocalTypeInferenceTester$_fun_forward
+(tuple, ()) $LocalTypeInferenceTester$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $LocalTypeInferenceTester$_fun_notify
+(tuple, ()) $LocalTypeInferenceTester$_fun_notify(tuple $self, cell $body) impure inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline;
+
+
+;; local-type-inference_LocalTypeInferenceTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+tuple __tact_string_builder_start(builder b) inline {
+    return tpush(tpush(empty_tuple(), b), null());
+}
+
+tuple __tact_string_builder_start_string() inline {
+    return __tact_string_builder_start(begin_cell());
+}
+
+cell __tact_string_builder_end(tuple builders) inline {
+    (builder b, tuple tail) = uncons(builders);
+    cell c = b.end_cell();
+    while(~ null?(tail)) {
+        (b, tail) = uncons(tail);
+        c = b.store_ref(c).end_cell();
+    }
+    return c;
+}
+
+slice __tact_string_builder_end_slice(tuple builders) inline {
+    return __tact_string_builder_end(builders).begin_parse();
+}
+
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref {
+    int sliceRefs = slice_refs(sc);
+    int sliceBits = slice_bits(sc);
+
+    while((sliceBits > 0) | (sliceRefs > 0)) {
+
+        ;; Load the current builder
+        (builder b, tuple tail) = uncons(builders);
+        int remBytes = 127 - (builder_bits(b) / 8);
+        int exBytes = sliceBits / 8;
+
+        ;; Append bits
+        int amount = min(remBytes, exBytes);
+        if (amount > 0) {
+            slice read = sc~load_bits(amount * 8);
+            b = b.store_slice(read);
+        }
+
+        ;; Update builders
+        builders = cons(b, tail);
+
+        ;; Check if we need to add a new cell and continue
+        if (exBytes - amount > 0) {
+            var bb = begin_cell();
+            builders = cons(bb, builders);
+            sliceBits = (exBytes - amount) * 8;
+        } elseif (sliceRefs > 0) {
+            sc = sc~load_ref().begin_parse();
+            sliceRefs = slice_refs(sc);
+            sliceBits = slice_bits(sc);
+        } else {
+            sliceBits = 0;
+            sliceRefs = 0;
+        }
+    }
+
+    return ((builders), ());
+}
+
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref {
+    builders~__tact_string_builder_append(sc);
+    return builders;
+}
+
+int __tact_dict_get_int_int(cell d, int kl, int k, int vl) inline {
+    var (r, ok) = idict_get?(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_int_int(cell d, int kl, int k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = idict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (idict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+(tuple, ()) $LocalTypeInferenceTester$_fun_forward(tuple $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var ($self) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return ($self, ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return ($self, ());
+}
+
+(tuple, ()) $LocalTypeInferenceTester$_fun_notify(tuple $self, cell $body) impure inline {
+    var ($self) = $self;
+    $self~$LocalTypeInferenceTester$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return ($self, ());
+}
+
+;; local-type-inference_LocalTypeInferenceTester.constants.fc
+;; String "hello"
+slice __gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988() asm """
+    B{b5ee9c7241010101000700000a68656c6c6f4d1ca352} B>boc <s PUSHSLICE
+""";
+
+;; local-type-inference_LocalTypeInferenceTester.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: MyStruct
+;; TLB: _ x:int257 y:int257 = MyStruct
+;;
+
+(int, int) $MyStruct$_to_external(((int, int)) v) inline {
+    var (v'x, v'y) = v; 
+    return (v'x, v'y);
+}
+
+((int, int)) $MyStruct$_constructor_x_y(int $x, int $y) inline {
+    return ($x, $y);
+}
+
+;;
+;; Type: LocalTypeInferenceTester
+;; TLB: _  = LocalTypeInferenceTester
+;;
+
+builder $LocalTypeInferenceTester$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+tuple $LocalTypeInferenceTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $LocalTypeInferenceTester$_contract_init();
+    }
+}
+
+(cell, cell) $LocalTypeInferenceTester$_init_child() inline {
+    ;; Build init code cell
+
+    ;; Contract Code: LocalTypeInferenceTester
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $LocalTypeInferenceTester$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract LocalTypeInferenceTester functions
+;;
+
+tuple $LocalTypeInferenceTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $x = 1;
+    var $fresh$ret_430 = $x;
+    return ($self, $fresh$ret_430);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $x = 1;
+    int $y = ($x + 1);
+    var $fresh$ret_431 = $y;
+    return ($self, $fresh$ret_431);
+}
+
+(tuple, slice) $LocalTypeInferenceTester$_fun_test3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $x = $global_myAddress();
+    var $fresh$ret_432 = $x;
+    return ($self, $fresh$ret_432);
+}
+
+(tuple, slice) $LocalTypeInferenceTester$_fun_test4(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $x = $global_myAddress();
+    slice $y = $x;
+    var $fresh$ret_433 = $y;
+    return ($self, $fresh$ret_433);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test5(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $x = 123;
+    int $y = ($x == 123);
+    var $fresh$ret_434 = $y;
+    return ($self, $fresh$ret_434);
+}
+
+(tuple, slice) $LocalTypeInferenceTester$_fun_test6(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $x = $Cell$_fun_asSlice($Builder$_fun_endCell(store_uint($global_beginCell(), 123, 64)));
+    var $fresh$ret_435 = $x;
+    return ($self, $fresh$ret_435);
+}
+
+(tuple, cell) $LocalTypeInferenceTester$_fun_test7(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $x = $Builder$_fun_endCell(store_uint($global_beginCell(), 123, 64));
+    var $fresh$ret_436 = $x;
+    return ($self, $fresh$ret_436);
+}
+
+(tuple, builder) $LocalTypeInferenceTester$_fun_test8(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    builder $x = store_uint($global_beginCell(), 123, 64);
+    var $fresh$ret_437 = $x;
+    return ($self, $fresh$ret_437);
+}
+
+(tuple, slice) $LocalTypeInferenceTester$_fun_test9(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    slice $x = __tact_string_builder_end_slice(__tact_string_builder_append_not_mut(__tact_string_builder_start_string(), __gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988()));
+    var $fresh$ret_438 = $x;
+    return ($self, $fresh$ret_438);
+}
+
+(tuple, slice) $LocalTypeInferenceTester$_fun_test10(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $x = __tact_string_builder_start_string();
+    slice $y = __tact_string_builder_end_slice(__tact_string_builder_append_not_mut($x, __gen_slice_string_dde115548d9f228a10b8d45eeb3f9a67d74b58bf3aa8e264e7d6132f5e6eb988()));
+    var $fresh$ret_439 = $y;
+    return ($self, $fresh$ret_439);
+}
+
+(tuple, (cell, cell)) $LocalTypeInferenceTester$_fun_test11(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var ($x'code, $x'data) = $LocalTypeInferenceTester$_init_child();
+    var $fresh$ret_440 = ($x'code, $x'data);
+    return ($self, $fresh$ret_440);
+}
+
+(tuple, cell) $LocalTypeInferenceTester$_fun_test12(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $x = null();
+    cell $y = $x;
+    var $fresh$ret_441 = $y;
+    return ($self, $fresh$ret_441);
+}
+
+(tuple, cell) $LocalTypeInferenceTester$_fun_test13(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $x = null();
+    cell $y = $x;
+    var $fresh$ret_442 = $y;
+    return ($self, $fresh$ret_442);
+}
+
+(tuple, (int, int)) $LocalTypeInferenceTester$_fun_test14(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var ($x'x, $x'y) = $MyStruct$_constructor_x_y(1, 2);
+    var $fresh$ret_443 = ($x'x, $x'y);
+    return ($self, $fresh$ret_443);
+}
+
+(tuple, (int, int)) $LocalTypeInferenceTester$_fun_test15(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var ($x'x, $x'y) = $MyStruct$_constructor_x_y(1, 2);
+    var ($y'x, $y'y) = ($x'x, $x'y);
+    var $fresh$ret_444 = ($y'x, $y'y);
+    return ($self, $fresh$ret_444);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test16(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $m = null();
+    int $x = __tact_dict_get_int_int($m, 257, 1, 257);
+    var $fresh$ret_445 = $x;
+    return ($self, $fresh$ret_445);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test17(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $m = null();
+    int $x = __tact_dict_get_int_int($m, 257, 1, 257);
+    int $y = $x;
+    var $fresh$ret_446 = $y;
+    return ($self, $fresh$ret_446);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test18(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    cell $m = null();
+    $m~__tact_dict_set_int_int(257, 1, 2, 257);
+    int $x = __tact_dict_get_int_int($m, 257, 1, 257);
+    var $fresh$ret_447 = $x;
+    return ($self, $fresh$ret_447);
+}
+
+(tuple, int) $LocalTypeInferenceTester$_fun_test19(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    int $x = null();
+    int $y = $x;
+    var $fresh$ret_448 = $y;
+    return ($self, $fresh$ret_448);
+}
+
+;;
+;; Get methods of a Contract LocalTypeInferenceTester
+;;
+
+_ %test1() method_id(70304) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test1();
+    return res;
+}
+
+_ %test2() method_id(74435) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test2();
+    return res;
+}
+
+_ %test3() method_id(78562) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test3();
+    return res;
+}
+
+_ %test4() method_id(82437) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test4();
+    return res;
+}
+
+_ %test5() method_id(86564) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test5();
+    return res;
+}
+
+_ %test6() method_id(90695) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test6();
+    return res;
+}
+
+_ %test7() method_id(94822) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test7();
+    return res;
+}
+
+_ %test8() method_id(99209) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test8();
+    return res;
+}
+
+_ %test9() method_id(103336) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test9();
+    return res;
+}
+
+_ %test10() method_id(107552) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test10();
+    return res;
+}
+
+_ %test11() method_id(111617) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test11();
+    return $StateInit$_to_external(res);
+}
+
+_ %test12() method_id(99426) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test12();
+    return res;
+}
+
+_ %test13() method_id(103491) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test13();
+    return res;
+}
+
+_ %test14() method_id(124068) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test14();
+    return $MyStruct$_to_external(res);
+}
+
+_ %test15() method_id(128133) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test15();
+    return $MyStruct$_to_external(res);
+}
+
+_ %test16() method_id(115942) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test16();
+    return res;
+}
+
+_ %test17() method_id(120007) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test17();
+    return res;
+}
+
+_ %test18() method_id(75048) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test18();
+    return res;
+}
+
+_ %test19() method_id(79113) {
+    var self = $LocalTypeInferenceTester$_contract_load();
+    var res = self~$LocalTypeInferenceTester$_fun_test19();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract LocalTypeInferenceTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $LocalTypeInferenceTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var op = in_msg~load_opcode();
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var ($deploy'queryId) = in_msg~$Deploy$_load_without_opcode();
+        $self~$LocalTypeInferenceTester$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+        return ();
+    }
+    
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

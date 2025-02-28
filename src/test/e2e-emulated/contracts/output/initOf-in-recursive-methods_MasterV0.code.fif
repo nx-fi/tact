@@ -1,0 +1,95 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/initOf-in-recursive-methods_MasterV0.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $MasterV0$_load
+  DECLPROC $MasterV0$_contract_init
+  DECLPROC $MasterV0$_contract_load
+  DECLPROC $MasterV0$_fun_state
+  77589 DECLMETHOD %state
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $MasterV0$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $MasterV0$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $MasterV0$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $MasterV0$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $MasterV0$_contract_init INLINECALLDICT
+    }>
+  }>
+  $MasterV0$_fun_state PROCREF:<{
+    DUP
+  }>
+  %state PROC:<{
+    $MasterV0$_contract_load INLINECALLDICT
+    $MasterV0$_fun_state INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    DROP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s5 s5 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    SWAP
+    __tact_context_sender SETGLOB
+    $MasterV0$_contract_load INLINECALLDICT
+    DROP
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

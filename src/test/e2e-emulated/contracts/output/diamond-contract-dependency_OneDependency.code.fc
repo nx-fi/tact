@@ -1,0 +1,233 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; diamond-contract-dependency_OneDependency.headers.fc
+;;
+;; Header files for OneDependency
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $OneDependency$_load
+(slice, ((int))) $OneDependency$_load(slice sc_0) inline;
+
+;; $StateInit$_to_external
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline;
+
+;; $NoDependencies$init$_store
+builder $NoDependencies$init$_store(builder build_0, tuple v) inline;
+
+;; $OneDependency$init$_store
+builder $OneDependency$init$_store(builder build_0, (int) v) inline;
+
+;; $OneDependency$init$_load
+(slice, ((int))) $OneDependency$init$_load(slice sc_0) inline;
+
+;; $OneDependency$_contract_init
+(int) $OneDependency$_contract_init(int $initParam) impure inline;
+
+;; $OneDependency$_contract_load
+(int) $OneDependency$_contract_load() impure inline;
+
+;; $NoDependencies$_init_child
+(cell, cell) $NoDependencies$_init_child() inline;
+
+;; $OneDependency$_init_child
+(cell, cell) $OneDependency$_init_child(int $initParam) inline;
+
+;; $OneDependency$_fun_getDep
+((int), (cell, cell)) $OneDependency$_fun_getDep((int) $self) impure inline_ref;
+
+;; $OneDependency$_fun_getState
+((int), (cell, cell)) $OneDependency$_fun_getState((int) $self) impure inline_ref;
+
+
+;; diamond-contract-dependency_OneDependency.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; diamond-contract-dependency_OneDependency.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+(cell, cell) $StateInit$_to_external(((cell, cell)) v) inline {
+    var (v'code, v'data) = v; 
+    return (v'code, v'data);
+}
+
+;;
+;; Type: NoDependencies
+;; TLB: _  = NoDependencies
+;;
+
+builder $NoDependencies$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $NoDependencies$_child_get_code() impure asm """
+    B{b5ee9c720101030100750001a0ff00208e423001d072d721d200d200fa4021103450666f04f86102f862ed44d0d20030916d916de230019130e07021d74920c21f953101d31f309132e2c00001c121b0dcf2c082e1f4a413f4bcf2c80b010125a679207b513434800c245b645b78b6cf1b04a0020014f82ac87001ca006d30c9} B>boc PUSHREF
+""";
+
+(cell, cell) $NoDependencies$_init_child() inline {
+    ;; Build init code cell
+
+    ;; Contract Code: NoDependencies
+    cell init_code = $NoDependencies$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $NoDependencies$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: OneDependency
+;; TLB: _ param:uint32 = OneDependency
+;;
+
+(slice, ((int))) $OneDependency$_load(slice sc_0) inline {
+    var v'param = sc_0~load_uint(32);
+    return (sc_0, (v'param));
+}
+
+builder $OneDependency$init$_store(builder build_0, (int) v) inline {
+    var (v'initParam) = v;
+    build_0 = build_0.store_int(v'initParam, 257);
+    return build_0;
+}
+
+(slice, ((int))) $OneDependency$init$_load(slice sc_0) inline {
+    var v'initParam = sc_0~load_int(257);
+    return (sc_0, (v'initParam));
+}
+
+(int) $OneDependency$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$OneDependency$_load();
+    } else {
+        (int $initParam) = $sc~$OneDependency$init$_load();
+        $sc.end_parse();
+        return $OneDependency$_contract_init($initParam);
+    }
+}
+
+(cell, cell) $OneDependency$_init_child(int $initParam) inline {
+    ;; Build init code cell
+
+    ;; Contract Code: OneDependency
+    cell init_code = my_code();
+
+    ;; Build init data cell
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $OneDependency$init$_store(b, ($initParam));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Contract OneDependency functions
+;;
+
+(int) $OneDependency$_contract_init(int $initParam) impure inline {
+    var (($self'param)) = (null());
+    $self'param = $initParam;
+    return ($self'param);
+}
+
+((int), (cell, cell)) $OneDependency$_fun_getDep((int) $self) impure inline_ref {
+    var (($self'param)) = $self;
+    var $fresh$ret_302 = $NoDependencies$_init_child();
+    return (($self'param), $fresh$ret_302);
+}
+
+((int), (cell, cell)) $OneDependency$_fun_getState((int) $self) impure inline_ref {
+    var (($self'param)) = $self;
+    var $fresh$ret_303 = $OneDependency$_init_child($self'param);
+    return (($self'param), $fresh$ret_303);
+}
+
+;;
+;; Get methods of a Contract OneDependency
+;;
+
+_ %getDep() method_id(93811) {
+    var self = $OneDependency$_contract_load();
+    var res = self~$OneDependency$_fun_getDep();
+    return $StateInit$_to_external(res);
+}
+
+_ %getState() method_id(124033) {
+    var self = $OneDependency$_contract_load();
+    var res = self~$OneDependency$_fun_getState();
+    return $StateInit$_to_external(res);
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract OneDependency
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'param) = $OneDependency$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

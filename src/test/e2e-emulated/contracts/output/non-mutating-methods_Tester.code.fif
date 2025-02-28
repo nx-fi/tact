@@ -1,0 +1,208 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/non-mutating-methods_Tester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $SomeStruct$_get_i
+  DECLPROC $SomeStruct$_get_b
+  DECLPROC $SomeStruct$_not_null
+  DECLPROC $SomeStruct$_as_optional
+  DECLPROC $Tester$_contract_init
+  DECLPROC $Tester$_contract_load
+  DECLPROC $SomeStruct$_fun_equal
+  DECLPROC $SomeStruct$_constructor_i_b
+  DECLPROC $Tester$_fun_test1
+  70304 DECLMETHOD %test1
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $SomeStruct$_get_i PROCINLINE:<{
+    DROP
+  }>
+  $SomeStruct$_get_b PROCINLINE:<{
+    NIP
+  }>
+  $SomeStruct$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $SomeStruct$_as_optional PROCINLINE:<{
+        2 TUPLE
+  }>
+  $Tester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Tester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $Tester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $SomeStruct$_fun_equal PROCREF:<{
+    OVER
+    ISNULL
+    IF:<{
+      DUP
+      ISNULL
+    }>ELSE<{
+      FALSE
+    }>
+    IFJMP:<{
+      2DROP
+      TRUE
+    }>
+    OVER
+    ISNULL
+    IF:<{
+      TRUE
+    }>ELSE<{
+      DUP
+      ISNULL
+    }>
+    IFJMP:<{
+      2DROP
+      FALSE
+    }>
+    OVER
+    $SomeStruct$_not_null INLINECALLDICT
+    $SomeStruct$_get_i INLINECALLDICT
+    OVER
+    $SomeStruct$_not_null INLINECALLDICT
+    $SomeStruct$_get_i INLINECALLDICT
+    EQUAL
+    IF:<{
+      SWAP
+      $SomeStruct$_not_null INLINECALLDICT
+      $SomeStruct$_get_b INLINECALLDICT
+      SWAP
+      $SomeStruct$_not_null INLINECALLDICT
+      $SomeStruct$_get_b INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      2DROP
+      FALSE
+    }>
+  }>
+  $SomeStruct$_constructor_i_b PROCINLINE:<{
+  }>
+  $Tester$_fun_test1 PROCREF:<{
+    42 PUSHINT
+    TRUE
+    $SomeStruct$_constructor_i_b INLINECALLDICT
+    42 PUSHINT
+    FALSE
+    $SomeStruct$_constructor_i_b INLINECALLDICT
+    PUSHNULL
+    s4 s3 PUSH2
+    $SomeStruct$_as_optional INLINECALLDICT
+    s5 s4 PUSH2
+    $SomeStruct$_as_optional INLINECALLDICT
+    $SomeStruct$_fun_equal INLINECALLDICT
+    IF:<{
+      s4 s3 XCHG2
+      $SomeStruct$_as_optional INLINECALLDICT
+      s1 s3 PUSH2
+      $SomeStruct$_as_optional INLINECALLDICT
+      $SomeStruct$_fun_equal INLINECALLDICT
+      NOT
+    }>ELSE<{
+      s3 POP
+      s3 POP
+      FALSE
+    }>
+    IF:<{
+      ROT
+      $SomeStruct$_as_optional INLINECALLDICT
+      $SomeStruct$_fun_equal INLINECALLDICT
+      NOT
+    }>ELSE<{
+      3 BLKDROP
+      FALSE
+    }>
+  }>
+  %test1 PROC:<{
+    $Tester$_contract_load INLINECALLDICT
+    $Tester$_fun_test1 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Tester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

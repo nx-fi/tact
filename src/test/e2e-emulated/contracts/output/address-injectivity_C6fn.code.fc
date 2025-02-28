@@ -1,0 +1,138 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; address-injectivity_C6fn.headers.fc
+;;
+;; Header files for C6fn
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $C6fn$_load
+(slice, ((int))) $C6fn$_load(slice sc_0) inline;
+
+;; $C6fn$init$_load
+(slice, ((int))) $C6fn$init$_load(slice sc_0) inline;
+
+;; $C6fn$_contract_init
+(int) $C6fn$_contract_init(int $v) impure inline;
+
+;; $C6fn$_contract_load
+(int) $C6fn$_contract_load() impure inline;
+
+;; $C6fn$_fun_incrAndGetField1
+((int), int) $C6fn$_fun_incrAndGetField1((int) $self, int $n) impure inline_ref;
+
+
+;; address-injectivity_C6fn.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; address-injectivity_C6fn.storage.fc
+;;
+;; Type: C6fn
+;; TLB: _ f:int257 = C6fn
+;;
+
+(slice, ((int))) $C6fn$_load(slice sc_0) inline {
+    var v'f = sc_0~load_int(257);
+    return (sc_0, (v'f));
+}
+
+(slice, ((int))) $C6fn$init$_load(slice sc_0) inline {
+    var v'v = sc_0~load_int(257);
+    return (sc_0, (v'v));
+}
+
+(int) $C6fn$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$C6fn$_load();
+    } else {
+        (int $v) = $sc~$C6fn$init$_load();
+        $sc.end_parse();
+        return $C6fn$_contract_init($v);
+    }
+}
+
+;;
+;; Contract C6fn functions
+;;
+
+(int) $C6fn$_contract_init(int $v) impure inline {
+    var (($self'f)) = (null());
+    $self'f = $v;
+    return ($self'f);
+}
+
+((int), int) $C6fn$_fun_incrAndGetField1((int) $self, int $n) impure inline_ref {
+    var (($self'f)) = $self;
+    var $fresh$ret_70 = ($self'f + $n);
+    return (($self'f), $fresh$ret_70);
+}
+
+;;
+;; Get methods of a Contract C6fn
+;;
+
+_ %incrAndGetField1(int $n) method_id(111350) {
+    int $n = $n;
+    var self = $C6fn$_contract_load();
+    var res = self~$C6fn$_fun_incrAndGetField1($n);
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract C6fn
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'f) = $C6fn$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

@@ -1,0 +1,731 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; receiver-precedence_ReceiverTester.headers.fc
+;;
+;; Header files for ReceiverTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_slice_eq
+int __tact_slice_eq(slice a, slice b) inline;
+
+;; $Message$_load_without_opcode
+(slice, ((slice))) $Message$_load_without_opcode(slice sc_0) inline;
+
+;; $BinaryIntOperation$_store
+builder $BinaryIntOperation$_store(builder build_0, (slice, int, int) v) inline;
+
+;; $BinaryIntOperation$_store_cell
+cell $BinaryIntOperation$_store_cell((slice, int, int) v) inline;
+
+;; $BinaryIntOperation$_load_bounced
+(slice, (tuple)) $BinaryIntOperation$_load_bounced(slice sc_0) inline;
+
+;; $SendCellToAddress$_load_without_opcode
+(slice, ((slice, cell))) $SendCellToAddress$_load_without_opcode(slice sc_0) inline;
+
+;; $ReceiverTester$_store
+builder $ReceiverTester$_store(builder build_0, (slice) v) inline;
+
+;; $ReceiverTester$_load
+(slice, ((slice))) $ReceiverTester$_load(slice sc_0) inline;
+
+;; $Calculator$init$_store
+builder $Calculator$init$_store(builder build_0, tuple v) inline;
+
+;; $ReceiverTester$_contract_init
+(slice) $ReceiverTester$_contract_init() impure inline;
+
+;; $ReceiverTester$_contract_load
+(slice) $ReceiverTester$_contract_load() impure inline;
+
+;; $ReceiverTester$_contract_store
+() $ReceiverTester$_contract_store((slice) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $Calculator$_init_child
+(cell, cell) $Calculator$_init_child() inline;
+
+;; $ReceiverTester$_fun_receiverKind
+((slice), slice) $ReceiverTester$_fun_receiverKind((slice) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_to_bounce_value_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline;
+
+;; $MessageParameters$_constructor_to_bounce_value_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline;
+
+;; $BinaryIntOperation$_constructor_op_val1_val2
+((slice, int, int)) $BinaryIntOperation$_constructor_op_val1_val2(slice $op, int $val1, int $val2) inline;
+
+
+;; receiver-precedence_ReceiverTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+int __tact_slice_eq(slice a, slice b) inline {
+    return (a.slice_hash() ==  b.slice_hash());
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+() $global_message((int, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+    STZEROES
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+    STDICT
+    ENDC
+    SWAP
+    SENDRAWMSG
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+() $global_acceptMessage() impure asm """
+    ACCEPT
+""";
+
+;; receiver-precedence_ReceiverTester.constants.fc
+;; String "unknown"
+slice __gen_slice_string_b6f92ccfff6c9fa74f28aae6587957d4014fab2558ee73a78d6f6052f018d262() asm """
+    B{b5ee9c7241010101000900000e756e6b6e6f776e86bcd037} B>boc <s PUSHSLICE
+""";
+
+;; String "bounced_binary_message"
+slice __gen_slice_string_87a415129aacef04d298c3a802d3e3f8bc48ca70094ccc7a2ac9282f53d24b39() asm """
+    B{b5ee9c7241010101001800002c626f756e6365645f62696e6172795f6d657373616765ffb8eadf} B>boc <s PUSHSLICE
+""";
+
+;; String "bounced_fallback"
+slice __gen_slice_string_040c0006cbabf8da9ab29bf9d01dc65e6af21281c44b020763403619a1823978() asm """
+    B{b5ee9c72410101010012000020626f756e6365645f66616c6c6261636bd137f014} B>boc <s PUSHSLICE
+""";
+
+;; String "binary_message"
+slice __gen_slice_string_69431666636ca848fb52455fc04894b740949439676c781683b97349fe39d7ed() asm """
+    B{b5ee9c7241010101001000001c62696e6172795f6d657373616765182fa7f8} B>boc <s PUSHSLICE
+""";
+
+;; String "empty"
+slice __gen_slice_string_4e6560ed53c6ea0954964ae7b42c4aa670d9794f8239929c1c84f3ddc430c125() asm """
+    B{b5ee9c7241010101000700000a656d707479cd50d7fb} B>boc <s PUSHSLICE
+""";
+
+;; String "comment"
+slice __gen_slice_string_4c6acda1a984436078f5f2a3c62cdcbba2dea0c945d16d1b3d692455ba98e3f8() asm """
+    B{b5ee9c7241010101000900000e636f6d6d656e747870e97e} B>boc <s PUSHSLICE
+""";
+
+;; String "+"
+slice __gen_slice_string_f36a6d8837e606321152b2563755e0ad77075714c61f57f04efd37a4812af0b5() asm """
+    B{b5ee9c724101010100030000022b3642e8f8} B>boc <s PUSHSLICE
+""";
+
+;; String "/"
+slice __gen_slice_string_2c1988d0c53291adf27e9866632c4c8e79b822a3ef85f43657c4bbd7eb6c6b31() asm """
+    B{b5ee9c724101010100030000022f29d5723f} B>boc <s PUSHSLICE
+""";
+
+;; Cell WKclCIC7rAClk/DCjixdDeDqZn59SWLfsKAHqJvlbY4=
+cell __gen_cell_cell_58a7250880bbac00a593f0c28e2c5d0de0ea667e7d4962dfb0a007a89be56d8e() asm """
+    B{b5ee9c7241010101001200002000000000646f5f736f6d657468696e67a4f18b86} B>boc PUSHREF
+""";
+
+;; String "message"
+slice __gen_slice_string_2d6cb4f99d7b5b23c30858fd5b0ec54e1cb9d6fec149658867c4b1c26f030f9e() asm """
+    B{b5ee9c7241010101000900000e6d6573736167650cd9b20d} B>boc <s PUSHSLICE
+""";
+
+;; String "error_comment"
+slice __gen_slice_string_f3f324a362f19f5151ffef925a3b3cc64b62c28a8f74f1b4826fb4d428583470() asm """
+    B{b5ee9c7241010101000f00001a6572726f725f636f6d6d656e74c0780ab2} B>boc <s PUSHSLICE
+""";
+
+;; String "comment_fallback"
+slice __gen_slice_string_dc5468e6b2c452306dfe9490637bd0431d31a70e4402ba32be3be9ae23ea2cc7() asm """
+    B{b5ee9c72410101010012000020636f6d6d656e745f66616c6c6261636bc5e99174} B>boc <s PUSHSLICE
+""";
+
+;; String "message_slice"
+slice __gen_slice_string_84c904687516c54779da1b4981cb98b3e3d5e2271141086edc29c8ce1e07c736() asm """
+    B{b5ee9c7241010101000f00001a6d6573736167655f736c6963658f8e6ed5} B>boc <s PUSHSLICE
+""";
+
+;; String "fallback"
+slice __gen_slice_string_2778674735d94e060d892b83da483182acf0a1562971af21ca0b0a8d9d251f96() asm """
+    B{b5ee9c7241010101000a00001066616c6c6261636bbfcb7b68} B>boc <s PUSHSLICE
+""";
+
+;; String "external_binary_message"
+slice __gen_slice_string_f1bf291e956d41e2c57adfae19d230af22fb93370abc172b785b0b6b3b5a0c6c() asm """
+    B{b5ee9c7241010101001900002e65787465726e616c5f62696e6172795f6d6573736167650f6f52c8} B>boc <s PUSHSLICE
+""";
+
+;; String "external_empty"
+slice __gen_slice_string_699103a7881c77feaaba850b35202b0fe67e4b8f589f86804063fc6d2eac98d5() asm """
+    B{b5ee9c7241010101001000001c65787465726e616c5f656d7074798ec2e3da} B>boc <s PUSHSLICE
+""";
+
+;; String "external_comment"
+slice __gen_slice_string_68ab11063be4a2498301fe1371e3a98147fb1b0dda7ce9276da79d72e0d39d97() asm """
+    B{b5ee9c7241010101001200002065787465726e616c5f636f6d6d656e7456d763e7} B>boc <s PUSHSLICE
+""";
+
+;; String "external_error_comment"
+slice __gen_slice_string_87a80101fbbec2d3f6a9d2b0424e03c588534f21efecdacfd789dfb954c5cad4() asm """
+    B{b5ee9c7241010101001800002c65787465726e616c5f6572726f725f636f6d6d656e745937491d} B>boc <s PUSHSLICE
+""";
+
+;; String "external_comment_fallback"
+slice __gen_slice_string_90fd61dcb60da44a829396070206bb9db02dad56a2747dc78d8a248a33100711() asm """
+    B{b5ee9c7241010101001b00003265787465726e616c5f636f6d6d656e745f66616c6c6261636b07dfd144} B>boc <s PUSHSLICE
+""";
+
+;; String "external_message_slice"
+slice __gen_slice_string_ab0dbe473e3aec05e7714114ef057c1de058bcb08cf55d6d6964e7993970236c() asm """
+    B{b5ee9c7241010101001800002c65787465726e616c5f6d6573736167655f736c69636516c12d7a} B>boc <s PUSHSLICE
+""";
+
+;; String "external_fallback"
+slice __gen_slice_string_d583583a514361b0712b11fc4b0dc7228d03425e1ddd865afbf5110fafdbbf44() asm """
+    B{b5ee9c7241010101001300002265787465726e616c5f66616c6c6261636b100c4b5a} B>boc <s PUSHSLICE
+""";
+
+;; receiver-precedence_ReceiverTester.storage.fc
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline {
+    return (0, $body, null(), null(), $value, $to, $bounce);
+}
+
+;;
+;; Type: MessageParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 to:address bounce:bool = MessageParameters
+;;
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_bounce_value_body(slice $to, int $bounce, int $value, cell $body) inline {
+    return (0, $body, $value, $to, $bounce);
+}
+
+;;
+;; Type: Message
+;; Header: 0x00000064
+;; TLB: message#00000064 msg:^string = Message
+;;
+
+(slice, ((slice))) $Message$_load_without_opcode(slice sc_0) inline {
+    var v'msg = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'msg));
+}
+
+;;
+;; Type: BinaryIntOperation
+;; Header: 0x3177103a
+;; TLB: binary_int_operation#3177103a op:^string val1:int257 val2:int257 = BinaryIntOperation
+;;
+
+builder $BinaryIntOperation$_store(builder build_0, (slice, int, int) v) inline {
+    var (v'op, v'val1, v'val2) = v;
+    build_0 = store_uint(build_0, 829886522, 32);
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'op).end_cell());
+    build_0 = build_0.store_int(v'val1, 257);
+    build_0 = build_0.store_int(v'val2, 257);
+    return build_0;
+}
+
+cell $BinaryIntOperation$_store_cell((slice, int, int) v) inline {
+    return $BinaryIntOperation$_store(begin_cell(), v).end_cell();
+}
+
+(slice, (tuple)) $BinaryIntOperation$_load_bounced(slice sc_0) inline {
+    return (sc_0, null());
+}
+
+((slice, int, int)) $BinaryIntOperation$_constructor_op_val1_val2(slice $op, int $val1, int $val2) inline {
+    return ($op, $val1, $val2);
+}
+
+;;
+;; Type: SendCellToAddress
+;; Header: 0x7f9e1f09
+;; TLB: send_cell_to_address#7f9e1f09 address:address body:^cell = SendCellToAddress
+;;
+
+(slice, ((slice, cell))) $SendCellToAddress$_load_without_opcode(slice sc_0) inline {
+    var v'address = sc_0~load_msg_addr();
+    var v'body = sc_0~load_ref();
+    return (sc_0, (v'address, v'body));
+}
+
+;;
+;; Type: Calculator
+;; TLB: _  = Calculator
+;;
+
+builder $Calculator$init$_store(builder build_0, tuple v) inline {
+    return build_0;
+}
+
+cell $Calculator$_child_get_code() impure asm """
+    B{b5ee9c720101020100dd0001d4ff00208edc30eda2edfb01d072d721d200d200fa4021103450666f04f86102f862ed44d0d20030916d916de230019130e020d749c21fe300f90182f0d95abec808516815126b60e61ee97798fa369d80938fd6e58a862d5789af459cbadcf2c082e16d8013f4bcf2c80b0100dcd31f0182103177103aba8e61d401d001810101d700810101d7005520338200bc238b12f8500301f90101f901ba12f2f401a904f8427082103b9aca0003c8018210fc63281058cb1f810101cf00c9413070504403c8cf8580ca00cf8440ce01fa02806acf40f400c901fb00db31e0} B>boc PUSHREF
+""";
+
+(cell, cell) $Calculator$_init_child() inline {
+    ;; Build init code cell
+
+    ;; Contract Code: Calculator
+    cell init_code = $Calculator$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $Calculator$init$_store(b, null());
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: ReceiverTester
+;; TLB: _ receiverKind:^string = ReceiverTester
+;;
+
+builder $ReceiverTester$_store(builder build_0, (slice) v) inline {
+    var (v'receiverKind) = v;
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'receiverKind).end_cell());
+    return build_0;
+}
+
+(slice, ((slice))) $ReceiverTester$_load(slice sc_0) inline {
+    var v'receiverKind = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'receiverKind));
+}
+
+(slice) $ReceiverTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ReceiverTester$_load();
+    } else {
+        return $ReceiverTester$_contract_init();
+    }
+}
+
+() $ReceiverTester$_contract_store((slice) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ReceiverTester$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ReceiverTester functions
+;;
+
+(slice) $ReceiverTester$_contract_init() impure inline {
+    var (($self'receiverKind)) = (__gen_slice_string_b6f92ccfff6c9fa74f28aae6587957d4014fab2558ee73a78d6f6052f018d262());
+    return ($self'receiverKind);
+}
+
+((slice), slice) $ReceiverTester$_fun_receiverKind((slice) $self) impure inline_ref {
+    var (($self'receiverKind)) = $self;
+    var $fresh$ret_759 = $self'receiverKind;
+    return (($self'receiverKind), $fresh$ret_759);
+}
+
+;;
+;; Get methods of a Contract ReceiverTester
+;;
+
+_ %receiverKind() method_id(87389) {
+    var self = $ReceiverTester$_contract_load();
+    var res = self~$ReceiverTester$_fun_receiverKind();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract ReceiverTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'receiverKind) = $ReceiverTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        ;; Skip 0xFFFFFFFF prefix of a bounced message
+        in_msg~skip_bits(32);
+        int op = 0;
+        if (slice_bits(in_msg) >= 32) {
+            op = in_msg.preload_uint(32);
+        }
+        ;; Bounced handler for BinaryIntOperation message
+        if (op == 829886522) {
+            in_msg~skip_bits(32);
+            var $msg = in_msg~$BinaryIntOperation$_load_bounced();
+            $self'receiverKind = __gen_slice_string_87a415129aacef04d298c3a802d3e3f8bc48ca70094ccc7a2ac9282f53d24b39();
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+        
+        ;; Fallback bounce receiver
+        slice $msg = in_msg;
+        $self'receiverKind = __gen_slice_string_040c0006cbabf8da9ab29bf9d01dc65e6af21281c44b020763403619a1823978();
+        ;; Persist state
+        $ReceiverTester$_contract_store(($self'receiverKind));
+        return ();
+        return ();
+    }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg.preload_uint(32);
+        ;; Receive Message message
+        if (op == 100) {
+            in_msg~skip_bits(32);
+            var ($msg'msg) = in_msg~$Message$_load_without_opcode();
+            $self'receiverKind = __gen_slice_string_69431666636ca848fb52455fc04894b740949439676c781683b97349fe39d7ed();
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+        
+        ;; Receive SendCellToAddress message
+        if (op == 2141069065) {
+            in_msg~skip_bits(32);
+            var ($msg'address, $msg'body) = in_msg~$SendCellToAddress$_load_without_opcode();
+            $global_send($SendParameters$_constructor_to_bounce_value_body($msg'address, false, 5000000000, $msg'body));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        $self'receiverKind = __gen_slice_string_4e6560ed53c6ea0954964ae7b42c4aa670d9794f8239929c1c84f3ddc430c125();
+        ;; Persist state
+        $ReceiverTester$_contract_store(($self'receiverKind));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    if (op == 0) {
+        var text_op = slice_hash(in_msg);
+        ;; Receive "message" message
+        if (text_op == 0x1ba0ac2d69015dc89146ce5a9f413226396ee95ca204692d36689772b8730f0d) {
+            $self'receiverKind = __gen_slice_string_4c6acda1a984436078f5f2a3c62cdcbba2dea0c945d16d1b3d692455ba98e3f8();
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+        ;; Receive "do_unsupported_op" message
+        if (text_op == 0x6f3abb96938af3aaf34db6e7b3d28829abaac151dc92016a364365b3c5ee23ac) {
+            slice $addr = $global_contractAddress($Calculator$_init_child());
+            $global_message($MessageParameters$_constructor_to_bounce_value_body($addr, true, 1000000000, $BinaryIntOperation$_store_cell($BinaryIntOperation$_constructor_op_val1_val2(__gen_slice_string_f36a6d8837e606321152b2563755e0ad77075714c61f57f04efd37a4812af0b5(), 1, 1))));
+            return ();
+        }
+        ;; Receive "do_div_by_zero" message
+        if (text_op == 0xd32430e98065fe1f74537fab7ec50dea2b3f720340ab3056db227995bbee07ac) {
+            slice $addr = $global_contractAddress($Calculator$_init_child());
+            $global_message($MessageParameters$_constructor_to_bounce_value_body($addr, true, 1000000000, $BinaryIntOperation$_store_cell($BinaryIntOperation$_constructor_op_val1_val2(__gen_slice_string_2c1988d0c53291adf27e9866632c4c8e79b822a3ef85f43657c4bbd7eb6c6b31(), 10, 0))));
+            return ();
+        }
+        ;; Receive "do_success_div" message
+        if (text_op == 0x0e9cadae3933d7fee31097828a6a2100693ce4d6f043b0288fc41e67ef9f909e) {
+            slice $addr = $global_contractAddress($Calculator$_init_child());
+            $global_message($MessageParameters$_constructor_to_bounce_value_body($addr, true, 1000000000, $BinaryIntOperation$_store_cell($BinaryIntOperation$_constructor_op_val1_val2(__gen_slice_string_2c1988d0c53291adf27e9866632c4c8e79b822a3ef85f43657c4bbd7eb6c6b31(), 10, 2))));
+            return ();
+        }
+        ;; Receive "do_unknown_request" message
+        if (text_op == 0x3d1d2802f3d1bd4c4dfb9a782eb9ec631c8b13a17277c513c3528ead67c11acf) {
+            slice $addr = $global_contractAddress($Calculator$_init_child());
+            $global_message($MessageParameters$_constructor_to_bounce_value_body($addr, true, 1000000000, __gen_cell_cell_58a7250880bbac00a593f0c28e2c5d0de0ea667e7d4962dfb0a007a89be56d8e()));
+            return ();
+        }
+        ;; Fallback Text Receiver
+        if (in_msg_length >= 32) {
+            slice $msg = in_msg.skip_bits(32);
+            if (__tact_slice_eq(__gen_slice_string_2d6cb4f99d7b5b23c30858fd5b0ec54e1cb9d6fec149658867c4b1c26f030f9e(), $msg)) {
+                $self'receiverKind = __gen_slice_string_f3f324a362f19f5151ffef925a3b3cc64b62c28a8f74f1b4826fb4d428583470();
+            } else {
+                $self'receiverKind = __gen_slice_string_dc5468e6b2c452306dfe9490637bd0431d31a70e4402ba32be3be9ae23ea2cc7();
+            }
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+    }
+    ;; Receiver fallback
+    slice $msg = in_msg;
+    $msg~load_uint(32);
+    slice $m = __tact_slice_to_str($msg);
+    if (__tact_slice_eq(__gen_slice_string_2d6cb4f99d7b5b23c30858fd5b0ec54e1cb9d6fec149658867c4b1c26f030f9e(), $m)) {
+        $self'receiverKind = __gen_slice_string_84c904687516c54779da1b4981cb98b3e3d5e2271141086edc29c8ce1e07c736();
+    } else {
+        $self'receiverKind = __gen_slice_string_2778674735d94e060d892b83da483182acf0a1562971af21ca0b0a8d9d251f96();
+    }
+    ;; Persist state
+    $ReceiverTester$_contract_store(($self'receiverKind));
+    return ();
+}
+
+() recv_external(slice in_msg) impure {
+    ;; Load contract data
+    var ($self'receiverKind) = $ReceiverTester$_contract_load();
+    
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg.preload_uint(32);
+        ;; Receive Message message
+        if (op == 100) {
+            in_msg~skip_bits(32);
+            var ($msg'msg) = in_msg~$Message$_load_without_opcode();
+            $global_acceptMessage();
+            $self'receiverKind = __gen_slice_string_f1bf291e956d41e2c57adfae19d230af22fb93370abc172b785b0b6b3b5a0c6c();
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+        
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        $global_acceptMessage();
+        $self'receiverKind = __gen_slice_string_699103a7881c77feaaba850b35202b0fe67e4b8f589f86804063fc6d2eac98d5();
+        ;; Persist state
+        $ReceiverTester$_contract_store(($self'receiverKind));
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    if (op == 0) {
+        var text_op = slice_hash(in_msg);
+        ;; Receive "message" message
+        if (text_op == 0x1ba0ac2d69015dc89146ce5a9f413226396ee95ca204692d36689772b8730f0d) {
+            $global_acceptMessage();
+            $self'receiverKind = __gen_slice_string_68ab11063be4a2498301fe1371e3a98147fb1b0dda7ce9276da79d72e0d39d97();
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+        ;; Fallback Text Receiver
+        if (in_msg_length >= 32) {
+            slice $msg = in_msg.skip_bits(32);
+            $global_acceptMessage();
+            if (__tact_slice_eq(__gen_slice_string_2d6cb4f99d7b5b23c30858fd5b0ec54e1cb9d6fec149658867c4b1c26f030f9e(), $msg)) {
+                $self'receiverKind = __gen_slice_string_87a80101fbbec2d3f6a9d2b0424e03c588534f21efecdacfd789dfb954c5cad4();
+            } else {
+                $self'receiverKind = __gen_slice_string_90fd61dcb60da44a829396070206bb9db02dad56a2747dc78d8a248a33100711();
+            }
+            ;; Persist state
+            $ReceiverTester$_contract_store(($self'receiverKind));
+            return ();
+        }
+    }
+    ;; Receiver fallback
+    slice $msg = in_msg;
+    $global_acceptMessage();
+    $msg~load_uint(32);
+    slice $m = __tact_slice_to_str($msg);
+    if (__tact_slice_eq(__gen_slice_string_2d6cb4f99d7b5b23c30858fd5b0ec54e1cb9d6fec149658867c4b1c26f030f9e(), $m)) {
+        $self'receiverKind = __gen_slice_string_ab0dbe473e3aec05e7714114ef057c1de058bcb08cf55d6d6964e7993970236c();
+    } else {
+        $self'receiverKind = __gen_slice_string_d583583a514361b0712b11fc4b0dc7228d03425e1ddd865afbf5110fafdbbf44();
+    }
+    ;; Persist state
+    $ReceiverTester$_contract_store(($self'receiverKind));
+    return ();
+}
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+DUP -1 EQINT IFJMP:<{
+                DROP over <s ref@ -1 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

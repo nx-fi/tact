@@ -1,0 +1,153 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; forward_Forward.headers.fc
+;;
+;; Header files for Forward
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; $TestGetFwdFee$_load_without_opcode
+(slice, ((slice))) $TestGetFwdFee$_load_without_opcode(slice sc_0) inline;
+
+;; $Forward$_contract_init
+tuple $Forward$_contract_init() impure inline;
+
+;; $Forward$_contract_load
+tuple $Forward$_contract_load() impure inline;
+
+
+;; forward_Forward.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+int $Context$_fun_readForwardFee((int, slice, int, slice) $self) impure asm """
+    LDMSGADDR   // load dest:MsgAddressInt
+    LDGRAMS     // load value:CurrencyCollection
+    ONE
+    SDSKIPFIRST // skip extra currency collection
+    LDGRAMS     // load ihr_fee
+    LDGRAMS     // load fwd_fee, we'll be using this!
+    DROP        // drop remaining Slice (with created_lt and created_at)
+
+    // There are 7 entries on the stack — first 3 fields of Context plus 4 loaded ones.
+    // The topmost is fwd_fee, which is the only one we're after, so let's drop 6 entries below:
+    6 1 BLKDROP2 // drop the loaded values as well as the first 3 fields of Context
+
+    ZERO              // not masterchain
+    GETORIGINALFWDFEE // (fwd_fee * 2^16) / first_frac, where
+                      // first_frac is a value listed in config param 25
+                      // of the blockchain: https://tonscan.org/config#25
+""";
+
+;; forward_Forward.storage.fc
+;;
+;; Type: TestGetFwdFee
+;; Header: 0x240e5d15
+;; TLB: test_get_fwd_fee#240e5d15 any:^slice = TestGetFwdFee
+;;
+
+(slice, ((slice))) $TestGetFwdFee$_load_without_opcode(slice sc_0) inline {
+    var v'any = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'any));
+}
+
+;;
+;; Type: Forward
+;; TLB: _  = Forward
+;;
+
+tuple $Forward$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $Forward$_contract_init();
+    }
+}
+
+;;
+;; Contract Forward functions
+;;
+
+tuple $Forward$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+() $global_touch(int $x) impure asm "NOP";
+
+;;
+;; Get methods of a Contract Forward
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Forward
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $Forward$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    var op = in_msg~load_opcode();
+    ;; Receive TestGetFwdFee message
+    if (op == 604921109) {
+        var ($msg'any) = in_msg~$TestGetFwdFee$_load_without_opcode();
+        $global_touch($Context$_fun_readForwardFee(__tact_context_get()));
+        return ();
+    }
+    
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

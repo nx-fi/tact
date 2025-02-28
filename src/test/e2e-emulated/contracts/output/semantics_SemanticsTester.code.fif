@@ -1,0 +1,7127 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/semantics_SemanticsTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_cell_eq
+  DECLPROC __tact_cell_neq
+  DECLPROC __tact_slice_eq
+  DECLPROC __tact_slice_neq
+  DECLPROC __tact_dict_get_int_cell
+  DECLPROC __tact_dict_min_int_cell
+  DECLPROC __tact_dict_next_int_cell
+  DECLPROC __tact_dict_set_int_cell
+  DECLPROC $StateInit$_store
+  DECLPROC $StateInit$_store_cell
+  DECLPROC $SC$_store
+  DECLPROC $SC$_load
+  DECLPROC $SB$_store
+  DECLPROC $SB$_store_cell
+  DECLPROC $SB$_load
+  DECLPROC $SB$_load_not_mut
+  DECLPROC $SA$_store
+  DECLPROC $SA$_store_cell
+  DECLPROC $SA$_load
+  DECLPROC $SA$_as_optional
+  DECLPROC $SA$_load_opt
+  DECLPROC $MapWrapper$_store
+  DECLPROC $MapWrapper$_store_cell
+  DECLPROC $MapWrapper$_load
+  DECLPROC $MapWrapper$_as_optional
+  DECLPROC $MapWrapper$_load_opt
+  DECLPROC $SemanticsTester$_store
+  DECLPROC $SemanticsTester$_load
+  DECLPROC $SA$_get_a1
+  DECLPROC $SA$_get_a2
+  DECLPROC $SA$_not_null
+  DECLPROC $SB$_get_b1
+  DECLPROC $SB$_get_b2
+  DECLPROC $SB$_get_b3
+  DECLPROC $SC$_get_c1
+  DECLPROC $MapWrapper$_get_m
+  DECLPROC $MapWrapper$_not_null
+  DECLPROC $SemanticsTester$init$_store
+  DECLPROC $SC$_constructor_c1
+  DECLPROC $SB$_constructor_b1_b2_b3
+  DECLPROC $SA$_constructor_a1_a2
+  DECLPROC $MapWrapper$_constructor_m
+  DECLPROC $SemanticsTester$_contract_init
+  DECLPROC $SemanticsTester$_contract_load
+  DECLPROC $SemanticsTester$_contract_store
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $global_getNewStruct
+  DECLPROC $global_copyAndModifyStruct
+  DECLPROC $global_getNewMap
+  DECLPROC $global_copyAndModifyMap
+  DECLPROC $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged
+  DECLPROC $SemanticsTester$_fun_structAssign2
+  DECLPROC $global_copyAndModifyContract
+  DECLPROC $global_infiniteLoop
+  DECLPROC $global_throwException
+  DECLPROC $global_fullyReadSlice
+  DECLPROC $Int$_fun_multiplyBy2
+  DECLPROC $Int$_fun_multiplyBy2$not_mut
+  DECLPROC $Int$_fun_increment
+  DECLPROC $Int$_fun_increment$not_mut
+  DECLPROC $Int$_fun_doNothing
+  DECLPROC $Int$_fun_doNothing$not_mut
+  DECLPROC $Slice$_fun_asCell
+  DECLPROC $Slice$_fun_fullyReadAndModifySlice
+  DECLPROC $SA$_fun_reassignStruct
+  DECLPROC $SA$_fun_changeSomeFields
+  DECLPROC $SA$_fun_changeSomeFields$not_mut
+  DECLPROC $SA$_fun_copyStruct
+  DECLPROC $SA$_fun_reflectStruct
+  DECLPROC $SA$_fun_reflectStruct$not_mut
+  DECLPROC $SA$_fun_incrementIntFields
+  DECLPROC $SA$_fun_incrementIntFields$not_mut
+  DECLPROC $SA$_fun_flipBooleanFields
+  DECLPROC $SA$_fun_flipBooleanFields$not_mut
+  DECLPROC $MapWrapper$_fun_reassignMap
+  DECLPROC $MapWrapper$_fun_changeSomeEntries
+  DECLPROC $SemanticsTester$_init_child
+  DECLPROC $SemanticsTester$_fun_structAssign1
+  DECLPROC $SemanticsTester$_fun_paramStruct1
+  DECLPROC $SemanticsTester$_fun_paramStruct2
+  DECLPROC $SemanticsTester$_fun_mutateParamStruct1
+  DECLPROC $SemanticsTester$_fun_mutateParamStruct2
+  DECLPROC $SemanticsTester$_fun_testReturnedStructs
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct1
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct2
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct3
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct4
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct5
+  DECLPROC $SemanticsTester$_fun_mutatesChainStruct6
+  DECLPROC $SemanticsTester$_fun_mapAssign1
+  DECLPROC $SemanticsTester$_fun_mapAssign2
+  DECLPROC $SemanticsTester$_fun_paramMap1
+  DECLPROC $SemanticsTester$_fun_paramMap2
+  DECLPROC $SemanticsTester$_fun_mutateParamMap1
+  DECLPROC $SemanticsTester$_fun_mutateParamMap2
+  DECLPROC $SemanticsTester$_fun_testReturnedMaps1
+  DECLPROC $SemanticsTester$_fun_mutateNestedMap1
+  DECLPROC $SemanticsTester$_fun_contractAssign1
+  DECLPROC $SemanticsTester$_fun_contractAssign2
+  DECLPROC $SemanticsTester$_fun_paramContract
+  DECLPROC $SemanticsTester$_fun_changeSomeContractFields
+  DECLPROC $SemanticsTester$_fun_mutateParamContract
+  DECLPROC $SemanticsTester$_fun_address
+  DECLPROC $SemanticsTester$_fun_checkFieldsEqualTo
+  DECLPROC $SemanticsTester$_fun_mutateContractState
+  DECLPROC $SemanticsTester$_fun_copyContract
+  DECLPROC $SemanticsTester$_fun_changeSomeContractFields$not_mut
+  DECLPROC $SemanticsTester$_fun_reflectContract
+  DECLPROC $SemanticsTester$_fun_flipBooleanFieldsInUB
+  DECLPROC $SemanticsTester$_fun_incrementIntFieldsInUB
+  DECLPROC $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut
+  DECLPROC $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut
+  DECLPROC $SemanticsTester$_fun_testReturnedContracts
+  DECLPROC $SemanticsTester$_fun_mutateContractStateFlag
+  DECLPROC $SemanticsTester$_fun_changesPersisted
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt1
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt2
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt3
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt4
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt5
+  DECLPROC $SemanticsTester$_fun_mutatesChainInt6
+  DECLPROC $SemanticsTester$_fun_andMutateShortCircuit
+  DECLPROC $SemanticsTester$_fun_andInfiniteLoopShortCircuit
+  DECLPROC $SemanticsTester$_fun_andExceptionShortCircuit
+  DECLPROC $SemanticsTester$_fun_orMutateShortCircuit
+  DECLPROC $SemanticsTester$_fun_orInfiniteLoopShortCircuit
+  DECLPROC $SemanticsTester$_fun_orExceptionShortCircuit
+  DECLPROC $SemanticsTester$_fun_ternaryMutateShortCircuit
+  DECLPROC $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit
+  DECLPROC $SemanticsTester$_fun_ternaryExceptionShortCircuit
+  DECLPROC $SemanticsTester$_fun_testAddressEquality
+  DECLPROC $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress
+  DECLPROC $SemanticsTester$_fun_testSliceEquality1
+  DECLPROC $SemanticsTester$_fun_testSliceEquality2
+  DECLPROC $SemanticsTester$_fun_testCellEquality1
+  DECLPROC $SemanticsTester$_fun_testCellEquality2
+  DECLPROC $SemanticsTester$_fun_testCellEquality3
+  89972 DECLMETHOD %checkAllContractFieldsAreUnchanged
+  126129 DECLMETHOD %structAssign1
+  122066 DECLMETHOD %structAssign2
+  101710 DECLMETHOD %paramStruct1
+  113965 DECLMETHOD %paramStruct2
+  122731 DECLMETHOD %mutateParamStruct1
+  126728 DECLMETHOD %mutateParamStruct2
+  120944 DECLMETHOD %testReturnedStructs
+  111427 DECLMETHOD %mutatesChainStruct1
+  99104 DECLMETHOD %mutatesChainStruct2
+  103169 DECLMETHOD %mutatesChainStruct3
+  123878 DECLMETHOD %mutatesChainStruct4
+  127943 DECLMETHOD %mutatesChainStruct5
+  115620 DECLMETHOD %mutatesChainStruct6
+  116618 DECLMETHOD %mapAssign1
+  129001 DECLMETHOD %mapAssign2
+  94790 DECLMETHOD %paramMap1
+  82469 DECLMETHOD %paramMap2
+  78185 DECLMETHOD %mutateParamMap1
+  65802 DECLMETHOD %mutateParamMap2
+  110855 DECLMETHOD %testReturnedMaps1
+  118490 DECLMETHOD %mutateNestedMap1
+  127255 DECLMETHOD %contractAssign1
+  115060 DECLMETHOD %contractAssign2
+  92093 DECLMETHOD %paramContract
+  79882 DECLMETHOD %mutateParamContract
+  69216 DECLMETHOD %address
+  113327 DECLMETHOD %testReturnedContracts
+  67465 DECLMETHOD %mutateContractStateFlag
+  76822 DECLMETHOD %changesPersisted
+  119936 DECLMETHOD %mutatesChainInt1
+  124131 DECLMETHOD %mutatesChainInt2
+  128194 DECLMETHOD %mutatesChainInt3
+  99365 DECLMETHOD %mutatesChainInt4
+  103428 DECLMETHOD %mutatesChainInt5
+  107623 DECLMETHOD %mutatesChainInt6
+  119163 DECLMETHOD %andMutateShortCircuit
+  110116 DECLMETHOD %andInfiniteLoopShortCircuit
+  68264 DECLMETHOD %andExceptionShortCircuit
+  127918 DECLMETHOD %orMutateShortCircuit
+  66777 DECLMETHOD %orInfiniteLoopShortCircuit
+  67804 DECLMETHOD %orExceptionShortCircuit
+  73382 DECLMETHOD %ternaryMutateShortCircuit
+  115599 DECLMETHOD %ternaryInfiniteLoopShortCircuit
+  90901 DECLMETHOD %ternaryExceptionShortCircuit
+  92871 DECLMETHOD %testAddressEquality
+  109118 DECLMETHOD %testInversesParseStdAddressAndNewAddress
+  83228 DECLMETHOD %testSliceEquality1
+  95615 DECLMETHOD %testSliceEquality2
+  91507 DECLMETHOD %testCellEquality1
+  87312 DECLMETHOD %testCellEquality2
+  83249 DECLMETHOD %testCellEquality3
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_cell_eq PROCINLINE:<{
+    SWAP
+    HASHCU
+    SWAP
+    HASHCU
+    EQUAL
+  }>
+  __tact_cell_neq PROCINLINE:<{
+    SWAP
+    HASHCU
+    SWAP
+    HASHCU
+    NEQ
+  }>
+  __tact_slice_eq PROCINLINE:<{
+    SWAP
+    HASHSU
+    SWAP
+    HASHSU
+    EQUAL
+  }>
+  __tact_slice_neq PROCINLINE:<{
+    SWAP
+    HASHSU
+    SWAP
+    HASHSU
+    NEQ
+  }>
+  __tact_dict_get_int_cell PROCINLINE:<{
+    -ROT
+    DICTIGETREF
+    NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_min_int_cell PROCINLINE:<{
+    DICTIMINREF
+    NULLSWAPIFNOT2
+    DUP
+    IF:<{
+      s1 s2 XCHG
+    }>ELSE<{
+      NIP
+      PUSHNULL
+      s2 POP
+      PUSHNULL
+      SWAP
+    }>
+  }>
+  __tact_dict_next_int_cell PROCINLINE:<{
+    -ROT
+    DICTIGETNEXT
+    NULLSWAPIFNOT2
+    DUP
+    IF:<{
+      s0 s2 XCHG
+      LDREF
+      DROP
+      ROT
+    }>ELSE<{
+      NIP
+      PUSHNULL
+      s2 POP
+      PUSHNULL
+      SWAP
+    }>
+  }>
+  __tact_dict_set_int_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTIDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTISETREF
+    }>
+  }>
+  $StateInit$_store PROCINLINE:<{
+    s0 s2 XCHG
+    STREF
+    STREF
+  }>
+  $StateInit$_store_cell PROCINLINE:<{
+    NEWC
+    -ROT
+    $StateInit$_store INLINECALLDICT
+    ENDC
+  }>
+  $SC$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $SC$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $SB$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    1 STI
+    SWAP
+    $SC$_store INLINECALLDICT
+    257 PUSHINT
+    STIX
+  }>
+  $SB$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $SB$_store INLINECALLDICT
+    ENDC
+  }>
+  $SB$_load PROCINLINE:<{
+    1 LDI
+    $SC$_load INLINECALLDICT
+    SWAP
+    257 PUSHINT
+    LDIX
+    3 -ROLL
+  }>
+  $SB$_load_not_mut PROCINLINE:<{
+    $SB$_load INLINECALLDICT
+    s0 s3 XCHG
+    ENDS
+    ROT
+  }>
+  $SA$_store PROCINLINE:<{
+    s3 s4 XCHG2
+    257 PUSHINT
+    STIX
+    s2 s3 XCHG2
+    $SB$_store INLINECALLDICT
+  }>
+  $SA$_store_cell PROCINLINE:<{
+    NEWC
+    4 -ROLL
+    $SA$_store INLINECALLDICT
+    ENDC
+  }>
+  $SA$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    $SB$_load INLINECALLDICT
+    s3 s4 XCHG
+  }>
+  $SA$_as_optional PROCINLINE:<{
+        4 TUPLE
+  }>
+  $SA$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $SA$_load INLINECALLDICT
+      1 4 BLKDROP2
+      $SA$_as_optional INLINECALLDICT
+    }>
+  }>
+  $MapWrapper$_store PROCINLINE:<{
+    SWAP
+    STDICT
+  }>
+  $MapWrapper$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $MapWrapper$_store INLINECALLDICT
+    ENDC
+  }>
+  $MapWrapper$_load PROCINLINE:<{
+    LDDICT
+    SWAP
+  }>
+  $MapWrapper$_as_optional PROCINLINE:<{
+        1 TUPLE
+  }>
+  $MapWrapper$_load_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      PUSHNULL
+    }>ELSE<{
+      CTOS
+      $MapWrapper$_load INLINECALLDICT
+      NIP
+      $MapWrapper$_as_optional INLINECALLDICT
+    }>
+  }>
+  $SemanticsTester$_store PROCINLINE:<{
+    s15 s14 XCHG2
+    $SC$_store INLINECALLDICT
+    s12 s1 s3 XCHG3
+    s11 s10 XCHG2
+    $SB$_store INLINECALLDICT
+    NEWC
+    4 4 BLKSWAP
+    $SA$_store INLINECALLDICT
+    NEWC
+    s4 s3 s3 XCHG3
+    s0 s5 XCHG
+    $SB$_store INLINECALLDICT
+    s1 s4 XCHG
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s1 s4 XCHG
+    STDICT
+    s1 s2 XCHG
+    1 STI
+    ENDC
+    ROT
+    STREF
+    ENDC
+    SWAP
+    STREF
+  }>
+  $SemanticsTester$_load PROCINLINE:<{
+    $SC$_load INLINECALLDICT
+    SWAP
+    $SB$_load INLINECALLDICT
+    s0 s3 XCHG
+    LDREF
+    SWAP
+    CTOS
+    $SA$_load INLINECALLDICT
+    s0 s4 XCHG
+    LDREF
+    DROP
+    CTOS
+    $SB$_load INLINECALLDICT
+    s0 s3 XCHG
+    LDDICT
+    LDDICT
+    LDDICT
+    1 LDI
+    DROP
+    s11 s15 XCHG
+    s11 s14 XCHG
+    s9 s10 XCHG
+    s8 s9 XCHG
+    s7 s8 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+  }>
+  $SA$_get_a1 PROCINLINE:<{
+    3 BLKDROP
+  }>
+  $SA$_get_a2 PROCINLINE:<{
+    1 3 BLKDROP2
+  }>
+  $SA$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        4 UNTUPLE
+  }>
+  $SB$_get_b1 PROCINLINE:<{
+    2DROP
+  }>
+  $SB$_get_b2 PROCINLINE:<{
+    DROP
+    NIP
+  }>
+  $SB$_get_b3 PROCINLINE:<{
+    2 1 BLKDROP2
+  }>
+  $SC$_get_c1 PROCINLINE:<{
+  }>
+  $MapWrapper$_get_m PROCINLINE:<{
+  }>
+  $MapWrapper$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        1 UNTUPLE
+  }>
+  $SemanticsTester$init$_store PROCINLINE:<{
+    DROP
+  }>
+  $SC$_constructor_c1 PROCINLINE:<{
+  }>
+  $SB$_constructor_b1_b2_b3 PROCINLINE:<{
+  }>
+  $SA$_constructor_a1_a2 PROCINLINE:<{
+  }>
+  $MapWrapper$_constructor_m PROCINLINE:<{
+  }>
+  $SemanticsTester$_contract_init PROCINLINE:<{
+    5 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    TRUE
+    5 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    10 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    2 1 BLKDROP2
+    20 PUSHINT
+    TRUE
+    5 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    10 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+    FALSE
+    FALSE
+    0 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    11 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    DROP
+    14 PUSHINT
+    FALSE
+    3 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    257 PUSHINT
+    1 PUSHINT
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_store_cell INLINECALLDICT
+    s3 s11 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    s12 s11 PUSH2
+    100 PUSHINT
+    0 PUSHINT
+    257 PUSHINT
+    s4 s3 XCHG2
+    2 PUSHINT
+    s3 s5 XCPU
+    $SA$_store_cell INLINECALLDICT
+    s3 s4 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    150 PUSHINT
+    5 PUSHINT
+    FALSE
+    257 PUSHINT
+    s0 s3 XCHG
+    3 PUSHINT
+    s0 s6 XCHG
+    $SA$_store_cell INLINECALLDICT
+    s1 s3 s0 XCHG3
+    __tact_dict_set_int_cell INLINECALLDICT
+    PUSHNULL
+    $MapWrapper$_constructor_m INLINECALLDICT
+    257 PUSHINT
+    10 PUSHINT
+    s15 s14 s13 PUSH3
+    s15 PUSH
+    $SA$_store_cell INLINECALLDICT
+    __tact_dict_set_int_cell INLINECALLDICT
+    257 PUSHINT
+    100 PUSHINT
+    s0 s2 XCHG
+    $MapWrapper$_store_cell INLINECALLDICT
+    s3 s9 XCHG
+    s1 s2 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    s1 s13 XCHG
+    s8 s12 XCHG
+    s1 s11 XCHG
+    s8 s10 XCHG
+    s1 s9 XCHG
+    s1 s7 XCHG
+    s4 s6 XCHG
+    s3 s5 XCHG
+    s1 s0 s4 XCHG3
+    s0 s3 XCHG
+  }>
+  $SemanticsTester$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $SemanticsTester$_load INLINECALLDICT
+      1 15 BLKDROP2
+    }>
+    DROP
+    $SemanticsTester$_contract_init INLINECALLDICT
+  }>
+  $SemanticsTester$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    15 -ROLL
+    $SemanticsTester$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $global_getNewStruct PROCREF:<{
+    4 BLKDROP
+    0 PUSHINT
+    FALSE
+    OVER
+    $SC$_constructor_c1 INLINECALLDICT
+    s2 PUSH
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+  }>
+  $global_copyAndModifyStruct PROCREF:<{
+    s0 s3 XCHG
+    100 ADDCONST
+    SWAP
+    INC
+    s0 s3 XCHG2
+  }>
+  $global_getNewMap PROCREF:<{
+    DROP
+    PUSHNULL
+    257 PUSHINT
+    1 PUSHINT
+    0 PUSHINT
+    FALSE
+    OVER
+    $SC$_constructor_c1 INLINECALLDICT
+    s2 PUSH
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+    $SA$_store_cell INLINECALLDICT
+    __tact_dict_set_int_cell INLINECALLDICT
+  }>
+  $global_copyAndModifyMap PROCREF:<{
+    DUP
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    SWAP
+    40 ADDCONST
+    s4 PUSH
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    $SA$_get_a2 INLINECALLDICT
+    $SB$_get_b2 INLINECALLDICT
+    $SC$_get_c1 INLINECALLDICT
+    OVER
+    EQUAL
+    IFJMP:<{
+      5 BLKDROP
+      PUSHNULL
+    }>
+    s1 s3 XCHG
+    257 PUSHINT
+    s3 s3 XCHG2
+    1 PUSHINT
+    s0 s5 XCHG
+    $SA$_store_cell INLINECALLDICT
+    s1 s2 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    257 PUSHINT
+    2 PUSHINT
+    -ROT
+        DICTIDEL
+    DROP
+    257 PUSHINT
+    3 PUSHINT
+    -ROT
+        DICTIDEL
+    DROP
+  }>
+  $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged PROCREF:<{
+    s6 PUSH
+    0 EQINT
+    IF:<{
+      s5 PUSH
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      14 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s10 PUSH
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s9 PUSH
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s8 PUSH
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s7 PUSH
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s13 PUSH
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s12 PUSH
+      3 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s11 PUSH
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s2 PUSH
+      ISNULL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s2 PUSH
+      ISNULL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    s4 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        2 EQINT
+      }>
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      s6 s0 s2 PUXC2
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    s2 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $MapWrapper$_load_opt INLINECALLDICT
+      $MapWrapper$_not_null INLINECALLDICT
+      DUP
+      257 PUSHINT
+      __tact_dict_min_int_cell INLINECALLDICT
+      WHILE:<{
+      }>DO<{
+        $SA$_load_opt INLINECALLDICT
+        $SA$_not_null INLINECALLDICT
+        s6 PUSH
+        100 EQINT
+        IF:<{
+          s4 PUSH
+          10 EQINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          s0 s3 XCHG
+          20 EQINT
+        }>ELSE<{
+          s3 POP
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -1 EQINT
+        }>ELSE<{
+          NIP
+          FALSE
+        }>
+        IF:<{
+          5 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        IF:<{
+          10 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        s1 s4 XCHG
+        AND
+        257 PUSHINT
+        s2 s0 s4 PUXC2
+        __tact_dict_next_int_cell INLINECALLDICT
+      }>
+      3 BLKDROP
+      257 PUSHINT
+      s4 PUSH
+      s0 s2 XCHG
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+  }>
+  $SemanticsTester$_fun_structAssign2 PROCREF:<{
+    s9 s7 s9 PUSH3
+    s14 17 s() XCHG
+    s13 16 s() XCHG
+    s12 s15 XCHG
+    s11 17 s() XCHG
+    s10 16 s() XCHG
+    s9 s15 XCHG
+    s8 17 s() XCHG
+    s7 16 s() XCHG
+    s6 s15 XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      10 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      -1 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    s12 s15 XCHG
+    s11 s14 XCHG
+    s10 s13 XCHG
+    s9 s12 XCHG
+    s8 s11 XCHG
+    s7 s10 XCHG
+    s6 s9 XCHG
+    s5 s8 XCHG
+    s4 s7 XCHG
+    s3 s6 XCHG
+    s5 s4 s0 XCHG3
+    s1 s3 XCHG
+  }>
+  $global_copyAndModifyContract PROCREF:<{
+    s4 POP
+    s4 POP
+    s4 POP
+    TRUE
+    99 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    98 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    257 PUSHINT
+    1 PUSHINT
+    s0 s5 s5 XCHG3
+        DICTIDEL
+    DROP
+    s6 s1 s3 XCHG3
+    s5 s4 XCHG2
+    $SemanticsTester$_fun_structAssign2 INLINECALLDICT
+    DROP
+  }>
+  $global_infiniteLoop PROCREF:<{
+    AGAINEND
+  }>
+  $global_throwException PROCREF:<{
+    1 PUSHINT
+    SWAP
+    DIV
+    0 GTINT
+  }>
+  $global_fullyReadSlice PROCREF:<{
+    6 LDI
+    6 LDI
+    DUP
+        ENDS
+    s0 s2 XCHG
+    5 EQINT
+    IF:<{
+      2 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+          SEMPTY
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $Int$_fun_multiplyBy2 PROCREF:<{
+    1 LSHIFT#
+    DUP
+  }>
+  $Int$_fun_multiplyBy2$not_mut PROCREF:<{
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    NIP
+  }>
+  $Int$_fun_increment PROCREF:<{
+    INC
+    DUP
+  }>
+  $Int$_fun_increment$not_mut PROCREF:<{
+    $Int$_fun_increment INLINECALLDICT
+    NIP
+  }>
+  $Int$_fun_doNothing PROCREF:<{
+    DUP
+  }>
+  $Int$_fun_doNothing$not_mut PROCREF:<{
+    $Int$_fun_doNothing INLINECALLDICT
+    NIP
+  }>
+  $Slice$_fun_asCell PROCINLINE:<{
+        NEWC
+    SWAP
+        STSLICER
+        ENDC
+  }>
+  $Slice$_fun_fullyReadAndModifySlice PROCREF:<{
+    6 LDI
+    6 LDI
+    DUP
+        ENDS
+    s0 s2 XCHG
+    5 EQINT
+    IF:<{
+      2 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      DUP
+          SEMPTY
+    }>ELSE<{
+      FALSE
+    }>
+  }>
+  $SA$_fun_reassignStruct PROCREF:<{
+    4 BLKDROP
+    0 PUSHINT
+    FALSE
+    OVER
+    $SC$_constructor_c1 INLINECALLDICT
+    s2 PUSH
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+  }>
+  $SA$_fun_changeSomeFields PROCREF:<{
+    s0 s3 XCHG
+    100 ADDCONST
+    SWAP
+    INC
+    s0 s3 XCHG2
+  }>
+  $SA$_fun_changeSomeFields$not_mut PROCREF:<{
+    $SA$_fun_changeSomeFields INLINECALLDICT
+    4 BLKDROP
+  }>
+  $SA$_fun_copyStruct PROCREF:<{
+  }>
+  $SA$_fun_reflectStruct PROCREF:<{
+    s3 s2 s1 PUSH3
+    s3 PUSH
+  }>
+  $SA$_fun_reflectStruct$not_mut PROCREF:<{
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 4 BLKDROP2
+  }>
+  $SA$_fun_incrementIntFields PROCREF:<{
+    s0 s3 XCHG
+    INC
+    SWAP
+    INC
+    s0 s3 XCHG
+    INC
+    s1 s2 s3 PUSH3
+    s3 PUSH
+    s5 s7 XCHG
+  }>
+  $SA$_fun_incrementIntFields$not_mut PROCREF:<{
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 4 BLKDROP2
+  }>
+  $SA$_fun_flipBooleanFields PROCREF:<{
+    s0 s2 XCHG
+    NOT
+    s3 s0 s1 PUSH3
+    s5 PUSH
+    s4 s6 XCHG
+  }>
+  $SA$_fun_flipBooleanFields$not_mut PROCREF:<{
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 4 BLKDROP2
+  }>
+  $MapWrapper$_fun_reassignMap PROCREF:<{
+    DROP
+    PUSHNULL
+    $MapWrapper$_constructor_m INLINECALLDICT
+    257 PUSHINT
+    1 PUSHINT
+    0 PUSHINT
+    FALSE
+    OVER
+    $SC$_constructor_c1 INLINECALLDICT
+    s2 PUSH
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+    $SA$_store_cell INLINECALLDICT
+    __tact_dict_set_int_cell INLINECALLDICT
+  }>
+  $MapWrapper$_fun_changeSomeEntries PROCREF:<{
+    DUP
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    SWAP
+    30 ADDCONST
+    s4 PUSH
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    $SA$_get_a2 INLINECALLDICT
+    $SB$_get_b2 INLINECALLDICT
+    $SC$_get_c1 INLINECALLDICT
+    OVER
+    EQUAL
+    IFJMP:<{
+      4 BLKDROP
+    }>
+    s1 s3 XCHG
+    257 PUSHINT
+    s3 s3 XCHG2
+    1 PUSHINT
+    s0 s5 XCHG
+    $SA$_store_cell INLINECALLDICT
+    s1 s2 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    257 PUSHINT
+    2 PUSHINT
+    -ROT
+        DICTIDEL
+    DROP
+    257 PUSHINT
+    3 PUSHINT
+    -ROT
+        DICTIDEL
+    DROP
+  }>
+  $SemanticsTester$_init_child PROCINLINE:<{
+    MYCODE
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    PUSHNULL
+    $SemanticsTester$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $SemanticsTester$_fun_structAssign1 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 s2 s13 PUSH3
+    EQUAL
+    IF:<{
+      s2 s13 PUSH2
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s1 s12 PUSH2
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s0 s11 PUSH2
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s0 s3 XCHG
+      20 EQINT
+    }>ELSE<{
+      s3 POP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+      -1 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      10 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_paramStruct1 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $global_getNewStruct INLINECALLDICT
+    s14 18 s() XCHG
+    s13 17 s() XCHG
+    s12 16 s() XCHG
+    s11 s15 XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    s7 s15 XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 s15 XCHG
+      0 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      0 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s11 s15 XCHG
+    s10 s14 XCHG
+    s9 s13 XCHG
+    s8 s12 XCHG
+    s7 s11 XCHG
+    s6 s10 XCHG
+    s5 s9 XCHG
+    s4 s8 XCHG
+    s3 s7 XCHG
+    s6 s5 s0 XCHG3
+    4 1 REVERSE
+  }>
+  $SemanticsTester$_fun_paramStruct2 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $global_copyAndModifyStruct INLINECALLDICT
+    s14 18 s() XCHG
+    s13 17 s() XCHG
+    s12 16 s() XCHG
+    s11 s15 XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    s7 s15 XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 s15 XCHG
+      120 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      10 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s11 s15 XCHG
+    s10 s14 XCHG
+    s9 s13 XCHG
+    s8 s12 XCHG
+    s7 s11 XCHG
+    s6 s10 XCHG
+    s5 s9 XCHG
+    s4 s8 XCHG
+    s3 s7 XCHG
+    s6 s5 s0 XCHG3
+    4 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutateParamStruct1 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_reassignStruct INLINECALLDICT
+    s14 18 s() XCHG
+    s13 17 s() XCHG
+    s12 16 s() XCHG
+    s11 s15 XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    s7 s15 XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 s15 XCHG
+      0 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      0 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s11 s15 XCHG
+    s10 s14 XCHG
+    s9 s13 XCHG
+    s8 s12 XCHG
+    s7 s11 XCHG
+    s6 s10 XCHG
+    s5 s9 XCHG
+    s4 s8 XCHG
+    s3 s7 XCHG
+    s6 s5 s0 XCHG3
+    4 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutateParamStruct2 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_changeSomeFields INLINECALLDICT
+    s14 18 s() XCHG
+    s13 17 s() XCHG
+    s12 16 s() XCHG
+    s11 s15 XCHG
+    s10 18 s() XCHG
+    s9 17 s() XCHG
+    s8 16 s() XCHG
+    s7 s15 XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 s15 XCHG
+      120 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      10 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s11 s15 XCHG
+    s10 s14 XCHG
+    s9 s13 XCHG
+    s8 s12 XCHG
+    s7 s11 XCHG
+    s6 s10 XCHG
+    s5 s9 XCHG
+    s4 s8 XCHG
+    s3 s7 XCHG
+    s6 s5 s0 XCHG3
+    4 1 REVERSE
+  }>
+  $SemanticsTester$_fun_testReturnedStructs PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_copyStruct INLINECALLDICT
+    $SA$_fun_changeSomeFields$not_mut INLINECALLDICT
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    s11 s10 s9 PUSH3
+    s11 PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    $SA$_fun_changeSomeFields$not_mut INLINECALLDICT
+    s14 19 s() XCHG
+    s13 18 s() XCHG
+    s12 17 s() XCHG
+    s11 16 s() XCHG
+    s10 s15 XCHG
+    s9 19 s() XCHG
+    s8 18 s() XCHG
+    s7 17 s() XCHG
+    s6 16 s() XCHG
+    s5 s15 XCHG
+    s4 19 s() XCHG
+    s3 18 s() XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      18 s() PUSH
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      17 s() PUSH
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      16 s() PUSH
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    s1 20 s() XCHG
+    AND
+    s3 18 s() XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_changeSomeFields INLINECALLDICT
+    s3 18 s() XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 19 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 18 s() XCHG
+      120 EQINT
+    }>ELSE<{
+      18 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s14 XCHG
+      6 EQINT
+    }>ELSE<{
+      s14 POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      10 EQINT
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    s1 s12 XCHG
+    AND
+    s10 s15 XCHG
+    s9 s14 XCHG
+    s8 s13 XCHG
+    s7 s12 XCHG
+    s6 s11 XCHG
+    s5 s10 XCHG
+    s4 s9 XCHG
+    s3 s8 XCHG
+    s7 s6 s0 XCHG3
+    s1 s5 XCHG
+    4 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct1 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      5 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      10 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct2 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      5 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      10 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct3 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      21 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      6 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      11 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct4 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_flipBooleanFields$not_mut INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      21 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      6 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      11 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct5 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      5 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      10 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mutatesChainStruct6 PROCREF:<{
+    s10 s9 s8 PUSH3
+    s10 PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    4 BLKDROP
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 4 BLKDROP2
+    $SA$_fun_reflectStruct$not_mut INLINECALLDICT
+    $SA$_fun_incrementIntFields$not_mut INLINECALLDICT
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    18 s() PUSH
+    $SA$_fun_flipBooleanFields INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_reflectStruct INLINECALLDICT
+    4 BLKDROP
+    $SA$_fun_incrementIntFields INLINECALLDICT
+    4 BLKDROP
+    s14 26 s() XCHG
+    s13 25 s() XCHG
+    s12 24 s() XCHG
+    s11 23 s() XCHG
+    s10 22 s() XCHG
+    s9 21 s() XCHG
+    s8 20 s() XCHG
+    s7 19 s() XCHG
+    s6 18 s() XCHG
+    s5 17 s() XCHG
+    s4 16 s() XCHG
+    s3 s15 XCHG
+    s2 26 s() XCHG
+    s1 25 s() XCHG
+    s0 24 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 23 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      23 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 21 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      21 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 19 s() XCHG
+      5 EQINT
+    }>ELSE<{
+      19 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      10 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      21 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      0 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s11 XCHG
+      6 EQINT
+    }>ELSE<{
+      s11 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s9 XCHG
+      11 EQINT
+    }>ELSE<{
+      s9 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s7 XCHG
+      21 EQINT
+    }>ELSE<{
+      s7 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      6 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      11 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    s3 s15 XCHG
+    s14 s13 s0 XCHG3
+    12 1 REVERSE
+  }>
+  $SemanticsTester$_fun_mapAssign1 PROCREF:<{
+    s3 s3 PUSH2
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    $SA$_get_a1 INLINECALLDICT
+    OVER
+    257 PUSHINT
+    1 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    $SA$_get_a1 INLINECALLDICT
+    EQUAL
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      OVER
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      DUP
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      15 -ROLL
+      $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    }>ELSE<{
+      15 -ROLL
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        2 EQINT
+      }>
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_mapAssign2 PROCREF:<{
+    s3 PUSH
+    257 PUSHINT
+    1 PUSHINT
+    0 PUSHINT
+    FALSE
+    19 s() PUSH
+    2 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    $SA$_constructor_a1_a2 INLINECALLDICT
+    $SA$_store_cell INLINECALLDICT
+    __tact_dict_set_int_cell INLINECALLDICT
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      2 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        2 EQINT
+      }>
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_paramMap1 PROCREF:<{
+    s3 PUSH
+    $global_getNewMap INLINECALLDICT
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_paramMap2 PROCREF:<{
+    s3 PUSH
+    $global_copyAndModifyMap INLINECALLDICT
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      45 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_mutateParamMap1 PROCREF:<{
+    s3 PUSH
+    $MapWrapper$_constructor_m INLINECALLDICT
+    $MapWrapper$_fun_reassignMap INLINECALLDICT
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_mutateParamMap2 PROCREF:<{
+    s3 PUSH
+    $MapWrapper$_constructor_m INLINECALLDICT
+    $MapWrapper$_fun_changeSomeEntries INLINECALLDICT
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      35 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    15 ROLL
+  }>
+  $SemanticsTester$_fun_testReturnedMaps1 PROCREF:<{
+    s3 PUSH
+    257 PUSHINT
+    2 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    $SA$_fun_changeSomeFields$not_mut INLINECALLDICT
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+  }>
+  $SemanticsTester$_fun_mutateNestedMap1 PROCREF:<{
+    s1 s1 PUSH2
+    257 PUSHINT
+    100 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $MapWrapper$_load_opt INLINECALLDICT
+    $MapWrapper$_not_null INLINECALLDICT
+    $MapWrapper$_get_m INLINECALLDICT
+    257 PUSHINT
+    10 PUSHINT
+    __tact_dict_get_int_cell INLINECALLDICT
+    $SA$_load_opt INLINECALLDICT
+    $SA$_not_null INLINECALLDICT
+    NIP
+    1000 PUSHINT
+    s3 PUSH
+    20 EQINT
+    IF:<{
+      s2 PUSH
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      OVER
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    s5 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $MapWrapper$_load_opt INLINECALLDICT
+      $MapWrapper$_not_null INLINECALLDICT
+      DUP
+      257 PUSHINT
+      __tact_dict_min_int_cell INLINECALLDICT
+      WHILE:<{
+      }>DO<{
+        $SA$_load_opt INLINECALLDICT
+        $SA$_not_null INLINECALLDICT
+        s6 PUSH
+        100 EQINT
+        IF:<{
+          s4 PUSH
+          10 EQINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          s0 s3 XCHG
+          20 EQINT
+        }>ELSE<{
+          s3 POP
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -1 EQINT
+        }>ELSE<{
+          NIP
+          FALSE
+        }>
+        IF:<{
+          5 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        IF:<{
+          10 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        s1 s4 XCHG
+        AND
+        257 PUSHINT
+        s2 s0 s4 PUXC2
+        __tact_dict_next_int_cell INLINECALLDICT
+      }>
+      3 BLKDROP
+      257 PUSHINT
+      s7 PUSH
+      s0 s2 XCHG
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    PUSHNULL
+    257 PUSHINT
+    10 PUSHINT
+    s7 s6 s4 PUSH3
+    s8 PUSH
+    $SA$_store_cell INLINECALLDICT
+    __tact_dict_set_int_cell INLINECALLDICT
+    $MapWrapper$_constructor_m INLINECALLDICT
+    PUSHNULL
+    $MapWrapper$_constructor_m INLINECALLDICT
+    s1 s6 XCHG
+    257 PUSHINT
+    s6 s4 XCHG2
+    10 PUSHINT
+    s0 s6 XCHG
+    $SA$_store_cell INLINECALLDICT
+    s1 s4 XCHG
+    s1 s3 XCHG
+    __tact_dict_set_int_cell INLINECALLDICT
+    s2 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      s4 PUSH
+      10 EQINT
+      IF:<{
+        s0 s3 XCHG
+        20 EQINT
+      }>ELSE<{
+        s3 POP
+        FALSE
+      }>
+      IF:<{
+        SWAP
+        -1 EQINT
+      }>ELSE<{
+        NIP
+        FALSE
+      }>
+      IF:<{
+        1000 PUSHINT
+        EQUAL
+      }>ELSE<{
+        DROP
+        FALSE
+      }>
+      IF:<{
+        10 EQINT
+      }>ELSE<{
+        DROP
+        FALSE
+      }>
+      s1 s3 XCHG
+      AND
+      257 PUSHINT
+      s4 s0 s3 PUXC2
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    DUP
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      s4 PUSH
+      10 EQINT
+      IF:<{
+        s0 s3 XCHG
+        20 EQINT
+      }>ELSE<{
+        s3 POP
+        FALSE
+      }>
+      IF:<{
+        SWAP
+        -1 EQINT
+      }>ELSE<{
+        NIP
+        FALSE
+      }>
+      IF:<{
+        1000 PUSHINT
+        EQUAL
+      }>ELSE<{
+        DROP
+        FALSE
+      }>
+      IF:<{
+        10 EQINT
+      }>ELSE<{
+        DROP
+        FALSE
+      }>
+      s1 s3 XCHG
+      AND
+      257 PUSHINT
+      s2 s0 s3 PUXC2
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    3 BLKDROP
+    257 PUSHINT
+    100 PUSHINT
+    s0 s3 XCHG
+    $MapWrapper$_store_cell INLINECALLDICT
+    s3 s4 XCHG
+    s1 s4 s0 XCHG3
+    __tact_dict_set_int_cell INLINECALLDICT
+    DUP
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $MapWrapper$_load_opt INLINECALLDICT
+      $MapWrapper$_not_null INLINECALLDICT
+      DUP
+      257 PUSHINT
+      __tact_dict_min_int_cell INLINECALLDICT
+      WHILE:<{
+      }>DO<{
+        $SA$_load_opt INLINECALLDICT
+        $SA$_not_null INLINECALLDICT
+        s6 PUSH
+        100 EQINT
+        IF:<{
+          s4 PUSH
+          10 EQINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          s0 s3 XCHG
+          20 EQINT
+        }>ELSE<{
+          s3 POP
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -1 EQINT
+        }>ELSE<{
+          NIP
+          FALSE
+        }>
+        IF:<{
+          1000 PUSHINT
+          EQUAL
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        IF:<{
+          10 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        s1 s5 XCHG
+        AND
+        257 PUSHINT
+        s2 s0 s5 PUXC2
+        __tact_dict_next_int_cell INLINECALLDICT
+      }>
+      3 BLKDROP
+      257 PUSHINT
+      s2 PUSH
+      s0 s2 XCHG
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    3 BLKDROP
+    15 -ROLL
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    s1 16 s() XCHG
+    AND
+    s14 s15 XCHG
+    s13 s14 XCHG
+    s12 s13 XCHG
+    s11 s12 XCHG
+    s10 s11 XCHG
+    s9 s10 XCHG
+    s8 s9 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+    s3 s4 XCHG
+    s1 s3 s0 XCHG3
+  }>
+  $SemanticsTester$_fun_contractAssign1 PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 29 s() XCHG
+    s13 28 s() XCHG
+    s12 27 s() XCHG
+    s11 26 s() XCHG
+    s10 25 s() XCHG
+    s9 24 s() XCHG
+    s8 23 s() XCHG
+    s7 22 s() XCHG
+    s6 21 s() XCHG
+    s5 20 s() XCHG
+    s4 19 s() XCHG
+    s3 18 s() XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s14 29 s() XCHG
+      s13 28 s() XCHG
+      s12 27 s() XCHG
+      s11 26 s() XCHG
+      s10 25 s() XCHG
+      s9 24 s() XCHG
+      s8 23 s() XCHG
+      s7 22 s() XCHG
+      s6 21 s() XCHG
+      s5 20 s() XCHG
+      s4 19 s() XCHG
+      s3 18 s() XCHG
+      s2 17 s() XCHG
+      s1 16 s() XCHG
+      s0 s15 XCHG
+      $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+      15 1 BLKDROP2
+    }>ELSE<{
+      15 15 BLKDROP2
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_contractAssign2 PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 PUSH
+    257 PUSHINT
+    1 PUSHINT
+    s0 s3 s3 XCHG3
+        DICTIDEL
+    DROP
+    257 PUSHINT
+    2 PUSHINT
+    -ROT
+        DICTIDEL
+    DROP
+    s14 27 s() XCHG
+    s13 26 s() XCHG
+    s12 25 s() XCHG
+    s11 24 s() XCHG
+    s10 23 s() XCHG
+    s9 22 s() XCHG
+    s8 21 s() XCHG
+    s7 20 s() XCHG
+    s6 19 s() XCHG
+    s5 18 s() XCHG
+    s4 17 s() XCHG
+    s3 16 s() XCHG
+    s2 s15 XCHG
+    s1 27 s() XCHG
+    s0 26 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      0 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      14 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 18 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      18 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s14 XCHG
+      5 EQINT
+    }>ELSE<{
+      s14 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s12 XCHG
+      10 EQINT
+    }>ELSE<{
+      s12 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      3 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      10 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      5 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      ISNULL
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    s15 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      3 EQINT
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      17 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    s15 POP
+    s15 s14 s13 XCHG3
+    s12 s1 s11 XCHG3
+    s8 s1 s9 XCHG3
+    s6 s7 XCHG
+    s5 s1 s4 XCHG3
+    -ROT
+  }>
+  $SemanticsTester$_fun_paramContract PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    $global_copyAndModifyContract INLINECALLDICT
+    2DROP
+    s14 27 s() XCHG
+    s13 26 s() XCHG
+    s12 25 s() XCHG
+    s11 24 s() XCHG
+    s10 23 s() XCHG
+    s9 22 s() XCHG
+    s8 21 s() XCHG
+    s7 20 s() XCHG
+    s6 19 s() XCHG
+    s5 18 s() XCHG
+    s4 17 s() XCHG
+    s3 16 s() XCHG
+    s2 s15 XCHG
+    s1 27 s() XCHG
+    s0 26 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 17 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      99 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      98 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 18 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      18 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s14 XCHG
+      5 EQINT
+    }>ELSE<{
+      s14 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s12 XCHG
+      10 EQINT
+    }>ELSE<{
+      s12 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      3 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      10 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      5 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      ISNULL
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      2 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    s15 s1 s13 XCHG3
+    s0 s11 XCHG
+    s14 s9 XCHG2
+    s1 s12 XCHG
+    s1 s8 XCHG
+    s6 s7 XCHG
+    s4 s5 s4 XCHG3
+  }>
+  $SemanticsTester$_fun_changeSomeContractFields PROCREF:<{
+    s4 POP
+    s4 POP
+    s4 POP
+    TRUE
+    77 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    88 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    s0 s8 XCHG
+    30 ADDCONST
+    s6 s1 s8 XCHG3
+    s5 s4 XCHG2
+  }>
+  $SemanticsTester$_fun_mutateParamContract PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    $SemanticsTester$_fun_changeSomeContractFields INLINECALLDICT
+    2DROP
+    s14 27 s() XCHG
+    s13 26 s() XCHG
+    s12 25 s() XCHG
+    s11 24 s() XCHG
+    s10 23 s() XCHG
+    s9 22 s() XCHG
+    s8 21 s() XCHG
+    s7 20 s() XCHG
+    s6 19 s() XCHG
+    s5 18 s() XCHG
+    s4 17 s() XCHG
+    s3 16 s() XCHG
+    s2 s15 XCHG
+    s1 27 s() XCHG
+    s0 26 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s0 17 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      77 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      88 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 18 s() XCHG
+      20 EQINT
+    }>ELSE<{
+      18 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 16 s() XCHG
+      -1 EQINT
+    }>ELSE<{
+      16 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s14 XCHG
+      35 EQINT
+    }>ELSE<{
+      s14 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s12 XCHG
+      10 EQINT
+    }>ELSE<{
+      s12 POP
+      FALSE
+    }>
+    IF:<{
+      s0 17 s() XCHG
+      0 EQINT
+    }>ELSE<{
+      17 s() POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      3 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s13 XCHG
+      10 EQINT
+    }>ELSE<{
+      s13 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      5 EQINT
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s0 s15 XCHG
+      ISNULL
+    }>ELSE<{
+      s15 POP
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s15 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    16 s() PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        2 EQINT
+      }>
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      18 s() PUSH
+      s0 s1 s3 XCHG3
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    16 s() POP
+    s15 s1 s13 XCHG3
+    s0 s11 XCHG
+    s14 s9 XCHG2
+    s1 s12 XCHG
+    s1 s8 XCHG
+    s6 s7 XCHG
+    s4 s5 s4 XCHG3
+  }>
+  $SemanticsTester$_fun_address PROCREF:<{
+        MYADDR
+  }>
+  $SemanticsTester$_fun_checkFieldsEqualTo PROCREF:<{
+    s10 s3 PUXC
+    EQUAL
+    IF:<{
+      s8 s1 PUXC
+      EQUAL
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      s6 s(-1) PUXC
+      EQUAL
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      s11 PUSH
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s10 PUSH
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s9 s(-1) PUXC
+      EQUAL
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      s7 PUSH
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s13 PUSH
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s12 PUSH
+      3 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s11 PUSH
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s14 PUSH
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s2 PUSH
+      ISNULL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      1 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      10 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      20 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      -1 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      100 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      2 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a1 INLINECALLDICT
+      5 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b1 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b2 INLINECALLDICT
+      $SC$_get_c1 INLINECALLDICT
+      150 PUSHINT
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s3 PUSH
+      257 PUSHINT
+      3 PUSHINT
+      __tact_dict_get_int_cell INLINECALLDICT
+      $SA$_load_opt INLINECALLDICT
+      $SA$_not_null INLINECALLDICT
+      $SA$_get_a2 INLINECALLDICT
+      $SB$_get_b3 INLINECALLDICT
+      0 EQINT
+    }>ELSE<{
+      FALSE
+    }>
+    s4 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      DROP
+      DUP
+      1 EQINT
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        2 EQINT
+      }>
+      IF:<{
+        TRUE
+      }>ELSE<{
+        DUP
+        3 EQINT
+      }>
+      s1 s2 XCHG
+      AND
+      257 PUSHINT
+      s6 s0 s2 PUXC2
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+    s2 PUSH
+    257 PUSHINT
+    __tact_dict_min_int_cell INLINECALLDICT
+    WHILE:<{
+    }>DO<{
+      $MapWrapper$_load_opt INLINECALLDICT
+      $MapWrapper$_not_null INLINECALLDICT
+      DUP
+      257 PUSHINT
+      __tact_dict_min_int_cell INLINECALLDICT
+      WHILE:<{
+      }>DO<{
+        $SA$_load_opt INLINECALLDICT
+        $SA$_not_null INLINECALLDICT
+        s6 PUSH
+        100 EQINT
+        IF:<{
+          s4 PUSH
+          10 EQINT
+        }>ELSE<{
+          FALSE
+        }>
+        IF:<{
+          s0 s3 XCHG
+          20 EQINT
+        }>ELSE<{
+          s3 POP
+          FALSE
+        }>
+        IF:<{
+          SWAP
+          -1 EQINT
+        }>ELSE<{
+          NIP
+          FALSE
+        }>
+        IF:<{
+          5 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        IF:<{
+          10 EQINT
+        }>ELSE<{
+          DROP
+          FALSE
+        }>
+        s1 s4 XCHG
+        AND
+        257 PUSHINT
+        s2 s0 s4 PUXC2
+        __tact_dict_next_int_cell INLINECALLDICT
+      }>
+      3 BLKDROP
+      257 PUSHINT
+      s4 PUSH
+      s0 s2 XCHG
+      __tact_dict_next_int_cell INLINECALLDICT
+    }>
+    2DROP
+  }>
+  $SemanticsTester$_fun_mutateContractState PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    $SemanticsTester$_fun_changeSomeContractFields INLINECALLDICT
+    s14 29 s() XCHG
+    s13 28 s() XCHG
+    s12 27 s() XCHG
+    s11 26 s() XCHG
+    s10 25 s() XCHG
+    s9 24 s() XCHG
+    s8 23 s() XCHG
+    s7 22 s() XCHG
+    s6 21 s() XCHG
+    s5 20 s() XCHG
+    s4 19 s() XCHG
+    s3 18 s() XCHG
+    s2 17 s() XCHG
+    s1 16 s() XCHG
+    s0 s15 XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    15 1 BLKDROP2
+    IF:<{
+      TRUE
+      77 PUSHINT
+      $SC$_constructor_c1 INLINECALLDICT
+      88 PUSHINT
+      $SB$_constructor_b1_b2_b3 INLINECALLDICT
+      35 PUSHINT
+      $SemanticsTester$_fun_checkFieldsEqualTo INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    TRUE
+    77 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    88 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    17 s() 18 s() XCHG
+    16 s() 18 s() XCHG
+    s15 18 s() XCHG
+    s14 18 s() XCHG
+    s13 18 s() XCHG
+    s12 18 s() XCHG
+    s11 18 s() XCHG
+    s10 18 s() XCHG
+    s9 18 s() XCHG
+    s8 18 s() XCHG
+    s7 18 s() XCHG
+    s6 18 s() XCHG
+    s5 18 s() XCHG
+    s4 18 s() XCHG
+    s3 18 s() XCHG
+    35 PUSHINT
+    $SemanticsTester$_fun_checkFieldsEqualTo INLINECALLDICT
+    s1 16 s() XCHG
+    AND
+    s14 s15 XCHG
+    s13 s14 XCHG
+    s12 s13 XCHG
+    s11 s12 XCHG
+    s10 s11 XCHG
+    s9 s10 XCHG
+    s8 s9 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+    s3 s4 XCHG
+    s1 s3 s0 XCHG3
+  }>
+  $SemanticsTester$_fun_copyContract PROCREF:<{
+  }>
+  $SemanticsTester$_fun_changeSomeContractFields$not_mut PROCREF:<{
+    $SemanticsTester$_fun_changeSomeContractFields INLINECALLDICT
+    15 BLKDROP
+  }>
+  $SemanticsTester$_fun_reflectContract PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+  }>
+  $SemanticsTester$_fun_flipBooleanFieldsInUB PROCREF:<{
+    s0 s6 XCHG
+    NOT
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s6 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 PUSH2
+    20 s() PUSH
+    s15 21 s() XCHG
+  }>
+  $SemanticsTester$_fun_incrementIntFieldsInUB PROCREF:<{
+    s0 s5 XCHG
+    INC
+    s0 s4 XCHG
+    INC
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s13 s9 s12 PUSH3
+    s14 s13 PUSH2
+    19 s() PUSH
+    19 s() 20 s() XCHG
+    s15 19 s() XCHG
+  }>
+  $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut PROCREF:<{
+    $SemanticsTester$_fun_incrementIntFieldsInUB INLINECALLDICT
+    15 15 BLKDROP2
+  }>
+  $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut PROCREF:<{
+    $SemanticsTester$_fun_flipBooleanFieldsInUB INLINECALLDICT
+    15 15 BLKDROP2
+  }>
+  $SemanticsTester$_fun_testReturnedContracts PROCREF:<{
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    s14 s13 s12 PUSH3
+    $SemanticsTester$_fun_copyContract INLINECALLDICT
+    $SemanticsTester$_fun_changeSomeContractFields$not_mut INLINECALLDICT
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    s15 s14 s13 PUSH3
+    s15 s14 s13 PUSH3
+    s15 s14 s13 PUSH3
+    s15 s14 s13 PUSH3
+    s15 s14 s13 PUSH3
+    $SemanticsTester$_fun_reflectContract INLINECALLDICT
+    $SemanticsTester$_fun_changeSomeContractFields$not_mut INLINECALLDICT
+    s14 30 s() XCHG
+    s13 29 s() XCHG
+    s12 28 s() XCHG
+    s11 27 s() XCHG
+    s10 26 s() XCHG
+    s9 25 s() XCHG
+    s8 24 s() XCHG
+    s7 23 s() XCHG
+    s6 22 s() XCHG
+    s5 21 s() XCHG
+    s4 20 s() XCHG
+    s3 19 s() XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      s14 30 s() XCHG
+      s13 29 s() XCHG
+      s12 28 s() XCHG
+      s11 27 s() XCHG
+      s10 26 s() XCHG
+      s9 25 s() XCHG
+      s8 24 s() XCHG
+      s7 23 s() XCHG
+      s6 22 s() XCHG
+      s5 21 s() XCHG
+      s4 20 s() XCHG
+      s3 19 s() XCHG
+      s2 18 s() XCHG
+      s1 17 s() XCHG
+      s0 16 s() XCHG
+      $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    }>ELSE<{
+      s14 30 s() XCHG
+      s13 29 s() XCHG
+      s12 28 s() XCHG
+      s11 27 s() XCHG
+      s10 26 s() XCHG
+      s9 25 s() XCHG
+      s8 24 s() XCHG
+      s7 23 s() XCHG
+      s6 22 s() XCHG
+      s5 21 s() XCHG
+      s4 20 s() XCHG
+      s3 19 s() XCHG
+      s2 18 s() XCHG
+      s1 17 s() XCHG
+      s0 16 s() XCHG
+      FALSE
+    }>
+    s1 16 s() XCHG
+    AND
+    s0 s15 XCHG
+    $SemanticsTester$_fun_reflectContract INLINECALLDICT
+    15 15 BLKDROP2
+    $SemanticsTester$_fun_incrementIntFieldsInUB$not_mut INLINECALLDICT
+    $SemanticsTester$_fun_flipBooleanFieldsInUB$not_mut INLINECALLDICT
+    s14 30 s() XCHG
+    s13 29 s() XCHG
+    s12 28 s() XCHG
+    s11 27 s() XCHG
+    s10 26 s() XCHG
+    s9 25 s() XCHG
+    s8 24 s() XCHG
+    s7 23 s() XCHG
+    s6 22 s() XCHG
+    s5 21 s() XCHG
+    s4 20 s() XCHG
+    s3 19 s() XCHG
+    s2 18 s() XCHG
+    s1 17 s() XCHG
+    s0 16 s() XCHG
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    IF:<{
+      TRUE
+      1 PUSHINT
+      $SC$_constructor_c1 INLINECALLDICT
+      15 PUSHINT
+      $SB$_constructor_b1_b2_b3 INLINECALLDICT
+      17 s() 33 s() XCHG
+      16 s() 32 s() XCHG
+      s15 31 s() XCHG
+      s14 30 s() XCHG
+      s13 29 s() XCHG
+      s12 28 s() XCHG
+      s11 27 s() XCHG
+      s10 26 s() XCHG
+      s9 25 s() XCHG
+      s8 24 s() XCHG
+      s7 23 s() XCHG
+      s6 22 s() XCHG
+      s5 21 s() XCHG
+      s4 20 s() XCHG
+      s3 19 s() XCHG
+      5 PUSHINT
+      $SemanticsTester$_fun_checkFieldsEqualTo INLINECALLDICT
+      15 1 BLKDROP2
+    }>ELSE<{
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      16 s() POP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_mutateContractStateFlag PROCREF:<{
+    DUP
+  }>
+  $SemanticsTester$_fun_changesPersisted PROCREF:<{
+    TRUE
+    77 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    88 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    35 PUSHINT
+    $SemanticsTester$_fun_checkFieldsEqualTo INLINECALLDICT
+  }>
+  $SemanticsTester$_fun_mutatesChainInt1 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    NIP
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    4 EQINT
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_mutatesChainInt2 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    NIP
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    4 EQINT
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_mutatesChainInt3 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    NIP
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    2 EQINT
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_mutatesChainInt4 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    NIP
+    $Int$_fun_increment$not_mut INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    2 EQINT
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_mutatesChainInt5 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    NIP
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    3 EQINT
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_mutatesChainInt6 PROCREF:<{
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    DROP
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    NIP
+    $Int$_fun_multiplyBy2$not_mut INLINECALLDICT
+    $Int$_fun_doNothing$not_mut INLINECALLDICT
+    2 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    DROP
+    $Int$_fun_multiplyBy2 INLINECALLDICT
+    DROP
+    $Int$_fun_doNothing INLINECALLDICT
+    DROP
+    s0 s2 XCHG
+    3 EQINT
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      6 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+  }>
+  $SemanticsTester$_fun_andMutateShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    2 GTINT
+    OVER
+    2 EQINT
+    s2 PUSH
+    2 EQINT
+    AND
+    s2 PUSH
+    2 GTINT
+    IF:<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+    }>ELSE<{
+      s0 s2 XCHG
+      FALSE
+    }>
+    OVER
+    2 EQINT
+    s1 s4 XCHG
+    AND
+    OVER
+    2 EQINT
+    IF:<{
+      SWAP
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      SWAP
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    OVER
+    3 EQINT
+    s1 s3 XCHG
+    AND
+    OVER
+    3 EQINT
+    IF:<{
+      SWAP
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      SWAP
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      4 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    OVER
+    5 EQINT
+    s1 s3 XCHG
+    AND
+    OVER
+    5 EQINT
+    IF:<{
+      SWAP
+      $Int$_fun_increment INLINECALLDICT
+      6 GTINT
+    }>ELSE<{
+      SWAP
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      6 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      6 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    SWAP
+    6 EQINT
+    s1 s2 XCHG
+    AND
+    s0 s4 XCHG
+    NOT
+    IF:<{
+      -1 PUSHINT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s0 s4 XCHG
+      NOT
+    }>ELSE<{
+      s4 POP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+      NOT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+      NOT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_andInfiniteLoopShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    2 GTINT
+    IF:<{
+      $global_infiniteLoop INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    OVER
+    2 EQINT
+    s2 PUSH
+    2 EQINT
+    IF:<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      s0 s2 XCHG
+      FALSE
+    }>
+    IF:<{
+      $global_infiniteLoop INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    SWAP
+    3 EQINT
+    s1 s3 XCHG
+    AND
+    SWAP
+    NOT
+    IF:<{
+      SWAP
+      NOT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_andExceptionShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    2 GTINT
+    IF:<{
+      DUP
+      -2 ADDCONST
+      $global_throwException INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    OVER
+    2 EQINT
+    s2 PUSH
+    2 EQINT
+    IF:<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      s0 s2 XCHG
+      FALSE
+    }>
+    IF:<{
+      DUP
+      -3 ADDCONST
+      $global_throwException INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      FALSE
+    }>
+    SWAP
+    3 EQINT
+    s1 s3 XCHG
+    AND
+    SWAP
+    NOT
+    IF:<{
+      SWAP
+      NOT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_orMutateShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    1 GTINT
+    OVER
+    2 EQINT
+    TRUE
+    s3 PUSH
+    2 EQINT
+    s1 s2 XCHG
+    AND
+    s3 PUSH
+    1 GTINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s3 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+      s1 s4 XCHG
+    }>
+    s4 PUSH
+    2 EQINT
+    s1 s2 XCHG
+    AND
+    s4 PUSH
+    2 NEQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s4 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+      s1 s5 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s4 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+      s1 s5 XCHG
+    }>
+    s5 PUSH
+    3 EQINT
+    s1 s2 XCHG
+    AND
+    s5 PUSH
+    3 NEQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s5 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 LESSINT
+      s1 s6 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s5 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      4 LESSINT
+      s1 s6 XCHG
+    }>
+    s6 PUSH
+    5 EQINT
+    s1 s2 XCHG
+    AND
+    s6 PUSH
+    5 NEQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s6 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      5 GTINT
+      s1 s7 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s6 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      6 GTINT
+      s1 s7 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s6 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      6 GTINT
+      s1 s7 XCHG
+    }>
+    s0 s7 XCHG
+    6 EQINT
+    AND
+    s0 s5 XCHG
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s4 POP
+    }>
+    s0 s3 XCHG
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    IF:<{
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+      NOT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    AND
+  }>
+  $SemanticsTester$_fun_orInfiniteLoopShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    1 GTINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      $global_infiniteLoop INLINECALLDICT
+    }>
+    OVER
+    2 EQINT
+    s2 PUSH
+    2 NEQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+      s1 s3 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      $global_infiniteLoop INLINECALLDICT
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+      s1 s3 XCHG
+    }>
+    s0 s3 XCHG
+    3 EQINT
+    AND
+    SWAP
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    AND
+  }>
+  $SemanticsTester$_fun_orExceptionShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    1 GTINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      DUP
+      -2 ADDCONST
+      $global_throwException INLINECALLDICT
+    }>
+    OVER
+    2 EQINT
+    s2 PUSH
+    2 NEQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+      s1 s3 XCHG
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s2 PUSH
+      -3 ADDCONST
+      $global_throwException INLINECALLDICT
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s0 s2 XCHG
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+      s1 s3 XCHG
+    }>
+    s0 s3 XCHG
+    3 EQINT
+    AND
+    SWAP
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    AND
+  }>
+  $SemanticsTester$_fun_ternaryMutateShortCircuit PROCREF:<{
+    1 PUSHINT
+    $Int$_fun_increment INLINECALLDICT
+    2 GTINT
+    OVER
+    2 EQINT
+    s0 s2 XCHG
+    $Int$_fun_increment INLINECALLDICT
+    2 GTINT
+    OVER
+    3 EQINT
+    s1 s4 XCHG
+    AND
+    OVER
+    3 GTINT
+    IF:<{
+      SWAP
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+    }>ELSE<{
+      OVER
+      2 GTINT
+      s1 s2 XCHG
+    }>
+    OVER
+    3 EQINT
+    s1 s3 XCHG
+    AND
+    OVER
+    2 GTINT
+    IF:<{
+      OVER
+      2 GTINT
+    }>ELSE<{
+      SWAP
+      $Int$_fun_increment INLINECALLDICT
+      2 GTINT
+      s1 s2 XCHG
+    }>
+    s2 PUSH
+    3 EQINT
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    $Int$_fun_increment INLINECALLDICT
+    3 GTINT
+    IF:<{
+      DUP
+      4 EQINT
+    }>ELSE<{
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>
+    OVER
+    4 EQINT
+    s1 s4 XCHG
+    AND
+    SWAP
+    $Int$_fun_increment INLINECALLDICT
+    5 GTINT
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      3 GTINT
+    }>ELSE<{
+      DUP
+      5 GTINT
+    }>
+    OVER
+    5 EQINT
+    s1 s3 XCHG
+    AND
+    SWAP
+    $Int$_fun_increment INLINECALLDICT
+    5 GTINT
+    IF:<{
+      $Int$_fun_increment INLINECALLDICT
+      7 EQINT
+    }>ELSE<{
+      DUP
+      6 EQINT
+    }>
+    OVER
+    7 EQINT
+    s1 s3 XCHG
+    AND
+    SWAP
+    $Int$_fun_increment INLINECALLDICT
+    8 GTINT
+    IF:<{
+      DUP
+      8 EQINT
+    }>ELSE<{
+      $Int$_fun_increment INLINECALLDICT
+      9 EQINT
+    }>
+    SWAP
+    9 EQINT
+    s1 s2 XCHG
+    AND
+    s0 s7 XCHG
+    NOT
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s8 POP
+    }>
+    s0 s7 XCHG
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s5 POP
+    }>
+    s0 s4 XCHG
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    IF:<{
+      NOT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+    }>ELSE<{
+      FALSE
+      s2 POP
+    }>
+    SWAP
+    AND
+  }>
+  $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit PROCREF:<{
+    -1 PUSHINT
+  }>
+  $SemanticsTester$_fun_ternaryExceptionShortCircuit PROCREF:<{
+    -1 PUSHINT
+  }>
+  $SemanticsTester$_fun_testAddressEquality PROCREF:<{
+        MYADDR
+    $SemanticsTester$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    OVER
+    SDEQ
+    s1 s0 XCPU
+    SDEQ
+    AND
+  }>
+  $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress PROCREF:<{
+        MYADDR
+    DUP
+        REWRITESTDADDR
+    $global_newAddress INLINECALLDICT
+    SWAP
+    SDEQ
+    0 PUSHINT
+    $SemanticsTester$_init_child INLINECALLDICT
+    $StateInit$_store_cell INLINECALLDICT
+        HASHCU
+    2DUP
+    $global_newAddress INLINECALLDICT
+    1 2 BLKDROP2
+        REWRITESTDADDR
+    SWAP
+    0 EQINT
+    IF:<{
+      EQUAL
+    }>ELSE<{
+      2DROP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_testSliceEquality1 PROCREF:<{
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+    5 PUSHINT
+    SWAP
+    6 STI
+    2 PUSHINT
+    SWAP
+    6 STI
+        ENDC
+    DUP
+    $Cell$_fun_asSlice INLINECALLDICT
+    OVER
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s1 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    s0 s2 XCHG
+    6 LDI
+    s2 s0 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      SWAP
+      10 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    SWAP
+    6 LDI
+    s0 s3 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    IF:<{
+      SWAP
+      10 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    6 LDI
+    6 LDI
+    s0 s3 XCHG
+    6 LDI
+    s0 s4 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      s0 s3 XCHG
+      5 EQINT
+    }>ELSE<{
+      s3 POP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+      2 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    s0 s2 XCHG
+    6 LDI
+    s0 s2 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    IF:<{
+      SWAP
+      2 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    OVER
+        ENDS
+    s2 s1 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    AND
+    s2 PUSH
+        ENDS
+    s2 s1 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    IF:<{
+      SWAP
+          SEMPTY
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+          SEMPTY
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+    OVER
+    $Cell$_fun_asSlice INLINECALLDICT
+    6 LDI
+    SWAP
+    10 EQINT
+    s1 s2 XCHG
+    AND
+    s1 s1 s1 PUSH3
+    __tact_slice_eq INLINECALLDICT
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    6 LDI
+    s2 s0 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      SWAP
+      5 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    s0 s2 XCHG
+    6 LDI
+    s2 s0 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      SWAP
+      2 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    SWAP
+    6 LDI
+    s0 s3 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      SWAP
+      5 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+    SWAP
+    6 LDI
+    s0 s3 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    IF:<{
+      SWAP
+      2 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      s0 s2 XCHG
+          SEMPTY
+    }>ELSE<{
+      s2 POP
+      FALSE
+    }>
+    IF:<{
+      SWAP
+          SEMPTY
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+    OVER
+    $Cell$_fun_asSlice INLINECALLDICT
+    6 LDI
+    SWAP
+    10 EQINT
+    s1 s2 XCHG
+    AND
+    OVER
+    $global_fullyReadSlice INLINECALLDICT
+    AND
+    SWAP
+    6 LDI
+    6 LDI
+    s0 s2 XCHG
+    5 EQINT
+    IF:<{
+      2 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    IF:<{
+          SEMPTY
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    AND
+    SWAP
+    $Cell$_fun_asSlice INLINECALLDICT
+    6 LDI
+    SWAP
+    10 EQINT
+    s1 s2 XCHG
+    AND
+    SWAP
+    $Slice$_fun_fullyReadAndModifySlice INLINECALLDICT
+    s1 s2 XCHG
+    AND
+    SWAP
+        SEMPTY
+    AND
+  }>
+  $SemanticsTester$_fun_testSliceEquality2 PROCREF:<{
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+    s2 s(-1) PUXC
+        STREF
+        ENDC
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+    s2 s(-1) PUXC
+        STREF
+        ENDC
+        <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+        STREF
+        ENDC
+    s0 s2 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    SWAP
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s2 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    s2 s1 PUSH2
+    __tact_slice_eq INLINECALLDICT
+    s2 s1 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      s3 s1 PUSH2
+      __tact_slice_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    AND
+    s0 s2 XCHG
+    6 LDI
+    OVER
+    5 EQINT
+    s1 s4 XCHG
+    AND
+    s4 s3 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    AND
+    s0 s4 XCHG
+    6 LDI
+    NIP
+    SWAP
+    5 EQINT
+    s1 s4 XCHG
+    AND
+    2OVER
+    __tact_slice_eq INLINECALLDICT
+    AND
+    SWAP
+    6 LDI
+    SWAP
+    5 EQINT
+    s1 s2 XCHG
+    AND
+    s2 s1 PUSH2
+    __tact_slice_neq INLINECALLDICT
+    IF:<{
+      s3 s1 PUSH2
+      __tact_slice_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    AND
+    s0 s2 XCHG
+        LDREF
+    s0 s4 XCHG
+        LDREF
+    s0 s3 XCHG
+        LDREF
+    s8 s3 XCHG2
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+      s1 s5 XCHG
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      DROP
+      s4 POP
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      s0 s5 XCHG2
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      s4 POP
+      FALSE
+    }>
+    AND
+    s3 s1 XCPU
+    __tact_slice_eq INLINECALLDICT
+    IF:<{
+      __tact_slice_eq INLINECALLDICT
+    }>ELSE<{
+      2DROP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_testCellEquality1 PROCREF:<{
+    TRUE
+    10 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    50 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    TRUE
+    10 PUSHINT
+    $SC$_constructor_c1 INLINECALLDICT
+    50 PUSHINT
+    $SB$_constructor_b1_b2_b3 INLINECALLDICT
+    s5 s4 s3 PUSH3
+    $SB$_store_cell INLINECALLDICT
+    3 -ROLL
+    $SB$_store_cell INLINECALLDICT
+    OVER
+    __tact_cell_eq INLINECALLDICT
+    s1 s1 s1 PUSH3
+    __tact_cell_eq INLINECALLDICT
+    s1 s2 XCHG
+    AND
+    SWAP
+    CTOS
+    $SB$_load_not_mut INLINECALLDICT
+    s7 s2 PUSH2
+    EQUAL
+    IF:<{
+      s6 s6 XCHG2
+      EQUAL
+    }>ELSE<{
+      NIP
+      s5 POP
+      FALSE
+    }>
+    IF:<{
+      s3 s4 PUSH2
+      EQUAL
+    }>ELSE<{
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+    100 PUSHINT
+    s0 s5 XCHG2
+    $SB$_store_cell INLINECALLDICT
+    s0 s1 PUSH2
+    __tact_cell_neq INLINECALLDICT
+    s1 s4 XCHG
+    AND
+    s1 s4 XCHG
+    100 PUSHINT
+    s0 s3 XCHG2
+    $SB$_store_cell INLINECALLDICT
+    s2 s2 XCPU
+    __tact_cell_eq INLINECALLDICT
+    AND
+    -ROT
+    __tact_cell_neq INLINECALLDICT
+    AND
+  }>
+  $SemanticsTester$_fun_testCellEquality2 PROCREF:<{
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    TRUE
+        NEWC
+        1 STI
+    10 PUSHINT
+    SWAP
+    6 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    FALSE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    FALSE
+        NEWC
+        1 STI
+    10 PUSHINT
+    SWAP
+    6 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    s3 s4 PUSH2
+    __tact_cell_eq INLINECALLDICT
+    s3 s5 PUSH2
+    __tact_cell_neq INLINECALLDICT
+    IF:<{
+      s2 s5 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s1 s5 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    AND
+    s3 s4 PUSH2
+    __tact_cell_neq INLINECALLDICT
+    IF:<{
+      s2 s4 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s1 s4 PUXC
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      s4 POP
+      FALSE
+    }>
+    s1 s4 XCHG
+    AND
+    s1 s2 PUSH2
+    __tact_cell_neq INLINECALLDICT
+    IF:<{
+      2OVER
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    AND
+    s3 s3 XCHG2
+    __tact_cell_neq INLINECALLDICT
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    SWAP
+    $Cell$_fun_asSlice INLINECALLDICT
+    SWAP
+    6 LDI
+    s0 s2 XCHG
+        1 LDI
+    s0 s2 XCHG
+    10 EQINT
+    IF:<{
+      -1 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    s2 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    s2 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    __tact_cell_neq INLINECALLDICT
+    AND
+    SWAP
+        1 LDI
+    SWAP
+    -1 EQINT
+    s1 s2 XCHG
+    AND
+    s2 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    s2 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    __tact_cell_neq INLINECALLDICT
+    AND
+    s0 s2 XCHG
+    6 LDI
+    SWAP
+    10 EQINT
+    s1 s3 XCHG
+    AND
+    OVER
+    $Slice$_fun_asCell INLINECALLDICT
+    s3 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    s0 s1 PUSH2
+    __tact_cell_eq INLINECALLDICT
+    s1 s3 XCHG
+    AND
+    SWAP
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s2 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s2 XCHG
+    6 LDU
+    s0 s3 XCHG
+    6 LDU
+    s0 s2 XCHG
+    2 EQINT
+    IF:<{
+      2 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+        <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+    s0 s3 XCHG
+    $Slice$_fun_asCell INLINECALLDICT
+    s1 s3 XCHG
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      SWAP
+      $Slice$_fun_asCell INLINECALLDICT
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    AND
+    SWAP
+    6 LDU
+    s0 s3 XCHG
+    6 LDU
+    s0 s2 XCHG
+    2 EQINT
+    IF:<{
+      2 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    $Slice$_fun_asCell INLINECALLDICT
+    SWAP
+    $Slice$_fun_asCell INLINECALLDICT
+    s0 s1 PUSH2
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      ROT
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      SWAP
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    AND
+  }>
+  $SemanticsTester$_fun_testCellEquality3 PROCREF:<{
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    TRUE
+        NEWC
+    10 PUSHINT
+    SWAP
+    6 STI
+        1 STI
+    2 PUSHINT
+    SWAP
+    6 STU
+        ENDC
+    s0 s1 PUSH2
+    __tact_cell_eq INLINECALLDICT
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+    s3 s(-1) PUXC
+        STREF
+        ENDC
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+    s3 s(-1) PUXC
+        STREF
+        ENDC
+    s0 s1 PUSH2
+    __tact_cell_eq INLINECALLDICT
+    s1 s3 XCHG
+    AND
+        <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+        NEWC
+    5 PUSHINT
+    SWAP
+    6 STI
+        STREF
+        ENDC
+    s2 s0 PUSH2
+    __tact_cell_neq INLINECALLDICT
+    IF:<{
+      s3 s0 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s5 s0 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s4 s0 PUSH2
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    s1 s2 XCHG
+    AND
+    s0 s2 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s3 XCHG
+    $Cell$_fun_asSlice INLINECALLDICT
+    SWAP
+    $Cell$_fun_asSlice INLINECALLDICT
+    s0 s3 XCHG
+    6 LDI
+    s0 s2 XCHG
+    6 LDI
+    s0 s5 XCHG
+    6 LDI
+    s0 s3 XCHG
+    5 EQINT
+    IF:<{
+      SWAP
+      5 EQINT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+      5 EQINT
+    }>ELSE<{
+      DROP
+      FALSE
+    }>
+    s1 s3 XCHG
+    AND
+    s3 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    s2 PUSH
+    $Slice$_fun_asCell INLINECALLDICT
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+      s2 PUSH
+      $Slice$_fun_asCell INLINECALLDICT
+      s2 PUSH
+      $Slice$_fun_asCell INLINECALLDICT
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+      s2 PUSH
+      $Slice$_fun_asCell INLINECALLDICT
+      s4 PUSH
+      $Slice$_fun_asCell INLINECALLDICT
+      __tact_cell_neq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    AND
+    SWAP
+        LDREF
+    s0 s4 XCHG
+        LDREF
+    s0 s4 XCHG
+        LDREF
+    s8 s3 XCHG2
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+      s1 s5 XCHG
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      DROP
+      s4 POP
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      s0 s5 XCHG2
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      s4 POP
+      FALSE
+    }>
+    s1 s4 XCHG
+    AND
+    SWAP
+    $Slice$_fun_asCell INLINECALLDICT
+    s0 s3 XCHG
+    $Slice$_fun_asCell INLINECALLDICT
+    s0 s2 XCHG
+    $Slice$_fun_asCell INLINECALLDICT
+    s2 s3 PUSH2
+    __tact_cell_eq INLINECALLDICT
+    IF:<{
+      s0 s3 PUSH2
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      s0 s4 XCHG2
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      s3 POP
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      ROT
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    IF:<{
+          <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+      ROT
+      __tact_cell_eq INLINECALLDICT
+    }>ELSE<{
+      NIP
+      FALSE
+    }>
+    AND
+  }>
+  %checkAllContractFieldsAreUnchanged PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_checkAllContractFieldsAreUnchanged INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %structAssign1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_structAssign1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %structAssign2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_structAssign2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %paramStruct1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_paramStruct1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %paramStruct2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_paramStruct2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateParamStruct1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateParamStruct1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateParamStruct2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateParamStruct2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testReturnedStructs PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testReturnedStructs INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct3 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct3 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct4 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct4 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct5 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct5 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainStruct6 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainStruct6 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mapAssign1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mapAssign1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mapAssign2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mapAssign2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %paramMap1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_paramMap1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %paramMap2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_paramMap2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateParamMap1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateParamMap1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateParamMap2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateParamMap2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testReturnedMaps1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testReturnedMaps1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateNestedMap1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateNestedMap1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %contractAssign1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_contractAssign1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %contractAssign2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_contractAssign2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %paramContract PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_paramContract INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateParamContract PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateParamContract INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %address PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_address INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testReturnedContracts PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testReturnedContracts INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutateContractStateFlag PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutateContractStateFlag INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %changesPersisted PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_changesPersisted INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt3 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt3 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt4 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt4 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt5 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt5 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %mutatesChainInt6 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_mutatesChainInt6 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %andMutateShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_andMutateShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %andInfiniteLoopShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_andInfiniteLoopShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %andExceptionShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_andExceptionShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %orMutateShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_orMutateShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %orInfiniteLoopShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_orInfiniteLoopShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %orExceptionShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_orExceptionShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %ternaryMutateShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_ternaryMutateShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %ternaryInfiniteLoopShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_ternaryInfiniteLoopShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %ternaryExceptionShortCircuit PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_ternaryExceptionShortCircuit INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testAddressEquality PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testAddressEquality INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testInversesParseStdAddressAndNewAddress PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testInversesParseStdAddressAndNewAddress INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testSliceEquality1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testSliceEquality1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testSliceEquality2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testSliceEquality2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testCellEquality1 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testCellEquality1 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testCellEquality2 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testCellEquality2 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  %testCellEquality3 PROC:<{
+    $SemanticsTester$_contract_load INLINECALLDICT
+    $SemanticsTester$_fun_testCellEquality3 INLINECALLDICT
+    15 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $SemanticsTester$_contract_load INLINECALLDICT
+    s0 16 s() XCHG
+    IFJMP:<{
+      15 BLKDROP
+      DROP
+    }>
+    0 PUSHINT
+    s15 PUSH
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      s0 s15 XCHG
+      32 LDU
+      s0 16 s() XCHG
+    }>
+    SWAP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+      15 BLKDROP
+      DROP
+    }>
+    s0 s14 XCHG
+    HASHSU
+    98540369100368890765848760899775664667398819187798833358169714449916225335600 PUSHINT
+    EQUAL
+    IFJMP:<{
+      s12 s14 XCHG
+      2 12 BLKSWAP
+      $SemanticsTester$_fun_mutateContractState INLINECALLDICT
+      NIP
+      $SemanticsTester$_contract_store INLINECALLDICT
+    }>
+    15 BLKDROP
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

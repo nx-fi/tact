@@ -1,0 +1,149 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/benchmarks/contracts/output/benchmark_sha256_small_Sha256Small.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $HashData$_load_without_opcode
+  DECLPROC $Sha256Small$_store
+  DECLPROC $Sha256Small$_load
+  DECLPROC $Sha256Small$_contract_init
+  DECLPROC $Sha256Small$_contract_load
+  DECLPROC $Sha256Small$_contract_store
+  DECLPROC $Sha256Small$_fun_res
+  68675 DECLMETHOD %res
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $HashData$_load_without_opcode PROCINLINE:<{
+    LDREF
+    SWAP
+    CTOS
+  }>
+  $Sha256Small$_store PROCINLINE:<{
+    SWAP
+    257 PUSHINT
+    STIX
+  }>
+  $Sha256Small$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    SWAP
+  }>
+  $Sha256Small$_contract_init PROCINLINE:<{
+    0 PUSHINT
+  }>
+  $Sha256Small$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $Sha256Small$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      DROP
+      $Sha256Small$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Sha256Small$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    $Sha256Small$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Sha256Small$_fun_res PROCREF:<{
+    DUP
+  }>
+  %res PROC:<{
+    $Sha256Small$_contract_load INLINECALLDICT
+    $Sha256Small$_fun_res INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Sha256Small$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      s0 s2 XCHG
+    }>
+    OVER
+    3211612486 PUSHINT
+    EQUAL
+    IFJMP:<{
+      2DROP
+      $HashData$_load_without_opcode INLINECALLDICT
+      NIP
+          SHA256U
+      ADD
+      $Sha256Small$_contract_store INLINECALLDICT
+    }>
+    s3 POP
+    NIP
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

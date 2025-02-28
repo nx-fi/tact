@@ -1,0 +1,193 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; optionals_Opt4.headers.fc
+;;
+;; Header files for Opt4
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_load_address_opt
+(slice, slice) __tact_load_address_opt(slice cs) inline;
+
+;; $OptAddr$_load_without_opcode
+(slice, ((int, slice, int))) $OptAddr$_load_without_opcode(slice sc_0) inline;
+
+;; $Opt4$_store
+builder $Opt4$_store(builder build_0, (int) v) inline;
+
+;; $Opt4$_load
+(slice, ((int))) $Opt4$_load(slice sc_0) inline;
+
+;; $Opt4$_contract_init
+(int) $Opt4$_contract_init() impure inline;
+
+;; $Opt4$_contract_load
+(int) $Opt4$_contract_load() impure inline;
+
+;; $Opt4$_contract_store
+() $Opt4$_contract_store((int) v) impure inline;
+
+;; $Opt4$_fun_z
+((int), int) $Opt4$_fun_z((int) $self) impure inline_ref;
+
+
+;; optionals_Opt4.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(slice, slice) __tact_load_address_opt(slice cs) inline {
+    if (cs.preload_uint(2) != 0) {
+        slice raw = cs~load_msg_addr();
+        return (cs, raw);
+    } else {
+        cs~skip_bits(2);
+        return (cs, null());
+    }
+}
+
+;; optionals_Opt4.storage.fc
+;;
+;; Type: OptAddr
+;; Header: 0xc7e9e464
+;; TLB: opt_addr#c7e9e464 x:uint8 y:Maybe address z:uint16 = OptAddr
+;;
+
+(slice, ((int, slice, int))) $OptAddr$_load_without_opcode(slice sc_0) inline {
+    var v'x = sc_0~load_uint(8);
+    var v'y = sc_0~__tact_load_address_opt();
+    var v'z = sc_0~load_uint(16);
+    return (sc_0, (v'x, v'y, v'z));
+}
+
+;;
+;; Type: Opt4
+;; TLB: _ z:int257 = Opt4
+;;
+
+builder $Opt4$_store(builder build_0, (int) v) inline {
+    var (v'z) = v;
+    build_0 = build_0.store_int(v'z, 257);
+    return build_0;
+}
+
+(slice, ((int))) $Opt4$_load(slice sc_0) inline {
+    var v'z = sc_0~load_int(257);
+    return (sc_0, (v'z));
+}
+
+(int) $Opt4$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Opt4$_load();
+    } else {
+        return $Opt4$_contract_init();
+    }
+}
+
+() $Opt4$_contract_store((int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Opt4$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Opt4 functions
+;;
+
+(int) $Opt4$_contract_init() impure inline {
+    var (($self'z)) = (0);
+    return ($self'z);
+}
+
+((int), int) $Opt4$_fun_z((int) $self) impure inline_ref {
+    var (($self'z)) = $self;
+    var $fresh$ret_673 = $self'z;
+    return (($self'z), $fresh$ret_673);
+}
+
+;;
+;; Get methods of a Contract Opt4
+;;
+
+_ %z() method_id(122845) {
+    var self = $Opt4$_contract_load();
+    var res = self~$Opt4$_fun_z();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Opt4
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'z) = $Opt4$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive OptAddr message
+    if (op == 3353994340) {
+        var ($msg'x, $msg'y, $msg'z) = in_msg~$OptAddr$_load_without_opcode();
+        $self'z = $msg'z;
+        ;; Persist state
+        $Opt4$_contract_store(($self'z));
+        return ();
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

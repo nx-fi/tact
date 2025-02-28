@@ -1,0 +1,975 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; strings_StringsTester.headers.fc
+;;
+;; Header files for StringsTester
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_crc16
+(slice) __tact_crc16(slice data) inline_ref;
+
+;; __tact_base64_encode
+(slice) __tact_base64_encode(slice data) inline_ref;
+
+;; __tact_address_to_user_friendly
+(slice) __tact_address_to_user_friendly(slice address) inline_ref;
+
+;; __tact_string_builder_start
+tuple __tact_string_builder_start(builder b) inline;
+
+;; __tact_string_builder_start_comment
+tuple __tact_string_builder_start_comment() inline;
+
+;; __tact_string_builder_start_string
+tuple __tact_string_builder_start_string() inline;
+
+;; __tact_string_builder_end
+cell __tact_string_builder_end(tuple builders) inline;
+
+;; __tact_string_builder_end_slice
+slice __tact_string_builder_end_slice(tuple builders) inline;
+
+;; __tact_string_builder_append
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref;
+
+;; __tact_string_builder_append_not_mut
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref;
+
+;; $StringsTester$_contract_init
+tuple $StringsTester$_contract_init() impure inline;
+
+;; $StringsTester$_contract_load
+tuple $StringsTester$_contract_load() impure inline;
+
+;; $Builder$_fun_asSlice
+slice $Builder$_fun_asSlice(builder $self) impure inline;
+
+;; $Slice$_fun_fromBase64
+slice $Slice$_fun_fromBase64(slice $self) impure inline_ref;
+
+;; $String$_fun_fromBase64
+slice $String$_fun_fromBase64(slice $self) impure inline;
+
+;; $StringsTester$_fun_constantString
+(tuple, slice) $StringsTester$_fun_constantString(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_constantStringUnicode
+(tuple, slice) $StringsTester$_fun_constantStringUnicode(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_constantStringUnicodeLong
+(tuple, slice) $StringsTester$_fun_constantStringUnicodeLong(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_dynamicStringCell
+(tuple, cell) $StringsTester$_fun_dynamicStringCell(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_dynamicStringCell2
+(tuple, cell) $StringsTester$_fun_dynamicStringCell2(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_dynamicCommentCell
+(tuple, cell) $StringsTester$_fun_dynamicCommentCell(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_dynamicCommentCellLarge
+(tuple, cell) $StringsTester$_fun_dynamicCommentCellLarge(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_dynamicCommentStringLarge
+(tuple, slice) $StringsTester$_fun_dynamicCommentStringLarge(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithNumber
+(tuple, slice) $StringsTester$_fun_stringWithNumber(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithNegativeNumber
+(tuple, slice) $StringsTester$_fun_stringWithNegativeNumber(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithLargeNumber
+(tuple, slice) $StringsTester$_fun_stringWithLargeNumber(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithFloat
+(tuple, slice) $StringsTester$_fun_stringWithFloat(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_intToString
+(tuple, slice) $StringsTester$_fun_intToString(tuple $self, int $x) impure inline_ref;
+
+;; $StringsTester$_fun_floatToString
+(tuple, slice) $StringsTester$_fun_floatToString(tuple $self, int $x, int $digits) impure inline_ref;
+
+;; $StringsTester$_fun_base64
+(tuple, slice) $StringsTester$_fun_base64(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_processBase64
+(tuple, slice) $StringsTester$_fun_processBase64(tuple $self, slice $src) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars1
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars1(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars2
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars2(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars3
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars3(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars4
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars4(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars5
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars5(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithEscapedChars6
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars6(tuple $self) impure inline_ref;
+
+;; $StringsTester$_fun_stringWithAddress
+(tuple, slice) $StringsTester$_fun_stringWithAddress(tuple $self) impure inline_ref;
+
+
+;; strings_StringsTester.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(slice) __tact_preload_offset(slice s, int offset, int bits) asm """
+    SDSUBSTR
+""";
+
+(slice) __tact_crc16(slice data) inline_ref {
+    slice new_data = begin_cell()
+        .store_slice(data)
+        .store_slice("0000"s)
+    .end_cell().begin_parse();
+    int reg = 0;
+    while (~ new_data.slice_data_empty?()) {
+        int byte = new_data~load_uint(8);
+        int mask = 0x80;
+        while (mask > 0) {
+            reg <<= 1;
+            if (byte & mask) {
+                reg += 1;
+            }
+            mask >>= 1;
+            if (reg > 0xffff) {
+                reg &= 0xffff;
+                reg ^= 0x1021;
+            }
+        }
+    }
+    (int q, int r) = divmod(reg, 256);
+    return begin_cell()
+        .store_uint(q, 8)
+        .store_uint(r, 8)
+    .end_cell().begin_parse();
+}
+
+(slice) __tact_base64_encode(slice data) inline_ref {
+    slice chars = "4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F"s;
+    builder res = begin_cell();
+
+    while (data.slice_bits() >= 24) {
+        (int bs1, int bs2, int bs3) = (data~load_uint(8), data~load_uint(8), data~load_uint(8));
+
+        int n = (bs1 << 16) | (bs2 << 8) | bs3;
+
+        res = res
+            .store_slice(__tact_preload_offset(chars, ((n >> 18) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >> 12) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >>  6) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n      ) & 63) * 8, 8));
+    }
+
+    return res.end_cell().begin_parse();
+}
+
+(slice) __tact_address_to_user_friendly(slice address) inline_ref {
+    (int wc, int hash) = address.parse_std_addr();
+
+    slice user_friendly_address = begin_cell()
+        .store_slice("11"s)
+        .store_uint((wc + 0x100) % 0x100, 8)
+        .store_uint(hash, 256)
+    .end_cell().begin_parse();
+
+    slice checksum = __tact_crc16(user_friendly_address);
+    slice user_friendly_address_with_checksum = begin_cell()
+        .store_slice(user_friendly_address)
+        .store_slice(checksum)
+    .end_cell().begin_parse();
+
+    return __tact_base64_encode(user_friendly_address_with_checksum);
+}
+
+tuple __tact_string_builder_start(builder b) inline {
+    return tpush(tpush(empty_tuple(), b), null());
+}
+
+tuple __tact_string_builder_start_comment() inline {
+    return __tact_string_builder_start(begin_cell().store_uint(0, 32));
+}
+
+tuple __tact_string_builder_start_string() inline {
+    return __tact_string_builder_start(begin_cell());
+}
+
+cell __tact_string_builder_end(tuple builders) inline {
+    (builder b, tuple tail) = uncons(builders);
+    cell c = b.end_cell();
+    while(~ null?(tail)) {
+        (b, tail) = uncons(tail);
+        c = b.store_ref(c).end_cell();
+    }
+    return c;
+}
+
+slice __tact_string_builder_end_slice(tuple builders) inline {
+    return __tact_string_builder_end(builders).begin_parse();
+}
+
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref {
+    int sliceRefs = slice_refs(sc);
+    int sliceBits = slice_bits(sc);
+
+    while((sliceBits > 0) | (sliceRefs > 0)) {
+
+        ;; Load the current builder
+        (builder b, tuple tail) = uncons(builders);
+        int remBytes = 127 - (builder_bits(b) / 8);
+        int exBytes = sliceBits / 8;
+
+        ;; Append bits
+        int amount = min(remBytes, exBytes);
+        if (amount > 0) {
+            slice read = sc~load_bits(amount * 8);
+            b = b.store_slice(read);
+        }
+
+        ;; Update builders
+        builders = cons(b, tail);
+
+        ;; Check if we need to add a new cell and continue
+        if (exBytes - amount > 0) {
+            var bb = begin_cell();
+            builders = cons(bb, builders);
+            sliceBits = (exBytes - amount) * 8;
+        } elseif (sliceRefs > 0) {
+            sc = sc~load_ref().begin_parse();
+            sliceRefs = slice_refs(sc);
+            sliceBits = slice_bits(sc);
+        } else {
+            sliceBits = 0;
+            sliceRefs = 0;
+        }
+    }
+
+    return ((builders), ());
+}
+
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref {
+    builders~__tact_string_builder_append(sc);
+    return builders;
+}
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+slice $Int$_fun_toString(int $self) impure asm """
+    <{
+        // x
+        NEWC // x b
+        OVER // x b x
+        0 LESSINT // x b <0?
+        <{
+            // x b
+            45 PUSHINT // x b 45
+            SWAP // x 45 b
+            8 STU // x b
+            SWAP // b x
+            NEGATE // b -x
+            SWAP // -x b
+        }>CONT IF
+        // x b
+
+        SWAP // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10 
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 1 1 CALLXARGS
+    // b
+
+    ENDC CTOS // s
+""";
+
+slice $Int$_fun_toFloatString(int $self, int $digits) impure asm """
+    DUP // x digits digits
+    1 LESSINT // x digits digits<=0
+    134 THROWIF // x digits
+    DUP // x digits digits
+    77 GTINT // x digits digits>77
+    134 THROWIF // x digits
+
+    NEWC // x digits b
+    ROTREV // b x digits
+    s1 PUSH // b x digits x
+    0 LESSINT // b x digits x<0?
+
+    <{
+        // b x digits
+        ROT // x digits b
+        x{2d} STSLICECONST // x digits b
+        ROT // digits b x
+        NEGATE // digits b -x
+        ROT // b -x digits
+    }>CONT IF
+
+    // b x digits
+    ONE // b x digits 1
+    OVER // b x digits 1 digits
+
+    <{ 10 MULCONST }>CONT REPEAT // b x digits 10^digits
+
+    s1 s2 XCHG // b digits x 10^digits
+    DIVMOD // b digits left right
+    s3 s3 XCHG2 // right digits b left
+
+    <{
+        // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10 
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 2 1 CALLXARGS
+
+    // right digits "left"
+
+    ROT // digits "left" right
+    DUP // digits "left" right right
+    ISZERO // digits "left" right right==0?
+
+    <{
+        // digits "left" right
+        DROP // digits "left"
+        NIP // "left"
+    }>CONT
+
+    <{
+        // digits "left" right
+        ZERO // digits "left" right 0
+        SWAP // digits "left" 0 right
+
+        <{
+            // digits "left" i right
+            DUP // digits "left" i right right
+            10 PUSHINT // digits "left" i right right 10
+            MOD // digits "left" i right right%10
+            ISZERO // digits "left" i right right%10==0?
+        }>CONT
+
+        <{
+            // digits "left" i right
+            10 PUSHINT // digits "left" i right 10
+            DIV // digits "left" i right/10
+            SWAP // digits "left" right/10 i
+            INC // digits "left" right/10 i+1
+            SWAP // digits "left" i+1 right/10
+        }>CONT
+
+        WHILE // digits "left" i right
+
+        <{
+            // x
+            NEWC // x b
+            SWAP // b x
+
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+
+            DROP // ... b
+            DEPTH DEC DUP // ... b n n
+            ROTREV // ... n b n
+            <{
+                // ... c n b
+                s1 s2 XCHG // ... n c b
+                8 STU // ... n b
+            }>CONT REPEAT // n b
+        }>CONT 1 2 CALLXARGS
+        // digits "left" i right_digits "right"
+        ROTREV // digits "left" "right" i right_digits
+        ADD // digits "left" "right" right_digits
+
+        s3 s1 XCHG // "right" "left" digits right_digits
+        SUB // "right" "left" digits_diff
+        SWAP // "right" digits_diff "left"
+        x{2e} STSLICECONST // "right" digits_diff "left."
+        SWAP // "right" "left." digits_diff
+
+        <{
+            // "right" "left."
+            x{30} STSLICECONST // "right" "left.0"
+        }>CONT REPEAT // "right" "left.000"
+
+        STB // "left.000right"
+    }>CONT
+
+    IFELSE // b
+
+    ENDC CTOS // s
+""";
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+int $Builder$_fun_bits(builder $self) impure asm """
+    BBITS
+""";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Builder$_fun_asSlice(builder $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($Builder$_fun_endCell($self));
+}
+
+int $Slice$_fun_bits(slice $self) impure asm """
+    SBITS
+""";
+
+slice $Slice$_fun_fromBase64(slice $self) impure inline_ref {
+    var ($self) = $self;
+    int $size = ($Slice$_fun_bits($self) / 8);
+    builder $result = $global_beginCell();
+    repeat ($size) {
+        int $code = $self~load_uint(8);
+        if (( (($code >= 65)) ? (($code <= 90)) : (false) )) {
+            $result = store_uint($result, ($code - 65), 6);
+        } elseif (( (($code >= 97)) ? (($code <= 122)) : (false) )) {
+            $result = store_uint($result, ($code - 71), 6);
+        } elseif (( (($code >= 48)) ? (($code <= 57)) : (false) )) {
+            $result = store_uint($result, ($code + 4), 6);
+        } elseif (( (($code == 45)) ? (true) : (($code == 43)) )) {
+            $result = store_uint($result, 62, 6);
+        } elseif (( (($code == 95)) ? (true) : (($code == 47)) )) {
+            $result = store_uint($result, 63, 6);
+        } elseif (($code == 61)) {
+        } else {
+            throw(134);
+        }
+    }
+    int $total = $Builder$_fun_bits($result);
+    int $padding = ($total % 8);
+    if (($padding != 0)) {
+        slice $s = $Builder$_fun_asSlice($result);
+        return $s~load_bits(($total - $padding));
+    } else {
+        return $Builder$_fun_asSlice($result);
+    }
+}
+
+slice $String$_fun_fromBase64(slice $self) impure inline {
+    var ($self) = $self;
+    return $Slice$_fun_fromBase64(__tact_str_to_slice($self));
+}
+
+;; strings_StringsTester.constants.fc
+;; String "test string"
+slice __gen_slice_string_74d626e0f3941e966793bdd5fcf327bb9bff00847b32ebc108c9133956147c7a() asm """
+    B{b5ee9c7241010101000d0000167465737420737472696e67ee608f50} B>boc <s PUSHSLICE
+""";
+
+;; String "привет мир 👀"
+slice __gen_slice_string_710059deca558715c18495640cfb369b538848c2f8fb3b58a43d7acb2d7d7c4b() asm """
+    B{b5ee9c7241010101001a000030d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d8d539ad} B>boc <s PUSHSLICE
+""";
+
+;; String "привет мир 👀 привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀привет мир 👀"
+slice __gen_slice_string_96c344cdade1da5e97412fd081c6d3cd5e1735a2085600e21bc23ed337a77f60() asm """
+    B{b5ee9c72410206010002fa0001fed0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f918020d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b80101fed0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d182200201fed0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d180200301fef09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd10401fe80d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b50500dcd18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0bfd180d0b8d0b2d0b5d18220d0bcd0b8d18020f09f9180d0918e6a} B>boc <s PUSHSLICE
+""";
+
+;; String "Hello!"
+slice __gen_slice_string_caa2a2c6f920cdf334acf8f83ab9ef931b272c5b229f5c537570e420477e1a54() asm """
+    B{b5ee9c7241010101000800000c48656c6c6f21a44219b3} B>boc <s PUSHSLICE
+""";
+
+;; String "World!"
+slice __gen_slice_string_67505ac2839abdfd34e847c184981c6b74949d1a2646dc23d31e1a4884c19e9d() asm """
+    B{b5ee9c7241010101000800000c576f726c642169e98952} B>boc <s PUSHSLICE
+""";
+
+;; String " "
+slice __gen_slice_string_40d98146a47dbe3bbc9c7205450b5da355c567deb3ea11d30a74c85ef592e945() asm """
+    B{b5ee9c72410101010003000002200de96161} B>boc <s PUSHSLICE
+""";
+
+;; String "Hello,"
+slice __gen_slice_string_e3908713e5e001207f3cf387cc1fc40750180459a5debd49e4b5883729a06cb8() asm """
+    B{b5ee9c7241010101000800000c48656c6c6f2c770e310c} B>boc <s PUSHSLICE
+""";
+
+;; String "Something something world!"
+slice __gen_slice_string_7e88585a2e68d61d03c94bcfa99c6306015b0327fc9e7d4adb9c5cb597ade16f() asm """
+    B{b5ee9c7241010101001c000034536f6d657468696e6720736f6d657468696e6720776f726c64212a90ca7f} B>boc <s PUSHSLICE
+""";
+
+;; String "Hello, your balance: "
+slice __gen_slice_string_03dd40537be2dc6a7f0dc501d655369d5bc3f46f2ef4b2badd4d288d457444e9() asm """
+    B{b5ee9c7241010101001700002a48656c6c6f2c20796f75722062616c616e63653a201d628127} B>boc <s PUSHSLICE
+""";
+
+;; String "TWFueSBoYW5kcyBtYWtlIGxpZ2h0IHdvcmsu"
+slice __gen_slice_string_2a445194828b2997d031d317e7bafe3930ebc99081602b9f4b9702f288e5dc0f() asm """
+    B{b5ee9c72410101010026000048545746756553426f5957356b637942745957746c494778705a32683049486476636d7375ff762436} B>boc <s PUSHSLICE
+""";
+
+;; String "test \x0a\x0a \ \\x0a "string""
+slice __gen_slice_string_e95a6800c2ff3215be0b36a0bb4bed34103e24d83998500771f034ba6ff2bf89() asm """
+    B{b5ee9c7241010101001800002c74657374200a200a205c205c0a2022737472696e67227b8221e2} B>boc <s PUSHSLICE
+""";
+
+;; String "test \x0a test \x09 test \x0d test \x08 test \x0c test " test ' test \ \\ "_" "" test"
+slice __gen_slice_string_c609f9da73ed498b7e1fac50820669c370b61440c79372f9d0ffd20f8b8249ce() asm """
+    B{b5ee9c7241010101004800008c74657374200a207465737420092074657374200d207465737420082074657374200c20746573742022207465737420272074657374205c205c5c20225f22202222207465737440741c54} B>boc <s PUSHSLICE
+""";
+
+;; String "test \n test \t test \r test \\b\x08 test \f test \" test \' test \x0b \x0b \\ \\\\ \"_\" \"\" test"
+slice __gen_slice_string_124b0fd1c54de91e181ac7038e4eddd884f9145097b6a2abb0d7d5788b706997() asm """
+    B{b5ee9c7241010101005c0000b474657374205c6e2074657374205c742074657374205c722074657374205c5c62082074657374205c662074657374205c222074657374205c272074657374200b200b205c5c205c5c5c5c205c225f5c22205c225c222074657374bdc83e3b} B>boc <s PUSHSLICE
+""";
+
+;; String "   D ABC"
+slice __gen_slice_string_8949cb84acfe46cc8be708af5f8e6a7bb45d7b4492991e1f21129e159e68b8f9() asm """
+    B{b5ee9c7241010101000e000018e280a8e280a9204420414243bd4cd513} B>boc <s PUSHSLICE
+""";
+
+;; String "\x00 \x00 \x00 \x00 \x00 \x00 \x00 \x00"
+slice __gen_slice_string_5bbe7cf35f40f704e743d3406166793e1d54b6eb182a16365bbdb27258d5e945() asm """
+    B{b5ee9c7241010101001100001e002000200020002000200020002000ad520db8} B>boc <s PUSHSLICE
+""";
+
+;; EQBKgXCNLPexWhs2L79kiARR1phGH1LwXxRbNsCFF9doc2lN
+slice __gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43() asm """
+    B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+""";
+
+;; strings_StringsTester.storage.fc
+;;
+;; Type: StringsTester
+;; TLB: _  = StringsTester
+;;
+
+tuple $StringsTester$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return null();
+    } else {
+        return $StringsTester$_contract_init();
+    }
+}
+
+;;
+;; Contract StringsTester functions
+;;
+
+tuple $StringsTester$_contract_init() impure inline {
+    tuple $self = null();
+    return $self;
+}
+
+(tuple, slice) $StringsTester$_fun_constantString(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2439 = __gen_slice_string_74d626e0f3941e966793bdd5fcf327bb9bff00847b32ebc108c9133956147c7a();
+    return ($self, $fresh$ret_2439);
+}
+
+(tuple, slice) $StringsTester$_fun_constantStringUnicode(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2440 = __gen_slice_string_710059deca558715c18495640cfb369b538848c2f8fb3b58a43d7acb2d7d7c4b();
+    return ($self, $fresh$ret_2440);
+}
+
+(tuple, slice) $StringsTester$_fun_constantStringUnicodeLong(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2441 = __gen_slice_string_96c344cdade1da5e97412fd081c6d3cd5e1735a2085600e21bc23ed337a77f60();
+    return ($self, $fresh$ret_2441);
+}
+
+(tuple, cell) $StringsTester$_fun_dynamicStringCell(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_caa2a2c6f920cdf334acf8f83ab9ef931b272c5b229f5c537570e420477e1a54());
+    var $fresh$ret_2442 = __tact_string_builder_end($b);
+    return ($self, $fresh$ret_2442);
+}
+
+(tuple, cell) $StringsTester$_fun_dynamicStringCell2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b = __tact_string_builder_append_not_mut(__tact_string_builder_append_not_mut(__tact_string_builder_append_not_mut($b, __gen_slice_string_e3908713e5e001207f3cf387cc1fc40750180459a5debd49e4b5883729a06cb8()), __gen_slice_string_40d98146a47dbe3bbc9c7205450b5da355c567deb3ea11d30a74c85ef592e945()), __gen_slice_string_67505ac2839abdfd34e847c184981c6b74949d1a2646dc23d31e1a4884c19e9d());
+    var $fresh$ret_2443 = __tact_string_builder_end($b);
+    return ($self, $fresh$ret_2443);
+}
+
+(tuple, cell) $StringsTester$_fun_dynamicCommentCell(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_comment();
+    $b~__tact_string_builder_append(__gen_slice_string_7e88585a2e68d61d03c94bcfa99c6306015b0327fc9e7d4adb9c5cb597ade16f());
+    var $fresh$ret_2444 = __tact_string_builder_end($b);
+    return ($self, $fresh$ret_2444);
+}
+
+(tuple, cell) $StringsTester$_fun_dynamicCommentCellLarge(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_caa2a2c6f920cdf334acf8f83ab9ef931b272c5b229f5c537570e420477e1a54());
+    $b~__tact_string_builder_append(__gen_slice_string_96c344cdade1da5e97412fd081c6d3cd5e1735a2085600e21bc23ed337a77f60());
+    var $fresh$ret_2445 = __tact_string_builder_end($b);
+    return ($self, $fresh$ret_2445);
+}
+
+(tuple, slice) $StringsTester$_fun_dynamicCommentStringLarge(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_caa2a2c6f920cdf334acf8f83ab9ef931b272c5b229f5c537570e420477e1a54());
+    $b~__tact_string_builder_append(__gen_slice_string_96c344cdade1da5e97412fd081c6d3cd5e1735a2085600e21bc23ed337a77f60());
+    var $fresh$ret_2446 = __tact_string_builder_end_slice($b);
+    return ($self, $fresh$ret_2446);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithNumber(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_03dd40537be2dc6a7f0dc501d655369d5bc3f46f2ef4b2badd4d288d457444e9());
+    $b~__tact_string_builder_append($Int$_fun_toString(123));
+    var $fresh$ret_2447 = __tact_string_builder_end_slice($b);
+    return ($self, $fresh$ret_2447);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithNegativeNumber(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_03dd40537be2dc6a7f0dc501d655369d5bc3f46f2ef4b2badd4d288d457444e9());
+    $b~__tact_string_builder_append($Int$_fun_toString(-123));
+    var $fresh$ret_2448 = __tact_string_builder_end_slice($b);
+    return ($self, $fresh$ret_2448);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithLargeNumber(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    tuple $b = __tact_string_builder_start_string();
+    $b~__tact_string_builder_append(__gen_slice_string_03dd40537be2dc6a7f0dc501d655369d5bc3f46f2ef4b2badd4d288d457444e9());
+    $b~__tact_string_builder_append($Int$_fun_toString(1000000000000000000000000000000000000000000000000000000000000));
+    var $fresh$ret_2449 = __tact_string_builder_end_slice($b);
+    return ($self, $fresh$ret_2449);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithFloat(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2450 = $Int$_fun_toFloatString(95, 1);
+    return ($self, $fresh$ret_2450);
+}
+
+(tuple, slice) $StringsTester$_fun_intToString(tuple $self, int $x) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2451 = $Int$_fun_toString($x);
+    return ($self, $fresh$ret_2451);
+}
+
+(tuple, slice) $StringsTester$_fun_floatToString(tuple $self, int $x, int $digits) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2452 = $Int$_fun_toFloatString($x, $digits);
+    return ($self, $fresh$ret_2452);
+}
+
+(tuple, slice) $StringsTester$_fun_base64(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2453 = $String$_fun_fromBase64(__gen_slice_string_2a445194828b2997d031d317e7bafe3930ebc99081602b9f4b9702f288e5dc0f());
+    return ($self, $fresh$ret_2453);
+}
+
+(tuple, slice) $StringsTester$_fun_processBase64(tuple $self, slice $src) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2454 = $String$_fun_fromBase64($src);
+    return ($self, $fresh$ret_2454);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars1(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2455 = __gen_slice_string_e95a6800c2ff3215be0b36a0bb4bed34103e24d83998500771f034ba6ff2bf89();
+    return ($self, $fresh$ret_2455);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars2(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2456 = __gen_slice_string_c609f9da73ed498b7e1fac50820669c370b61440c79372f9d0ffd20f8b8249ce();
+    return ($self, $fresh$ret_2456);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars3(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2457 = __gen_slice_string_124b0fd1c54de91e181ac7038e4eddd884f9145097b6a2abb0d7d5788b706997();
+    return ($self, $fresh$ret_2457);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars4(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2458 = __gen_slice_string_8949cb84acfe46cc8be708af5f8e6a7bb45d7b4492991e1f21129e159e68b8f9();
+    return ($self, $fresh$ret_2458);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars5(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2459 = __gen_slice_string_5bbe7cf35f40f704e743d3406166793e1d54b6eb182a16365bbdb27258d5e945();
+    return ($self, $fresh$ret_2459);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithEscapedChars6(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2460 = __tact_slice_to_str($Builder$_fun_asSlice(store_uint(store_uint(store_uint(store_uint(store_uint(store_uint(store_uint(store_uint(store_uint($global_beginCell(), 127, 8), 31, 8), 10, 8), 0, 8), 32, 8), 84, 8), 65, 8), 67, 8), 84, 8)));
+    return ($self, $fresh$ret_2460);
+}
+
+(tuple, slice) $StringsTester$_fun_stringWithAddress(tuple $self) impure inline_ref {
+    var ($self) = $self;
+    var $fresh$ret_2461 = __tact_address_to_user_friendly(__gen_slice_address_91f149c50d8445a06cffd875e02ab7777b172ad62464c2492d41da881eddab43());
+    return ($self, $fresh$ret_2461);
+}
+
+;;
+;; Get methods of a Contract StringsTester
+;;
+
+_ %constantString() method_id(93932) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_constantString();
+    return res;
+}
+
+_ %constantStringUnicode() method_id(94939) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_constantStringUnicode();
+    return res;
+}
+
+_ %constantStringUnicodeLong() method_id(104680) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_constantStringUnicodeLong();
+    return res;
+}
+
+_ %dynamicStringCell() method_id(122225) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_dynamicStringCell();
+    return res;
+}
+
+_ %dynamicStringCell2() method_id(97729) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_dynamicStringCell2();
+    return res;
+}
+
+_ %dynamicCommentCell() method_id(122531) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_dynamicCommentCell();
+    return res;
+}
+
+_ %dynamicCommentCellLarge() method_id(74771) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_dynamicCommentCellLarge();
+    return res;
+}
+
+_ %dynamicCommentStringLarge() method_id(74191) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_dynamicCommentStringLarge();
+    return res;
+}
+
+_ %stringWithNumber() method_id(68752) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithNumber();
+    return res;
+}
+
+_ %stringWithNegativeNumber() method_id(82914) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithNegativeNumber();
+    return res;
+}
+
+_ %stringWithLargeNumber() method_id(94811) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithLargeNumber();
+    return res;
+}
+
+_ %stringWithFloat() method_id(80064) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithFloat();
+    return res;
+}
+
+_ %intToString(int $x) method_id(104498) {
+    int $x = $x;
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_intToString($x);
+    return res;
+}
+
+_ %floatToString(int $x, int $digits) method_id(90680) {
+    int $x = $x;
+    int $digits = $digits;
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_floatToString($x, $digits);
+    return res;
+}
+
+_ %base64() method_id(71427) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_base64();
+    return res;
+}
+
+_ %processBase64(slice $src) method_id(128362) {
+    slice $src = $src;
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_processBase64($src);
+    return res;
+}
+
+_ %stringWithEscapedChars1() method_id(82062) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars1();
+    return res;
+}
+
+_ %stringWithEscapedChars2() method_id(94445) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars2();
+    return res;
+}
+
+_ %stringWithEscapedChars3() method_id(90316) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars3();
+    return res;
+}
+
+_ %stringWithEscapedChars4() method_id(69675) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars4();
+    return res;
+}
+
+_ %stringWithEscapedChars5() method_id(65546) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars5();
+    return res;
+}
+
+_ %stringWithEscapedChars6() method_id(77929) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithEscapedChars6();
+    return res;
+}
+
+_ %stringWithAddress() method_id(84575) {
+    var self = $StringsTester$_contract_load();
+    var res = self~$StringsTester$_fun_stringWithAddress();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract StringsTester
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var $self = $StringsTester$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "backtick-test" message
+    if (text_op == 0xa8eec08a32d5557c1986d6a97152a3011aff69a8020b8ed824407c194e530658) {
+        throw_unless(31733, false);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

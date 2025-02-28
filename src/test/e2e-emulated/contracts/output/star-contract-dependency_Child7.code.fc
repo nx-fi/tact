@@ -1,0 +1,121 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; star-contract-dependency_Child7.headers.fc
+;;
+;; Header files for Child7
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; $Child7$_load
+(slice, ((int))) $Child7$_load(slice sc_0) inline;
+
+;; $Child7$_contract_init
+(int) $Child7$_contract_init() impure inline;
+
+;; $Child7$_contract_load
+(int) $Child7$_contract_load() impure inline;
+
+
+;; star-contract-dependency_Child7.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+;; star-contract-dependency_Child7.storage.fc
+;;
+;; Type: Child7
+;; TLB: _ childNum:uint32 = Child7
+;;
+
+(slice, ((int))) $Child7$_load(slice sc_0) inline {
+    var v'childNum = sc_0~load_uint(32);
+    return (sc_0, (v'childNum));
+}
+
+(int) $Child7$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Child7$_load();
+    } else {
+        return $Child7$_contract_init();
+    }
+}
+
+;;
+;; Contract Child7 functions
+;;
+
+(int) $Child7$_contract_init() impure inline {
+    var (($self'childNum)) = (0);
+    return ($self'childNum);
+}
+
+;;
+;; Get methods of a Contract Child7
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Child7
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'childNum) = $Child7$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

@@ -1,0 +1,441 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; treasure_Treasure.headers.fc
+;;
+;; Header files for Treasure
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $ChangeOwner$_load_without_opcode
+(slice, ((int, slice))) $ChangeOwner$_load_without_opcode(slice sc_0) inline;
+
+;; $ChangeOwnerOk$_store
+builder $ChangeOwnerOk$_store(builder build_0, (int, slice) v) inline;
+
+;; $ChangeOwnerOk$_store_cell
+cell $ChangeOwnerOk$_store_cell((int, slice) v) inline;
+
+;; $Withdraw$_load_without_opcode
+(slice, ((int, int))) $Withdraw$_load_without_opcode(slice sc_0) inline;
+
+;; $Treasure$_store
+builder $Treasure$_store(builder build_0, (slice) v) inline;
+
+;; $Treasure$_load
+(slice, ((slice))) $Treasure$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $Treasure$init$_load
+(slice, ((slice))) $Treasure$init$_load(slice sc_0) inline;
+
+;; $Treasure$_contract_init
+(slice) $Treasure$_contract_init(slice $owner) impure inline;
+
+;; $Treasure$_contract_load
+(slice) $Treasure$_contract_load() impure inline;
+
+;; $Treasure$_contract_store
+() $Treasure$_contract_store((slice) v) impure inline;
+
+;; $SendParameters$_constructor_value_to_mode_body
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_body(int $value, slice $to, int $mode, cell $body) inline;
+
+;; $Treasure$_fun_requireOwner
+((slice), ()) $Treasure$_fun_requireOwner((slice) $self) impure inline_ref;
+
+;; $Treasure$_fun_doWithdraw
+((slice), ()) $Treasure$_fun_doWithdraw((slice) $self, int $amount, int $mode) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline;
+
+;; $Treasure$_fun_forward
+((slice), ()) $Treasure$_fun_forward((slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $Treasure$_fun_reply
+((slice), ()) $Treasure$_fun_reply((slice) $self, cell $body) impure inline;
+
+;; $Treasure$_fun_owner
+((slice), slice) $Treasure$_fun_owner((slice) $self) impure inline_ref;
+
+;; $ChangeOwnerOk$_constructor_queryId_newOwner
+((int, slice)) $ChangeOwnerOk$_constructor_queryId_newOwner(int $queryId, slice $newOwner) inline;
+
+
+;; treasure_Treasure.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm """
+    2 UNTUPLE
+""";
+
+cell $global_emptyCell() impure asm """
+    <b b> PUSHREF // Pure Fift: "<b" creates a builder, "b>" turns it into a cell at compile time
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_nativeReserve(int $amount, int $mode) impure asm """
+    RAWRESERVE
+""";
+
+() $global_send((int, cell, cell, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+    STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+
+    // Group 2: Placing the Builder after code and data, then checking those for nullability
+    s2 XCHG0
+    DUP2
+    ISNULL
+    SWAP
+    ISNULL
+    MUL // note that -1 * -1 wraps back to -1
+    // → Stack state
+    // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+    // s1: `code`
+    // s2: `data`
+    // s3: Builder
+    // s4: `body`
+    // s5: `mode`
+
+    // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+    <{
+        DROP2 // drop `data` and `code`, since either of those is null
+        b{0} STSLICECONST
+    }> PUSHCONT
+
+    // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+    <{
+        // _ split_depth:(Maybe (## 5))
+        //   special:(Maybe TickTock)
+        //   code:(Maybe ^Cell)
+        //   data:(Maybe ^Cell)
+        //   library:(Maybe ^Cell)
+        // = StateInit;
+        ROT                // place message Builder on top
+        b{10} STSLICECONST // store Maybe = true, Either = false
+        // Start composing inlined StateInit
+        b{00} STSLICECONST // store split_depth and special first
+        STDICT             // store code
+        STDICT             // store data
+        b{0} STSLICECONST  // store library
+    }> PUSHCONT
+
+    // Group 3: IFELSE that does the branching shown above
+    IFELSE
+    // → Stack state
+    // s0: Builder
+    // s1: null or StateInit
+    // s2: `body`
+    // s3: `mode`
+
+    // Group 4: Finalizing the message
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC
+    // → Stack state
+    // s0: Cell
+    // s1: `mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+""";
+
+((slice), ()) $Treasure$_fun_requireOwner((slice) $self) impure inline_ref {
+    var (($self'owner)) = $self;
+    throw_unless(132, ( equal_slices_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'owner), ());
+}
+
+((slice), ()) $Treasure$_fun_forward((slice) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'owner)) = $self;
+    var ($init) = $init;
+    cell $code = null();
+    cell $data = null();
+    if ((~ null?($init))) {
+        var ($init2'code, $init2'data) = $StateInit$_not_null($init);
+        $code = $init2'code;
+        $data = $init2'data;
+    }
+    if (false) {
+        var ($ctx'bounceable, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+        int $balance = $global_myBalance();
+        int $balanceBeforeMessage = ($balance - $ctx'value);
+        if (($balanceBeforeMessage < 0)) {
+            $global_nativeReserve(0, 0);
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 130, $body, $code, $data));
+            return (($self'owner), ());
+        }
+    }
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, 66, $body, $code, $data));
+    return (($self'owner), ());
+}
+
+((slice), ()) $Treasure$_fun_reply((slice) $self, cell $body) impure inline {
+    var (($self'owner)) = $self;
+    ($self'owner)~$Treasure$_fun_forward(__tact_context_get_sender(), $body, true, null());
+    return (($self'owner), ());
+}
+
+((slice), slice) $Treasure$_fun_owner((slice) $self) impure inline_ref {
+    var (($self'owner)) = $self;
+    var $fresh$ret_45 = $self'owner;
+    return (($self'owner), $fresh$ret_45);
+}
+
+;; treasure_Treasure.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell value:int257 to:address bounce:bool = SendParameters
+;;
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_value_to_mode_body(int $value, slice $to, int $mode, cell $body) inline {
+    return ($mode, $body, null(), null(), $value, $to, true);
+}
+
+((int, cell, cell, cell, int, slice, int)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int $bounce, slice $to, int $value, int $mode, cell $body, cell $code, cell $data) inline {
+    return ($mode, $body, $code, $data, $value, $to, $bounce);
+}
+
+;;
+;; Type: ChangeOwner
+;; Header: 0x819dbe99
+;; TLB: change_owner#819dbe99 queryId:uint64 newOwner:address = ChangeOwner
+;;
+
+(slice, ((int, slice))) $ChangeOwner$_load_without_opcode(slice sc_0) inline {
+    var v'queryId = sc_0~load_uint(64);
+    var v'newOwner = sc_0~load_msg_addr();
+    return (sc_0, (v'queryId, v'newOwner));
+}
+
+;;
+;; Type: ChangeOwnerOk
+;; Header: 0x327b2b4a
+;; TLB: change_owner_ok#327b2b4a queryId:uint64 newOwner:address = ChangeOwnerOk
+;;
+
+builder $ChangeOwnerOk$_store(builder build_0, (int, slice) v) inline {
+    var (v'queryId, v'newOwner) = v;
+    build_0 = store_uint(build_0, 846932810, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    build_0 = build_0.store_slice(v'newOwner);
+    return build_0;
+}
+
+cell $ChangeOwnerOk$_store_cell((int, slice) v) inline {
+    return $ChangeOwnerOk$_store(begin_cell(), v).end_cell();
+}
+
+((int, slice)) $ChangeOwnerOk$_constructor_queryId_newOwner(int $queryId, slice $newOwner) inline {
+    return ($queryId, $newOwner);
+}
+
+;;
+;; Type: Withdraw
+;; Header: 0x63b0a748
+;; TLB: withdraw#63b0a748 amount:coins mode:uint8 = Withdraw
+;;
+
+(slice, ((int, int))) $Withdraw$_load_without_opcode(slice sc_0) inline {
+    var v'amount = sc_0~load_varuint16();
+    var v'mode = sc_0~load_uint(8);
+    return (sc_0, (v'amount, v'mode));
+}
+
+;;
+;; Type: Treasure
+;; TLB: _ owner:address = Treasure
+;;
+
+builder $Treasure$_store(builder build_0, (slice) v) inline {
+    var (v'owner) = v;
+    build_0 = build_0.store_slice(v'owner);
+    return build_0;
+}
+
+(slice, ((slice))) $Treasure$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice, ((slice))) $Treasure$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice) $Treasure$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Treasure$_load();
+    } else {
+        (slice $owner) = $sc~$Treasure$init$_load();
+        $sc.end_parse();
+        return $Treasure$_contract_init($owner);
+    }
+}
+
+() $Treasure$_contract_store((slice) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $Treasure$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract Treasure functions
+;;
+
+(slice) $Treasure$_contract_init(slice $owner) impure inline {
+    var (($self'owner)) = (null());
+    $self'owner = $owner;
+    return ($self'owner);
+}
+
+((slice), ()) $Treasure$_fun_doWithdraw((slice) $self, int $amount, int $mode) impure inline_ref {
+    var (($self'owner)) = $self;
+    ($self'owner)~$Treasure$_fun_requireOwner();
+    $global_send($SendParameters$_constructor_value_to_mode_body($amount, $self'owner, $mode, $global_emptyCell()));
+    return (($self'owner), ());
+}
+
+;;
+;; Get methods of a Contract Treasure
+;;
+
+_ %owner() method_id(83229) {
+    var self = $Treasure$_contract_load();
+    var res = self~$Treasure$_fun_owner();
+    return res;
+}
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Treasure
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner) = $Treasure$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+        ;; Receive Withdraw message
+        if (op == 1672521544) {
+            var ($msg'amount, $msg'mode) = in_msg~$Withdraw$_load_without_opcode();
+            ($self'owner)~$Treasure$_fun_doWithdraw($msg'amount, $msg'mode);
+            return ();
+        }
+        
+        ;; Receive ChangeOwner message
+        if (op == 2174598809) {
+            var ($msg'queryId, $msg'newOwner) = in_msg~$ChangeOwner$_load_without_opcode();
+            ($self'owner)~$Treasure$_fun_requireOwner();
+            $self'owner = $msg'newOwner;
+            ($self'owner)~$Treasure$_fun_reply($ChangeOwnerOk$_store_cell($ChangeOwnerOk$_constructor_queryId_newOwner($msg'queryId, $msg'newOwner)));
+            ;; Persist state
+            $Treasure$_contract_store(($self'owner));
+            return ();
+        }
+        
+    }
+    ;; Empty Receiver and Text Receivers
+    var text_op = slice_hash(in_msg);
+    ;; Receive "Destroy" message
+    if (text_op == 0xbc11327417bcdfc895e7a19b74fe433f6cfb94ccaa3ed4123aee1d790cde56a0) {
+        ($self'owner)~$Treasure$_fun_doWithdraw(0, 160);
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

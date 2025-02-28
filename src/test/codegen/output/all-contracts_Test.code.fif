@@ -1,0 +1,130 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/codegen/output/all-contracts_Test.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Test$_contract_init
+  DECLPROC $Test$_contract_load
+  DECLPROC $Position$_constructor_tokenId_foo
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Test$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Test$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $Test$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Position$_constructor_tokenId_foo PROCINLINE:<{
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Test$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    DUP
+    SBITS
+    31 GTINT
+    IF:<{
+      32 LDU
+      NIP
+    }>
+    HASHSU
+    6731602802397666770938180957532378413873005850435560510872903601091507294727 PUSHINT
+    EQUAL
+    IFJMP:<{
+      1 PUSHINT
+      PUSHNULL
+      $Position$_constructor_tokenId_foo INLINECALLDICT
+      DROP
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001100001e64756d7028702e746f6b656e496429b23b298d} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f636f646567656e2f7374727563742d776974682d64656661756c742d616e642d6f7074696f6e616c2d6669656c64732e746163743a393a31303a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,159 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/examples/output/inheritance_Contract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $Contract$_contract_init
+  DECLPROC $Contract$_contract_load
+  DECLPROC $Contract$_fun_executeAbs
+  DECLPROC $Contract$_fun_execute
+  DECLPROC $Contract$_fun_ex
+  DECLPROC $Contract$_fun_ex2
+  DECLPROC $Contract$_fun_const1
+  DECLPROC $Contract$_fun_const2
+  DECLPROC $Contract$_fun_const3
+  DECLPROC $Contract$_fun_const4
+  DECLPROC $Contract$_fun_loadC2
+  DECLPROC $Contract$_fun_const5
+  68416 DECLMETHOD %ex
+  124794 DECLMETHOD %ex2
+  95714 DECLMETHOD %const1
+  83329 DECLMETHOD %const2
+  87456 DECLMETHOD %const3
+  75079 DECLMETHOD %const4
+  79206 DECLMETHOD %const5
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $Contract$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Contract$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $Contract$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Contract$_fun_executeAbs PROCREF:<{
+    1000 PUSHINT
+  }>
+  $Contract$_fun_execute PROCREF:<{
+    2 PUSHINT
+  }>
+  $Contract$_fun_ex PROCREF:<{
+    $Contract$_fun_execute INLINECALLDICT
+  }>
+  $Contract$_fun_ex2 PROCREF:<{
+    $Contract$_fun_executeAbs INLINECALLDICT
+  }>
+  $Contract$_fun_const1 PROCREF:<{
+    10 PUSHINT
+  }>
+  $Contract$_fun_const2 PROCREF:<{
+    20 PUSHINT
+  }>
+  $Contract$_fun_const3 PROCREF:<{
+    30 PUSHINT
+  }>
+  $Contract$_fun_const4 PROCREF:<{
+    40 PUSHINT
+  }>
+  $Contract$_fun_loadC2 PROCREF:<{
+    50 PUSHINT
+  }>
+  $Contract$_fun_const5 PROCREF:<{
+    $Contract$_fun_loadC2 INLINECALLDICT
+  }>
+  %ex PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_ex INLINECALLDICT
+    NIP
+  }>
+  %ex2 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_ex2 INLINECALLDICT
+    NIP
+  }>
+  %const1 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_const1 INLINECALLDICT
+    NIP
+  }>
+  %const2 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_const2 INLINECALLDICT
+    NIP
+  }>
+  %const3 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_const3 INLINECALLDICT
+    NIP
+  }>
+  %const4 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_const4 INLINECALLDICT
+    NIP
+  }>
+  %const5 PROC:<{
+    $Contract$_contract_load INLINECALLDICT
+    $Contract$_fun_const5 INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    DROP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s5 s5 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    SWAP
+    __tact_context_sender SETGLOB
+    $Contract$_contract_load INLINECALLDICT
+    DROP
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

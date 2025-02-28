@@ -1,0 +1,208 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; initof_Child.headers.fc
+;;
+;; Header files for Child
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; $ChildAddress$_store
+builder $ChildAddress$_store(builder build_0, (slice) v) inline;
+
+;; $ChildAddress$_store_cell
+cell $ChildAddress$_store_cell((slice) v) inline;
+
+;; $Child$_load
+(slice, ((slice))) $Child$_load(slice sc_0) inline;
+
+;; $Child$init$_load
+(slice, ((slice))) $Child$init$_load(slice sc_0) inline;
+
+;; $Child$_contract_init
+(slice) $Child$_contract_init(slice $owner) impure inline;
+
+;; $Child$_contract_load
+(slice) $Child$_contract_load() impure inline;
+
+;; $MessageParameters$_constructor_to_value_mode_bounce_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline;
+
+;; $ChildAddress$_constructor_address
+((slice)) $ChildAddress$_constructor_address(slice $address) inline;
+
+
+;; initof_Child.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+() $global_message((int, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+    STZEROES
+    // → Stack state
+    // s0: Builder
+    // s1: `data`
+    // s2: `code`
+    // s3: `body`
+    // s4: `mode`
+    STDICT
+    ENDC
+    SWAP
+    SENDRAWMSG
+""";
+
+;; initof_Child.storage.fc
+;;
+;; Type: MessageParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 to:address bounce:bool = MessageParameters
+;;
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_bounce_body(slice $to, int $value, int $mode, int $bounce, cell $body) inline {
+    return ($mode, $body, $value, $to, $bounce);
+}
+
+;;
+;; Type: ChildAddress
+;; Header: 0x421fcf26
+;; TLB: child_address#421fcf26 address:address = ChildAddress
+;;
+
+builder $ChildAddress$_store(builder build_0, (slice) v) inline {
+    var (v'address) = v;
+    build_0 = store_uint(build_0, 1109380902, 32);
+    build_0 = build_0.store_slice(v'address);
+    return build_0;
+}
+
+cell $ChildAddress$_store_cell((slice) v) inline {
+    return $ChildAddress$_store(begin_cell(), v).end_cell();
+}
+
+((slice)) $ChildAddress$_constructor_address(slice $address) inline {
+    return ($address);
+}
+
+;;
+;; Type: Child
+;; TLB: _ owner:address = Child
+;;
+
+(slice, ((slice))) $Child$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice, ((slice))) $Child$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    return (sc_0, (v'owner));
+}
+
+(slice) $Child$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$Child$_load();
+    } else {
+        (slice $owner) = $sc~$Child$init$_load();
+        $sc.end_parse();
+        return $Child$_contract_init($owner);
+    }
+}
+
+;;
+;; Contract Child functions
+;;
+
+(slice) $Child$_contract_init(slice $owner) impure inline {
+    var (($self'owner)) = (null());
+    $self'owner = $owner;
+    return ($self'owner);
+}
+
+;;
+;; Get methods of a Contract Child
+;;
+
+;; message opcode reader utility
+;; Returns 32 bit message opcode, otherwise throws the "Invalid incoming message" exit code
+(slice, int) ~load_opcode(slice s) asm( -> 1 0) "32 LDUQ 130 THROWIFNOT";
+;;
+;; Routing of a Contract Child
+;;
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner) = $Child$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg~load_uint(32);
+    }
+    ;; Receive empty message
+    if ((op == 0) & (in_msg_length <= 32)) {
+        $global_message($MessageParameters$_constructor_to_value_mode_bounce_body(__tact_context_get_sender(), 0, 66, false, $ChildAddress$_store_cell($ChildAddress$_constructor_address($global_myAddress()))));
+        return ();
+    }
+    ;; Throw if not handled
+    throw(130);
+}
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+    execute current@ context@ current!
+    {
+        }END> b>
+        
+        <{
+            SETCP0 DUP
+            IFNOTJMP:<{
+                DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+            }>
+swap <s ref@
+            0 swap @procdictkeylen idict- drop
+            -1 swap @procdictkeylen idict- drop
+            65535 swap @procdictkeylen idict- drop
+
+            @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+        }> b>
+    } : }END>c
+    current@ context! current!
+} does @atend !
+""";
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

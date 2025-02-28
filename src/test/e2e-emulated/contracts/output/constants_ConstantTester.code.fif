@@ -1,0 +1,781 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/constants_ConstantTester.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $S$_to_external
+  DECLPROC $T$_to_external
+  DECLPROC $ConstantTester$_contract_init
+  DECLPROC $ConstantTester$_contract_load
+  DECLPROC $ConstantTester$_fun_something1
+  DECLPROC $ConstantTester$_fun_something2
+  DECLPROC $ConstantTester$_fun_something3
+  DECLPROC $ConstantTester$_fun_something4
+  DECLPROC $ConstantTester$_fun_something5
+  DECLPROC $ConstantTester$_fun_something6
+  DECLPROC $ConstantTester$_fun_something7
+  DECLPROC $ConstantTester$_fun_something8
+  DECLPROC $ConstantTester$_fun_something9
+  DECLPROC $ConstantTester$_fun_something10
+  DECLPROC $ConstantTester$_fun_something11
+  DECLPROC $ConstantTester$_fun_something12
+  DECLPROC $ConstantTester$_fun_something13
+  DECLPROC $ConstantTester$_fun_something14
+  DECLPROC $ConstantTester$_fun_something15
+  DECLPROC $ConstantTester$_fun_something16
+  DECLPROC $ConstantTester$_fun_something17
+  DECLPROC $ConstantTester$_fun_something18
+  DECLPROC $ConstantTester$_fun_something19
+  DECLPROC $ConstantTester$_fun_something20
+  DECLPROC $ConstantTester$_fun_something21
+  DECLPROC $ConstantTester$_fun_something22
+  DECLPROC $ConstantTester$_fun_something23
+  DECLPROC $ConstantTester$_fun_something24
+  DECLPROC $ConstantTester$_fun_something25
+  DECLPROC $ConstantTester$_fun_something26
+  DECLPROC $ConstantTester$_fun_something27
+  DECLPROC $ConstantTester$_fun_something28
+  DECLPROC $ConstantTester$_fun_something29
+  DECLPROC $ConstantTester$_fun_something30
+  DECLPROC $ConstantTester$_fun_something31
+  DECLPROC $ConstantTester$_fun_something32
+  DECLPROC $ConstantTester$_fun_something33
+  DECLPROC $ConstantTester$_fun_something34
+  DECLPROC $S$_constructor_a_b
+  DECLPROC $ConstantTester$_fun_something35
+  DECLPROC $ConstantTester$_fun_something36
+  DECLPROC $T$_constructor_a_s
+  DECLPROC $ConstantTester$_fun_something37
+  DECLPROC $ConstantTester$_fun_something38
+  DECLPROC $ConstantTester$_fun_something39
+  DECLPROC $ConstantTester$_fun_something40
+  DECLPROC $ConstantTester$_fun_something41
+  DECLPROC $ConstantTester$_fun_something42
+  DECLPROC $ConstantTester$_fun_something43
+  DECLPROC $ConstantTester$_fun_something44
+  DECLPROC $ConstantTester$_fun_something45
+  DECLPROC $ConstantTester$_fun_globalConst1
+  DECLPROC $ConstantTester$_fun_globalConst2
+  DECLPROC $ConstantTester$_fun_globalConst3
+  DECLPROC $ConstantTester$_fun_globalConst4
+  DECLPROC $ConstantTester$_fun_globalConst5
+  DECLPROC $ConstantTester$_fun_globalConst6
+  DECLPROC $ConstantTester$_fun_globalConst7
+  DECLPROC $ConstantTester$_fun_globalConst8
+  DECLPROC $ConstantTester$_fun_globalConst9
+  DECLPROC $ConstantTester$_fun_globalConst10
+  DECLPROC $ConstantTester$_fun_globalConst11
+  DECLPROC $ConstantTester$_fun_globalConst12
+  DECLPROC $ConstantTester$_fun_globalConst13
+  DECLPROC $ConstantTester$_fun_beforeDefinedA
+  DECLPROC $ConstantTester$_fun_beforeDefinedC
+  DECLPROC $ConstantTester$_fun_defaultFieldB
+  DECLPROC $ConstantTester$_fun_noCircularA
+  DECLPROC $ConstantTester$_fun_minInt1
+  DECLPROC $ConstantTester$_fun_minInt2
+  DECLPROC $ConstantTester$_fun_minInt3
+  DECLPROC $ConstantTester$_fun_globalConst
+  121234 DECLMETHOD %something1
+  125425 DECLMETHOD %something2
+  129488 DECLMETHOD %something3
+  100663 DECLMETHOD %something4
+  104726 DECLMETHOD %something5
+  108917 DECLMETHOD %something6
+  112980 DECLMETHOD %something7
+  84155 DECLMETHOD %something8
+  88218 DECLMETHOD %something9
+  130567 DECLMETHOD %something10
+  126502 DECLMETHOD %something11
+  122437 DECLMETHOD %something12
+  118372 DECLMETHOD %something13
+  114307 DECLMETHOD %something14
+  110242 DECLMETHOD %something15
+  106177 DECLMETHOD %something16
+  102112 DECLMETHOD %something17
+  98063 DECLMETHOD %something18
+  93998 DECLMETHOD %something19
+  109396 DECLMETHOD %something20
+  113525 DECLMETHOD %something21
+  101142 DECLMETHOD %something22
+  105271 DECLMETHOD %something23
+  125904 DECLMETHOD %something24
+  130033 DECLMETHOD %something25
+  117650 DECLMETHOD %something26
+  121779 DECLMETHOD %something27
+  76380 DECLMETHOD %something28
+  80509 DECLMETHOD %something29
+  104549 DECLMETHOD %something30
+  100420 DECLMETHOD %something31
+  112679 DECLMETHOD %something32
+  108550 DECLMETHOD %something33
+  121057 DECLMETHOD %something34
+  116928 DECLMETHOD %something35
+  129187 DECLMETHOD %something36
+  125058 DECLMETHOD %something37
+  72045 DECLMETHOD %something38
+  67916 DECLMETHOD %something39
+  66034 DECLMETHOD %something40
+  70099 DECLMETHOD %something41
+  74160 DECLMETHOD %something42
+  78225 DECLMETHOD %something43
+  82294 DECLMETHOD %something44
+  86359 DECLMETHOD %something45
+  126681 DECLMETHOD %globalConst1
+  122554 DECLMETHOD %globalConst2
+  118427 DECLMETHOD %globalConst3
+  114300 DECLMETHOD %globalConst4
+  110173 DECLMETHOD %globalConst5
+  106046 DECLMETHOD %globalConst6
+  101919 DECLMETHOD %globalConst7
+  98288 DECLMETHOD %globalConst8
+  94161 DECLMETHOD %globalConst9
+  127923 DECLMETHOD %globalConst10
+  123794 DECLMETHOD %globalConst11
+  119793 DECLMETHOD %globalConst12
+  115664 DECLMETHOD %globalConst13
+  90149 DECLMETHOD %beforeDefinedA
+  82023 DECLMETHOD %beforeDefinedC
+  66374 DECLMETHOD %defaultFieldB
+  115089 DECLMETHOD %noCircularA
+  92144 DECLMETHOD %minInt1
+  87955 DECLMETHOD %minInt2
+  83890 DECLMETHOD %minInt3
+  116577 DECLMETHOD %globalConst
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $S$_to_external PROCINLINE:<{
+  }>
+  $T$_to_external PROCINLINE:<{
+  }>
+  $ConstantTester$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $ConstantTester$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $ConstantTester$_contract_init INLINECALLDICT
+    }>
+  }>
+  $ConstantTester$_fun_something1 PROCREF:<{
+    11 PUSHINT
+  }>
+  $ConstantTester$_fun_something2 PROCREF:<{
+    PUSHNULL
+  }>
+  $ConstantTester$_fun_something3 PROCREF:<{
+    123000000000 PUSHINT
+  }>
+  $ConstantTester$_fun_something4 PROCREF:<{
+    456000000000 PUSHINT
+  }>
+  $ConstantTester$_fun_something5 PROCREF:<{
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something6 PROCREF:<{
+    10 PUSHINT
+  }>
+  $ConstantTester$_fun_something7 PROCREF:<{
+    5 PUSHINT
+  }>
+  $ConstantTester$_fun_something8 PROCREF:<{
+    4 PUSHINT
+  }>
+  $ConstantTester$_fun_something9 PROCREF:<{
+        B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something10 PROCREF:<{
+        B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something11 PROCREF:<{
+    88 PUSHINT
+  }>
+  $ConstantTester$_fun_something12 PROCREF:<{
+    -90 PUSHINT
+  }>
+  $ConstantTester$_fun_something13 PROCREF:<{
+    88 PUSHINT
+  }>
+  $ConstantTester$_fun_something14 PROCREF:<{
+    243 PUSHINT
+  }>
+  $ConstantTester$_fun_something15 PROCREF:<{
+    32 PUSHINT
+  }>
+  $ConstantTester$_fun_something16 PROCREF:<{
+    256 PUSHNEGPOW2
+  }>
+  $ConstantTester$_fun_something17 PROCREF:<{
+    256 PUSHPOW2DEC
+  }>
+  $ConstantTester$_fun_something18 PROCREF:<{
+    -115792089237316195423570985008687907853269984665640564039457584007913129639935 PUSHINT
+  }>
+  $ConstantTester$_fun_something19 PROCREF:<{
+    256 PUSHNEGPOW2
+  }>
+  $ConstantTester$_fun_something20 PROCREF:<{
+    -6 PUSHINT
+  }>
+  $ConstantTester$_fun_something21 PROCREF:<{
+    0 PUSHINT
+  }>
+  $ConstantTester$_fun_something22 PROCREF:<{
+    -1 PUSHINT
+  }>
+  $ConstantTester$_fun_something23 PROCREF:<{
+    -1 PUSHINT
+  }>
+  $ConstantTester$_fun_something24 PROCREF:<{
+    0 PUSHINT
+  }>
+  $ConstantTester$_fun_something25 PROCREF:<{
+    1 PUSHINT
+  }>
+  $ConstantTester$_fun_something26 PROCREF:<{
+    4 PUSHINT
+  }>
+  $ConstantTester$_fun_something27 PROCREF:<{
+    -4 PUSHINT
+  }>
+  $ConstantTester$_fun_something28 PROCREF:<{
+    -1 PUSHINT
+  }>
+  $ConstantTester$_fun_something29 PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_something30 PROCREF:<{
+    PUSHNULL
+  }>
+  $ConstantTester$_fun_something31 PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_something32 PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_something33 PROCREF:<{
+    PUSHNULL
+  }>
+  $ConstantTester$_fun_something34 PROCREF:<{
+    PUSHNULL
+  }>
+  $S$_constructor_a_b PROCINLINE:<{
+  }>
+  $ConstantTester$_fun_something35 PROCREF:<{
+    FALSE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+  }>
+  $ConstantTester$_fun_something36 PROCREF:<{
+    FALSE
+    42 PUSHINT
+    $S$_constructor_a_b INLINECALLDICT
+  }>
+  $T$_constructor_a_s PROCINLINE:<{
+  }>
+  $ConstantTester$_fun_something37 PROCREF:<{
+    42 PUSHINT
+    TRUE
+    OVER
+    $S$_constructor_a_b INLINECALLDICT
+    $T$_constructor_a_s INLINECALLDICT
+  }>
+  $ConstantTester$_fun_something38 PROCREF:<{
+    4 PUSHINT
+  }>
+  $ConstantTester$_fun_something39 PROCREF:<{
+    TRUE
+  }>
+  $ConstantTester$_fun_something40 PROCREF:<{
+    TRUE
+  }>
+  $ConstantTester$_fun_something41 PROCREF:<{
+        B{b5ee9c72410101010024000043800000000000000000000000000000000000000000000000000000000000000000104aec829d} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something42 PROCREF:<{
+        B{b5ee9c72410101010024000043800000000000000000000000000000000000000000000000000000000000002468b05ce0db5d} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something43 PROCREF:<{
+        B{b5ee9c7241010101002400004380000000000000000000000000000000000000000000000000002468acf13579bdf0b1160dcd} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something44 PROCREF:<{
+        B{b5ee9c724101010100240000438009502e11a59ef62b4366c5f7ec91008a3ad308c3ea5e0be28b66d810a2faed0e7036187bf4} B>boc <s PUSHSLICE
+  }>
+  $ConstantTester$_fun_something45 PROCREF:<{
+    42 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst1 PROCREF:<{
+    1 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst2 PROCREF:<{
+    2 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst3 PROCREF:<{
+    4 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst4 PROCREF:<{
+    15 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst5 PROCREF:<{
+    15 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst6 PROCREF:<{
+    26 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst7 PROCREF:<{
+    27 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst8 PROCREF:<{
+    2 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst9 PROCREF:<{
+    2 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst10 PROCREF:<{
+    24 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst11 PROCREF:<{
+    24 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst12 PROCREF:<{
+    8 PUSHINT
+  }>
+  $ConstantTester$_fun_globalConst13 PROCREF:<{
+    8 PUSHINT
+  }>
+  $ConstantTester$_fun_beforeDefinedA PROCREF:<{
+    10 PUSHINT
+  }>
+  $ConstantTester$_fun_beforeDefinedC PROCREF:<{
+    20 PUSHINT
+  }>
+  $ConstantTester$_fun_defaultFieldB PROCREF:<{
+    20 PUSHINT
+  }>
+  $ConstantTester$_fun_noCircularA PROCREF:<{
+    200 PUSHINT
+  }>
+  $ConstantTester$_fun_minInt1 PROCREF:<{
+    256 PUSHNEGPOW2
+  }>
+  $ConstantTester$_fun_minInt2 PROCREF:<{
+    -115792089237316195423570985008687907853269984665640564039457584007913129639935 PUSHINT
+  }>
+  $ConstantTester$_fun_minInt3 PROCREF:<{
+    256 PUSHNEGPOW2
+  }>
+  $ConstantTester$_fun_globalConst PROCREF:<{
+    100 PUSHINT
+  }>
+  %something1 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something1 INLINECALLDICT
+    NIP
+  }>
+  %something2 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something2 INLINECALLDICT
+    NIP
+  }>
+  %something3 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something3 INLINECALLDICT
+    NIP
+  }>
+  %something4 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something4 INLINECALLDICT
+    NIP
+  }>
+  %something5 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something5 INLINECALLDICT
+    NIP
+  }>
+  %something6 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something6 INLINECALLDICT
+    NIP
+  }>
+  %something7 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something7 INLINECALLDICT
+    NIP
+  }>
+  %something8 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something8 INLINECALLDICT
+    NIP
+  }>
+  %something9 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something9 INLINECALLDICT
+    NIP
+  }>
+  %something10 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something10 INLINECALLDICT
+    NIP
+  }>
+  %something11 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something11 INLINECALLDICT
+    NIP
+  }>
+  %something12 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something12 INLINECALLDICT
+    NIP
+  }>
+  %something13 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something13 INLINECALLDICT
+    NIP
+  }>
+  %something14 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something14 INLINECALLDICT
+    NIP
+  }>
+  %something15 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something15 INLINECALLDICT
+    NIP
+  }>
+  %something16 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something16 INLINECALLDICT
+    NIP
+  }>
+  %something17 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something17 INLINECALLDICT
+    NIP
+  }>
+  %something18 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something18 INLINECALLDICT
+    NIP
+  }>
+  %something19 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something19 INLINECALLDICT
+    NIP
+  }>
+  %something20 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something20 INLINECALLDICT
+    NIP
+  }>
+  %something21 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something21 INLINECALLDICT
+    NIP
+  }>
+  %something22 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something22 INLINECALLDICT
+    NIP
+  }>
+  %something23 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something23 INLINECALLDICT
+    NIP
+  }>
+  %something24 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something24 INLINECALLDICT
+    NIP
+  }>
+  %something25 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something25 INLINECALLDICT
+    NIP
+  }>
+  %something26 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something26 INLINECALLDICT
+    NIP
+  }>
+  %something27 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something27 INLINECALLDICT
+    NIP
+  }>
+  %something28 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something28 INLINECALLDICT
+    NIP
+  }>
+  %something29 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something29 INLINECALLDICT
+    NIP
+  }>
+  %something30 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something30 INLINECALLDICT
+    NIP
+  }>
+  %something31 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something31 INLINECALLDICT
+    NIP
+  }>
+  %something32 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something32 INLINECALLDICT
+    NIP
+  }>
+  %something33 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something33 INLINECALLDICT
+    NIP
+  }>
+  %something34 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something34 INLINECALLDICT
+    NIP
+  }>
+  %something35 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something35 INLINECALLDICT
+    1 2 BLKDROP2
+    $S$_to_external INLINECALLDICT
+  }>
+  %something36 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something36 INLINECALLDICT
+    1 2 BLKDROP2
+    $S$_to_external INLINECALLDICT
+  }>
+  %something37 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something37 INLINECALLDICT
+    1 3 BLKDROP2
+    $T$_to_external INLINECALLDICT
+  }>
+  %something38 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something38 INLINECALLDICT
+    NIP
+  }>
+  %something39 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something39 INLINECALLDICT
+    NIP
+  }>
+  %something40 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something40 INLINECALLDICT
+    NIP
+  }>
+  %something41 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something41 INLINECALLDICT
+    NIP
+  }>
+  %something42 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something42 INLINECALLDICT
+    NIP
+  }>
+  %something43 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something43 INLINECALLDICT
+    NIP
+  }>
+  %something44 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something44 INLINECALLDICT
+    NIP
+  }>
+  %something45 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_something45 INLINECALLDICT
+    NIP
+  }>
+  %globalConst1 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst1 INLINECALLDICT
+    NIP
+  }>
+  %globalConst2 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst2 INLINECALLDICT
+    NIP
+  }>
+  %globalConst3 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst3 INLINECALLDICT
+    NIP
+  }>
+  %globalConst4 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst4 INLINECALLDICT
+    NIP
+  }>
+  %globalConst5 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst5 INLINECALLDICT
+    NIP
+  }>
+  %globalConst6 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst6 INLINECALLDICT
+    NIP
+  }>
+  %globalConst7 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst7 INLINECALLDICT
+    NIP
+  }>
+  %globalConst8 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst8 INLINECALLDICT
+    NIP
+  }>
+  %globalConst9 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst9 INLINECALLDICT
+    NIP
+  }>
+  %globalConst10 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst10 INLINECALLDICT
+    NIP
+  }>
+  %globalConst11 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst11 INLINECALLDICT
+    NIP
+  }>
+  %globalConst12 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst12 INLINECALLDICT
+    NIP
+  }>
+  %globalConst13 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst13 INLINECALLDICT
+    NIP
+  }>
+  %beforeDefinedA PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_beforeDefinedA INLINECALLDICT
+    NIP
+  }>
+  %beforeDefinedC PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_beforeDefinedC INLINECALLDICT
+    NIP
+  }>
+  %defaultFieldB PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_defaultFieldB INLINECALLDICT
+    NIP
+  }>
+  %noCircularA PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_noCircularA INLINECALLDICT
+    NIP
+  }>
+  %minInt1 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_minInt1 INLINECALLDICT
+    NIP
+  }>
+  %minInt2 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_minInt2 INLINECALLDICT
+    NIP
+  }>
+  %minInt3 PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_minInt3 INLINECALLDICT
+    NIP
+  }>
+  %globalConst PROC:<{
+    $ConstantTester$_contract_load INLINECALLDICT
+    $ConstantTester$_fun_globalConst INLINECALLDICT
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ConstantTester$_contract_load INLINECALLDICT
+    DROP
+    SWAP
+    IFJMP:<{
+      DROP
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    DUP
+    31 GTINT
+    IF:<{
+      NIP
+      SWAP
+      32 LDU
+      DROP
+    }>ELSE<{
+      s2 POP
+    }>
+    0 EQINT
+    SWAP
+    33 LESSINT
+    AND
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

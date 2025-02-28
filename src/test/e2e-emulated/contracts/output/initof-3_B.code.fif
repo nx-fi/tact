@@ -1,0 +1,90 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/initof-3_B.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $B$_load
+  DECLPROC $B$init$_load
+  DECLPROC $B$_contract_init
+  DECLPROC $B$_contract_load
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $B$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $B$init$_load PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+  }>
+  $B$_contract_init PROCINLINE:<{
+  }>
+  $B$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $B$_load INLINECALLDICT
+      NIP
+    }>ELSE<{
+      $B$init$_load INLINECALLDICT
+      SWAP
+      ENDS
+      $B$_contract_init INLINECALLDICT
+    }>
+  }>
+  recv_internal PROC:<{
+    DROP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s5 s5 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    SWAP
+    __tact_context_sender SETGLOB
+    $B$_contract_load INLINECALLDICT
+    DROP
+    IFJMP:<{
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

@@ -1,0 +1,574 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/debug_Debug.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC __tact_debug_bool
+  DECLPROC __tact_crc16
+  DECLPROC __tact_base64_encode
+  DECLPROC __tact_address_to_user_friendly
+  DECLPROC __tact_debug_address
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC $Deploy$_load_without_opcode
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $StateInit$_not_null
+  DECLPROC $Debug$_contract_init
+  DECLPROC $Debug$_contract_load
+  DECLPROC $Debug$_fun_debug
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $Debug$_fun_forward
+  DECLPROC $Debug$_fun_notify
+  DECLPROC $DeployOk$_constructor_queryId
+  93099 DECLMETHOD %debug
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  __tact_debug_bool PROCREF:<{
+    s0 s2 XCHG
+    IF:<{
+      x{74727565} PUSHSLICE
+      s0 s2 XCHG
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    }>ELSE<{
+      x{66616c7365} PUSHSLICE
+      s0 s2 XCHG
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    }>
+  }>
+  __tact_crc16 PROCREF:<{
+    NEWC
+    SWAP
+    STSLICER
+    x{0000} PUSHSLICE
+    STSLICER
+    ENDC
+    CTOS
+    0 PUSHINT
+    WHILE:<{
+      OVER
+      SDEMPTY
+      NOT
+    }>DO<{
+      SWAP
+      8 LDU
+      7 PUSHPOW2
+      WHILE:<{
+        DUP
+        0 GTINT
+      }>DO<{
+        s0 s3 XCHG
+        1 LSHIFT#
+        s2 s3 PUSH2
+        AND
+        IF:<{
+          INC
+        }>
+        s0 s3 XCHG
+        1 RSHIFT#
+        s3 PUSH
+        16 PUSHPOW2DEC
+        GREATER
+        IF:<{
+          s0 s3 XCHG
+          16 PUSHPOW2DEC
+          AND
+          4129 PUSHINT
+          XOR
+          s0 s3 XCHG
+        }>
+      }>
+      DROP
+      NIP
+      SWAP
+    }>
+    NIP
+    8 PUSHPOW2
+    DIVMOD
+    SWAP
+    NEWC
+    8 STU
+    8 STU
+    ENDC
+    CTOS
+  }>
+  __tact_base64_encode PROCREF:<{
+    x{4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F} PUSHSLICE
+    NEWC
+    WHILE:<{
+      s2 PUSH
+      SBITS
+      23 GTINT
+    }>DO<{
+      s0 s2 XCHG
+      8 LDU
+      8 LDU
+      8 LDU
+      s0 s3 XCHG
+      16 LSHIFT#
+      s0 s2 XCHG
+      8 LSHIFT#
+      s1 s2 XCHG
+      OR
+      SWAP
+      OR
+      DUP
+      18 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s4 XCHG
+      STSLICER
+      s3 PUSH
+      12 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s3 PUSH
+      6 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      STSLICER
+      s0 s3 XCHG
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s2 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s1 s3 XCHG
+      STSLICER
+    }>
+    2 1 BLKDROP2
+    ENDC
+    CTOS
+  }>
+  __tact_address_to_user_friendly PROCREF:<{
+    REWRITESTDADDR
+    NEWC
+    x{11} PUSHSLICE
+    STSLICER
+    s0 s2 XCHG
+    8 PUSHPOW2
+    ADD
+    8 MODPOW2#
+    ROT
+    8 STU
+    256 STU
+    ENDC
+    CTOS
+    DUP
+    __tact_crc16 INLINECALLDICT
+    NEWC
+    ROT
+    STSLICER
+    SWAP
+    STSLICER
+    ENDC
+    CTOS
+    __tact_base64_encode INLINECALLDICT
+  }>
+  __tact_debug_address PROCREF:<{
+    s0 s2 XCHG
+    __tact_address_to_user_friendly INLINECALLDICT
+    s0 s2 XCHG
+        STRDUMP DROP STRDUMP DROP STRDUMP DROP
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  $Deploy$_load_without_opcode PROCINLINE:<{
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        2 UNTUPLE
+  }>
+  $Debug$_contract_init PROCINLINE:<{
+    PUSHNULL
+  }>
+  $Debug$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    DROP
+    IF:<{
+      PUSHNULL
+    }>ELSE<{
+      $Debug$_contract_init INLINECALLDICT
+    }>
+  }>
+  $Debug$_fun_debug PROCREF:<{
+    x{64756d70537461636b2829} PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32323a393a} PUSHSLICE
+        STRDUMP DROP STRDUMP DROP DUMPSTK
+        B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+        B{b5ee9c7241010101001600002864756d70282248656c6c6f20776f726c642122297bc6d422} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32333a393a} PUSHSLICE
+        STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    123 PUSHINT
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10 
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+        B{b5ee9c7241010101000b00001264756d70283132332930231ef8} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32343a393a} PUSHSLICE
+        STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    TRUE
+        B{b5ee9c7241010101000c00001464756d702874727565299cd07f90} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32353a393a} PUSHSLICE
+    __tact_debug_bool INLINECALLDICT
+    FALSE
+        B{b5ee9c7241010101000d00001664756d702866616c73652971c90a43} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32363a393a} PUSHSLICE
+    __tact_debug_bool INLINECALLDICT
+    x{6e756c6c} PUSHSLICE
+        B{b5ee9c7241010101000c00001464756d70286e756c6c29b2571cd0} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32373a393a} PUSHSLICE
+        STRDUMP DROP STRDUMP DROP STRDUMP DROP
+        MYADDR
+        B{b5ee9c7241010101001300002264756d70286d794164647265737328292976c8ae4b} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32383a393a} PUSHSLICE
+    __tact_debug_address INLINECALLDICT
+        B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+        B{b5ee9c724101010100590000ae64756d70286e65774164647265737328302c2030783833646664353532653633373239623437326663626363386334356562636336363931373032353538623638656337353237653162613430336130663331613829294c3bc73f} B>boc <s PUSHSLICE
+    x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a32393a393a} PUSHSLICE
+    __tact_debug_address INLINECALLDICT
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+    s3 s6 XCHG
+    3 3 BLKSWAP
+    s1 s2 XCHG
+  }>
+  $Debug$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+        NEWC
+        b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+        1 STI               // store `bounce`
+        b{000} STSLICECONST // store bounced = false and src = addr_none
+        STSLICE             // store `to`
+        SWAP
+        STGRAMS             // store `value`
+        105 PUSHINT         // 1 + 4 + 4 + 64 + 32
+        STZEROES            // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+        // → Stack state
+        // s0: Builder
+        // s1: `data`
+        // s2: `code`
+        // s3: `body`
+        // s4: `mode`
+        // Group 2: Placing the Builder after code and data, then checking those for nullability
+        s2 XCHG0
+        DUP2
+        ISNULL
+        SWAP
+        ISNULL
+        MUL // note that -1 * -1 wraps back to -1
+        // → Stack state
+        // s0: -1 (true) if `data` and `code` are both null, 0 (false) otherwise
+        // s1: `code`
+        // s2: `data`
+        // s3: Builder
+        // s4: `body`
+        // s5: `mode`
+        // Group 3: Left branch of the IFELSE, executed if s0 is -1 (true)
+        <{
+            DROP2 // drop `data` and `code`, since either of those is null
+            b{0} STSLICECONST
+        }> PUSHCONT
+        // Group 3: Right branch of the IFELSE, executed if s0 is 0 (false)
+        <{
+            // _ split_depth:(Maybe (## 5))
+            //   special:(Maybe TickTock)
+            //   code:(Maybe ^Cell)
+            //   data:(Maybe ^Cell)
+            //   library:(Maybe ^Cell)
+            // = StateInit;
+            ROT                // place message Builder on top
+            b{10} STSLICECONST // store Maybe = true, Either = false
+            // Start composing inlined StateInit
+            b{00} STSLICECONST // store split_depth and special first
+            STDICT             // store code
+            STDICT             // store data
+            b{0} STSLICECONST  // store library
+        }> PUSHCONT
+        // Group 3: IFELSE that does the branching shown above
+        IFELSE
+        // → Stack state
+        // s0: Builder
+        // s1: null or StateInit
+        // s2: `body`
+        // s3: `mode`
+        // Group 4: Finalizing the message
+        STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+        ENDC
+        // → Stack state
+        // s0: Cell
+        // s1: `mode`
+        // Group 5: Sending the message, with `mode` on top
+        SWAP
+        SENDRAWMSG // https://github.com/tact-lang/tact/issues/1558
+  }>
+  $Debug$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $Debug$_fun_forward INLINECALLDICT
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  %debug PROC:<{
+    $Debug$_contract_load INLINECALLDICT
+    $Debug$_fun_debug INLINECALLDICT
+    DROP
+  }>
+  recv_internal PROC:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Debug$_contract_load INLINECALLDICT
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+    }>
+    DUP
+    SBITS
+    31 GTINT
+    IF:<{
+      32 LDU
+      SWAP
+      2490013878 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $Deploy$_load_without_opcode INLINECALLDICT
+        NIP
+        $DeployOk$_constructor_queryId INLINECALLDICT
+        $DeployOk$_store_cell INLINECALLDICT
+        $Debug$_fun_notify INLINECALLDICT
+        DROP
+        RETALT
+      }>
+      NIP
+    }>ELSE<{
+      NIP
+    }>
+    HASHSU
+    1108245194012921737571472705644349306953514507145671568765587013970586734060 PUSHINT
+    EQUAL
+    IFJMP:<{
+      x{64756d70537461636b2829} PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31303a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP DUMPSTK
+          B{b5ee9c7241010101000e00001848656c6c6f20776f726c6421782dc5bc} B>boc <s PUSHSLICE
+          B{b5ee9c7241010101001600002864756d70282248656c6c6f20776f726c642122297bc6d422} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31313a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      123 PUSHINT
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101000b00001264756d70283132332930231ef8} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31323a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+      TRUE
+          B{b5ee9c7241010101000c00001464756d702874727565299cd07f90} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31333a393a} PUSHSLICE
+      __tact_debug_bool INLINECALLDICT
+      FALSE
+          B{b5ee9c7241010101000d00001664756d702866616c73652971c90a43} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31343a393a} PUSHSLICE
+      __tact_debug_bool INLINECALLDICT
+      x{6e756c6c} PUSHSLICE
+          B{b5ee9c7241010101000c00001464756d70286e756c6c29b2571cd0} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31353a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+          MYADDR
+          B{b5ee9c7241010101001300002264756d70286d794164647265737328292976c8ae4b} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31363a393a} PUSHSLICE
+      __tact_debug_address INLINECALLDICT
+          B{b5ee9c7241010101002400004380107bfaaa5cc6e5368e5f9799188bd798cd22e04ab16d1d8ea4fc37480741e6351064a3e1a6} B>boc <s PUSHSLICE
+          B{b5ee9c724101010100590000ae64756d70286e65774164647265737328302c2030783833646664353532653633373239623437326663626363386334356562636336363931373032353538623638656337353237653162613430336130663331613829294c3bc73f} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31373a393a} PUSHSLICE
+      __tact_debug_address INLINECALLDICT
+          BALANCE FIRST
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10 
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+          B{b5ee9c7241010101001300002264756d70286d7942616c616e63652829296ebc95a9} B>boc <s PUSHSLICE
+      x{46696c65207372632f746573742f6532652d656d756c617465642f636f6e7472616374732f64656275672e746163743a31383a393a} PUSHSLICE
+          STRDUMP DROP STRDUMP DROP STRDUMP DROP
+    }>
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c

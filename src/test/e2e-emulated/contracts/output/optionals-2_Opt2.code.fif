@@ -1,0 +1,183 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `@stdlib/std/stdlib_ex.fc` `/home/benji/proj/ton/tact/src/test/e2e-emulated/contracts/output/optionals-2_Opt2.code.fc` 
+PROGRAM{
+  DECLPROC __tact_sha256
+  DECLPROC $StateInit$_load
+  DECLPROC $Struct2$_store
+  DECLPROC $Opt2$_load
+  DECLPROC $Struct2$_not_null
+  DECLPROC $Struct2$_as_optional
+  DECLPROC $Opt3$init$_store
+  DECLPROC $Struct2$_constructor_v
+  DECLPROC $Opt3$_init_child
+  DECLPROC $Opt2$_contract_init
+  DECLPROC $Opt2$_contract_load
+  DECLPROC $OptStruct$_constructor_s
+  DECLPROC $Opt2$_fun_sample
+  DECLPROC $Opt2$_fun_sample2
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_sha256 PROC:<{
+    ONE
+    WHILE:<{
+      OVER SREFS 0 NEQINT
+    }>DO<{
+      OVER LDREF s0 POP CTOS s0 s1 XCHG INC
+    }>
+    HASHEXT_SHA256
+  }>
+  $StateInit$_load PROCINLINE:<{
+    LDREF
+    LDREF
+    -ROT
+  }>
+  $Struct2$_store PROCINLINE:<{
+    2971230874 PUSHINT
+    ROT
+    32 STU
+    257 PUSHINT
+    STIX
+  }>
+  $Opt2$_load PROCINLINE:<{
+    $StateInit$_load INLINECALLDICT
+  }>
+  $Struct2$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+        1 UNTUPLE
+  }>
+  $Struct2$_as_optional PROCINLINE:<{
+        1 TUPLE
+  }>
+  $Opt3$init$_store PROCINLINE:<{
+    DUP
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      ROT
+      1 STI
+      SWAP
+      $Struct2$_not_null INLINECALLDICT
+      $Struct2$_store INLINECALLDICT
+    }>ELSE<{
+      DROP
+      FALSE
+      SWAP
+      1 STI
+    }>
+  }>
+  $Struct2$_constructor_v PROCINLINE:<{
+  }>
+  $Opt3$_init_child PROCINLINE:<{
+        B{b5ee9c7201010101005a0000b0ff00208e4a3030d072d721d200d200fa4021103450556f04f86101f862ed44d0d2000192306d8e21d200018e15d31f018210b119629abaf2e081810101d700016f01916de201d1306de230dcf2c082e16d8013f4bcf2c80b} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    ROT
+    $Opt3$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $Opt2$_contract_init PROCINLINE:<{
+    1 PUSHINT
+    $Struct2$_constructor_v INLINECALLDICT
+    $Struct2$_as_optional INLINECALLDICT
+    $Opt3$_init_child INLINECALLDICT
+  }>
+  $Opt2$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $Opt2$_load INLINECALLDICT
+      1 2 BLKDROP2
+    }>ELSE<{
+      DROP
+      $Opt2$_contract_init INLINECALLDICT
+    }>
+  }>
+  $OptStruct$_constructor_s PROCINLINE:<{
+  }>
+  $Opt2$_fun_sample PROCREF:<{
+    DROP
+  }>
+  $Opt2$_fun_sample2 PROCREF:<{
+    DROP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $Opt2$_contract_load INLINECALLDICT
+    s0 s3 XCHG
+    IFJMP:<{
+      3 BLKDROP
+    }>
+    OVER
+    SBITS
+    31 GTINT
+    IF:<{
+      SWAP
+      32 LDU
+      NIP
+      SWAP
+    }>
+    SWAP
+    HASHSU
+    31426076435810996242035324182806267785463094332304371983272174752411835780599 PUSHINT
+    EQUAL
+    IFJMP:<{
+      1 PUSHINT
+      $Struct2$_constructor_v INLINECALLDICT
+      $Struct2$_as_optional INLINECALLDICT
+      s1 s2 XCHG
+      $Opt2$_fun_sample INLINECALLDICT
+      PUSHNULL
+      $Opt2$_fun_sample INLINECALLDICT
+      1 PUSHINT
+      $Struct2$_constructor_v INLINECALLDICT
+      $Opt2$_fun_sample2 INLINECALLDICT
+      2DROP
+    }>
+    2DROP
+    130 THROW
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+        execute current@ context@ current!
+        {
+            }END> b>
+            
+            <{
+                SETCP0 DUP
+                IFNOTJMP:<{
+                    DROP over <s ref@ 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot @addop
+                }>
+    swap <s ref@
+                0 swap @procdictkeylen idict- drop
+                -1 swap @procdictkeylen idict- drop
+                65535 swap @procdictkeylen idict- drop
+                @procdictkeylen DICTPUSHCONST DICTIGETJMPZ 11 THROWARG
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+  }>
+}END>c
